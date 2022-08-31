@@ -7,6 +7,32 @@
   Gatsby minimal TypeScript starter
 </h1>
 
+## Dev
+Notes:
+
+yarn.lock-install-remove-cache
+
+yarn.lock file generated inside docker container using the Dockerfile in the repo
+
+- can be used to pin dependencies so that docker environments are consistent
+- also shall help with achieving the desired effect during development:
+  that is to have any "dev", "test", "prod" environments as similar to each other as possible.
+
+### Docker
+
+- Get the yarn.lock-install-remove-cache in host machine:
+
+  ```shell
+  docker build --name myname .
+  docker run --name temp-ssg -it --rm myname sh
+  ```
+
+  in new terminal
+
+  ```shell
+  docker cp temp-ssg:/app/yarn.lock ./yarn.lock-install-remove-cache
+  ```
+
 ## 🚀 Quick start
 
 1.  **Create a Gatsby site.**

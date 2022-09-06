@@ -43,18 +43,15 @@ build_dev_server: Dockerfile  ## Build development server image
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
 	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 929:929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
 
-
 # TYPE CHECK
 type_check:
 	docker build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
 	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
 
-# import config.
-# You can change the default config with `make cnf="config_special.env" build`
-# cnf ?= config.env
-# include $(cnf)
-# export $(shell sed 's/=.*//' $(cnf))
 
-
-# # grep the version from the mix file
-# VERSION=$(shell ./version.sh)
+copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn cache clean`
+	docker build -f Dockerfile.build --target install -t $(BUILD_IMAGE_INSTALL_TARGET) .
+	docker create -it --name ssg_dummy_container_to_copy_yarn_lock $(BUILD_IMAGE_INSTALL_TARGET) sh
+	docker cp ssg_dummy_container_to_copy_yarn_lock:/app/yarn.lock /data/repos/static-site-generator/
+	docker rm ssg_dummy_container_to_copy_yarn_lock
+	docker rmi $(BUILD_IMAGE_INSTALL_TARGET)

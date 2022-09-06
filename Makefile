@@ -41,7 +41,7 @@ build_dev_server: Dockerfile  ## Build development server image
 	docker build --target dev -t $(DEV_SERVER_NAME) .
 
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
-	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 929:929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
+	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
 
 # TYPE CHECK
 typecheck:

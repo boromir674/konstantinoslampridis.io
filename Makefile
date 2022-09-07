@@ -30,6 +30,11 @@ build_static_files: builder  ## Build the "static" files and copy them into the 
 	docker run -v /data/repos/static-site-generator/public-container/:/app/public/ -it --rm $(BUILDER_NAME)
 
 
+shell_in_builder:  ## Run an interactive shell into the ssg (builder) container environment
+	docker build -f Dockerfile.build --target COPY_CODE -t $(BUILD_IMAGE_INSTALL_TARGET) .
+	docker run -it --rm --name ssg_dummy_container_to_run_shell $(BUILD_IMAGE_INSTALL_TARGET) sh
+
+
 # STATIC FILE SERVER
 static_file_server:  ## Run a server on localhost that serves the (built) "static" files
 	docker build -f Dockerfile.build --target serve_files -t $(FILE_SERVER_NAME) .
@@ -59,3 +64,4 @@ copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn c
 
 clean:
 	docker rmi $(TYPE_CHECK_IMAGE_NAME)
+	docker rmi $(DEV_SERVER_NAME)

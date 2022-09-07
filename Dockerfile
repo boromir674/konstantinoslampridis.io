@@ -13,14 +13,13 @@ FROM node:16-alpine as base
 FROM base as install
 WORKDIR /app
 COPY package.json .
-RUN yarn install && yarn cache clean
+COPY yarn.lock .
+RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 
 # Copy Code/Files
-# COPY . .
 FROM install as COPY_CODE
-# COPY public public
+
 COPY src src
-# COPY .env .
 COPY gatsby-config.ts .
 COPY README.md .
 COPY tsconfig.json .
@@ -28,9 +27,8 @@ COPY tsconfig.json .
 FROM COPY_CODE as configure
 ENV GATSBY_TELEMETRY_DISABLED=1
 
-
+# Run development server
 FROM configure as dev
-
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
 CMD [ "yarn", "develop", "-H", "0.0.0.0" ]

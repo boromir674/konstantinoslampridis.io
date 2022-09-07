@@ -49,9 +49,15 @@ run_dev_server: build_dev_server  ## Run a development server on localhost, with
 	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
 
 # TYPE CHECK
-typecheck:
+typecheck:  ## Type Checking in Typescript
 	docker build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
 	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
+
+
+# ESLINT
+eslint:  ## Code Linting, using ESLint (Typescript)
+	docker build --target eslint -t $(ESLINT_IMAGE_NAME) .
+	docker run -it --rm $(ESLINT_IMAGE_NAME)
 
 
 copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn cache clean`
@@ -64,4 +70,5 @@ copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn c
 
 clean:
 	docker rmi $(TYPE_CHECK_IMAGE_NAME)
+	docker rmi $(ESLINT_IMAGE_NAME)
 	docker rmi $(DEV_SERVER_NAME)

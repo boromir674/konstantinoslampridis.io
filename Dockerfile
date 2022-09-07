@@ -23,6 +23,7 @@ COPY src src
 COPY gatsby-config.ts .
 COPY README.md .
 COPY tsconfig.json .
+COPY .eslintrc.cjs .
 
 FROM COPY_CODE as configure
 ENV GATSBY_TELEMETRY_DISABLED=1
@@ -37,6 +38,10 @@ CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
 FROM configure as type_check
 
 CMD [ "yarn", "typecheck" ]
+
+
+FROM configure as eslint
+CMD [ "yarn", "eslint", "." ]
 
 
 # Dev server with hot reloading

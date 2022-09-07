@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install util-linux
 FROM base as install
 WORKDIR /app
 COPY package.json .
-RUN yarn install && yarn cache clean
+COPY yarn.lock .
+RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 
 # Copy Code/Files
 

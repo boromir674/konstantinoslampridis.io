@@ -48,3 +48,17 @@
   align-self: center;
   grid-area: Footer;
 }
+
+
+/*desktops - higher resolution*/
+@media (min-width: 800px) {
+  .Portfolio {
+    color: #e5989b;
+  }
+}
+
+@media (max-width: 800px) {
+  .Portfolio {
+    color: #a8dadc;
+  }
+}

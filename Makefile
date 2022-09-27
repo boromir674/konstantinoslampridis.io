@@ -28,11 +28,25 @@ builder: Dockerfile.build  ## Build an image to prepare for building/bundling th
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
 	rm -rf /data/repos/static-site-generator/public-container/*
 	docker run -v /data/repos/static-site-generator/public-container/:/app/public/ -it --rm $(BUILDER_NAME)
+	du -sh /data/repos/static-site-generator/public-container
 
 
+# INTERACTIVE SHELL
 shell_in_builder:  ## Run an interactive shell into the ssg (builder) container environment
 	docker build -f Dockerfile.build --target COPY_CODE -t $(BUILD_IMAGE_INSTALL_TARGET) .
 	docker run -it --rm --name ssg_dummy_container_to_run_shell $(BUILD_IMAGE_INSTALL_TARGET) sh
+
+# COPY LOCK
+copy_shell_lock:
+	docker cp ssg_dummy_container_to_run_shell:/app/package.json ./package.json
+	docker cp ssg_dummy_container_to_run_shell:/app/yarn.lock ./yarn.lock
+
+copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn cache clean`
+	docker build -f Dockerfile.build --target install -t $(BUILD_IMAGE_INSTALL_TARGET) .
+	docker create -it --name ssg_dummy_container_to_copy_yarn_lock $(BUILD_IMAGE_INSTALL_TARGET) sh
+	docker cp ssg_dummy_container_to_copy_yarn_lock:/app/yarn.lock /data/repos/static-site-generator/
+	docker rm ssg_dummy_container_to_copy_yarn_lock
+	docker rmi $(BUILD_IMAGE_INSTALL_TARGET)
 
 
 # STATIC FILE SERVER
@@ -58,14 +72,6 @@ typecheck:  ## Type Checking in Typescript
 eslint:  ## Code Linting, using ESLint (Typescript)
 	docker build --target eslint -t $(ESLINT_IMAGE_NAME) .
 	docker run -it --rm $(ESLINT_IMAGE_NAME)
-
-
-copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn cache clean`
-	docker build -f Dockerfile.build --target install -t $(BUILD_IMAGE_INSTALL_TARGET) .
-	docker create -it --name ssg_dummy_container_to_copy_yarn_lock $(BUILD_IMAGE_INSTALL_TARGET) sh
-	docker cp ssg_dummy_container_to_copy_yarn_lock:/app/yarn.lock /data/repos/static-site-generator/
-	docker rm ssg_dummy_container_to_copy_yarn_lock
-	docker rmi $(BUILD_IMAGE_INSTALL_TARGET)
 
 
 clean:

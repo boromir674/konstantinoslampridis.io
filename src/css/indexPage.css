@@ -51,7 +51,7 @@
 
 
 /*desktops - higher resolution*/
-@media (min-width: 800px) {
+/* @media (min-width: 800px) {
   .Portfolio {
     color: #e5989b;
   }
@@ -59,6 +59,20 @@
 
 @media (max-width: 800px) {
   .Portfolio {
+    color: #a8dadc;
+  }
+} */
+
+
+/*desktops - higher resolution*/
+@media (min-width: 800px) {
+  .Career {
+    color: #e5989b;
+  }
+}
+
+@media (max-width: 800px) {
+  .Career {
     color: #a8dadc;
   }
 }

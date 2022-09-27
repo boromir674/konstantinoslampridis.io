@@ -62,6 +62,12 @@ build_dev_server: Dockerfile  ## Build development server image
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
 	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
 
+# TEST
+test:  ## Run Test Suite
+	docker build --target test -t $(TEST_IMAGE_NAME) .
+	docker run -it --rm $(TEST_IMAGE_NAME)
+
+
 # TYPE CHECK
 typecheck:  ## Type Checking in Typescript
 	docker build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .

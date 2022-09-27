@@ -36,8 +36,16 @@ CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
 
 
 FROM configure as type_check
-
 CMD [ "yarn", "typecheck" ]
+
+FROM configure as test
+ENV NODE_ENV=test
+COPY babel.config.js .
+COPY jest.config.ts .
+COPY jest-preprocess.js .
+COPY loadershim.js .
+COPY __mocks__ __mocks__
+CMD [ "yarn", "test" ]
 
 
 FROM configure as eslint

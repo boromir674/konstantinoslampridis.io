@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test App width = 700 matches the snapshot 1`] = `
+<div>
+  <main
+    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif;"
+  >
+    <div
+      class="computerContainer"
+    >
+      <div
+        class="Header"
+      />
+      <div
+        class="Side-Profile"
+      >
+        <h2>
+          Profile
+        </h2>
+      </div>
+      <div
+        class="Main-Pane"
+      >
+        <div
+          class="Introduction"
+        >
+          <p>
+            Hi, I am Konstantinos Lampridis :)
+          </p>
+        </div>
+        <div>
+          <h3>
+            Open Source Portfolio
+          </h3>
+        </div>
+        <div
+          class="Career"
+        >
+          <h3>
+            Professional Career
+          </h3>
+        </div>
+      </div>
+      <div
+        class="Footer"
+      />
+    </div>
+    <p
+      css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+      data-testid="dynamic-el"
+    >
+      Test text!
+    </p>
+  </main>
+</div>
+`;
+
+exports[`Test App width = 900 matches the snapshot 1`] = `
+<div>
+  <main
+    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif;"
+  >
+    <div
+      class="computerContainer"
+    >
+      <div
+        class="Header"
+      />
+      <div
+        class="Side-Profile"
+      >
+        <h2>
+          Profile
+        </h2>
+      </div>
+      <div
+        class="Main-Pane"
+      >
+        <div
+          class="Introduction"
+        >
+          <p>
+            Hi, I am Konstantinos Lampridis :)
+          </p>
+        </div>
+        <div>
+          <h3>
+            Open Source Portfolio
+          </h3>
+        </div>
+        <div
+          class="Career"
+        >
+          <h3>
+            Professional Career
+          </h3>
+        </div>
+      </div>
+      <div
+        class="Footer"
+      />
+    </div>
+    <p
+      css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+      data-testid="dynamic-el"
+    >
+      Test text!
+    </p>
+  </main>
+</div>
+`;

@@ -41,13 +41,6 @@ copy_shell_lock:
 	docker cp ssg_dummy_container_to_run_shell:/app/package.json ./package.json
 	docker cp ssg_dummy_container_to_run_shell:/app/yarn.lock ./yarn.lock
 
-copy_lock:  ## Copy the yarn.lock produced after running `yarn install && yarn cache clean`
-	docker build -f Dockerfile.build --target install -t $(BUILD_IMAGE_INSTALL_TARGET) .
-	docker create -it --name ssg_dummy_container_to_copy_yarn_lock $(BUILD_IMAGE_INSTALL_TARGET) sh
-	docker cp ssg_dummy_container_to_copy_yarn_lock:/app/yarn.lock /data/repos/static-site-generator/
-	docker rm ssg_dummy_container_to_copy_yarn_lock
-	docker rmi $(BUILD_IMAGE_INSTALL_TARGET)
-
 
 # STATIC FILE SERVER
 static_file_server:  ## Run a server on localhost that serves the (built) "static" files
@@ -65,7 +58,7 @@ run_dev_server: build_dev_server  ## Run a development server on localhost, with
 # TEST
 test:  ## Run Test Suite
 	docker build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm $(TEST_IMAGE_NAME)
+	docker run -it --rm -v /data/repos/static-site-generator/__tests__:/app/__tests__ $(TEST_IMAGE_NAME) sh
 
 
 # TYPE CHECK

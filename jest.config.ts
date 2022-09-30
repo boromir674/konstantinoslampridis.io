@@ -150,6 +150,9 @@ export default {
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
+  // snapshotSerializers: [
+  //   '@emotion/jest/serializer' /* if needed other snapshotSerializers should go here */
+  // ],
 
   // The test environment that will be used for testing
   // testEnvironment: "jest-environment-node",

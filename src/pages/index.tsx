@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 import "../css/indexPage.css";
 import { useAppStyles } from "../Hooks/AppStyles";
@@ -10,6 +11,17 @@ const pageStyles = {
   padding: 96,
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
 };
+
+
+const Button = styled.button({
+  color: "red",
+  fontSize: "30px",
+  "@media (max-width: 800px)": {
+    color: "blue",
+    fontSize: "20px",
+  },
+});
+
 
 const IndexPage = () => {
   const [appStyles] = useAppStyles();
@@ -34,27 +46,7 @@ const IndexPage = () => {
           <div className="Introduction">
             <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
           </div>
-          <div
-          // css={{
-          //   gridArea: "Portfolio",
-          //   [mq[0]]: {
-          //     color: '#e5989b'
-          //   },
-          //   [mq[1]]: {
-          //     color: '#a8dadc'
-          //   }
-          // }}
-
-          // css={css`
-          // grid-area: Portfolio;
-          //   ${mq[0]} {
-          //     color: #e5989b;
-          //   }
-          //   ${mq[1]} {
-          //     color: #a8dadc;
-          //   }
-          // `}
-          >
+          <div>
             <h3>Open Source Portfolio</h3>
           </div>
           <div className="Career">
@@ -63,15 +55,14 @@ const IndexPage = () => {
         </div>
         <div className="Footer"></div>
       </div>
+      <Button data-testid="button-id">This my button component.</Button>
       <p
+        className="tempp"
         data-testid="dynamic-el"
-        css={css`
-          background-color: #228be6;
-          color: blue;
-          @media (min-width: 800px) {
-            font-size: 50px;
-          }
-        `}
+        css={{
+          backgroundColor: "#228be6",
+          color: "yellow",
+        }}
       >
         Test text!
       </p>

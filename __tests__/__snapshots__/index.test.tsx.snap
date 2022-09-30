@@ -45,8 +45,15 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         class="Footer"
       />
     </div>
+    <button
+      class="css-1ap15ok"
+      data-testid="button-id"
+    >
+      This my button component.
+    </button>
     <p
-      css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+      class="tempp"
+      css="[object Object]"
       data-testid="dynamic-el"
     >
       Test text!
@@ -100,8 +107,15 @@ exports[`Test App width = 900 matches the snapshot 1`] = `
         class="Footer"
       />
     </div>
+    <button
+      class="css-1ap15ok"
+      data-testid="button-id"
+    >
+      This my button component.
+    </button>
     <p
-      css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+      class="tempp"
+      css="[object Object]"
       data-testid="dynamic-el"
     >
       Test text!

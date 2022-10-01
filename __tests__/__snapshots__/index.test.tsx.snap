@@ -3,8 +3,30 @@
 exports[`Test App width = 700 matches the snapshot 1`] = `
 <div>
   <main
-    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif;"
+    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif; background-color: rgb(228, 136, 154);"
   >
+    <div
+      style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
+    >
+      <div
+        style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+      >
+        <div
+          style="width: 48px; height: 26px; border-radius: 16px; background: rgb(222, 222, 222); transition: all 100ms;"
+        />
+      </div>
+      <div
+        style="margin-left: -100%; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+      >
+        <div
+          style="transition: all 100ms; padding-top: 4px; padding-left: 5px;"
+        >
+          <div
+            style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 255, 255); transition: all 100ms;"
+          />
+        </div>
+      </div>
+    </div>
     <div
       class="computerContainer"
     >
@@ -45,6 +67,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         class="Footer"
       />
     </div>
+    <div
+      class="css-1l2b09b"
+    >
+      some text
+    </div>
     <button
       class="css-1ap15ok"
       data-testid="button-id"
@@ -65,8 +92,30 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
 exports[`Test App width = 900 matches the snapshot 1`] = `
 <div>
   <main
-    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif;"
+    style="color: rgb(35, 33, 41); padding: 96px; font-family: -apple-system, Roboto, sans-serif, serif; background-color: rgb(228, 136, 154);"
   >
+    <div
+      style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
+    >
+      <div
+        style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+      >
+        <div
+          style="width: 48px; height: 26px; border-radius: 16px; background: rgb(222, 222, 222); transition: all 100ms;"
+        />
+      </div>
+      <div
+        style="margin-left: -100%; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+      >
+        <div
+          style="transition: all 100ms; padding-top: 4px; padding-left: 5px;"
+        >
+          <div
+            style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 255, 255); transition: all 100ms;"
+          />
+        </div>
+      </div>
+    </div>
     <div
       class="computerContainer"
     >
@@ -106,6 +155,11 @@ exports[`Test App width = 900 matches the snapshot 1`] = `
       <div
         class="Footer"
       />
+    </div>
+    <div
+      class="css-1l2b09b"
+    >
+      some text
     </div>
     <button
       class="css-1ap15ok"

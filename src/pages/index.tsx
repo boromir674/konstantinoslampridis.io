@@ -50,22 +50,32 @@ interface PropsType {
 }
 const SomeText = styled.div`
   color: ${(props: PropsType) => (props.theme as ThemeType).colors.primary};
+  font-size: 40px;
 `;
 
-const positionMap = {
-  'left': 'light',
-  'right': 'dark',
+interface PositionMap {
+  [keyName: string]: string;
 }
+const positionMap: PositionMap = {
+  left: "light",
+  right: "dark",
+};
 
-const booleanMap = {
-  'light': false,
-  'dark': true,
+interface BooleanMap {
+  [keyName: string]: boolean;
 }
+const booleanMap: BooleanMap = {
+  light: false,
+  dark: true,
+};
 
 const IndexPage = () => {
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
   // const [appStyles] = useAppStyles();
-  const matchTogglePosition = useCallback(() => theme === appThemeSets.default.light ? 'left' : 'right', [theme]);
+  const matchTogglePosition = useCallback(
+    () => (theme === appThemeSets.default.light ? "left" : "right"),
+    [theme]
+  );
   /* If toggle is left (aka inactive) return true, else false
    *
    */
@@ -75,10 +85,12 @@ const IndexPage = () => {
     <ThemeProvider theme={theme}>
       <main style={pageStyles}>
         <ToggleSlider
-          active={true}
+          active={booleanMap[positionMap[matchTogglePosition()]]}
           onToggle={(active: boolean) => {
             // setTheme(active ? appThemeSets.default.light[positionMap[matchTogglePosition()]])
-            setTheme(active ? appThemeSets.default.dark : appThemeSets.default.light)
+            setTheme(
+              active ? appThemeSets.default.dark : appThemeSets.default.light
+            );
             // positionMap[matchTogglePosition()]
             // isSwitchLeft(active)
             //   ? setTheme(appThemeSets.default.light)

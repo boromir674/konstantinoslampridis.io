@@ -87,14 +87,9 @@ const IndexPage = () => {
         <ToggleSlider
           active={booleanMap[positionMap[matchTogglePosition()]]}
           onToggle={(active: boolean) => {
-            // setTheme(active ? appThemeSets.default.light[positionMap[matchTogglePosition()]])
             setTheme(
               active ? appThemeSets.default.dark : appThemeSets.default.light
             );
-            // positionMap[matchTogglePosition()]
-            // isSwitchLeft(active)
-            //   ? setTheme(appThemeSets.default.light)
-            //   : setTheme(appThemeSets.default.dark);
           }}
         ></ToggleSlider>
         <div className="computerContainer">

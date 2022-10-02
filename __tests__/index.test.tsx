@@ -20,10 +20,10 @@ describe("Test App width = 700", () => {
   });
 });
 
-describe("Test App width = 900", () => {
+describe("Test App width = 400", () => {
   test("matches the snapshot", () => {
     const { container: mobile } = render(
-      <ResponsiveContext.Provider value={{ width: 900 }}>
+      <ResponsiveContext.Provider value={{ width: 400 }}>
         <IndexPage />
       </ResponsiveContext.Provider>
     );

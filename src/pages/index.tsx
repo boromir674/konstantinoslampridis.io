@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import type { HeadFC } from "gatsby";
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -6,7 +6,9 @@ import { ThemeProvider } from "@emotion/react";
 
 import { ToggleSlider } from "../Components/MyToggleSwitch1";
 
-import "../css/indexPage.css";
+// import "../css/indexPageStack.css";
+// import "../css/indexPage.css";
+import "../css/indexStyles.css";
 
 const pageStyles = {
   color: "#232129",
@@ -69,17 +71,59 @@ const booleanMap: BooleanMap = {
   dark: true,
 };
 
+type WindowSize = {
+  innerWidth: number;
+  innerHeight: number;
+};
+type getWindowSizeFunction = () => WindowSize;
+
+const getReactNode = () => {
+  return (
+    <div className="Main-Pane">
+      <div className="Introduction">
+        <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
+      </div>
+      <div>
+        <h3>Open Source Portfolio</h3>
+      </div>
+      <div className="Career">
+        <h3>Professional Career</h3>
+      </div>
+    </div>
+  );
+};
+
+// TODO change boundaries for conditional rendering to 320 width
+
 const IndexPage = () => {
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
+  const [windowSize, setWindowSize] = useState<WindowSize>(() => ({
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight,
+  }));
+
   // const [appStyles] = useAppStyles();
   const matchTogglePosition = useCallback(
     () => (theme === appThemeSets.default.light ? "left" : "right"),
     [theme]
   );
-  /* If toggle is left (aka inactive) return true, else false
-   *
-   */
-  const isSwitchLeft = useCallback((isActive: boolean) => !isActive, []);
+
+  const getWindowSize: getWindowSizeFunction = useCallback(() => {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }, [windowSize]);
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,9 +138,11 @@ const IndexPage = () => {
         ></ToggleSlider>
         <div className="computerContainer">
           <div className="Header"></div>
-          <div className="Side-Profile">
-            <h2>Profile</h2>
-          </div>
+          {windowSize.innerWidth > 500 && (
+            <div className="Profile">
+              <h2>Profile</h2>
+            </div>
+          )}
           <div className="Main-Pane">
             <div className="Introduction">
               <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
@@ -108,7 +154,12 @@ const IndexPage = () => {
               <h3>Professional Career</h3>
             </div>
           </div>
-          <div className="Footer"></div>
+          {windowSize.innerWidth <= 500 && (
+            <div className="Profile">
+              <h2>Profile</h2>
+            </div>
+          )}
+          <div className="Footer">Footer</div>
         </div>
         <SomeText>some text</SomeText>
         <Button data-testid="button-id">This my button component.</Button>
@@ -122,6 +173,10 @@ const IndexPage = () => {
         >
           Test text!
         </p>
+        <h2>Width: {windowSize.innerWidth}</h2>
+
+        <h2>Height: {windowSize.innerHeight}</h2>
+
       </main>
     </ThemeProvider>
   );

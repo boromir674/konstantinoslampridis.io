@@ -5,9 +5,8 @@ import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 
 import { ToggleSlider } from "../Components/MyToggleSwitch1";
+import Profile from '../Components/Profile';
 
-// import "../css/indexPageStack.css";
-// import "../css/indexPage.css";
 import "../css/indexStyles.css";
 
 const pageStyles = {
@@ -77,22 +76,6 @@ type WindowSize = {
 };
 type getWindowSizeFunction = () => WindowSize;
 
-const getReactNode = () => {
-  return (
-    <div className="Main-Pane">
-      <div className="Introduction">
-        <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
-      </div>
-      <div>
-        <h3>Open Source Portfolio</h3>
-      </div>
-      <div className="Career">
-        <h3>Professional Career</h3>
-      </div>
-    </div>
-  );
-};
-
 // TODO change boundaries for conditional rendering to 320 width
 
 const IndexPage = () => {
@@ -140,7 +123,7 @@ const IndexPage = () => {
           <div className="Header"></div>
           {windowSize.innerWidth > 500 && (
             <div className="Profile">
-              <h2>Profile</h2>
+              <Profile />
             </div>
           )}
           <div className="Main-Pane">
@@ -156,7 +139,7 @@ const IndexPage = () => {
           </div>
           {windowSize.innerWidth <= 500 && (
             <div className="Profile">
-              <h2>Profile</h2>
+              <Profile />
             </div>
           )}
           <div className="Footer">Footer</div>
@@ -176,7 +159,6 @@ const IndexPage = () => {
         <h2>Width: {windowSize.innerWidth}</h2>
 
         <h2>Height: {windowSize.innerHeight}</h2>
-
       </main>
     </ThemeProvider>
   );

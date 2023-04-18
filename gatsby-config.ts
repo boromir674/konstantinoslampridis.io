@@ -1,6 +1,9 @@
 import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
+  flags: {
+    DEV_SSR: true
+  },
   siteMetadata: {
     title: `Konstantinos Lampridis Online`,
     siteUrl: `https://www.yourdomain.tld`,
@@ -9,7 +12,7 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
-  plugins: [],
+  plugins: [`gatsby-plugin-emotion`],
 }
 
 export default config

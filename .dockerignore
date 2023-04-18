@@ -1,0 +1,10 @@
+node_modules
+dist
+Dockerfile
+notes.org
+notes.org~
+.tmp
+.env.example
+.gitignore
+.editorconfig
+.cache

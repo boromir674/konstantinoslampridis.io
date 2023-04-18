@@ -1,0 +1,64 @@
+.computerContainer {  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-rows: 0.2fr 2.6fr 0.2fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Header Header"
+    "Profile Main-Pane"
+    "Footer Footer";
+}
+
+.Header {
+  justify-self: center;
+  align-self: center;
+  grid-area: Header;
+  padding-top: 50px;
+  padding-right: 80px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+
+.Profile { grid-area: Profile; }
+
+.Main-Pane {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Introduction"
+    "Portfolio"
+    "Career";
+  grid-area: Main-Pane;
+}
+
+.Introduction {
+  justify-self: center;
+  align-self: stretch;
+  grid-area: Introduction;
+}
+
+.Portfolio { grid-area: Portfolio; }
+
+.Career { grid-area: Career; }
+
+.Footer {
+  justify-self: center;
+  align-self: center;
+  grid-area: Footer;
+}
+
+
+/*desktops - higher resolution*/
+@media (min-width: 800px) {
+  .Career {
+    color: #e5989b;
+  }
+}
+
+@media (max-width: 800px) {
+  .Career {
+    color: #a8dadc;
+  }
+}

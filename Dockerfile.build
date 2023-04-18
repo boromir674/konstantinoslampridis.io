@@ -1,0 +1,44 @@
+# Use Node v18
+FROM node:hydrogen-alpine3.17 as base
+
+
+FROM base as install
+WORKDIR /app
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install --frozen-lockfile --production=true && yarn cache clean
+
+# Copy Code/Files
+
+FROM install as COPY_CODE
+
+COPY src src
+COPY gatsby-config.ts .
+COPY README.md .
+COPY tsconfig.json .
+
+FROM COPY_CODE as build
+ENV GATSBY_TELEMETRY_DISABLED=1
+
+CMD [ "yarn", "build" ]
+
+# BUILD into "static" files, aka bundle (eg webpack output)
+# Example
+# docker build -f Dockerfile.build --target build -t me/ssg-builder .
+# docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
+
+# cd /data/repos/static-site-generator
+# rm -rf ./public/*
+# cp ./public-container/* ./public/
+
+
+FROM build as serve_files
+RUN yarn build
+EXPOSE 9000
+CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
+
+# SERVE the "static" files on localhost
+# Example
+# docker build -f Dockerfile.build --target serve_files -t me/file-server .
+# docker run -it --rm -v /data/repos/static-site-generator/:/app -p 9000:9000 me/file-server
+

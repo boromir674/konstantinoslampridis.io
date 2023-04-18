@@ -34,7 +34,10 @@ build_static_files: builder  ## Build the "static" files and copy them into the 
 # INTERACTIVE SHELL
 shell_in_builder:  ## Run an interactive shell into the ssg (builder) container environment
 	docker build -f Dockerfile.build --target COPY_CODE -t $(BUILD_IMAGE_INSTALL_TARGET) .
-	docker run -it --rm --name ssg_dummy_container_to_run_shell $(BUILD_IMAGE_INSTALL_TARGET) sh
+	docker run -it --rm --name ssg_dummy_container_to_run_shell \
+		-v /data/repos/static-site-generator/package.json:/app/package.json \
+		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+		$(BUILD_IMAGE_INSTALL_TARGET) bash
 
 # COPY LOCK
 copy_shell_lock:
@@ -55,10 +58,29 @@ build_dev_server: Dockerfile  ## Build development server image
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
 	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
 
+# DEV ACTIVITIES
+## update caniuse-lite with browsers DB from Browserslist config.
+update_browserslist: build_dev_server
+	docker run -v /data/repos/static-site-generator/package.json:/app/package.json -it --rm $(DEV_SERVER_NAME) sh
+# update-browserslist-db@latest
+
+## DEV SHELL
+dev_shell:  ## Run an interactive shell into the ssg (builder) container environment
+	docker build --target COPY_CODE -t ssg-dev-im .
+	docker run -it --rm --name ssg-dev-container \
+		-v /data/repos/static-site-generator/package.json:/app/package.json \
+		ssg-dev-im sh
+# -v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+
+
 # TEST
 test:  ## Run Test Suite
 	docker build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm -v /data/repos/static-site-generator/__tests__:/app/__tests__ $(TEST_IMAGE_NAME) sh
+	docker run -it --rm \
+		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
+		-v /data/repos/static-site-generator/src:/app/src \
+		$(TEST_IMAGE_NAME) sh
+# yarn test --verbose
 
 
 # TYPE CHECK

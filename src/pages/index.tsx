@@ -4,8 +4,9 @@ import type { HeadFC } from "gatsby";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 
+import useIsSSR from "../Hooks/useIsSSR";
 import { ToggleSlider } from "../Components/MyToggleSwitch1";
-import Profile from '../Components/Profile';
+import Profile from "../Components/Profile";
 
 import "../css/indexStyles.css";
 
@@ -25,7 +26,6 @@ const Button = styled.button({
   },
 });
 
-// Todo implemente ThemeSets (light + dark)
 const appThemeSets = {
   default: {
     light: {
@@ -71,19 +71,25 @@ const booleanMap: BooleanMap = {
 };
 
 type WindowSize = {
-  innerWidth: number;
-  innerHeight: number;
+  innerWidth: number | null;
+  innerHeight: number | null;
 };
 type getWindowSizeFunction = () => WindowSize;
 
-// TODO change boundaries for conditional rendering to 320 width
-
 const IndexPage = () => {
+  const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
-  const [windowSize, setWindowSize] = useState<WindowSize>(() => ({
-    innerWidth: window.innerWidth,
-    innerHeight: window.innerHeight,
-  }));
+  const [windowSize, setWindowSize] = useState<WindowSize>(() =>
+    SSROn
+      ? {
+          innerWidth: null,
+          innerHeight: null,
+        }
+      : {
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight,
+        }
+  );
 
   // const [appStyles] = useAppStyles();
   const matchTogglePosition = useCallback(
@@ -111,23 +117,30 @@ const IndexPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <main style={pageStyles}>
-        <ToggleSlider
-          active={booleanMap[positionMap[matchTogglePosition()]]}
-          onToggle={(active: boolean) => {
-            setTheme(
-              active ? appThemeSets.default.dark : appThemeSets.default.light
-            );
-          }}
-        ></ToggleSlider>
         <div className="computerContainer">
-          <div className="Header"></div>
-          {windowSize.innerWidth > 500 && (
+          <div className="Header scrolled">
+            <ToggleSlider
+              active={booleanMap[positionMap[matchTogglePosition()]]}
+              onToggle={(active: boolean) => {
+                setTheme(
+                  active
+                    ? appThemeSets.default.dark
+                    : appThemeSets.default.light
+                );
+              }}
+            ></ToggleSlider>
+          </div>
+          {(windowSize.innerWidth as number) > 500 && (
             <div className="Profile">
               <Profile />
             </div>
           )}
           <div className="Main-Pane">
             <div className="Introduction">
+              <h2>Width: {windowSize.innerWidth}</h2>
+              <h2>Height: {windowSize.innerHeight}</h2>
+              <SomeText>some text</SomeText>
+              <Button data-testid="button-id">This my button component.</Button>
               <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
             </div>
             <div>
@@ -137,28 +150,24 @@ const IndexPage = () => {
               <h3>Professional Career</h3>
             </div>
           </div>
-          {windowSize.innerWidth <= 500 && (
+          {(windowSize.innerWidth as number) <= 500 && (
             <div className="Profile">
               <Profile />
             </div>
           )}
-          <div className="Footer">Footer</div>
+          <div className="Footer">
+            <p
+              className="tempp"
+              data-testid="dynamic-el"
+              css={{
+                backgroundColor: "#228be6",
+                color: "yellow",
+              }}
+            >
+              Footer Content
+            </p>
+          </div>
         </div>
-        <SomeText>some text</SomeText>
-        <Button data-testid="button-id">This my button component.</Button>
-        <p
-          className="tempp"
-          data-testid="dynamic-el"
-          css={{
-            backgroundColor: "#228be6",
-            color: "yellow",
-          }}
-        >
-          Test text!
-        </p>
-        <h2>Width: {windowSize.innerWidth}</h2>
-
-        <h2>Height: {windowSize.innerHeight}</h2>
       </main>
     </ThemeProvider>
   );

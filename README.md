@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby minimal TypeScript starter
+  TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
 ## Dev

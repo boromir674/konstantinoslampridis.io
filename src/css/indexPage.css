@@ -5,7 +5,7 @@
   grid-auto-flow: row;
   grid-template-areas:
     "Header Header"
-    "Side-Profile Main-Pane"
+    "Profile Main-Pane"
     "Footer Footer";
 }
 
@@ -19,7 +19,7 @@
   padding-left: 80px;
 }
 
-.Side-Profile { grid-area: Side-Profile; }
+.Profile { grid-area: Profile; }
 
 .Main-Pane {  display: grid;
   grid-template-columns: 1fr;
@@ -48,20 +48,6 @@
   align-self: center;
   grid-area: Footer;
 }
-
-
-/*desktops - higher resolution*/
-/* @media (min-width: 800px) {
-  .Portfolio {
-    color: #e5989b;
-  }
-}
-
-@media (max-width: 800px) {
-  .Portfolio {
-    color: #a8dadc;
-  }
-} */
 
 
 /*desktops - higher resolution*/

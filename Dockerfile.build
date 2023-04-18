@@ -1,6 +1,6 @@
-FROM node:16-slim as base
+# Use Node v18
+FROM node:hydrogen-alpine3.17 as base
 
-RUN apt-get update && apt-get install util-linux
 
 FROM base as install
 WORKDIR /app

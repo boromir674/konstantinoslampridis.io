@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import type { HeadFC } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby"
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
@@ -7,8 +8,29 @@ import { ThemeProvider } from "@emotion/react";
 import useIsSSR from "../Hooks/useIsSSR";
 import { ToggleSlider } from "../Components/MyToggleSwitch1";
 import Profile from "../Components/Profile";
-
+import Nav from "../Components/FloatingNavigationStyled";
 import "../css/indexStyles.css";
+
+interface Theme {
+  backgroundColor: string;
+  foregroundColor: string;
+  buttonColor: string;
+  buttonHoverColor: string;
+}
+
+const lightTheme: Theme = {
+  backgroundColor: '#ffffff',
+  foregroundColor: '#000000',
+  buttonColor: '#007bff',
+  buttonHoverColor: '#0056b3',
+};
+
+const darkTheme: Theme = {
+  backgroundColor: '#333333',
+  foregroundColor: '#ffffff',
+  buttonColor: '#007bff',
+  buttonHoverColor: '#0096ff',
+};
 
 const pageStyles = {
   color: "#232129",
@@ -77,8 +99,27 @@ type WindowSize = {
 type getWindowSizeFunction = () => WindowSize;
 
 const IndexPage = () => {
+  // Define Build Time Data
+  const buildTimeData = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+        }
+        internal {
+          type
+        }
+      }
+      sitePlugin {
+        name
+      }
+    }
+  `)
+
   const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
+  const [theme1, setTheme1] = useState<Theme>(lightTheme);
   const [windowSize, setWindowSize] = useState<WindowSize>(() =>
     SSROn
       ? {
@@ -127,8 +168,14 @@ const IndexPage = () => {
                     ? appThemeSets.default.dark
                     : appThemeSets.default.light
                 );
+                setTheme1(
+                  active
+                    ? darkTheme
+                    : lightTheme
+                );
               }}
             ></ToggleSlider>
+            {buildTimeData.site.siteMetadata.title}
           </div>
           {(windowSize.innerWidth as number) > 500 && (
             <div className="Profile">
@@ -153,8 +200,11 @@ const IndexPage = () => {
           {(windowSize.innerWidth as number) <= 500 && (
             <div className="Profile">
               <Profile />
+              {/* <Nav navItems={buildTimeData.sections} theme={theme1} /> */}
+              <Nav navItems={['sec 1', 'sec 2', 'sec 3']} theme={theme1} />
             </div>
           )}
+          {/* Footer is always displayed */}
           <div className="Footer">
             <p
               className="tempp"

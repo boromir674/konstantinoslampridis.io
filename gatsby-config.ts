@@ -12,7 +12,20 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
-  plugins: [`gatsby-plugin-emotion`],
+  plugins: [
+    `gatsby-plugin-emotion`,
+    // {
+    //   resolve: `gatsby-source-graphql`,
+    //   options: {
+    //     typeName: `GitHub`,
+    //     fieldName: `github`,
+    //     url: `https://api.github.com/graphql`,  // a url to a graphql server (ie could be strapi))
+    //     headers: {
+    //       Authorization: `Bearer your-github-token`,
+    //     },
+    //   },
+    // }
+  ],
 }
 
 export default config

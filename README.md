@@ -7,6 +7,20 @@
   TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
+We currently use  
+- Typescript 4.8.2
+- Gatsby 4.22.0
+
+## Architecture
+
+### Build Time Data
+The site will mostly use **data** computed/fetched at **build time**.  
+We will use the **gatsby-source-graphql** to seemlessly define 
+what data are required by which component and provide an entrypoint toimplement the data fetch/compute logic.
+
+We "install"/add it, by adding it to the `gatsby-config.ts` and since it is an  
+existing source plugin we need to do sth like `yarn add gatsby-source-graphql`
+
 ## Dev
 Notes:
 

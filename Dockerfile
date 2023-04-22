@@ -1,5 +1,5 @@
 # Use Node v18
-FROM node:hydrogen-alpine3.17 as base
+FROM node:18.16.0-slim as base
 
 # RUN \
 #   apk add --no-cache python3 make g++ && \

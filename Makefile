@@ -25,6 +25,7 @@ help: ## This help.
 builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
 	docker build -f Dockerfile.build --target build -t $(BUILDER_NAME) .
 
+# BUILD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
 	rm -rf /data/repos/static-site-generator/public-container/*
 	docker run -v /data/repos/static-site-generator/public-container/:/app/public/ -it --rm $(BUILDER_NAME)

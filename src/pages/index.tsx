@@ -10,12 +10,18 @@ import { ToggleSlider } from "../Components/MyToggleSwitch1";
 import Profile from "../Components/Profile";
 import Nav from "../Components/FloatingNavigationStyled";
 import "../css/indexStyles.css";
+import Header from "../Components/HeaderNavigationBar";
 
+interface HeaderStyles {
+  primaryColor: string;
+  secondaryColor: string;
+}
 interface Theme {
   backgroundColor: string;
   foregroundColor: string;
   buttonColor: string;
   buttonHoverColor: string;
+  headerStyles: HeaderStyles;
 }
 
 const lightTheme: Theme = {
@@ -23,6 +29,10 @@ const lightTheme: Theme = {
   foregroundColor: '#000000',
   buttonColor: '#007bff',
   buttonHoverColor: '#0056b3',
+  headerStyles: {
+    primaryColor: '#ffffff',
+    secondaryColor: '#0056b3',
+  }
 };
 
 const darkTheme: Theme = {
@@ -30,6 +40,10 @@ const darkTheme: Theme = {
   foregroundColor: '#ffffff',
   buttonColor: '#007bff',
   buttonHoverColor: '#0096ff',
+  headerStyles: {
+    primaryColor: '#333333',
+    secondaryColor: '#0096ff',
+  }
 };
 
 const pageStyles = {
@@ -159,7 +173,23 @@ const IndexPage = () => {
     <ThemeProvider theme={theme}>
       <main style={pageStyles}>
         <div className="computerContainer">
-          <div className="Header scrolled">
+          <Header
+            theme={theme1.headerStyles}
+            // activeNavButtonIndex={0}
+            navLinks={[
+              {
+                key: "0",
+                to: "#initial-view",
+                label: "Home",
+              },
+              {
+                key: "introduction",
+                to: "#introduction",
+                label: "Introduction",
+              },
+            ]}
+            />
+          <div id="initial-view" className="Header scrolled">
             <ToggleSlider
               active={booleanMap[positionMap[matchTogglePosition()]]}
               onToggle={(active: boolean) => {
@@ -183,7 +213,7 @@ const IndexPage = () => {
             </div>
           )}
           <div className="Main-Pane">
-            <div className="Introduction">
+            <div id="introduction" className="Introduction">
               <h2>Width: {windowSize.innerWidth}</h2>
               <h2>Height: {windowSize.innerHeight}</h2>
               <SomeText>some text</SomeText>

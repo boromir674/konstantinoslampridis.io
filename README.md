@@ -32,6 +32,45 @@ yarn.lock file generated inside docker container using the Dockerfile in the rep
 - also shall help with achieving the desired effect during development:
   that is to have any "dev", "test", "prod" environments as similar to each other as possible.
 
+## Deploy
+
+```mermaid
+graph LR;
+  A[Develop] --> B[Test]
+  B --> C[Build]
+  C --> D[Upload to S3 bucket]
+```
+```shell
+
+```
+
+```mermaid
+sequenceDiagram
+  %%{init: { "sequence": { "wrap": true} } }%%
+    actor U as User
+    participant B as Browser
+    participant R as Route53 (AWS DNS)
+    participant ES as CDN Edge Server (AWS)
+    participant S3 as S3 Bucket (AWS file hosting)
+    U--)B: navigate to konstantinoslampridis.io
+    B->>R: konstantinoslampridis.io
+    R->>ES: request for static files
+    alt if cache is valid
+    ES-->>B: cached content
+    else
+    ES->>S3: request (content) files
+    S3-->>ES: serve static files
+    ES-->>B: static file content
+    end
+
+    Note over ES,B: serving static files
+    B--)U: display content
+    activate B
+    B->>B: hydrate
+    B--)U: enable all reactive/dynamic features
+    deactivate B
+```
+
 ### Docker
 
 - Get the yarn.lock-install-remove-cache in host machine:
@@ -86,9 +125,3 @@ yarn.lock file generated inside docker container using the Dockerfile in the rep
     - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
 
     - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)

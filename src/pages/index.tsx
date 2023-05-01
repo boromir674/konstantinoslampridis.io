@@ -11,6 +11,8 @@ import Profile from "../Components/Profile";
 import Nav from "../Components/FloatingNavigationStyled";
 import "../css/indexStyles.css";
 import Header from "../Components/HeaderNavigationBar";
+import HeaderNavNew from "../Components/HeaderNavigationNew";
+import Header1Nav from "../Components/HeaderNavigationNew1";
 
 interface HeaderStyles {
   primaryColor: string;
@@ -22,6 +24,14 @@ interface Theme {
   buttonColor: string;
   buttonHoverColor: string;
   headerStyles: HeaderStyles;
+  navigationBar: {
+    backgroundColor: string;
+    textColor: string;
+    hoverBackgroundColor: string;
+    hoverTextColor: string;
+    activatedBackgroundColor: string;
+    activatedTextColor: string;
+  };
 }
 
 const lightTheme: Theme = {
@@ -32,7 +42,15 @@ const lightTheme: Theme = {
   headerStyles: {
     primaryColor: '#ffffff',
     secondaryColor: '#0056b3',
-  }
+  },
+  navigationBar: {
+    backgroundColor: '#ffffff',
+    textColor: '#000000',
+    hoverBackgroundColor: '#fff',
+    hoverTextColor: '#000000',
+    activatedBackgroundColor: '#fa345f',
+    activatedTextColor: '#000000',
+  },
 };
 
 const darkTheme: Theme = {
@@ -43,7 +61,15 @@ const darkTheme: Theme = {
   headerStyles: {
     primaryColor: '#333333',
     secondaryColor: '#0096ff',
-  }
+  },
+  navigationBar: {
+    backgroundColor: '#333333',
+    textColor: '#ffffff',
+    hoverBackgroundColor: '#fff',
+    hoverTextColor: '#ffffff',
+    activatedBackgroundColor: '#ff345f',
+    activatedTextColor: '#ffffff',
+  },
 };
 
 const pageStyles = {
@@ -169,43 +195,77 @@ const IndexPage = () => {
     };
   }, []);
 
+  // Nav Bar 1
+  const navItems = [
+    {
+      label: "Intro",
+      to_element_id: "#introduction",
+    },
+    {
+      label: "Open Source Portfolio",
+      to_element_id: "#open-source-portfolio",
+    },
+    {
+      label: "Professional Career",
+      to_element_id: "#professional-career",
+    },
+  ];
+
+  const activeNavItem = "Intro";
+
   return (
     <ThemeProvider theme={theme}>
       <main style={pageStyles}>
         <div className="computerContainer">
-          <Header
-            theme={theme1.headerStyles}
-            // activeNavButtonIndex={0}
-            navLinks={[
-              {
-                key: "0",
-                to: "#initial-view",
-                label: "Home",
-              },
-              {
-                key: "introduction",
-                to: "#introduction",
-                label: "Introduction",
-              },
-            ]}
-            />
-          <div id="initial-view" className="Header scrolled">
-            <ToggleSlider
-              active={booleanMap[positionMap[matchTogglePosition()]]}
-              onToggle={(active: boolean) => {
-                setTheme(
-                  active
-                    ? appThemeSets.default.dark
-                    : appThemeSets.default.light
-                );
-                setTheme1(
-                  active
-                    ? darkTheme
-                    : lightTheme
-                );
-              }}
-            ></ToggleSlider>
-            {buildTimeData.site.siteMetadata.title}
+          <div>
+            <Header
+              theme={theme1.headerStyles}
+              // activeNavButtonIndex={0}
+              navLinks={[
+                {
+                  key: "0",
+                  to: "#initial-view",
+                  label: "Home",
+                },
+                {
+                  key: "introduction",
+                  to: "#introduction",
+                  label: "Introduction",
+                },
+              ]}
+              />
+            <div id="initial-view" className="Header scrolled">
+              <ToggleSlider
+                active={booleanMap[positionMap[matchTogglePosition()]]}
+                onToggle={(active: boolean) => {
+                  setTheme(
+                    active
+                      ? appThemeSets.default.dark
+                      : appThemeSets.default.light
+                  );
+                  setTheme1(
+                    active
+                      ? darkTheme
+                      : lightTheme
+                  );
+                }}
+              ></ToggleSlider>
+              <Header1Nav
+                items={navItems}
+                activeItem={activeNavItem}
+                colorSet={theme1.navigationBar}
+                // colorSet={{
+                //     textColor: theme1.buttonColor;
+                //     backgroundColor: theme1.backgroundColor;
+                //     activatedTextColor: string;
+                //     activatedBackgroundColor: string;
+                // }}
+              />
+              <HeaderNavNew
+                theme={theme1}
+              />
+              {buildTimeData.site.siteMetadata.title}
+            </div>
           </div>
           {(windowSize.innerWidth as number) > 500 && (
             <div className="Profile">
@@ -221,17 +281,17 @@ const IndexPage = () => {
               <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
             </div>
             <div>
-              <h3>Open Source Portfolio</h3>
+              <h3 id="open-source-portfolio">Open Source Portfolio</h3>
             </div>
             <div className="Career">
-              <h3>Professional Career</h3>
+              <h3 id="professional-career">Professional Career</h3>
             </div>
           </div>
           {(windowSize.innerWidth as number) <= 500 && (
             <div className="Profile">
               <Profile />
               {/* <Nav navItems={buildTimeData.sections} theme={theme1} /> */}
-              <Nav navItems={['sec 1', 'sec 2', 'sec 3']} theme={theme1} />
+              <Nav items={navItems} colorSet={theme1.navigationBar} />
             </div>
           )}
           {/* Footer is always displayed */}

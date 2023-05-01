@@ -27,9 +27,9 @@ builder: Dockerfile.build  ## Build an image to prepare for building/bundling th
 
 # BUILD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
-	rm -rf /data/repos/static-site-generator/public-container/*
-	docker run -v /data/repos/static-site-generator/public-container/:/app/public/ -it --rm $(BUILDER_NAME)
-	du -sh /data/repos/static-site-generator/public-container
+	rm -rf /data/repos/static-site-generator/public-auto/*
+	docker run -v /data/repos/static-site-generator/public-auto/:/app/public/ -it --rm $(BUILDER_NAME)
+	du -sh /data/repos/static-site-generator/public-auto
 
 
 # INTERACTIVE SHELL

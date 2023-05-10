@@ -1,8 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ScrollingNavigationItem from "./ScrollingNavigationItemGeneric";
-import useHandleNavigationClickFunction from '../Hooks/useNavigationClickHandler';
-import useScreenScrollHandler from '../Hooks/useScreenScrollHandler';
+import useScreenScrollHandler from "../Hooks/useScreenScrollHandler";
 
 const NavContainerNew = styled.nav`
   display: flex;
@@ -85,34 +84,34 @@ interface HeaderNavProps {
   };
 }
 
-
+/** 
+* Rectangular Brief description of the function here.
+* @summary If the description is long, write your summary here. Otherwise, feel free to remove this.
+* @param {ParamDataTypeHere} parameterNameHere - Brief description of the parameter here. Note: For other notations of data types, please refer to JSDocs: DataTypes command.
+* @return {ReturnValueDataTypeHere} Brief description of the returning value here.
+*/
 const Header1Nav: FC<HeaderNavProps> = ({ items, colorSet }) => {
-  
   const activeLinkIndex = useScreenScrollHandler(items);
 
-    return (
-        <NavContainerNew>
-        {items.map((item, index) => (
-            <ScrollingNavigationItem
-            renderProps={({
-                active,
-                onClick,
-            }) => <NavItem
-                colorSet={colorSet}
-                active={active}
-                onClick={onClick}
-                >{item.label}</NavItem>}
-            key={index}
-            data={{
-                to: item.to_element_id,
-                active: item.to_element_id === items[activeLinkIndex || 0].to_element_id,
-            }}
-            >
-            </ScrollingNavigationItem>
-        ))}
-        </NavContainerNew>
-    );
+  return (
+    <NavContainerNew>
+      {items.map((item, index) => (
+        <ScrollingNavigationItem
+          renderProps={({ active, onClick }) => (
+            <NavItem colorSet={colorSet} active={active} onClick={onClick}>
+              {item.label}
+            </NavItem>
+          )}
+          key={index}
+          data={{
+            to: item.to_element_id,
+            active:
+              item.to_element_id === items[activeLinkIndex || 0].to_element_id,
+          }}
+        ></ScrollingNavigationItem>
+      ))}
+    </NavContainerNew>
+  );
 };
-
 
 export default Header1Nav;

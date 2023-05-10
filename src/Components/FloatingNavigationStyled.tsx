@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "@emotion/styled";
 import useScreenScrollHandler from "../Hooks/useScreenScrollHandler";
+import ScrollingNavigationItem from "./ScrollingNavigationItemGeneric";
 import useIsSSR from "../Hooks/useIsSSR";
 
 interface Theme {
@@ -115,14 +116,20 @@ const Nav: React.FC<NavProps> = ({ items, colorSet }) => {
       {/* hack to avoid rendering it by default on SSR, (since on SSR we do not know window size) */}
       {((windowSize.innerWidth as number) || 1000) <= 500 && (
         <NavContainer>
-          {items.map((navItem, index) => (
-            <NavButton
-              key={index}
-              colorSet={colorSet}
-              active={navItem.label == items[activeSectionIndex || 0].label}
-            >
-              {navItem.label}
-            </NavButton>
+          {items.map((item, index) => (
+            <ScrollingNavigationItem
+            renderProps={({ active, onClick }) => (
+              <NavButton key={index} colorSet={colorSet} active={active} onClick={onClick}>
+                {item.label}
+              </NavButton>
+            )}
+            key={index}
+            data={{
+              to: item.to_element_id,
+              active:
+                item.to_element_id === items[activeSectionIndex || 0].to_element_id,
+            }}
+          ></ScrollingNavigationItem>
           ))}
         </NavContainer>
       )}

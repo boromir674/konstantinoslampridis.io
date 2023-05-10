@@ -12,17 +12,50 @@ RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 
 # Copy Code/Files
 
-FROM install as COPY_CODE
+FROM install as codebase
 
 COPY src src
 COPY gatsby-config.ts .
+COPY gatsby-node.ts .
 COPY README.md .
 COPY tsconfig.json .
 
-FROM COPY_CODE as build
+FROM codebase as build
 ENV GATSBY_TELEMETRY_DISABLED=1
 
 CMD [ "yarn", "build" ]
+
+
+FROM build as dev_codebase
+COPY .eslintrc.cjs .
+
+# Run development server
+FROM dev_codebase as dev
+# VSCode debug ports: 9929 9230
+EXPOSE 8000 9929 9230
+CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
+
+
+
+
+FROM dev_codebase as type_check
+CMD [ "yarn", "typecheck" ]
+
+
+FROM dev_codebase as test
+ENV NODE_ENV=test
+COPY babel.config.js .
+COPY jest.config.ts .
+COPY jest-preprocess.js .
+COPY loadershim.js .
+COPY __mocks__ __mocks__
+CMD [ "yarn", "test" ]
+
+
+FROM dev_codebase as eslint
+CMD [ "yarn", "eslint", "." ]
+
+
 
 # BUILD into "static" files, aka bundle (eg webpack output)
 # Example
@@ -32,8 +65,6 @@ CMD [ "yarn", "build" ]
 # cd /data/repos/static-site-generator
 # rm -rf ./public/*
 # cp ./public-container/* ./public/
-
-
 FROM build as serve_files
 RUN yarn build
 EXPOSE 9000

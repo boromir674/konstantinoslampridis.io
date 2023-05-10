@@ -52,12 +52,15 @@ static_file_server:  ## Run a server on localhost that serves the (built) "stati
 	docker run -p 9000:9000 -it --rm $(FILE_SERVER_NAME)
 
 
-# DEV SERVER
-build_dev_server: Dockerfile  ## Build development server image
-	docker build --target dev -t $(DEV_SERVER_NAME) .
+build_dev_server: Dockerfile.build  ## Build development server image
+	docker build -f Dockerfile.build --target dev -t $(DEV_SERVER_NAME) .
 
+# DEV SERVER
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
-	docker run -v /data/repos/static-site-generator/src:/app/src -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm $(DEV_SERVER_NAME)
+	docker run -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm \
+		-v /data/repos/static-site-generator/src:/app/src \
+		-v /data/repos/static-site-generator/data.yaml:/app/data.yaml \
+		$(DEV_SERVER_NAME)
 
 # DEV ACTIVITIES
 ## update caniuse-lite with browsers DB from Browserslist config.
@@ -67,7 +70,7 @@ update_browserslist: build_dev_server
 
 ## DEV SHELL
 dev_shell:  ## Run an interactive shell into the ssg (builder) container environment
-	docker build --target COPY_CODE -t ssg-dev-im .
+	docker build -f Dockerfile.build --target COPY_CODE -t ssg-dev-im .
 	docker run -it --rm --name ssg-dev-container \
 		-v /data/repos/static-site-generator/package.json:/app/package.json \
 		ssg-dev-im sh
@@ -76,7 +79,7 @@ dev_shell:  ## Run an interactive shell into the ssg (builder) container environ
 
 # TEST
 test:  ## Run Test Suite
-	docker build --target test -t $(TEST_IMAGE_NAME) .
+	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
 	docker run -it --rm \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
 		-v /data/repos/static-site-generator/src:/app/src \
@@ -86,13 +89,13 @@ test:  ## Run Test Suite
 
 # TYPE CHECK
 typecheck:  ## Type Checking in Typescript
-	docker build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
+	docker build -f Dockerfile.build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
 	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
 
 
 # ESLINT
 eslint:  ## Code Linting, using ESLint (Typescript)
-	docker build --target eslint -t $(ESLINT_IMAGE_NAME) .
+	docker build -f Dockerfile.build --target eslint -t $(ESLINT_IMAGE_NAME) .
 	docker run -it --rm $(ESLINT_IMAGE_NAME)
 
 

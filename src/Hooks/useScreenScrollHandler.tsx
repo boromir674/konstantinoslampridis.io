@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 
-
+/**
+* This hook is used to handle the scroll event on the screen.
+*
+* @summary Track items index based on scroll position by binding (on Component mount) the 'activeLinkIndex' state attribute so that it updates with the index of given items that is "in view", whenever a 'scroll' event happens.
+* @param {{ to_element_id: string }[]} items - Sections List where at any moment, one item can be "in view", depending on scroll position
+* @return {number} index of the given list corresponding to the Section currently "in view".
+*/
 const useScreenScrollHandler = (items: { to_element_id: string }[]) => {
     const [activeLinkIndex, setActiveLinkIndex] = useState<number | null>(null);
 

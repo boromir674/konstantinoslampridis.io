@@ -10,9 +10,10 @@ import { ToggleSlider } from "../Components/MyToggleSwitch1";
 import Profile from "../Components/Profile";
 import Nav from "../Components/FloatingNavigationStyled";
 import "../css/indexStyles.css";
-import Header from "../Components/HeaderNavigationBar";
-import HeaderNavNew from "../Components/HeaderNavigationNew";
 import Header1Nav from "../Components/HeaderNavigationNew1";
+
+import BuildTimePersonalInfo from "../Components/BuildTimePersonalInfo";
+
 
 interface HeaderStyles {
   primaryColor: string;
@@ -139,7 +140,9 @@ type WindowSize = {
 type getWindowSizeFunction = () => WindowSize;
 
 const IndexPage = () => {
-  // Define Build Time Data
+  // Build-Time Data Fetching
+
+  // Fetch data using the graphql automatically supplied by gatsby (see gatsby-config.ts)
   const buildTimeData = useStaticQuery(graphql`
     query {
       site {
@@ -156,6 +159,26 @@ const IndexPage = () => {
       }
     }
   `)
+  // // Fetch data using the sourceNodes API and the custom createNode action
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     exampleYaml {
+  //       personal {
+  //         name
+  //         email
+  //         phone
+  //         location
+  //         links {
+  //           name
+  //           url
+  //         }
+  //         description
+  //       }
+  //     }
+  //   }
+  // `);
+
+  // const { personal } = data.exampleYaml;
 
   const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
@@ -218,22 +241,6 @@ const IndexPage = () => {
       <main style={pageStyles}>
         <div className="computerContainer">
           <div>
-            <Header
-              theme={theme1.headerStyles}
-              // activeNavButtonIndex={0}
-              navLinks={[
-                {
-                  key: "0",
-                  to: "#initial-view",
-                  label: "Home",
-                },
-                {
-                  key: "introduction",
-                  to: "#introduction",
-                  label: "Introduction",
-                },
-              ]}
-              />
             <div id="initial-view" className="Header scrolled">
               <ToggleSlider
                 active={booleanMap[positionMap[matchTogglePosition()]]}
@@ -254,15 +261,6 @@ const IndexPage = () => {
                 items={navItems}
                 activeItem={activeNavItem}
                 colorSet={theme1.navigationBar}
-                // colorSet={{
-                //     textColor: theme1.buttonColor;
-                //     backgroundColor: theme1.backgroundColor;
-                //     activatedTextColor: string;
-                //     activatedBackgroundColor: string;
-                // }}
-              />
-              <HeaderNavNew
-                theme={theme1}
               />
               {buildTimeData.site.siteMetadata.title}
             </div>
@@ -276,6 +274,7 @@ const IndexPage = () => {
             <div id="introduction" className="Introduction">
               <h2>Width: {windowSize.innerWidth}</h2>
               <h2>Height: {windowSize.innerHeight}</h2>
+              <BuildTimePersonalInfo/>
               <SomeText>some text</SomeText>
               <Button data-testid="button-id">This my button component.</Button>
               <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
@@ -290,7 +289,6 @@ const IndexPage = () => {
           {(windowSize.innerWidth as number) <= 500 && (
             <div className="Profile">
               <Profile />
-              {/* <Nav navItems={buildTimeData.sections} theme={theme1} /> */}
               <Nav items={navItems} colorSet={theme1.navigationBar} />
             </div>
           )}

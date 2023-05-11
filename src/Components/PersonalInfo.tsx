@@ -19,7 +19,18 @@ const InfoItem = styled.div`
   padding: 10px;
 `;
 
-const PersonalInfo: React.FC<PersonalInfoProps> = ({
+const InfoKey = styled.span`
+  font-weight: bold;
+`;
+
+const InfoValue = styled.span`
+  word-break: break-all;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PersonalInfo1: React.FC<PersonalInfoProps> = ({
   name,
   email,
   github,
@@ -29,31 +40,37 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
   return (
     <Container>
       <InfoItem>
-        <strong>Name:</strong> {name}
+        <InfoKey>Name:</InfoKey> <InfoValue>{name}</InfoValue>
       </InfoItem>
       <InfoItem>
-        <strong>Email:</strong> {email}
+        <InfoKey>Email:</InfoKey> <InfoValue>{email}</InfoValue>
       </InfoItem>
       <InfoItem>
-        <strong>Github:</strong>{' '}
-        <a href={github} target="_blank" rel="noopener noreferrer">
-          {github}
-        </a>
+        <InfoKey>Github:</InfoKey>{' '}
+        <InfoValue>
+          <a href={`https://${github}`} target="_blank" rel="noopener noreferrer">
+            {github}
+          </a>
+        </InfoValue>
       </InfoItem>
       <InfoItem>
-        <strong>Gitlab:</strong>{' '}
-        <a href={gitlab} target="_blank" rel="noopener noreferrer">
-          {gitlab}
-        </a>
+        <InfoKey>Gitlab:</InfoKey>{' '}
+        <InfoValue>
+          <a href={`https://${gitlab}`} target="_blank" rel="noopener noreferrer">
+            {gitlab}
+          </a>
+        </InfoValue>
       </InfoItem>
       <InfoItem>
-        <strong>LinkedIn:</strong>{' '}
-        <a href={linkedin} target="_blank" rel="noopener noreferrer">
-          {linkedin}
-        </a>
+        <InfoKey>LinkedIn:</InfoKey>{' '}
+        <InfoValue>
+          <a href={`https://${linkedin}`} target="_blank" rel="noopener noreferrer">
+            {linkedin}
+          </a>
+        </InfoValue>
       </InfoItem>
     </Container>
   );
 };
 
-export default PersonalInfo;
+export default PersonalInfo1;

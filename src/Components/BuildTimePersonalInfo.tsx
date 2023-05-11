@@ -8,57 +8,46 @@ interface PersonalInfoProps {
   github: string;
   gitlab: string;
   linkedin: string;
-}
+  links: {
+    name: string;
+    url: string;
+  }[];
+};
+
+type SourcePluginData = {
+  userDefinedWebsiteData: {
+    personal: PersonalInfoProps;
+  }
+};
 
 const BuildTimePersonalInfo: React.FC = () => {
   // Fetch data using the sourceNodes API and the custom createNode action
-  const data = useStaticQuery(graphql`
-    query PersonalWebsiteData{
-        example {
-            personal {
-              name
-            }
+  const { userDefinedWebsiteData: { personal } }: SourcePluginData = useStaticQuery(graphql`
+    query {
+      userDefinedWebsiteData {
+        personal {
+          name
+          email
+          phone
+          location
+          links {
+            name
+            url
+          }
+          description
         }
+      }
     }
   `);
 
-//   const data = useStaticQuery(graphql`
-//     query {
-//       example {
-//         personal {
-//           name
-//           email
-//           phone
-//           location
-//           links {
-//             name
-//             url
-//           }
-//           description
-//         }
-//       }
-//     }
-//   `);
-//   return (
-//     <PersonalInfo
-//       {data.allRepository.nodes.map((repo) => {
-//         return (
-//           <p key={repo.name}>
-//             {repo.name} -- {repo.stargazerCount}
-//           </p>
-//         );
-//       })}
-//     </main>
-//   );
     return (
-        <a>{data.example.personal.name}</a>
-    //   <PersonalInfo
-    //       name={data.allRepository.personal.name}
-    //       email={data.exampleYaml.personal.email}
-    //       github={data.exampleYaml.personal.links[0].url}
-    //       gitlab={data.exampleYaml.personal.links[1].url}
-    //       linkedin={data.exampleYaml.personal.links[2].url}
-    //   />
+        <PersonalInfo
+            name={personal.name}
+            email={personal.email}
+            github={personal.links[0].url}
+            gitlab={personal.links[1].url}
+            linkedin={personal.links[2].url}
+        />
     );
 };
 

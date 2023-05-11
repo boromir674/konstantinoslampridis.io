@@ -268,13 +268,13 @@ const IndexPage = () => {
           {(windowSize.innerWidth as number) > 500 && (
             <div className="Profile">
               <Profile />
+              <BuildTimePersonalInfo/>
             </div>
           )}
           <div className="Main-Pane">
             <div id="introduction" className="Introduction">
               <h2>Width: {windowSize.innerWidth}</h2>
               <h2>Height: {windowSize.innerHeight}</h2>
-              <BuildTimePersonalInfo/>
               <SomeText>some text</SomeText>
               <Button data-testid="button-id">This my button component.</Button>
               <p>{"Hi, I am Konstantinos Lampridis :)"}</p>
@@ -289,6 +289,7 @@ const IndexPage = () => {
           {(windowSize.innerWidth as number) <= 500 && (
             <div className="Profile">
               <Profile />
+              <BuildTimePersonalInfo/>
               <Nav items={navItems} colorSet={theme1.navigationBar} />
             </div>
           )}

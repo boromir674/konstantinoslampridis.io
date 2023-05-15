@@ -13,7 +13,7 @@ import "../css/indexStyles.css";
 import Header1Nav from "../Components/HeaderNavigationNew1";
 
 import BuildTimePersonalInfo from "../Components/BuildTimePersonalInfo";
-
+import AppLeftPane from "../Components/AppLeftpane";
 
 interface HeaderStyles {
   primaryColor: string;
@@ -159,26 +159,6 @@ const IndexPage = () => {
       }
     }
   `)
-  // // Fetch data using the sourceNodes API and the custom createNode action
-  // const data = useStaticQuery(graphql`
-  //   query {
-  //     exampleYaml {
-  //       personal {
-  //         name
-  //         email
-  //         phone
-  //         location
-  //         links {
-  //           name
-  //           url
-  //         }
-  //         description
-  //       }
-  //     }
-  //   }
-  // `);
-
-  // const { personal } = data.exampleYaml;
 
   const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
@@ -266,10 +246,7 @@ const IndexPage = () => {
             </div>
           </div>
           {(windowSize.innerWidth as number) > 500 && (
-            <div className="Profile">
-              <Profile />
-              <BuildTimePersonalInfo/>
-            </div>
+            <AppLeftPane/>
           )}
           <div className="Main-Pane">
             <div id="introduction" className="Introduction">

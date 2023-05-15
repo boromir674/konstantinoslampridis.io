@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PersonalInfo from "./PersonalInfo";
+import Education from './Education';
 
 interface PersonalInfoProps {
   name: string;
@@ -41,6 +42,7 @@ const BuildTimePersonalInfo: React.FC = () => {
   `);
 
     return (
+      <>
         <PersonalInfo
             name={personal.name}
             email={personal.email}
@@ -48,6 +50,8 @@ const BuildTimePersonalInfo: React.FC = () => {
             gitlab={personal.links[1].url}
             linkedin={personal.links[2].url}
         />
+        <Education />
+      </>
     );
 };
 

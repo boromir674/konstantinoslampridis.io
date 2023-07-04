@@ -11,17 +11,44 @@ We currently use
 - Typescript 4.8.2
 - Gatsby 4.22.0
 
-## Architecture
+# Architecture
 
-### Build Time Data
+## Build Time Data
 The site will mostly use **data** computed/fetched at **build time**.  
 We will use the **gatsby-source-graphql** to seemlessly define 
-what data are required by which component and provide an entrypoint toimplement the data fetch/compute logic.
+what data are required by which component and provide an entrypoint to implement the data fetch/compute logic.
 
 We "install"/add it, by adding it to the `gatsby-config.ts` and since it is an  
 existing source plugin we need to do sth like `yarn add gatsby-source-graphql`
 
-## Dev
+## Components
+
+In this repo we develop Components for mainly serving 3 purposes:
+- Having Generic Components as re-usable pieces of code
+- Having Components that wrap Generic Components and styling code
+
+### **Generic/Lib Components**
+Should be implmented so that they fit the use-cases the client code is going to need.  
+See for example the [ScrollingNavigationItemGeneric.tsx Component](src/Components/ScrollingNavigationItemGeneric.tsx) which:
+- allows the client code to pass a `renderProps` callback in the constructor (as `props`)
+- uses a `react hook` to take care of the `onClick` interaction that should happen
+
+They should be implemented so that they are portable to other apps too!
+
+### **Styled/App Components**
+These are the App-specific (usually tight to app styles) components that each app developer should implement sooner or later.  
+- They can absolutely leverage `Generic/Lib Components` for their implementation.  
+- Styling should be implemented using the `@emotion/styled` library.  
+- Theming should be supported.
+- Should be implemented so that the client code does not care about providing styling
+information (except for an optional `Theme`).  
+
+See for example the [PersonalInfo Component](src/Components/PersonalInfo.tsx), which uses `@emotion/styled` to define the `Component Styling`.
+
+# Dev
+
+TLDR See [Makefile](Makefile)
+
 Notes:
 
 yarn.lock-install-remove-cache
@@ -32,6 +59,28 @@ yarn.lock file generated inside docker container using the Dockerfile in the rep
 - also shall help with achieving the desired effect during development:
   that is to have any "dev", "test", "prod" environments as similar to each other as possible.
 
+## Storybook Frontend Workshop
+
+> Note
+`import { css } from "@emotion/react";` does NOT integrate nicely with Storybook.  
+Use `import styled from "@emotion/styled";` instead.
+
+
+We have configured our codebase to leverage the open source [`storybook` Frontend Workshop](https://storybook.js.org/) for building UI components and pages in isolation.  
+Deploying `storybook` on localhost (dev server with some hot-reloading), enables developing Components (such as React Components) avoiding "grunt work" by easing:
+- UI development
+- testing
+- documentation
+
+#### Cheat Sheet
+- **Initialize Storybook** at first
+  ```shell
+  npx storybook@latest init
+  ```
+- **Run storybook** on localhost
+  ```shell
+  yarn storybook
+  ```
 ## Deploy
 
 ```mermaid
@@ -39,9 +88,6 @@ graph LR;
   A[Develop] --> B[Test]
   B --> C[Build]
   C --> D[Upload to S3 bucket]
-```
-```shell
-
 ```
 
 ```mermaid

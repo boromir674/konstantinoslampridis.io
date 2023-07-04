@@ -14,6 +14,7 @@ ENV GATSBY_TELEMETRY_DISABLED=1
 # Static Site Generator / Static File Builder
 # we need ONLY the dependencies from package.json
 FROM install AS prod
+# we avoid unintented updates to yarn.lock by using --frozen-lockfile
 RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 # Copy Code/Files
 COPY src src
@@ -54,6 +55,7 @@ CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
 # Dev Operations, Testing, Type Check, Linting
 # we need EXTRA dependencies from devDependencies in package.json
 FROM install AS dev
+# we avoid unintented updates to yarn.lock by using --frozen-lockfile
 RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 # Copy Code/Files
 COPY src src

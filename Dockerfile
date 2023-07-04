@@ -15,6 +15,15 @@ FROM base as install
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
+
+# we avoid unintented updates to yarn.lock by using --frozen-lockfile
+# we INSTALL the devDependencies (along with the dependencies) because we use
+# the image to build static files
+
+# we do not care so much about optimizing this image size, since this is an
+# auxiliary image desinged as a dev-container
+# designed for building static files and not for hosting a runtime or a process
+# or a server (expect for the dev server))
 RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 
 # Copy Code/Files

@@ -8,41 +8,69 @@ FROM base as install
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
+ENV GATSBY_TELEMETRY_DISABLED=1
+
+# BRANCH 1
+# Static Site Generator / Static File Builder
+# we need ONLY the dependencies from package.json
+FROM install AS prod
 RUN yarn install --frozen-lockfile --production=true && yarn cache clean
-
 # Copy Code/Files
-
-FROM install as codebase
-
 COPY src src
 COPY gatsby-config.ts .
 COPY gatsby-node.ts .
 COPY README.md .
 COPY tsconfig.json .
+COPY data.yaml .
 
-FROM codebase as build
-ENV GATSBY_TELEMETRY_DISABLED=1
-
+# BRANCH 1.1
+# BUILD into "static" files, aka bundle (eg webpack output)
+FROM prod as build
 CMD [ "yarn", "build" ]
+# Example
+# docker build -f Dockerfile.build --target build -t me/ssg-builder .
+# docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
+# cd /data/repos/static-site-generator
+# rm -rf ./public/*
+# cp ./public-container/* ./public/
 
-
-FROM build as dev_codebase
-COPY .eslintrc.cjs .
+# BRANCH 1.2
+FROM prod as serve_files
+RUN yarn build
+EXPOSE 9000
+CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
+# SERVE the "static" files on localhost
+# Example
+# docker build -f Dockerfile.build --target serve_files -t me/file-server .
+# docker run -it --rm -v /data/repos/static-site-generator/:/app -p 9000:9000 me/file-server
 
 # Run development server
-FROM dev_codebase as dev
+FROM prod AS dev_server
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
 CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
 
+# BRANCH 2
+# Dev Operations, Testing, Type Check, Linting
+# we need EXTRA dependencies from devDependencies in package.json
+FROM install AS dev
+RUN yarn install --frozen-lockfile --production=false && yarn cache clean
+# Copy Code/Files
+COPY src src
+COPY gatsby-config.ts .
+COPY gatsby-node.ts .
+COPY README.md .
+COPY tsconfig.json .
+COPY data.yaml .
+COPY .eslintrc.cjs .
 
+ENV STORYBOOK_DISABLE_TELEMETRY=1
 
-
-FROM dev_codebase as type_check
+FROM dev as type_check
 CMD [ "yarn", "typecheck" ]
 
 
-FROM dev_codebase as test
+FROM dev as test
 ENV NODE_ENV=test
 COPY babel.config.js .
 COPY jest.config.ts .
@@ -52,26 +80,5 @@ COPY __mocks__ __mocks__
 CMD [ "yarn", "test" ]
 
 
-FROM dev_codebase as eslint
+FROM dev as eslint
 CMD [ "yarn", "eslint", "." ]
-
-
-
-# BUILD into "static" files, aka bundle (eg webpack output)
-# Example
-# docker build -f Dockerfile.build --target build -t me/ssg-builder .
-# docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
-
-# cd /data/repos/static-site-generator
-# rm -rf ./public/*
-# cp ./public-container/* ./public/
-FROM build as serve_files
-RUN yarn build
-EXPOSE 9000
-CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
-
-# SERVE the "static" files on localhost
-# Example
-# docker build -f Dockerfile.build --target serve_files -t me/file-server .
-# docker run -it --rm -v /data/repos/static-site-generator/:/app -p 9000:9000 me/file-server
-

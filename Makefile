@@ -25,19 +25,33 @@ help: ## This help.
 builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
 	docker build -f Dockerfile.build --target build -t $(BUILDER_NAME) .
 
-# BUILD STATIC WEBSITE
+# BUILD PROD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
 	rm -rf /data/repos/static-site-generator/public-auto/*
-	docker run -v /data/repos/static-site-generator/public-auto/:/app/public/ -it --rm $(BUILDER_NAME)
+	docker run -it --rm \
+		-v /data/repos/static-site-generator/public-auto/:/app/public/ \
+		$(BUILDER_NAME)
 	du -sh /data/repos/static-site-generator/public-auto
 
+# STATIC FILE SERVER
+static_file_server:  ## Run a server on localhost that serves the (built) "static" files
+	docker build -f Dockerfile.build --target serve_files -t $(FILE_SERVER_NAME) .
+	docker run -p 9000:9000 -it --rm $(FILE_SERVER_NAME)
+
+# SERVE STATIC FILES
+# server_static_files:  ## Serve (after building) the "static" files on localhost
+# 	docker builf -f Dockerfile.build --target serve_files -t $(BUILDER_NAME) .
+# 	docker run -it --rm \
+# 		-v /data/repos/static-site-generator/public-auto/:/app/public/ \
+# 		-p 8080:8080 \
+# 		$(BUILDER_NAME) \
+		
 
 # INTERACTIVE SHELL
 shell_in_builder:  ## Run an interactive shell into the ssg (builder) container environment
-	docker build -f Dockerfile.build --target COPY_CODE -t $(BUILD_IMAGE_INSTALL_TARGET) .
+	docker build -f Dockerfile.build --target build -t $(BUILD_IMAGE_INSTALL_TARGET) .
 	docker run -it --rm --name ssg_dummy_container_to_run_shell \
-		-v /data/repos/static-site-generator/package.json:/app/package.json \
-		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+		-v /data/repos/static-site-generator/:/app/ \
 		$(BUILD_IMAGE_INSTALL_TARGET) bash
 
 # COPY LOCK
@@ -46,20 +60,13 @@ copy_shell_lock:
 	docker cp ssg_dummy_container_to_run_shell:/app/yarn.lock ./yarn.lock
 
 
-# STATIC FILE SERVER
-static_file_server:  ## Run a server on localhost that serves the (built) "static" files
-	docker build -f Dockerfile.build --target serve_files -t $(FILE_SERVER_NAME) .
-	docker run -p 9000:9000 -it --rm $(FILE_SERVER_NAME)
-
-
 build_dev_server: Dockerfile.build  ## Build development server image
-	docker build -f Dockerfile.build --target dev -t $(DEV_SERVER_NAME) .
+	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
 
 # DEV SERVER
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
 	docker run -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm \
 		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/data.yaml:/app/data.yaml \
 		$(DEV_SERVER_NAME)
 
 # DEV ACTIVITIES
@@ -69,11 +76,13 @@ update_browserslist: build_dev_server
 # update-browserslist-db@latest
 
 ## DEV SHELL
-dev_shell:  ## Run an interactive shell into the ssg (builder) container environment
-	docker build -f Dockerfile.build --target COPY_CODE -t ssg-dev-im .
+dev_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) container
+	docker build -f Dockerfile.build --target dev -t ssg-dev-im .
 	docker run -it --rm --name ssg-dev-container \
 		-v /data/repos/static-site-generator/package.json:/app/package.json \
-		ssg-dev-im sh
+		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+		-v /data/repos/static-site-generator/src/:/app/src/ \
+		ssg-dev-im bash
 # -v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
 
 

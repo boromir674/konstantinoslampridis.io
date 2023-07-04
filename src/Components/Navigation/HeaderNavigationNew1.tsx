@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import ScrollingNavigationItem from "./ScrollingNavigationItemGeneric";
-import useScreenScrollHandler from "../Hooks/useScreenScrollHandler";
+import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
 
 const NavContainerNew = styled.nav`
   display: flex;

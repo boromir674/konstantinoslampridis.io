@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PersonalInfo from "./PersonalInfo";
-import Education from './Education';
 
 interface PersonalInfoProps {
   name: string;
@@ -21,7 +20,17 @@ type SourcePluginData = {
   }
 };
 
-const BuildTimePersonalInfo: React.FC = () => {
+interface AppPersonalInfoProps {
+  theme: {
+    containerBackgroundColor: string;
+    textColor: string;
+    linkColor: string;
+  }
+};
+
+const BuildTimePersonalInfo: React.FC<AppPersonalInfoProps> = ({
+  theme,
+}) => {
   // Fetch data using the sourceNodes API and the custom createNode action
   const { userDefinedWebsiteData: { personal } }: SourcePluginData = useStaticQuery(graphql`
     query {
@@ -44,13 +53,15 @@ const BuildTimePersonalInfo: React.FC = () => {
     return (
       <>
         <PersonalInfo
-            name={personal.name}
-            email={personal.email}
-            github={personal.links[0].url}
-            gitlab={personal.links[1].url}
-            linkedin={personal.links[2].url}
+        userData={{
+            name: personal.name,
+            email: personal.email,
+            github: personal.links[0].url,
+            gitlab: personal.links[1].url,
+            linkedin: personal.links[2].url,
+        }}
+            theme={theme}
         />
-        <Education />
       </>
     );
 };

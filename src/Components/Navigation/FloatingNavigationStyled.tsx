@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "@emotion/styled";
-import useScreenScrollHandler from "../Hooks/useScreenScrollHandler";
+import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
 import ScrollingNavigationItem from "./ScrollingNavigationItemGeneric";
-import useIsSSR from "../Hooks/useIsSSR";
+import useIsSSR from "../../Hooks/useIsSSR";
 
 interface Theme {
   backgroundColor: string;

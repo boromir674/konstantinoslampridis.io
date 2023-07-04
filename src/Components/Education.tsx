@@ -1,28 +1,31 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { graphql, useStaticQuery } from "gatsby"
-import AppTag from './AppTag';
+import React from "react";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import AppTag from "./AppTag";
+import EducationItemData from '../EducationItemDataInterface';
 
-const EducationContainer = styled.div`
-  margin-top: 20px;
+const EducationSectionContainer = styled.div`
+  margin-top: 20px;  // how much space will be left between this and the component above
 `;
 
 // const EducationItem = styled.div`
 //   margin-bottom: 20px;
 // `;
 
-const UniversityTitle = styled.h3`
+const DegreeTitle = styled.h3`
   margin-bottom: 5px;
+`;
+
+const UniversityTitle = styled.h4`
+  margin-top: 7px;
+  margin-bottom: 5px;
+  font-style: italic;
 `;
 
 const Location = styled.p`
   font-size: 16px;
   color: #888;
   margin-top: 5px;
-`;
-
-const DegreeTitle = styled.h4`
-  margin-bottom: 5px;
 `;
 
 const StudiesDuration = styled.span`
@@ -40,39 +43,79 @@ const TopicTagsContainer = styled.div`
   // margin-top: 10px;
 `;
 
-interface EducationItemUserTextData {
-  name: string;
-  location: string;
-  degree: string;
-  date: string;
-  thesis_title: string;
-  topics: string[];
+
+interface AppEducationSectionProps {
+  data: EducationItemData[];
+  theme: {
+    item: EducationItemTheme;
+  }
 }
 
-interface EducationItemProps {
-  university: string;
-  degree: string;
-  duration: string;
-  thesis: string;
-  topics: string[];
-  location: string;
+// EDUCATION ITEM
+interface EducationItemTheme {
+  backgroundColor: string;
+  textColor: string;
+  linkColor: string;
+  onHoverBackgroundColor: string;
+  onHoverTextColor: string;
+  // onHoverTransitionDelay: string;
+  onHoverTransformDuration: string;
+  onHoverBackgroundColorChangeDuration: string;
+}
+interface StyledAppEducationItemProps {
+  theme: EducationItemTheme;
+  children?: React.ReactNode;
+}
+const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
+  // display: flex;
+  background-color: ${(props) =>
+    props.theme.backgroundColor};
+  color: ${(props) => props.theme.textColor};
+  border: 1px solid #ccc;
+  transition: transform
+      ${(props) => props.theme.onHoverTransformDuration},
+    box-shadow 0.3s,
+    background-color
+      ${(props) =>
+        props.theme.onHoverBackgroundColorChangeDuration};
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    background-color: ${(props) =>
+      props.theme.onHoverBackgroundColor};
+    color: ${(props) =>
+      props.theme.onHoverTextColor || props.theme.textColor};
+  }
+`;
+interface AppEducationItemProps {
+  userData: EducationItemData;
+  theme: EducationItemTheme;
 }
 
-const EducationItem: React.FC<EducationItemProps> = ({
-  university,
-  degree,
-  duration,
-  thesis,
-  topics,
-  location,
+const EducationItem: React.FC<AppEducationItemProps> = ({
+  userData: {
+    degree_title,
+    university_name,
+    location,
+    duration,
+    thesis_title,
+    topics,
+  },
+  theme,
 }) => {
   return (
-    <EducationContainer>
-      <UniversityTitle>{university}</UniversityTitle>
-      <Location>{location}</Location>
-      <DegreeTitle>{degree}</DegreeTitle>
-      <StudiesDuration>{duration}</StudiesDuration>
-      <ThesisTitle>Thesis: {thesis}</ThesisTitle>
+    <StyledAppEduItem theme={theme}>
+      <DegreeTitle>{degree_title}</DegreeTitle>
+      <UniversityTitle>{university_name}</UniversityTitle>
+      <span css={css`
+        display: flex;
+        flex-wrap: wrap;
+      `}><a>
+        <Location>{location}</Location><StudiesDuration>{duration}</StudiesDuration>
+        </a>
+      </span>
+      <ThesisTitle>Thesis: {thesis_title}</ThesisTitle>
       <TopicTagsContainer>
         {topics.map((topic, index) => (
           <AppTag
@@ -83,44 +126,34 @@ const EducationItem: React.FC<EducationItemProps> = ({
               onHoverBackgroundColor: "#ddd",
               onHoverTextColor: "#333",
             }}
-          >{topic}</AppTag>
+          >
+            {topic}
+          </AppTag>
         ))}
       </TopicTagsContainer>
-    </EducationContainer>
+    </StyledAppEduItem>
   );
 };
 
-const Education: React.FC = () => {
-  const { userDefinedWebsiteData: { education } } = useStaticQuery(graphql`
-    query {
-      userDefinedWebsiteData {
-        education {
-          name
-          location
-          degree
-          thesis_title
-          date
-          topics
-        }
-      }
-    }
-  `);
-
+// EDUCATION SECTION
+const Education: React.FC<AppEducationSectionProps> = (props) => {
   return (
-    <EducationContainer>
-      {education.map((item: EducationItemUserTextData, index: number) => (
+    <EducationSectionContainer>
+      {props.data.map((item: EducationItemData, index: number) => (
         <EducationItem
           key={index}
-          university={item.name}
-          location={item.location}
-          degree={item.degree}
-          duration={item.date}
-          thesis={item.thesis_title}
-          topics={item.topics}
+          userData={item}
+          theme={props.theme.item}
+          // university_name={item.university_name}
+          // location={item.location}
+          // degree_title={item.degree_title}
+          // duration={item.duration}
+          // thesis_title={item.thesis_title}
+          // topics={item.topics}
         />
       ))}
-    </EducationContainer>
+    </EducationSectionContainer>
   );
 };
 
-export default Education;
+export { Education, EducationItem };

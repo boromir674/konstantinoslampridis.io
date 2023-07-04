@@ -13,13 +13,29 @@ interface PersonalWebsiteData {
   }[];
   description: string;
 };
+interface UserDefinedTextData {
+  personal: PersonalWebsiteData,
+  education: {
+    name: string;
+    location: string;
+    degree: string;
+    thesis_title: string;
+    date: string;
+    tags: string[];
+  }[];
+  professional: {
+    experience_items: {
+      title: string;
+      company: string
+      location: string;
+      duration: string;
+      description: string;
+      activities: string[];
+      technology_tags: string[];
+    }[];
+  };
+};
 
-
-// const sourceNodes : GatsbyNode["sourceNodes"] = async ({
-//   actions: { createNode },
-//   createNodeId,
-//   createContentDigest
-// }: CreateNodeArgs) => {
 
 const sourceNodes = async ({
   actions: { createNode },
@@ -31,7 +47,7 @@ const sourceNodes = async ({
     const yamlData = fs.readFileSync('data.yaml', 'utf8');
 
     // // Parse the YAML data
-    const data: PersonalWebsiteData = yaml.safeLoad(yamlData);
+    const data: UserDefinedTextData = yaml.safeLoad(yamlData);
     console.log('DATA');
     console.log(data);
     // create node for build time data
@@ -44,8 +60,8 @@ const sourceNodes = async ({
       internal: {
         // use type to "select" GraphQL node/Query. Example below
         // query {
-        //   elaPameEdw {
-        //     name
+        //   userDefinedWebsiteData {
+        //     personal
         //   }
         // }
         type: 'UserDefinedWebsiteData',

@@ -90,7 +90,10 @@ interface HeaderNavProps {
 * @param {ParamDataTypeHere} parameterNameHere - Brief description of the parameter here. Note: For other notations of data types, please refer to JSDocs: DataTypes command.
 * @return {ReturnValueDataTypeHere} Brief description of the returning value here.
 */
-const Header1Nav: FC<HeaderNavProps> = ({ items, colorSet }) => {
+const HorizontalNavBar: FC<HeaderNavProps> = ({ items, colorSet }) => {
+  // whenever the user makes a scroll we capture the "screen view position"
+  // and we store in the 'activeLinkIndex' state attribute of this component
+  // thus we also trigger a re-render on scroll
   const activeLinkIndex = useScreenScrollHandler(items);
 
   return (
@@ -114,4 +117,4 @@ const Header1Nav: FC<HeaderNavProps> = ({ items, colorSet }) => {
   );
 };
 
-export default Header1Nav;
+export default HorizontalNavBar;

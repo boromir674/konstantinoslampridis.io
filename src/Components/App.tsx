@@ -252,6 +252,7 @@ const IndexPage = () => {
               Footer Content
             </p>
           </div>
+          {/* Footer is always displayed */}
         </div>
       </main>
     </ThemeProvider>

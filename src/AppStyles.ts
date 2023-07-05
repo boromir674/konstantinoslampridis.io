@@ -12,6 +12,9 @@ interface Theme {
   buttonColor: string;
   buttonHoverColor: string;
   headerStyles: HeaderStyles;
+  topHeaderPane: {
+    backgroundColor: string;
+  };
   navigationBar: {
     backgroundColor: string;
     textColor: string;
@@ -57,13 +60,17 @@ interface Theme {
       onHoverTextColor: string;
     };
   };
+  footerStyles: {
+    textColor: string;
+    backgroundColor: string;
+  };
 }
 
 // Used internally for type checking
 interface ComputedTheme extends Theme {
   professional: {
-    containerBackgroundColor: Theme['professional']['containerBackgroundColor'];
-    title: Theme['professional']['title'];
+    containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
+    title: Theme["professional"]["title"];
     item: {
       backgroundColor: string;
       textColor: string;
@@ -75,7 +82,7 @@ interface ComputedTheme extends Theme {
     };
     // defines whether there will be a delay between the the top item and the
     // bottom, on color mode switch (toggle)
-    
+
     // for example if given number is 4 then from the moment the top item
     // starts to change colors (on mode switch), till the moment the bottom
     // item changed colors, 4 seconds would pass
@@ -99,7 +106,6 @@ interface ComputedTheme extends Theme {
     containerBackgroundColor: string;
   };
 }
-
 
 // DESIGNER SPACE
 // COMMON Styling Configuration between Light and Dark Modes
@@ -129,17 +135,24 @@ const commonStyling = {
 };
 
 const lightColorMode: Theme = {
-  backgroundColor: "#ffffff",
-  foregroundColor: "#000000",
+  // <picked> color after thought
+  backgroundColor: "#D6D6DF",
+  foregroundColor: "#1D5556",
+  // </picked>
+
+  // foregroundColor: "#000000",
   buttonColor: "#007bff",
   buttonHoverColor: "#0056b3",
   headerStyles: {
     primaryColor: "#ffffff",
     secondaryColor: "#0056b3",
   },
+  topHeaderPane: {
+    backgroundColor: "#D6D6DF",
+  },
   navigationBar: {
     textColor: "#000000",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#009385",
     hoverBackgroundColor: "#fff",
     hoverTextColor: "#000000",
     activatedBackgroundColor: "#fa345f",
@@ -149,7 +162,7 @@ const lightColorMode: Theme = {
     textColor: "#4A4A4A",
     urlTextColor: "#2063e9",
     // containerBackgroundColor: "#f6f8fa",
-    containerBackgroundColor: '#EDB6DB',
+    containerBackgroundColor: "#EDB6DB",
   },
   education: {
     title: {
@@ -158,13 +171,13 @@ const lightColorMode: Theme = {
     },
     item: {
       // MY OLD DESIGN
-        // backgroundColor: "#FFAD00",
-        // textColor: "#333",
-        onHoverBackgroundColor: "#ddd",
-        onHoverTextColor: "#333",
-        linkColor: "#2063e9",
-        // NEW DESIGN
-        textColor: "#123123",
+      // backgroundColor: "#FFAD00",
+      // textColor: "#333",
+      onHoverBackgroundColor: "#ddd",
+      onHoverTextColor: "#333",
+      linkColor: "#2063e9",
+      // NEW DESIGN
+      textColor: "#123123",
       backgroundColor: "#ffffff",
       // textColor: "#000000",
       // onHoverBackgroundColor: "#f6f8fa",
@@ -184,22 +197,34 @@ const lightColorMode: Theme = {
     item: {
       textColor: "#000000",
       backgroundColor: "#ffffff",
-      linkColor: '#1651f3',
-      onHoverBackgroundColor: '#a4e2c7',
+      linkColor: "#1651f3",
+      onHoverBackgroundColor: "#a4e2c7",
       onHoverTextColor: "#000000",
     },
     containerBackgroundColor: "#f6f8fa",
   },
+  footerStyles: {
+    textColor: "#1D5556",
+    backgroundColor: "#D6D6DF",
+  },
 };
 
 const darkColorMode: Theme = {
-  backgroundColor: "#333333",
-  foregroundColor: "#ffffff",
+  // <picked> color after thought
+  backgroundColor: "#D6D6DF",
+  foregroundColor: "#1D5556",
+  // </picked>
+  // backgroundColor: "#333333",
+  // foregroundColor: "#ffffff",
+
   buttonColor: "#007bff",
   buttonHoverColor: "#0096ff",
   headerStyles: {
     primaryColor: "#333333",
     secondaryColor: "#0096ff",
+  },
+  topHeaderPane: {
+    backgroundColor: "#463507",
   },
   navigationBar: {
     backgroundColor: "#333333",
@@ -214,7 +239,7 @@ const darkColorMode: Theme = {
     textColor: "#EDEDED",
     urlTextColor: "#D98C66",
     // containerBackgroundColor: "#222222",
-    containerBackgroundColor: '#2D0B22',
+    containerBackgroundColor: "#2D0B22",
   },
   // EDUCATION SECTION
   education: {
@@ -243,14 +268,17 @@ const darkColorMode: Theme = {
     item: {
       textColor: "#d7e5db",
       backgroundColor: "#201f1f",
-      linkColor: '#aec0f1',
-      onHoverBackgroundColor: '#494343',
+      linkColor: "#aec0f1",
+      onHoverBackgroundColor: "#494343",
       onHoverTextColor: "#d7e5db",
     },
     containerBackgroundColor: "#1d2421",
   },
+  footerStyles: {
+    textColor: "#D6D6DF",
+    backgroundColor: "#1D5556",
+  },
 };
-
 
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
 type CommonStyling = typeof commonStyling;
@@ -279,7 +307,6 @@ const mergeStylings = (theme: Theme, commonStyling: CommonStyling) => {
     },
   };
 };
-
 
 const lightTheme: ComputedTheme = mergeStylings(lightColorMode, commonStyling);
 const darkTheme: ComputedTheme = mergeStylings(darkColorMode, commonStyling);

@@ -42,8 +42,15 @@ These are the App-specific (usually tight to app styles) components that each ap
 - Theming should be supported.
 - Should be implemented so that the client code does not care about providing styling
 information (except for an optional `Theme`).  
-
+- the usually accept a `props.data` value usually text data to be used in rendering
+- 
 See for example the [PersonalInfo Component](src/Components/PersonalInfo.tsx), which uses `@emotion/styled` to define the `Component Styling`.
+
+
+### Component Arrangements based on Screen Size (aka media queries)
+The default view is for big screens and is a grid of TopheaderPane, leftSidePane, RightMainPane and BottomFooterPane
+
+All the Panes should be rendered inside a Component with the `View` name as indicator.
 
 # Dev
 

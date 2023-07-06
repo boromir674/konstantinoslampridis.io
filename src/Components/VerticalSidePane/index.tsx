@@ -1,3 +1,4 @@
-import VerticalSidePane from './VerticalSidePane';
+import { VerticalSidePane, AppVerticalSidePaneProps } from './VerticalSidePane';
 
+export type { AppVerticalSidePaneProps };
 export default VerticalSidePane;

@@ -17,7 +17,7 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   justify-self: center;
   align-self: center;
-  //   grid-area: Footer;
+  grid-area: Footer;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -33,3 +33,6 @@ const BottomFooterPane: FC<BottomFooterPaneProps> = (props) => {
 };
 
 export default BottomFooterPane;
+
+export type { BottomFooterPaneProps };
+export { BottomFooterPane };

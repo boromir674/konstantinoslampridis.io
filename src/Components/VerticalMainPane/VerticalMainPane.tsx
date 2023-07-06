@@ -45,6 +45,7 @@ const VerticanMainPaneContainer = styled.div<VerticanMainPaneContainerProps>`
   //   display: flex;
   //   flex-direction: column;
   //   flex-wrap: wrap;
+  grid-area: Main;
 `;
 
 interface AppVerticalMainPaneProps {
@@ -82,4 +83,6 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
   );
 };
 
-export default VerticalMainPane;
+
+export type { AppVerticalMainPaneProps };
+export { VerticalMainPane };

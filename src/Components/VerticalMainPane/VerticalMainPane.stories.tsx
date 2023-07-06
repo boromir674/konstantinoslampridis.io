@@ -1,4 +1,4 @@
-import VerticalMainPane from "./VerticalMainPane";
+import { VerticalMainPane } from "./VerticalMainPane";
 import { lightTheme, darkTheme } from "../../AppStyles";
 
 export default {

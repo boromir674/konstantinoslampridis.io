@@ -1,4 +1,4 @@
-import BottomFooterPane from "./BottomFooterPane";
+import {BottomFooterPane} from "./BottomFooterPane";
 import { lightTheme, darkTheme } from "../../AppStyles";
 
 export default {

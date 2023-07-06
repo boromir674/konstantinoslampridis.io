@@ -7,6 +7,7 @@ import { ThemeProvider } from "@emotion/react";
 import "../css/indexStyles.css";
 import { ComputedTheme, lightTheme, darkTheme } from "../AppStyles";
 import useIsSSR from "../Hooks/useIsSSR";
+import useWindowSizeTrackingState from "../Hooks/useWindowSizeTrackingState";
 
 import { ToggleSlider } from "./MyToggleSwitch1";
 import { HorizontalNavBar, VerticalFlowtingNav } from "./Navigation";
@@ -88,7 +89,6 @@ type WindowSize = {
   innerWidth: number | null;
   innerHeight: number | null;
 };
-type getWindowSizeFunction = () => WindowSize;
 
 const IndexPage = () => {
   // Build-Time Data Fetching
@@ -114,41 +114,14 @@ const IndexPage = () => {
   const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
   const [theme1, setTheme1] = useState<ComputedTheme>(lightTheme);
-  const [windowSize, setWindowSize] = useState<WindowSize>(() =>
-    SSROn
-      ? {
-          innerWidth: null,
-          innerHeight: null,
-        }
-      : {
-          innerWidth: window.innerWidth,
-          innerHeight: window.innerHeight,
-        }
-  );
+
+  const [windowSize] = useWindowSizeTrackingState(SSROn);
 
   // const [appStyles] = useAppStyles();
   const matchTogglePosition = useCallback(
     () => (theme === appThemeSets.default.light ? "left" : "right"),
     [theme]
   );
-
-  const getWindowSize: getWindowSizeFunction = useCallback(() => {
-    const { innerWidth, innerHeight } = window;
-    return { innerWidth, innerHeight };
-  }, [windowSize]);
-
-  useEffect(() => {
-    function handleWindowResize() {
-      setWindowSize(getWindowSize());
-    }
-
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
-
   // Nav Bar 1
   const navItems = [
     {
@@ -230,8 +203,7 @@ const IndexPage = () => {
                 }}
               />
               <React.StrictMode>
-
-              <BuildTimeEducationSection theme={theme1.education} />
+                <BuildTimeEducationSection theme={theme1.education} />
               </React.StrictMode>
               <VerticalFlowtingNav
                 items={navItems}

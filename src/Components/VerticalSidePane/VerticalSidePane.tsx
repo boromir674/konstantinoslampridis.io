@@ -40,10 +40,11 @@ interface VerticanSidePaneContainerProps {
 }
 
 const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
-  left: 0px;
+  // left: 0px;
   // background-color: lightblue;
   background-color: ${(props) => props.theme.containerBackground || props.theme.personalInfo.containerBackgroundColor};
   display: flex;
+  grid-area: Side;
   flex-direction: column;
   flex-wrap: wrap;
 `;
@@ -68,4 +69,5 @@ const VerticalSidePane: React.FC<AppVerticalSidePaneProps> = ({
   );
 };
 
-export default VerticalSidePane;
+export type { AppVerticalSidePaneProps };
+export { VerticalSidePane };

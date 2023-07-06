@@ -54,16 +54,16 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   //   grid-column-end: 3;
   //   grid-row-start: row1-start;
   //   grid-row-end: 2;
-  //   position: fixed;
+  position: fixed;
   top: 0px;
   width: 100%;
-  //   justify-self: center;
+    // justify-self: center;
   //   align-self: center;
-  //   grid-area: Header;
-  padding-top: 10px;
-  padding-right: 80px;
-  padding-bottom: 10px;
+  grid-area: Header;
   padding-left: 80px;
+  // padding-right: 80px;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
 `;
 
 const TopHeaderPane: FC<TopHeaderPaneProps> = ({
@@ -85,4 +85,5 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
   );
 };
 
-export default TopHeaderPane;
+export type { TopHeaderPaneProps };
+export { TopHeaderPane };

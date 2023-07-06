@@ -1,4 +1,4 @@
-import TopHeaderPane from "./TopHeaderPane";
+import {TopHeaderPane} from "./TopHeaderPane";
 import { lightTheme, darkTheme } from "../../AppStyles";
 
 export default {

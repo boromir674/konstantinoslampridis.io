@@ -1,4 +1,4 @@
-import VerticalSidePane from "./VerticalSidePane";
+import { VerticalSidePane } from "./VerticalSidePane";
 import { lightTheme, darkTheme } from "../../AppStyles";
 
 export default {

@@ -90,7 +90,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
         <InfoKey>Github:</InfoKey>{" "}
         <InfoValue>
           <MyLink
-            href={`https://github.com/${github}`}
+            href={`https://${github}`}
             target="_blank"
             rel="noopener noreferrer"
             theme={{
@@ -105,7 +105,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
         <InfoKey>Gitlab:</InfoKey>{" "}
         <InfoValue>
           <MyLink
-            href={`https://gitlab.com/${gitlab}`}
+            href={`https://${gitlab}`}
             target="_blank"
             rel="noopener noreferrer"
             theme={{

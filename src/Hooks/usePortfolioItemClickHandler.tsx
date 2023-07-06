@@ -9,7 +9,7 @@ import { useCallback } from 'react';
 */
 const useHandleClickONExperienceItem = () => 
     useCallback(() => {
-        console.log('Pressed Experience Item');
+        // console.log('Pressed Experience Item');
         // const target = document.querySelector(elementId);
         // if (target) {
         //     const yOffset = -100; // adjust this as needed

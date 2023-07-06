@@ -67,15 +67,8 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
   const timestapsArray = Array.from(Array(dataLen).keys()).map(
     (i) => i * timeStep
   );
-  console.log(timestapsArray);
-  console.log("DATA");
-  console.log(data);
-  console.log("data.experience_items");
-  console.log(data.experience_items);
-  console.log("------");
-  // const timeStep1 = (dataLen - 1) / (theme.itemsColorModeSwitchDelay || 1);
-  // const timestampsTransform = [0].concat((dataLen - 1))
-  //  + data.experience_items.map((item) => item.timestamp);
+  // console.log(timestapsArray);
+
   return (
     <ProfessionalExperienceSectionContainer
       id={htmlID}

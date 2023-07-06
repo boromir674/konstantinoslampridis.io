@@ -26,6 +26,7 @@ const App: FC = () => {
           phone
           location
           links {
+            id
             name
             url
           }
@@ -55,16 +56,24 @@ const App: FC = () => {
   `);
 
   // create a name2Url mapping as an object, given the links array using Object.create
-  const name2Url = Object.create(
-    {},
-    {
-      ...personal.links.map(
-        ({ name, url }: { name: string; url: string }) => ({
-          [name]: url,
-        })
-      ),
-    }
+  // const name2Url = Object.create(
+  //   {},
+  //   {
+  //     ...personal.links.map(
+  //       ({ name, url }: { name: string; url: string }) => ({
+  //         [name]: url,
+  //       })
+  //     ),
+  //   }
+  // );
+  // ALT
+  // create a name2Url mapping
+  const name2Url = personal.links.reduce(
+    (acc, { name, id, url }) => ({ ...acc, [id]: url }),
+    {}
   );
+
+
   return (
     <BigScreenViewInteractive
       navigationSections={[

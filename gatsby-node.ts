@@ -9,6 +9,7 @@ interface PersonalWebsiteData {
   location: string;
   links: {
     name: string;
+    id: string;
     url: string;
   }[];
   description: string;

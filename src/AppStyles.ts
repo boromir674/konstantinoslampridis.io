@@ -119,7 +119,7 @@ const commonStyling = {
   // Domain Specific Styling
   professional: {
     item: {
-      onHoverTransformDuration: "1.6s",
+      onHoverTransformDuration: "0.5s",
       onHoverBackgroundColorChangeDuration: "0.7s",
       // onHoverTransitionDelay: '1s',
     },

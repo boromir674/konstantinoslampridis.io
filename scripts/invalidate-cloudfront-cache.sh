@@ -14,6 +14,8 @@ usage() {
   echo "Options:"
   echo "  -h, --help     Show this help message"
   echo "  -n, --dry-run  Do a dry run without invalidating the cache"
+  echo ""
+  echo " Example: ./invalidate-cache.sh <cloudfront_distribution_id> /index.html"
 }
 
 # Parse command-line arguments

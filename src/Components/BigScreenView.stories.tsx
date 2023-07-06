@@ -49,7 +49,7 @@ export const Light = {
         // starting position of toggle, if true it is on the right
         active: true,
         // false -> left, true -> right
-      },
+    },
       verticalSidePane: {
         personal: {
           name: "John Doe",

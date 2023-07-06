@@ -18,5 +18,5 @@ export default IndexPage;
 
 // the HeadFC Component allows to alter the <head> html element or insert elements in it
 
-// ADD the <title> element in the <hear> of the html document
+// ADD the <title> element in the <head> of the html document
 export const Head: HeadFC = () => <BuildTimeTitle />;

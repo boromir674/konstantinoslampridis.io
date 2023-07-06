@@ -49,7 +49,7 @@ CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 FROM prod AS dev_server
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
-CMD [ "yarn", "develop", "-H", "0.0.0.0" ]
+CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 
 # BRANCH 2
 # Dev Operations, Testing, Type Check, Linting

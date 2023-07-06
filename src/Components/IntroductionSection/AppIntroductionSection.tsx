@@ -11,6 +11,8 @@ interface AppIntroductionSectionProps {
   data: {
     name: string;
   };
+  // the id of the html element (can easily allow other components to do a 'scroll to' action)
+  id: string;
 }
 
 interface StyledIntroductionSectionContainerProps {
@@ -31,9 +33,10 @@ const StyledIntroductionSectionContainer = styled.div<StyledIntroductionSectionC
 const AppIntroductionSection: FC<AppIntroductionSectionProps> = ({
   data,
   theme,
+  id: htmlId,
 }) => {
   return (
-    <StyledIntroductionSectionContainer theme={theme}>
+    <StyledIntroductionSectionContainer id={htmlId} theme={theme}>
       <p>
         Welcome to the online space of <strong>{data.name}</strong> {":)"}
       </p>

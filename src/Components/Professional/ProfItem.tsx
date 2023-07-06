@@ -31,7 +31,7 @@ const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
   transition: transform ${(props) => props.theme.onHoverTransformDuration}, box-shadow 0.3s, background-color ${(props) => props.theme.onHoverBackgroundColorChangeDuration};
   cursor: pointer;
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
     background-color: ${(props) => props.theme.onHoverBackgroundColor};
     color: ${(props) =>

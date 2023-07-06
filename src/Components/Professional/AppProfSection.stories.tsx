@@ -15,6 +15,7 @@ export const LightMode = {
         {
           title: "Software Engineer",
           company: "GG Navi",
+          activities: ["other activity"],
           location: "Mountain View, CA",
           duration: "Sep 2022 - May 2023",
           description: "I worked at GG Navi as a Software Engineer.",
@@ -24,6 +25,7 @@ export const LightMode = {
           title: "Software Engineer",
           company: "GG Navi",
           location: "Mountain View, CA",
+          activities: ["other activity"],
           duration: "Sep 2022 - May 2023",
           description: "I worked at GG Navi as a Software Engineer.",
           technology_tags: ["python", 'docker'],
@@ -49,52 +51,3 @@ export const DarkMode = {
     // },
   },
 };      
-
-
-
-// // 3: Production Professional Data & Light Mode Colors
-// interface UserDefinedProfessionalTextData {
-//   professional: {
-//     experience_items: {
-//       title: string;
-//       company: string;
-//       location: string;
-//       duration: string;
-//       description: string;
-//       activities?: string[];
-//       technology_tags: string[];
-//     }[];
-//   };
-// }
-
-// let data;
-// try {
-//   // Read the YAML file
-//   const yamlData = fs.readFileSync("data.yaml", "utf8");
-//   // Parse the YAML data
-//   // const data: UserDefinedProfessionalTextData = yaml.safeLoad(yamlData);
-//   data = yaml.safeLoad(yamlData);
-  
-// } catch (error) {
-//   console.error("Error reading or parsing YAML file:", error);
-//   data = {};
-//   // const data: UserDefinedProfessionalTextData = {
-//   //   professional: LightMode.args.data
-//   // };
-// }
-
-// export const ProdLightMode = {
-//   args: {
-//     ...LightMode.args,
-//     ...data
-//   },
-// }; 
-
-
-// // 4: Production Professional Data & Dark Mode Colors
-// export const ProdDarkMode = {
-//   args: {
-//     ...DarkMode.args,
-//     ...data
-//   },
-// };

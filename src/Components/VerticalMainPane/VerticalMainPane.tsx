@@ -34,11 +34,13 @@ containerBackgroundColor: string;
   };
 }
 
-interface VerticanMainPaneContainerProps {
+
+interface VerticalMainPaneContainerProps {
   theme: AppVerticalMainPaneTheme;
+  // sectionIDs: SectionIDs
 }
 
-const VerticanMainPaneContainer = styled.div<VerticanMainPaneContainerProps>`
+const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   left: 0px;
   // background-color: ${(props) => props.theme.containerBackgroundColor};
   background-color: #f6f8fa;
@@ -57,19 +59,25 @@ interface AppVerticalMainPaneProps {
     professional: ExperienceItemData[];
     // portfolio: PortfolioItemData[];
   };
+  sectionIDs?: string[];
 }
 
 const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
   theme,
   data,
+  sectionIDs,
 }) => {
   return (
-    <VerticanMainPaneContainer theme={theme}>
+    <VerticalMainPaneContainer theme={theme}>
+      {/* Scrollable Section 1 */}
       <IntroductionSection
+        id={sectionIDs ? sectionIDs[0] : "introduction-section"}
         theme={theme.introduction}
         data={{ name: data.introduction.name }}
       />
+      {/* Scrollable Sectoin 2 */}
       <ProfessionalSection
+        id={sectionIDs ? sectionIDs[1] : "professional-section"}
         theme={{
           ...theme.professional,
           title: {
@@ -79,7 +87,7 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         }}
         data={{ experience_items: data.professional }}
       />
-    </VerticanMainPaneContainer>
+    </VerticalMainPaneContainer>
   );
 };
 

@@ -17,7 +17,7 @@ export const Light = {
             linkColor: lightTheme.personal.urlTextColor,
         },
         education: {
-            containerBackground: lightTheme.education.containerBackgroundColor,
+            containerBackgroundColor: lightTheme.education.containerBackgroundColor,
             title: lightTheme.education.title,
             item: lightTheme.education.item,
         }

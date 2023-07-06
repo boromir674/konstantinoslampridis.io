@@ -8,6 +8,8 @@ type ProfessionalSectionData = {
 };
 
 interface ProfessionalSectionProps {
+  // the id of the html element (can easily allow other components to do a 'scroll to' action)
+  id: string;
   data: ProfessionalSectionData;
   theme: {
     title: {
@@ -44,6 +46,7 @@ interface ProfessionalExperienceSectionContainerProps {
     backgroundColor: string;
   };
 }
+
 const ProfessionalExperienceSectionContainer = styled.div<ProfessionalExperienceSectionContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
 `;
@@ -51,6 +54,7 @@ const ProfessionalExperienceSectionContainer = styled.div<ProfessionalExperience
 const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
   theme,
   data,
+  id: htmlID,
 }) => {
   const dataLen = data.experience_items.length;
   var timeStep: number;
@@ -64,11 +68,17 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
     (i) => i * timeStep
   );
   console.log(timestapsArray);
+  console.log("DATA");
+  console.log(data);
+  console.log("data.experience_items");
+  console.log(data.experience_items);
+  console.log("------");
   // const timeStep1 = (dataLen - 1) / (theme.itemsColorModeSwitchDelay || 1);
   // const timestampsTransform = [0].concat((dataLen - 1))
   //  + data.experience_items.map((item) => item.timestamp);
   return (
     <ProfessionalExperienceSectionContainer
+      id={htmlID}
       theme={{ backgroundColor: theme.containerBackgroundColor }}
     >
       <ProfessionalExperienceSectionTitle theme={theme.title}>

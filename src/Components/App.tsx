@@ -114,10 +114,9 @@ const IndexPage = () => {
   const SSROn = useIsSSR();
   const [theme, setTheme] = useState<ThemeType>(appThemeSets.default.light);
   const [theme1, setTheme1] = useState<ComputedTheme>(lightTheme);
-
   const [windowSize] = useWindowSizeTrackingState(SSROn);
 
-  // const [appStyles] = useAppStyles();
+  // this state's initial value governs whether the toggle switch will be left or right
   const matchTogglePosition = useCallback(
     () => (theme === appThemeSets.default.light ? "left" : "right"),
     [theme]

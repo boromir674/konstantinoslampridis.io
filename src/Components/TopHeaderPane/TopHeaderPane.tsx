@@ -57,7 +57,7 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   position: fixed;
   top: 0px;
   width: 100%;
-    // justify-self: center;
+  // justify-self: center;
   //   align-self: center;
   grid-area: Header;
   padding-left: 80px;

@@ -1,4 +1,4 @@
-import BigScreenView from "./BigScreenView";
+import BigScreenView, { BigScreenViewProps} from "./BigScreenView";
 import { lightTheme, darkTheme } from "../AppStyles";
 
 export default {
@@ -24,7 +24,8 @@ export const Light = {
           linkColor: lightTheme.personal.urlTextColor,
         },
         education: {
-          containerBackground: lightTheme.education.containerBackgroundColor,
+          containerBackgroundColor:
+            lightTheme.education.containerBackgroundColor,
           title: lightTheme.education.title,
           item: lightTheme.education.item,
         },
@@ -46,7 +47,7 @@ export const Light = {
           console.log("active: ", active);
         },
         // starting position of toggle, if true it is on the right
-        active: false,
+        active: true,
         // false -> left, true -> right
       },
       verticalSidePane: {
@@ -81,32 +82,34 @@ export const Light = {
         ],
       },
       verticalMainPane: {
-        introduction: {
-          name: "John Doe",
+        data: {
+          introduction: {
+            name: "John Doe",
+          },
+          professional: [
+            {
+              title: "Software Engineer",
+              company: "GG Navi",
+              location: "Mountain View, CA",
+              duration: "Sep 2022 - May 2023",
+              description: "I worked at GG Navi as a Software Engineer.",
+              technology_tags: ["python", "docker"],
+            },
+            {
+              title: "Software Engineer",
+              company: "GG Navi",
+              location: "Mountain View, CA",
+              duration: "Sep 2022 - May 2023",
+              description: "I worked at GG Navi as a Software Engineer.",
+              technology_tags: ["python", "docker"],
+            },
+          ],
         },
-        professional: [
-          {
-            title: "Software Engineer",
-            company: "GG Navi",
-            location: "Mountain View, CA",
-            duration: "Sep 2022 - May 2023",
-            description: "I worked at GG Navi as a Software Engineer.",
-            technology_tags: ["python", "docker"],
-          },
-          {
-            title: "Software Engineer",
-            company: "GG Navi",
-            location: "Mountain View, CA",
-            duration: "Sep 2022 - May 2023",
-            description: "I worked at GG Navi as a Software Engineer.",
-            technology_tags: ["python", "docker"],
-          },
-        ],
+        // sectionIDs: {},
       },
     },
   },
 };
-
 
 export const Dark = {
   args: {
@@ -119,13 +122,12 @@ export const Dark = {
       },
       verticalSidePane: {
         personalInfo: {
-          containerBackgroundColor:
-            darkTheme.personal.containerBackgroundColor,
+          containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
           textColor: darkTheme.personal.textColor,
           linkColor: darkTheme.personal.urlTextColor,
         },
         education: {
-          containerBackground: darkTheme.education.containerBackgroundColor,
+          containerBackgroundColor: darkTheme.education.containerBackgroundColor,
           title: darkTheme.education.title,
           item: darkTheme.education.item,
         },

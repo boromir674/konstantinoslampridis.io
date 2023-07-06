@@ -15,6 +15,7 @@ export const Light = {
         experienceItemData: {
             title: "Software Engineer",
             company: "GG Navi",
+            activities: ["I worked at GG Navi as a Software Engineer.", "other activity"],
             location: "Mountain View, CA",
             duration: "Sep 2022 - May 2023",
             description: "I worked at GG Navi as a Software Engineer.",

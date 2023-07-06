@@ -24,7 +24,10 @@ interface BigScreenViewProps {
   data: {
     topHeaderPane: TopHeaderPaneProps["data"];
     verticalSidePane: AppVerticalSidePaneProps["data"];
-    verticalMainPane: AppVerticalMainPaneProps["data"];
+    verticalMainPane: {
+      data: AppVerticalMainPaneProps["data"];
+      sectionIDs?: string[];
+    } 
     // bottomFooterPane: BottomFooterPaneProps['data'];
   };
 }
@@ -42,7 +45,7 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
   width: 100vw;
   // background: #ffecb3;
   background: ${(props) => props.theme.containerBackgroundColor};
-//   background: "inherit";
+  //   background: "inherit";
 `;
 
 const BigScreenView: FC<BigScreenViewProps> = ({
@@ -61,13 +64,16 @@ const BigScreenView: FC<BigScreenViewProps> = ({
   },
 }) => {
   return (
-    <BigScreenViewContainer theme={{containerBackgroundColor: containerBackgroundColor}}>
+    <BigScreenViewContainer
+      theme={{ containerBackgroundColor: containerBackgroundColor }}
+    >
       <TopHeaderPane theme={topHeaderPane} data={topHeaderPaneData} />
       <VerticalSidePane theme={verticalSidePane} data={verticalSidePaneData} />
-      <VerticalMainPane theme={verticalMainPane} data={verticalMainPaneData} />
+      <VerticalMainPane theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs}/>
       <BottomFooterPane theme={bottomFooterPane} />
     </BigScreenViewContainer>
   );
 };
 
 export default BigScreenView;
+export type { BigScreenViewProps };

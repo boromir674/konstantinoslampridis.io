@@ -49,21 +49,22 @@ interface TopHeaderPaneContainerProps {
 const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.navigationBar.textColor};
-
+  
   //   grid-column-start: 1;
   //   grid-column-end: 3;
   //   grid-row-start: row1-start;
   //   grid-row-end: 2;
   position: fixed;
-  top: 0px;
+  top: 0;
   width: 100%;
   // justify-self: center;
   //   align-self: center;
   grid-area: Header;
   padding-left: 80px;
+  padding-top: 10px;
   // padding-right: 80px;
-  // padding-top: 10px;
   // padding-bottom: 10px;
+  // margin-bottom: 20px;
 `;
 
 const TopHeaderPane: FC<TopHeaderPaneProps> = ({

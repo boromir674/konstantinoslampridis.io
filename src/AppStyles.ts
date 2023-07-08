@@ -16,12 +16,12 @@ interface Theme {
     backgroundColor: string;
   };
   navigationBar: {
-    backgroundColor: string;
     textColor: string;
+    backgroundColor: string;
     hoverBackgroundColor: string;
     hoverTextColor: string;
-    activatedBackgroundColor: string;
     activatedTextColor: string;
+    activatedBackgroundColor: string;
   };
   personal: {
     textColor: string;
@@ -70,8 +70,13 @@ interface Theme {
 interface ComputedTheme extends Theme {
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
-    title: Theme["professional"]["title"];
+    title: {
+      textColor: Theme["professional"]["title"]["textColor"];
+      backgroundColor: Theme["professional"]["title"]["backgroundColor"];
+      padding: string;
+    };
     item: {
+      padding?: string;
       backgroundColor: string;
       textColor: string;
       linkColor: string;
@@ -92,8 +97,10 @@ interface ComputedTheme extends Theme {
     title: {
       textColor: string;
       backgroundColor: string;
+      padding: string;
     };
     item: {
+      padding?: string;
       backgroundColor: string;
       textColor: string;
       linkColor: string;
@@ -118,7 +125,11 @@ const commonStyling = {
   letterSpacing: "0.00938em",
   // Domain Specific Styling
   professional: {
+    title: {
+      padding: "15px",
+    },
     item: {
+      padding: "15px",
       onHoverTransformDuration: "0.5s",
       onHoverBackgroundColorChangeDuration: "0.7s",
       // onHoverTransitionDelay: '1s',
@@ -126,10 +137,14 @@ const commonStyling = {
     itemsColorModeSwitchDelay: 1.2,
   },
   education: {
+    title: {
+      padding: "15px",
+    },
     item: {
       onHoverTransformDuration: "1.6s",
       onHoverBackgroundColorChangeDuration: "0.7s",
       // onHoverTransitionDelay: '1s',
+      padding: "15px",
     },
   },
 };
@@ -283,14 +298,18 @@ const darkColorMode: Theme = {
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
 type CommonStyling = typeof commonStyling;
 
-const mergeStylings = (theme: Theme, commonStyling: CommonStyling) => {
+const mergeStylings = (theme: Theme, commonStyling: CommonStyling): ComputedTheme => {
   return {
     ...theme,
     ...commonStyling,
 
     professional: {
-      ...theme.professional,
-      ...commonStyling.professional,
+      containerBackgroundColor: theme.professional.containerBackgroundColor,
+      title: {
+        ...theme.professional.title,
+        ...commonStyling.professional.title,
+      },
+      itemsColorModeSwitchDelay: commonStyling.professional.itemsColorModeSwitchDelay,
       item: {
         ...theme.professional.item,
         ...commonStyling.professional.item,
@@ -300,6 +319,10 @@ const mergeStylings = (theme: Theme, commonStyling: CommonStyling) => {
     education: {
       ...theme.education,
       ...commonStyling.education,
+      title: {
+        ...theme.education.title,
+        ...commonStyling.education.title,
+      },
       item: {
         ...theme.education.item,
         ...commonStyling.education.item,

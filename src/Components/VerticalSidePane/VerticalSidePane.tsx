@@ -21,6 +21,7 @@ interface AppVerticalSidePaneTheme {
     title: {
       textColor: string;
       backgroundColor: string;
+      padding?: string;
     };
     item: {
       backgroundColor: string;
@@ -31,6 +32,7 @@ interface AppVerticalSidePaneTheme {
       // onHoverTransitionDelay: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      padding?: string;
     };
   };
 }

@@ -6,14 +6,17 @@ import EducationItemData from "./EducationItemInterface";
 import AppTag from "../AppTag";
 
 interface EducationItemTheme {
+  //color mode
   backgroundColor: string;
   textColor: string;
   linkColor: string;
   onHoverBackgroundColor: string;
   onHoverTextColor: string;
+  // other styles
   // onHoverTransitionDelay: string;
   onHoverTransformDuration: string;
   onHoverBackgroundColorChangeDuration: string;
+  padding?: string;
 }
 
 type OnClickCallback = () => void;
@@ -36,6 +39,7 @@ interface StyledAppEducationItemProps {
 
 const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
   // display: flex;
+  padding: ${(props) => props.theme.padding || "0px"};
   background-color: ${(props) =>
     props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
@@ -163,13 +167,6 @@ const AppEducationItem: FC<AppEducationItemProps> = (
     },
     onClick: () => null,
   });
-  //     <EducationItemGeneric
-  //       renderProps={(d) =>
-  //         renderEducationItem({ data: d.dataInterface, onClick: d.onClick, theme: props.theme })
-  //       }
-  //       data={props.educationItemData}
-  //     />
-  //   );
 };
 
 export default AppEducationItem;

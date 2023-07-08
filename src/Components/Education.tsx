@@ -53,6 +53,9 @@ interface AppEducationSectionProps {
 
 // EDUCATION ITEM
 interface EducationItemTheme {
+  // other styles
+  padding?: string;
+  // color mode
   backgroundColor: string;
   textColor: string;
   linkColor: string;
@@ -68,6 +71,7 @@ interface StyledAppEducationItemProps {
 }
 const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
   // display: flex;
+  padding: ${(props) => props.theme.padding || "0px"};
   background-color: ${(props) =>
     props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};

@@ -1,9 +1,9 @@
-import AppProfItem from './ProfItem';
+import ProfItem from './ProfItem';
 import { lightTheme, darkTheme } from '../../AppStyles';
 
 export default {
-  component: AppProfItem,
-  title: "AppProfItem",
+  component: ProfItem,
+  title: "ProfItem",
   tags: ["autodocs"],
 };
 

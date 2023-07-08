@@ -15,8 +15,13 @@ interface ProfessionalSectionProps {
     title: {
       textColor: string;
       backgroundColor: string;
+      // other styles
+      padding?: string;
     };
     item: {
+      // other styles
+      padding?: string;
+      // color mode
       backgroundColor: string;
       textColor: string;
       linkColor: string;
@@ -34,11 +39,13 @@ interface ProfessionalExperienceSectionTitleProps {
   theme: {
     textColor: string;
     backgroundColor: string;
+    padding?: string;
   };
 }
 const ProfessionalExperienceSectionTitle = styled.h1<ProfessionalExperienceSectionTitleProps>`
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.backgroundColor};
+  padding: ${(props) => props.theme.padding || "0px"};
 `;
 
 interface ProfessionalExperienceSectionContainerProps {

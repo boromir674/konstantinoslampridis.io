@@ -10,7 +10,7 @@ import ProfessionalSection from "../Professional";
 // import PortfolioSection from "../Portfolio";
 
 interface AppVerticalMainPaneTheme {
-containerBackgroundColor: string;
+  containerBackgroundColor: string;
   introduction: {
     containerBackgroundColor: string;
     textColor: string;
@@ -33,7 +33,6 @@ containerBackgroundColor: string;
     containerBackgroundColor: string;
   };
 }
-
 
 interface VerticalMainPaneContainerProps {
   theme: AppVerticalMainPaneTheme;
@@ -82,15 +81,16 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
           ...theme.professional,
           title: {
             textColor: theme.professional.title.textColor,
-            backgroundColor: theme.professional.title.backgroundColor || theme.containerBackgroundColor,
-        },
+            backgroundColor:
+              theme.professional.title.backgroundColor ||
+              theme.containerBackgroundColor,
+          },
         }}
         data={{ experience_items: data.professional }}
       />
     </VerticalMainPaneContainer>
   );
 };
-
 
 export type { AppVerticalMainPaneProps };
 export { VerticalMainPane };

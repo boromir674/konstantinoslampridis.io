@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 interface AppSectionProps {
   theme: {
     item: {
+      // color mode
       textColor: string;
       backgroundColor: string;
       linkColor: string;
@@ -11,6 +12,8 @@ interface AppSectionProps {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      // other styles
+      padding?: string;
     };
   };
   data: {

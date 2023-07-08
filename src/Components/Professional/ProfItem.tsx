@@ -6,6 +6,9 @@ import ExperienceItemData from "../../ExperienceItemDataInterface";
 import ProfItemPOC from "./ProfItemPOC";
 
 interface ProfessionalItemTheme {
+  // styles unrelated to colors
+  padding?: string;
+
   backgroundColor: string;
   textColor: string;
   linkColor: string;
@@ -24,6 +27,8 @@ interface AppProfessionalItemProps {
 const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
   // width: 200px;
   // height: 200px;
+  padding: ${(props) => props.theme.padding || "10px"};
+  // padding: ${(props) => props.theme.padding};
   display: flex;
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};

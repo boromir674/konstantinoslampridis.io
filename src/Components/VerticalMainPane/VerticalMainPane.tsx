@@ -42,11 +42,19 @@ interface VerticalMainPaneContainerProps {
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   left: 0px;
   // background-color: ${(props) => props.theme.containerBackgroundColor};
-  background-color: #f6f8fa;
-  //   display: flex;
+  background-color: inherit;
+  // display: flex;
   //   flex-direction: column;
   //   flex-wrap: wrap;
   grid-area: Main;
+
+  // box-sizing: border-box
+  // overflow: auto; /* Introduce a scrollbar if necessary */
+
+  // hard-coded fix which prevents a bug:
+  // bug being from a certain level of zoom (and above) the top header pane starts to
+  // cover the top part content of both SidePane and MainPane
+  margin-top: 50px;
 `;
 
 interface AppVerticalMainPaneProps {

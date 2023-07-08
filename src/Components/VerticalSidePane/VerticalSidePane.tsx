@@ -49,6 +49,9 @@ const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
   grid-area: Side;
   flex-direction: column;
   flex-wrap: wrap;
+  // fix a buyg where the top header is shown above the top-part content
+  // of both the Sidepane and the MainPane
+  margin-top: 50px;
 `;
 
 interface AppVerticalSidePaneProps {

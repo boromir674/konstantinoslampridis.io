@@ -72,103 +72,103 @@ const App: FC = () => {
   );
 
   return (
-    <main>
-      <BigScreenViewInteractive
-        navigationSections={[
-          {
-            htmlID: "introduction-section",
-            barLabel: "Introduction",
+    // <main>
+    <BigScreenViewInteractive
+      navigationSections={[
+        {
+          htmlID: "introduction-section",
+          barLabel: "Introduction",
+        },
+        {
+          htmlID: "professional-section",
+          barLabel: "Professional",
+        },
+      ]}
+      data={{
+        verticalMainPane: {
+          introduction: {
+            name: personal.name,
           },
-          {
-            htmlID: "professional-section",
-            barLabel: "Professional",
-          },
-        ]}
-        data={{
-          verticalMainPane: {
-            introduction: {
-              name: personal.name,
-            },
-            professional: professional.experience_items,
-            // portfolio: data.portfolio;
-          },
+          professional: professional.experience_items,
+          // portfolio: data.portfolio;
+        },
 
+        verticalSidePane: {
+          personal: {
+            name: personal.name,
+            email: personal.email,
+            github: name2Url["github"],
+            gitlab: name2Url["gitlab"],
+            linkedin: name2Url["linkedin"],
+          },
+          education: education.map(
+            (item: EducationItemUserTextData, index: number) => ({
+              degree_title: item.degree,
+              university_name: item.name,
+              location: item.location,
+              duration: item.date,
+              thesis_title: item.thesis_title,
+              topics: item.topics,
+            })
+          ),
+        },
+      }}
+      colorSet={{
+        light: {
+          containerBackgroundColor: lightTheme.backgroundColor,
+          topHeaderPane: {
+            navigationBar: lightTheme.navigationBar,
+            backgroundColor: lightTheme.topHeaderPane.backgroundColor,
+          },
           verticalSidePane: {
-            personal: {
-              name: personal.name,
-              email: personal.email,
-              github: name2Url["github"],
-              gitlab: name2Url["gitlab"],
-              linkedin: name2Url["linkedin"],
+            personalInfo: {
+              containerBackgroundColor:
+                lightTheme.personal.containerBackgroundColor,
+              textColor: lightTheme.personal.textColor,
+              linkColor: lightTheme.personal.urlTextColor,
             },
-            education: education.map(
-              (item: EducationItemUserTextData, index: number) => ({
-                degree_title: item.degree,
-                university_name: item.name,
-                location: item.location,
-                duration: item.date,
-                thesis_title: item.thesis_title,
-                topics: item.topics,
-              })
-            ),
+            education: {
+              containerBackgroundColor:
+                lightTheme.education.containerBackgroundColor,
+              title: lightTheme.education.title,
+              item: lightTheme.education.item,
+            },
           },
-        }}
-        colorSet={{
-          light: {
+          verticalMainPane: {
+            ...lightTheme,
             containerBackgroundColor: lightTheme.backgroundColor,
-            topHeaderPane: {
-              navigationBar: lightTheme.navigationBar,
-              backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-            },
-            verticalSidePane: {
-              personalInfo: {
-                containerBackgroundColor:
-                  lightTheme.personal.containerBackgroundColor,
-                textColor: lightTheme.personal.textColor,
-                linkColor: lightTheme.personal.urlTextColor,
-              },
-              education: {
-                containerBackgroundColor:
-                  lightTheme.education.containerBackgroundColor,
-                title: lightTheme.education.title,
-                item: lightTheme.education.item,
-              },
-            },
-            verticalMainPane: {
-              ...lightTheme,
-              containerBackgroundColor: lightTheme.backgroundColor,
-            },
-            bottomFooterPane: lightTheme.footerStyles,
           },
-          dark: {
+          bottomFooterPane: lightTheme.footerStyles,
+        },
+        dark: {
+          containerBackgroundColor: darkTheme.backgroundColor,
+          topHeaderPane: {
+            navigationBar: darkTheme.navigationBar,
+            backgroundColor: darkTheme.topHeaderPane.backgroundColor,
+          },
+          verticalSidePane: {
+            personalInfo: {
+              containerBackgroundColor:
+                darkTheme.personal.containerBackgroundColor,
+              textColor: darkTheme.personal.textColor,
+              linkColor: darkTheme.personal.urlTextColor,
+            },
+            education: {
+              containerBackgroundColor:
+                darkTheme.education.containerBackgroundColor,
+              title: darkTheme.education.title,
+              item: darkTheme.education.item,
+            },
+          },
+          verticalMainPane: {
+            ...darkTheme,
             containerBackgroundColor: darkTheme.backgroundColor,
-            topHeaderPane: {
-              navigationBar: darkTheme.navigationBar,
-              backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-            },
-            verticalSidePane: {
-              personalInfo: {
-                containerBackgroundColor:
-                  darkTheme.personal.containerBackgroundColor,
-                textColor: darkTheme.personal.textColor,
-                linkColor: darkTheme.personal.urlTextColor,
-              },
-              education: {
-                containerBackgroundColor:
-                  darkTheme.education.containerBackgroundColor,
-                title: darkTheme.education.title,
-                item: darkTheme.education.item,
-              },
-            },
-            verticalMainPane: {
-              ...darkTheme,
-              containerBackgroundColor: darkTheme.backgroundColor,
-            },
-            bottomFooterPane: darkTheme.footerStyles,
           },
-        }}
-      />
-    </main>
+          bottomFooterPane: darkTheme.footerStyles,
+        },
+      }}
+    />
+    // </main>
   );
 };
 

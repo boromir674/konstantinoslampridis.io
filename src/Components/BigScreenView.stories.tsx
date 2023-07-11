@@ -93,6 +93,10 @@ export const Light = {
               location: "Mountain View, CA",
               duration: "Sep 2022 - May 2023",
               description: "I worked at GG Navi as a Software Engineer.",
+              activities: [
+                "I worked at GG Navi as a Software Engineer.",
+                "other activity",
+              ],
               technology_tags: ["python", "docker"],
             },
             {
@@ -101,6 +105,10 @@ export const Light = {
               location: "Mountain View, CA",
               duration: "Sep 2022 - May 2023",
               description: "I worked at GG Navi as a Software Engineer.",
+              activities: [
+                "I worked at GG Navi as a Software Engineer.",
+                "other activity",
+              ],
               technology_tags: ["python", "docker"],
             },
           ],

@@ -2,8 +2,7 @@ import { FC } from "react";
 import styled from "@emotion/styled";
 import ScrollingNavigationItemGeneric from "./ScrollingNavigationItemGeneric";
 import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
-import AppHorNavItem from './AppHorNavItem';
-
+import AppHorNavItem from "./AppHorNavItem";
 
 const NavContainerNew = styled.nav`
   display: flex;
@@ -44,7 +43,12 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, colorSet }) => {
       {items.map((item, index) => (
         <ScrollingNavigationItemGeneric
           renderProps={({ active, onClick }) => (
-            <AppHorNavItem colorSet={colorSet} active={active} onClick={onClick}>
+            <AppHorNavItem
+              key={index}
+              colorSet={colorSet}
+              active={active}
+              onClick={onClick}
+            >
               {item.label}
             </AppHorNavItem>
           )}

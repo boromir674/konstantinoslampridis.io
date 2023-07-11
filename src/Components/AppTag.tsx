@@ -33,3 +33,4 @@ const AppTag = styled.span<AppTagProps>`
   }
 `;
 export default AppTag;
+export type { AppTagProps };

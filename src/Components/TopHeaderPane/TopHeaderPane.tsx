@@ -49,7 +49,7 @@ interface TopHeaderPaneContainerProps {
 const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.navigationBar.textColor};
-  
+
   //   grid-column-start: 1;
   //   grid-column-end: 3;
   //   grid-row-start: row1-start;

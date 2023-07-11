@@ -46,6 +46,9 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
   // background: #ffecb3;
   background: ${(props) => props.theme.containerBackgroundColor};
   //   background: "inherit";
+  // display: inline-block;
+  word-wrap: break-word;
+
 `;
 
 const BigScreenView: FC<BigScreenViewProps> = ({

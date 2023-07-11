@@ -58,6 +58,12 @@ interface Theme {
       linkColor: string;
       onHoverBackgroundColor: string;
       onHoverTextColor: string;
+      tag: {
+        backgroundColor: string;
+        textColor: string;
+        onHoverBackgroundColor: string;
+        onHoverTextColor: string;
+      };
     };
   };
   footerStyles: {
@@ -84,6 +90,12 @@ interface ComputedTheme extends Theme {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      tag: {
+        backgroundColor: string;
+        textColor: string;
+        onHoverBackgroundColor: string;
+        onHoverTextColor: string;
+      };
     };
     // defines whether there will be a delay between the the top item and the
     // bottom, on color mode switch (toggle)
@@ -201,8 +213,8 @@ const lightColorMode: Theme = {
     containerBackgroundColor: "#f6f8fa",
   },
   introduction: {
-    containerBackgroundColor: "#ffffff",
-    textColor: "#000000",
+    containerBackgroundColor: "#D6D6DF",
+    textColor: "#1D5556",
   },
   professional: {
     title: {
@@ -215,6 +227,12 @@ const lightColorMode: Theme = {
       linkColor: "#1651f3",
       onHoverBackgroundColor: "#a4e2c7",
       onHoverTextColor: "#000000",
+      tag: {
+        backgroundColor: "#8be0c8",
+        textColor: "#174b58",
+        onHoverBackgroundColor: "#000000",
+        onHoverTextColor: "#ffffff",
+      },
     },
     containerBackgroundColor: "#f6f8fa",
   },
@@ -272,9 +290,10 @@ const darkColorMode: Theme = {
     containerBackgroundColor: "#222222",
   },
   introduction: {
-    containerBackgroundColor: "#201f1f",
-    textColor: "#d7e5db",
+    containerBackgroundColor: "#1D5556",
+    textColor: "#D6D6DF",
   },
+  // PROFESSIONAL EXPERIENCE SECTION
   professional: {
     title: {
       textColor: "#d7e5db",
@@ -286,6 +305,12 @@ const darkColorMode: Theme = {
       linkColor: "#aec0f1",
       onHoverBackgroundColor: "#494343",
       onHoverTextColor: "#d7e5db",
+      tag: {
+        backgroundColor: "#174b58",
+        textColor: "#8be0c8",
+        onHoverBackgroundColor: "#ffffff",
+        onHoverTextColor: "#000000",
+      },
     },
     containerBackgroundColor: "#1d2421",
   },

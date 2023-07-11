@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 
 import IntroductionSection from "../IntroductionSection";
 import ExperienceItemData from "../../ExperienceItemDataInterface";
-import ProfessionalSection from "../Professional";
+import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 // import PortfolioSection from "../Portfolio";
 
 interface AppVerticalMainPaneTheme {
@@ -29,6 +29,7 @@ interface AppVerticalMainPaneTheme {
       // onHoverTransitionDelay: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      tag: ProfessionalSectionProps["theme"]["item"]["tag"];
     };
     containerBackgroundColor: string;
   };
@@ -47,7 +48,9 @@ const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   //   flex-direction: column;
   //   flex-wrap: wrap;
   grid-area: Main;
-
+  // word-wrap: break-word;
+  // display: flex;
+  // flex-direction: column;
   // box-sizing: border-box
   // overflow: auto; /* Introduce a scrollbar if necessary */
 
@@ -55,6 +58,9 @@ const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   // bug being from a certain level of zoom (and above) the top header pane starts to
   // cover the top part content of both SidePane and MainPane
   margin-top: 50px;
+
+  display: inline-block;
+
 `;
 
 interface AppVerticalMainPaneProps {
@@ -86,7 +92,8 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
       <ProfessionalSection
         id={sectionIDs ? sectionIDs[1] : "professional-section"}
         theme={{
-          ...theme.professional,
+          containerBackgroundColor: theme.professional.containerBackgroundColor,
+          item: theme.professional.item,
           title: {
             textColor: theme.professional.title.textColor,
             backgroundColor:

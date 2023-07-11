@@ -17,6 +17,12 @@ interface ProfessionalItemTheme {
   // onHoverTransitionDelay: string;
   onHoverTransformDuration: string;
   onHoverBackgroundColorChangeDuration: string;
+  tag: {
+    backgroundColor: string;
+    textColor: string;
+    onHoverBackgroundColor: string;
+    onHoverTextColor: string;
+  };
 }
 
 interface AppProfessionalItemProps {
@@ -33,14 +39,16 @@ const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
   border: 1px solid #ccc;
-  transition: transform ${(props) => props.theme.onHoverTransformDuration}, box-shadow 0.3s, background-color ${(props) => props.theme.onHoverBackgroundColorChangeDuration};
+  transition: transform ${(props) => props.theme.onHoverTransformDuration},
+    box-shadow 0.3s,
+    background-color
+      ${(props) => props.theme.onHoverBackgroundColorChangeDuration};
   cursor: pointer;
   &:hover {
     transform: scale(1.01);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
     background-color: ${(props) => props.theme.onHoverBackgroundColor};
-    color: ${(props) =>
-      props.theme.onHoverTextColor || props.theme.textColor};
+    color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
   }
 `;
 
@@ -59,13 +67,19 @@ interface AppProfItemProps {
 
 const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
   const renderProfessionalItem = useCallback(
-    ({ data: {
-      title,
-      company,
-      location,
-      duration,
-      description,
-    }, onClick, theme}: renderPropsArgs) => (
+    ({
+      data: {
+        title,
+        company,
+        location,
+        duration,
+        description,
+        activities,
+        technology_tags,
+      },
+      onClick,
+      theme,
+    }: renderPropsArgs) => (
       <AppProfessionalItem theme={theme} onClick={onClick}>
         <ProfItemPOC
           title={title}
@@ -73,14 +87,27 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
           location={location}
           company={company}
           description={description}
+          activities={activities}
+          technology_tags={technology_tags}
+          theme={{
+            tags: {
+              item: theme.tag,
+            },
+          }}
         />
       </AppProfessionalItem>
-    ), [theme]);
+    ),
+    [theme]
+  );
 
   return (
     <ExperienceItem
       renderProps={(d) =>
-        renderProfessionalItem({ data: d.dataInterface, onClick: d.onClick, theme: theme })
+        renderProfessionalItem({
+          data: d.dataInterface,
+          onClick: d.onClick,
+          theme: theme,
+        })
       }
       data={experienceItemData}
     />

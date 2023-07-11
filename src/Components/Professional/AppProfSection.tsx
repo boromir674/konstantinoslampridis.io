@@ -29,6 +29,12 @@ interface ProfessionalSectionProps {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      tag: {
+        backgroundColor: string;
+        textColor: string;
+        onHoverBackgroundColor: string;
+        onHoverTextColor: string;
+      };
     };
     containerBackgroundColor: string;
     itemsColorModeSwitchDelay?: number;
@@ -96,6 +102,7 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
             key={index}
             theme={{
               ...theme.item,
+              tag: theme.item.tag,
               onHoverBackgroundColorChangeDuration:
                 (
                   parseFloat(dur.substring(0, dur.length - 1)) +
@@ -111,3 +118,4 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
 };
 
 export default ProfessionalSection;
+export type { ProfessionalSectionProps };

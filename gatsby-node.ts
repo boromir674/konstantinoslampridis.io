@@ -35,6 +35,19 @@ interface UserDefinedTextData {
       technology_tags: string[];
     }[];
   };
+  portfolio: {
+    title: string;
+    development_period: string;
+    status: string;
+    description: string;
+    source_code_repo: string;
+    release: {
+      artifact_type: string;
+      version: string;
+      name: string;
+    }[];
+    tags: string[];
+  }[];
 };
 
 

@@ -1,11 +1,5 @@
 
-import PortfolioPOC from "./PortfolioPOC2";
+// import PortfolioPOC from "./PortfolioPOC2";
+import PortfolioSectionFC from "./PortfolioSectionFC";
 
-
-const Portfolio = (props: any) => {
-    return (
-        <PortfolioPOC {...props} />
-    );
-};
-
-export default Portfolio;
+export default PortfolioSectionFC;

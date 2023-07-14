@@ -6,8 +6,9 @@ import styled from "@emotion/styled";
 
 import IntroductionSection from "../IntroductionSection";
 import ExperienceItemData from "../../ExperienceItemDataInterface";
+import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
-// import PortfolioSection from "../Portfolio";
+import PortfolioSection from "../Portfolio";
 
 interface AppVerticalMainPaneTheme {
   containerBackgroundColor: string;
@@ -70,7 +71,7 @@ interface AppVerticalMainPaneProps {
       name: string;
     };
     professional: ExperienceItemData[];
-    // portfolio: PortfolioItemData[];
+    portfolio: PortfolioItemData[];
   };
   sectionIDs?: string[];
 }
@@ -88,7 +89,7 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         theme={theme.introduction}
         data={{ name: data.introduction.name }}
       />
-      {/* Scrollable Sectoin 2 */}
+      {/* Scrollable Section 2 */}
       <ProfessionalSection
         id={sectionIDs ? sectionIDs[1] : "professional-section"}
         theme={{
@@ -103,6 +104,8 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         }}
         data={{ experience_items: data.professional }}
       />
+      {/* Scrollable Section 3 */}
+      <PortfolioSection data={data.portfolio}/>
     </VerticalMainPaneContainer>
   );
 };

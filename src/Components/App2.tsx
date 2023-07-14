@@ -14,7 +14,7 @@ interface EducationItemUserTextData {
 
 const App: FC = () => {
   const {
-    userDefinedWebsiteData: { personal, education, professional },
+    userDefinedWebsiteData: { personal, education, professional, portfolio },
   } = useStaticQuery(graphql`
     query {
       userDefinedWebsiteData {
@@ -49,23 +49,23 @@ const App: FC = () => {
             technology_tags
           }
         }
+        portfolio {
+          title
+          development_period
+          status
+          description
+          source_code_repo
+          release {
+            artifact_type
+            version
+            name
+          }
+          tags
+        }
       }
     }
   `);
 
-  // create a name2Url mapping as an object, given the links array using Object.create
-  // const name2Url = Object.create(
-  //   {},
-  //   {
-  //     ...personal.links.map(
-  //       ({ name, url }: { name: string; url: string }) => ({
-  //         [name]: url,
-  //       })
-  //     ),
-  //   }
-  // );
-  // ALT
-  // create a name2Url mapping
   const name2Url = personal.links.reduce(
     (acc: any, { name, id, url }: any) => ({ ...acc, [id]: url }),
     {}
@@ -90,7 +90,7 @@ const App: FC = () => {
             name: personal.name,
           },
           professional: professional.experience_items,
-          // portfolio: data.portfolio;
+          portfolio,
         },
 
         verticalSidePane: {

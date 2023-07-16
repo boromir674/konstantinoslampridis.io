@@ -21,6 +21,13 @@ what data are required by which component and provide an entrypoint to implement
 We "install"/add it, by adding it to the `gatsby-config.ts` and since it is an  
 existing source plugin we need to do sth like `yarn add gatsby-source-graphql`
 
+## Hooks
+Inspiration:  
+https://github.com/uidotdev/usehooks  
+https://usehooks-ts.com/  
+
+Our Hooks are in [src/Hooks](src/Hooks)
+
 ## Components
 
 In this repo we develop Components for mainly serving 3 purposes:

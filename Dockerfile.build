@@ -23,6 +23,7 @@ COPY gatsby-node.ts .
 COPY README.md .
 COPY tsconfig.json .
 COPY data.yaml .
+COPY data-portfolio.yml .
 
 # BRANCH 1.1
 # BUILD into "static" files, aka bundle (eg webpack output)
@@ -64,6 +65,7 @@ COPY gatsby-node.ts .
 COPY README.md .
 COPY tsconfig.json .
 COPY data.yaml .
+COPY data-portfolio.yml .
 COPY .eslintrc.cjs .
 
 ENV STORYBOOK_DISABLE_TELEMETRY=1

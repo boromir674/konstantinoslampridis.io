@@ -66,6 +66,16 @@ interface Theme {
       };
     };
   };
+  portfolio: {
+    container: {
+      backgroundColor: string;
+    };
+    item: {
+      backgroundColor: string;
+      color: string;
+    };
+  };
+
   footerStyles: {
     textColor: string;
     backgroundColor: string;
@@ -236,6 +246,17 @@ const lightColorMode: Theme = {
     },
     containerBackgroundColor: "#f6f8fa",
   },
+  // PORTFOLIO LIGHT
+  portfolio: {
+    container: {
+      backgroundColor: "#D5D7C6",
+    },
+    item: {
+      backgroundColor: "#D5D7C6",
+      color: "#125160",
+    },
+  },
+
   footerStyles: {
     textColor: "#1D5556",
     backgroundColor: "#D6D6DF",
@@ -314,6 +335,16 @@ const darkColorMode: Theme = {
     },
     containerBackgroundColor: "#1d2421",
   },
+  // PORTFOLIO DARK
+  portfolio: {
+    container: {
+      backgroundColor: "#125160",
+    },
+    item: {
+      backgroundColor: "#125160",
+      color: "#D5D7C6",
+    },
+  },
   footerStyles: {
     textColor: "#D6D6DF",
     backgroundColor: "#1D5556",
@@ -323,7 +354,10 @@ const darkColorMode: Theme = {
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
 type CommonStyling = typeof commonStyling;
 
-const mergeStylings = (theme: Theme, commonStyling: CommonStyling): ComputedTheme => {
+const mergeStylings = (
+  theme: Theme,
+  commonStyling: CommonStyling
+): ComputedTheme => {
   return {
     ...theme,
     ...commonStyling,
@@ -334,7 +368,8 @@ const mergeStylings = (theme: Theme, commonStyling: CommonStyling): ComputedThem
         ...theme.professional.title,
         ...commonStyling.professional.title,
       },
-      itemsColorModeSwitchDelay: commonStyling.professional.itemsColorModeSwitchDelay,
+      itemsColorModeSwitchDelay:
+        commonStyling.professional.itemsColorModeSwitchDelay,
       item: {
         ...theme.professional.item,
         ...commonStyling.professional.item,

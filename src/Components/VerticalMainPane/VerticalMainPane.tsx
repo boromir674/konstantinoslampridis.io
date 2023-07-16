@@ -8,7 +8,9 @@ import IntroductionSection from "../IntroductionSection";
 import ExperienceItemData from "../../ExperienceItemDataInterface";
 import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
-import PortfolioSection from "../Portfolio";
+// import PortfolioSection from "../Portfolio";
+import PortfolioSection from "../Portfolio/PortfolioSectionV3";
+
 
 interface AppVerticalMainPaneTheme {
   containerBackgroundColor: string;
@@ -33,6 +35,15 @@ interface AppVerticalMainPaneTheme {
       tag: ProfessionalSectionProps["theme"]["item"]["tag"];
     };
     containerBackgroundColor: string;
+  };
+  portfolio: {
+    container: {
+      backgroundColor: string;
+    };
+    item: {
+      backgroundColor: string;
+      color: string;
+    };
   };
 }
 
@@ -105,7 +116,9 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         data={{ experience_items: data.professional }}
       />
       {/* Scrollable Section 3 */}
-      <PortfolioSection data={data.portfolio}/>
+      <PortfolioSection
+      id={sectionIDs ? sectionIDs[2] : "open-source-portfolio-section"}
+      data={data.portfolio} theme={theme.portfolio}/>
     </VerticalMainPaneContainer>
   );
 };

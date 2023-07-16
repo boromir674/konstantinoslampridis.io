@@ -57,13 +57,24 @@ const sourceNodes = async ({
   createContentDigest,
 }: CreateNodeArgs) => {
   try {
-    // Read the YAML file
+    // Read the YAML files
+
+    // Personal, Education, Professional Data
     const yamlData = fs.readFileSync('data.yaml', 'utf8');
 
-    // // Parse the YAML data
+    // Parse the YAML data
     const data: UserDefinedTextData = yaml.safeLoad(yamlData);
+    
+    // Open Source Portfolio / Projects
+    const portfolioYamlData = fs.readFileSync('data-portfolio.yml', 'utf8');
+    const portfolioData = yaml.safeLoad(portfolioYamlData);
+    console.log('DEBUG', portfolioData)
+    
+    data.portfolio = portfolioData.projects;
+
     console.log('DATA');
     console.log(data);
+    
     // create node for build time data
     createNode({
       ...data,

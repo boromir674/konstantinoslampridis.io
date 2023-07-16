@@ -1,6 +1,6 @@
 interface ReleaseItemData {
-  artifact_type: string;
-  version: string;
+  type: string;
+  artifact_version: string;
   name: string;
 };
 
@@ -22,12 +22,9 @@ interface PortfolioItemData {
   status: string;
   description: string;
   source_code_repo: string;
-  release: {
-    artifact_type: string;
-    version: string;
-    name: string;
-  }[];
+  release?: ReleaseItemData[];
   tags: string[];
 }
 
 export default PortfolioItemData;
+export type { ReleaseItemData };

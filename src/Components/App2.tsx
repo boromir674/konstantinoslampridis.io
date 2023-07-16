@@ -53,13 +53,13 @@ const App: FC = () => {
           title
           development_period
           status
-          description
           source_code_repo
           release {
-            artifact_type
-            version
+            type
             name
+            artifact_version
           }
+          description
           tags
         }
       }
@@ -82,6 +82,10 @@ const App: FC = () => {
         {
           htmlID: "professional-section",
           barLabel: "Professional",
+        },
+        {
+          htmlID: "open-source-portfolio-section",
+          barLabel: "Open Source Portfolio",
         },
       ]}
       data={{

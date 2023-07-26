@@ -59,6 +59,15 @@ The default view is for big screens and is a grid of TopheaderPane, leftSidePane
 
 All the Panes should be rendered inside a Component with the `View` name as indicator.
 
+# Style System
+Our definition of `Style System`:  
+A way to document the decisions taken for picking the style/theme used
+throughout the app.
+Color palettes, margin configurations, font configurations, and css-related
+properties go here.
+
+We achieve that by utilizing `Design Tokens`, and we document them by rendering a dedicated `storybook` Story.
+
 # Dev
 
 TLDR See [Makefile](Makefile)
@@ -95,7 +104,7 @@ Deploying `storybook` on localhost (dev server with some hot-reloading), enables
   ```shell
   yarn storybook
   ```
-## Deploy
+## Delivery Process
 
 ```mermaid
 graph LR;
@@ -103,6 +112,8 @@ graph LR;
   B --> C[Build]
   C --> D[Upload to S3 bucket]
 ```
+
+# Main Use Case of konstantinoslampridis.io
 
 ```mermaid
 sequenceDiagram
@@ -131,7 +142,7 @@ sequenceDiagram
     deactivate B
 ```
 
-### Docker
+## Docker (legacy) notes
 
 - Get the yarn.lock-install-remove-cache in host machine:
 
@@ -145,43 +156,3 @@ sequenceDiagram
   ```shell
   docker cp temp-ssg:/app/yarn.lock ./yarn.lock-install-remove-cache
   ```
-
-## 🚀 Quick start
-
-1.  **Create a Gatsby site.**
-
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
-
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby
-    ```
-
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.tsx` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)

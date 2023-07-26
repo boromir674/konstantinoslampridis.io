@@ -11,7 +11,7 @@ const args: AppVerticalMainPaneProps = {
   theme: {
     ...lightTheme,
     // containerBackgroundColor: '#FFAD00',
-    containerBackgroundColor: "#009385",
+    containerBackgroundColor: lightTheme.latestContainerBackgroundColor,
 
     // introduction: lightTheme.introduction,
     // professional: lightTheme.professional,
@@ -95,66 +95,9 @@ const args: AppVerticalMainPaneProps = {
     ],
   },
 };
-export const Light = {
-  args: {
-    // same interface as the props of the Component
-    theme: {
-      ...lightTheme,
-      // containerBackgroundColor: '#FFAD00',
-      containerBackgroundColor: "#009385",
 
-      // introduction: lightTheme.introduction,
-      // professional: lightTheme.professional,
-    },
-    data: {
-      introduction: {
-        name: "John Doe",
-      },
-      professional: [
-        {
-          title: "Software Engineer",
-          company: "GG Navi",
-          location: "Mountain View, CA",
-          duration: "Sep 2022 - May 2023",
-          description: "I worked at GG Navi as a Software Engineer.",
-          activities: [
-            "I worked at GG Navi as a Software Engineer.",
-            "other activity",
-          ],
-          technology_tags: ["python", "docker"],
-        },
-        {
-          title: "Software Engineer",
-          company: "GG Navi",
-          location: "Mountain View, CA",
-          duration: "Sep 2022 - May 2023",
-          description: "I worked at GG Navi as a Software Engineer.",
-          activities: [
-            "I worked at GG Navi as a Software Engineer.",
-            "other activity",
-          ],
-          technology_tags: ["python", "docker"],
-        },
-      ],
-      portfolio: [
-        {
-          title: "Python Package Generator",
-        },
-        {
-          title: "Neural Style Transfer",
-        },
-        {
-          title: "Topic Modeling Toolkit",
-        },
-        {
-          title: "Software Patterns",
-        },
-        {
-          title: "Pytest Object Getter",
-        },
-      ],
-    },
-  },
+export const Light = {
+  args,
 };
 
 export const Dark = {
@@ -162,7 +105,7 @@ export const Dark = {
     ...Light.args,
     theme: {
       ...darkTheme,
-      containerBackgroundColor: "#D6F5E0",
+      containerBackgroundColor: darkTheme.latestContainerBackgroundColor,
       // introduction: darkTheme.introduction,
       // professional: darkTheme.professional,
     },

@@ -59,6 +59,12 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   width: 100%;
   // justify-self: center;
   //   align-self: center;
+  
+  // place the top header pane above everything on the z axis
+  // in other words imagining the page in 3D the top pane shall be the topmost layer
+  // at the highest level
+  z-index: 9999; /* Set a high z-index to keep the header on top */
+
   grid-area: Header;
   padding-left: 80px;
   padding-top: 10px;

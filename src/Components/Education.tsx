@@ -64,6 +64,13 @@ interface EducationItemTheme {
   // onHoverTransitionDelay: string;
   onHoverTransformDuration: string;
   onHoverBackgroundColorChangeDuration: string;
+  tag: {
+    // color design, that switchs on color mode
+    backgroundColor: string;
+    textColor: string;
+    onHoverBackgroundColor: string;
+    onHoverTextColor: string;
+  };
 }
 interface StyledAppEducationItemProps {
   theme: EducationItemTheme;
@@ -124,12 +131,7 @@ const EducationItem: React.FC<AppEducationItemProps> = ({
         {topics.map((topic, index) => (
           <AppTag
             key={index}
-            theme={{
-              backgroundColor: "#FFAD00",
-              textColor: "#333",
-              onHoverBackgroundColor: "#ddd",
-              onHoverTextColor: "#333",
-            }}
+            theme={theme.tag}
           >
             {topic}
           </AppTag>
@@ -148,16 +150,10 @@ const Education: React.FC<AppEducationSectionProps> = (props) => {
           key={index}
           userData={item}
           theme={props.theme.item}
-          // university_name={item.university_name}
-          // location={item.location}
-          // degree_title={item.degree_title}
-          // duration={item.duration}
-          // thesis_title={item.thesis_title}
-          // topics={item.topics}
         />
       ))}
     </EducationSectionContainer>
   );
 };
 
-export { Education, EducationItem };
+export { Education, EducationItem, type AppEducationSectionProps };

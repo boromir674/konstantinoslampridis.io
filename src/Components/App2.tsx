@@ -138,9 +138,9 @@ const App: FC = () => {
               linkColor: lightTheme.personal.urlTextColor,
             },
             education: {
-              containerBackgroundColor:
-                lightTheme.education.containerBackgroundColor,
-              title: lightTheme.education.title,
+              // containerBackgroundColor:
+              //   lightTheme.education.containerBackgroundColor,
+              // title: lightTheme.education.title,
               item: lightTheme.education.item,
             },
           },
@@ -164,9 +164,9 @@ const App: FC = () => {
               linkColor: darkTheme.personal.urlTextColor,
             },
             education: {
-              containerBackgroundColor:
-                darkTheme.education.containerBackgroundColor,
-              title: darkTheme.education.title,
+              // containerBackgroundColor:
+              //   darkTheme.education.containerBackgroundColor,
+              // title: darkTheme.education.title,
               item: darkTheme.education.item,
             },
           },

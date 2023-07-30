@@ -13,6 +13,8 @@ We currently use
 
 # Architecture
 
+## TODO
+- hover does not offer much: remove on hover and use their effects onClick for Prof Items and Edu Items
 ## Build Time Data
 The site will mostly use **data** computed/fetched at **build time**.  
 We will use the **gatsby-source-graphql** to seemlessly define 

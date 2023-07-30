@@ -90,7 +90,12 @@ interface ResponsiveLocalStorageLayoutProps {
     container: {
       backgroundColor: string;
     };
+    sectionHeader: {
+      backgroundColor: string;
+      color: string;
+    };
     item: {
+      outline?: string;
       backgroundColor: string;
       color: string;
     };
@@ -222,7 +227,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
       color: theme.item.color,
     }}>
       {/* Portfolio Section TITLE*/}
-      <h1>Open Source & Portfolio</h1>
+      <h1 style={{ ...theme.sectionHeader }}>Open Source & Portfolio</h1>
       <button onClick={resetLayout}>Reset Layout</button>
       <ResponsiveReactGridLayout
         className={className}
@@ -254,6 +259,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 y: row,
                 minW: 3,
                 minH: 7,
+              }}
+              style={{
+                outline: theme.item.outline,
               }}
             >
               <ResponsiveLayoutItemContent

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import PortfolioItemDataInterface from '../../../PortfolioItemInterface';
 
-import { useElementSizeRef } from "../../../Hooks/useElementSizeRef";
+// import { useElementSizeRef } from "../../../Hooks/useElementSizeRef";
 // import { useLayoutEffect } from "react";
 
 interface PortfolioLayoutItemContentProps {
@@ -29,7 +29,7 @@ const OuterContainer = styled.div`
   // when mouse is on element make cursor a pointer
   cursor: pointer;
   // when mouse is over element change color a bit
-
+  // defining outline here is buggy 
 `;
 
 const InnerContainer = styled.div`
@@ -47,9 +47,10 @@ const InnerContainer = styled.div`
   &:hover {
     transform: scale(1.01);
     // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    // background-color: ${(props) => props.theme.onHoverBackgroundColor};
-    // color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
+    // background-color:
+    // color:
   }
+  // define outline here is also buggy
 `;
 
 

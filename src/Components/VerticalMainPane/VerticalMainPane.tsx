@@ -9,8 +9,9 @@ import ExperienceItemData from "../../ExperienceItemDataInterface";
 import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 // import PortfolioSection from "../Portfolio";
-import PortfolioSection from "../Portfolio/PortfolioSectionV3";
-
+import PortfolioSection, {
+  ResponsiveLocalStorageLayoutProps,
+} from "../Portfolio/PortfolioSectionV3";
 
 interface AppVerticalMainPaneTheme {
   // color of outer most div
@@ -37,13 +38,29 @@ interface AppVerticalMainPaneTheme {
     };
     containerBackgroundColor: string;
   };
+  // portfolio: {
+  //   // Color Mode Design
+  //   color: string;
+  //   // Other Design
+  //   width: string;
+  // };
   portfolio: {
     container: {
       backgroundColor: string;
     };
+    sectionHeader: {
+      backgroundColor: string;
+      color: string;
+    };
     item: {
       backgroundColor: string;
       color: string;
+      outline: {
+        // Color Mode Design
+        color: string;
+        // Other Design
+        width: string;
+      };
     };
   };
 }
@@ -72,8 +89,6 @@ const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   // flex-direction: column;
   // box-sizing: border-box
   // overflow: auto; /* Introduce a scrollbar if necessary */
-
-
 `;
 
 interface AppVerticalMainPaneProps {
@@ -118,8 +133,16 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
       />
       {/* Scrollable Section 3 */}
       <PortfolioSection
-      id={sectionIDs ? sectionIDs[2] : "open-source-portfolio-section"}
-      data={data.portfolio} theme={theme.portfolio}/>
+        id={sectionIDs ? sectionIDs[2] : "open-source-portfolio-section"}
+        data={data.portfolio}
+        theme={{
+          ...theme.portfolio,
+          item: {
+            ...theme.portfolio.item,
+            outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
+          },
+        }}
+      />
     </VerticalMainPaneContainer>
   );
 };

@@ -15,8 +15,11 @@ const darkColorMode: Theme = {
   // latestContainerBackgroundColor: '#FFBEC3',
   latestContainerBackgroundColor: '#214C63',  // cello
 
+  // This affects some out most backgound color
+  backgroundColor: DESIGN_TOKENS['--md-sys-color-background-dark'],
   // <picked> color after thought
-  backgroundColor: "#D6D6DF",
+  // backgroundColor: "#D6D6DF",
+  // backgroundColor: "#000000",
   foregroundColor: "#1D5556",
   // </picked>
   // backgroundColor: "#333333",
@@ -41,9 +44,11 @@ const darkColorMode: Theme = {
   },
   // PERSONAL INFO / CONTACT / LINKS
   personal: {
-    textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+    // containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-variant-dark"],
+    // textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+    containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+    textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
     urlTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
-    containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-variant-dark"],
   },
   //////// EDUCATION SECTION DARK ////////
   education: {
@@ -52,11 +57,14 @@ const darkColorMode: Theme = {
       backgroundColor: "#333333",
     },
     item: {
-      onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
-      onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
+      // backgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
+      // textColor: DESIGN_TOKENS["--md-sys-color-tertiary-on-container-dark"],
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+      textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
+      // textColor: '#ffffff',
       linkColor: "#2063e9",
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-dark"],
-      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+      onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-dark'],
         textColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
@@ -67,11 +75,12 @@ const darkColorMode: Theme = {
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-dark"],
   },
   introduction: {
-    containerBackgroundColor: darkColorDesign.latestBackgroundColor,
-    // containerBackgroundColor: darkColorDesign.latestContainerBackgroundColor,
-    textColor: darkColorDesign.latestColor,
+    // containerBackgroundColor: darkColorDesign.latestBackgroundColor,
+    // textColor: darkColorDesign.latestColor,
     // containerBackgroundColor: "#1D5556",
     // textColor: "#D6D6DF",
+    containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-dark'],
+    textColor: DESIGN_TOKENS['--md-sys-color-on-primary-container-dark'],
   },
   ///// PROFESSIONAL DARK /////
   professional: {
@@ -80,16 +89,18 @@ const darkColorMode: Theme = {
         textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-dark"],
     },
     item: {
-      onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
-      onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
+      // backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      // textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-dark"],
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+      textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
       linkColor: "#2063e9",
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-dark"],
-      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+      onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-primary-dark'],
         textColor: DESIGN_TOKENS['--md-sys-color-on-primary-dark'],
-        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-dark'],
-        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
+        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
       },
     },
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-dark"],
@@ -97,11 +108,23 @@ const darkColorMode: Theme = {
   // PORTFOLIO DARK
   portfolio: {
     container: {
-      backgroundColor: "#125160",
+      // backgroundColor: "#125160",
+      // backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+    },
+    sectionHeader: {
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
     },
     item: {
-      backgroundColor: "#125160",
-      color: "#D5D7C6",
+      // backgroundColor: "#125160",
+      // color: "#D5D7C6",
+      // has not effect
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+      color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
+      outline: {
+        color: DESIGN_TOKENS['--md-sys-color-outline-dark'],
+      },
     },
   },
   footerStyles: {

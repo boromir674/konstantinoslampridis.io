@@ -60,7 +60,7 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   renderProps,
   layoutItemID,
 }) => {
-  const [blockRef, { width, height }] = useElementSizeRef();
+  // const [blockRef, { width, height }] = useElementSizeRef();
   // whenever the width or height change we want to notify our listeners
   // each listener is expected tohave supplied a callback that we use to notify them
   // of the new width and height
@@ -77,7 +77,8 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
 
   return (
     <OuterContainer>
-      <InnerContainer ref={blockRef}>
+      {/* <InnerContainer ref={blockRef}> */}
+      <InnerContainer>
         {renderProps(data)}
       </InnerContainer>
     </OuterContainer>

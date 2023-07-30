@@ -119,28 +119,36 @@ Annotated with comments designed to integrate with the 'storybook-design-token' 
   --md-sys-color-on-primary-light: #ffffff;
   --md-sys-color-primary-container-light: #ffdad6;
   --md-sys-color-on-primary-container-light: #410003;
+
   --md-sys-color-secondary-light: #775653;
   --md-sys-color-on-secondary-light: #ffffff;
   --md-sys-color-secondary-container-light: #ffdad6;
   --md-sys-color-on-secondary-container-light: #2c1513;
+
   --md-sys-color-tertiary-light: #725b2e;
   --md-sys-color-on-tertiary-light: #ffffff;
   --md-sys-color-tertiary-container-light: #fedfa6;
   --md-sys-color-on-tertiary-container-light: #261900;
+
   --md-sys-color-error-light: #ba1a1a;
   --md-sys-color-error-container-light: #ffdad6;
   --md-sys-color-on-error-light: #ffffff;
   --md-sys-color-on-error-container-light: #410002;
+
   --md-sys-color-background-light: #fffbff;
   --md-sys-color-on-background-light: #201a19;
+
   --md-sys-color-surface-light: #fffbff;
   --md-sys-color-on-surface-light: #201a19;
   --md-sys-color-surface-variant-light: #f5dddb;
   --md-sys-color-on-surface-variant-light: #534341;
+
   --md-sys-color-outline-light: #857371;
+
   --md-sys-color-inverse-on-surface-light: #fbeeec;
   --md-sys-color-inverse-surface-light: #362f2e;
   --md-sys-color-inverse-primary-light: #ffb4ac;
+
   --md-sys-color-shadow-light: #000000;
   --md-sys-color-surface-tint-light: #9c423b;
   --md-sys-color-outline-variant-light: #d8c2bf;

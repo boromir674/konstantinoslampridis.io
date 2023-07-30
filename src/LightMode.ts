@@ -19,11 +19,14 @@ const lightColorMode: Theme = {
   // Secondly, an alternative background color for outer containers
   // latestContainerBackgroundColor: '#214C63',  // cello
   latestContainerBackgroundColor: '#FFBEC3',
-
+  
   // <picked> color after thought
-  backgroundColor: "#D6D6DF",
+  // backgroundColor: "#D6D6DF",
   foregroundColor: "#1D5556",
   // </picked>
+
+  // This affects some out most backgound color
+  backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
 
   // foregroundColor: "#000000",
   buttonColor: "#007bff",
@@ -55,11 +58,14 @@ const lightColorMode: Theme = {
       backgroundColor: "#ffffff",
     },
     item: {
+      // backgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
+      // textColor: DESIGN_TOKENS["--md-sys-color-tertiary-on-container-light"],
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-light'],
+      textColor: DESIGN_TOKENS['--md-sys-color-on-surface-light'],
+      // textColor: '#ffffff',
+      linkColor: "#2063e9",
       onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
       onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
-      linkColor: "#2063e9",
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
-      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
         textColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
@@ -70,8 +76,10 @@ const lightColorMode: Theme = {
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-light"],
   },
   introduction: {
-    containerBackgroundColor: lightColorDesign.latestBackgroundColor,
-    textColor: lightColorDesign.latestColor,
+    // containerBackgroundColor: lightColorDesign.latestBackgroundColor,
+    // textColor: lightColorDesign.latestColor,
+    containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-light'],
+    textColor: DESIGN_TOKENS['--md-sys-color-on-primary-container-light'],
   },
   ///// PROFESSIONAL LIGHT /////
   professional: {
@@ -80,16 +88,16 @@ const lightColorMode: Theme = {
       textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
     },
     item: {
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+      linkColor: "#2063e9",
       onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
       onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
-      linkColor: "#2063e9",
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
-      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-primary-light'],
         textColor: DESIGN_TOKENS['--md-sys-color-on-primary-light'],
-        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
-        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
+        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-light'],
+        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-light'],
       },
     },
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-light"],
@@ -97,11 +105,22 @@ const lightColorMode: Theme = {
   // PORTFOLIO LIGHT
   portfolio: {
     container: {
-      backgroundColor: "#D5D7C6",
+      // backgroundColor: "#D5D7C6",
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+    },
+    sectionHeader: {
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+      color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
     },
     item: {
-      backgroundColor: "#D5D7C6",
-      color: "#125160",
+      // backgroundColor: "#D5D7C6",
+      // color: "#125160",
+      // TODO; fix bug: item color background has no effect
+      backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+      color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+      outline: {
+        color: DESIGN_TOKENS['--md-sys-color-outline-light'],
+      },
     },
   },
 

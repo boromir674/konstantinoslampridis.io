@@ -19,22 +19,23 @@ interface WindowSize {
  */
 const useWindowSizeTrackingState = (
   SSROn: boolean
-): [{ innerWidth: number | null; innerHeight: number | null; }] => {
+): [{ innerWidth: number | null; innerHeight: number | null }] => {
   // initialize the windowSize state attribute with null if client signals we
   // are doing 'server side rendering' or query the browser window at runtime
   const [windowSize, setWindowSize] = useState<WindowSize>(() =>
     SSROn
       ? {
+          // runs when build command runs (ie on developer machine, or on a server)
           innerWidth: null,
           innerHeight: null,
         }
       : {
+          // runs on client browser, on component mount (due to useEffect below)
           innerWidth: window.innerWidth,
           innerHeight: window.innerHeight,
         }
   );
 
-  // const getWindowSize: getWindowSizeFunction = useCallback(() => {
   const getWindowSize = useCallback(() => {
     const { innerWidth, innerHeight } = window;
     return { innerWidth, innerHeight };
@@ -54,6 +55,5 @@ const useWindowSizeTrackingState = (
 
   return [windowSize];
 };
-
 
 export default useWindowSizeTrackingState;

@@ -6,6 +6,9 @@ const config: GatsbyConfig = {
   },
   siteMetadata: {
     title: `Konstantinos Lampridis Online`,
+    description: `The online professional profile of Konstantinos Lampridis'. In this website, one can view Konstantinos Lampridis' contact information, Curicculum Vitae (CV), and Open Source Projects Portfolio.`,
+    // twitterUsername: `@todo-username`,
+    // image: `/a-brand-or-sth-icon.png`,
     siteUrl: `https://konstantinoslampridis.io`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -14,6 +17,7 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     `gatsby-plugin-emotion`,
+    // in case you have a graphql service to provide data you can configure as example below:
     // {
     //   resolve: `gatsby-source-graphql`,
     //   options: {

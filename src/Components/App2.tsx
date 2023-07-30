@@ -1,7 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby";
 import type { FC } from "react";
 import BigScreenViewInteractive from "./BigScreenViewInteractive";
-import { lightTheme, darkTheme } from "../AppStyles";
+import { mergeStylings, commonStyling, ComputedTheme } from "../AppStyles";
+import lightMode from '../LightMode';
+import darkMode from '../DarkMode';
 
 interface EducationItemUserTextData {
   name: string;
@@ -70,6 +72,10 @@ const App: FC = () => {
     (acc: any, { name, id, url }: any) => ({ ...acc, [id]: url }),
     {}
   );
+
+  const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+  const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+
 
   return (
     // <main>

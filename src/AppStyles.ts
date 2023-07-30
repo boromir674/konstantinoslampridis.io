@@ -7,6 +7,13 @@ interface HeaderStyles {
 // Usually this interface can describe the colors of a so-called "color mode"
 // For example Light/Dark mode/theme
 interface Theme {
+  // latest iteration of color system, including 3 colors
+  // Firstly, a color duo as alternating color and background-color css properties
+  latestColor: string;
+  latestBackgroundColor: string;
+  // Secondly, an alternative background color for outer containers
+  latestContainerBackgroundColor: string;
+
   backgroundColor: string;
   foregroundColor: string;
   buttonColor: string;
@@ -39,6 +46,12 @@ interface Theme {
       linkColor: string;
       onHoverBackgroundColor: string;
       onHoverTextColor: string;
+      tag: {
+        backgroundColor: string;
+        textColor: string;
+        onHoverBackgroundColor: string;
+        onHoverTextColor: string;
+      };
     };
     containerBackgroundColor: string;
   };
@@ -131,6 +144,7 @@ interface ComputedTheme extends Theme {
       // Common Styling that does not depend on color
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      tag: Theme["education"]["item"]["tag"];
     };
     containerBackgroundColor: string;
   };
@@ -171,185 +185,6 @@ const commonStyling = {
   },
 };
 
-const lightColorMode: Theme = {
-  // <picked> color after thought
-  backgroundColor: "#D6D6DF",
-  foregroundColor: "#1D5556",
-  // </picked>
-
-  // foregroundColor: "#000000",
-  buttonColor: "#007bff",
-  buttonHoverColor: "#0056b3",
-  headerStyles: {
-    primaryColor: "#ffffff",
-    secondaryColor: "#0056b3",
-  },
-  topHeaderPane: {
-    backgroundColor: "#D6D6DF",
-  },
-  navigationBar: {
-    textColor: "#000000",
-    backgroundColor: "#009385",
-    hoverBackgroundColor: "#fff",
-    hoverTextColor: "#000000",
-    activatedBackgroundColor: "#fa345f",
-    activatedTextColor: "#000000",
-  },
-  personal: {
-    textColor: "#4A4A4A",
-    urlTextColor: "#2063e9",
-    // containerBackgroundColor: "#f6f8fa",
-    containerBackgroundColor: "#EDB6DB",
-  },
-  education: {
-    title: {
-      textColor: "#000000",
-      backgroundColor: "#ffffff",
-    },
-    item: {
-      // MY OLD DESIGN
-      // backgroundColor: "#FFAD00",
-      // textColor: "#333",
-      onHoverBackgroundColor: "#ddd",
-      onHoverTextColor: "#333",
-      linkColor: "#2063e9",
-      // NEW DESIGN
-      textColor: "#123123",
-      backgroundColor: "#ffffff",
-      // textColor: "#000000",
-      // onHoverBackgroundColor: "#f6f8fa",
-      // onHoverTextColor: "#000000",
-    },
-    containerBackgroundColor: "#f6f8fa",
-  },
-  introduction: {
-    containerBackgroundColor: "#D6D6DF",
-    textColor: "#1D5556",
-  },
-  professional: {
-    title: {
-      textColor: "#000000",
-      backgroundColor: "#ffffff",
-    },
-    item: {
-      textColor: "#000000",
-      backgroundColor: "#ffffff",
-      linkColor: "#1651f3",
-      onHoverBackgroundColor: "#a4e2c7",
-      onHoverTextColor: "#000000",
-      tag: {
-        backgroundColor: "#8be0c8",
-        textColor: "#174b58",
-        onHoverBackgroundColor: "#000000",
-        onHoverTextColor: "#ffffff",
-      },
-    },
-    containerBackgroundColor: "#f6f8fa",
-  },
-  // PORTFOLIO LIGHT
-  portfolio: {
-    container: {
-      backgroundColor: "#D5D7C6",
-    },
-    item: {
-      backgroundColor: "#D5D7C6",
-      color: "#125160",
-    },
-  },
-
-  footerStyles: {
-    textColor: "#1D5556",
-    backgroundColor: "#D6D6DF",
-  },
-};
-
-const darkColorMode: Theme = {
-  // <picked> color after thought
-  backgroundColor: "#D6D6DF",
-  foregroundColor: "#1D5556",
-  // </picked>
-  // backgroundColor: "#333333",
-  // foregroundColor: "#ffffff",
-
-  buttonColor: "#007bff",
-  buttonHoverColor: "#0096ff",
-  headerStyles: {
-    primaryColor: "#333333",
-    secondaryColor: "#0096ff",
-  },
-  topHeaderPane: {
-    backgroundColor: "#463507",
-  },
-  navigationBar: {
-    backgroundColor: "#333333",
-    textColor: "#ffffff",
-    hoverBackgroundColor: "#fff",
-    hoverTextColor: "#ffffff",
-    activatedBackgroundColor: "#ff345f",
-    activatedTextColor: "#ffffff",
-  },
-  // PERSONAL INFO / CONTACT / LINKS
-  personal: {
-    textColor: "#EDEDED",
-    urlTextColor: "#D98C66",
-    // containerBackgroundColor: "#222222",
-    containerBackgroundColor: "#2D0B22",
-  },
-  // EDUCATION SECTION
-  education: {
-    title: {
-      textColor: "#ffffff",
-      backgroundColor: "#333333",
-    },
-    item: {
-      backgroundColor: "#333333",
-      textColor: "#ffffff",
-      linkColor: "#D98C66",
-      onHoverBackgroundColor: "#444444",
-      onHoverTextColor: "#ffffff",
-    },
-    containerBackgroundColor: "#222222",
-  },
-  introduction: {
-    containerBackgroundColor: "#1D5556",
-    textColor: "#D6D6DF",
-  },
-  // PROFESSIONAL EXPERIENCE SECTION
-  professional: {
-    title: {
-      textColor: "#d7e5db",
-      backgroundColor: "#201f1f",
-    },
-    item: {
-      textColor: "#d7e5db",
-      backgroundColor: "#201f1f",
-      linkColor: "#aec0f1",
-      onHoverBackgroundColor: "#494343",
-      onHoverTextColor: "#d7e5db",
-      tag: {
-        backgroundColor: "#174b58",
-        textColor: "#8be0c8",
-        onHoverBackgroundColor: "#ffffff",
-        onHoverTextColor: "#000000",
-      },
-    },
-    containerBackgroundColor: "#1d2421",
-  },
-  // PORTFOLIO DARK
-  portfolio: {
-    container: {
-      backgroundColor: "#125160",
-    },
-    item: {
-      backgroundColor: "#125160",
-      color: "#D5D7C6",
-    },
-  },
-  footerStyles: {
-    textColor: "#D6D6DF",
-    backgroundColor: "#1D5556",
-  },
-};
 
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
 type CommonStyling = typeof commonStyling;
@@ -391,7 +226,7 @@ const mergeStylings = (
   };
 };
 
-const lightTheme: ComputedTheme = mergeStylings(lightColorMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkColorMode, commonStyling);
+// const lightTheme: ComputedTheme = mergeStylings(lightColorMode, commonStyling);
+// const darkTheme: ComputedTheme = mergeStylings(darkColorMode, commonStyling);
 
-export { ComputedTheme, lightTheme, darkTheme };
+export { type ComputedTheme, type Theme, mergeStylings, commonStyling };

@@ -83,7 +83,14 @@ interface Theme {
     container: {
       backgroundColor: string;
     };
+    sectionHeader: {
+      backgroundColor: string;
+      color: string;
+    };
     item: {
+      outline: {
+        color: string;
+      };
       backgroundColor: string;
       color: string;
     };
@@ -148,6 +155,18 @@ interface ComputedTheme extends Theme {
     };
     containerBackgroundColor: string;
   };
+  portfolio: {
+    container: Theme["portfolio"]["container"];
+    sectionHeader: Theme["portfolio"]["sectionHeader"];
+    item: {
+      outline: {
+        color: string;
+        width: string;
+      };
+      backgroundColor: string;
+      color: string;
+    };
+  };
 }
 
 // DESIGNER SPACE
@@ -181,6 +200,13 @@ const commonStyling = {
       onHoverBackgroundColorChangeDuration: "0.7s",
       // onHoverTransitionDelay: '1s',
       padding: "15px",
+    },
+  },
+  portfolio: {
+    item: {
+      outline: {
+        width: "3px",
+      },
     },
   },
 };
@@ -223,10 +249,19 @@ const mergeStylings = (
         ...commonStyling.education.item,
       },
     },
+    portfolio: {
+      ...theme.portfolio,
+      ...commonStyling.portfolio,
+      item: {
+        ...theme.portfolio.item,
+        ...commonStyling.portfolio.item,
+        outline: {
+          ...theme.portfolio.item.outline,
+          ...commonStyling.portfolio.item.outline,
+        },
+      },
+    },
   };
 };
-
-// const lightTheme: ComputedTheme = mergeStylings(lightColorMode, commonStyling);
-// const darkTheme: ComputedTheme = mergeStylings(darkColorMode, commonStyling);
 
 export { type ComputedTheme, type Theme, mergeStylings, commonStyling };

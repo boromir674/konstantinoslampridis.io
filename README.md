@@ -100,18 +100,25 @@ Deploying `storybook` on localhost (dev server with some hot-reloading), enables
   ```shell
   npx storybook@latest init
   ```
-- **Run storybook** on localhost
+- **Run storybook** on **localhost**
   ```shell
   yarn storybook
   ```
 ## Delivery Process
+
+Our case fits the Static Site Generator.  
+We have opted for an `'S3 + Cloudfront'` Deployment.
 
 ```mermaid
 graph LR;
   A[Develop] --> B[Test]
   B --> C[Build]
   C --> D[Upload to S3 bucket]
+  D --> E[Optional: Invalidate Cloudfront Caches]
 ```
+
+> Our plan includes implementing a `Continous Delivery (CD)` process in the future.  
+> Now, this can be done in `Github Actions` or investigate if it is worth switching to an `'Amplify'` Deployment (see [this article](https://adrianhall.github.io/cloud/2019/01/31/which-aws-service-for-hosting/)), which seems to provide an out-of-the-box solution for `CD`.
 
 # Main Use Case of konstantinoslampridis.io
 
@@ -141,6 +148,14 @@ sequenceDiagram
     B--)U: enable all reactive/dynamic features
     deactivate B
 ```
+
+# SEO
+
+For Search Engine Optimization we cane leverage a [SEO Component](https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-seo-component/) offered by
+`Gatsby`, which powers our Static Website/File Generator.  
+We can use `gatsby-config.ts` or graphQL to get the Metadata from the source values.  
+Each page should have elements such as `<meta name="description" content={seo.description} />`.  
+
 
 ## Docker (legacy) notes
 

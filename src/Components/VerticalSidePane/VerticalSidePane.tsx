@@ -1,12 +1,12 @@
-/** 
-* A Vertical Side Pane, suitable to be on the left or right of a Main one.
-*/
+/**
+ * A Vertical Side Pane, suitable to be on the left or right of a Main one.
+ */
 import React from "react";
 import styled from "@emotion/styled";
 import PersonalInfoInterface from "../../PersonalInfoInterface";
 import EducationDataInterface from "../../EducationItemDataInterface";
 import PersonalInfo from "../PersonalInfo";
-import { Education } from "../Education";
+import { Education, AppEducationSectionProps } from "../Education";
 
 interface AppVerticalSidePaneTheme {
   containerBackground?: string;
@@ -16,25 +16,7 @@ interface AppVerticalSidePaneTheme {
     textColor: string;
     linkColor: string;
   };
-  education: {
-    containerBackgroundColor: string;
-    title: {
-      textColor: string;
-      backgroundColor: string;
-      padding?: string;
-    };
-    item: {
-      backgroundColor: string;
-      textColor: string;
-      linkColor: string;
-      onHoverBackgroundColor: string;
-      onHoverTextColor: string;
-      // onHoverTransitionDelay: string;
-      onHoverTransformDuration: string;
-      onHoverBackgroundColorChangeDuration: string;
-      padding?: string;
-    };
-  };
+  education: AppEducationSectionProps["theme"];
 }
 
 interface VerticanSidePaneContainerProps {
@@ -44,12 +26,14 @@ interface VerticanSidePaneContainerProps {
 const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
   // left: 0px;
   // background-color: lightblue;
-  background-color: ${(props) => props.theme.containerBackground || props.theme.personalInfo.containerBackgroundColor};
+  background-color: ${(props) =>
+    props.theme.containerBackground ||
+    props.theme.personalInfo.containerBackgroundColor};
   display: flex;
   grid-area: Side;
   flex-direction: column;
   flex-wrap: wrap;
-  // fix a buyg where the top header is shown above the top-part content
+  // fix a bug where the top header is shown above the top-part content
   // of both the Sidepane and the MainPane
   margin-top: 50px;
 `;

@@ -1,4 +1,4 @@
-import react, { useState, useCallback, FC, useRef, useEffect } from "react";
+import react, { useState, useCallback, FC, useRef } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
@@ -69,27 +69,6 @@ const LayoutItem = styled.div<LayoutItemProps>`
   width: 100%;
 `;
 
-// Helper function definition
-// const render = (d: PortfolioItemInterface) => {
-//   return (
-//     <>
-//       <h1>{d.title}</h1>
-//       <TopPartBlock>
-//         <LeftPane>
-//           Links (ie urls to source code, CI)
-//           <p />
-//           <span>
-//             Width: {width}px. Height: {height}
-//           </span>
-//         </LeftPane>
-//         <RightPane>
-//           maturity level<p>Releases pane</p>
-//         </RightPane>
-//       </TopPartBlock>
-//       <BottomPartBlock>Description</BottomPartBlock>
-//     </>
-//   );
-// };
 interface PortfolioSectionContainerProps {
   theme: {
     backgroundColor: string;
@@ -135,6 +114,7 @@ const defaultProps = {
   element_to_render: PortfolioItemCard,
 };
 
+
 const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   id: htmlID,
   data,
@@ -154,14 +134,14 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   console.log("HEIGHTS", layoutItemHeights.current);
   // const layoutItemHeights = useRef<Record<string, number>>({});
 
-  const storeUpdatedItemHeight = useCallback((id: string, height: number) => {
-    // designed as a handler (or the update function of a listener)
-    // SHOULD MATCH the variable in PortfolioItemV3.tsx
-    const padding = 10;
-    layoutItemHeights.current[id] = height - 2 * padding;
-    console.log("UPDATE Heights with", id, height);
-    console.log("NEW Heights", layoutItemHeights.current);
-  }, []);
+  // const storeUpdatedItemHeight = useCallback((id: string, height: number) => {
+  //   // designed as a handler (or the update function of a listener)
+  //   // SHOULD MATCH the variable in PortfolioItemV3.tsx
+  //   const padding = 10;
+  //   layoutItemHeights.current[id] = height - 2 * padding;
+  //   console.log("UPDATE Heights with", id, height);
+  //   console.log("NEW Heights", layoutItemHeights.current);
+  // }, []);
 
   const onResize = (
     layout: Layout,

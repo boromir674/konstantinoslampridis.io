@@ -4,25 +4,13 @@ import styled from "@emotion/styled";
 import PortfolioItemDataInterface from '../../../PortfolioItemInterface';
 
 import { useElementSizeRef } from "../../../Hooks/useElementSizeRef";
-import { useLayoutEffect } from "react";
+// import { useLayoutEffect } from "react";
 
 interface PortfolioLayoutItemContentProps {
   layoutItemID?: string;
   renderProps: (portfolioItemData: PortfolioItemDataInterface) => React.ReactNode;
   data: PortfolioItemDataInterface;
-  // {
-  //   title: string;
-  //   development_period: string;
-  //   status: string;
-  //   description: string;
-  //   source_code_repo: string;
-  //   release: {
-  //     type: string;
-  //     artifact_version: string;
-  //     name: string;
-  //   }[];
-  //   tags: string[];
-  // };
+
   // allow only one callbakc to subscribe
   listeners_callbacks?: ((
     // width: number,

@@ -131,6 +131,22 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
           </MyLink>
         </InfoValue>
       </InfoItem>
+      {/* Render the various PDF documents and link to their publicly accessible urls */}
+      <InfoItem>
+        <InfoKey>Resume:</InfoKey>{" "}
+        <InfoValue>
+          <Link
+            href={`https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            theme={{
+              textColor: theme.linkColor,
+            }}
+          >
+            CV + Projects PDF
+          </Link>
+        </InfoValue>
+      </InfoItem>
     </Container>
   );
 };

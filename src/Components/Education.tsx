@@ -24,7 +24,7 @@ const UniversityTitle = styled.h4`
 
 const Location = styled.p`
   font-size: 16px;
-  color: #888;
+  // color: #888;
   margin-top: 5px;
 `;
 
@@ -70,6 +70,7 @@ interface EducationItemTheme {
     textColor: string;
     onHoverBackgroundColor: string;
     onHoverTextColor: string;
+    outlineColor: string;
   };
 }
 interface StyledAppEducationItemProps {
@@ -103,7 +104,7 @@ interface AppEducationItemProps {
   userData: EducationItemData;
   theme: EducationItemTheme;
 }
-
+/// EDUCATION ITEM
 const EducationItem: React.FC<AppEducationItemProps> = ({
   userData: {
     degree_title,

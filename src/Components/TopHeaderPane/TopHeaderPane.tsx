@@ -14,6 +14,12 @@ interface TopHeaderPaneTheme {
     activatedTextColor: string;
     activatedBackgroundColor: string;
   };
+  themeSwitch: {
+    backgroundColor: string;
+    backgroundColorActive: string;
+    handleBackgroundColor: string;
+    handleBackgroundColorActive: string;
+  };
 }
 
 /**
@@ -50,16 +56,10 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.navigationBar.textColor};
 
-  //   grid-column-start: 1;
-  //   grid-column-end: 3;
-  //   grid-row-start: row1-start;
-  //   grid-row-end: 2;
   position: fixed;
   top: 0;
   width: 100%;
-  // justify-self: center;
-  //   align-self: center;
-  
+
   // place the top header pane above everything on the z axis
   // in other words imagining the page in 3D the top pane shall be the topmost layer
   // at the highest level
@@ -68,9 +68,6 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   grid-area: Header;
   padding-left: 80px;
   padding-top: 10px;
-  // padding-right: 80px;
-  // padding-bottom: 10px;
-  // margin-bottom: 20px;
 `;
 
 const TopHeaderPane: FC<TopHeaderPaneProps> = ({
@@ -79,14 +76,27 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
 }) => {
   return (
     <TopHeaderPaneContainer theme={theme}>
-      <ToggleSlider active={active} onToggle={onToggle}></ToggleSlider>
+      <ToggleSlider
+        active={active}
+        onToggle={onToggle}
+        barBackgroundColor={theme.themeSwitch.backgroundColor}
+        barBackgroundColorActive={theme.themeSwitch.backgroundColorActive}
+        handleBackgroundColor={theme.themeSwitch.handleBackgroundColor}
+        handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
+      ></ToggleSlider>
       <HorizontalNavBar
         // replace the name key from section objects with the 'label' key to match interface of HorizontalNavBar props
         items={sections.map((section_data) =>
           Object.assign(section_data, { label: section_data.name })
         )}
         activeItem={sections[0].name}
-        colorSet={theme.navigationBar}
+        theme={{
+          colorSet: theme.navigationBar,
+          padding: {
+            vertical: "8px",
+            horizontal: "28px",
+          },
+        }}
       />
     </TopHeaderPaneContainer>
   );

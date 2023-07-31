@@ -127,25 +127,26 @@ const App: FC = () => {
         light: {
           containerBackgroundColor: lightTheme.backgroundColor,
           topHeaderPane: {
+            themeSwitch: lightTheme.themeSwitch,
             navigationBar: lightTheme.navigationBar,
             backgroundColor: lightTheme.topHeaderPane.backgroundColor,
           },
           verticalSidePane: {
             personalInfo: {
-              containerBackgroundColor:
-                lightTheme.personal.containerBackgroundColor,
-              textColor: lightTheme.personal.textColor,
+              // pass Theme Personal Color Design
+              ...lightTheme.personal,
+              // adjust interface
               linkColor: lightTheme.personal.urlTextColor,
             },
             education: {
-              // containerBackgroundColor:
-              //   lightTheme.education.containerBackgroundColor,
-              // title: lightTheme.education.title,
               item: lightTheme.education.item,
             },
           },
           verticalMainPane: {
-            ...lightTheme,
+            introduction: lightTheme.introduction,
+            professional: lightTheme.professional,
+            portfolio: lightTheme.portfolio,
+            // ...lightTheme,
             containerBackgroundColor: lightTheme.backgroundColor,
           },
           bottomFooterPane: lightTheme.footerStyles,
@@ -153,20 +154,18 @@ const App: FC = () => {
         dark: {
           containerBackgroundColor: darkTheme.backgroundColor,
           topHeaderPane: {
+            themeSwitch: darkTheme.themeSwitch,
             navigationBar: darkTheme.navigationBar,
             backgroundColor: darkTheme.topHeaderPane.backgroundColor,
           },
           verticalSidePane: {
             personalInfo: {
-              containerBackgroundColor:
-                darkTheme.personal.containerBackgroundColor,
-              textColor: darkTheme.personal.textColor,
+              // pass Theme Personal Color Design
+              ...darkTheme.personal,
+              // adjust interface
               linkColor: darkTheme.personal.urlTextColor,
             },
             education: {
-              // containerBackgroundColor:
-              //   darkTheme.education.containerBackgroundColor,
-              // title: darkTheme.education.title,
               item: darkTheme.education.item,
             },
           },

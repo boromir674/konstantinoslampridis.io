@@ -60,7 +60,7 @@ const ProfItem: React.FC<ProfItemProps> = ({
       <h3
         css={css`
           margin: 0;
-          font-size: 18px;
+          font-size: 24px;
           font-weight: bold;
         `}
       >

@@ -1,7 +1,9 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
-import ScrollingNavigationItemGeneric from "./ScrollingNavigationItemGeneric";
+
 import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
+
+import ScrollingNavigationItemGeneric from "./ScrollingNavigationItemGeneric";
 import AppHorNavItem from "./AppHorNavItem";
 
 const NavContainerNew = styled.nav`
@@ -11,8 +13,9 @@ const NavContainerNew = styled.nav`
   justify-content: center;
   align-items: center;
   align-content: center;
-  // background: #ffecb3;
   background: "inherit";
+  /* Set the desired spacing between flex items */
+  gap: 1px;
 `;
 
 interface HeaderNavProps {
@@ -21,17 +24,24 @@ interface HeaderNavProps {
     to_element_id: string;
   }[];
   activeItem: string;
-  colorSet: {
-    textColor: string;
-    backgroundColor: string;
-    hoverBackgroundColor: string;
-    hoverTextColor: string;
-    activatedTextColor: string;
-    activatedBackgroundColor: string;
+  theme: {
+    colorSet: {
+      textColor: string;
+      backgroundColor: string;
+      hoverBackgroundColor: string;
+      hoverTextColor: string;
+      activatedTextColor: string;
+      activatedBackgroundColor: string;
+    };
+    // paddings for vertical and horizontal control
+    padding: {
+      vertical: string;
+      horizontal: string;
+    };
   };
 }
 
-const HorizontalNavBar: FC<HeaderNavProps> = ({ items, colorSet }) => {
+const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, padding } }) => {
   // whenever the user makes a scroll we capture the "screen view position"
   // and we store in the 'activeLinkIndex' state attribute of this component
   // since the state value gets updated on scroll event,
@@ -45,7 +55,7 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, colorSet }) => {
           renderProps={({ active, onClick }) => (
             <AppHorNavItem
               key={index}
-              colorSet={colorSet}
+              theme={{ colorSet, padding }}
               active={active}
               onClick={onClick}
             >

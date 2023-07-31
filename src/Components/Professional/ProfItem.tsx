@@ -22,6 +22,7 @@ interface ProfessionalItemTheme {
     textColor: string;
     onHoverBackgroundColor: string;
     onHoverTextColor: string;
+    outlineColor: string;
   };
 }
 

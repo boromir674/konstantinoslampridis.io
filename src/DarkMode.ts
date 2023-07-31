@@ -1,13 +1,9 @@
-import { Theme } from './AppStyles';
+/* DESIGN your Dark Mode Color Theme */
 import DESIGN_TOKENS from "./design-system/tokens.json";
+import { Theme } from './AppStyles';
 
 
 /////////// DARK MODE ///////////
-const darkColorDesign = {
-  latestColor: '#FFBEC3',
-  latestBackgroundColor: '#0E2637',
-  latestContainerBackgroundColor: '#214C63',  // cello
-};
 const darkColorMode: Theme = {
   latestColor: '#0E2637',
   latestBackgroundColor: '#7AFCBA',
@@ -17,13 +13,7 @@ const darkColorMode: Theme = {
 
   // This affects some out most backgound color
   backgroundColor: DESIGN_TOKENS['--md-sys-color-background-dark'],
-  // <picked> color after thought
-  // backgroundColor: "#D6D6DF",
-  // backgroundColor: "#000000",
   foregroundColor: "#1D5556",
-  // </picked>
-  // backgroundColor: "#333333",
-  // foregroundColor: "#ffffff",
 
   buttonColor: "#007bff",
   buttonHoverColor: "#0096ff",
@@ -37,18 +27,23 @@ const darkColorMode: Theme = {
   navigationBar: {
     textColor: DESIGN_TOKENS["--md-sys-color-on-tertiary-dark"],
     backgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
-    hoverBackgroundColor: "#000000",
-    hoverTextColor: "#ffffff",
+    hoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+    hoverTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-dark"],
     activatedBackgroundColor: DESIGN_TOKENS["--md-sys-color-primary-dark"],
     activatedTextColor: DESIGN_TOKENS["--md-sys-color-on-primary-dark"],
   },
+  themeSwitch: {
+    backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-dark'],
+    handleBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+    backgroundColorActive: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+    handleBackgroundColorActive: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+  },
   // PERSONAL INFO / CONTACT / LINKS
   personal: {
-    // containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-variant-dark"],
-    // textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
     containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
     textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
     urlTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+    externalURLSVGColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
   },
   //////// EDUCATION SECTION DARK ////////
   education: {
@@ -70,6 +65,7 @@ const darkColorMode: Theme = {
         textColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
         onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
         onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
+        outlineColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
       },
     },
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-dark"],
@@ -97,10 +93,11 @@ const darkColorMode: Theme = {
       onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
       onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
       tag: {
-        backgroundColor: DESIGN_TOKENS['--md-sys-color-primary-dark'],
-        textColor: DESIGN_TOKENS['--md-sys-color-on-primary-dark'],
-        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
-        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
+        backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+        textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
+        onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-dark'],
+        onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-primary-dark'],
+        outlineColor: DESIGN_TOKENS['--md-sys-color-outline-dark'],
       },
     },
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-dark"],

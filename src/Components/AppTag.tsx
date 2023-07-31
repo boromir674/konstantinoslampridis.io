@@ -16,21 +16,27 @@ interface AppTagProps {
     textColor: string;
     onHoverBackgroundColor: string;
     onHoverTextColor?: string;
+    outlineColor: string;
   };
 }
 
 const AppTag = styled.span<AppTagProps>`
+  // COLOR THEME
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
-  font-size: 14px;
-  padding: 8px 12px;
-  border-radius: 20px;
-  margin: 4px;
-  transition: background-color 0.3s ease;
+  border-color: ${(props) => props.theme.outlineColor};
   &:hover {
     background-color: ${(props) => props.theme.onHoverBackgroundColor};
     color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
   }
+  // OTHER STYLES
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin: 4px;
+  // configure border line width
+  border-style: solid;
+  transition: background-color 0.3s ease;
 `;
 export default AppTag;
 export type { AppTagProps };

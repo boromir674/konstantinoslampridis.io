@@ -22,6 +22,7 @@ interface Theme {
   topHeaderPane: {
     backgroundColor: string;
   };
+  /// NAVIGATION COLORS ///
   navigationBar: {
     textColor: string;
     backgroundColor: string;
@@ -30,11 +31,26 @@ interface Theme {
     activatedTextColor: string;
     activatedBackgroundColor: string;
   };
+  /// THEME SWITCH COLORS ///
+  themeSwitch: {
+    backgroundColor: string;
+    backgroundColorActive: string;
+    handleBackgroundColor: string;
+    handleBackgroundColorActive: string;
+  };
+  /// INTRODUCTIONS COLORS ///
+  introduction: {
+    containerBackgroundColor: string;
+    textColor: string;
+  };
+  /// PERSONAL COLORS ///
   personal: {
     textColor: string;
     urlTextColor: string;
     containerBackgroundColor: string;
+    externalURLSVGColor: string;
   };
+  /// EDUCATION COLORS ///
   education: {
     title: {
       textColor: string;
@@ -51,14 +67,13 @@ interface Theme {
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
+        outlineColor: string;
       };
     };
     containerBackgroundColor: string;
   };
-  introduction: {
-    containerBackgroundColor: string;
-    textColor: string;
-  };
+
+  /// PROFESSIONAL COLORS ///
   professional: {
     containerBackgroundColor: string;
     title: {
@@ -76,9 +91,11 @@ interface Theme {
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
+        outlineColor: string;
       };
     };
   };
+  /// PORTFOLIO COLORS ///
   portfolio: {
     container: {
       backgroundColor: string;
@@ -104,6 +121,7 @@ interface Theme {
 
 // Used internally for type checking
 interface ComputedTheme extends Theme {
+  //// ALL PROFESSIONAL STYLES
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
     title: {
@@ -125,6 +143,7 @@ interface ComputedTheme extends Theme {
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
+        outlineColor: string;
       };
     };
     // defines whether there will be a delay between the the top item and the
@@ -135,6 +154,7 @@ interface ComputedTheme extends Theme {
     // item changed colors, 4 seconds would pass
     itemsColorModeSwitchDelay: number;
   };
+  //// ALL EDUCATION STYLES
   education: {
     title: {
       textColor: string;
@@ -155,6 +175,7 @@ interface ComputedTheme extends Theme {
     };
     containerBackgroundColor: string;
   };
+  //// ALL PORTFOLIO STYLES
   portfolio: {
     container: Theme["portfolio"]["container"];
     sectionHeader: Theme["portfolio"]["sectionHeader"];

@@ -34,6 +34,7 @@ interface ProfessionalSectionProps {
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
+        outlineColor: string;
       };
     };
     containerBackgroundColor: string;
@@ -52,6 +53,7 @@ const ProfessionalExperienceSectionTitle = styled.h1<ProfessionalExperienceSecti
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.backgroundColor};
   padding: ${(props) => props.theme.padding || "0px"};
+  font-size: 32px;
 `;
 
 interface ProfessionalExperienceSectionContainerProps {

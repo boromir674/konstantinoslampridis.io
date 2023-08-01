@@ -11,6 +11,18 @@ We currently use
 - Typescript 4.8.2
 - Gatsby 4.22.0
 
+## Audit
+### Lighthouse
+#### Light Color Mode
+- Performace: 92
+- Accesibility: 94
+- Best Practices: 100
+- SEO: 78
+#### Dark Color Mode
+- Performace: 93
+- Accesibility: 94
+- Best Practices: 100
+- SEO: 78
 # Architecture
 
 ## TODO

@@ -1,8 +1,8 @@
-import type { GatsbyConfig } from "gatsby"
+import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   flags: {
-    DEV_SSR: true
+    DEV_SSR: true,
   },
   siteMetadata: {
     title: `Konstantinos Lampridis Online`,
@@ -29,7 +29,19 @@ const config: GatsbyConfig = {
     //     },
     //   },
     // }
+
+    // Add support for integrating with the '' plugin
+    // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-svg/#:~:text=The%20following%20configuration%20uses%20svg,process%20SVGs%20from%20everywhere%20else.&text=From%20now%20on%20you%20can,svg%22%3B%20%2F%2F%20...
+
+    //   {
+    //   resolve: "gatsby-plugin-react-svg",
+    //   options: {
+    //     rule: {
+    //       include: /static/
+    //     }
+    //   }
+    // }
   ],
-}
+};
 
 export default config;

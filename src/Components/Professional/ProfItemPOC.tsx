@@ -115,9 +115,8 @@ const ProfItem: React.FC<ProfItemProps> = ({
         `}
       >
         {activities.map((activity, index) => (
-          <li>
+          <li key={index}>
             <ExpItemActivity
-              key={index}
               theme={{
                 // containerBackgroundColor: "#fff",
                 textColor: "inherit",

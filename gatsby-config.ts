@@ -5,11 +5,13 @@ const config: GatsbyConfig = {
     DEV_SSR: true,
   },
   siteMetadata: {
+    // they help with SEO too
+    // these get automatically put into the GraphQL data layer
     title: `Konstantinos Lampridis Online`,
     description: `The online professional profile of Konstantinos Lampridis'. In this website, one can view Konstantinos Lampridis' contact information, Curicculum Vitae (CV), and Open Source Projects Portfolio.`,
+    siteUrl: `https://konstantinoslampridis.io`,
     // twitterUsername: `@todo-username`,
     // image: `/a-brand-or-sth-icon.png`,
-    siteUrl: `https://konstantinoslampridis.io`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

@@ -1,6 +1,5 @@
 import type { HeadFC } from "gatsby";
-import BuildTimeTitle from "../Components/TitleElement";
-
+import { SEO } from "../Components/SEO"
 import IndexPage from "../Components/App2";
 
 
@@ -10,13 +9,9 @@ import IndexPage from "../Components/App2";
 export default IndexPage;
 
 
-//////// TITLE <title> element ////////
-
-// since we use gatsby as static site generator
-// we set the <title> html element text to the user name at build time assuming
-// it is extracted in the GraphQL layer
+//////// HEAD <head> element ////////
 
 // the HeadFC Component allows to alter the <head> html element or insert elements in it
 
-// ADD the <title> element in the <head> of the html document
-export const Head: HeadFC = () => <BuildTimeTitle />;
+// ADD content of the <head> element mostly used for metadata nd SEO
+export const Head: HeadFC = () => <SEO />;

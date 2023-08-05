@@ -7,18 +7,8 @@ interface HeaderStyles {
 // Usually this interface can describe the colors of a so-called "color mode"
 // For example Light/Dark mode/theme
 interface Theme {
-  // latest iteration of color system, including 3 colors
-  // Firstly, a color duo as alternating color and background-color css properties
-  latestColor: string;
-  latestBackgroundColor: string;
-  // Secondly, an alternative background color for outer containers
-  latestContainerBackgroundColor: string;
 
   backgroundColor: string;
-  foregroundColor: string;
-  buttonColor: string;
-  buttonHoverColor: string;
-  headerStyles: HeaderStyles;
   topHeaderPane: {
     backgroundColor: string;
   };

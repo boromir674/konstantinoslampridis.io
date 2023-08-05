@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { useSiteMetadata } from "../Hooks/useSiteMetadata";
+// import { useSiteMetadata } from "../Hooks/useSiteMetadata";
 import { Helmet } from "react-helmet";
+import { graphql, useStaticQuery } from "gatsby"
 
 interface SEOProps {
   title?: string;
@@ -12,28 +13,70 @@ interface SEOProps {
   children?: React.ReactNode;
 }
 
+interface ConfigSiteMetadata {
+  title: string;
+  description: string;
+  siteUrl: string;
+  keywords: string[];
+}
+type QueryResult = {
+  site: {
+    siteMetadata: ConfigSiteMetadata;
+}
+}
 export const SEO: FC<SEOProps> = ({
   title,
   description,
   pathname,
   children,
 }) => {
+  // PREV Implementation
+  // const {
+  //   title: defaultTitle,
+  //   description: defaultDescription,
+  //   siteUrl,
+  //   keywords: defaultKeywords,
+  //   image,
+  //   twitterUsername,
+  // } = useSiteMetadata();
+  // const seo = {
+  //   title: title || defaultTitle,
+  //   description: description || defaultDescription,
+  //   url: `${siteUrl}${pathname || ``}`,
+  //   keywords: defaultKeywords,
+  //   image: `${siteUrl}${image}`,
+  //   twitterUsername,
+  // };
+
+  // NEW Implementatinon
   const {
-    title: defaultTitle,
-    description: defaultDescription,
-    siteUrl,
-    keywords: defaultKeywords,
-    image,
-    twitterUsername,
-  } = useSiteMetadata();
+    site: {
+      siteMetadata
+    }
+  }: QueryResult = useStaticQuery<{
+    site: {
+      siteMetadata: ConfigSiteMetadata
+    }
+  }>(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          keywords
+        }
+      }
+    }
+  `)
 
   const seo = {
-    title: title || defaultTitle,
-    description: description || defaultDescription,
-    url: `${siteUrl}${pathname || ``}`,
-    keywords: defaultKeywords,
-    image: `${siteUrl}${image}`,
-    twitterUsername,
+    title: title || siteMetadata.title,
+    description: description || siteMetadata.description,
+    url: `${siteMetadata.siteUrl}${pathname || ``}`,
+    keywords: siteMetadata.keywords,
+    // image: `${siteMetadata.siteUrl}${image}`,
+    // twitterUsername,
   };
 
   const slug = '/';

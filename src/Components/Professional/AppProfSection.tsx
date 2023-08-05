@@ -98,7 +98,7 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
           (
             parseFloat(dur.substring(0, dur.length - 1)) + timestapsArray[index]
           ).toString() + "s";
-        console.log(cssDur);
+        // console.log(cssDur);
         return (
           <AppProfItem
             key={index}

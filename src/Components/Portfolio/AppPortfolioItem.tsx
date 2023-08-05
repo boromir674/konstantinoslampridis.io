@@ -47,7 +47,7 @@ const ReleaseListContainer = styled.div`
 `;
 
 // Helper function definition
-type RenderRelease = (release: ReleaseItemData) => React.ReactNode;
+type RenderRelease = (release: ReleaseItemData, index: number) => React.ReactNode;
 
 const render = (d: PortfolioItemInterface, renderRelease: RenderRelease) => {
   return (
@@ -67,7 +67,7 @@ const render = (d: PortfolioItemInterface, renderRelease: RenderRelease) => {
             <ReleasesPane>
               <h3>Releases</h3>
               <ReleaseListContainer>
-                {d.release.map((release) => renderRelease(release))}
+                {d.release.map((release, index) => renderRelease(release, index))}
               </ReleaseListContainer>
             </ReleasesPane>
           ) : (
@@ -91,9 +91,9 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
   // create a callback function at most 2 times,
   // since we currently support 2 type of releases: pypi and github
   const renderReleaseCallback: RenderRelease = useCallback(
-    (r: PortfolioItemInterface["release"][0]) => {
+    (r: PortfolioItemInterface["release"][0], index: number) => {
       return (
-        <div>
+        <div key={index}>
           <span>
             {r.type} {"->"}{" "}
           </span>

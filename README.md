@@ -18,8 +18,8 @@ We currently use
 
 |       | Performance | Accessibility | Best Practices | SEO | PWA |
 |-------|-------------|---------------|----------------|-----|-----|
-| Light | 100         | 94            | 100            | 78  | N/A |
-| Dark  | 92          | 94            | 100            | 78  | N/A |
+| Light | 100        | 95            | 100            | 90  | N/A |
+| Dark  | 100          | 98            | 100            | 90  | N/A |
 
 # Architecture
 
@@ -168,6 +168,10 @@ For Search Engine Optimization we cane leverage a [SEO Component](https://www.ga
 We can use `gatsby-config.ts` or graphQL to get the Metadata from the source values.  
 Each page should have elements such as `<meta name="description" content={seo.description} />`.  
 
+Audit live website at https://www.seoptimer.com/konstantinoslampridis.io for
+- SEO
+- UX
+- and more!
 
 ## Docker (legacy) notes
 

@@ -45,10 +45,11 @@ const lightColorMode: Theme = {
   },
   /// EDUCATION LIGHT ///
   education: {
-    title: {
-      textColor: "#000000",
-      backgroundColor: "#ffffff",
-    },
+    // title: {
+    //   // backgroundColor: "#ffffff",
+    //   backgroundColor: "#111111",
+    //   textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+    // },
     item: {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],

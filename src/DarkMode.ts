@@ -45,10 +45,10 @@ const darkColorMode: Theme = {
   },
   //////// EDUCATION SECTION DARK ////////
   education: {
-    title: {
-      textColor: "#ffffff",
-      backgroundColor: "#333333",
-    },
+    // title: {
+    //   textColor: "#ffffff",
+    //   backgroundColor: "#333333",
+    // },
     item: {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
       textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],

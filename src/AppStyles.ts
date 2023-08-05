@@ -42,10 +42,10 @@ interface Theme {
   };
   /// EDUCATION COLORS ///
   education: {
-    title: {
-      textColor: string;
-      backgroundColor: string;
-    };
+    // title: {
+    //   textColor: string;
+    //   backgroundColor: string;
+    // };
     item: {
       backgroundColor: string;
       textColor: string;
@@ -146,11 +146,11 @@ interface ComputedTheme extends Theme {
   };
   //// ALL EDUCATION STYLES
   education: {
-    title: {
-      textColor: string;
-      backgroundColor: string;
-      padding: string;
-    };
+    // title: {
+    //   textColor: string;
+    //   backgroundColor: string;
+    //   padding: string;
+    // };
     item: {
       padding?: string;
       backgroundColor: string;
@@ -251,10 +251,10 @@ const mergeStylings = (
     education: {
       ...theme.education,
       ...commonStyling.education,
-      title: {
-        ...theme.education.title,
-        ...commonStyling.education.title,
-      },
+      // title: {
+      //   ...theme.education.title,
+      //   ...commonStyling.education.title,
+      // },
       item: {
         ...theme.education.item,
         ...commonStyling.education.item,

@@ -12,17 +12,15 @@ We currently use
 - Gatsby 4.22.0
 
 ## Audit
+
+**Bundle Size: 2.6MB**
 ### Lighthouse
-#### Light Color Mode
-- Performace: 92
-- Accesibility: 94
-- Best Practices: 100
-- SEO: 78
-#### Dark Color Mode
-- Performace: 93
-- Accesibility: 94
-- Best Practices: 100
-- SEO: 78
+
+|       | Performance | Accessibility | Best Practices | SEO | PWA |
+|-------|-------------|---------------|----------------|-----|-----|
+| Light | 100         | 94            | 100            | 78  | N/A |
+| Dark  | 92          | 94            | 100            | 78  | N/A |
+
 # Architecture
 
 ## TODO

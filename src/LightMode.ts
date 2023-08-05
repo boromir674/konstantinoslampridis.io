@@ -40,12 +40,15 @@ const lightColorMode: Theme = {
     backgroundColor: DESIGN_TOKENS["--md-sys-color-surface-light"],
   },
   navigationBar: {
-    textColor: DESIGN_TOKENS["--md-sys-color-on-tertiary-light"],
-    backgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-light'],
-    hoverBackgroundColor: "#fff",
-    hoverTextColor: "#000000",
-    activatedBackgroundColor: DESIGN_TOKENS["--md-sys-color-primary-light"],
-    activatedTextColor: DESIGN_TOKENS["--md-sys-color-on-primary-light"],
+    // backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
+    // textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-light"],
+    backgroundColor: DESIGN_TOKENS["--md-sys-color-surface-variant-light"],
+    textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
+    
+    hoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-light'],
+    hoverTextColor: DESIGN_TOKENS["--md-sys-color-on-primary-light"],
+    activatedBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-light"],
+    activatedTextColor: DESIGN_TOKENS["--md-sys-color-on-secondary-light"],
   },
   themeSwitch: {
     backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
@@ -53,10 +56,17 @@ const lightColorMode: Theme = {
     handleBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
     handleBackgroundColorActive: DESIGN_TOKENS['--md-sys-color-surface-light'],
   },
+  //// INTRODUCTION ////
+  introduction: {
+    // containerBackgroundColor: lightColorDesign.latestBackgroundColor,
+    // textColor: lightColorDesign.latestColor,
+    containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-light'],
+    textColor: DESIGN_TOKENS['--md-sys-color-on-primary-container-light'],
+  },
   /// PERSONAL LIGHT ///
   personal: {
-    textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-variant-light"],
+    textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
     urlTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
     externalURLSVGColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
   },
@@ -85,14 +95,9 @@ const lightColorMode: Theme = {
     },
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-light"],
   },
-  introduction: {
-    // containerBackgroundColor: lightColorDesign.latestBackgroundColor,
-    // textColor: lightColorDesign.latestColor,
-    containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-light'],
-    textColor: DESIGN_TOKENS['--md-sys-color-on-primary-container-light'],
-  },
   ///// PROFESSIONAL LIGHT /////
   professional: {
+    containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-light"],
     title: {
       backgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-light"],
       textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
@@ -111,12 +116,10 @@ const lightColorMode: Theme = {
         outlineColor: DESIGN_TOKENS['--md-sys-color-outline-light'],
       },
     },
-    containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-container-light"],
   },
   // PORTFOLIO LIGHT
   portfolio: {
     container: {
-      // backgroundColor: "#D5D7C6",
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
     },
     sectionHeader: {
@@ -124,9 +127,7 @@ const lightColorMode: Theme = {
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
     },
     item: {
-      // backgroundColor: "#D5D7C6",
-      // color: "#125160",
-      // TODO; fix bug: item color background has no effect
+      // TODO; fix bug: item color backgroundColor has no effect
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
       outline: {

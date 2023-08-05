@@ -135,8 +135,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   // The value of the reference is persisted (remains unchanged) between component re-renderings;
   // Updating a reference doesn't trigger a component re-rendering.
   // numerical id to number mapping
-  const layoutItemHeights = useRef<{ [key: string]: number }>({});
-  console.log("HEIGHTS", layoutItemHeights.current);
+  // const layoutItemHeights = useRef<{ [key: string]: number }>({});
+  // console.log("HEIGHTS", layoutItemHeights.current);
   // const layoutItemHeights = useRef<Record<string, number>>({});
 
   // const storeUpdatedItemHeight = useCallback((id: string, height: number) => {

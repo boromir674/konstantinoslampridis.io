@@ -1,7 +1,6 @@
 /* Provides a hook to request site metadata from the GraphQL data layer. */
 import { graphql, useStaticQuery } from "gatsby"
 
-
 type SiteMetadata = {
     title: string
     description: string

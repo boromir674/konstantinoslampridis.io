@@ -168,6 +168,10 @@ For Search Engine Optimization we cane leverage a [SEO Component](https://www.ga
 We can use `gatsby-config.ts` or graphQL to get the Metadata from the source values.  
 Each page should have elements such as `<meta name="description" content={seo.description} />`.  
 
+Audit live website at https://www.seoptimer.com/konstantinoslampridis.io for
+- SEO
+- UX
+- and more!
 
 ## Docker (legacy) notes
 

@@ -10,6 +10,8 @@ const config: GatsbyConfig = {
     title: `Konstantinos Lampridis Online`,
     description: `The online professional profile of Konstantinos Lampridis'. In this website, one can view Konstantinos Lampridis' contact information, Curicculum Vitae (CV), and Open Source Projects Portfolio.`,
     siteUrl: `https://konstantinoslampridis.io`,
+    keywords: ['konstantinos lampridis', 'lampridis', 'cv', 'resume', 'portfolio', 'contact', 'online', 'professional', 'career', 'professional career', 'profile', 'open source', 'projects', 'software', 'engineer', 'developer', 'software engineer', 'software developer', 'full stack', 'full stack developer', 'full stack engineer', 'devops engineer', 'ai', 'artificial intelligence', 'python'],
+
     // twitterUsername: `@todo-username`,
     // image: `/a-brand-or-sth-icon.png`,
   },
@@ -43,6 +45,9 @@ const config: GatsbyConfig = {
     //     }
     //   }
     // }
+
+    ////// SEO //////
+    `gatsby-plugin-react-helmet`,  // a wrapper component for SEO
   ],
 };
 

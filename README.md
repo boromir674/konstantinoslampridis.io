@@ -18,8 +18,8 @@ We currently use
 
 |       | Performance | Accessibility | Best Practices | SEO | PWA |
 |-------|-------------|---------------|----------------|-----|-----|
-| Light | 100         | 94            | 100            | 78  | N/A |
-| Dark  | 92          | 94            | 100            | 78  | N/A |
+| Light | 92        | 98            | 100            | 90  | N/A |
+| Dark  | 100          | 98            | 100            | 90  | N/A |
 
 # Architecture
 

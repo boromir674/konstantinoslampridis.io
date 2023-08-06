@@ -22,9 +22,11 @@ interface ConfigSiteMetadata {
 type QueryResult = {
   site: {
     siteMetadata: ConfigSiteMetadata;
+  }
 }
-}
-export const SEO: FC<SEOProps> = ({
+
+
+const SEO: FC<SEOProps> = ({
   title,
   description,
   pathname,
@@ -133,3 +135,10 @@ export const SEO: FC<SEOProps> = ({
     </Helmet>
   );
 };
+
+// try to force server side render once
+const renderedSEOElement = <SEO />
+
+const SEOWrapper = () => renderedSEOElement;
+
+export default SEOWrapper;

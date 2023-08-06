@@ -1,5 +1,5 @@
 import type { HeadFC } from "gatsby";
-import { SEO } from "../Components/SEO"
+import SEO from "../Components/SEO"
 import IndexPage from "../Components/App2";
 
 

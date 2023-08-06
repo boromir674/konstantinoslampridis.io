@@ -18,7 +18,8 @@ We currently use
 
 |       | Performance | Accessibility | Best Practices | SEO | PWA |
 |-------|-------------|---------------|----------------|-----|-----|
-| Light | 100        | 95            | 100            | 90  | N/A |
+| Live  | 100         | 94            | 92             | 78  | N/A  |
+| Light | 92        | 98            | 100            | 90  | N/A |
 | Dark  | 100          | 98            | 100            | 90  | N/A |
 
 # Architecture
@@ -168,10 +169,32 @@ For Search Engine Optimization we cane leverage a [SEO Component](https://www.ga
 We can use `gatsby-config.ts` or graphQL to get the Metadata from the source values.  
 Each page should have elements such as `<meta name="description" content={seo.description} />`.  
 
+- [x] title
+- [x] description
+- [x] site url (aka `canonical`)
+- [x] keywords
+  - [ ] add more keywords
+- [ ] social media: twitter
+- [ ] add `Structured Data to please more search engine
+  - [ ] model our from https://schema.org/WebSite  a { webSite: {.... Person: {....}}} in SEO.tsx (eg {jsonld && >script< type="application/ld+json">{JSON.stringify(jsonld)} >/script<})
+- [ ] add `favicon`
+
 Audit live website at https://www.seoptimer.com/konstantinoslampridis.io for
 - SEO
 - UX
 - and more!
+
+# Bundling
+
+We use `webpack` to bundle and minify code (html, js, css).  
+
+We can configure `sourcemaps` to control whether the "reversed map" bundle to source code is included in the bundle.  
+See https://itnext.io/using-sourcemaps-on-production-without-revealing-the-source-code-%EF%B8%8F-d41e78e20c89
+
+In case the error persists with useStaticQuery in SEO component:
+- try using the `>StaticQuey<` wrapper component instead of the Hook
+- read https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/deploying-to-s3-cloudfront/
+- investigate configuring the `paga-data.json` browser/CDN caching strategy
 
 ## Docker (legacy) notes
 

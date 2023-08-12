@@ -7,6 +7,14 @@
   TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
+This is the **Source Code Repository** of [konstantinoslampridis.io](https://konstantinoslampridis.io).  
+Comprises of:
+- a **Component-based SPA**, written in `React`
+- a **Static Website Generator**, leveraging `Gatsby` for build-time SSR rendering of the SPA
+- a **Design System** leveraging Design Tokens according to `Material Design`
+- a **Frontend Workshop**, leveraging `Storybook`, to assist development, by render Components in isolation
+
+
 We currently use  
 - Typescript 4.8.2
 - Gatsby 4.22.0
@@ -23,16 +31,6 @@ We currently use
 | Dark  | 100          | 98            | 100            | 90  | N/A |
 
 # Architecture
-
-## TODO
-- hover does not offer much: remove on hover and use their effects onClick for Prof Items and Edu Items
-## Build Time Data
-The site will mostly use **data** computed/fetched at **build time**.  
-We will use the **gatsby-source-graphql** to seemlessly define 
-what data are required by which component and provide an entrypoint to implement the data fetch/compute logic.
-
-We "install"/add it, by adding it to the `gatsby-config.ts` and since it is an  
-existing source plugin we need to do sth like `yarn add gatsby-source-graphql`
 
 ## Hooks
 Inspiration:  
@@ -72,7 +70,7 @@ The default view is for big screens and is a grid of TopheaderPane, leftSidePane
 
 All the Panes should be rendered inside a Component with the `View` name as indicator.
 
-# Style System
+# Style/Design System
 Our definition of `Style System`:  
 A way to document the decisions taken for picking the style/theme used
 throughout the app.
@@ -85,9 +83,15 @@ We achieve that by utilizing `Design Tokens`, and we document them by rendering 
 
 TLDR See [Makefile](Makefile)
 
-Notes:
+## Build Time Data
+The site will mostly use **data** computed/fetched at **build time**.  
+We will use the **gatsby-source-graphql** to seemlessly define 
+what data are required by which component and provide an entrypoint to implement the data fetch/compute logic.
 
-yarn.lock-install-remove-cache
+We "install"/add it, by adding it to the `gatsby-config.ts` and since it is an  
+existing source plugin we need to do sth like `yarn add gatsby-source-graphql`
+
+## Notes
 
 yarn.lock file generated inside docker container using the Dockerfile in the repo
 

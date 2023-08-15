@@ -59,7 +59,7 @@ copy_shell_lock:
 	docker cp ssg_dummy_container_to_run_shell:/app/package.json ./package.json
 	docker cp ssg_dummy_container_to_run_shell:/app/yarn.lock ./yarn.lock
 
-
+# Install only Prod deps and deploy a dev-server with hot reload
 build_dev_server: Dockerfile.build  ## Build development server image
 	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
 

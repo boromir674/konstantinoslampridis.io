@@ -16,7 +16,8 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "cypress-headless": "cypress run"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -61,6 +62,7 @@
     "@typescript-eslint/parser": "^5.36.2",
     "babel-jest": "^29.0.3",
     "babel-preset-gatsby": "^2.24.0",
+    "cypress": "^12.17.3",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-storybook": "^0.6.12",

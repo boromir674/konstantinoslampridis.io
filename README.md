@@ -137,6 +137,21 @@ graph LR;
 > Our plan includes implementing a `Continous Delivery (CD)` process in the future.  
 > Now, this can be done in `Github Actions` or investigate if it is worth switching to an `'Amplify'` Deployment (see [this article](https://adrianhall.github.io/cloud/2019/01/31/which-aws-service-for-hosting/)), which seems to provide an out-of-the-box solution for `CD`.
 
+## Testing
+
+We reconginze 3 levels of testing:
+
+| Name          | Running | Primary Tool | Invocation shortcut |
+| ----          | ------- | ---- | -------------------------- |
+| Unit Testing  | Automated | Jest | `make test`
+| End-2-end testing | Automated | Cypress | `make test` |
+| Visual Testing | Manual | Storybook | `yarn storybook` |
+
+For the interactive `Cypress` (GUI) App you can run an instance at (linux) localhost, leveraging `docker-compose`:
+```shell
+./e2e/run-cypress-gui.sh
+```
+
 # Main Use Case of konstantinoslampridis.io
 
 ```mermaid

@@ -1,0 +1,33 @@
+# e2e/docker-compose.yml from repo
+# https://github.com/bahmutov/cypress-open-from-docker-compose
+version: '3.2'
+services:
+
+  # this is the web application we are going to test
+  # this can be a static file server, an apache instance, etc
+  my_app:
+    build:
+      context: ../
+      target: serve_files
+      dockerfile: Dockerfile.build
+    ports:
+      - "9000:9000"
+    # environment:
+    #   - PORT=8123
+
+  # Cypress container
+  cypress:
+    # the Docker image to use from https://github.com/cypress-io/cypress-docker-images
+    image: "cypress/included:3.2.0"
+    depends_on:
+      - my_app
+    environment:
+      # pass base url to test pointing at the web application
+      - CYPRESS_baseUrl=http://my_app:9000
+    # share the current folder as volume to avoid copying
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
+
+# Start the application, run the headless tests and close services:
+# docker-compose up --exit-code-from cypress

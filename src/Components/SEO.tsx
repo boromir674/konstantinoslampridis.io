@@ -87,6 +87,25 @@ const SEO: FC<SEOProps> = ({
     content: string;
   }[] = [];
 
+  // TODO: read schema from props
+  const schema = {
+    "@context": "http://schema.org/",
+    "@type": "Person",
+    "name": "Konstantinos Lampridis",
+    "jobTitle": "Software Engineer",
+    "url": "https://konstantinoslampridis.io",
+    "sameAs": [
+      "https://www.linkedin.com/in/konstantinos-lampridis"
+    ],
+    "email": "k.lampridis@hotmail.com",
+    "telephone": "+1234567890",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Thessaloniki",
+      "addressCountry": "Greece"
+    }
+  };
+
   return (
     <Helmet
       htmlAttributes={{ lang: `en` }}
@@ -132,6 +151,7 @@ const SEO: FC<SEOProps> = ({
       ].concat(meta)}
     >
       <link rel="canonical" href={`${seo.url}${slug}`} />
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
     </Helmet>
   );
 };

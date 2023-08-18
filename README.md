@@ -196,7 +196,13 @@ Each page should have elements such as `<meta name="description" content={seo.de
 - [ ] social media: twitter
 - [ ] add `Structured Data to please more search engine
   - [ ] model our from https://schema.org/WebSite  a { webSite: {.... Person: {....}}} in SEO.tsx (eg {jsonld && >script< type="application/ld+json">{JSON.stringify(jsonld)} >/script<})
+  - [x] Person entity
+  - [ ] Website and/or Web PAge, and/or Profile Entities
 - [ ] add `favicon`
+- [ ] Add `sitemap.xml`
+  - [ ] upload to S3 in proper place
+  - [ ] add a link to it in `robots.txt`
+  - [ ] Configure Google Console according to https://www.halo-lab.com/blog/website-xml-sitemap#:~:text=of%20a%20site.-,A%20sitemap.,on%20the%20type%20of%20content.
 
 Audit live website at https://www.seoptimer.com/konstantinoslampridis.io for
 - SEO

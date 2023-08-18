@@ -18,6 +18,7 @@ FROM install AS prod
 # this is helpful since we force the user's yarn.lock into the image
 # and the build process does not know whether the lock was produced in the same env as this on
 RUN yarn install --frozen-lockfile --production=true && yarn cache clean
+
 # Copy Code/Files
 COPY src src
 COPY gatsby-config.ts .
@@ -27,10 +28,16 @@ COPY tsconfig.json .
 COPY data.yaml .
 COPY data-portfolio.yml .
 
+
 # BRANCH 1.1
-# BUILD into "static" files, aka bundle (eg webpack output)
+# BUILD (bundle) into "static" files ready to serve. Static files include
+# minified code (ie webpack html/css/js bundle) built on server (SSR) for the
+# content to display, but also site 'metadata' such as sitemap.xml, robots.txt
 FROM prod as build
-CMD [ "yarn", "build" ]
+COPY scripts/generate-robots-file.sh .
+COPY scripts/build-production-bundle.sh .
+ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
+
 # Example
 # docker build -f Dockerfile.build --target build -t me/ssg-builder .
 # docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
@@ -41,6 +48,12 @@ CMD [ "yarn", "build" ]
 # BRANCH 1.2
 FROM prod as serve_files
 RUN yarn build
+COPY scripts/generate-robots-file.sh .
+RUN ./generate-robots-file.sh /app/public/robots.txt
+
+RUN rm public/sitemap-index.xml
+RUN mv public/sitemap-0.xml public/sitemap.xml
+
 EXPOSE 9000
 CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 # SERVE the "static" files on localhost

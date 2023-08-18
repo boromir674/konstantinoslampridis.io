@@ -26,7 +26,7 @@ We currently use
 
 |       | Performance | Accessibility | Best Practices | SEO | PWA |
 |-------|-------------|---------------|----------------|-----|-----|
-| Live  | 100         | 94            | 92             | 78  | N/A  |
+| Live  | 100         | 98            | 92             | 91  | N/A  |
 | Light | 92        | 98            | 100            | 90  | N/A |
 | Dark  | 100          | 98            | 100            | 90  | N/A |
 
@@ -196,7 +196,13 @@ Each page should have elements such as `<meta name="description" content={seo.de
 - [ ] social media: twitter
 - [ ] add `Structured Data to please more search engine
   - [ ] model our from https://schema.org/WebSite  a { webSite: {.... Person: {....}}} in SEO.tsx (eg {jsonld && >script< type="application/ld+json">{JSON.stringify(jsonld)} >/script<})
+  - [x] Person entity
+  - [ ] Website and/or Web PAge, and/or Profile Entities
 - [ ] add `favicon`
+- [x] Add `sitemap.xml`
+  - [x] upload to S3 in proper place
+  - [x] add a link to it in `robots.txt`
+  - [x] Configure Google Console according to https://www.halo-lab.com/blog/website-xml-sitemap#:~:text=of%20a%20site.-,A%20sitemap.,on%20the%20type%20of%20content.
 
 Audit live website at https://www.seoptimer.com/konstantinoslampridis.io for
 - SEO

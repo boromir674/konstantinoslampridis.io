@@ -83,7 +83,15 @@ dev_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) cont
 		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
 		-v /data/repos/static-site-generator/src/:/app/src/ \
 		ssg-dev-im bash
-# -v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+
+## PROD SHELL
+prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) container
+	docker build -f Dockerfile.build --target prod -t ssg-prod-im .
+	docker run -it --rm --name ssg-dev-container \
+		-v /data/repos/static-site-generator/package.json:/app/package.json \
+		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
+		-v /data/repos/static-site-generator/src/:/app/src/ \
+		ssg-prod-im bash
 
 
 # TEST

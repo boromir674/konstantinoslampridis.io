@@ -1,3 +1,4 @@
+/* Provides nodes, which instruct gatsby to put data into the Data Layer*/
 import { CreateNodeArgs, GatsbyNode } from 'gatsby';
 import yaml from 'js-yaml';
 import fs from 'fs';
@@ -75,6 +76,7 @@ const sourceNodes = async ({
     console.log('DATA');
     console.log(data);
     
+    // insert into the Data Layer, which exposes a GraphQL API
     // create node for build time data
     createNode({
       ...data,

@@ -1,6 +1,10 @@
 import { VerticalMainPane, AppVerticalMainPaneProps } from "./VerticalMainPane";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+
+const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
 
 export default {
   component: VerticalMainPane,
@@ -10,12 +14,9 @@ export default {
 
 const args: AppVerticalMainPaneProps = {
   theme: {
-    ...lightTheme,
-    // containerBackgroundColor: '#FFAD00',
-    containerBackgroundColor: lightTheme.latestContainerBackgroundColor,
-
-    // introduction: lightTheme.introduction,
-    // professional: lightTheme.professional,
+    introduction: lightTheme.introduction,
+    professional: lightTheme.professional,
+    portfolio: lightTheme.portfolio,
   },
   data: {
     introduction: {
@@ -105,10 +106,9 @@ export const Dark = {
   args: {
     ...Light.args,
     theme: {
-      ...darkTheme,
-      containerBackgroundColor: darkTheme.latestContainerBackgroundColor,
-      // introduction: darkTheme.introduction,
-      // professional: darkTheme.professional,
+      introduction: darkTheme.introduction,
+      professional: darkTheme.professional,
+      portfolio: darkTheme.portfolio,
     },
   },
 };

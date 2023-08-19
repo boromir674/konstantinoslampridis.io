@@ -15,6 +15,7 @@ const args: BigScreenViewProps = {
     topHeaderPane: {
       navigationBar: lightTheme.navigationBar,
       backgroundColor: lightTheme.topHeaderPane.backgroundColor,
+      themeSwitch: lightTheme.themeSwitch,
     },
     verticalSidePane: {
       personalInfo: {

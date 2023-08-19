@@ -19,8 +19,8 @@ export const Light = {
             linkColor: lightTheme.personal.urlTextColor,
         },
         education: {
-            containerBackgroundColor: lightTheme.education.containerBackgroundColor,
-            title: lightTheme.education.title,
+            // containerBackgroundColor: lightTheme.education.containerBackgroundColor,
+            // title: lightTheme.education.title,
             item: lightTheme.education.item,
         }
     },
@@ -68,8 +68,8 @@ export const Dark = {
             linkColor: darkTheme.personal.urlTextColor,
         },
         education: {
-            containerBackground: darkTheme.education.containerBackgroundColor,
-            title: darkTheme.education.title,
+            // containerBackground: darkTheme.education.containerBackgroundColor,
+            // title: darkTheme.education.title,
             item: darkTheme.education.item,
         }
     },

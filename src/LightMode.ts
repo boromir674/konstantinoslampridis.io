@@ -52,13 +52,13 @@ const lightColorMode: Theme = {
     // },
     item: {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+      textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
       linkColor: "#2063e9",
       onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
       onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
-        textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+        textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
         onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
         onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
         outlineColor: DESIGN_TOKENS['--md-sys-color-outline-light'],
@@ -75,13 +75,13 @@ const lightColorMode: Theme = {
     },
     item: {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
-      textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+      textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
       linkColor: "#2063e9",
       onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
       onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
       tag: {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
-        textColor: DESIGN_TOKENS["--md-sys-color-secondary-on-container-light"],
+        textColor: DESIGN_TOKENS["--md-sys-color-on-secondary-container-light"],
         onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-light'],
         onHoverTextColor: DESIGN_TOKENS['--md-sys-color-on-primary-light'],
         outlineColor: DESIGN_TOKENS['--md-sys-color-outline-light'],

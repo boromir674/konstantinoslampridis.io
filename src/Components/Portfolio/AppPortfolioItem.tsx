@@ -91,7 +91,7 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
   // create a callback function at most 2 times,
   // since we currently support 2 type of releases: pypi and github
   const renderReleaseCallback: RenderRelease = useCallback(
-    (r: PortfolioItemInterface["release"][0], index: number) => {
+    (r: ReleaseItemData, index: number) => {
       return (
         <div key={index}>
           <span>

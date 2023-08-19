@@ -1,5 +1,6 @@
 import ProfItem from './ProfItem';
-import { lightTheme, darkTheme } from '../../AppStyles';
+import lightTheme from "../../LightMode";
+import darkTheme from "../../DarkMode";
 
 export default {
   component: ProfItem,

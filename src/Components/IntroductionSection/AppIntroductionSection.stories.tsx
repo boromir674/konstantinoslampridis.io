@@ -1,5 +1,6 @@
 import AppIntroductionSection from "./AppIntroductionSection";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import lightTheme from "../../LightMode";
+import darkTheme from "../../DarkMode";
 
 export default {
   component: AppIntroductionSection,

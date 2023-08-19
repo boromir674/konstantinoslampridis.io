@@ -1,5 +1,6 @@
 import AppHorNavItem from "./AppHorNavItem";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import lightTheme from "../../LightMode";
+import darkTheme from "../../DarkMode";
 
 export default {
   component: AppHorNavItem,

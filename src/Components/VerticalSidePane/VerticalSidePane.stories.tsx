@@ -1,5 +1,7 @@
 import { VerticalSidePane } from "./VerticalSidePane";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import lightTheme from "../../LightMode";
+import darkTheme from "../../DarkMode";
+
 
 export default {
   component: VerticalSidePane,

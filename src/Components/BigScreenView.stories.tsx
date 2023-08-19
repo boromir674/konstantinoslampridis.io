@@ -1,5 +1,6 @@
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
-import { lightTheme, darkTheme } from "../AppStyles";
+import lightTheme from "../LightMode";
+import darkTheme from "../DarkMode";
 
 export default {
   component: BigScreenView,

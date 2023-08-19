@@ -1,5 +1,6 @@
 import type { GatsbyConfig } from "gatsby";
 
+
 const config: GatsbyConfig = {
   flags: {
     DEV_SSR: true,
@@ -130,7 +131,7 @@ const config: GatsbyConfig = {
         //   })
         // },
 
-        serialize: ({ path, modifiedGmt }) => {
+        serialize: ({ path, modifiedGmt }: { path: string, modifiedGmt: any}) => {
           return {
             url: path,
             lastmod: modifiedGmt,

@@ -79,9 +79,9 @@ update_browserslist: build_dev_server
 dev_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) container
 	docker build -f Dockerfile.build --target dev -t ssg-dev-im .
 	docker run -it --rm --name ssg-dev-container \
+		-v /data/repos/static-site-generator/src/:/app/src/ \
 		-v /data/repos/static-site-generator/package.json:/app/package.json \
 		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
-		-v /data/repos/static-site-generator/src/:/app/src/ \
 		ssg-dev-im bash
 
 ## PROD SHELL
@@ -111,7 +111,11 @@ typecheck:  ## Headless Type Checking in Typescript
 
 typecheck_live:  ## Type Checking in Typescript, with Hot Reload
 	docker build -f Dockerfile.build --target type_check_live -t $(TYPE_CHECK_IMAGE_NAME_LIVE) .
-	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME_LIVE)
+	docker run -it --rm \
+		-v /data/repos/static-site-generator/src:/app/src \
+		-v /data/repos/static-site-generator/gatsby-config.ts:/app/gatsby-config.ts \
+		-v /data/repos/static-site-generator/gatsby-node.ts:/app/gatsby-node.ts \
+		$(TYPE_CHECK_IMAGE_NAME_LIVE)
 
 
 # ESLINT

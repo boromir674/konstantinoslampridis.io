@@ -147,7 +147,7 @@ const App: FC = () => {
             professional: lightTheme.professional,
             portfolio: lightTheme.portfolio,
             // ...lightTheme,
-            containerBackgroundColor: lightTheme.backgroundColor,
+            // containerBackgroundColor: lightTheme.backgroundColor,
           },
           bottomFooterPane: lightTheme.footerStyles,
         },
@@ -171,7 +171,6 @@ const App: FC = () => {
           },
           verticalMainPane: {
             ...darkTheme,
-            containerBackgroundColor: darkTheme.backgroundColor,
           },
           bottomFooterPane: darkTheme.footerStyles,
         },

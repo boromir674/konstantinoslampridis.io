@@ -15,7 +15,7 @@ import PortfolioSection, {
 
 interface AppVerticalMainPaneTheme {
   // color of outer most div
-  containerBackgroundColor: string;
+  // containerBackgroundColor: string;
   introduction: {
     containerBackgroundColor: string;
     textColor: string;
@@ -23,7 +23,7 @@ interface AppVerticalMainPaneTheme {
   professional: {
     title: {
       textColor: string;
-      backgroundColor?: string;
+      backgroundColor: string;
     };
     item: {
       backgroundColor: string;
@@ -72,7 +72,7 @@ interface VerticalMainPaneContainerProps {
 
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   left: 0px;
-  background-color: ${(props) => props.theme.containerBackgroundColor};
+  // background-color: (props) => props.theme.containerBackgroundColor}
   // background-color: inherit;
   grid-area: Main;
   // hard-coded fix which prevents a bug:
@@ -125,8 +125,7 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
           title: {
             textColor: theme.professional.title.textColor,
             backgroundColor:
-              theme.professional.title.backgroundColor ||
-              theme.containerBackgroundColor,
+              theme.professional.title.backgroundColor
           },
         }}
         data={{ experience_items: data.professional }}

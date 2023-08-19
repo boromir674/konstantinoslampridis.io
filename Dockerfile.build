@@ -3,7 +3,6 @@ FROM node:18.16.0-slim as base
 
 # RUN apt-get update && apt-get install -y --install-recommends util-linux
 
-
 FROM base as install
 WORKDIR /app
 COPY package.json .
@@ -11,6 +10,7 @@ COPY yarn.lock .
 ENV GATSBY_TELEMETRY_DISABLED=1
 
 # BRANCH 1
+
 # Static Site Generator / Static File Builder
 # we need ONLY the dependencies from package.json
 FROM install AS prod
@@ -29,7 +29,7 @@ COPY data.yaml .
 COPY data-portfolio.yml .
 
 
-# BRANCH 1.1
+# PROD SUB BRANCH 1.1
 # BUILD (bundle) into "static" files ready to serve. Static files include
 # minified code (ie webpack html/css/js bundle) built on server (SSR) for the
 # content to display, but also site 'metadata' such as sitemap.xml, robots.txt
@@ -45,7 +45,9 @@ ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
 # rm -rf ./public/*
 # cp ./public-container/* ./public/
 
-# BRANCH 1.2
+
+# PROD SUB BRANCH 1.2
+
 FROM prod as serve_files
 RUN yarn build
 COPY scripts/generate-robots-file.sh .
@@ -61,14 +63,19 @@ CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 # docker build -f Dockerfile.build --target serve_files -t me/file-server .
 # docker run -it --rm -v /data/repos/static-site-generator/:/app -p 9000:9000 me/file-server
 
+
+# PROD SUB BRANCH 1.3
+
 # Run development server
 FROM prod AS dev_server
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
 CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 
+
 # BRANCH 2
 # Dev Operations, Testing, Type Check, Linting
+
 # we need EXTRA dependencies from devDependencies in package.json
 FROM install AS dev
 # we avoid unintented updates to yarn.lock by using --frozen-lockfile
@@ -85,9 +92,12 @@ COPY .eslintrc.cjs .
 
 ENV STORYBOOK_DISABLE_TELEMETRY=1
 
+
 FROM dev as type_check
 CMD [ "yarn", "typecheck" ]
 
+FROM dev as type_check_live
+CMD [ "yarn", "typecheck-live" ]
 
 FROM dev as test
 ENV NODE_ENV=test
@@ -97,7 +107,6 @@ COPY jest-preprocess.js .
 COPY loadershim.js .
 COPY __mocks__ __mocks__
 CMD [ "yarn", "test" ]
-
 
 FROM dev as eslint
 CMD [ "yarn", "eslint", "." ]

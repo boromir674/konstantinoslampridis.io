@@ -105,9 +105,13 @@ test:  ## Run Test Suite
 
 
 # TYPE CHECK
-typecheck:  ## Type Checking in Typescript
+typecheck:  ## Headless Type Checking in Typescript
 	docker build -f Dockerfile.build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
 	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
+
+typecheck_live:  ## Type Checking in Typescript, with Hot Reload
+	docker build -f Dockerfile.build --target type_check_live -t $(TYPE_CHECK_IMAGE_NAME_LIVE) .
+	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME_LIVE)
 
 
 # ESLINT

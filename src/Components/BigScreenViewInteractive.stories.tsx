@@ -1,9 +1,14 @@
 import BigScreenViewInteractive, {
   BigScreenViewInteractiveProps,
 } from "./BigScreenViewInteractive";
-import lightTheme from "../LightMode";
-import darkTheme from "../DarkMode";
+import lightMode from "../LightMode";
+import darkMode from "../DarkMode";
+import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
 
+const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+
+// STORY CONFIGURATION
 export default {
   component: BigScreenViewInteractive,
   title: "BigScreenViewInteractive",
@@ -132,8 +137,9 @@ const arg1: BigScreenViewInteractiveProps = {
     light: {
       containerBackgroundColor: lightTheme.backgroundColor,
       topHeaderPane: {
-        navigationBar: lightTheme.navigationBar,
         backgroundColor: lightTheme.topHeaderPane.backgroundColor,
+        navigationBar: lightTheme.navigationBar,
+        themeSwitch: lightTheme.themeSwitch,
       },
       verticalSidePane: {
         personalInfo: {
@@ -141,42 +147,41 @@ const arg1: BigScreenViewInteractiveProps = {
             lightTheme.personal.containerBackgroundColor,
           textColor: lightTheme.personal.textColor,
           linkColor: lightTheme.personal.urlTextColor,
+          externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
         },
         education: {
-          containerBackgroundColor:
-            lightTheme.education.containerBackgroundColor,
-          title: lightTheme.education.title,
           item: lightTheme.education.item,
         },
       },
       verticalMainPane: {
-        ...lightTheme,
-        containerBackgroundColor: lightTheme.backgroundColor,
+        introduction: lightTheme.introduction,
+        professional: lightTheme.professional,
+        portfolio: lightTheme.portfolio,
       },
       bottomFooterPane: lightTheme.footerStyles,
     },
     dark: {
       containerBackgroundColor: darkTheme.backgroundColor,
       topHeaderPane: {
-        navigationBar: darkTheme.navigationBar,
         backgroundColor: darkTheme.topHeaderPane.backgroundColor,
+        navigationBar: darkTheme.navigationBar,
+        themeSwitch: darkTheme.themeSwitch,
       },
       verticalSidePane: {
         personalInfo: {
           containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
           textColor: darkTheme.personal.textColor,
           linkColor: darkTheme.personal.urlTextColor,
+          externalURLSVGColor: darkTheme.personal.externalURLSVGColor,
         },
         education: {
-          containerBackgroundColor:
-            darkTheme.education.containerBackgroundColor,
-          title: darkTheme.education.title,
           item: darkTheme.education.item,
         },
       },
       verticalMainPane: {
-        ...darkTheme,
-        containerBackgroundColor: darkTheme.backgroundColor,
+        introduction: darkTheme.introduction,
+        professional: darkTheme.professional,
+        portfolio: darkTheme.portfolio,
       },
       bottomFooterPane: darkTheme.footerStyles,
     },

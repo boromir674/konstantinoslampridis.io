@@ -1,13 +1,19 @@
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
-import lightTheme from "../LightMode";
-import darkTheme from "../DarkMode";
+import lightMode from "../LightMode";
+import darkMode from "../DarkMode";
+import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
 
+const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+
+// STORY CONFIGURATION
 export default {
   component: BigScreenView,
   title: "BigScreenView",
   tags: ["autodocs"],
 };
 
+// STORY DEFAULT PROPS VALUES
 const args: BigScreenViewProps = {
   // same interface as the props of the Component
   theme: {
@@ -23,17 +29,19 @@ const args: BigScreenViewProps = {
           lightTheme.personal.containerBackgroundColor,
         textColor: lightTheme.personal.textColor,
         linkColor: lightTheme.personal.urlTextColor,
+        externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
       },
       education: {
-        containerBackgroundColor:
-          lightTheme.education.containerBackgroundColor,
-        title: lightTheme.education.title,
+        // containerBackgroundColor:
+        //   lightTheme.education.containerBackgroundColor,
+        // title: lightTheme.education.title,
         item: lightTheme.education.item,
       },
     },
     verticalMainPane: {
-      ...lightTheme,
-      containerBackgroundColor: lightTheme.backgroundColor,
+      introduction: lightTheme.introduction,
+      professional: lightTheme.professional,
+      portfolio: lightTheme.portfolio,
     },
     bottomFooterPane: lightTheme.footerStyles,
   },
@@ -184,7 +192,6 @@ export const Light = {
         education: {
           containerBackgroundColor:
             lightTheme.education.containerBackgroundColor,
-          title: lightTheme.education.title,
           item: lightTheme.education.item,
         },
       },
@@ -312,7 +319,6 @@ export const Dark = {
         education: {
           containerBackgroundColor:
             darkTheme.education.containerBackgroundColor,
-          title: darkTheme.education.title,
           item: darkTheme.education.item,
         },
       },

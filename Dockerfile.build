@@ -19,12 +19,13 @@ FROM install AS prod
 # and the build process does not know whether the lock was produced in the same env as this on
 RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 
-# Copy Code/Files
+# Copy Code / Config / Text Data
 COPY src src
 COPY gatsby-config.ts .
 COPY gatsby-node.ts .
-COPY README.md .
 COPY tsconfig.json .
+COPY babel.config.js .
+COPY README.md .
 COPY data.yaml .
 COPY data-portfolio.yml .
 
@@ -89,6 +90,7 @@ COPY tsconfig.json .
 COPY data.yaml .
 COPY data-portfolio.yml .
 COPY .eslintrc.cjs .
+COPY babel.config.js .
 
 ENV STORYBOOK_DISABLE_TELEMETRY=1
 
@@ -101,7 +103,6 @@ CMD [ "yarn", "typecheck-live" ]
 
 FROM dev as test
 ENV NODE_ENV=test
-COPY babel.config.js .
 COPY jest.config.ts .
 COPY jest-preprocess.js .
 COPY loadershim.js .
@@ -110,3 +111,16 @@ CMD [ "yarn", "test" ]
 
 FROM dev as eslint
 CMD [ "yarn", "eslint", "." ]
+
+
+FROM dev AS storybook
+COPY .storybook/ .storybook/
+
+ENV STORYBOOK_DISABLE_TELEMETRY=1
+
+# we run 'storybook dev -p 6006'
+CMD [ "yarn", "storybook" ]
+
+# Example 1
+# docker build -t ssg-storybook -f Dockerfile.build --target storybook .
+# docker run -it --rm -p 6006:6006 ssg-storybook

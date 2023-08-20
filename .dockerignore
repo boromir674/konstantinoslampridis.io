@@ -8,3 +8,14 @@ notes.org~
 .gitignore
 .editorconfig
 .cache
+__mocks__/
+__tests__/
+node_modules/
+.cache/
+anima/
+public/
+public-auto/
+public-container/
+snippets/
+stories/
+wip/

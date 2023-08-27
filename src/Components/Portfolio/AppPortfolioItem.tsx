@@ -3,6 +3,33 @@ import styled from "@emotion/styled";
 import PortfolioItemInterface, {
   ReleaseItemData,
 } from "../../PortfolioItemInterface";
+import AppExternalURLIcon from "../AppExternalURLIcon";
+
+// URL (TODO: put into a dedicated Component and re-use in whole App)
+interface URLProps {
+  theme: {
+    textColor: string;
+    onHoverTextColor?: string;
+  };
+}
+
+const Link = styled.a<URLProps>`
+  color: ${(props) => props.theme.textColor};
+  // text-decoration: none;
+  transition: color ease;
+
+  &:hover {
+    // color: #ff7f50;
+    color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
+    // color: #a12aef;
+  }
+`;
+
+const MyLink = styled(Link)`
+  margin-right: 10px;
+`;
+
+// DIV Wrappers
 
 const TopPartBlock = styled.div`
   display: flex;
@@ -47,47 +74,22 @@ const ReleaseListContainer = styled.div`
 `;
 
 // Helper function definition
-type RenderRelease = (release: ReleaseItemData, index: number) => React.ReactNode;
-
-const render = (d: PortfolioItemInterface, renderRelease: RenderRelease) => {
-  return (
-    <>
-      <h1>{d.title}</h1>
-      <TopPartBlock>
-        <LeftPane>
-          <span>
-            Source Code:<a>github.com/{d.source_code_repo}</a>
-          </span>
-        </LeftPane>
-        <RightPane>
-          <span>Software maturity level: {d.status}</span>
-          {/* A Block where each element covers a line */}
-          {/* Each element should be able to wrap below according to size of block */}
-          {d.release ? (
-            <ReleasesPane>
-              <h3>Releases</h3>
-              <ReleaseListContainer>
-                {d.release.map((release, index) => renderRelease(release, index))}
-              </ReleaseListContainer>
-            </ReleasesPane>
-          ) : (
-            <></>
-          )}
-        </RightPane>
-      </TopPartBlock>
-      <BottomPartBlock>{d.description}</BottomPartBlock>
-    </>
-  );
-};
+type RenderRelease = (
+  release: ReleaseItemData,
+  index: number
+) => React.ReactNode;
 
 // React Component
 
 interface AppPortfolioItemProps {
+  theme: {
+    urlLinkTextColor: string;
+  };
   data: PortfolioItemInterface;
   //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
 }
 
-const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
+const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
   // create a callback function at most 2 times,
   // since we currently support 2 type of releases: pypi and github
   const renderReleaseCallback: RenderRelease = useCallback(
@@ -106,10 +108,51 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
 
   //   const renderCallback: (data: PortfolioItemInterface) => React.ReactNode = useCallback(
   const renderCallback = useCallback(
-    (portfolioItemData: PortfolioItemInterface) => {
-      return render(portfolioItemData, renderReleaseCallback);
+    (d: PortfolioItemInterface) => {
+      return (
+        <>
+          <h1>{d.title}</h1>
+          <TopPartBlock>
+            <LeftPane>
+              {d.source_code_repo ? (
+                <span>
+                  Source Code:{" "}
+                  <MyLink
+                    href={`https://github.com/${d.source_code_repo}`}
+                    target="_blank"
+                    theme={{
+                      textColor: theme.urlLinkTextColor,
+                    }}
+                  >
+                    github.com/{d.source_code_repo}{" "}
+                    <AppExternalURLIcon
+                      theme={{ lineColor: theme.urlLinkTextColor }}
+                    />
+                  </MyLink>
+                </span>
+              ) : null}
+            </LeftPane>
+            <RightPane>
+              <span>Software maturity level: {d.status}</span>
+              {/* A Block where each element covers a line */}
+              {/* Each element should be able to wrap below according to size of block */}
+              {d.release ? (
+                <ReleasesPane>
+                  <h3>Releases</h3>
+                  <ReleaseListContainer>
+                    {d.release.map((release, index) =>
+                      renderReleaseCallback(release, index)
+                    )}
+                  </ReleaseListContainer>
+                </ReleasesPane>
+              ) : null}
+            </RightPane>
+          </TopPartBlock>
+          <BottomPartBlock>{d.description}</BottomPartBlock>
+        </>
+      );
     },
-    [renderReleaseCallback]
+    [renderReleaseCallback, data]
   );
 
   return <>{renderCallback(data)}</>;

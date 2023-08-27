@@ -25,7 +25,7 @@ interface HeaderNavProps {
   }[];
   activeItem: string;
   theme: {
-    colorSet: {
+    colors: {
       textColor: string;
       backgroundColor: string;
       hoverBackgroundColor: string;
@@ -33,7 +33,7 @@ interface HeaderNavProps {
       activatedTextColor: string;
       activatedBackgroundColor: string;
     };
-    // paddings for vertical and horizontal control
+    // paddings for nav items
     padding: {
       vertical: string;
       horizontal: string;
@@ -41,7 +41,7 @@ interface HeaderNavProps {
   };
 }
 
-const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, padding } }) => {
+const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colors, padding } }) => {
   // whenever the user makes a scroll we capture the "screen view position"
   // and we store in the 'activeLinkIndex' state attribute of this component
   // since the state value gets updated on scroll event,
@@ -55,7 +55,7 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, paddin
           renderProps={({ active, onClick }) => (
             <AppHorNavItem
               key={index}
-              theme={{ colorSet, padding }}
+              theme={{ colors, padding }}
               active={active}
               onClick={onClick}
             >

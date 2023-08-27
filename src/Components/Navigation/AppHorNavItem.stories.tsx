@@ -1,6 +1,11 @@
-import AppHorNavItem from "./AppHorNavItem";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import AppHorNavItem, { NavItemProps } from "./AppHorNavItem";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+
+const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);;
+
 
 export default {
   component: AppHorNavItem,
@@ -8,40 +13,33 @@ export default {
   tags: ["autodocs"],
 };
 
-// Deactivated Light
-export const DeactivatedLight = {
-  args: {
-    // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
-    active: false,
-    children: "Not in current view",
+
+const lightProps: NavItemProps = {
+  // same interface as the props of the Component
+  // Theme
+  theme: {
+    colors: lightTheme.navigationBar,
+    padding: lightTheme.headerNavigationBar.padding,
   },
+  // Data
+  active: false,  // on initialization
+  // Children React Elements to render
+  children: "Not in current view",
 };
 
-// Deactivated Dark
-export const DeactivatedDark = {
-  args: {
-    // same interface as the props of the Component
-    ...DeactivatedLight.args,
-    colorSet: darkTheme.navigationBar,
-  },
+
+// Render with LIGHT Theme
+export const LightNavigationItem = {
+  args: lightProps,
 };
 
-// Activated Light
-export const ActivatedLight = {
+// Render with DARK Theme
+export const DarkNavigationItem = {
   args: {
     // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
-    active: true,
-    children: "In current view",
-  },
-};
-
-// Activated dark
-export const ActivatedDark = {
-  args: {
-    // same interface as the props of the Component
-    ...ActivatedLight.args,
-    colorSet: darkTheme.navigationBar,
+    ...LightNavigationItem.args,
+    theme: {
+      colorSet: darkTheme.navigationBar,
+    },
   },
 };

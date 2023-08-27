@@ -112,7 +112,7 @@ const App: FC = () => {
             linkedin: name2Url["linkedin"],
           },
           education: education.map(
-            (item: EducationItemUserTextData, index: number) => ({
+            (item: EducationItemUserTextData) => ({
               degree_title: item.degree,
               university_name: item.name,
               location: item.location,
@@ -124,11 +124,15 @@ const App: FC = () => {
         },
       }}
       colorSet={{
+        // LIGHT MODE
         light: {
           containerBackgroundColor: lightTheme.backgroundColor,
           topHeaderPane: {
             themeSwitch: lightTheme.themeSwitch,
-            navigationBar: lightTheme.navigationBar,
+            headerNavigationBar: {
+              colors: lightTheme.navigationBar,
+              padding: lightTheme.headerNavigationBar.padding,
+            },
             backgroundColor: lightTheme.topHeaderPane.backgroundColor,
           },
           verticalSidePane: {
@@ -151,11 +155,15 @@ const App: FC = () => {
           },
           bottomFooterPane: lightTheme.footerStyles,
         },
+        // DARK MODE
         dark: {
           containerBackgroundColor: darkTheme.backgroundColor,
           topHeaderPane: {
             themeSwitch: darkTheme.themeSwitch,
-            navigationBar: darkTheme.navigationBar,
+            headerNavigationBar: {
+              colors: darkTheme.navigationBar,
+              padding: darkTheme.headerNavigationBar.padding,
+            },
             backgroundColor: darkTheme.topHeaderPane.backgroundColor,
           },
           verticalSidePane: {

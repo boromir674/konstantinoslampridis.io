@@ -55,6 +55,7 @@ interface AppVerticalMainPaneTheme {
     item: {
       backgroundColor: string;
       color: string;
+      urlLinkTextColor: string;
       outline: {
         // Color Mode Design
         color: string;
@@ -139,6 +140,7 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
           item: {
             ...theme.portfolio.item,
             outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
+            urlLinkTextColor: theme.portfolio.item.urlLinkTextColor,
           },
         }}
       />

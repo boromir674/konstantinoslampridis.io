@@ -137,8 +137,11 @@ const arg1: BigScreenViewInteractiveProps = {
     light: {
       containerBackgroundColor: lightTheme.backgroundColor,
       topHeaderPane: {
+        headerNavigationBar: {
+          colors: lightTheme.navigationBar,
+          padding: lightTheme.headerNavigationBar.padding,
+        },
         backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-        navigationBar: lightTheme.navigationBar,
         themeSwitch: lightTheme.themeSwitch,
       },
       verticalSidePane: {
@@ -163,8 +166,11 @@ const arg1: BigScreenViewInteractiveProps = {
     dark: {
       containerBackgroundColor: darkTheme.backgroundColor,
       topHeaderPane: {
+        headerNavigationBar: {
+          colors: darkTheme.navigationBar,
+          padding: darkTheme.headerNavigationBar.padding,
+        },
         backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-        navigationBar: darkTheme.navigationBar,
         themeSwitch: darkTheme.themeSwitch,
       },
       verticalSidePane: {

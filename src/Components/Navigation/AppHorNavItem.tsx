@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 interface NavItemProps {
   theme: {
-    colorSet: {
+    colors: {
       textColor: string;
       backgroundColor: string;
       hoverBackgroundColor: string;
@@ -30,7 +30,7 @@ const NavItem = styled.a<NavItemProps>`
   padding-top: ${(props) => props.theme.padding.vertical};
   padding-bottom: ${(props) => props.theme.padding.vertical};
   padding-left: ${(props) => props.theme.padding.horizontal};
-  padding-right: ${(props) => props.theme.padding.horizontal};
+  padding-right: ${(props) => props.theme.padding.horizontal};  
 
   display: block;
   flex-grow: 0;
@@ -44,12 +44,12 @@ const NavItem = styled.a<NavItemProps>`
   // background: "inherit";
   background: ${(props) =>
     props.active
-      ? props.theme.colorSet.activatedBackgroundColor
-      : props.theme.colorSet.backgroundColor};
+      ? props.theme.colors.activatedBackgroundColor
+      : props.theme.colors.backgroundColor};
   color: ${(props) =>
     props.active
-      ? props.theme.colorSet.activatedTextColor
-      : props.theme.colorSet.textColor};
+      ? props.theme.colors.activatedTextColor
+      : props.theme.colors.textColor};
   // color: "inherit";
   cursor: pointer;
   margin: 0 0px;
@@ -61,9 +61,10 @@ const NavItem = styled.a<NavItemProps>`
 
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   &:hover {
-    background-color: ${(props) => props.theme.colorSet.hoverBackgroundColor};
-    color: ${(props) => props.theme.colorSet.hoverTextColor};
+    background-color: ${(props) => props.theme.colors.hoverBackgroundColor};
+    color: ${(props) => props.theme.colors.hoverTextColor};
   }
 `;
 
 export default NavItem;
+export { NavItemProps };

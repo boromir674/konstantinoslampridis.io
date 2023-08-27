@@ -6,13 +6,19 @@ import { HorizontalNavBar } from "../Navigation";
 
 interface TopHeaderPaneTheme {
   backgroundColor: string;
-  navigationBar: {
-    textColor: string;
-    backgroundColor: string;
-    hoverBackgroundColor: string;
-    hoverTextColor: string;
-    activatedTextColor: string;
-    activatedBackgroundColor: string;
+  headerNavigationBar: {
+    colors: {
+      textColor: string;
+      backgroundColor: string;
+      hoverBackgroundColor: string;
+      hoverTextColor: string;
+      activatedTextColor: string;
+      activatedBackgroundColor: string;
+    };
+    padding: {
+      vertical: string;
+      horizontal: string;
+    }
   };
   themeSwitch: {
     backgroundColor: string;
@@ -54,7 +60,7 @@ interface TopHeaderPaneContainerProps {
 
 const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.navigationBar.textColor};
+  color: ${(props) => props.theme.headerNavigationBar.colors.textColor};
 
   position: fixed;
   top: 0;
@@ -90,13 +96,7 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
           Object.assign(section_data, { label: section_data.name })
         )}
         activeItem={sections[0].name}
-        theme={{
-          colorSet: theme.navigationBar,
-          padding: {
-            vertical: "8px",
-            horizontal: "28px",
-          },
-        }}
+        theme={theme.headerNavigationBar}
       />
     </TopHeaderPaneContainer>
   );

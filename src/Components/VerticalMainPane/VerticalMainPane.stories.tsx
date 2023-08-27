@@ -25,6 +25,20 @@ const args: AppVerticalMainPaneProps = {
     professional: [
       {
         title: "Software Engineer",
+        activities: [
+          "Engineered a Test Framework to facilitate easier/automated testing of new integrations",
+          "Added new features for 'MySQL' and 'MS SQL Server' integrations in user-facing app",
+          "Implemented a GDPR 'delete user data' feature, upon user request in user-facing app",
+          "Designed a process to facilitate faster collaborative development, version control (and merging strategies) and Continuous Integration (CI), throughout the release cycle.",
+        ],
+        company: "Alvin",
+        location: "Thessaloniki, Greece",
+        duration: "Feb 2022 - Apr 2022",
+        description: "Alvin parses SQL metadata from popular Data Platforms, such as Postgres, Redshift, Airflow, BigQuery, Tableau, Hive, etc and facilitates Data Governance Operations by providing a Software as a Service (SaaS) web app. Working asynchronously and fully remotely on adding features and automating (backend) testing of our Data Governance SaaS product",
+        technology_tags: ["python", "docker", "FastAPI", "VueJS"],
+      },
+      {
+        title: "Software Engineer",
         company: "GG Navi",
         location: "Mountain View, CA",
         duration: "Sep 2022 - May 2023",

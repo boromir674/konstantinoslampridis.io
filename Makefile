@@ -63,11 +63,19 @@ copy_shell_lock:
 build_dev_server: Dockerfile.build  ## Build development server image
 	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
 
-# DEV SERVER
+# DEV SERVER on localhost
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
 	docker run -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm \
 		-v /data/repos/static-site-generator/src:/app/src \
 		$(DEV_SERVER_NAME)
+
+# STORYBOOK DEV SERVER on localhost
+storybook: ## Run the Storybook server on localhost, with "hot-reload" of source code (no storybook config)
+	docker build -f Dockerfile.build --target storybook -t $(STORYBOOK_NAME) .
+	docker run -it --rm -p 6006:6006 \
+	-v /data/repos/static-site-generator/src:/app/src \
+	$(STORYBOOK_NAME)
+
 
 # DEV ACTIVITIES
 ## update caniuse-lite with browsers DB from Browserslist config.

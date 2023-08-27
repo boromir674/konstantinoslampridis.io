@@ -1,11 +1,19 @@
-interface HeaderStyles {
-  primaryColor: string;
-  secondaryColor: string;
-}
+/** ELA
+* Provides the 'Color Theme Interface' (Theme), which should be enough to
+* represent a Color Mode (Light or Dark) and the 'Full Theme Interface'
+* (ComputedTheme: color mode + other styles), which is the result of merging
+* an instance of 'Color Theme' with an object holding the styles configuration
+* (CommonStyling) that are common regardless of the active color mode (light or
+* dark)
+**/
 
 // Represents a set of colors corresponding to the Business Logic of the App
 // Usually this interface can describe the colors of a so-called "color mode"
-// For example Light/Dark mode/theme
+/// For example Light/Dark mode/theme
+
+/** Color Mode Interface (ie Light or Dark mode)
+* The 'Theme', which should be enough to represent a Color Mode (Light or Dark)
+**/
 interface Theme {
 
   backgroundColor: string;
@@ -100,6 +108,7 @@ interface Theme {
       };
       backgroundColor: string;
       color: string;
+      urlLinkTextColor: string;
     };
   };
 
@@ -111,6 +120,13 @@ interface Theme {
 
 // Used internally for type checking
 interface ComputedTheme extends Theme {
+  // Header Navigation Bar (ie renders on Desktop view)
+  headerNavigationBar: {
+    padding: {
+      vertical: string;
+      horizontal: string;
+    },
+  },
   //// ALL PROFESSIONAL STYLES
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
@@ -174,6 +190,7 @@ interface ComputedTheme extends Theme {
         color: string;
         width: string;
       };
+      urlLinkTextColor: string;
       backgroundColor: string;
       color: string;
     };
@@ -189,6 +206,13 @@ const commonStyling = {
   fontWeight: "400",
   lineHeight: "1.5",
   letterSpacing: "0.00938em",
+  // Header Navigation Bar (ie renders on Desktop view)
+  headerNavigationBar: {
+    padding: {
+      vertical: "8px",
+      horizontal: "28px",
+    },
+  },
   // Domain Specific Styling
   professional: {
     title: {

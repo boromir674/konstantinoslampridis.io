@@ -102,6 +102,7 @@ const darkColorMode: Theme = {
       // TODO; fix bug: item color backgroundColor has no effect
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
+      urlLinkTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
       outline: {
         color: DESIGN_TOKENS['--md-sys-color-outline-dark'],
       },

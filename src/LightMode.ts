@@ -101,6 +101,7 @@ const lightColorMode: Theme = {
       // TODO; fix bug: item color backgroundColor has no effect
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+      urlLinkTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
       outline: {
         color: DESIGN_TOKENS['--md-sys-color-outline-light'],
       },

@@ -6,14 +6,18 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
 
+    # hard-coded env variables to inject in the built image/container
     environment:
-      ENV GATSBY_TELEMETRY_DISABLED: 1
+      GATSBY_TELEMETRY_DISABLED: 1
 
     volumes:
       - ../..:/workspaces:cached
 
+    # open a dev server with hot-reload in the default shell
+    # command: yarn develop
+
     # Overrides default command so things don't shut down after the process ends.
-    command: sleep infinity
+    command: sleep infinity  # should result in an open shell
 
     # Uncomment the next line to use a non-root user for all processes.
     # user: vscode

@@ -24,7 +24,7 @@
 	//----------------------	
 
 	"mounts": [
-		"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",	
+		"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
 		// "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
 		// Uncomment the next line to also sync certs in your .minikube folder
 		// "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
@@ -41,7 +41,8 @@
 	//"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && poetry install -E test",
 	// to enable git commands
 	"postStartCommand": {
-		"yarn_install": "yarn install --frozen-lockfile --prodution=false --non-interactive"
+		"yarn_install": "yarn install --frozen-lockfile --prodution=false --non-interactive",
+		"yarn_develop": "yarn develop"
 		// "git_add_safe": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 	},
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.

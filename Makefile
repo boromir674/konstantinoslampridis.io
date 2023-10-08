@@ -64,13 +64,13 @@ build_dev_server: Dockerfile.build  ## Build development server image
 	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
 
 # DEV SERVER on localhost
-run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
+run_dev_server: build_dev_server  ## Run a development server with "hot-reloading", inside an ephemeral container, and expose on localhost 8000
 	docker run -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm \
 		-v /data/repos/static-site-generator/src:/app/src \
 		$(DEV_SERVER_NAME)
 
 # STORYBOOK DEV SERVER on localhost
-storybook: ## Run the Storybook server on localhost, with "hot-reload" of source code (no storybook config)
+storybook: ## Run a Storybook server with "hot-reload" of Components/Stories code, inside an ephemeral container, and expose on localhost 6006
 	docker build -f Dockerfile.build --target storybook -t $(STORYBOOK_NAME) .
 	docker run -it --rm -p 6006:6006 \
 	-v /data/repos/static-site-generator/src:/app/src \
@@ -103,7 +103,7 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 
 
 # TEST
-test:  ## Run Test Suite
+test:  ## Fire up a ready-to-run-unit-tests shell, inside an ephemeral container
 	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
 	docker run -it --rm \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \

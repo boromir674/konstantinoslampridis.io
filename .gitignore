@@ -124,3 +124,4 @@ DockerTree
 CHECK-OUT*
 babel\.config\.js-old
 stability-ai-warm_colors_nature_landscape_with_a_futuristic_touch\.jpeg
+env/

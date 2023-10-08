@@ -102,6 +102,7 @@ const lightColorMode: Theme = {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
       urlLinkTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
+      onHoverURLLinkTextColor: DESIGN_TOKENS['--md-sys-color-on-surface-light'],
       outline: {
         color: DESIGN_TOKENS['--md-sys-color-outline-light'],
       },

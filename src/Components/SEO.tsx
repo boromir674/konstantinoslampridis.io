@@ -105,7 +105,7 @@ const SEO: FC<SEOProps> = ({
       "addressCountry": "Greece"
     }
   };
-
+ 
   return (
     <Helmet
       htmlAttributes={{ lang: `en` }}

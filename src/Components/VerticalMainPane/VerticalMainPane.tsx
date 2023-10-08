@@ -11,7 +11,7 @@ import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 // import PortfolioSection from "../Portfolio";
 import PortfolioSection, {
   ResponsiveLocalStorageLayoutProps,
-} from "../Portfolio/PortfolioSectionV3";
+} from "../Portfolio/PortfolioSection";
 
 interface AppVerticalMainPaneTheme {
   // color of outer most div
@@ -38,12 +38,6 @@ interface AppVerticalMainPaneTheme {
     };
     containerBackgroundColor: string;
   };
-  // portfolio: {
-  //   // Color Mode Design
-  //   color: string;
-  //   // Other Design
-  //   width: string;
-  // };
   portfolio: {
     container: {
       backgroundColor: string;
@@ -56,6 +50,7 @@ interface AppVerticalMainPaneTheme {
       backgroundColor: string;
       color: string;
       urlLinkTextColor: string;
+      onHoverURLLinkTextColor: string;
       outline: {
         // Color Mode Design
         color: string;
@@ -136,11 +131,15 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         id={sectionIDs ? sectionIDs[2] : "open-source-portfolio-section"}
         data={data.portfolio}
         theme={{
-          ...theme.portfolio,
+          container: theme.portfolio.container,
+          sectionHeader: theme.portfolio.sectionHeader,
           item: {
-            ...theme.portfolio.item,
-            outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
+            color: theme.portfolio.item.color,
+            backgroundColor: theme.portfolio.item.backgroundColor,
             urlLinkTextColor: theme.portfolio.item.urlLinkTextColor,
+            onHoverURLLinkTextColor: theme.portfolio.item.onHoverURLLinkTextColor,
+            // onHoverURLLinkTextColor: "#123345",
+            outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
           },
         }}
       />

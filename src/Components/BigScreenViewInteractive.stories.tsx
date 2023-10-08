@@ -1,12 +1,14 @@
 import BigScreenViewInteractive, {
   BigScreenViewInteractiveProps,
 } from "./BigScreenViewInteractive";
+
+import { commonStyling } from "../AppStyles";
 import lightMode from "../LightMode";
 import darkMode from "../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
+import { ThemeManager } from "../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+
 
 // STORY CONFIGURATION
 export default {
@@ -133,65 +135,7 @@ const arg1: BigScreenViewInteractiveProps = {
       ],
     },
   },
-  colorSet: {
-    light: {
-      containerBackgroundColor: lightTheme.backgroundColor,
-      topHeaderPane: {
-        headerNavigationBar: {
-          colors: lightTheme.navigationBar,
-          padding: lightTheme.headerNavigationBar.padding,
-        },
-        backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-        themeSwitch: lightTheme.themeSwitch,
-      },
-      verticalSidePane: {
-        personalInfo: {
-          containerBackgroundColor:
-            lightTheme.personal.containerBackgroundColor,
-          textColor: lightTheme.personal.textColor,
-          linkColor: lightTheme.personal.urlTextColor,
-          externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
-        },
-        education: {
-          item: lightTheme.education.item,
-        },
-      },
-      verticalMainPane: {
-        introduction: lightTheme.introduction,
-        professional: lightTheme.professional,
-        portfolio: lightTheme.portfolio,
-      },
-      bottomFooterPane: lightTheme.footerStyles,
-    },
-    dark: {
-      containerBackgroundColor: darkTheme.backgroundColor,
-      topHeaderPane: {
-        headerNavigationBar: {
-          colors: darkTheme.navigationBar,
-          padding: darkTheme.headerNavigationBar.padding,
-        },
-        backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-        themeSwitch: darkTheme.themeSwitch,
-      },
-      verticalSidePane: {
-        personalInfo: {
-          containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
-          textColor: darkTheme.personal.textColor,
-          linkColor: darkTheme.personal.urlTextColor,
-          externalURLSVGColor: darkTheme.personal.externalURLSVGColor,
-        },
-        education: {
-          item: darkTheme.education.item,
-        },
-      },
-      verticalMainPane: {
-        introduction: darkTheme.introduction,
-        professional: darkTheme.professional,
-        portfolio: darkTheme.portfolio,
-      },
-      bottomFooterPane: darkTheme.footerStyles,
-    },
-  },
+  colorSet: tm.toAppColorSet(),
 };
 
 export const LightColorOnTheLeft = {

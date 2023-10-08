@@ -1,10 +1,23 @@
 import AppHorNavItem, { NavItemProps } from "./AppHorNavItem";
+
+import { commonStyling } from "../../AppStyles";
 import lightMode from "../../LightMode";
 import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+import { ThemeManager } from "../../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);;
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const {
+  light: {
+    topHeaderPane: {
+      headerNavigationBar: horNavItemLightStyles,
+    }
+  },
+  dark: {
+    topHeaderPane: {
+      headerNavigationBar: horNavItemDarkStyles,
+    },
+  }
+} = tm.toAppColorSet();
 
 
 export default {
@@ -17,10 +30,7 @@ export default {
 const lightProps: NavItemProps = {
   // same interface as the props of the Component
   // Theme
-  theme: {
-    colors: lightTheme.navigationBar,
-    padding: lightTheme.headerNavigationBar.padding,
-  },
+  theme: horNavItemLightStyles,
   // Data
   active: false,  // on initialization
   // Children React Elements to render
@@ -38,8 +48,6 @@ export const DarkNavigationItem = {
   args: {
     // same interface as the props of the Component
     ...LightNavigationItem.args,
-    theme: {
-      colorSet: darkTheme.navigationBar,
-    },
+    theme: horNavItemDarkStyles,
   },
 };

@@ -1,10 +1,13 @@
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
+import { commonStyling } from "../AppStyles";
 import lightMode from "../LightMode";
 import darkMode from "../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
+import { ThemeManager } from "../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+
+// App Styles ('light' + common), 'dark' + common)
+const colorSet = tm.toAppColorSet()
 
 // STORY CONFIGURATION
 export default {
@@ -16,35 +19,7 @@ export default {
 // STORY DEFAULT PROPS VALUES
 const args: BigScreenViewProps = {
   // same interface as the props of the Component
-  theme: {
-    containerBackgroundColor: lightTheme.backgroundColor,
-    topHeaderPane: {
-      headerNavigationBar: {
-        colors: lightTheme.navigationBar,
-        padding: lightTheme.headerNavigationBar.padding,
-      },
-      backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-      themeSwitch: lightTheme.themeSwitch,
-    },
-    verticalSidePane: {
-      personalInfo: {
-        containerBackgroundColor:
-          lightTheme.personal.containerBackgroundColor,
-        textColor: lightTheme.personal.textColor,
-        linkColor: lightTheme.personal.urlTextColor,
-        externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
-      },
-      education: {
-        item: lightTheme.education.item,
-      },
-    },
-    verticalMainPane: {
-      introduction: lightTheme.introduction,
-      professional: lightTheme.professional,
-      portfolio: lightTheme.portfolio,
-    },
-    bottomFooterPane: lightTheme.footerStyles,
-  },
+  theme: colorSet.light,
   data: {
     topHeaderPane: {
       sections: [
@@ -181,16 +156,6 @@ export const Light = {
 export const Dark = {
   args: {
     ...Light.args,
-    theme: {
-      ...Light.args.theme,
-      topHeaderPane: {
-        backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-        themeSwitch: darkTheme.themeSwitch,
-        headerNavigationBar: {
-          colors: darkTheme.navigationBar,
-          padding: darkTheme.headerNavigationBar.padding,
-        },
-      },
-    },
+    theme: colorSet.dark,
   },
 };

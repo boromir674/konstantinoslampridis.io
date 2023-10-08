@@ -1,22 +1,36 @@
-import PortfolioSectionV3, { ResponsiveLocalStorageLayoutProps } from "./PortfolioSectionV3";
+import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
+
+import { commonStyling } from "../../AppStyles";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ThemeManager } from "../../lib";
+
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const {
+  light: {
+    verticalMainPane: {
+      portfolio: portfolioStylesLight,
+    }
+  },
+  dark: {
+    verticalMainPane: {
+      portfolio: portfolioStylesDark,
+    }
+  }
+} = tm.toAppColorSet();
+
 
 export default {
-  component: PortfolioSectionV3,
-  title: "PortfolioSectionV3",
+  component: PortfolioSection,
+  title: "PortfolioSection",
   tags: ["autodocs"],
 };
 
-// const args: ResponsiveLocalStorageLayoutProps = {
-const args = {
-  theme: {
-    container: {
-      backgroundColor: "#D5D7C6",
-    },
-    item: {
-      backgroundColor: "#D5D7C6",
-      color: "#125160",
-    },
-  },
+
+const args: ResponsiveLocalStorageLayoutProps = {
+  // ID is a required prop, since this component is designed to act as a
+  // section that the navigation system can scroll to on user click
+  id: "does-not-matter-in-this-story",
   data: [
     {
       title: "Python Package Generator",
@@ -84,24 +98,59 @@ const args = {
       ],
     },
   ],
+  theme: {
+    ...portfolioStylesLight,
+    item: {
+      ...portfolioStylesLight.item,
+      outline: `${portfolioStylesLight.item.outline.width} solid ${portfolioStylesLight.item.outline.color}`,
+    },
+  },
+  ...defaultProps,
 };
 
-export const Light = {
+
+export const LightWithSolidOutline = {
   args,
 };
 
 
-export const Dark = {
+export const DarkWithSolidOutline = {
   args: {
-    ...Light.args,
+    ...LightWithSolidOutline.args,
     theme: {
-      container: {
-        backgroundColor: "#125160",
-      },
+      ...portfolioStylesDark,
       item: {
-        backgroundColor: "#125160",
-        color: "#D5D7C6",
+        ...portfolioStylesDark.item,
+        outline: `${portfolioStylesDark.item.outline.width} solid ${portfolioStylesDark.item.outline.color}`,
       },
+    },
+  },
+};
+
+
+
+export const LightWithSimpleOutline = {
+  args: {
+    ...LightWithSolidOutline.args,
+    theme: {
+      ...LightWithSolidOutline.args.theme,
+      item: {
+        ...LightWithSolidOutline.args.theme.item,
+        outline: `${portfolioStylesLight.item.outline.width} ${portfolioStylesLight.item.outline.color}`,
+      }
+    },
+  },
+};
+
+export const DarkWithSimpleOutline = {
+  args: {
+    ...DarkWithSolidOutline.args,
+    theme: {
+      ...DarkWithSolidOutline.args.theme,
+      item: {
+        ...DarkWithSolidOutline.args.theme.item,
+        outline: `${portfolioStylesDark.item.outline.width} ${portfolioStylesDark.item.outline.color}`,
+      }
     },
   },
 };

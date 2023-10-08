@@ -1,10 +1,13 @@
 import { VerticalMainPane, AppVerticalMainPaneProps } from "./VerticalMainPane";
+import { commonStyling } from "../../AppStyles";
 import lightMode from "../../LightMode";
 import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+import { ThemeManager } from "../../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+
+// App Styles ('light' + common), 'dark' + common)
+const colorSet = tm.toAppColorSet()
 
 export default {
   component: VerticalMainPane,
@@ -13,11 +16,7 @@ export default {
 };
 
 const args: AppVerticalMainPaneProps = {
-  theme: {
-    introduction: lightTheme.introduction,
-    professional: lightTheme.professional,
-    portfolio: lightTheme.portfolio,
-  },
+  theme: colorSet.light.verticalMainPane,
   data: {
     introduction: {
       name: "John Doe",
@@ -119,10 +118,6 @@ export const Light = {
 export const Dark = {
   args: {
     ...Light.args,
-    theme: {
-      introduction: darkTheme.introduction,
-      professional: darkTheme.professional,
-      portfolio: darkTheme.portfolio,
-    },
+    theme: colorSet.dark.verticalMainPane,
   },
 };

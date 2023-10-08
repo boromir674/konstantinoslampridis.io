@@ -109,6 +109,7 @@ interface Theme {
       backgroundColor: string;
       color: string;
       urlLinkTextColor: string;
+      onHoverURLLinkTextColor: string;
     };
   };
 
@@ -190,9 +191,10 @@ interface ComputedTheme extends Theme {
         color: string;
         width: string;
       };
-      urlLinkTextColor: string;
-      backgroundColor: string;
       color: string;
+      backgroundColor: string;
+      urlLinkTextColor: string;
+      onHoverURLLinkTextColor: string;
     };
   };
 }

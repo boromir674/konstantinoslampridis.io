@@ -1,16 +1,17 @@
-import AppProfSection, { ProfessionalSectionProps } from "./AppProfSection";
+import ProfessionalSection, { ProfessionalSectionProps } from "./ProfessionalSection";
+import { commonStyling } from "../../AppStyles";
 import lightMode from "../../LightMode";
 import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+import { ThemeManager } from "../../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
 
 export default {
-  component: AppProfSection,
-  title: "AppProfSection",
+  component: ProfessionalSection,
+  title: "ProfessionalSection",
   tags: ["autodocs"],
 };
+
 
 const args: ProfessionalSectionProps = {
   data: {
@@ -48,7 +49,7 @@ const args: ProfessionalSectionProps = {
       },
     ],
   },
-  theme: lightTheme.professional,
+  theme: tm.light.professional,
   id: "id_that_we_will_not_use_to_scroll_to_in_this_story",
 };
 
@@ -61,10 +62,6 @@ export const LightMode = {
 export const DarkMode = {
   args: {
     ...LightMode.args,
-    theme: darkTheme.professional,
-    // theme: {
-    //   item: darkTheme.professional.item,
-    //   containerBackground: darkTheme.professional.containerBackground,
-    // },
+    theme: tm.dark.professional,
   },
 };

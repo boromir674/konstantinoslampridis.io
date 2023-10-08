@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import ExperienceItemData from "./ExperienceItemInterface";
-import AppProfItem from "./ProfItem";
+import AppProfessionalItem from "./AppProfessionalItem";
 
 type ProfessionalSectionData = {
   experience_items: ExperienceItemData[];
@@ -100,7 +100,7 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
           ).toString() + "s";
         // console.log(cssDur);
         return (
-          <AppProfItem
+          <AppProfessionalItem
             key={index}
             theme={{
               ...theme.item,

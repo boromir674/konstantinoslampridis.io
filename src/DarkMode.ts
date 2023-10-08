@@ -45,10 +45,6 @@ const darkColorMode: Theme = {
   },
   //////// EDUCATION SECTION DARK ////////
   education: {
-    // title: {
-    //   textColor: "#ffffff",
-    //   backgroundColor: "#333333",
-    // },
     item: {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-dark'],
       textColor: DESIGN_TOKENS['--md-sys-color-on-surface-dark'],
@@ -103,6 +99,8 @@ const darkColorMode: Theme = {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
       urlLinkTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+      onHoverURLLinkTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-dark"],
+      // onHoverURLLinkTextColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
       outline: {
         color: DESIGN_TOKENS['--md-sys-color-outline-dark'],
       },

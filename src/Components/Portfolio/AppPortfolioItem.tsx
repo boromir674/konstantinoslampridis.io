@@ -13,15 +13,16 @@ interface URLProps {
   };
 }
 
+// color: #ff7f50;
+// color: #a12aef;
+
 const Link = styled.a<URLProps>`
   color: ${(props) => props.theme.textColor};
   // text-decoration: none;
   transition: color ease;
 
   &:hover {
-    // color: #ff7f50;
     color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
-    // color: #a12aef;
   }
 `;
 
@@ -84,6 +85,7 @@ type RenderRelease = (
 interface AppPortfolioItemProps {
   theme: {
     urlLinkTextColor: string;
+    onHoverURLLinkTextColor: string;
   };
   data: PortfolioItemInterface;
   //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
@@ -122,6 +124,7 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
                     target="_blank"
                     theme={{
                       textColor: theme.urlLinkTextColor,
+                      onHoverTextColor: theme.onHoverURLLinkTextColor,
                     }}
                   >
                     github.com/{d.source_code_repo}{" "}

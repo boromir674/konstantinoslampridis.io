@@ -1,6 +1,8 @@
 import AppIntroductionSection from "./AppIntroductionSection";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import { commonStyling } from "../../AppStyles";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ThemeManager } from "../../lib";
 
 export default {
   component: AppIntroductionSection,
@@ -8,19 +10,29 @@ export default {
   tags: ["autodocs"],
 };
 
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const {
+  light: {
+    verticalMainPane: { introduction: introductionSectionStylesLightMode },
+  },
+  dark: {
+    verticalMainPane: { introduction: introductionSectionStylesDarkMode },
+  },
+} = tm.toAppColorSet();
+
 export const Light = {
-    args: {
-        theme: lightTheme.introduction,
-        data: {
-            name: "John Doe",
-        },
-        id: "introduction-section",
+  args: {
+    theme: introductionSectionStylesLightMode,
+    data: {
+      name: "John Doe",
     },
+    id: "introduction-section",
+  },
 };
 
 export const Dark = {
-    args: {
-        ...Light.args,
-        theme: darkTheme.introduction,
-    },
+  args: {
+    ...Light.args,
+    theme: introductionSectionStylesDarkMode,
+  },
 };

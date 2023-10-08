@@ -1,44 +1,26 @@
 import { useState, FC, useCallback } from 'react';
-import {TopHeaderPane, TopHeaderPaneProps } from "./TopHeaderPane";
+import { TopHeaderPane, TopHeaderPaneProps } from "./TopHeaderPane";
+import { commonStyling } from "../../AppStyles";
 import lightMode from "../../LightMode";
 import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
+import { ThemeManager } from "../../lib";
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);;
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
 
+// App Styles ('light' + common), 'dark' + common)
+const colorSet = tm.toAppColorSet()
 
 interface BooleanMap {
   [keyName: string]: boolean;
 }
 
-const lightThemeInstance = {
-  backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-  headerNavigationBar: {
-    colors: lightTheme.navigationBar,
-    padding: lightTheme.headerNavigationBar.padding,
-  },
-  themeSwitch: lightTheme.themeSwitch,
-};
-
-const darkThemeInstance = {
-  backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-  headerNavigationBar: {
-    colors: darkTheme.navigationBar,
-    padding: darkTheme.headerNavigationBar.padding,
-  },
-  themeSwitch: darkTheme.themeSwitch,
-};
-
-
 interface HeaderPaneWrapperProps {
   theme: TopHeaderPaneProps["theme"];
   data: {
     sections: TopHeaderPaneProps["data"]["sections"];
-    // active: TopHeaderPaneProps["data"]["active"];
   }
 }
-const HeaderPaneWrapper: FC<TopHeaderPaneProps> = ({
+const HeaderPaneWrapper: FC<HeaderPaneWrapperProps> = ({
   theme: themeObject,
   data,
 }) => {
@@ -63,7 +45,7 @@ const HeaderPaneWrapper: FC<TopHeaderPaneProps> = ({
       data={{
         ...data,
         onToggle: (active: boolean) => {
-          setTheme(active ? darkThemeInstance : lightThemeInstance);
+          setTheme(active ? colorSet.dark.topHeaderPane : colorSet.light.topHeaderPane);
         },
         active: booleanMap[positionMap[matchTogglePosition()]],
       }}
@@ -80,7 +62,7 @@ export default {
 
 export const LightWithToggleLeft = {
   args: {
-    theme: lightThemeInstance,
+    theme: colorSet.light.topHeaderPane,
     data: {
       sections: [
         { name: "Home", to_element_id: "home-section" },
@@ -104,9 +86,10 @@ export const LightWithToggleLeft = {
 };
 
 export const DarkWithToggleLeft = {
+  // Has a bug when toggling between themes using the switch in the UI
   args: {
     ...LightWithToggleLeft.args,
-    theme: darkThemeInstance,
+    theme: colorSet.dark.topHeaderPane,
   },
 };
 

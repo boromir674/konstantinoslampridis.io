@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 
-import PortfolioItemDataInterface from '../../../PortfolioItemInterface';
+import PortfolioItemDataInterface from '../../PortfolioItemInterface';
 
 // import { useElementSizeRef } from "../../../Hooks/useElementSizeRef";
 // import { useLayoutEffect } from "react";

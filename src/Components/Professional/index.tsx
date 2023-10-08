@@ -1,4 +1,4 @@
-import AppProfSection, { ProfessionalSectionProps } from "./AppProfSection";
+import ProfessionalSection, { ProfessionalSectionProps } from "./ProfessionalSection";
 
-export default AppProfSection;
+export default ProfessionalSection;
 export type { ProfessionalSectionProps };

@@ -1,6 +1,8 @@
 import {BottomFooterPane} from "./BottomFooterPane";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import { commonStyling } from "../../AppStyles";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ThemeManager } from "../../lib";
 
 export default {
   component: BottomFooterPane,
@@ -8,18 +10,27 @@ export default {
   tags: ["autodocs"],
 };
 
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const {
+  light: {
+    bottomFooterPane: bottomFooterStylesLightMode,
+  },
+  dark: {
+    bottomFooterPane: bottomFooterStylesDarkMode,
+  },
+} = tm.toAppColorSet();
+
+
 export const Light = {
   args: {
     // same interface as the props of the Component
-    theme: lightTheme.footerStyles,
+    theme: bottomFooterStylesLightMode,
   },
 };
 
 export const Dark = {
   args: {
     ...Light.args,
-    theme: darkTheme.footerStyles,
+    theme: bottomFooterStylesDarkMode,
   },
 };
-
-

@@ -1,10 +1,14 @@
-import ProfItem from './ProfItem';
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import AppProfessionalItem from './AppProfessionalItem';
+import { commonStyling } from "../../AppStyles";
+import lightMode from "../../LightMode";
+import darkMode from "../../DarkMode";
+import { ThemeManager } from "../../lib";
+
+const tm = new ThemeManager(lightMode, darkMode, commonStyling);
 
 export default {
-  component: ProfItem,
-  title: "ProfItem",
+  component: AppProfessionalItem,
+  title: "AppProfessionalItem",
   tags: ["autodocs"],
 };
 
@@ -12,7 +16,7 @@ export default {
 export const Light = {
     args: {
         // same interface as the props of the Component
-        theme: lightTheme.professional.item,
+        theme: tm.light.professional.item,
         experienceItemData: {
             title: "Software Engineer",
             company: "GG Navi",
@@ -28,7 +32,7 @@ export const Light = {
 export const Dark = {
     args: {
         ...Light.args,
-        theme: darkTheme.professional.item,
+        theme: tm.dark.professional.item,
     },
 };
 
@@ -36,7 +40,7 @@ export const Dark = {
 export const LightWithLongText = {
     args: {
         // same interface as the props of the Component
-        theme: lightTheme.professional.item,
+        theme: tm.light.professional.item,
         experienceItemData: {
             title: "Software Engineer",
             company: "AI Company",

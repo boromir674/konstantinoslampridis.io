@@ -1,9 +1,10 @@
 import { graphql, useStaticQuery } from "gatsby";
 import type { FC } from "react";
 import BigScreenViewInteractive from "./BigScreenViewInteractive";
-import { mergeStylings, commonStyling, ComputedTheme } from "../AppStyles";
-import lightMode from '../LightMode';
-import darkMode from '../DarkMode';
+import { commonStyling } from "../AppStyles";
+import lightMode from "../LightMode";
+import darkMode from "../DarkMode";
+import { ThemeManager } from "../lib";
 
 interface EducationItemUserTextData {
   name: string;
@@ -73,9 +74,7 @@ const App: FC = () => {
     {}
   );
 
-  const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-  const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
-
+  const tm = new ThemeManager(lightMode, darkMode, commonStyling);
 
   return (
     // <main>
@@ -111,78 +110,19 @@ const App: FC = () => {
             gitlab: name2Url["gitlab"],
             linkedin: name2Url["linkedin"],
           },
-          education: education.map(
-            (item: EducationItemUserTextData) => ({
-              degree_title: item.degree,
-              university_name: item.name,
-              location: item.location,
-              duration: item.date,
-              thesis_title: item.thesis_title,
-              topics: item.topics,
-            })
-          ),
+          education: education.map((item: EducationItemUserTextData) => ({
+            degree_title: item.degree,
+            university_name: item.name,
+            location: item.location,
+            duration: item.date,
+            thesis_title: item.thesis_title,
+            topics: item.topics,
+          })),
         },
       }}
-      colorSet={{
-        // LIGHT MODE
-        light: {
-          containerBackgroundColor: lightTheme.backgroundColor,
-          topHeaderPane: {
-            themeSwitch: lightTheme.themeSwitch,
-            headerNavigationBar: {
-              colors: lightTheme.navigationBar,
-              padding: lightTheme.headerNavigationBar.padding,
-            },
-            backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-          },
-          verticalSidePane: {
-            personalInfo: {
-              // pass Theme Personal Color Design
-              ...lightTheme.personal,
-              // adjust interface
-              linkColor: lightTheme.personal.urlTextColor,
-            },
-            education: {
-              item: lightTheme.education.item,
-            },
-          },
-          verticalMainPane: {
-            introduction: lightTheme.introduction,
-            professional: lightTheme.professional,
-            portfolio: lightTheme.portfolio,
-            // ...lightTheme,
-            // containerBackgroundColor: lightTheme.backgroundColor,
-          },
-          bottomFooterPane: lightTheme.footerStyles,
-        },
-        // DARK MODE
-        dark: {
-          containerBackgroundColor: darkTheme.backgroundColor,
-          topHeaderPane: {
-            themeSwitch: darkTheme.themeSwitch,
-            headerNavigationBar: {
-              colors: darkTheme.navigationBar,
-              padding: darkTheme.headerNavigationBar.padding,
-            },
-            backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-          },
-          verticalSidePane: {
-            personalInfo: {
-              // pass Theme Personal Color Design
-              ...darkTheme.personal,
-              // adjust interface
-              linkColor: darkTheme.personal.urlTextColor,
-            },
-            education: {
-              item: darkTheme.education.item,
-            },
-          },
-          verticalMainPane: {
-            ...darkTheme,
-          },
-          bottomFooterPane: darkTheme.footerStyles,
-        },
-      }}
+      // Current BigScreenView constructor interface requires an object of 2 keys: lightTheme and darkTheme
+      // each object value autonomously "holds" all color and common styles
+      colorSet={tm.toAppColorSet()}
     />
     // </main>
   );

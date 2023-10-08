@@ -107,6 +107,15 @@ coverage
 # Gatsby
 ############################
 
+############################
+# My Ignores
+############################
+
 public
 public-container
 src/gatsby-types.d.ts
+public-auto/
+wip/
+snippets/
+stories/
+.env

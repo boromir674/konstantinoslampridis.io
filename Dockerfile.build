@@ -106,7 +106,7 @@ ENV NODE_ENV=test
 COPY jest.config.ts .
 COPY jest-preprocess.js .
 COPY loadershim.js .
-COPY __mocks__ __mocks__
+# COPY __mocks__ __mocks__  # if uncomment, then check ./dockerignore
 CMD [ "yarn", "test" ]
 
 FROM dev as eslint

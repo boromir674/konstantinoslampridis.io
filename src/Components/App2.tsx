@@ -1,9 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import type { FC } from "react";
 import BigScreenViewInteractive from "./BigScreenViewInteractive";
-import { commonStyling } from "../AppStyles";
-import lightMode from "../LightMode";
-import darkMode from "../DarkMode";
+import { lightColorModeStyles, darkColorModeStyles, commonStyling } from "../UserDesign";
 import { ThemeManager } from "../lib";
 
 interface EducationItemUserTextData {
@@ -74,7 +72,7 @@ const App: FC = () => {
     {}
   );
 
-  const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+  const tm = new ThemeManager(lightColorModeStyles, darkColorModeStyles, commonStyling);
 
   return (
     // <main>

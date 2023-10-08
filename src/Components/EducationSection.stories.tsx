@@ -1,6 +1,16 @@
 import { Education } from "./Education";
-import lightTheme from "../LightMode";
-import darkTheme from "../DarkMode";
+import { ThemeManagerFactory } from "../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
+
+const {
+  light: {
+    verticalSidePane: { education: educationSectionStylesLightMode },
+  },
+  dark: {
+    verticalSidePane: { education: educationSectionStylesDarkMode },
+  },
+} = tm.toAppColorSet();
 
 export default {
   component: Education,
@@ -11,7 +21,7 @@ export default {
 export const Light = {
   args: {
     // same interface as the props of the Component
-    theme: lightTheme.education,
+    theme: educationSectionStylesLightMode,
     data: [
       {
         degree_title: "MSc in Artificial Intelligence",
@@ -37,10 +47,9 @@ export const Light = {
   },
 };
 
-
 export const Dark = {
   args: {
     ...Light.args,
-    theme: darkTheme.education,
+    theme: educationSectionStylesDarkMode,
   },
 };

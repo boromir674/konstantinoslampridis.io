@@ -1,10 +1,7 @@
 import ExpItemActivity from "./ExpItemActivity";
-import { commonStyling } from "../../AppStyles";
-import lightMode from "../../LightMode";
-import darkMode from "../../DarkMode";
-import { ThemeManager } from "../../lib";
+import { ThemeManagerFactory } from "../../lib";;
 
-const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const tm = ThemeManagerFactory.createFromUserDesign();
 
 export default {
   component: ExpItemActivity,

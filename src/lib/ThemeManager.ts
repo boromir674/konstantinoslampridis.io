@@ -1,6 +1,12 @@
+import design_tokens from "../design-system/tokens.json";
+
 import { ColorMode } from "./ColorModeInterface";
 import { ThemeMode } from "./ThemeModeInterface";
 import { CommonStylingInterface } from "./CommonThemeInterface";
+import replaceValuesWithTokens from "./Utils";
+
+// Explicit Typechecking
+const DESIGN_TOKENS: { [key: string]: string } = design_tokens;
 
 const mergeStylings = (
   colorMode: ColorMode,
@@ -47,7 +53,6 @@ const mergeStylings = (
   };
 };
 
-
 class ThemeManager {
   private lightMode: ColorMode;
   private darkMode: ColorMode;
@@ -58,8 +63,14 @@ class ThemeManager {
     darkMode: ColorMode,
     commonStyles: CommonStylingInterface
   ) {
-    this.lightMode = lightMode;
-    this.darkMode = darkMode;
+    this.lightMode = replaceValuesWithTokens(
+      lightMode,
+      DESIGN_TOKENS
+    ) as ColorMode;
+    this.darkMode = replaceValuesWithTokens(
+      darkMode,
+      DESIGN_TOKENS
+    ) as ColorMode;
     this.commonStyles = commonStyles;
   }
 
@@ -108,6 +119,5 @@ class ThemeManager {
     };
   };
 }
-
 
 export default ThemeManager;

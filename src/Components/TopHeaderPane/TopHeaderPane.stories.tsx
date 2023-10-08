@@ -1,11 +1,8 @@
 import { useState, FC, useCallback } from 'react';
 import { TopHeaderPane, TopHeaderPaneProps } from "./TopHeaderPane";
-import { commonStyling } from "../../AppStyles";
-import lightMode from "../../LightMode";
-import darkMode from "../../DarkMode";
-import { ThemeManager } from "../../lib";
+import { ThemeManagerFactory } from "../../lib";
 
-const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const tm = ThemeManagerFactory.createFromUserDesign();
 
 // App Styles ('light' + common), 'dark' + common)
 const colorSet = tm.toAppColorSet()

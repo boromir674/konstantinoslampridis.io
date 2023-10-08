@@ -1,8 +1,6 @@
 import AppIntroductionSection from "./AppIntroductionSection";
-import { commonStyling } from "../../AppStyles";
-import lightMode from "../../LightMode";
-import darkMode from "../../DarkMode";
-import { ThemeManager } from "../../lib";
+import { ThemeManagerFactory } from "../../lib";
+
 
 export default {
   component: AppIntroductionSection,
@@ -10,7 +8,8 @@ export default {
   tags: ["autodocs"],
 };
 
-const tm = new ThemeManager(lightMode, darkMode, commonStyling);
+const tm = ThemeManagerFactory.createFromUserDesign();
+
 const {
   light: {
     verticalMainPane: { introduction: introductionSectionStylesLightMode },

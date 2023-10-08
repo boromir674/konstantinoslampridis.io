@@ -184,3 +184,4 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
 };
 
 export default PersonalInfo;
+export type { PersonalInfoProps };

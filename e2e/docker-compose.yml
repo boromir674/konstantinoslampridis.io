@@ -31,3 +31,10 @@ services:
 
 # Start the application, run the headless tests and close services:
 # docker-compose up --exit-code-from cypress
+
+
+# if you have my_app running detached at localhost:9000 (ie with `make static_file_server`):
+
+# xhost +
+# docker run -it -v $PWD:/e2e -w /e2e -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --network="host" -e CYPRESS_baseUrl=http://localhost:9000 --entrypoint cypress cypress/included:3.2.0 open --project /e2e
+# xhost +

@@ -66,15 +66,7 @@
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				// "ms-azuretools.vscode-docker",
-				// "ms-kubernetes-tools.vscode-kubernetes-tools",
-				// "ms-python.python",
-				// "ms-python.vscode-pylance",
-				// "patbenatar.advanced-new-file",
-				// "aaron-bond.better-comments",
-				// "ms-python.autopep8",
-				// "mtxr.sqltools",
-				// "mtxr.sqltools-driver-pg"
+				"ReacTreeDev.reactree"
 			]
 		}
 	}

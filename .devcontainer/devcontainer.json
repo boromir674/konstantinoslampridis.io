@@ -42,7 +42,7 @@
 	// to enable git commands
 	"postStartCommand": {
 		"git_add_safe": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-		"yarn_install": "yarn install --frozen-lockfile --prodution=false --non-interactive",
+		"yarn_install": "yarn install --frozen-lockfile --production=false --non-interactive",
 		"yarn_develop": "yarn develop"
 	},
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.

@@ -1,0 +1,73 @@
+// Update the VARIANT arg in docker-compose.yml to pick a Python version
+{
+	"name": "Static_Site_Generator",
+
+	//Dedicated to Docker-compose
+	//----------------------
+	"dockerComposeFile": ["docker-compose-app.yml"],
+
+	// set the service to connect to, out of all the "composed" services
+	"service": "ssg_dev_environment",
+	//----------------------	
+
+	//Dedicated to docker-file/kubernetes
+	//----------------------
+	// "build" : {
+	// 	"dockerfile": "Dockerfile",
+	// 	"context" : ".."
+	// },
+	// "overrideCommand": false,
+	// "remoteEnv": {
+	// 	"SYNC_LOCALHOST_KUBECONFIG": "true"
+	// },
+	// "runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_BIND_SERVICE"],	
+	//----------------------	
+
+	"mounts": [
+		"source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+		// "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
+		// Uncomment the next line to also sync certs in your .minikube folder
+		// "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
+	],
+	
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// "remoteUser": "vscode",
+
+	// postCreateCommand -> postStartCommand
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "pip install --user -r requirements.txt",
+	
+	//"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && poetry install -E test",
+	// to enable git commands
+	"postStartCommand": {
+		"git_add_safe": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+		"yarn_install": "yarn install --frozen-lockfile --production=false --non-interactive",
+		"yarn_develop": "yarn develop"
+	},
+	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	"forwardPorts": [8000, 9000],
+	// hot-reload server is on 8000
+	// static file server is on 9000
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ReacTreeDev.reactree"
+			]
+		}
+	}
+}

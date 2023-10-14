@@ -1,5 +1,10 @@
 import { VerticalSidePane } from "./VerticalSidePane";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import { ThemeManagerFactory } from "../../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
+
+// App Styles ('light' + common), 'dark' + common)
+const colorSet = tm.toAppColorSet()
 
 export default {
   component: VerticalSidePane,
@@ -10,18 +15,7 @@ export default {
 export const Light = {
   args: {
     // same interface as the props of the Component
-    theme: {
-        personalInfo: {
-            containerBackgroundColor: lightTheme.personal.containerBackgroundColor,
-            textColor: lightTheme.personal.textColor,
-            linkColor: lightTheme.personal.urlTextColor,
-        },
-        education: {
-            containerBackgroundColor: lightTheme.education.containerBackgroundColor,
-            title: lightTheme.education.title,
-            item: lightTheme.education.item,
-        }
-    },
+    theme: colorSet.light.verticalSidePane,
     data: {
       personal: {
         name: "John Doe",
@@ -59,17 +53,6 @@ export const Light = {
 export const Dark = {
   args: {
     ...Light.args,
-    theme: {
-        personalInfo: {
-            containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
-            textColor: darkTheme.personal.textColor,
-            linkColor: darkTheme.personal.urlTextColor,
-        },
-        education: {
-            containerBackground: darkTheme.education.containerBackgroundColor,
-            title: darkTheme.education.title,
-            item: darkTheme.education.item,
-        }
-    },
+    theme: colorSet.dark.verticalSidePane,
   },
 };

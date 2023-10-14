@@ -1,8 +1,12 @@
 import BigScreenViewInteractive, {
   BigScreenViewInteractiveProps,
 } from "./BigScreenViewInteractive";
-import { lightTheme, darkTheme } from "../AppStyles";
 
+import { ThemeManagerFactory } from "../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
+
+// STORY CONFIGURATION
 export default {
   component: BigScreenViewInteractive,
   title: "BigScreenViewInteractive",
@@ -127,59 +131,7 @@ const arg1: BigScreenViewInteractiveProps = {
       ],
     },
   },
-  colorSet: {
-    light: {
-      containerBackgroundColor: lightTheme.backgroundColor,
-      topHeaderPane: {
-        navigationBar: lightTheme.navigationBar,
-        backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-      },
-      verticalSidePane: {
-        personalInfo: {
-          containerBackgroundColor:
-            lightTheme.personal.containerBackgroundColor,
-          textColor: lightTheme.personal.textColor,
-          linkColor: lightTheme.personal.urlTextColor,
-        },
-        education: {
-          containerBackgroundColor:
-            lightTheme.education.containerBackgroundColor,
-          title: lightTheme.education.title,
-          item: lightTheme.education.item,
-        },
-      },
-      verticalMainPane: {
-        ...lightTheme,
-        containerBackgroundColor: lightTheme.backgroundColor,
-      },
-      bottomFooterPane: lightTheme.footerStyles,
-    },
-    dark: {
-      containerBackgroundColor: darkTheme.backgroundColor,
-      topHeaderPane: {
-        navigationBar: darkTheme.navigationBar,
-        backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-      },
-      verticalSidePane: {
-        personalInfo: {
-          containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
-          textColor: darkTheme.personal.textColor,
-          linkColor: darkTheme.personal.urlTextColor,
-        },
-        education: {
-          containerBackgroundColor:
-            darkTheme.education.containerBackgroundColor,
-          title: darkTheme.education.title,
-          item: darkTheme.education.item,
-        },
-      },
-      verticalMainPane: {
-        ...darkTheme,
-        containerBackgroundColor: darkTheme.backgroundColor,
-      },
-      bottomFooterPane: darkTheme.footerStyles,
-    },
-  },
+  colorSet: tm.toAppColorSet(),
 };
 
 export const LightColorOnTheLeft = {

@@ -1,6 +1,6 @@
 {
   "name": "konstantinos-lampridis-online",
-  "version": "1.0.0",
+  "version": "1.3.1-dev",
   "private": true,
   "description": "konstantinos-lampridis-online",
   "author": "konstantinos",
@@ -15,6 +15,7 @@
     "clean": "gatsby clean",
     "test": "jest",
     "typecheck": "tsc --noEmit",
+    "typecheck-live": "tsc --noEmit --watch --pretty",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "cypress-headless": "cypress run"
@@ -22,7 +23,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@types/js-yaml": "^4.0.5",
     "babel-eslint": "^10.1.0",
     "browserslist": "^4.21.5",
     "color-interpolate": "^1.0.5",
@@ -59,6 +59,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-grid-layout": "^1.3.2",
+    "@types/react-helmet": "^6.1.6",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "babel-jest": "^29.0.3",

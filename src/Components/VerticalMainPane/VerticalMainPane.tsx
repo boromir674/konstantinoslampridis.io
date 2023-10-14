@@ -11,11 +11,11 @@ import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 // import PortfolioSection from "../Portfolio";
 import PortfolioSection, {
   ResponsiveLocalStorageLayoutProps,
-} from "../Portfolio/PortfolioSectionV3";
+} from "../Portfolio/PortfolioSection";
 
 interface AppVerticalMainPaneTheme {
   // color of outer most div
-  containerBackgroundColor: string;
+  // containerBackgroundColor: string;
   introduction: {
     containerBackgroundColor: string;
     textColor: string;
@@ -23,7 +23,7 @@ interface AppVerticalMainPaneTheme {
   professional: {
     title: {
       textColor: string;
-      backgroundColor?: string;
+      backgroundColor: string;
     };
     item: {
       backgroundColor: string;
@@ -38,12 +38,6 @@ interface AppVerticalMainPaneTheme {
     };
     containerBackgroundColor: string;
   };
-  // portfolio: {
-  //   // Color Mode Design
-  //   color: string;
-  //   // Other Design
-  //   width: string;
-  // };
   portfolio: {
     container: {
       backgroundColor: string;
@@ -55,6 +49,8 @@ interface AppVerticalMainPaneTheme {
     item: {
       backgroundColor: string;
       color: string;
+      urlLinkTextColor: string;
+      onHoverURLLinkTextColor: string;
       outline: {
         // Color Mode Design
         color: string;
@@ -72,7 +68,7 @@ interface VerticalMainPaneContainerProps {
 
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
   left: 0px;
-  background-color: ${(props) => props.theme.containerBackgroundColor};
+  // background-color: (props) => props.theme.containerBackgroundColor}
   // background-color: inherit;
   grid-area: Main;
   // hard-coded fix which prevents a bug:
@@ -125,8 +121,7 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
           title: {
             textColor: theme.professional.title.textColor,
             backgroundColor:
-              theme.professional.title.backgroundColor ||
-              theme.containerBackgroundColor,
+              theme.professional.title.backgroundColor
           },
         }}
         data={{ experience_items: data.professional }}
@@ -136,9 +131,14 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
         id={sectionIDs ? sectionIDs[2] : "open-source-portfolio-section"}
         data={data.portfolio}
         theme={{
-          ...theme.portfolio,
+          container: theme.portfolio.container,
+          sectionHeader: theme.portfolio.sectionHeader,
           item: {
-            ...theme.portfolio.item,
+            color: theme.portfolio.item.color,
+            backgroundColor: theme.portfolio.item.backgroundColor,
+            urlLinkTextColor: theme.portfolio.item.urlLinkTextColor,
+            onHoverURLLinkTextColor: theme.portfolio.item.onHoverURLLinkTextColor,
+            // onHoverURLLinkTextColor: "#123345",
             outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
           },
         }}

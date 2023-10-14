@@ -15,6 +15,7 @@ interface AppVerticalSidePaneTheme {
     containerBackgroundColor: string;
     textColor: string;
     linkColor: string;
+    externalURLSVGColor: string;
   };
   education: AppEducationSectionProps["theme"];
 }

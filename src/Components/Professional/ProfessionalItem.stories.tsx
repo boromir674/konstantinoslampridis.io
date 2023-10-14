@@ -1,9 +1,11 @@
-import ProfItemPOC from "./ProfItemPOC";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import ProfessionalItem from "./ProfessionalItem";
+import { ThemeManagerFactory } from "../../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
 
 export default {
-  component: ProfItemPOC,
-  title: "ProfItemPOC",
+  component: ProfessionalItem,
+  title: "ProfessionalItem",
   tags: ["autodocs"],
 };
 
@@ -13,12 +15,7 @@ export const Light = {
     // theme
     theme: {
       tags: {
-        item: lightTheme.professional.item.tag,
-        // item: {
-        //   ...lightTheme.professional.item.tag,
-        //   onHoverBackgroundColor: "#000000",
-        //   onHoverTextColor: "#ffffff",
-        // },
+        item: tm.light.professional.item.tag,
       },
     },
     // data
@@ -40,7 +37,7 @@ export const Dark = {
     ...Light.args,
     theme: {
       tags: {
-        item: darkTheme.professional.item.tag,
+        item: tm.dark.professional.item.tag,
       },
     },
   },

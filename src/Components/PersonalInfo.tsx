@@ -75,7 +75,6 @@ const InfoURLVerticalFlexContainerItem = styled.div<URLProps>`
 
 const Link = styled.a<URLProps>`
   color: ${(props) => props.theme.textColor};
-  // color: #2063e9;
   // text-decoration: none;
   transition: color 0.3s ease;
 
@@ -87,17 +86,6 @@ const Link = styled.a<URLProps>`
 const MyLink = styled(Link)`
   margin-right: 10px;
 `;
-
-// Open PDF in new TAB ICON
-// library.add(faB, faS, faHouseLaptop, faCheckSquare, faCoffee, faDatabase, faWindowMaximize)
-const IconWrapper = styled.span`
-  margin-right: 8px;
-`;
-const ExternalLinkIcon = () => (
-  <IconWrapper>
-    <i className="fas fa-external-link-alt"></i>
-  </IconWrapper>
-);
 
 
 // TODO read ALL Data from props
@@ -118,7 +106,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
         <InfoValue>
           <MyLink
             href={`https://${github}`}
-            target="_blank"
+            target="_blank"  // usually open in new tab, but users can configure browsers to open a new window instead
             rel="noopener noreferrer"
             theme={{
               textColor: theme.linkColor,
@@ -161,7 +149,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
       {/* Render the various PDF documents and link to their publicly accessible urls */}
       <InfoItem>
         {" "}
-        <InfoKey>Curricular Docs:</InfoKey>{" "}
+        <InfoKey>Curricular PDFs:</InfoKey>{" "}
         <InfoURLVerticalFlexContainer>
           {/* 1 PAGE RESUME */}
           <InfoURLVerticalFlexContainerItem theme={{ textColor: "#fff" }}>
@@ -196,3 +184,4 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
 };
 
 export default PersonalInfo;
+export type { PersonalInfoProps };

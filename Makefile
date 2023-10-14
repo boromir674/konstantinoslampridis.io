@@ -63,11 +63,19 @@ copy_shell_lock:
 build_dev_server: Dockerfile.build  ## Build development server image
 	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
 
-# DEV SERVER
-run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"
+# DEV SERVER on localhost
+run_dev_server: build_dev_server  ## Run a development server with "hot-reloading", inside an ephemeral container, and expose on localhost 8000
 	docker run -p 8000:8000 -p 9929:9929 -p 9230:9230 -it --rm \
 		-v /data/repos/static-site-generator/src:/app/src \
 		$(DEV_SERVER_NAME)
+
+# STORYBOOK DEV SERVER on localhost
+storybook: ## Run a Storybook server with "hot-reload" of Components/Stories code, inside an ephemeral container, and expose on localhost 6006
+	docker build -f Dockerfile.build --target storybook -t $(STORYBOOK_NAME) .
+	docker run -it --rm -p 6006:6006 \
+	-v /data/repos/static-site-generator/src:/app/src \
+	$(STORYBOOK_NAME)
+
 
 # DEV ACTIVITIES
 ## update caniuse-lite with browsers DB from Browserslist config.
@@ -79,9 +87,9 @@ update_browserslist: build_dev_server
 dev_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) container
 	docker build -f Dockerfile.build --target dev -t ssg-dev-im .
 	docker run -it --rm --name ssg-dev-container \
+		-v /data/repos/static-site-generator/src/:/app/src/ \
 		-v /data/repos/static-site-generator/package.json:/app/package.json \
 		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
-		-v /data/repos/static-site-generator/src/:/app/src/ \
 		ssg-dev-im bash
 
 ## PROD SHELL
@@ -95,7 +103,7 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 
 
 # TEST
-test:  ## Run Test Suite
+test:  ## Fire up a ready-to-run-unit-tests shell, inside an ephemeral container
 	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
 	docker run -it --rm \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
@@ -105,9 +113,17 @@ test:  ## Run Test Suite
 
 
 # TYPE CHECK
-typecheck:  ## Type Checking in Typescript
+typecheck:  ## Headless Type Checking in Typescript
 	docker build -f Dockerfile.build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
 	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
+
+typecheck_live:  ## Type Checking in Typescript, with Hot Reload
+	docker build -f Dockerfile.build --target type_check_live -t $(TYPE_CHECK_IMAGE_NAME_LIVE) .
+	docker run -it --rm \
+		-v /data/repos/static-site-generator/src:/app/src \
+		-v /data/repos/static-site-generator/gatsby-config.ts:/app/gatsby-config.ts \
+		-v /data/repos/static-site-generator/gatsby-node.ts:/app/gatsby-node.ts \
+		$(TYPE_CHECK_IMAGE_NAME_LIVE)
 
 
 # ESLINT

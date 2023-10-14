@@ -2,14 +2,15 @@ import react, { useState, useCallback, FC, useRef } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
-import PortfolioItemCard from "./PortfolioItemV3";
 import { withDefaultProps } from "../hoc";
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
-import AppPortfolioItem from "./AppPortfolioItem";
-
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
+
+import PortfolioItemCard from "./PortfolioItemContainer";
+import AppPortfolioItem from "./AppPortfolioItem";
+
 
 // const ResponsiveReactGridLayout = useMemo(() => WidthProvider(Responsive), []);
 
@@ -98,6 +99,8 @@ interface ResponsiveLocalStorageLayoutProps {
       outline?: string;
       backgroundColor: string;
       color: string;
+      urlLinkTextColor: string;
+      onHoverURLLinkTextColor: string;
     };
   };
   element_to_render: typeof PortfolioItemCard;
@@ -267,7 +270,10 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               <ResponsiveLayoutItemContent
                 data={item}
                 renderProps={(d: PortfolioItemInterface) => {
-                  return <AppPortfolioItem data={d} />;
+                  return <AppPortfolioItem data={d} theme={{
+                    urlLinkTextColor: theme.item.urlLinkTextColor,
+                    onHoverURLLinkTextColor: theme.item.onHoverURLLinkTextColor,
+                  }} />;
                 }}
 
                 // layoutItemID={index.toString()}

@@ -1,4 +1,4 @@
 
-import PortfolioSectionFC from "./PortfolioSectionV3";
+import PortfolioSectionFC from "./PortfolioSection";
 
 export default PortfolioSectionFC;

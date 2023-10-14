@@ -1,14 +1,17 @@
-import React from "react";
+/* Provides a Component to render the Tokens JSON in a readable format */
+import React, { FC } from "react";
 
 import DATA from "./tokens.json";
 
+type TokensData = {
+  [key: string]: string;
+};
 
-
-const ColorPalette = () => {
+const ColorPalette: FC = () => {
   const sourceColor = "#ff9288";
 
   // auxiliary
-  const colorData = DATA;
+  const colorData: TokensData = DATA;
 
   const colorCategories = [
     { name: "primary", palette: "md-ref-palette-primary" },
@@ -21,7 +24,7 @@ const ColorPalette = () => {
   const getColorValue = (category: string, step: number) => {
     const palette = `--${category}${step}`;
     console.log("PALLETE", palette);
-    const res = colorData[`${palette}`];
+    const res: string = colorData[`${palette}`];
     console.log(res);
     return res;
   };

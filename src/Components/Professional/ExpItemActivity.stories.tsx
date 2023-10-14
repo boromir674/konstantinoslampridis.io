@@ -1,6 +1,7 @@
 import ExpItemActivity from "./ExpItemActivity";
-import { lightTheme, darkTheme } from '../../AppStyles';
+import { ThemeManagerFactory } from "../../lib";;
 
+const tm = ThemeManagerFactory.createFromUserDesign();
 
 export default {
   component: ExpItemActivity,
@@ -11,8 +12,8 @@ export default {
 export const Light = {
     args: {
         theme: {
-            containerBackgroundColor: lightTheme.introduction.containerBackgroundColor,
-            textColor: lightTheme.introduction.textColor,
+            containerBackgroundColor: tm.light.introduction.containerBackgroundColor,
+            textColor: tm.light.introduction.textColor,
         },
         data: {
             text: "Auditing the ML predictive models",
@@ -24,8 +25,8 @@ export const Dark = {
     args: {
         ...Light.args,
         theme: {
-            containerBackgroundColor: darkTheme.introduction.containerBackgroundColor,
-            textColor: darkTheme.introduction.textColor,
+            containerBackgroundColor: tm.dark.introduction.containerBackgroundColor,
+            textColor: tm.dark.introduction.textColor,
         },
     }
 };

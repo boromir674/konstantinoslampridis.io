@@ -1,5 +1,22 @@
-import AppHorNavItem from "./AppHorNavItem";
-import { lightTheme, darkTheme } from "../../AppStyles";
+import AppHorNavItem, { NavItemProps } from "./AppHorNavItem";
+
+import { ThemeManagerFactory } from "../../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
+
+const {
+  light: {
+    topHeaderPane: {
+      headerNavigationBar: horNavItemLightStyles,
+    }
+  },
+  dark: {
+    topHeaderPane: {
+      headerNavigationBar: horNavItemDarkStyles,
+    },
+  }
+} = tm.toAppColorSet();
+
 
 export default {
   component: AppHorNavItem,
@@ -7,40 +24,28 @@ export default {
   tags: ["autodocs"],
 };
 
-// Deactivated Light
-export const DeactivatedLight = {
-  args: {
-    // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
-    active: false,
-    children: "Not in current view",
-  },
+
+const lightProps: NavItemProps = {
+  // same interface as the props of the Component
+  // Theme
+  theme: horNavItemLightStyles,
+  // Data
+  active: false,  // on initialization
+  // Children React Elements to render
+  children: "Not in current view",
 };
 
-// Deactivated Dark
-export const DeactivatedDark = {
-  args: {
-    // same interface as the props of the Component
-    ...DeactivatedLight.args,
-    colorSet: darkTheme.navigationBar,
-  },
+
+// Render with LIGHT Theme
+export const LightNavigationItem = {
+  args: lightProps,
 };
 
-// Activated Light
-export const ActivatedLight = {
+// Render with DARK Theme
+export const DarkNavigationItem = {
   args: {
     // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
-    active: true,
-    children: "In current view",
-  },
-};
-
-// Activated dark
-export const ActivatedDark = {
-  args: {
-    // same interface as the props of the Component
-    ...ActivatedLight.args,
-    colorSet: darkTheme.navigationBar,
+    ...LightNavigationItem.args,
+    theme: horNavItemDarkStyles,
   },
 };

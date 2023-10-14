@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import ExperienceItem from "./ExperienceItemGeneric";
 import ExperienceItemData from "../../ExperienceItemDataInterface";
-import ProfItemPOC from "./ProfItemPOC";
+import ProfessionalItem from "./ProfessionalItem";
 
 interface ProfessionalItemTheme {
   // styles unrelated to colors
@@ -82,7 +82,7 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
       theme,
     }: renderPropsArgs) => (
       <AppProfessionalItem theme={theme} onClick={onClick}>
-        <ProfItemPOC
+        <ProfessionalItem
           title={title}
           duration={duration}
           location={location}

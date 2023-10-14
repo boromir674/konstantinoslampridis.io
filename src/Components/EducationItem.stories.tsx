@@ -1,5 +1,20 @@
 import { EducationItem } from "./Education";
-import { lightTheme, darkTheme } from "../AppStyles";
+import { ThemeManagerFactory } from "../lib";
+
+const tm = ThemeManagerFactory.createFromUserDesign();
+
+const {
+  light: {
+    verticalSidePane: {
+      education: { item: educationItemStylesLightMode },
+    },
+  },
+  dark: {
+    verticalSidePane: {
+      education: { item: educationItemStylesDarkMode },
+    },
+  },
+} = tm.toAppColorSet();
 
 export default {
   component: EducationItem,
@@ -9,22 +24,21 @@ export default {
 
 export const Light = {
   args: {
-    theme: lightTheme.education.item,
+    theme: educationItemStylesLightMode,
     userData: {
-    degree_title: "MSc in Artificial Intelligence",
-    university_name: "University of Amsterdam",
-    location: "Amsterdam, Netherlands",
-    duration: "2014 - 2019",
-    thesis_title: "Political Spectrum Aware Topic Model",
-    topics: ["python", "docker"],
-    }
+      degree_title: "MSc in Artificial Intelligence",
+      university_name: "University of Amsterdam",
+      location: "Amsterdam, Netherlands",
+      duration: "2014 - 2019",
+      thesis_title: "Political Spectrum Aware Topic Model",
+      topics: ["python", "docker"],
+    },
   },
 };
 
 export const Dark = {
   args: {
     ...Light.args,
-    theme: darkTheme.education.item,
-    // theme: darkTheme.professional.item,
+    theme: educationItemStylesDarkMode,
   },
 };

@@ -116,3 +116,6 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
 };
 
 export default AppPortfolioItem;
+
+export { ReleasesPane, ReleaseListContainer };
+export type { RenderRelease };

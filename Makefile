@@ -78,6 +78,16 @@ storybook: ## Run the Storybook server on localhost, with "hot-reload" of source
 
 
 # DEV ACTIVITIES
+
+## YARN ADD
+yarn_add:  ## Do Yarn Add <package-name>
+	docker build -f Dockerfile.build --target install -t $(YARN_ADD_NAME) .
+	docker run -it --rm \
+		-v $(PWD)/package.json:/app/package.json \
+		-v $(PWD)/yarn.lock:/app/yarn.lock \
+		$(YARN_ADD_NAME) yarn add $(filter-out $@,$(MAKECMDGOALS))
+
+
 ## update caniuse-lite with browsers DB from Browserslist config.
 update_browserslist: build_dev_server
 	docker run -v /data/repos/static-site-generator/package.json:/app/package.json -it --rm $(DEV_SERVER_NAME) sh
@@ -100,6 +110,7 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 		-v /data/repos/static-site-generator/yarn.lock:/app/yarn.lock \
 		-v /data/repos/static-site-generator/src/:/app/src/ \
 		ssg-prod-im bash
+
 
 
 # TEST
@@ -136,3 +147,4 @@ clean:
 	docker rmi $(TYPE_CHECK_IMAGE_NAME)
 	docker rmi $(ESLINT_IMAGE_NAME)
 	docker rmi $(DEV_SERVER_NAME)
+	docker rmi $(STORYBOOK_NAME)

@@ -94,12 +94,23 @@ interface Theme {
       backgroundColor: string;
       color: string;
     };
+    // PROJECT ITEM
     item: {
       outline: {
         color: string;
       };
       backgroundColor: string;
       color: string;
+      releases: {
+        backgroundColor: string;
+        color: string;
+        item: {
+          backgroundColor: string;
+          color: string;
+          onHoverBackgroundColor: string;
+          onHoverColor: string;
+        };
+      };
     };
   };
 
@@ -176,6 +187,23 @@ interface ComputedTheme extends Theme {
       };
       backgroundColor: string;
       color: string;
+      releases: {
+        // Color styles
+        backgroundColor: string;
+        color: string;
+        // other styles
+        fontFamily: string;
+        headerMarginBottom: string;
+        item: {
+          // Color styles
+          backgroundColor: string;
+          color: string;
+          onHoverBackgroundColor: string;
+          onHoverColor: string;
+          // other styles
+          fontFamily: string;
+        };
+      };
     };
   };
 }
@@ -217,6 +245,13 @@ const commonStyling = {
     item: {
       outline: {
         width: "3px",
+      },
+      releases: {
+        headerFont: "Roboto, sans-serif",
+        headerMarginBottom: "15px",
+        item: {
+          font: "Roboto, sans-serif",
+        },
       },
     },
   },
@@ -269,6 +304,16 @@ const mergeStylings = (
         outline: {
           ...theme.portfolio.item.outline,
           ...commonStyling.portfolio.item.outline,
+        },
+        releases: {
+          ...theme.portfolio.item.releases,
+          fontFamily: commonStyling.portfolio.item.releases.headerFont,
+          headerMarginBottom: commonStyling.portfolio.item.releases.headerMarginBottom,
+          item: {
+            ...theme.portfolio.item.releases.item,
+            fontFamily: commonStyling.portfolio.item.releases.item.font,
+          },
+
         },
       },
     },

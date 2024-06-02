@@ -97,12 +97,41 @@ const lightColorMode: Theme = {
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
     },
+    // PROJECT ITEM
     item: {
       // TODO; fix bug: item color backgroundColor has no effect
       backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
       color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
       outline: {
         color: DESIGN_TOKENS['--md-sys-color-outline-light'],
+      },
+      // RESOURCE LINKS - PANE - LIGHT
+      resourceLinks: {
+        backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+        headerColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+        item: {
+          backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+          color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+          onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
+          onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
+        }
+        // linkColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+        // onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
+        // onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
+      },
+      // RELEASES PANE LIGHT
+      releases: {
+        backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+        color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+        // RELEASE ITEM
+        item: {
+          // backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+          // --md-sys-color-surface-variant-light
+          backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-light'],
+          color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+          onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
+          onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
+        },
       },
     },
   },

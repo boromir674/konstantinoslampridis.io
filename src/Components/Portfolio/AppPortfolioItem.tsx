@@ -1,15 +1,12 @@
 import React, { FC, useCallback } from "react";
+import Typography from '../Typography';
 import styled from "@emotion/styled";
 import PortfolioItemInterface, {
   ReleaseItemData,
 } from "../../PortfolioItemInterface";
+import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
+import AppProjectLinksPane, { LinksPaneProps } from './AppProjectLinksPane';
 
-const TopPartBlock = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 const LeftPane = styled.div`
   display: flex;
@@ -49,73 +46,102 @@ const ReleaseListContainer = styled.div`
 // Helper function definition
 type RenderRelease = (release: ReleaseItemData, index: number) => React.ReactNode;
 
-const render = (d: PortfolioItemInterface, renderRelease: RenderRelease) => {
+const RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT: { [key: string]: string } = {
+  'source_code_repo': 'Source Code',
+  'docs': 'Documentation',
+  'documentation': 'Documentation',
+  'ci/cd': 'CI/CD',
+};
+
+interface AppPortfolioItemProps {
+  data: PortfolioItemInterface;
+  theme: {
+    links: LinksPaneProps['theme'];
+    releases: ReleasesPaneProps["theme"];
+  };
+  //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
+}
+
+// links: [
+//   {
+//       title: 'Source Code',
+//       url: 'https://github.com/example/repo',
+//       type: 'github-repo',
+//   },
+//   {
+//       title: 'Documentation',
+//       url: 'https://example.com/docs',
+//       type: 'docs',
+//   },
+//   {
+//       title: 'CI/CD Pipeline',
+//       url: 'https://example.com/ci-cd',
+//       type: 'ci/cd',
+//   },
+// ],
+const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
   return (
     <>
       <h1>{d.title}</h1>
-      <TopPartBlock>
+      {/* Project Description. Could be github description or description from CV Pdf */}
+      <Typography variant="body1" gutterBottom>
+        {d.description}
+      </Typography>
+      <BottomPartBlock>
         <LeftPane>
-          <span>
-            Source Code:<a>github.com/{d.source_code_repo}</a>
-          </span>
+          {d.resource_links ? (
+            <AppProjectLinksPane
+              data={{
+                links: d.resource_links.map((link) => ({
+                  title: RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT[link.type],
+                  url: link.url,
+                  type: link.type as 'github-repo' | 'docs' | 'ci/cd' | 'other',
+                })),
+              }}
+              theme={{
+                headerColor: theme.links.headerColor,
+                item: theme.links.item
+              }}
+            ></AppProjectLinksPane>
+          ) : (
+            <></>
+          )}
         </LeftPane>
         <RightPane>
           <span>Software maturity level: {d.status}</span>
           {/* A Block where each element covers a line */}
           {/* Each element should be able to wrap below according to size of block */}
           {d.release ? (
-            <ReleasesPane>
-              <h3>Releases</h3>
-              <ReleaseListContainer>
-                {d.release.map((release, index) => renderRelease(release, index))}
-              </ReleaseListContainer>
-            </ReleasesPane>
+            <AppReleasePane data={d.release} theme={{
+              headerFontFamily: theme.releases.headerFontFamily,
+              headerColor: theme.releases.headerColor,
+              headerMarginBottom: theme.releases.headerMarginBottom,
+              releaseButtonTheme: theme.releases.releaseButtonTheme,
+            }} />
           ) : (
             <></>
           )}
         </RightPane>
-      </TopPartBlock>
-      <BottomPartBlock>{d.description}</BottomPartBlock>
+      </BottomPartBlock>
     </>
   );
 };
 
 // React Component
 
-interface AppPortfolioItemProps {
-  data: PortfolioItemInterface;
-  //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
-}
+const AppPortfolioItem: FC<AppPortfolioItemProps> = (props) => {
 
-const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data }) => {
-  // create a callback function at most 2 times,
-  // since we currently support 2 type of releases: pypi and github
-  const renderReleaseCallback: RenderRelease = useCallback(
-    (r: ReleaseItemData, index: number) => {
-      return (
-        <div key={index}>
-          <span>
-            {r.type} {"->"}{" "}
-          </span>
-          <span>{r.artifact_version}</span>
-        </div>
-      );
+  const renderCallback = useCallback(
+    (portfolioItemProps: AppPortfolioItemProps) => {
+      return render(portfolioItemProps.data, portfolioItemProps.theme);
     },
     []
   );
 
-  //   const renderCallback: (data: PortfolioItemInterface) => React.ReactNode = useCallback(
-  const renderCallback = useCallback(
-    (portfolioItemData: PortfolioItemInterface) => {
-      return render(portfolioItemData, renderReleaseCallback);
-    },
-    [renderReleaseCallback]
-  );
-
-  return <>{renderCallback(data)}</>;
+  return <div>{renderCallback(props)}</div>;
 };
 
 export default AppPortfolioItem;
 
 export { ReleasesPane, ReleaseListContainer };
-export type { RenderRelease };
+export type { RenderRelease, AppPortfolioItemProps };

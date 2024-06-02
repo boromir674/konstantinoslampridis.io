@@ -16,7 +16,21 @@ const args: AppVerticalMainPaneProps = {
   theme: {
     introduction: lightTheme.introduction,
     professional: lightTheme.professional,
-    portfolio: lightTheme.portfolio,
+    // portfolio: lightTheme.portfolio,
+    portfolio: {
+      ...lightTheme.portfolio,
+      item: {
+        ...lightTheme.portfolio.item,
+        theme: {
+          releases: {
+            headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+            headerColor: lightTheme.portfolio.item.releases.color,
+            headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
+            releaseButtonTheme: lightTheme.portfolio.item.releases.item
+          }
+        },
+      },
+    }
   },
   data: {
     introduction: {

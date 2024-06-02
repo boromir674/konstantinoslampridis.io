@@ -6,33 +6,14 @@ import PortfolioItemCard from "./PortfolioItemV3";
 import { withDefaultProps } from "../hoc";
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
-import AppPortfolioItem from "./AppPortfolioItem";
-
+import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
+import { LayoutInterface } from './LayoutInterface';
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
 
-// const ResponsiveReactGridLayout = useMemo(() => WidthProvider(Responsive), []);
 
 // taken from react-grid-layout source code
-interface LayoutItemType {
-  w: number;
-  h: number;
-  x: number;
-  y: number;
-  i: string;
-  minW?: number;
-  minH?: number;
-  maxW?: number;
-  maxH?: number;
-  moved?: boolean;
-  static?: boolean;
-  isDraggable?: boolean;
-  isResizable?: boolean;
-  resizeHandles?: Array<"s" | "w" | "e" | "n" | "sw" | "nw" | "se" | "ne">;
-  isBounded?: boolean;
-}
-// taken from react-grid-layout source code
-type Layout = ReadonlyArray<LayoutItemType>;
+type Layout = ReadonlyArray<LayoutInterface>;
 // taken from react-grid-layout source code
 interface Layouts {
   [P: string]: Layout[];
@@ -87,17 +68,21 @@ interface ResponsiveLocalStorageLayoutProps {
   id: string;
   data: PortfolioItemInterface[];
   theme: {
+    // OUTER MOST element of 'Portfolio Header' + 'Portfolio Layout Content'
     container: {
       backgroundColor: string;
     };
+    // HEADER with Title; ie 'Open Source & Portfolio'
     sectionHeader: {
       backgroundColor: string;
       color: string;
     };
+    // Each Portfolio Item Card
     item: {
-      outline?: string;
-      backgroundColor: string;
-      color: string;
+      outline?: string;  // styles the 'outline' css of the LayoutItem component
+      backgroundColor: string;  // currently not used by the code!
+      color: string; // currently used to add css 'color' property to the HEADER ! (todo: dedicate a color field for the header color css property)
+      theme: AppPortfolioItemProps['theme'];
     };
   };
   element_to_render: typeof PortfolioItemCard;
@@ -109,13 +94,20 @@ interface ResponsiveLocalStorageLayoutProps {
     xs: number;
     xxs: number;
   };
+  /** Governs initial and minimum Height, per Project Card.
+   * Change this number, to linearly scale the element's height (exlucindg padding)
+   * ie each integer increment will increase the height by 7.07px
+  */
   rowHeight: number;
 }
 
-const defaultProps = {
+// used to set up default values for the properties of the component
+// if the client does not provide them
+const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   className: "layout",
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-  rowHeight: 30,
+  // TODO make this dynamic based on the content of the PortfolioItem
+  rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
   element_to_render: PortfolioItemCard,
 };
 
@@ -148,10 +140,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   //   console.log("NEW Heights", layoutItemHeights.current);
   // }, []);
 
+  console.log("originalLayouts INSIDE Component code block", originalLayouts);
   const onResize = (
     layout: Layout,
-    oldLayoutItem: LayoutItemType,
-    layoutItem: LayoutItemType,
+    oldLayoutItem: LayoutInterface,
+    layoutItem: LayoutInterface,
     placeholder: any
   ) => {
     // `oldLayoutItem` contains the state of the item before the resize.
@@ -164,33 +157,37 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     // given the reported height that the content of the LayoutItem needs
     // we set the minHeight accordingly
 
-    // const contentHeight = layoutItemHeights.current[layoutItem.i]
-    // console.log("ON RESIZE", layoutItem.i, contentHeight);
-    // const requiredHeightUnits = Math.ceil(contentHeight / rowHeight);
-    // console.log("REQ HEIGHT", layoutItem.i, requiredHeightUnits);
-    // layoutItem.h = requiredHeightUnits;
-    // placeholder.h = requiredHeightUnits;
 
-    // Example
-    // if (layoutItem.h < 3 && layoutItem.w > 2) {
-    //   layoutItem.w = 2;
-    //   placeholder.w = 2;
-    // }
+    // we use dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
+    
+    // rule to handle Portfolio Items without releases or project links
+    // if previous Layout had h = 4, we assume it has no releases or links
 
-    // if (layoutItem.h >= 3 && layoutItem.w < 2) {
-    //   layoutItem.w = 2;
-    //   placeholder.w = 2;
-    // }
+    // if (oldLayoutItem.h === 4) {
+    //   console.log("oldLayoutItem.h === 4");
+
+    // } else if (layoutItem.w <= 2) {
 
     if (layoutItem.w <= 2) {
       const newValue = layoutItem.h + 2;
       layoutItem.h = newValue;
       placeholder.h = newValue;
+
     } else if (layoutItem.w <= 3) {
       const newValue = layoutItem.h + 1;
       layoutItem.h = newValue;
       placeholder.h = newValue;
     }
+
+    // if (layoutItem.w <= 2) {
+    //   const newValue = layoutItem.h + 2;
+    //   layoutItem.h = newValue;
+    //   placeholder.h = newValue;
+    // } else if (layoutItem.w <= 3) {
+    //   const newValue = layoutItem.h + 1;
+    //   layoutItem.h = newValue;
+    //   placeholder.h = newValue;
+    // }
   };
 
   const [layouts, setLayouts] = useState(
@@ -235,11 +232,20 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         rowHeight={rowHeight}
         layouts={layouts}
         onLayoutChange={onLayoutChange}
+        // when resize happens we run this
+        // Resize can happen if User drags the Card from the bottom right,
+        // in this case we want to dynamically force the Card to NOT shrink its height or width beyond a certain point
+        // eg: user might try to decrease height too much, and we want to ensure that contents are visible, which requires a minimum height
+        // eg: user might try to decrease width too much, and we want to ensure that contents are visible, which requires a minimum width
         onResize={onResize}
       >
         {data.map((item, index) => {
           let row: number = 0;
           let col: number = 0;
+          const maxNumberOfLinksOrReleases = Math.max(
+            (item.resource_links || []).length,
+            (item.release || []).length,
+          );
           if (index % 2 === 0) {
             col = 0;
           } else {
@@ -254,7 +260,13 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               data-grid={{
                 i: index.toString(),
                 w: startingWidth,
-                h: 7,
+                // Card height, on initial render, when local storage is empty
+                // each card's height should be determined dynamically, based on the content
+                // content depends on the number of Resource Links or Software Releases
+                // roughly max(len(item.resource_links), len(item.release) * 2)
+                // h: 7,
+                // dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
+                h: maxNumberOfLinksOrReleases === 2 ? 7 : maxNumberOfLinksOrReleases === 1 ? 4 : maxNumberOfLinksOrReleases === 0 ? 4 : 8,
                 x: col,
                 y: row,
                 minW: 3,
@@ -267,7 +279,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               <ResponsiveLayoutItemContent
                 data={item}
                 renderProps={(d: PortfolioItemInterface) => {
-                  return <AppPortfolioItem data={d} />;
+                  return <AppPortfolioItem data={d} theme={theme.item.theme}/>;
                 }}
 
                 // layoutItemID={index.toString()}

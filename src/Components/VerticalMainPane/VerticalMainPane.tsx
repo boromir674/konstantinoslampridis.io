@@ -8,10 +8,7 @@ import IntroductionSection from "../IntroductionSection";
 import ExperienceItemData from "../../ExperienceItemDataInterface";
 import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
-// import PortfolioSection from "../Portfolio";
-import PortfolioSection, {
-  ResponsiveLocalStorageLayoutProps,
-} from "../Portfolio/PortfolioSectionV3";
+import PortfolioSection, { ResponsiveLocalStorageLayoutProps } from "../Portfolio";
 
 interface AppVerticalMainPaneTheme {
   // color of outer most div
@@ -44,14 +41,13 @@ interface AppVerticalMainPaneTheme {
   //   // Other Design
   //   width: string;
   // };
+  // portfolio: ResponsiveLocalStorageLayoutProps["theme"];
   portfolio: {
-    container: {
-      backgroundColor: string;
-    };
-    sectionHeader: {
-      backgroundColor: string;
-      color: string;
-    };
+    container: ResponsiveLocalStorageLayoutProps["theme"]["container"];
+    // {
+    //   backgroundColor: string;
+    // };
+    sectionHeader: ResponsiveLocalStorageLayoutProps["theme"]["sectionHeader"];
     item: {
       backgroundColor: string;
       color: string;
@@ -61,6 +57,7 @@ interface AppVerticalMainPaneTheme {
         // Other Design
         width: string;
       };
+      theme: ResponsiveLocalStorageLayoutProps["theme"]["item"]["theme"];
     };
   };
 }
@@ -139,6 +136,14 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
           item: {
             ...theme.portfolio.item,
             outline: `${theme.portfolio.item.outline.width} solid ${theme.portfolio.item.outline.color}`,
+            theme: {
+              // add 'links' (and nested object) and all keys
+              ...theme.portfolio.item.theme,
+              // add 'releases' key and nested object
+              releases: {
+                ...theme.portfolio.item.theme.releases,
+              }
+            }
           },
         }}
       />

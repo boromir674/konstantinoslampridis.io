@@ -114,7 +114,8 @@ Annotated with comments designed to integrate with the 'storybook-design-token' 
   --md-ref-palette-error98: #fff8f7;
   --md-ref-palette-error99: #fffbff;
   --md-ref-palette-error100: #ffffff;
-  /* light */
+
+  /******* LIGHT - COLOR PALETTE *******/
   --md-sys-color-primary-light: #9c423b;
   --md-sys-color-on-primary-light: #ffffff;
   --md-sys-color-primary-container-light: #ffdad6;
@@ -153,7 +154,8 @@ Annotated with comments designed to integrate with the 'storybook-design-token' 
   --md-sys-color-surface-tint-light: #9c423b;
   --md-sys-color-outline-variant-light: #d8c2bf;
   --md-sys-color-scrim-light: #000000;
-  /* dark */
+
+  /******* DARK - COLOR PALETTE *******/
   --md-sys-color-primary-dark: #ffb4ac;
   --md-sys-color-on-primary-dark: #5f1412;
   --md-sys-color-primary-container-dark: #7e2b26;

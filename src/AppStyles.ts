@@ -101,6 +101,18 @@ interface Theme {
       };
       backgroundColor: string;
       color: string;
+      // Resource Links - Pane
+      resourceLinks: {
+        backgroundColor: string;
+        headerColor: string;
+        item: {
+          backgroundColor: string;
+          color: string;
+          onHoverBackgroundColor: string;
+          onHoverColor: string;
+        };
+      };
+      // Releases Pane
       releases: {
         backgroundColor: string;
         color: string;
@@ -187,6 +199,8 @@ interface ComputedTheme extends Theme {
       };
       backgroundColor: string;
       color: string;
+      // Resource Links - Pane
+      resourceLinks: Theme["portfolio"]["item"]["resourceLinks"];
       releases: {
         // Color styles
         backgroundColor: string;

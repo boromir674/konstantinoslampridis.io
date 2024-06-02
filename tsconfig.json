@@ -24,6 +24,7 @@
     // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
 
     /* Modules */
+    // "esnext" should enable tree shaking. This tells TypeScript to use ES6 modules, which can be statically analyzed for imports and exports.
     "module": "esnext",                                /* Specify what module code is generated. */
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */

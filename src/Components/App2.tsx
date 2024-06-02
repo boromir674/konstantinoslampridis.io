@@ -56,10 +56,16 @@ const App: FC = () => {
           development_period
           status
           source_code_repo
+          resource_links {
+            type
+            url
+          }
           release {
             type
             name
             artifact_version
+            url
+            command
           }
           description
           tags
@@ -124,6 +130,7 @@ const App: FC = () => {
         },
       }}
       colorSet={{
+        // LIGHT THEME - MODE
         light: {
           containerBackgroundColor: lightTheme.backgroundColor,
           topHeaderPane: {
@@ -145,12 +152,29 @@ const App: FC = () => {
           verticalMainPane: {
             introduction: lightTheme.introduction,
             professional: lightTheme.professional,
-            portfolio: lightTheme.portfolio,
+            portfolio: {
+              ...lightTheme.portfolio,
+              item: {
+                ...lightTheme.portfolio.item,
+                theme: {
+                  links: {
+                    ...lightTheme.portfolio.item.resourceLinks
+                  },
+                  releases: {
+                    headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+                    headerColor: lightTheme.portfolio.item.releases.color,
+                    headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
+                    releaseButtonTheme: lightTheme.portfolio.item.releases.item
+                  },
+                },
+              },
+            },
             // ...lightTheme,
             // containerBackgroundColor: lightTheme.backgroundColor,
           },
           bottomFooterPane: lightTheme.footerStyles,
         },
+        // DARK THEME - MODE
         dark: {
           containerBackgroundColor: darkTheme.backgroundColor,
           topHeaderPane: {
@@ -171,6 +195,24 @@ const App: FC = () => {
           },
           verticalMainPane: {
             ...darkTheme,
+            portfolio: {
+              ...darkTheme.portfolio,
+              item: {
+                ...darkTheme.portfolio.item,
+                theme: {
+                  links: {
+                    ...darkTheme.portfolio.item.resourceLinks
+                  },
+                  releases: {
+                    headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
+                    headerColor: darkTheme.portfolio.item.releases.color,
+                    headerMarginBottom: darkTheme.portfolio.item.releases.headerMarginBottom,
+                    releaseButtonTheme: darkTheme.portfolio.item.releases.item
+                  },
+                },
+              },
+            },
+
           },
           bottomFooterPane: darkTheme.footerStyles,
         },

@@ -1,4 +1,5 @@
 
-import PortfolioSectionFC from "./PortfolioSectionV3";
+import PortfolioSectionFC, { type ResponsiveLocalStorageLayoutProps } from "./PortfolioSectionV3";
 
 export default PortfolioSectionFC;
+export type { ResponsiveLocalStorageLayoutProps };

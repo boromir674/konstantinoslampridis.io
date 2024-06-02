@@ -15,6 +15,16 @@ interface NavigationSection {
   barLabel: string;
 }
 
+// Constants (unconditionally)
+const booleanMap: BooleanMap = {
+  light: false,
+  dark: true,
+};
+const positionMap = {
+  left: "light",
+  right: "dark",
+};
+
 interface BigScreenViewInteractiveProps {
   // information required to provide navigation with auto scroll
   navigationSections: NavigationSection[];
@@ -45,14 +55,7 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
     () => (theme === colorSet.light ? "left" : "right"),
     [theme]
   );
-  const booleanMap: BooleanMap = {
-    light: false,
-    dark: true,
-  };
-  const positionMap = {
-    left: "light",
-    right: "dark",
-  };
+
   return (
     <BigScreenView
       theme={theme}

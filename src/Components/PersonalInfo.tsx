@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-// import "@fontawesome";
-// import { faFilePdf, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 
 // Open PDF in new TAB ICON
 import AppExternalURLIcon from "./AppExternalURLIcon";

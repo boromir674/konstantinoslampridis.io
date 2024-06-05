@@ -37,7 +37,8 @@ COPY data-portfolio.yml .
 FROM prod as build
 COPY scripts/generate-robots-file.sh .
 COPY scripts/build-production-bundle.sh .
-ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
+CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
+# ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
 
 # Example
 # docker build -f Dockerfile.build --target build -t me/ssg-builder .

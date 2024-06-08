@@ -1,6 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
 
-
 const config: GatsbyConfig = {
   flags: {
     DEV_SSR: true,
@@ -12,7 +11,33 @@ const config: GatsbyConfig = {
     title: `Konstantinos Lampridis Online`,
     description: `The online professional profile of Konstantinos Lampridis'. In this website, one can view Konstantinos Lampridis' contact information, Curicculum Vitae (CV), and Open Source Projects Portfolio.`,
     siteUrl: `https://konstantinoslampridis.io`,
-    keywords: ['konstantinos lampridis', 'lampridis', 'cv', 'resume', 'portfolio', 'contact', 'online', 'professional', 'career', 'professional career', 'profile', 'open source', 'projects', 'software', 'engineer', 'developer', 'software engineer', 'software developer', 'full stack', 'full stack developer', 'full stack engineer', 'devops engineer', 'ai', 'artificial intelligence', 'python'],
+    keywords: [
+      "konstantinos lampridis",
+      "lampridis",
+      "cv",
+      "resume",
+      "portfolio",
+      "contact",
+      "online",
+      "professional",
+      "career",
+      "professional career",
+      "profile",
+      "open source",
+      "projects",
+      "software",
+      "engineer",
+      "developer",
+      "software engineer",
+      "software developer",
+      "full stack",
+      "full stack developer",
+      "full stack engineer",
+      "devops engineer",
+      "ai",
+      "artificial intelligence",
+      "python",
+    ],
 
     // twitterUsername: `@todo-username`,
     // image: `/a-brand-or-sth-icon.png`,
@@ -49,7 +74,7 @@ const config: GatsbyConfig = {
     // }
 
     ////// SEO //////
-    `gatsby-plugin-react-helmet`,  // a wrapper component for SEO
+    `gatsby-plugin-react-helmet`, // a wrapper component for SEO
 
     ////// SITE MAP Generator from single source of truth //////
     {
@@ -59,35 +84,35 @@ const config: GatsbyConfig = {
         // And since the page's url can be retrieved from
         // site.siteMetadata.siteUrl (see 'siteMetadata' above)
         // we can ommit the 'query' key and use the default
-      //   query: `
-      //   {
-      //     allSitePage {
-      //       nodes {
-      //         path
-      //       }
-      //     }
-      //     allWpContentNode(filter: {nodeType: {in: ["Post", "Page"]}}) {
-      //       nodes {
-      //         ... on WpPost {
-      //           uri
-      //           modifiedGmt
-      //         }
-      //         ... on WpPage {
-      //           uri
-      //           modifiedGmt
-      //         }
-      //       }
-      //     }
-      //   }
-      // `,
-      // for the same reason we can use the default value (function) for 'resolveSiteUrl'
+        //   query: `
+        //   {
+        //     allSitePage {
+        //       nodes {
+        //         path
+        //       }
+        //     }
+        //     allWpContentNode(filter: {nodeType: {in: ["Post", "Page"]}}) {
+        //       nodes {
+        //         ... on WpPost {
+        //           uri
+        //           modifiedGmt
+        //         }
+        //         ... on WpPage {
+        //           uri
+        //           modifiedGmt
+        //         }
+        //       }
+        //     }
+        //   }
+        // `,
+        // for the same reason we can use the default value (function) for 'resolveSiteUrl'
         // resolveSiteUrl: () => siteUrl,
 
         // 'resolvePages' should leverage the data.allSitePage.edges object
         // list to define how to extract pages
 
-        // at the moment of writing, the below GraphQL query 
-        
+        // at the moment of writing, the below GraphQL query
+
         // allSitePage {
         //   nodes {
         //     path
@@ -131,15 +156,34 @@ const config: GatsbyConfig = {
         //   })
         // },
 
-        serialize: ({ path, modifiedGmt }: { path: string, modifiedGmt: any}) => {
+        serialize: ({
+          path,
+          modifiedGmt,
+        }: {
+          path: string;
+          modifiedGmt: any;
+        }) => {
           return {
             url: path,
             lastmod: modifiedGmt,
-          }
+          };
         },
-
       },
     },
+
+    // // WEBPACK BUNDLE ANALYZER - Gatsby Plugin
+    // // ability for interactive bundle size exploration
+    // {
+    //   resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+    //   options: {
+    //     // run bundle exploration server on `gatsby develop`
+    //     devMode: true,
+    //     analyzerMode: "server",
+    //     analyzerPort: "8888",
+    //     analyzerHost: "0.0.0.0",
+    //     defaultSizes: "gzip"
+    //   },
+    // },
   ],
 };
 

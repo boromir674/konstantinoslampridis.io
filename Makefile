@@ -1,7 +1,3 @@
-# Designed to facilitate 3 common operations
-# 1. build_static_files
-# 2. static_file_server
-# 3. run_dev_server
 
 # import config file named 'config.env'
 # You can change the default config with `make cnf="deploy_special.env" <target>`
@@ -128,7 +124,19 @@ test:  ## Run Test Suite
 	docker run -it --rm \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
 		-v /data/repos/static-site-generator/src:/app/src \
-		$(TEST_IMAGE_NAME) sh
+		$(TEST_IMAGE_NAME) yarn test $(filter-out $@,$(MAKECMDGOALS))
+
+test_env:  ## Run Bash in Test Environment
+	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
+	docker run -it --rm \
+		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
+		-v /data/repos/static-site-generator/src:/app/src \
+		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
+		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
+		-v /data/repos/static-site-generator/.testing-static-queries.json:/app/.testing-static-queries.json \
+		--entrypoint bash \
+		$(TEST_IMAGE_NAME)
+
 # yarn test --verbose
 
 

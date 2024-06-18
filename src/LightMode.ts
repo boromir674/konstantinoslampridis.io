@@ -110,7 +110,7 @@ const lightColorMode: Theme = {
         backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
         headerColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
         item: {
-          backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light'],
+          backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-light'],
           color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
           onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
           onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
@@ -139,6 +139,9 @@ const lightColorMode: Theme = {
   footerStyles: {
     textColor: "#1D5556",
     backgroundColor: "#D6D6DF",
+    svgStyles: {
+      fill: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+    },
   },
 };
 

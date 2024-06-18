@@ -126,8 +126,9 @@ const darkColorMode: Theme = {
         item: {
           backgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
           color: DESIGN_TOKENS["--md-sys-color-on-surface-dark"],
-          onHoverBackgroundColor: DESIGN_TOKENS["--md-sys-color-tertiary-dark"],
-          onHoverColor: DESIGN_TOKENS["--md-sys-color-on-tertiary-dark"],
+          // onHoverBackgroundColor: DESIGN_TOKENS["--md-sys-color-tertiary-dark"],
+          onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
+          onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
         },
       },
     },
@@ -135,6 +136,9 @@ const darkColorMode: Theme = {
   footerStyles: {
     textColor: "#D6D6DF",
     backgroundColor: "#1D5556",
+    svgStyles: {
+      fill: DESIGN_TOKENS["--md-sys-color-on-surface-dark"]
+    },
   },
 };
 

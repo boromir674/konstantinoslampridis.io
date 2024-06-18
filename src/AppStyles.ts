@@ -129,6 +129,9 @@ interface Theme {
   footerStyles: {
     textColor: string;
     backgroundColor: string;
+    svgStyles: {
+      fill: string;
+    };
   };
 }
 
@@ -200,7 +203,23 @@ interface ComputedTheme extends Theme {
       backgroundColor: string;
       color: string;
       // Resource Links - Pane
-      resourceLinks: Theme["portfolio"]["item"]["resourceLinks"];
+      // resourceLinks: Theme["portfolio"]["item"]["resourceLinks"];
+      resourceLinks: {
+        backgroundColor: string;
+        headerColor: string;
+        item: {
+          // Colors
+          backgroundColor: string;
+          color: string;
+          onHoverBackgroundColor: string;
+          onHoverColor: string;
+          // Sizing for SVG Icons
+          iconStyles: {
+            width: string;
+            height: string;
+          },
+        };
+      };
       releases: {
         // Color styles
         backgroundColor: string;
@@ -216,10 +235,25 @@ interface ComputedTheme extends Theme {
           onHoverColor: string;
           // other styles
           fontFamily: string;
+          // Sizing for SVG Icons
+          iconStyles: {
+            width: string;
+            height: string;
+          },
         };
       };
     };
   };
+  // FOOTER Styles with color mode plus svgStyles
+  footerStyles: {
+    textColor: string;
+    backgroundColor: string;
+    svgStyles: {
+      fill: string;
+      width: string;
+      height: string;
+    };
+  }
 }
 
 // DESIGNER SPACE
@@ -260,14 +294,35 @@ const commonStyling = {
       outline: {
         width: "3px",
       },
+      // Resource Links - Pane
+      resourceLinks: {
+        item: {
+          iconStyles: {
+            width: "14px",
+            height: "14px",
+          },
+        },
+      },
+      // Releases Pane
       releases: {
         headerFont: "Roboto, sans-serif",
         headerMarginBottom: "15px",
         item: {
           font: "Roboto, sans-serif",
+          iconStyles: {
+            width: "14px",
+            height: "14px",
+          },
         },
       },
     },
+  },
+  footerStyles: {
+    svgStyles: {
+      width: "18px",
+      height: "18px",
+    },
+    // fill: lightTheme.portfolio.item.releases.item.color,
   },
 };
 
@@ -319,17 +374,34 @@ const mergeStylings = (
           ...theme.portfolio.item.outline,
           ...commonStyling.portfolio.item.outline,
         },
+        // Project Links - Pane
+        resourceLinks: {
+          ...theme.portfolio.item.resourceLinks,
+          item: {
+            ...theme.portfolio.item.resourceLinks.item,
+            ...commonStyling.portfolio.item.resourceLinks.item,
+          },
+        },
+        // Software Releases - Pane
         releases: {
           ...theme.portfolio.item.releases,
           fontFamily: commonStyling.portfolio.item.releases.headerFont,
           headerMarginBottom: commonStyling.portfolio.item.releases.headerMarginBottom,
           item: {
             ...theme.portfolio.item.releases.item,
+            ...commonStyling.portfolio.item.releases.item,
             fontFamily: commonStyling.portfolio.item.releases.item.font,
           },
-
         },
       },
+    },
+    footerStyles: {
+      ...theme.footerStyles,
+      ...commonStyling.footerStyles,
+      svgStyles: {
+        ...theme.footerStyles.svgStyles,
+        ...commonStyling.footerStyles.svgStyles,
+      }
     },
   };
 };

@@ -1,95 +1,65 @@
-/* Provides nodes, which instruct gatsby to put data into the Data Layer*/
-import { CreateNodeArgs, GatsbyNode } from 'gatsby';
-import yaml from 'js-yaml';
-import fs from 'fs';
-import { UserDefinedTextData } from './src/types';
+/* Placeholders to customize the Gatsby build process, like adding built-time data */
 
-// interface PersonalWebsiteData {
-//   name: string;
-//   email: string;
-//   phone: string;
-//   location: string;
-//   links: {
-//     name: string;
-//     id: string;
-//     url: string;
-//   }[];
-//   description: string;
-// };
-// interface UserDefinedTextData {
-//   personal: PersonalWebsiteData,
-//   education: {
-//     name: string;
-//     location: string;
-//     degree: string;
-//     thesis_title: string;
-//     date: string;
-//     tags: string[];
-//   }[];
-//   professional: {
-//     experience_items: {
-//       title: string;
-//       company: string
-//       location: string;
-//       duration: string;
-//       description: string;
-//       activities: string[];
-//       technology_tags: string[];
-//     }[];
-//   };
-//   portfolio: {
-//     title: string;
-//     development_period: string;
-//     status: string;
-//     description: string;
-//     source_code_repo: string;
-//     resource_links?: {
-//       type: string;
-//       url: string;
-//     }[];
-//     release: {
-//       // artifact_type: string;
-//       type: string;
-//       url: string;
-//       command?: string;
-//       artifact_version: string;
-//       name: string;
-//     }[];
-//     tags: string[];
-//   }[];
-// };
+/* Gatsby gives plugins and site builders many APIs for building your site.
+* Code in the file gatsby-node.js/gatsby-node.ts is run once in the process
+* of building your site. You can use its APIs to create pages dynamically,
+* add data into GraphQL, or respond to events during the build lifecycle.
+*/
+
+// Gatsby offers various hooks, if you implement the corresponding API
+// - https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
+
+// Quick ref to available hooks
+// - onCreateWebpackConfig
+// - onCreateBabelConfig
+// - onCreatePage
+// - onCreateNode
+// - createSchemaCustomization
+// - createPages
+// - createResolvers
+
+import { CreateNodeArgs, GatsbyNode, SourceNodesArgs, PluginOptions, PluginCallback } from "gatsby";
+import yaml from "js-yaml";
+import fs from "fs";
+import { UserDefinedTextData } from "./src/types";
 
 
-const sourceNodes = async ({
-  actions: { createNode },
-  // createNodeId,
-  createContentDigest,
-}: CreateNodeArgs) => {
+//// PUT DATA INTO THE DATA LAYER ////
+
+/* Instruct Gatsby to put data into the Data Layer, served by the GraphQL API */
+export const sourceNodes: GatsbyNode["sourceNodes"] = async (
+  {
+    actions: { createNode },
+    // createNodeId,
+    createContentDigest,
+  }: SourceNodesArgs,
+  options: PluginOptions,
+  callback: PluginCallback<void>
+) => {  
   try {
-    // Read the YAML files
+    // Read the YAML files, parse them, and insert them into the Data Layer (GraphQL API)
 
-    // Personal, Education, Professional Data
-    const yamlData = fs.readFileSync('data.yaml', 'utf8');
+    // Read Personal, Education, Professional Data file
+    const yamlData = fs.readFileSync("data.yaml", "utf8");
 
-    // Parse the YAML data
+    // Parse Personal, Education, Professional YAML data
     const data: UserDefinedTextData = yaml.safeLoad(yamlData);
-    
-    // Open Source Portfolio / Projects
-    const portfolioYamlData = fs.readFileSync('data-portfolio.yml', 'utf8');
+
+    // Read Open Source Portfolio / Projects
+    const portfolioYamlData = fs.readFileSync("data-portfolio.yml", "utf8");
+
+    // Parse Open Source Portfolio / Projects YAML data
     const portfolioData = yaml.safeLoad(portfolioYamlData);
-    console.log('DEBUG', portfolioData)
-    
+
+    // "attach" the portfolio data to the main data object
     data.portfolio = portfolioData.projects;
 
-    console.log('DATA');
-    console.log(data);
-    
     // insert into the Data Layer, which exposes a GraphQL API
     // create node for build time data
     createNode({
       ...data,
       // required fields
-      id: 'user-defined-build-time-data',
+      id: "user-defined-build-time-data",
       parent: null,
       children: [],
       internal: {
@@ -99,15 +69,14 @@ const sourceNodes = async ({
         //     personal
         //   }
         // }
-        type: 'UserDefinedWebsiteData',
+        type: "UserDefinedWebsiteData",
         content: JSON.stringify(data),
         contentDigest: createContentDigest(data),
       },
     });
+
+    // callback();
   } catch (error) {
-    console.error('Error reading or parsing YAML file:', error);
+    console.error("Error reading or parsing YAML file:", error);
   }
 };
-
-
-export { sourceNodes };

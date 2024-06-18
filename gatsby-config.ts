@@ -46,6 +46,8 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
+
+  ////////// Gatsby plugins //////////
   plugins: [
     `gatsby-plugin-emotion`,
     // in case you have a graphql service to provide data you can configure as example below:
@@ -74,6 +76,7 @@ const config: GatsbyConfig = {
     // }
 
     ////// SEO //////
+    // TODO: use vanilla feature of Gatsby to manipulate the <head> and put SEO metadata
     `gatsby-plugin-react-helmet`, // a wrapper component for SEO
 
     ////// SITE MAP Generator from single source of truth //////
@@ -170,6 +173,9 @@ const config: GatsbyConfig = {
         },
       },
     },
+
+    // Utilities for testing Gatsby sites, such as testing GraphQL query-dependent Components
+    // "gatsby-plugin-testing",  // TODO: plug in only when Testing
 
     // // WEBPACK BUNDLE ANALYZER - Gatsby Plugin
     // // ability for interactive bundle size exploration

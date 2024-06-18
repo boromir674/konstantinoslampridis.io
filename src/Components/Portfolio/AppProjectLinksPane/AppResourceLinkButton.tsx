@@ -1,6 +1,6 @@
 import { FC, useState, useRef, useEffect, ReactNode, RefObject } from "react";
 import styled from "@emotion/styled";
-import ResourceLinkTooltip from "./ResourceLinkTooltip";
+import ResourceLinkTooltip from './ResourceLinkTooltip';
 
 
 interface ResourceLinkButtonProps {

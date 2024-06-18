@@ -5,7 +5,7 @@ import PortfolioItemInterface, {
   ReleaseItemData,
 } from "../../PortfolioItemInterface";
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
-import AppProjectLinksPane, { LinksPaneProps } from './AppProjectLinksPane';
+import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
 
 
 const LeftPane = styled.div`
@@ -47,6 +47,7 @@ const ReleaseListContainer = styled.div`
 type RenderRelease = (release: ReleaseItemData, index: number) => React.ReactNode;
 
 const RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT: { [key: string]: string } = {
+  'github': 'Source Code',
   'source_code_repo': 'Source Code',
   'docs': 'Documentation',
   'documentation': 'Documentation',
@@ -56,29 +57,12 @@ const RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT: { [key: string]: string } = {
 interface AppPortfolioItemProps {
   data: PortfolioItemInterface;
   theme: {
-    links: LinksPaneProps['theme'];
+    links: AppProjectLinksPaneProps['theme'];
     releases: ReleasesPaneProps["theme"];
   };
   //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
 }
 
-// links: [
-//   {
-//       title: 'Source Code',
-//       url: 'https://github.com/example/repo',
-//       type: 'github-repo',
-//   },
-//   {
-//       title: 'Documentation',
-//       url: 'https://example.com/docs',
-//       type: 'docs',
-//   },
-//   {
-//       title: 'CI/CD Pipeline',
-//       url: 'https://example.com/ci-cd',
-//       type: 'ci/cd',
-//   },
-// ],
 const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
   return (
     <>
@@ -95,7 +79,7 @@ const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]
                 links: d.resource_links.map((link) => ({
                   title: RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT[link.type],
                   url: link.url,
-                  type: link.type as 'github-repo' | 'docs' | 'ci/cd' | 'other',
+                  type: link.type as 'github' | 'docs' | 'ci/cd' | 'source_code_repo' | 'documentation',
                 })),
               }}
               theme={{

@@ -87,3 +87,4 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
 };
 
 export default LayoutItemContent;
+export type { PortfolioLayoutItemContentProps };

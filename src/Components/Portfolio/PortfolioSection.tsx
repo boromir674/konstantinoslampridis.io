@@ -2,7 +2,7 @@ import react, { useState, useCallback, FC, useRef } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
-import PortfolioItemCard from "./PortfolioItemV3";
+import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
@@ -48,6 +48,7 @@ const LayoutItem = styled.div<LayoutItemProps>`
   width: max-content;
   height: 100%;
   width: 100%;
+  // margin-bottom: 10px;
 `;
 
 interface PortfolioSectionContainerProps {
@@ -140,7 +141,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   //   console.log("NEW Heights", layoutItemHeights.current);
   // }, []);
 
-  console.log("originalLayouts INSIDE Component code block", originalLayouts);
   const onResize = (
     layout: Layout,
     oldLayoutItem: LayoutInterface,
@@ -294,6 +294,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   );
 };
 
+/** 
+* Get a value, from local storage, by key
+* @param key - key to get from local storage
+* @returns value from local storage
+*/
 function getFromLS(key: string) {
   type LS = {
     [key: string]: any;
@@ -309,6 +314,13 @@ function getFromLS(key: string) {
   return ls[key];
 }
 
+/** 
+* Save a jsonified key value pair to local storage, under the key "rgl-8".
+* @summary Saves a jsonified key value pair to local storage, by setting the
+* "rgl-8" key to point to the jsonified key value pair
+* @param key - key to save to local storage
+* @param value - value to save to local storage
+*/
 function saveToLS(key: string, value: any) {
   if (typeof window !== "undefined" && window.localStorage) {
     window.localStorage.setItem(

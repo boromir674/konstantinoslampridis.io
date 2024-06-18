@@ -1,7 +1,7 @@
 import { FC, forwardRef } from 'react';
 import styled from "@emotion/styled";
 
-import AppExternalURLIcon from "../AppExternalURLIcon";
+import AppExternalURLIcon from "../../AppExternalURLIcon";
 
 interface SoftwareReleaseTooltipProps {
     theme: {

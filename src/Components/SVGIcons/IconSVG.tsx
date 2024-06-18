@@ -1,23 +1,22 @@
-// /* Provides a way to render icons, leveraging svg */
+/* Provides a way to render SVG elements */
 
 import { FC } from 'react';
 
 // Component Props Interface
-interface IconSVGProps { 
+interface IconSVGProps {
     style: React.SVGProps<SVGSVGElement>;
     children: React.ReactNode;
 }
 
-// React Component
-const IconSVG: FC<IconSVGProps> = ({ style, children }) => {
-
-    return (
-        <svg {...style}>
-            {children}
-        </svg>
-    );
-
-}
+/** 
+* SVG element wrapper
+* @summary SVG element wrapper, allowing full control over SVG elements.
+*/
+const IconSVG: FC<IconSVGProps> = ({ style, children }: IconSVGProps) => (
+    <svg {...style}>
+        {children}
+    </svg>
+);
 
 
 export default IconSVG;

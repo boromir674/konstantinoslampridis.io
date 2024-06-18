@@ -1,3 +1,1 @@
-import AppIcon from './AppIcon';
-
-export default AppIcon;
+export { createSVGIcon } from './createIconSVG';

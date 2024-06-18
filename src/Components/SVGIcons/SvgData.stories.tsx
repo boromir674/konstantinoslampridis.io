@@ -2,30 +2,36 @@
 
 
 // import Component and Props Type
-import IconSVG, { IconSVGProps } from './IconSVG';
+import IconSVG from './IconSVG';
 
 // import Mapping of predefined SVG properties / data
 import { SvgDataMapping } from './SvgData';
 
 
-// Declare Ancestor component of all predefined icons to
-// allow dynamic rendering from elements in mapping
+export const PredefinedIconsStory = () => (
+    <div>
+        {Object.entries(SvgDataMapping).map(([iconName, iconData]) => {
+            return (
+                <div id={iconName} key={iconName} style={{
+                    // add bottom space to distinguish from below
+                    marginBottom: "35px",
+                }}>
+                    <h3>{iconName}</h3>
+                    <IconSVG style={{
+                        ...iconData.svgStyles,
+                        width: "100px",
+                        height: "100px",
+                    }}>
+                        {iconData.svgChildren.map((pathProps, index) => (
+                            <path key={index} {...pathProps} />
+                        ))}
+                    </IconSVG>
+                </div>
+            );
+        })}
+    </div>
+);
 
-
-export const PredefinedIconsStory = () => {
-    return (
-        <div>
-            {Object.entries(SvgDataMapping).map(([iconName, iconData]) => {
-                return (
-                    <div key={iconName}>
-                        <h3>{iconName}</h3>
-                        <IconSVG style={iconData.svgStyles} children={iconData.svgChildren} />
-                    </div>
-                );
-            })}
-        </div>
-    );
-}
 
 
 // Configuration for rendering the component in storybook

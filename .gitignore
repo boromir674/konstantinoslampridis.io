@@ -119,3 +119,6 @@ wip/
 snippets/
 stories/
 .env
+temp/
+sitemap.xml
+notes.md

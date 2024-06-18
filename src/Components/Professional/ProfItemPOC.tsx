@@ -108,6 +108,9 @@ const ProfItem: React.FC<ProfItemProps> = ({
       <p>Activities</p>
       <ul
         css={css`
+          padding-left: 40px; /* Restore default padding for lists */
+          margin-left: 0; /* Remove any left margin */
+          list-style-position: outside; /* Ensure bullets are outside the content */
           margin: 0px 0;
           font-size: 14px;
           grid-column-start: 1;

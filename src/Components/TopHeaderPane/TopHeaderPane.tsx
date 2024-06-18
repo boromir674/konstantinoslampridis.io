@@ -103,4 +103,4 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
 };
 
 export type { TopHeaderPaneProps };
-export { TopHeaderPane };
+export default TopHeaderPane;

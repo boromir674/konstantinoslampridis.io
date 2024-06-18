@@ -41,13 +41,18 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
     "Header Header"
     "Side Main"
     "Footer Footer";
-  height: 100vh;
-  width: 100vw;
+  // height: 100vh;
+  // width: 100vw;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   // background: #ffecb3;
   background: ${(props) => props.theme.containerBackgroundColor};
   //   background: "inherit";
   // display: inline-block;
   word-wrap: break-word;
+  margin: 0;
+  padding: 0;
 
 `;
 

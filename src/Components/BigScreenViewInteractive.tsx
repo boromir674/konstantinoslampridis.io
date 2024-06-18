@@ -38,6 +38,8 @@ interface BigScreenViewInteractiveProps {
     light: BigScreenViewProps["theme"];
     dark: BigScreenViewProps["theme"];
   };
+  // style: React.HTMLAttributes<HTMLDivElement>.style?: React.CSSProperties | undefined
+  // style: React.CSSProperties;
 }
 
 const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({

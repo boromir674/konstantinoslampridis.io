@@ -1,5 +1,8 @@
 import React, { FC, CSSProperties } from "react";
-import { TypographyProps as MuiTypographyProps, Variant } from "./TypographyInterface";
+import {
+  TypographyProps as MuiTypographyProps,
+  Variant,
+} from "./TypographyInterface";
 
 interface TypographyProps extends MuiTypographyProps {
   style?: CSSProperties;
@@ -28,10 +31,17 @@ const Typography: FC<TypographyProps> = ({
   style = {},
   ...otherProps
 }) => {
-  const combinedStyle = { ...style, marginBottom: gutterBottom ? '1em' : undefined };
+  const combinedStyle = {
+    ...style,
+    marginBottom: gutterBottom ? "1em" : undefined,
+  };
 
   const Component = component || variantMapping[variant] || "span";
-  return React.createElement(Component, { ...otherProps, style: combinedStyle }, children);
+  return React.createElement(
+    Component,
+    { ...otherProps, style: combinedStyle },
+    children
+  );
 };
 
 export default Typography;

@@ -37,6 +37,10 @@ const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
   // fix a bug where the top header is shown above the top-part content
   // of both the Sidepane and the MainPane
   margin-top: 50px;
+
+  max-width: 400px; // Set a maximum width for the side pane
+  width: 100%; // Take up as much space as possible, up to the maximum
+
 `;
 
 interface AppVerticalSidePaneProps {

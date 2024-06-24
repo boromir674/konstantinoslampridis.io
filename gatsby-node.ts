@@ -27,15 +27,20 @@ import { UserDefinedTextData } from "./src/types";
 //// PUT DATA INTO THE DATA LAYER ////
 
 /* Instruct Gatsby to put data into the Data Layer, served by the GraphQL API */
-export const sourceNodes: GatsbyNode["sourceNodes"] = async (
-  {
-    actions: { createNode },
-    // createNodeId,
-    createContentDigest,
-  }: SourceNodesArgs,
-  options: PluginOptions,
-  callback: PluginCallback<void>
-) => {  
+// export const sourceNodes: GatsbyNode["sourceNodes"] = async (
+//   {
+//     actions: { createNode },
+//     // createNodeId,
+//     createContentDigest,
+//   }: SourceNodesArgs,
+//   options: PluginOptions,
+//   callback: PluginCallback<void>
+// ) => {
+export const sourceNodes = async ({
+  actions: { createNode },
+  // createNodeId,
+  createContentDigest,
+}: CreateNodeArgs) => {
   try {
     // Read the YAML files, parse them, and insert them into the Data Layer (GraphQL API)
 

@@ -41,6 +41,12 @@ const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
   max-width: 400px; // Set a maximum width for the side pane
   width: 100%; // Take up as much space as possible, up to the maximum
 
+  // active if the screen width is less than 800px
+  @media (max-width: 800px) {
+    // flex-direction: column;
+    max-width: 800px; // Set a maximum width for the side pane
+    width: 100%; // Take up as much space as possible, up to the maximum
+  }
 `;
 
 interface AppVerticalSidePaneProps {

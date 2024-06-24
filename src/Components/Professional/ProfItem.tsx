@@ -37,6 +37,7 @@ const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
   padding: ${(props) => props.theme.padding || "10px"};
   // padding: ${(props) => props.theme.padding};
   display: flex;
+  flex-direction: column;
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
   border: 1px solid #ccc;

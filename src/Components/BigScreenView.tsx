@@ -33,27 +33,23 @@ interface BigScreenViewProps {
 }
 
 const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  //   grid-template-rows: 1fr 3fr 1fr;
-  grid-template-rows: 1fr 3fr 1fr;
-  grid-template-areas:
-    "Header Header"
-    "Side Main"
-    "Footer Footer";
-  // height: 100vh;
-  // width: 100vw;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  // background: #ffecb3;
   background: ${(props) => props.theme.containerBackgroundColor};
-  //   background: "inherit";
-  // display: inline-block;
   word-wrap: break-word;
   margin: 0;
   padding: 0;
 
+  display: flex;
+  flex-direction: row;
+
+  // active if the screen width is less than 400px
+  @media (max-width: 800px) {
+    flex-direction: column;
+    // max-width: 400px; // Set a maximum width for the side pane
+    width: 100%; // Take up as much space as possible, up to the maximum
+  }
 `;
 
 const BigScreenView: FC<BigScreenViewProps> = ({

@@ -40,7 +40,7 @@ const ThesisTitle = styled.p`
 const TopicTagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  // margin-top: 10px;
+  margin-top: 20px;
 `;
 
 

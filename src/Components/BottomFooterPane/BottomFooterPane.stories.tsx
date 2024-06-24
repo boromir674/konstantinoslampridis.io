@@ -2,7 +2,7 @@
 import { BottomFooterPane } from "./BottomFooterPane";
 
 // Apply CSS reset
-import '../../global.css';
+// import '../../global.css';
 
 import lightMode from '../../LightMode'
 import darkMode from "../../DarkMode";

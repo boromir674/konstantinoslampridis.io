@@ -68,23 +68,19 @@ interface VerticalMainPaneContainerProps {
 }
 
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
-  left: 0px;
-  // background-color: (props) => props.theme.containerBackgroundColor}
-  // background-color: inherit;
-  grid-area: Main;
   // hard-coded fix which prevents a bug:
   // bug being from a certain level of zoom (and above) the top header pane starts to
   // cover the top part content of both SidePane and MainPane
   margin-top: 50px;
+
   // display: flex;
   //   flex-direction: column;
   //   flex-wrap: wrap;
 
   display: inline-block;
-  // word-wrap: break-word;
-  // display: flex;
-  // flex-direction: column;
+
   // box-sizing: border-box
+
   // overflow: auto; /* Introduce a scrollbar if necessary */
 `;
 

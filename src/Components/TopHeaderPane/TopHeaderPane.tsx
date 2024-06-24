@@ -65,7 +65,6 @@ const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
   // at the highest level
   z-index: 9999; /* Set a high z-index to keep the header on top */
 
-  grid-area: Header;
   padding-left: 80px;
   padding-top: 10px;
 `;

@@ -44,11 +44,9 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
   display: flex;
   flex-direction: row;
 
-  // active if the screen width is less than 400px
+  // active if the screen width is less than 800px
   @media (max-width: 800px) {
     flex-direction: column;
-    // max-width: 400px; // Set a maximum width for the side pane
-    width: 100%; // Take up as much space as possible, up to the maximum
   }
 `;
 

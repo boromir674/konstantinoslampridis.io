@@ -33,6 +33,9 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
   @media (max-width: 480px) {
     padding: 20px 0; /* Adjust padding for smartphone screens */
   }
+
+  // // in case css reset did not take care of box model, set it explicitly
+  // box-sizing: border-box;
 `;
 
 const StyledSpan = styled.span`

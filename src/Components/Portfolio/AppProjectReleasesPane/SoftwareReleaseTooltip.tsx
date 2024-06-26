@@ -62,7 +62,10 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                 </pre>
             </div>
             {/* WEB PAGE URL */}
-            <div>
+            <div style={{
+                paddingLeft: '6px',
+                marginTop: '10px'
+            }}>
                 <MyLink
                     href={urlText}
                     target="_blank"

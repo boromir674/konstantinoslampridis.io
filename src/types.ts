@@ -45,7 +45,7 @@ interface UserDefinedTextData {
     release: {
       // artifact_type: string;
       type: string;
-      urlText: string;
+      url: string;
       command?: string;
       artifact_version: string;
       name: string;

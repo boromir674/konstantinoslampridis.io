@@ -127,17 +127,14 @@ const App: FC = () => {
               name: personal.name,
             },
             professional: professional.experience_items,
-            portfolio: portfolio.map((item: any) => ({
+
+            portfolio: portfolio.map((item: UserDefinedTextData['portfolio'][0]) => ({
               ...item,
-              urlText: item.url,
+              release: item.release.map((release) => ({
+                ...release,
+                urlText: release.url,
+              })),
             })),
-
-
-            // ...portfolio,
-            // release: portfolio.release.map((item: any) => ({
-            //   ...item,
-            // }))
-            // },
           },
 
           verticalSidePane: {

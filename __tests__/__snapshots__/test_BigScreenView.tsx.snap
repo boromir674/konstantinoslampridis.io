@@ -1,0 +1,657 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test App width = 700 matches the snapshot 1`] = `
+<div>
+  <div
+    class="css-kzq97d"
+  >
+    <div
+      class="css-1m5sbi6"
+    >
+      <div
+        style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
+      >
+        <div
+          style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+        >
+          <div
+            style="width: 48px; height: 26px; border-radius: 16px; background: rgb(255, 255, 255); transition: all 100ms;"
+          />
+        </div>
+        <div
+          style="margin-left: -100%; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+        >
+          <div
+            style="transition: all 100ms; padding-top: 4px; padding-left: 25px;"
+          >
+            <div
+              style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 251, 255); transition: all 100ms;"
+            />
+          </div>
+        </div>
+      </div>
+      <nav
+        class="css-1cyn0a8"
+      >
+        <a
+          class="css-arku82"
+        >
+          Home
+        </a>
+        <a
+          class="css-w0in7m"
+        >
+          Portfolio
+        </a>
+        <a
+          class="css-w0in7m"
+        >
+          Professional
+        </a>
+      </nav>
+    </div>
+    <div
+      class="css-1lxjc1s"
+    >
+      <div
+        class="css-7xsp98"
+      >
+        <div
+          class="css-kp9dvk"
+        >
+          <span
+            class="css-1jbfuhw"
+          >
+            Name:
+          </span>
+           
+          <span
+            class="css-3vqpkh"
+          >
+            John Doe
+          </span>
+        </div>
+        <div
+          class="css-kp9dvk"
+        >
+          <span
+            class="css-1jbfuhw"
+          >
+            Email:
+          </span>
+           
+          <span
+            class="css-3vqpkh"
+          >
+            jd@email.io
+          </span>
+        </div>
+        <div
+          class="css-kp9dvk"
+        >
+          <span
+            class="css-1jbfuhw"
+          >
+            Github:
+          </span>
+           
+          <span
+            class="css-3vqpkh"
+          >
+            <a
+              class="css-1gyz2k7"
+              href="https://github.com/john-doe"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              github.com/john-doe
+               
+              <svg
+                fill="none"
+                height="10px"
+                stroke="#534341"
+                stroke-width="5.108"
+                viewBox="-2.56 -2.56 69.12 69.12"
+                width="10px"
+              >
+                <g
+                  id="SVGRepo_iconCarrier"
+                >
+                  <path
+                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                  />
+                  <polyline
+                    points="40.32 8.6 55.4 8.6 55.4 24.18"
+                  />
+                  <line
+                    x1="19.32"
+                    x2="54.61"
+                    y1="45.72"
+                    y2="8.91"
+                  />
+                </g>
+              </svg>
+            </a>
+          </span>
+        </div>
+        <div
+          class="css-kp9dvk"
+        >
+          <span
+            class="css-1jbfuhw"
+          >
+            Gitlab:
+          </span>
+           
+          <span
+            class="css-3vqpkh"
+          >
+            <a
+              class="css-1gyz2k7"
+              href="https://gitlab.com/john-doe"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              gitlab.com/john-doe
+               
+              <svg
+                fill="none"
+                height="10px"
+                stroke="#534341"
+                stroke-width="5.108"
+                viewBox="-2.56 -2.56 69.12 69.12"
+                width="10px"
+              >
+                <g
+                  id="SVGRepo_iconCarrier"
+                >
+                  <path
+                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                  />
+                  <polyline
+                    points="40.32 8.6 55.4 8.6 55.4 24.18"
+                  />
+                  <line
+                    x1="19.32"
+                    x2="54.61"
+                    y1="45.72"
+                    y2="8.91"
+                  />
+                </g>
+              </svg>
+            </a>
+          </span>
+        </div>
+        <div
+          class="css-kp9dvk"
+        >
+          <span
+            class="css-1jbfuhw"
+          >
+            LinkedIn:
+          </span>
+           
+          <span
+            class="css-3vqpkh"
+          >
+            <a
+              class="css-1gyz2k7"
+              href="https://linkedin.com/in/john-doe"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              linkedin.com/in/john-doe
+               
+              <svg
+                fill="none"
+                height="10px"
+                stroke="#534341"
+                stroke-width="5.108"
+                viewBox="-2.56 -2.56 69.12 69.12"
+                width="10px"
+              >
+                <g
+                  id="SVGRepo_iconCarrier"
+                >
+                  <path
+                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                  />
+                  <polyline
+                    points="40.32 8.6 55.4 8.6 55.4 24.18"
+                  />
+                  <line
+                    x1="19.32"
+                    x2="54.61"
+                    y1="45.72"
+                    y2="8.91"
+                  />
+                </g>
+              </svg>
+            </a>
+          </span>
+        </div>
+        <div
+          class="css-kp9dvk"
+        >
+           
+          <span
+            class="css-1jbfuhw"
+          >
+            Curricular Docs:
+          </span>
+           
+          <div
+            class="css-5l6624"
+          >
+            <div
+              class="css-1rstcrp"
+            >
+              <a
+                class="css-1gyz2k7"
+                href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                '1 Page Resume' 
+                <svg
+                  fill="none"
+                  height="10px"
+                  stroke="#534341"
+                  stroke-width="5.108"
+                  viewBox="-2.56 -2.56 69.12 69.12"
+                  width="10px"
+                >
+                  <g
+                    id="SVGRepo_iconCarrier"
+                  >
+                    <path
+                      d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                    />
+                    <polyline
+                      points="40.32 8.6 55.4 8.6 55.4 24.18"
+                    />
+                    <line
+                      x1="19.32"
+                      x2="54.61"
+                      y1="45.72"
+                      y2="8.91"
+                    />
+                  </g>
+                </svg>
+              </a>
+            </div>
+            <div
+              class="css-1rstcrp"
+            >
+              <a
+                class="css-1gyz2k7"
+                href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                'CV + Projects' 
+                <svg
+                  fill="none"
+                  height="10px"
+                  stroke="#534341"
+                  stroke-width="5.108"
+                  viewBox="-2.56 -2.56 69.12 69.12"
+                  width="10px"
+                >
+                  <g
+                    id="SVGRepo_iconCarrier"
+                  >
+                    <path
+                      d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                    />
+                    <polyline
+                      points="40.32 8.6 55.4 8.6 55.4 24.18"
+                    />
+                    <line
+                      x1="19.32"
+                      x2="54.61"
+                      y1="45.72"
+                      y2="8.91"
+                    />
+                  </g>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-n1i9i7"
+      >
+        <div
+          class="css-eqcqji"
+        >
+          <h3
+            class="css-dbagas"
+          >
+            MSc in Artificial Intelligence
+          </h3>
+          <h4
+            class="css-p7xzix"
+          >
+            University of Amsterdam
+          </h4>
+          <span
+            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+          >
+            <a>
+              <p
+                class="css-uzd3yx"
+              >
+                Amsterdam, Netherlands
+              </p>
+              <span
+                class="css-1l6q7jx"
+              >
+                2014 - 2019
+              </span>
+            </a>
+          </span>
+          <p
+            class="css-dbagas"
+          >
+            Thesis: 
+            Political Spectrum Aware Topic Model
+          </p>
+          <div
+            class="css-bvngjg"
+          >
+            <span
+              class="css-ccouac"
+            >
+              ML
+            </span>
+            <span
+              class="css-ccouac"
+            >
+              CV
+            </span>
+            <span
+              class="css-ccouac"
+            >
+              RL
+            </span>
+            <span
+              class="css-ccouac"
+            >
+              NLP
+            </span>
+          </div>
+        </div>
+        <div
+          class="css-eqcqji"
+        >
+          <h3
+            class="css-dbagas"
+          >
+            BSc in Applied Informatics
+          </h3>
+          <h4
+            class="css-p7xzix"
+          >
+            University of Macedonia
+          </h4>
+          <span
+            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+          >
+            <a>
+              <p
+                class="css-uzd3yx"
+              >
+                Thessaloniki, Greece
+              </p>
+              <span
+                class="css-1l6q7jx"
+              >
+                2008 - 2013
+              </span>
+            </a>
+          </span>
+          <p
+            class="css-dbagas"
+          >
+            Thesis: 
+            Computational Analysis of Simplex Points Algorithm
+          </p>
+          <div
+            class="css-bvngjg"
+          >
+            <span
+              class="css-ccouac"
+            >
+              Operating Systems
+            </span>
+            <span
+              class="css-ccouac"
+            >
+              Linear Programming
+            </span>
+            <span
+              class="css-ccouac"
+            >
+              Discreet Mathematics
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-lpnzm1"
+    >
+      <div
+        class="css-y93gho"
+        id="introduction-section"
+      >
+        <p>
+          Welcome to the online space of 
+          <strong>
+            John Doe
+          </strong>
+           
+          :-)
+        </p>
+        Here you will find mostly information about my Open Source Portfolio, professional experience, skills and education.
+      </div>
+      <div
+        class="css-mnc2za"
+        id="professional-section"
+      >
+        <h1
+          class="css-149z3qr"
+        >
+          Professional Career
+        </h1>
+        <div
+          class="css-ea9ttx"
+        >
+          <div
+            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+          >
+            <h3
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Software Engineer
+            </h3>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Mountain View, CA
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              GG Navi
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Sep 2022 - May 2023
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              I worked at GG Navi as a Software Engineer.
+            </p>
+            <p
+              style="margin-bottom: 12px;"
+            >
+              Activities
+            </p>
+            <ul
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              <li
+                style="padding: 4px 0px;"
+              >
+                <div
+                  class="css-p4d3hp"
+                >
+                  I worked at GG Navi as a Software Engineer.
+                </div>
+              </li>
+              <li
+                style="padding: 4px 0px;"
+              >
+                <div
+                  class="css-p4d3hp"
+                >
+                  other activity
+                </div>
+              </li>
+            </ul>
+            <div
+              class="css-tiry6g"
+            >
+              <span
+                class="css-1ywvkip"
+              >
+                python
+              </span>
+              <span
+                class="css-1ywvkip"
+              >
+                docker
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-ea9ttx"
+        >
+          <div
+            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+          >
+            <h3
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Software Engineer
+            </h3>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Mountain View, CA
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              GG Navi
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              Sep 2022 - May 2023
+            </p>
+            <p
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              I worked at GG Navi as a Software Engineer.
+            </p>
+            <p
+              style="margin-bottom: 12px;"
+            >
+              Activities
+            </p>
+            <ul
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
+              <li
+                style="padding: 4px 0px;"
+              >
+                <div
+                  class="css-p4d3hp"
+                >
+                  I worked at GG Navi as a Software Engineer.
+                </div>
+              </li>
+              <li
+                style="padding: 4px 0px;"
+              >
+                <div
+                  class="css-p4d3hp"
+                >
+                  other activity
+                </div>
+              </li>
+            </ul>
+            <div
+              class="css-tiry6g"
+            >
+              <span
+                class="css-1ywvkip"
+              >
+                python
+              </span>
+              <span
+                class="css-1ywvkip"
+              >
+                docker
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-1koo0nk"
+        id="open-source-portfolio-section"
+      >
+        <h1
+          style="background-color: rgb(255, 218, 214); color: rgb(44, 21, 19);"
+        >
+          Open Source & Portfolio
+        </h1>
+        <button>
+          Reset Layout
+        </button>
+        <div
+          class="layout react-grid-layout"
+        />
+      </div>
+    </div>
+    <div
+      class="css-lsw45e"
+    >
+      <span
+        class="css-2dse8b"
+      >
+        <svg
+          aria-hidden="true"
+          fill="#2c1513"
+          height="18px"
+          version="1.1"
+          viewBox="0 0 16 16"
+          width="18px"
+        >
+          <path
+            d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+</div>
+`;

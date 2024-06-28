@@ -65,7 +65,7 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   // whenever the width or height change we want to notify our listeners
   // each listener is expected tohave supplied a callback that we use to notify them
   // of the new width and height
-  
+
   // useLayoutEffect(() => {
   //   // notify of height change only when the height state has changed (instead of on all re-renders)
   //   console.log("Calling EFFECT for", title);

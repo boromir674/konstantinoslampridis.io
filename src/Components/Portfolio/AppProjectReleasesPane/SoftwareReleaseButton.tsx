@@ -1,6 +1,7 @@
-import { FC, useState, useRef, useEffect, ReactNode, RefObject } from "react";
+import { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
 import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";
+import ZIndexContext from '../../../ZIndexContext';
 
 
 interface SoftwareReleaseButtonProps {
@@ -63,10 +64,13 @@ const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
 
 const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme, data: { command, urlText }, children }) => {
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const { setZIndex } = useContext(ZIndexContext);
+
     const buttonRef = useRef<HTMLElement>(null);
     const tooltipRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        // Handle Click anywhere outside of the tooltip
         const handleClickOutside = (event: MouseEvent) => {
             if (
                 buttonRef.current && !buttonRef.current.contains(event.target as Node) &&
@@ -82,8 +86,15 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
         };
     }, []);
 
+    // Handle Click on the button
+    const handleClickOnButton = () => {
+        setTooltipVisible(!tooltipVisible);
+        // if visible set zIndex to 10 else 0
+        setZIndex(tooltipVisible ? 0 : 10);
+      };
+
     return (
-        <div onClick={() => setTooltipVisible(!tooltipVisible)}>
+        <div onClick={handleClickOnButton}>
             <SoftwareReleaseButton
                 ref={buttonRef as RefObject<HTMLButtonElement>}
                 color={theme.color}

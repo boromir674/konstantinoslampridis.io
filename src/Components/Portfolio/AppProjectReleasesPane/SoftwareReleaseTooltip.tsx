@@ -50,7 +50,7 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                 borderRadius: '15px',
                 boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.15)',
                 border: '2px solid #ff7f50',
-                zIndex: 3000,
+                zIndex: 30,
             }}
         >
             {/* SHELL COMMAND */}

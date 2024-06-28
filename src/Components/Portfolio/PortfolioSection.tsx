@@ -8,6 +8,10 @@ import PortfolioItemInterface from "../../PortfolioItemInterface";
 
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
 import { LayoutInterface } from './LayoutInterface';
+
+import ZIndexContext from '../../ZIndexContext';
+
+
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
 
@@ -18,6 +22,8 @@ type Layout = ReadonlyArray<LayoutInterface>;
 interface Layouts {
   [P: string]: Layout[];
 }
+
+////  GRID ITEM Top Level Component  ////
 
 interface LayoutItemProps {
   moved?: boolean;
@@ -159,7 +165,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
 
     // we use dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
-    
+
     // rule to handle Portfolio Items without releases or project links
     // if previous Layout had h = 4, we assume it has no releases or links
 
@@ -218,11 +224,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   const startingWidth = 4;
   return (
     <PortfolioSectionContainer
-    id={htmlID}
-    theme={{
-      backgroundColor: theme.container.backgroundColor,
-      color: theme.item.color,
-    }}>
+      id={htmlID}
+      theme={{
+        backgroundColor: theme.container.backgroundColor,
+        color: theme.item.color,
+      }}>
       {/* Portfolio Section TITLE*/}
       <h1 style={{ ...theme.sectionHeader }}>Open Source & Portfolio</h1>
       <button onClick={resetLayout}>Reset Layout</button>
@@ -238,6 +244,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         // eg: user might try to decrease height too much, and we want to ensure that contents are visible, which requires a minimum height
         // eg: user might try to decrease width too much, and we want to ensure that contents are visible, which requires a minimum width
         onResize={onResize}
+        // If true, WidthProvider will measure the container's width before mounting children.
+        // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
+        measureBeforeMount={true}
       >
         {data.map((item, index) => {
           let row: number = 0;
@@ -253,7 +262,12 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
           }
           // row is determined by index div 2
           row = Math.floor(index / 2);
+
+          // Initialize the zIndex state for this item
+          const [zIndex, setZIndex] = useState(0);
+
           return (
+            // <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
             <LayoutItem
               //   ref={portfolioHTMLELsRefs[index]}
               key={index}
@@ -274,19 +288,28 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               }}
               style={{
                 outline: theme.item.outline,
+                // allows increasing top-level grid item height, to allow children pop-ups to be visible
+                zIndex: zIndex,
               }}
             >
-              <ResponsiveLayoutItemContent
-                data={item}
-                renderProps={(d: PortfolioItemInterface) => {
-                  return <AppPortfolioItem data={d} theme={theme.item.theme}/>;
-                }}
+              <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
+                <ResponsiveLayoutItemContent
+                // containerStyle={{zIndex: zIndex}}
+                  data={item}
+                  renderProps={(d: PortfolioItemInterface) => {
+                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;
+                  }}
+                />
+              </ZIndexContext.Provider>
 
-                // layoutItemID={index.toString()}
-                // data={item}
-                // listeners_callbacks={[storeUpdatedItemHeight]}
-              />
+              {/* <ResponsiveLayoutItemContent
+                  data={item}
+                  renderProps={(d: PortfolioItemInterface) => {
+                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;
+                  }}
+                /> */}
             </LayoutItem>
+            // </ZIndexContext.Provider>
           );
         })}
       </ResponsiveReactGridLayout>

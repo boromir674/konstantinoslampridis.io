@@ -1,6 +1,6 @@
 /* Provides a way to render SVG elements */
 
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 // Component Props Interface
 interface IconSVGProps {

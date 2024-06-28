@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
+import React, { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
 import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";
 import ZIndexContext from '../../../ZIndexContext';

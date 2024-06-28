@@ -1,4 +1,4 @@
-import { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes } from "react";
 
 import styled from "@emotion/styled";
 

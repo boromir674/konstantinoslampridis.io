@@ -1,4 +1,4 @@
-import react, { useState, useCallback, FC, useRef } from "react";
+import React, { useState, useCallback, FC, useRef } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
@@ -31,8 +31,8 @@ interface LayoutItemProps {
   isDraggable?: boolean;
   isResizable?: boolean;
   resizeHandles?: string[];
-  resizeHandle?: react.ReactNode;
-  children?: react.ReactNode;
+  resizeHandle?: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
   isBounded?: boolean;

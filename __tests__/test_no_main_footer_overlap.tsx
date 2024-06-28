@@ -8,6 +8,10 @@ import React from "react";
 import { render } from '@testing-library/react';
 // import '@testing-library/jest-dom';
 
+// for rendering in customizable viewports (ie custom width)
+import { Context as ResponsiveContext } from "react-responsive";
+
+
 // Imports for Business Logic
 import VerticalMainPane, { AppVerticalMainPaneProps } from '../src/Components/VerticalMainPane';
 import BottomFooterPane, { BottomFooterPaneProps } from '../src/Components/BottomFooterPane';
@@ -770,4 +774,73 @@ test("Main/Footer - Overlap: render BigScreenView verify Main and Footer do not 
     expect(verticalMainPaneBottom).toBeLessThanOrEqual(bottomFooterPaneTop);
     // verify no overlap, but also no "big gap" between the two elements
     expect(verticalMainPaneBottom).toBeCloseTo(bottomFooterPaneTop, 0);
+});
+
+///// TEST 3 /////
+test("Main/Footer - Overlap: render BigScreenView with width 350 and verify Main and Footer do not overlap", () => {
+    // render in DOM
+    const { container: mobile } = render(
+        <ResponsiveContext.Provider value={{ width: 350 }}>
+            <BigScreenView {...bigScreenViewProps} />
+        </ResponsiveContext.Provider>
+    );
+
+    // get VerticalMainPane element reference
+    const verticalMainPane = document.getElementById('vertical-main-pane');
+
+    // get BottomFooterPane element reference
+    const bottomFooterPane = document.getElementById('bottom-footer-pane');
+
+    // assert queries elements are not null or undefined
+    expect(verticalMainPane).not.toBeNull();
+    expect(bottomFooterPane).not.toBeNull();
+
+    // test that after rendering the 2 elements do not overlap in position
+    const verticalMainPaneBottom = verticalMainPane?.getBoundingClientRect().bottom;
+    const bottomFooterPaneTop = bottomFooterPane?.getBoundingClientRect().top;
+
+    // if the mainPaneBottom is less than the footerPaneTop, then the 2 elements overlap
+    // if the mainPaneBottom is equal to the footerPaneTop, then the 2 elements touch
+    // if the mainPaneBottom is greater than the footerPaneTop, then the 2 elements do not overlap
+
+    // assert the two elements do not overlap, but "touch": equal
+    expect(verticalMainPaneBottom).toBeLessThanOrEqual(bottomFooterPaneTop);
+    // verify no overlap, but also no "big gap" between the two elements
+    expect(verticalMainPaneBottom).toBeCloseTo(bottomFooterPaneTop, 0);
+
+});
+
+
+///// TEST 4 /////
+test("Main/Footer - Overlap: render BigScreenView with width 750 and verify Main and Footer do not overlap", () => {
+    // render in DOM
+    const { container: mobile } = render(
+        <ResponsiveContext.Provider value={{ width: 750 }}>
+            <BigScreenView {...bigScreenViewProps} />
+        </ResponsiveContext.Provider>
+    );
+
+    // get VerticalMainPane element reference
+    const verticalMainPane = document.getElementById('vertical-main-pane');
+
+    // get BottomFooterPane element reference
+    const bottomFooterPane = document.getElementById('bottom-footer-pane');
+
+    // assert queries elements are not null or undefined
+    expect(verticalMainPane).not.toBeNull();
+    expect(bottomFooterPane).not.toBeNull();
+
+    // test that after rendering the 2 elements do not overlap in position
+    const verticalMainPaneBottom = verticalMainPane?.getBoundingClientRect().bottom;
+    const bottomFooterPaneTop = bottomFooterPane?.getBoundingClientRect().top;
+
+    // if the mainPaneBottom is less than the footerPaneTop, then the 2 elements overlap
+    // if the mainPaneBottom is equal to the footerPaneTop, then the 2 elements touch
+    // if the mainPaneBottom is greater than the footerPaneTop, then the 2 elements do not overlap
+
+    // assert the two elements do not overlap, but "touch": equal
+    expect(verticalMainPaneBottom).toBeLessThanOrEqual(bottomFooterPaneTop);
+    // verify no overlap, but also no "big gap" between the two elements
+    expect(verticalMainPaneBottom).toBeCloseTo(bottomFooterPaneTop, 0);
+
 });

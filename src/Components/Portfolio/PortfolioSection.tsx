@@ -251,10 +251,12 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         {data.map((item, index) => {
           let row: number = 0;
           let col: number = 0;
+
           const maxNumberOfLinksOrReleases = Math.max(
             (item.resource_links || []).length,
             (item.release || []).length,
           );
+
           if (index % 2 === 0) {
             col = 0;
           } else {
@@ -266,8 +268,28 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
           // Initialize the zIndex state for this item
           const [zIndex, setZIndex] = useState(0);
 
+          const setStartingHeigth = () => {
+            // and a heuristic including the startingWidth and the number of characters in data.description
+            // to determine the height of the Portfolio Item
+
+            const nbCharacters = item.description.length;
+            const height = maxNumberOfLinksOrReleases < 2 ? 4 : maxNumberOfLinksOrReleases < 3 ? 7 : 9;
+
+            // HEURISTIC
+            if (maxNumberOfLinksOrReleases == 3 && nbCharacters < 145) {
+              return height - 1
+            }
+            if (nbCharacters > 200) {
+              return height + 1
+            }
+            if (nbCharacters < 90) {
+              return height - 1
+            }
+            return height
+          };
+
+
           return (
-            // <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
             <LayoutItem
               //   ref={portfolioHTMLELsRefs[index]}
               key={index}
@@ -277,10 +299,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 // Card height, on initial render, when local storage is empty
                 // each card's height should be determined dynamically, based on the content
                 // content depends on the number of Resource Links or Software Releases
-                // roughly max(len(item.resource_links), len(item.release) * 2)
-                // h: 7,
-                // dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
-                h: maxNumberOfLinksOrReleases === 2 ? 7 : maxNumberOfLinksOrReleases === 1 ? 4 : maxNumberOfLinksOrReleases === 0 ? 4 : 8,
+
+                h: setStartingHeigth(),
                 x: col,
                 y: row,
                 minW: 3,
@@ -294,22 +314,13 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
             >
               <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
                 <ResponsiveLayoutItemContent
-                // containerStyle={{zIndex: zIndex}}
                   data={item}
                   renderProps={(d: PortfolioItemInterface) => {
                     return <AppPortfolioItem data={d} theme={theme.item.theme} />;
                   }}
                 />
               </ZIndexContext.Provider>
-
-              {/* <ResponsiveLayoutItemContent
-                  data={item}
-                  renderProps={(d: PortfolioItemInterface) => {
-                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;
-                  }}
-                /> */}
             </LayoutItem>
-            // </ZIndexContext.Provider>
           );
         })}
       </ResponsiveReactGridLayout>

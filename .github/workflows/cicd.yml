@@ -1,0 +1,68 @@
+# CI/CD Pipeline for Gatsby/TS project, in GitHub Actions
+
+# Test -> Build -> Deploy
+
+# Triggers
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - v*
+
+env:
+
+  ##### JOB ON/OFF SWITCHES - Top Level overrides #####
+  UNIT_TESTS_ON: "true"
+  LINT_ON: "true"
+  PUBLISH_ON: "true"
+  ##########################
+
+  #### 2nd Level overrides ####
+  ALWAYS_LINT: "false"
+
+  ## Pipe Settings ##
+
+  ALLOW_lINT_TO_FAIL: "true"
+jobs:
+  test:
+    if: env.UNIT_TESTS_ON == "true"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # package provides dockerized headless test, and a make frontend target
+      - name: Run Unit Tests
+        run: make test
+
+  lint:
+    if: env.LINT_ON == "true"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # package provides dockerized headless eslint check, and a make frontend target
+        # run: make eslint
+      - name: Run ESlint against all code
+        run: |
+          eslint_pass_boolean_flag=1
+          # set flag to 0 if eslint fails
+          make eslint || eslint_pass_boolean_flag=0
+          if [ $eslint_pass_boolean_flag -eq 1 ]; then
+            echo "[INFO] Code Lint PASSED!"
+          else
+            echo "[ERROR] Code Lint FAILED!"
+          fi
+
+          if [ $eslint_pass_boolean_flag -eq 1 ]; then
+            job_status=0
+          else
+            if [ $ALLOW_lINT_TO_FAIL == "true" ]; then
+              echo "[WARN] Lint failed but ALLOW_lINT_TO_FAIL is true"
+              job_status=0
+            else
+              echo "[ERROR] Lint failed and ALLOW_lINT_TO_FAIL is false"
+              job_status=1
+            fi
+          fi
+          echo "Exiting with status code: $job_status"
+          exit $job_status

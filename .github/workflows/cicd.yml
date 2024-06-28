@@ -46,7 +46,7 @@ jobs:
 
   test:
     needs: pipe_config
-    if: ${{ needs.pipe_config.outputs.UNIT_TESTS_ON == "true" }}
+    # if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,7 +57,7 @@ jobs:
 
   lint:
     needs: pipe_config
-    if: ${{ needs.pipe_config.outputs.LINT_ON == "true" }}
+    if: needs.pipe_config.outputs.LINT_ON == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

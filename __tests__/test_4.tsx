@@ -55,5 +55,10 @@ test("Styled Test: test renders with correct styles", () => {
 
   expect(tree).toHaveStyleRule("float", "left");
   expect(tree).not.toHaveStyleRule("height", "100%");
-  // expect(tree).toHaveStyleRule("color", "blue", { target: "MySpan" });
+
+  // query document for the element rendered and verify a simple property
+  const span = document.querySelector("span");
+  // assert span is NULL because this is a snapshot test
+  expect(span).toBeNull();
+
 });

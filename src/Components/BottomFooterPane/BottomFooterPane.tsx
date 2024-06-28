@@ -44,13 +44,14 @@ const StyledSpan = styled.span`
 
 
 interface BottomFooterPaneProps {
+  id?: string;
   theme: BottomFooterPaneTheme;
   children?: React.ReactNode;
 }
 
 const BottomFooterPane: FC<BottomFooterPaneProps> = (props) => {
   return (
-    <BottomFooterPaneContainer theme={props.theme}>
+    <BottomFooterPaneContainer id={props.id} theme={props.theme}>
       <StyledSpan>
         {createSVGIcon(
           'github',

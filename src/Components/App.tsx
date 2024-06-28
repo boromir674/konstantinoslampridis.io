@@ -288,6 +288,10 @@ const App: FC = () => {
             bottomFooterPane: darkTheme.footerStyles,
           },
         }}
+        html={{
+          verticalMainPaneID: "vertical-main-pane",
+          bottomFooterPaneID: "bottom-footer-pane",
+        }}
       />
     // </main>
   );

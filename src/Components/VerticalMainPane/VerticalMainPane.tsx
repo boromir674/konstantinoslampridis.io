@@ -107,15 +107,17 @@ interface AppVerticalMainPaneProps {
     portfolio: PortfolioItemData[];
   };
   sectionIDs?: string[];
+  id?: string;
 }
 
 const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
+  id,
   theme,
   data,
   sectionIDs,
 }) => {
   return (
-    <VerticalMainPaneContainer theme={theme}>
+    <VerticalMainPaneContainer id={id} theme={theme}>
       {/* Scrollable Section 1 */}
       <IntroductionSection
         id={sectionIDs ? sectionIDs[0] : "introduction-section"}

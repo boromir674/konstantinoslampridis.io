@@ -27,8 +27,12 @@ interface BigScreenViewProps {
     verticalMainPane: {
       data: AppVerticalMainPaneProps["data"];
       sectionIDs?: string[];
-    } 
+    }
     // bottomFooterPane: BottomFooterPaneProps['data'];
+  };
+  html?: {
+    verticalMainPaneID?: string;
+    bottomFooterPaneID?: string;
   };
 }
 
@@ -64,6 +68,7 @@ const BigScreenView: FC<BigScreenViewProps> = ({
     verticalMainPane: verticalMainPaneData,
     // bottomFooterPane: bottomFooterPaneData,
   },
+  html,
 }) => {
   return (
     <BigScreenViewContainer
@@ -71,8 +76,8 @@ const BigScreenView: FC<BigScreenViewProps> = ({
     >
       <TopHeaderPane theme={topHeaderPane} data={topHeaderPaneData} />
       <VerticalSidePane theme={verticalSidePane} data={verticalSidePaneData} />
-      <VerticalMainPane theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs}/>
-      <BottomFooterPane theme={bottomFooterPane} />
+      <VerticalMainPane id={html?.verticalMainPaneID} theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs} />
+      <BottomFooterPane id={html?.bottomFooterPaneID} theme={bottomFooterPane} />
     </BigScreenViewContainer>
   );
 };

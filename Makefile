@@ -19,7 +19,7 @@ help: ## This help.
 
 # STATIC FILE GENERATOR/BUNDLER/BUILDER
 builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
-	docker build -f Dockerfile.build --target build -t $(BUILDER_NAME) .
+	docker build -f Dockerfile.build --target build_prod_bundle -t $(BUILDER_NAME) .
 
 # BUILD PROD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder

@@ -49,25 +49,24 @@ jobs:
     # if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
     runs-on: ubuntu-latest
     env:
-      # Host location root directory where Coverage Results are stored are Test Suite runs
+      # Host location root directory where Coverage Results are stored after Test Suite runs
       HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
     steps:
       - uses: actions/checkout@v4
 
-      - run: echo TEST_IMAGE_NAME="test-image" >> $GITHUB_ENV
+      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          # token: ''   # add custom issued token for better rate-limiting
 
-      # package provides dockerized headless test, and a make frontend target
-      - name: Build Docker Image for running Tests
-        run: docker build -f Dockerfile.build --target test -t ${TEST_IMAGE_NAME} .
+      - name: Install Dependencies
+        run: yarn install
 
-      - name: Run Unit Tests
-        # run: make test
-        run: docker run -t --rm -v ${{ env.HOST_COVERAGE_DIR }}:/app/coverage -v ${PWD}/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
-        # Now, the ./coverage folder should contain
-        # lcov-report/
-        # coverage-final.json
-        # lcov.info
-        # clover.xml
+      - name: Run Tests
+        run: yarn test
 
       - name: Set CODE COVERAGE CI ARTIFACT name
         if: always()
@@ -86,6 +85,7 @@ jobs:
           if-no-files-found: error
     outputs:
       COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+
 
   codecov:
   # leverages repository secret CODECOV_TOKEN
@@ -192,30 +192,52 @@ jobs:
           exit $job_status
 
 
-  alt_test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
-      - uses: actions/setup-node@v4
-        with:
-          # Version Spec of the version to use in SemVer notation.
-          # It also emits such aliases as lts, latest, nightly and canary builds
-          # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
-          node-version: '18.16.x'
 
-          # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
-          # If node-version and node-version-file are both provided the action will use version from node-version. 
-          # node-version-file: 'package.json'
 
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
 
-          # token: ''   # add custom issued token for better rate-limiting
+  # test_old:
+  #   # needs caching to compete in speed with setup-node cache
+  #   # INVESTIGATE how to combine cache and docker images
 
-      - name: Install Dependencies
-        run: yarn install
+  #   needs: pipe_config
+  #   # if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     # Host location root directory where Coverage Results are stored after Test Suite runs
+  #     HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Run Tests
-        run: yarn test
+  #     - run: echo TEST_IMAGE_NAME="test-image" >> $GITHUB_ENV
+
+  #     # package provides dockerized headless test, and a make frontend target
+  #     - name: Build Docker Image for running Tests
+  #       run: docker build -f Dockerfile.build --target test -t ${TEST_IMAGE_NAME} .
+
+  #     - name: Run Unit Tests
+  #       # run: make test
+  #       run: docker run -t --rm -v ${{ env.HOST_COVERAGE_DIR }}:/app/coverage -v ${PWD}/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
+  #       # Now, the ./coverage folder should contain
+  #       # lcov-report/
+  #       # coverage-final.json
+  #       # lcov.info
+  #       # clover.xml
+
+  #     - name: Set CODE COVERAGE CI ARTIFACT name
+  #       if: always()
+  #       id: set_coverage_artifact_name
+  #       run: echo COVERAGE_ARTIFACT="coverage" >> $GITHUB_OUTPUT
+
+  #     # CI ARTIFACTS - Code Coverage
+  #     - name: Upload Test Coverage results as CI Artifacts
+  #       if: always()
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         # name under which to upload the Artifact(s) and later reference them
+  #         name: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+  #         # Path to the file/folder to upload
+  #         path: ${{ env.HOST_COVERAGE_DIR }}
+  #         if-no-files-found: error
+  #   outputs:
+  #     COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}

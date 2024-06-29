@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 
 import TopHeaderPane, { TopHeaderPaneProps } from "./TopHeaderPane";
@@ -27,8 +27,12 @@ interface BigScreenViewProps {
     verticalMainPane: {
       data: AppVerticalMainPaneProps["data"];
       sectionIDs?: string[];
-    } 
+    }
     // bottomFooterPane: BottomFooterPaneProps['data'];
+  };
+  html?: {
+    verticalMainPaneID?: string;
+    bottomFooterPaneID?: string;
   };
 }
 
@@ -44,11 +48,9 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
   display: flex;
   flex-direction: row;
 
-  // active if the screen width is less than 400px
+  // active if the screen width is less than 800px
   @media (max-width: 800px) {
     flex-direction: column;
-    // max-width: 400px; // Set a maximum width for the side pane
-    width: 100%; // Take up as much space as possible, up to the maximum
   }
 `;
 
@@ -66,6 +68,7 @@ const BigScreenView: FC<BigScreenViewProps> = ({
     verticalMainPane: verticalMainPaneData,
     // bottomFooterPane: bottomFooterPaneData,
   },
+  html,
 }) => {
   return (
     <BigScreenViewContainer
@@ -73,8 +76,8 @@ const BigScreenView: FC<BigScreenViewProps> = ({
     >
       <TopHeaderPane theme={topHeaderPane} data={topHeaderPaneData} />
       <VerticalSidePane theme={verticalSidePane} data={verticalSidePaneData} />
-      <VerticalMainPane theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs}/>
-      <BottomFooterPane theme={bottomFooterPane} />
+      <VerticalMainPane id={html?.verticalMainPaneID} theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs} />
+      <BottomFooterPane id={html?.bottomFooterPaneID} theme={bottomFooterPane} />
     </BigScreenViewContainer>
   );
 };

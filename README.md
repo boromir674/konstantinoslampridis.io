@@ -7,6 +7,10 @@
   TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/boromir674/konstantinoslampridis.io/cicd.yml?link=https%3A%2F%2Fgithub.com%2Fboromir674%2Fkonstantinoslampridis.io%2Factions%2Fworkflows%2Fcicd.yml)
+
+
 This is the **Source Code Repository** of [konstantinoslampridis.io](https://konstantinoslampridis.io).  
 Comprises of:
 - a **Component-based SPA**, written in `React`
@@ -21,14 +25,15 @@ We currently use
 
 ## Audit
 
-**Bundle Size: 4.2MB**
+**Bundle Size: 2.7MB**
 ### Lighthouse
 
 |       | Performance | Accessibility | Best Practices | SEO | PWA |
 |-------|-------------|---------------|----------------|-----|-----|
-| Live  | 100         | 98            | 92             | 91  | N/A  |
-| Light | 92        | 98            | 100            | 90  | N/A |
-| Dark  | 100          | 98            | 100            | 90  | N/A |
+| Live  | 100         | 98            | 95             | 91  | N/A  |
+| Light | 100        | 98            | 100            | 91  | N/A |
+| Dark  | 100          | 98            | 100            | 91  | N/A |
+| Mobile | 95 | 98 | 100 | N/A |
 
 # Architecture
 

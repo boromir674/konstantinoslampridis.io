@@ -79,9 +79,22 @@ const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
 
   display: inline-block;
 
-  // box-sizing: border-box
+  box-sizing: border-box
+
+  // border-bottom: 1px solid #000;
+  padding-bottom: 120px; // Adjust this value to match the height of the footer
+
 
   // overflow: auto; /* Introduce a scrollbar if necessary */
+
+  // this is designed a a vertical view, so a margin bottom is used to prevent
+  // content overlal with the Footer, which has CSS 'position: fixed'
+  margin-bottom: 55px;
+
+  // active if the screen width is less than 800px
+  @media (max-width: 800px) {
+    margin-bottom: 50px;
+  }
 `;
 
 interface AppVerticalMainPaneProps {
@@ -94,15 +107,17 @@ interface AppVerticalMainPaneProps {
     portfolio: PortfolioItemData[];
   };
   sectionIDs?: string[];
+  id?: string;
 }
 
 const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
+  id,
   theme,
   data,
   sectionIDs,
 }) => {
   return (
-    <VerticalMainPaneContainer theme={theme}>
+    <VerticalMainPaneContainer id={id} theme={theme}>
       {/* Scrollable Section 1 */}
       <IntroductionSection
         id={sectionIDs ? sectionIDs[0] : "introduction-section"}

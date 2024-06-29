@@ -33,6 +33,7 @@ interface BigScreenViewInteractiveProps {
     verticalMainPane: BigScreenViewProps["data"]["verticalMainPane"]["data"];
     verticalSidePane: BigScreenViewProps["data"]["verticalSidePane"];
   };
+  html?: BigScreenViewProps["html"];
   // designed theme duo of Light and Color modes
   colorSet: {
     light: BigScreenViewProps["theme"];
@@ -46,6 +47,7 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
   navigationSections,
   data,
   colorSet,
+  html,
 }) => {
   // Component State
   const SSROn = useIsSSR();
@@ -82,6 +84,7 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
           sectionIDs: navigationSections.map((section) => section.htmlID),
         },
       }}
+      html={html}
     />
   );
 };

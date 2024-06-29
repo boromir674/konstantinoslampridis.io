@@ -1,6 +1,7 @@
-import { FC, useState, useRef, useEffect, ReactNode, RefObject } from "react";
+import { FC, useState, useContext, useRef, useEffect, ReactNode, RefObject } from "react";
 import styled from "@emotion/styled";
 import ResourceLinkTooltip from './ResourceLinkTooltip';
+import ZIndexContext from '../../../ZIndexContext';
 
 
 interface ResourceLinkButtonProps {
@@ -58,6 +59,8 @@ const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
 
 const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlText, children }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const { setZIndex } = useContext(ZIndexContext);
+
   const buttonRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLElement>(null);
 
@@ -77,8 +80,15 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
     };
   }, []);
 
+      // Handle Click on the button
+      const handleClickOnButton = () => {
+        setTooltipVisible(!tooltipVisible);
+        // if visible set zIndex to 10 else 0
+        setZIndex(tooltipVisible ? 0 : 10);
+      };
+
   return (
-    <div onClick={() => setTooltipVisible(!tooltipVisible)}>
+    <div onClick={handleClickOnButton}>
       <ResourceLinkButton
         ref={buttonRef as RefObject<HTMLButtonElement>}
         color={theme.color}

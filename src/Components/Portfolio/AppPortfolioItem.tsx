@@ -112,17 +112,12 @@ const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]
 };
 
 // React Component
-
-const AppPortfolioItem: FC<AppPortfolioItemProps> = (props) => {
-
-  const renderCallback = useCallback(
-    (portfolioItemProps: AppPortfolioItemProps) => {
-      return render(portfolioItemProps.data, portfolioItemProps.theme);
-    },
-    []
+const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
+  return (
+    <div>
+      {render(data, theme)}
+    </div>
   );
-
-  return <div>{renderCallback(props)}</div>;
 };
 
 export default AppPortfolioItem;

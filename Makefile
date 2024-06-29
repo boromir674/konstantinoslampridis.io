@@ -19,7 +19,7 @@ help: ## This help.
 
 # STATIC FILE GENERATOR/BUNDLER/BUILDER
 builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
-	docker build -f Dockerfile.build --target build -t $(BUILDER_NAME) .
+	docker build -f Dockerfile.build --target build_prod_bundle -t $(BUILDER_NAME) .
 
 # BUILD PROD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
@@ -122,6 +122,7 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 test:  ## Run Test Suite
 	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
 	docker run -it --rm \
+		-v /data/repos/static-site-generator/coverage:/app/coverage \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
 		-v /data/repos/static-site-generator/src:/app/src \
 		$(TEST_IMAGE_NAME) yarn test $(filter-out $@,$(MAKECMDGOALS))
@@ -129,9 +130,9 @@ test:  ## Run Test Suite
 test_env:  ## Run Bash in Test Environment
 	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
 	docker run -it --rm \
+		-v /data/repos/static-site-generator/coverage:/app/coverage \
 		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
 		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
 		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
 		-v /data/repos/static-site-generator/.testing-static-queries.json:/app/.testing-static-queries.json \
 		--entrypoint bash \

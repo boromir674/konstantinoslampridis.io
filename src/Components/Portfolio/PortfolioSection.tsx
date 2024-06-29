@@ -1,4 +1,4 @@
-import react, { useState, useCallback, FC, useRef } from "react";
+import React, { useState, useCallback, FC, useRef } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
@@ -8,6 +8,10 @@ import PortfolioItemInterface from "../../PortfolioItemInterface";
 
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
 import { LayoutInterface } from './LayoutInterface';
+
+import ZIndexContext from '../../ZIndexContext';
+
+
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
 
@@ -19,14 +23,16 @@ interface Layouts {
   [P: string]: Layout[];
 }
 
+////  GRID ITEM Top Level Component  ////
+
 interface LayoutItemProps {
   moved?: boolean;
   static?: boolean;
   isDraggable?: boolean;
   isResizable?: boolean;
   resizeHandles?: string[];
-  resizeHandle?: react.ReactNode;
-  children?: react.ReactNode;
+  resizeHandle?: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
   isBounded?: boolean;
@@ -159,7 +165,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
 
     // we use dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
-    
+
     // rule to handle Portfolio Items without releases or project links
     // if previous Layout had h = 4, we assume it has no releases or links
 
@@ -218,11 +224,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   const startingWidth = 4;
   return (
     <PortfolioSectionContainer
-    id={htmlID}
-    theme={{
-      backgroundColor: theme.container.backgroundColor,
-      color: theme.item.color,
-    }}>
+      id={htmlID}
+      theme={{
+        backgroundColor: theme.container.backgroundColor,
+        color: theme.item.color,
+      }}>
       {/* Portfolio Section TITLE*/}
       <h1 style={{ ...theme.sectionHeader }}>Open Source & Portfolio</h1>
       <button onClick={resetLayout}>Reset Layout</button>
@@ -238,14 +244,19 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         // eg: user might try to decrease height too much, and we want to ensure that contents are visible, which requires a minimum height
         // eg: user might try to decrease width too much, and we want to ensure that contents are visible, which requires a minimum width
         onResize={onResize}
+        // If true, WidthProvider will measure the container's width before mounting children.
+        // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
+        measureBeforeMount={true}
       >
         {data.map((item, index) => {
           let row: number = 0;
           let col: number = 0;
+
           const maxNumberOfLinksOrReleases = Math.max(
             (item.resource_links || []).length,
             (item.release || []).length,
           );
+
           if (index % 2 === 0) {
             col = 0;
           } else {
@@ -253,6 +264,31 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
           }
           // row is determined by index div 2
           row = Math.floor(index / 2);
+
+          // Initialize the zIndex state for this item
+          const [zIndex, setZIndex] = useState(0);
+
+          const setStartingHeigth = () => {
+            // and a heuristic including the startingWidth and the number of characters in data.description
+            // to determine the height of the Portfolio Item
+
+            const nbCharacters = item.description.length;
+            const height = maxNumberOfLinksOrReleases < 2 ? 4 : maxNumberOfLinksOrReleases < 3 ? 7 : 9;
+
+            // HEURISTIC
+            if (maxNumberOfLinksOrReleases == 3 && nbCharacters < 145) {
+              return height - 1
+            }
+            if (nbCharacters > 200) {
+              return height + 1
+            }
+            if (nbCharacters < 90) {
+              return height - 1
+            }
+            return height
+          };
+
+
           return (
             <LayoutItem
               //   ref={portfolioHTMLELsRefs[index]}
@@ -263,10 +299,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 // Card height, on initial render, when local storage is empty
                 // each card's height should be determined dynamically, based on the content
                 // content depends on the number of Resource Links or Software Releases
-                // roughly max(len(item.resource_links), len(item.release) * 2)
-                // h: 7,
-                // dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
-                h: maxNumberOfLinksOrReleases === 2 ? 7 : maxNumberOfLinksOrReleases === 1 ? 4 : maxNumberOfLinksOrReleases === 0 ? 4 : 8,
+
+                h: setStartingHeigth(),
                 x: col,
                 y: row,
                 minW: 3,
@@ -274,18 +308,18 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               }}
               style={{
                 outline: theme.item.outline,
+                // allows increasing top-level grid item height, to allow children pop-ups to be visible
+                zIndex: zIndex,
               }}
             >
-              <ResponsiveLayoutItemContent
-                data={item}
-                renderProps={(d: PortfolioItemInterface) => {
-                  return <AppPortfolioItem data={d} theme={theme.item.theme}/>;
-                }}
-
-                // layoutItemID={index.toString()}
-                // data={item}
-                // listeners_callbacks={[storeUpdatedItemHeight]}
-              />
+              <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
+                <ResponsiveLayoutItemContent
+                  data={item}
+                  renderProps={(d: PortfolioItemInterface) => {
+                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;
+                  }}
+                />
+              </ZIndexContext.Provider>
             </LayoutItem>
           );
         })}

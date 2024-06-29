@@ -1,10 +1,13 @@
 # Use Node v18
-FROM node:18.16.0-slim as base
+FROM node:18.16.0-slim AS runtime
+
+FROM runtime as env
+WORKDIR /app
+ENV GATSBY_TELEMETRY_DISABLED=1
 
 # RUN apt-get update && apt-get install -y --install-recommends util-linux
 
-FROM base as env
-WORKDIR /app
+FROM runtime as base
 COPY package.json .
 COPY yarn.lock .
 
@@ -12,7 +15,7 @@ COPY yarn.lock .
 
 # Static Site Generator / Static File Builder
 # we need ONLY PROD dependencies from package.json
-FROM env AS prod_install
+FROM base AS prod_install
 # we avoid unintented updates to yarn.lock by using --frozen-lockfile
 # this is helpful since we force the user's yarn.lock into the image
 # and the build process does not know whether the lock was produced in the same env as this on
@@ -21,7 +24,7 @@ RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 # Node BUILDER 2
 # Test, List, Typecheck
 # we need PROD + DEV dependencies from package.json
-FROM env AS dev_install
+FROM base AS dev_install
 RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 
 # Code BUILDER
@@ -36,25 +39,25 @@ COPY babel.config.js .
 COPY package.json .
 COPY README.md .
 
-FROM base AS prod_build
-ENV GATSBY_TELEMETRY_DISABLED=1
+FROM scratch AS prod_build
 
-WORKDIR /app
 # Copy Code / Config / Text Data into /app
 COPY --from=code /app .
 
 # Copy PROD dependencies into /app/node_modules
-COPY --from=prod_install /app/node_modules node_modules
+COPY --from=prod_install /node_modules node_modules
 
 # Copy GraphQL Build-time required Data Files
 COPY data.yaml .
 COPY data-portfolio.yml .
 
+FROM env as prod_env
+COPY --from=prod_build /app .
 # PROD CASE 1: Build minified bundle of static html/css/js files
 # BUILD (bundle) into "static" files ready to serve. Static files include
 # minified code (ie webpack html/css/js bundle) built on server (SSR) for the
 # content to display, but also site 'metadata' such as sitemap.xml, robots.txt
-FROM prod_build as build_prod_bundle
+FROM prod_env as build_prod_bundle
 COPY scripts/generate-robots-file.sh .
 COPY scripts/build-production-bundle.sh .
 CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
@@ -68,7 +71,7 @@ CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
 # cp ./public-container/* ./public/
 
 # PROD CASE 2: Build minified bundle of static html/css/js files and servewith simple file server
-FROM prod_build as serve_files
+FROM prod_env as serve_files
 RUN yarn build
 COPY scripts/generate-robots-file.sh .
 RUN ./generate-robots-file.sh /app/public/robots.txt
@@ -87,7 +90,7 @@ CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 # PROD CASE 3: Run a hot-reload development server, with PROD dependencies
 
 # Run development server
-FROM prod_build AS dev_server
+FROM prod_env AS dev_server
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
 CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
@@ -96,26 +99,27 @@ CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 # BRANCH 2
 # Dev Operations, Testing, Type Check, Linting
 
-FROM base AS dev_build
-ENV GATSBY_TELEMETRY_DISABLED=1
-
-WORKDIR /app
+FROM scratch AS dev_build
 # Copy Code / Config /app
 COPY --from=code /app .
-
 # Copy PROD + DEV dependencies into /app/node_modules
-COPY --from=dev_install /app/node_modules node_modules
+COPY --from=dev_install /node_modules node_modules
+
+
+FROM env as dev_env
+COPY --from=dev_build /app .
+
 
 # Dev 1: TYPE CHECK
-FROM dev_build as type_check
+FROM dev_env as type_check
 CMD [ "yarn", "typecheck" ]
 
 # Dev 2: TYPE CHECK LIVE
-FROM dev_build as type_check_live
+FROM dev_env as type_check_live
 CMD [ "yarn", "typecheck-live" ]
 
 # Dev 3: UNIT TESTS
-FROM dev_build as test
+FROM dev_env as test
 ENV NODE_ENV=test
 COPY jest.config.ts .
 COPY jest-preprocess.js .
@@ -124,12 +128,12 @@ COPY loadershim.js .
 CMD [ "yarn", "test" ]
 
 # Dev 4: LINTING
-FROM dev_build as eslint
+FROM dev_env as eslint
 COPY .eslintrc.cjs .
 CMD [ "yarn", "eslint", "." ]
 
 # Dev 5: STORYBOOK
-FROM dev_build AS storybook
+FROM dev_env AS storybook
 COPY .storybook/ .storybook/
 ENV STORYBOOK_DISABLE_TELEMETRY=1
 

@@ -1,0 +1,295 @@
+personal:
+  name: 'Konstantinos Lampridis'
+  email: 'k.lampridis@hotmail.com'
+  phone: '+306942671779'
+  location: 'Thessaloniki, Greece'
+  links:
+    - name: 'GitHub Account Profile'
+      id: github
+      url: 'github.com/boromir674'
+    - name: 'Gitlab Account Profile'
+      id: gitlab
+      url: 'gitlab.com/boromir674'
+    - name: 'LinkedIn Account Profile'
+      id: linkedin
+      url: 'linkedin.com/in/konstantinos-lampridis/'
+  description: 'Greetings and welcome, my name is Konstantinos Lampridis.'
+
+education:
+  - name: 'University of Amsterdam'
+    location: 'Amsterdam, Netherlands'
+    degree: 'MSc in Artificial Intelligence'
+    thesis_title: 'Political Spectrum Aware Topic Model'
+    # thesis:
+    #   title: 'Political Spectrum Aware Topic Model'
+    #   url: ''
+    date: '2014 - 2019'
+    topics:
+      - 'Machine Learning'
+      - 'Computer Vision'
+      - 'Natural Language Processing'
+      - 'Autonomous Agents'
+      - 'Reinforcement Learning'
+  - name: 'University of Macedonia'
+    location: 'Thessaloniki, Greece'
+    degree: 'BSc in Applied Informatics'
+    thesis_title: 'Exterior Point Simplex Algorithm Analysis'
+    date: '2008 - 2013'
+    topics:
+      - 'Computer Programming'
+      - 'Computer Science'
+      - 'Data Structures'
+      - 'Algorithm Analysis'
+      - 'Software Engineering'
+      - 'Operating Systems'
+      - 'Computer Architecture'
+      - 'Discete Mathematics'
+      - 'Statistics'
+      - 'Micro/Macro Economics'
+
+      # - 'Scientific Computing'
+      # - 'Database Systems'
+      # - 'Computer Networks'
+      # - 'Artificial Intelligence'
+      # - 'Parallel Programming'
+      # - 'Human Computer Interaction'
+      # - 'Graph Theory'
+      # - 'Data Mining'
+      # - 'Computer Graphics'
+
+professional:
+  experience_items:
+    # ECO DEVELOPMENT
+    - title: 'Tech Lead - Contractor'
+      company: 'Eco Development S.A.'
+      location: 'Fyliro - Thessaloniki, Greece'
+      duration: 'May 2023 - Present'
+      description: >
+        Supervisor of the 'Data Analytics' team, responsible for the development of the company's Machine Learning Models and Data Pipelines Infrastructure.
+      activities:
+        - Engineering Data Pipelines to facilitate ETL wokflows
+        - Auditing Eco Development's ML predictive models for mosquito abundance and disease risk
+        - Redesigning the company's ML models to improve performance and scalability
+      technology_tags:
+        - 'Python'
+        - 'Machine Learning'
+        - Random Forest
+        - 'Gradient Boosting Methods'
+        - 'Variational Autoencoders'
+        - 'Pandas'
+        - SQL
+        - Pytest
+        - GCP
+        - BigQuery
+        - Scrum/Agile
+    # INFOVISTA SAS
+    - title: 'DevOps Engineer - Contractor'
+      company: 'Infovista SAS'
+      location: 'Massy, France - Remote'
+      duration: 'Sep 2022 - May 2023'
+      description: 'Member of the DevOps Enablement team, tasked with Platform Engineering, creating Automations, and CI/CD Pipelines.'
+      activities:
+        - Facilitated automated DevOps Compliance and Bill of Material (BoM) on-demand computing, by developing a new CLI tool
+        - "Enabled company managers to manage, track and mitigate whole portfolio's CVEs, by developing the API Backend of UI-driven app for handling managers' use cases"
+        - "Enabled tracking of Automated Deployments and their Lifecycle, by implementing a custom Logging and Monitoring solution"
+        - "Maintained the stability and reliability of the shared GitOps pipelines, which were critical to the CI/CD process for all portfolio's software at Infovista"
+        - Contributed to the library of shared Job Templates, which served as essential building blocks for teams to construct flexible CI/CD pipelines
+      technology_tags:
+        - 'Docker'
+        - 'Python'
+        - 'Git'
+        - 'Bash'
+        - 'Gitlab CI'
+        - 'Pytest'
+        - 'PostgreSQL'
+        - 'AWS'
+        - 'VMware'
+        - 'Jira/Confluence'
+        - 'Platform Engineering'
+        - Scum/Agile
+        - 'GitOps'
+    # ALVIN
+    - title: 'Senior Software Developer'
+      company: 'Alvin'
+      location: 'Thessaloniki, Greece'
+      duration: 'Feb 2022 - Apr 2022'
+      description: >
+        Alvin parses SQL metadata from popular "Data Platforms", such as Postgres, Redshift, Airflow, BigQuery, Tableau, Hive, etc and facilitates Data Governance Operations by providing a Software as a Service (SaaS) web app.
+
+        Working asynchronously and fully remotely on adding features and automating (backend) testing of our
+        Data Governance SaaS product
+      activities:
+        - Engineered a Test Framework to facilitate easier/automated testing of new integrations
+        - Added new features for 'MySQL' and 'MS SQL Server' integrations in user-facing app
+        - Implemented a GDPR "delete user data" feature, upon user request in user-facing app
+        - Designed a process to facilitate faster collaborative development, version control (and merging strategies) and Continuous Integration (CI), throughout the release cycle.
+      technology_tags:
+        - 'Python'
+        - 'FastAPI'
+        - 'Docker'
+        - 'Amundsen'
+        - 'VueJS'
+        - Automated Testing
+        - Pytest
+        - REST API
+        - OpenAPI
+        - AWS
+        - Scrum/Agile
+    # FEEL ROBOTICS
+    - title: 'Full-stack Developer'
+      company: 'FeelRobotics BV'
+      location: 'Amsterdam, Netherlands'
+      duration: 'Mar 2020 - Mar 2021'
+      description: 'Member of the Technology team, working on various (web, mobile, desktop) stacks, being involved in all aspects of the software: design, development, (automated) testing, CI/CD.'
+      activities:
+        - Continuously contributing on the in-house 'Order Management \& Dashboard' web app, fulfilling clients' orders coming from various webshops at real-time.
+        - Increased web app security by implementing '2FA flow' involving 'QR-Code scanning'
+        - Enabled sales for global customers in Australia, Indonesia, Hong-Kong and Singapore, by integrating our web app with the Invenco 3PL web API to periodically exchange data, using an authorized serverless app (AWS Lambda app)
+        - Migrated web app's legacy "http polling" to real-time/event-driven solution  and achieve data exchange with the newly published Rakuten web API
+        - Enabled web app autoamated invoice generation and delivery to customers, with custom solution.
+        - Adding features for the IoT mobile (iOS \& Android) app, providing a UI to allow inter-device Bluetooth communication.
+        - Developed a Terminal App, providing a Wizard to guide Bluetooth Device Testing on factory-site.
+      technology_tags:
+        - 'Python'
+        - 'Django'
+        - 'CircleCI'
+        - 'Docker'
+        - 'Pytest'
+        - 'Javascript'
+        - 'React'
+        - 'Bluetooth'
+        - 'AWS Lambda'
+        - 'AWS EB'
+        - 'AWS Cloudwatch'
+        - 'AWS SQS'
+        - HTML
+        - CSS
+        - Angular
+        - Firebase
+        - Scrum/Agile
+    # NMBRS
+    - title: 'Artificial Intelligence Specialist'
+      company: 'Nmbrs BV'
+      location: 'Amsterdam, Netherlands'
+      duration: 'Nov 2017 - Jul 2018'
+      description: >
+        Member of the AI squad; was responsible for researching and
+        enhancing the company's main product, “Payroll”, by developing AI-powered features to
+        assist the end-user pro-actively and intelligently.
+      activities:
+        - Implemented data-driven systems for “salary proposal” and “wage-code prediction” powered by Linear Regression and Random Forest models respectively
+        - Built web REST APIs for the above systems, hosted them in Azure cloud platform and was responsible for monitoring traffic and performance
+      technology_tags:
+        - 'Machine Learning'
+        - 'Python'
+        - 'Linear Regression'
+        - 'SQL'
+        - 'Flask'
+        - 'REST API'
+        - 'OpenAPI'
+        - 'Azure Web App'
+        - 'Scrum/Agile'
+    # UvA - INCA
+    - title: 'Software Developer - Freelance'
+      company: 'Universiteit van Amsterdam'
+      location: 'Amsterdam, Netherlands'
+      duration: 'Nov 2017 - Mar 2018'
+      description: "Member of the 'Analysis Team', tasked with contributing to the Inca Open-Source Project."
+      activities:
+        - "Engineered the 'analysis' (python) interface, that developers should implement, in case they want to supply a new 'analysis' algorithm."
+        - "Developed a Topic Modeling algorithm as a concrete implementation of the 'analysis' interface"
+        - "Provided mentoring, within the team, for software and 'git' best practices, in our collaborative setting"
+      technology_tags:
+        - 'Python'
+        - 'Topic Modeling'
+        - 'Latent Dirichlet Allocation (LDA)'
+        - 'Machine Learning'
+        - 'Git'
+        - 'Celery'
+    # TEXTKERNEL
+    - title: 'Research & Development Internship'
+      company: 'Textkernel BV'
+      location: 'Amsterdam, Netherlands'
+      duration: 'Aug 2016 - Dec 2016'
+      description: "Augmented Textkernel's main product, Extract!, a CV (resume) parsing software, by building a Machine Learning model able to \"understand\" the Greek language, surpassing worldwide competition in model performance benchmarks."
+      activities:
+        - "Developed Hidden Markov and Conditional Random Field Machine Learning model, trained on the Greek Language."
+        - "Feature Engineering and token normalization."
+      technology_tags:
+        - 'Machine Learning'
+        - 'Natural Language Processing'
+        - 'Conditional Random Fields'
+        - 'Hidden Markov Models'
+        - 'Feature Engineering'
+        - 'Perl'
+        - 'Git'
+        - 'Bash'
+        - 'Scrum/Agile'
+        - 'CI/CD'
+
+
+# PORTFOLIO - OPEN SOURCE PROJECTS
+portfolio:
+  # PYTHON PACKAGE GENERATOR
+  - title: Python Package Generator
+    development_period: Apr 2022 - Jul 2022
+    status: mature
+    description: >
+      A command-line interface (CLI) to automatically scaffold a new Python Open Source Project, along with multiple config files!
+      Implemented using Python, Github Actions, Sphinx \& Cookiecutter.
+    source_code_repo: github.com/boromir674/cookiecutter-python-package
+    release:
+      - artifact_type: pypi
+        version: 1.7.1
+        slug: cookiecutter-python-package
+    tags:
+      - Project Template
+      - Code Generator
+      - Automation
+      - Cookiecutter
+      - CLI
+      - Python
+      - PyPI
+      - Sphinx
+
+  # TOPIC MODELING TOOLKIT
+  - title: Topic Modeling Toolkit
+    development_period: Apr 2018 - Sep 2019
+    status: mature
+    description: >
+      A Python library for Topic Modeling providing a unified interface facilitating various research operations.
+      It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
+    source_code_repo: github.com/boromir674/topic-modeling-toolkit
+    release:
+      - artifact_type: pypi
+        version: 0.5.2
+        slug: topic-modeling-toolkit
+    tags:
+      - Machine Learning
+      - Unsupervised Learning
+      - Topic Modeling
+      - Regression Testing
+      - Python
+      - PyPI
+      - automation
+      - CLI
+
+  # NEURAL STYLE TRANSFER
+  - title: Neural Style Transfer
+    development_period: Sep 2021 - Dec 2021
+    status: stable
+    description: >
+      Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
+    source_code_repo: github.com/boromir674/neural-style-transfer
+    release:
+      - artifact_type: pypi
+        version: 0.6.1
+        name: neural-style-transfer
+    tags:
+      - Neural Style Transfer
+      - Deep Learning
+      - Python
+      - Docker
+      - Sphinx
+      - PyPI
+      - CLI

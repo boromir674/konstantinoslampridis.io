@@ -1,0 +1,345 @@
+projects:
+
+- title: Python Package Generator
+  development_period: Apr 2022 - Feb 2024
+  status: mature
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/cookiecutter-python-package
+    - type: documentation
+      url: https://python-package-generator.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/cookiecutter-python-package/actions/workflows/test.yaml
+  release:
+    - type: docker
+      command: docker pull boromir674/generate-python:v2.4.0
+      url: https://hub.docker.com/r/boromir674/generate-python
+      name: generate-python
+      artifact_version: "2.4.0"
+    - type: pypi
+      command: pip install cookiecutter-python
+      name: cookiecutter-python-package
+      url: https://pypi.org/project/cookiecutter-python/
+      artifact_version: "2.4.0"
+    - type: github
+      command: 'curl -LJO https://github.com/boromir674/cookiecutter-python-package/archive/refs/tags/v2.4.0.tar.gz'
+      artifact_version: v2.4.0
+      name: cookiecutter-python-package
+      url: https://github.com/boromir674/cookiecutter-python-package/releases/tag/v2.4.0
+  description: >
+    A tool command-line interface (CLI) to automatically scaffold a new
+    Python Open Source Project, along with multiple config files!
+    Implemented using Python, Github Actions, Sphinx \& Cookiecutter.
+  tags:
+    - Project Template
+    - Code Generator
+    - Automation
+    - Cookiecutter
+    - CLI
+    - Python
+    - PyPI
+    - Sphinx
+
+- title: Neural Style Transfer
+  development_period: Sep 2021 - Dec 2021
+  status: stable
+  source_code_repo: boromir674/neural-style-transfer
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/neural-style-transfer
+    - type: documentation
+      url: https://neural-style-transfer.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/neural-style-transfer/actions
+  release:
+    - type: pypi
+      command: pip install artificial-artwork
+      url: https://pypi.org/project/artificial-artwork/
+      name: artificial-artwork
+    - type: docker
+      command: docker pull boromir674/neural-style-transfer:1.0.2
+      url: https://hub.docker.com/r/boromir674/neural-style-transfer
+      artifact_version: "1.0.2"
+      name: neural-style-transfer
+    - type: github
+      command: 'curl -LJO https://github.com/boromir674/neural-style-transfer/archive/refs/tags/v1.0.2.tar.gz'
+      url: https://github.com/boromir674/neural-style-transfer/releases/tag/v1.0.2
+      artifact_version: v1.0.2
+      name: neural-style-transfer
+  description: >
+    Re-paint any image with the style of another image (ie Van Gogh painting)
+    using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
+  tags:
+    - Neural Style Transfer
+    - Deep Learning
+    - Python
+    - Docker
+    - Sphinx
+    - PyPI
+    - CLI
+
+- title: Software Patterns
+  development_period: Dec 2021 - Jun 2022
+  status: stable
+  source_code_repo: boromir674/software-patterns
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/software-patterns
+    - type: documentation
+      url: https://software-patterns.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://app.circleci.com/pipelines/github/boromir674/software-patterns
+  release:
+    - type: pypi
+      command: pip install software-patterns
+      url: https://pypi.org/project/software-patterns/
+      name: software-patterns
+    - type: github
+      command: 'curl -LJO https://github.com/boromir674/software-patterns/archive/refs/tags/v2.0.0.tar.gz'
+      url: https://github.com/boromir674/software-patterns/releases/tag/v2.0.0
+      name: software-patterns
+  description: >
+    A Python library with reusable Software Design Patterns with Types.
+  tags:
+    - Software Design Patterns
+    - Software Library
+    - Python
+    - Sphinx
+    - PyPI
+
+- title: Pytest Object Getter
+  development_period: Apr 2022 - Jul 2022
+  status: mature
+  source_code_repo: boromir674/pytest-object-getter
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/pytest-object-getter
+    - type: documentation
+      url: https://pytest-object-getter.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/pytest-object-getter/actions
+  release:
+    - type: pypi
+      command: pip install pytest-object-getter
+      name: pytest-object-getter
+      artifact_version: "1.0.2"
+    - type: github
+      artifact_version: v1.0.2
+  description: >
+    A Pytest Plugin providing a `fixture` to dynamically import any object
+    from a python (3rd party) module, while mocking its namespace on demand.
+  tags:
+    - Pytest
+    - Plugin
+    - Fixture
+    - Python
+    - PyPI
+
+- title: Python Software Release
+  development_period: May 2022
+  status: stable
+  source_code_repo: boromir674/software-release
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/software-release
+  release:
+    - type: pypi
+      name: software-release
+      artifact_version: "0.1.0"
+    - type: github
+      artifact_version: v0.1.0
+  description: >
+    A CLI that streamlines the process of making a "new" Software Release to
+    Github, using Semantic Versioning. Implemeted in Python, the CLI provides
+    a wizard, that guides the user through the semi-automated "release process".
+  tags:
+    - Automated Software Release
+    - Semantic Versioning
+    - github
+    - Python
+    - PyPI
+    - automation
+    - CLI
+
+- title: Pytest Subprocess Plugin
+  development_period: Jul 2022
+  status: stable
+  source_code_repo: boromir674/pytest-subprocess
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/pytest-subprocess
+    - type: documentation
+      url: https://subprocess-pytest-plugin.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/pytest-subprocess/actions
+  release:
+    - type: pypi
+      name: pytest-subprocess
+      artifact_version: "0.10.0"
+    - type: github
+      artifact_version: v0.10.0
+  description: >
+    A Pytest Plugin providing a `fixture` to assist in testing sub-processes
+    and reduce boilerplate test code.
+  tags:
+    - Pytest
+    - Plugin
+    - Fixture
+    - Python
+    - PyPI
+
+- title: Topic Modeling Toolkit
+  development_period: Apr 2018 - Sep 2019
+  status: mature
+  source_code_repo: boromir674/topic-modeling-toolkit
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/topic-modeling-toolkit
+    - type: 'ci/cd'
+      url: https://travis-ci.org/boromir674/topic-modeling-toolkit
+  release:
+    - type: pypi
+      command: pip install topic-modeling-toolkit
+      name: cookiecutter-python-package
+      url: https://pypi.org/project/topic-modeling-toolkit/
+    - type: github
+      command: curl -LJO https://github.com/boromir674/topic-modeling-toolkit/archive/refs/tags/v0.5.6.tar.gz
+      url: https://github.com/boromir674/topic-modeling-toolkit/releases/tag/v0.5.6
+      artifact_version: v0.5.6
+  description: >
+    A Python Package hosting multiple (CLI) programs that facilitate Topic
+    Modeling research operations, on a collection of documents.
+  tags:
+    - Machine Learning
+    - Unsupervised Learning
+    - Topic Modeling
+    - Python
+    - PyPI
+    - automation
+    - CLI
+
+- title: So Magic
+  development_period: May 2020 - Jun 2021
+  status: stable
+  source_code_repo: boromir674/so-magic
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/so-magic
+    - type: documentation
+      url: https://so-magic.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://app.circleci.com/pipelines/github/boromir674/so-magic
+  release:
+    - type: pypi
+      command: pip install so-magic
+      name: so-magic
+      artifact_version: "0.7.1"
+      url: https://pypi.org/project/so-magic/
+    - type: github
+      command: curl -LJO https://github.com/boromir674/so-magic/archive/refs/tags/v0.7.1.tar.gz
+      url: https://github.com/boromir674/so-magic/releases/tag/v0.7.1
+      artifact_version: v0.7.1
+  description: >
+    A Python library to infer Self-Organising Map models, based on structured
+    data.
+  tags:
+    - Self-Organizing Maps
+    - Machine Learning
+    - Unsupervised Learning
+    - Python
+    - PyPI
+
+# - title: So Magic API
+#   development_period: Jan 2021 - Oct 2021
+#   status: stable
+#   description: >
+#     A RESTful API built on top of the So Magic package using FastAPI and
+#     the Uvicorn server.
+#   tags:
+#     - Web Service
+#     - REST API
+#     - FastAPI
+#     - Uvicorn
+#     - Pydantic
+#     - Python
+#     - Docker
+
+# - title: So Magic UI
+#   development_period: Jan 2021 - Sep 2021
+#   status: stable
+#   description: >
+#     An interactive User Interface (UI) desinged to run as a client-side
+#     app, built with React and D3.
+#   tags:
+#     - Data Visualization
+#     - UI
+#     - Typescript
+#     - React
+#     - D3
+#     - Docker
+#     - Node
+
+- title: PyDoer
+  development_period: Mar 2018 - Apr 2022
+  status: mature
+  source_code_repo: boromir674/doer
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/doer
+    - type: 'ci/cd'
+      url: https://app.circleci.com/pipelines/github/boromir674/doer
+  release:
+    - type: pypi
+      name: pydoer
+      artifact_version: "1.0.2"
+      command: pip install pydoer
+      url: https://pypi.org/project/pydoer/
+    - type: github
+      name: doer
+      command: 'curl -LJO https://github.com/boromir674/doer/archive/refs/tags/v1.0.2.tar.gz'
+      url: https://github.com/boromir674/doer/releases/tag/v1.0.2
+      artifact_version: v1.0.2
+  description: >
+    A CLI program that renders a menu of options, each of which launches
+    one or more Terminal Applications, "bootstrapped" with one or more
+    custom bash commands. Implemented with Python and Bash allowing all
+    options & commands to be designed by the User, through a json file.
+  tags:
+    - Automation
+    - Bash
+    - CLI
+    - Python
+    - PyPI
+
+- title: Music Album Creator
+  development_period: Jan 2019 - Nov 2019
+  status: stable
+  source_code_repo: boromir674/music-album-creator
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/music-album-creator
+    - type: documentation
+      url: https://music-album-creator.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://ci.appveyor.com/project/boromir674/music-album-creator/branch/master
+  release:
+    - type: pypi
+      name: music-album-creation
+      artifact_version: "1.4.0"
+      command: pip install music-album-creation
+      url: https://pypi.org/project/music-album-creation/
+    - type: github
+      url: https://github.com/boromir674/music-album-creator/releases/tag/v1.4.0
+      command: 'curl -LJO https://github.com/boromir674/music-album-creator/archive/refs/tags/v1.4.0.tar.gz'
+      artifact_version: v1.4.0
+  description: >
+    Download a youtube video, convert and segment it into audio tracks,
+    attach metadata (per track) and save to disk.
+  tags:
+    - Audio Segmentation
+    - Metadata
+    - Youtube
+    - CLI
+    - Python
+    - PyPI
+    - Docker

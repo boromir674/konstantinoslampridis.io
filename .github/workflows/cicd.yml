@@ -88,6 +88,7 @@ jobs:
       COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
 
   codecov:
+  # leverages repository secret CODECOV_TOKEN
     needs: test
     # as long as test was triggered, we run codecov. both when Test PASSed or FAILed
     if: always() && ${{ !contains(fromJSON('["skipped", "cancelled"]'), needs.test.result) }}
@@ -113,6 +114,7 @@ jobs:
         env:
           OS_NAME: 'linux'
           NODEJS: '18'
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           for file in ./coverage/clover*.xml; do
             ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose

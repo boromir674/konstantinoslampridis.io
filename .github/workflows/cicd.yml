@@ -59,7 +59,7 @@ jobs:
 
       - name: Run Unit Tests
         # run: make test
-        run: docker run -t --rm -v /data/repos/static-site-generator/coverage:/app/coverage -v /data/repos/static-site-generator/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
+        run: docker run -t --rm -v ${PWD}/coverage:/app/coverage -v ${PWD}/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
 
   lint:
     needs: pipe_config

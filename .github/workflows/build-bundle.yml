@@ -42,10 +42,7 @@ jobs:
         run: docker build -f Dockerfile.build --target build_prod_bundle -t "${_IMAGE_NAME}" .
       
       - name: Build Minified Web html/css/js bundle
-        run: |
-          docker run -t --rm \
-              -v "${PWD}/public/:/app/public/ \
-              ${_IMAGE_NAME}
+        run: 'docker run -t --rm -v "${PWD}/public/:/app/public/ ${_IMAGE_NAME}'
       
       - name: Measure Bundle Size
         id: bundle_size

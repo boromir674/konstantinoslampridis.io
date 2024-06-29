@@ -132,7 +132,7 @@ jobs:
 
 ## BUILD MINIFIED BUNDLE
   build:
-    needs: [set_github_outputs, test]
+    needs: [test]
     uses: ./.github/workflows/build-bundle.yml
     if: always()
     with:

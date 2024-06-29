@@ -98,8 +98,11 @@ jobs:
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
 
+      # Sanity check
+      - run: 'echo Coverage Artifact: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}'
+
       # CI ARTIFACTS - Download ##
-      - name: Download built Distro Artifacts
+      - name: Download Code Coverage Reports - Artifacts
         uses: actions/download-artifact@v3
         with:
           # Artifact reference name (aka key) to download

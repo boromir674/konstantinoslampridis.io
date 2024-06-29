@@ -48,6 +48,9 @@ jobs:
     needs: pipe_config
     # if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
     runs-on: ubuntu-latest
+    env:
+      # Host location root directory where Coverage Results are stored are Test Suite runs
+      HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
     steps:
       - uses: actions/checkout@v4
 
@@ -59,7 +62,64 @@ jobs:
 
       - name: Run Unit Tests
         # run: make test
-        run: docker run -t --rm -v ${PWD}/coverage:/app/coverage -v ${PWD}/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
+        run: docker run -t --rm -v ${{ env.HOST_COVERAGE_DIR }}:/app/coverage -v ${PWD}/__tests__:/app/__tests__ ${TEST_IMAGE_NAME}
+        # Now, the ./coverage folder should contain
+        # lcov-report/
+        # coverage-final.json
+        # lcov.info
+        # clover.xml
+
+      - name: Set CODE COVERAGE CI ARTIFACT name
+        if: always()
+        id: set_coverage_artifact_name
+        run: echo COVERAGE_ARTIFACT="coverage" >> $GITHUB_OUTPUT
+
+      # CI ARTIFACTS - Code Coverage
+      - name: Upload Test Coverage results as CI Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          # name under which to upload the Artifact(s) and later reference them
+          name: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+          # Path to the file/folder to upload
+          path: ${{ env.HOST_COVERAGE_DIR }}
+          if-no-files-found: error
+    outputs:
+      COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+
+  codecov:
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get Codecov binary
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+
+      # CI ARTIFACTS - Download ##
+      - name: Download built Distro Artifacts
+        if: ${{ inputs.artifact }}
+        uses: actions/download-artifact@v3
+        with:
+          # Artifact reference name (aka key) to download
+          name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
+          # Host local path to download the Artifact to
+          # path: coverage
+      - run: ls -ltra
+      - run: ls -ltra coverage
+      ## CODECOV ##
+      - name: Upload Coverage Reports to Codecov
+        env:
+          OS_NAME: 'linux'
+          NODEJS: '18'
+        run: |
+          for file in ./coverage/coverage*.xml; do
+            ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
+            echo "Sent to Codecov: $file !"
+          done
+
 
   lint:
     needs: pipe_config
@@ -80,7 +140,7 @@ jobs:
           eslint_pass_boolean_flag=1
 
           # set flag to 0 if eslint fails
-          docker run --rm ${ESLINT_IMAGE_NAME} || eslint_pass_boolean_flag=0
+          docker run -t --rm ${ESLINT_IMAGE_NAME} || eslint_pass_boolean_flag=0
           # make eslint || eslint_pass_boolean_flag=0
 
           if [ $eslint_pass_boolean_flag -eq 1 ]; then

@@ -7,6 +7,10 @@
   TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/boromir674/konstantinoslampridis.io/cicd.yml?link=https%3A%2F%2Fgithub.com%2Fboromir674%2Fkonstantinoslampridis.io%2Factions%2Fworkflows%2Fcicd.yml)
+
+
 This is the **Source Code Repository** of [konstantinoslampridis.io](https://konstantinoslampridis.io).  
 Comprises of:
 - a **Component-based SPA**, written in `React`

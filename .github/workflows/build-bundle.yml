@@ -48,14 +48,16 @@ jobs:
         id: bundle_size
         run: echo BUNDLE_SIZE=$(du -sh ${PWD}/public/) >> $GITHUB_OUTPUT
 
+      - run: 'echo "Bundle Size: ${{ steps.bundle_size.outputs.BUNDLE_SIZE }}"'
+
       # CI ARTIFACTS - Upload Minified Bundle
-      - name: Upload Minified htll/css/js Bundle, as CI Artifacts
+      - name: Upload Minified html/css/js Bundle, as CI Artifacts
         uses: actions/upload-artifact@v4
         with:
           # name under which to upload the Artifact(s) and later reference them
           name: ${{ inputs.ci_artifact }}
           # Path to the file/folder to upload
-          path: "${PWD}/public"
+          path: public
           if-no-files-found: error
 
       - name: Output the BUNDLE_CI_ARTIFACT

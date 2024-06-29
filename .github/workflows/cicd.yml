@@ -100,7 +100,6 @@ jobs:
 
       # CI ARTIFACTS - Download ##
       - name: Download built Distro Artifacts
-        if: ${{ inputs.artifact }}
         uses: actions/download-artifact@v3
         with:
           # Artifact reference name (aka key) to download
@@ -115,7 +114,7 @@ jobs:
           OS_NAME: 'linux'
           NODEJS: '18'
         run: |
-          for file in ./coverage/coverage*.xml; do
+          for file in ./coverage/clover*.xml; do
             ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
             echo "Sent to Codecov: $file !"
           done

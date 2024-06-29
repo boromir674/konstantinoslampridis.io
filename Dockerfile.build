@@ -27,9 +27,11 @@ RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 FROM base AS dev_install
 RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 
-# Code BUILDER
-FROM scratch AS code
+FROM scratch AS source
 WORKDIR /app
+
+# Code BUILDER
+FROM source AS code
 # Copy Code / Config / Text Data
 COPY src src
 COPY gatsby-config.ts .
@@ -39,7 +41,7 @@ COPY babel.config.js .
 COPY package.json .
 COPY README.md .
 
-FROM scratch AS prod_build
+FROM source AS prod_build
 
 # Copy Code / Config / Text Data into /app
 COPY --from=code /app .
@@ -99,7 +101,7 @@ CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 # BRANCH 2
 # Dev Operations, Testing, Type Check, Linting
 
-FROM scratch AS dev_build
+FROM source AS dev_build
 # Copy Code / Config /app
 COPY --from=code /app .
 # Copy PROD + DEV dependencies into /app/node_modules

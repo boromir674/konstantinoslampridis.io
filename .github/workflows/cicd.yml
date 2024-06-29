@@ -191,29 +191,29 @@ jobs:
 
 
   alt_test:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-    # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
-    - uses: actions/setup-node@v4
-      with:
-        # Version Spec of the version to use in SemVer notation.
-        # It also emits such aliases as lts, latest, nightly and canary builds
-        # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
-        node-version: '18.16.x'
+      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
+      - uses: actions/setup-node@v4
+        with:
+          # Version Spec of the version to use in SemVer notation.
+          # It also emits such aliases as lts, latest, nightly and canary builds
+          # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
+          node-version: '18.16.x'
 
-        # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
-        # If node-version and node-version-file are both provided the action will use version from node-version. 
-        # node-version-file: 'package.json'
+          # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
+          # If node-version and node-version-file are both provided the action will use version from node-version. 
+          # node-version-file: 'package.json'
 
-        cache: 'yarn'
-        cache-dependency-path: 'yarn.lock'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
 
-        # token: ''   # add custom issued token for better rate-limiting
+          # token: ''   # add custom issued token for better rate-limiting
 
-    - name: Install Dependencies
-      run: yarn install
+      - name: Install Dependencies
+        run: yarn install
 
-    - name: Run Tests
-      run: yarn test
+      - name: Run Tests
+        run: yarn test

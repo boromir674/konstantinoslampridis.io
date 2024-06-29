@@ -111,7 +111,7 @@ jobs:
 
       # CI ARTIFACTS - Download ##
       - name: Download Code Coverage Reports - Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           # Artifact reference name (aka key) to download
           name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
@@ -130,6 +130,33 @@ jobs:
             echo "Sent to Codecov: $file !"
           done
 
+## BUILD MINIFIED BUNDLE
+  build:
+    needs: [set_github_outputs, test]
+    uses: .github/workflows/build-bundle.yml
+    if: always()
+    with:
+      ci_artifact: web_bundle
+
+# Test Web Bundle
+  test_bundle:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Verify Bundle Size is lower than 3MB
+      # eg parse 2,6M /data/repos/static-site-generator/public-auto
+      - name: Verify Bundle Size smaller than 3MB
+        run: |
+          echo "[INFO] Bundle Size: ${{ needs.build.outputs.BUNDLE_SIZE }}"
+          bundle_size=$(echo "${{ needs.build.outputs.BUNDLE_SIZE }}" | cut -d' ' -f1)
+          echo "[DEBUG] Bundle Size: $bundle_size"
+          if [ $(echo "$bundle_size" | tr -d 'M') -gt 3 ]; then
+            echo "[ERROR] Bundle Size is GREATER than 3MB!"
+            echo "exiting with status code 1"
+            exit 1
+          else
+            echo "[INFO] Bundle Size is LESS than 3MB"
+          fi
 
   lint:
     needs: pipe_config

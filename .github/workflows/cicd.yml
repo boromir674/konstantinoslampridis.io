@@ -133,7 +133,7 @@ jobs:
 ## BUILD MINIFIED BUNDLE
   build:
     needs: [set_github_outputs, test]
-    uses: .github/workflows/build-bundle.yml@dev
+    uses: ./.github/workflows/build-bundle.yml
     if: always()
     with:
       ci_artifact: web_bundle

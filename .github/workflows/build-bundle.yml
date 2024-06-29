@@ -44,7 +44,7 @@ jobs:
       - name: Build Minified Web html/css/js bundle
         run: |
           docker run -t --rm \
-              -v "${PWD}/public/:/app/public/
+              -v "${PWD}/public/:/app/public/ \
               ${_IMAGE_NAME}
       
       - name: Measure Bundle Size

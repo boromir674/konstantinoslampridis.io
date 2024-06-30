@@ -14,8 +14,8 @@ env:
 
   ##### JOB ON/OFF SWITCHES - Top Level overrides #####
   UNIT_TESTS_ON: "true"
-  LINT_ON: "false"
-  BUILD_ON: "true"
+  LINT_ON: "true"
+  BUILD_ON: "false"
   PUBLISH_ON: "true"
   DEPLOY_ON: "true"
   ##########################
@@ -95,44 +95,44 @@ jobs:
 # COVERAGE HOST
   codecov:
     needs: test
-    # uses: ./.github/workflows/codecov.yml
+    uses: ./.github/workflows/codecov.yml
     # as long as test was triggered, we run codecov. both when Test PASSed or FAILed
     if: always() && ${{ !contains(fromJSON('["skipped", "cancelled"]'), needs.test.result) }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get Codecov binary
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - name: Get Codecov binary
+    #     run: |
+    #       curl -Os https://uploader.codecov.io/latest/linux/codecov
+    #       chmod +x codecov
 
-      # CI ARTIFACTS - Download ##
-      - name: Download Code Coverage Reports - Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          # Artifact reference name (aka key) to download
-          name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
-          # Host local path to download the Artifact to
-          path: coverage
+    #   # CI ARTIFACTS - Download ##
+    #   - name: Download Code Coverage Reports - Artifacts
+    #     uses: actions/download-artifact@v4
+    #     with:
+    #       # Artifact reference name (aka key) to download
+    #       name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
+    #       # Host local path to download the Artifact to
+    #       path: coverage
 
-      ## CODECOV ##
-      - name: Upload Coverage Reports to Codecov
-        env:
-          OS_NAME: 'linux'
-          NODEJS: '18'
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-          for file in ./coverage/clover*.xml; do
-            ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
-            echo "Sent to Codecov: $file !"
-          done
+    #   ## CODECOV ##
+    #   - name: Upload Coverage Reports to Codecov
+    #     env:
+    #       OS_NAME: 'linux'
+    #       NODEJS: '18'
+    #       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    #     run: |
+    #       for file in ./coverage/clover*.xml; do
+    #         ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
+    #         echo "Sent to Codecov: $file !"
+    #       done
 
-    # with:
-    #   coverage_ci_artifact: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
-    #   file_prefix: clover
-    # secrets:
-    #   # leverages repository secret CODECOV_TOKEN
-    #   CODECOV_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+    with:
+      coverage_ci_artifact: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
+      file_prefix: clover
+    secrets:
+      # leverages repository secret CODECOV_TOKEN
+      CODECOV_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
 ## BUILD MINIFIED BUNDLE
   build:

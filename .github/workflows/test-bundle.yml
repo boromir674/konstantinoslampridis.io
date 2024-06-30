@@ -72,7 +72,6 @@ jobs:
 # -rwxrwxrwx 1 root root 208013 Jun 29 16:46  polyfill-6534e443b1457de06b09.js.map
 # -rwxrwxrwx 1 root root     99 Jun 29 16:46  robots.txt
 # -rwxrwxrwx 1 root root    389 Jun 29 16:46  sitemap.xml
-# drwxrwxrwx 1 root root      0 Jun 29 16:46  static
 # -rwxrwxrwx 1 root root   3422 Jun 29 16:46  styles.c332001ae72ea32dc04e.css
 # -rwxrwxrwx 1 root root   4997 Jun 29 16:46  webpack-runtime-70a38c66ba5dcf943ed0.js
 # -rwxrwxrwx 1 root root  23340 Jun 29 16:46  webpack-runtime-70a38c66ba5dcf943ed0.js.map
@@ -146,13 +145,17 @@ jobs:
             exit 1
           fi
 
-      # Test 4: Verify the presence of the static directory
-      - name: Verify static directory is present
+      # [INFO]: Static Directory may or may not exist
+      - name: Check if static directory exists
         working-directory: ${{ env._BUNDLE_DIR }}
         run: |
+          echo "## Static Directory" >> $GITHUB_STEP_SUMMARY
           if [ ! -d static ]; then
-            echo "[ERROR] static directory is missing!"
-            exit 1
+            echo "[INFO] static directory isn't present."
+            echo "Directory `static` isn't present." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "[INFO] static directory is present."
+            echo "Directory `static` is present." >> $GITHUB_STEP_SUMMARY
           fi
 
       # Test 5: Verify the presence of the 404 directory

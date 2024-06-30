@@ -38,12 +38,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -f Dockerfile.build --target build_prod_bundle -t "${_IMAGE_NAME}" .
+      # PREV
+      # - name: Build Docker Image
+      #   run: docker build -f Dockerfile.build --target build_prod_bundle -t "${_IMAGE_NAME}" .
       
-      - name: Build Minified Web html/css/js bundle
-        run: 'docker run -t --rm -v "${PWD}/public/:/app/public/" ${_IMAGE_NAME}'
-      
+      # - name: Build Minified Web html/css/js bundle
+      #   run: 'docker run -t --rm -v "${PWD}/public/:/app/public/" ${_IMAGE_NAME}'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install Production Dependencies
+        run: yarn install --frozen-lockfile --production=true && yarn cache clean
+
+      - name: Gatsby Build bundled html/css/js, using Webpack
+        env:
+          GATSBY_TELEMETRY_DISABLED: 1
+        run: |
+          sh scripts/build-production-bundle.sh public/robots.txt
+
       - name: Measure Bundle Size
         id: bundle_size
         run: echo BUNDLE_SIZE=$(du -sh ${PWD}/public/) >> $GITHUB_OUTPUT

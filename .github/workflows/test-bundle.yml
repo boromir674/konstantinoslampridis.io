@@ -78,16 +78,97 @@ jobs:
 # -rwxrwxrwx 1 root root  23340 Jun 29 16:46  webpack-runtime-70a38c66ba5dcf943ed0.js.map
 # -rwxrwxrwx 1 root root   1652 Jun 29 16:46  webpack.stats.json
 
-      # CD into the bundle directory
-      - name: CD into the bundle directory
-        run: cd ${{ env._BUNDLE_DIR }}
-      # Test 1: Check if index.html exists
-      - name: Check if index.html exists
+      # ls -l into the bundle directory
+      - name: List Bundle Directory
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: ls -l
+
+      # Test 1: Verify standard files are present: index.html, sitemap.xml, etc
+      - name: Verify index.html, sitemap.xml, robots.txt, webpack.stats.json, etc are present
+        working-directory: ${{ env._BUNDLE_DIR }}
         run: |
-          if [ -f index.html ]; then
-            echo "[INFO] index.html exists"
-          else
-            echo "[ERROR] index.html does not exist"
-            echo "exiting with status code 1"
+          if [ ! -f index.html ]; then
+            echo "[ERROR] index.html is missing!"
+            exit 1
+          fi
+          if [ ! -f sitemap.xml ]; then
+            echo "[ERROR] sitemap.xml is missing!"
+            exit 1
+          fi
+          if [ ! -f robots.txt ]; then
+            echo "[ERROR] robots.txt is missing!"
+            exit 1
+          fi
+          if [ ! -f webpack.stats.json ]; then
+            echo "[ERROR] webpack.stats.json is missing!"
+            exit 1
+          fi
+          if [ ! -f chunk-map.json ]; then
+            echo "[ERROR] chunk-map.json is missing!"
+            exit 1
+          fi
+          if [ ! -f 404.html ]; then
+            echo "[ERROR] 404.html is missing!"
+            exit 1
+          fi
+
+      # Test 2: Verify the presence of the main bundle files
+      - name: Verify main bundle files are present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -f app-*.js ]; then
+            echo "[ERROR] app-*.js is missing!"
+            exit 1
+          fi
+          if [ ! -f framework-*.js ]; then
+            echo "[ERROR] framework-*.js is missing!"
+            exit 1
+          fi
+          if [ ! -f polyfill-*.js ]; then
+            echo "[ERROR] polyfill-*.js is missing!"
+            exit 1
+          fi
+          if [ ! -f styles-*.css ]; then
+            echo "[ERROR] styles-*.css is missing!"
+            exit 1
+          fi
+          if [ ! -f webpack-runtime-*.js ]; then
+            echo "[ERROR] webpack-runtime-*.js is missing!"
+            exit 1
+          fi
+
+      # Test 3: Verify the presence of the page-data directory
+      - name: Verify page-data directory is present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -d page-data ]; then
+            echo "[ERROR] page-data directory is missing!"
+            exit 1
+          fi
+
+      # Test 4: Verify the presence of the static directory
+      - name: Verify static directory is present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -d static ]; then
+            echo "[ERROR] static directory is missing!"
+            exit 1
+          fi
+
+      # Test 5: Verify the presence of the 404 directory
+      - name: Verify 404 directory is present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -d 404 ]; then
+            echo "[ERROR] 404 directory is missing!"
+            exit 1
+          fi
+
+      # Test 6: Verify the presence of the ~partytown directory
+      - name: Verify ~partytown directory is present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -d '~partytown' ]; then
+            echo "[ERROR] ~partytown directory is missing!"
             exit 1
           fi

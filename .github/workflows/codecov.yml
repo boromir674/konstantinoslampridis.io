@@ -3,6 +3,11 @@ name: 'Upload Coverage to Codecov.io'
 on:
   workflow_call:
     inputs:
+      # Required Inputs
+      coverage_ci_artifact:
+        description: 'CI Artifact Name for Code Coverage'
+        required: true
+        type: string
       file_prefix:
         description: 'Prefix of the file to upload'
         required: false
@@ -28,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           # Artifact reference name (aka key) to download
-          name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
+          name: ${{ inputs.coverage_ci_artifact }}
           # Host local path to download the Artifact to
           path: coverage
 

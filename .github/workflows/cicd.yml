@@ -99,6 +99,7 @@ jobs:
     # as long as test was triggered, we run codecov. both when Test PASSed or FAILed
     if: always() && ${{ !contains(fromJSON('["skipped", "cancelled"]'), needs.test.result) }}
     with:
+      coverage_ci_artifact: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
       file_prefix: clover
     secrets:
       # leverages repository secret CODECOV_TOKEN

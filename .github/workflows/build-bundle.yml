@@ -56,9 +56,25 @@ jobs:
 
       - name: Gatsby Build bundled html/css/js, using Webpack
         env:
+          # Disable telemetry for Gatsby
           GATSBY_TELEMETRY_DISABLED: 1
+        run: yarn build
+
+      - name: Use single sitemap.xml file to represent the site
         run: |
-          sh scripts/build-production-bundle.sh public/robots.txt
+          rm public/sitemap-index.xml
+          mv public/sitemap-0.xml public/sitemap.xml
+
+      - name: Create robots.txt file
+        env:
+          output_file: public/robots.txt
+        run: |
+          cat > "$output_file" << EOF
+          User-agent: *
+          Crawl-delay: 120
+          Disallow: /*?
+          Sitemap: https://konstantinoslampridis.io/sitemap.xml
+          EOF
 
       - name: Measure Bundle Size
         id: bundle_size

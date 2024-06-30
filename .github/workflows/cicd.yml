@@ -14,8 +14,8 @@ env:
 
   ##### JOB ON/OFF SWITCHES - Top Level overrides #####
   UNIT_TESTS_ON: "true"
-  LINT_ON: "false"
-  BUILD_ON: "true"
+  LINT_ON: "true"
+  BUILD_ON: "false"
   PUBLISH_ON: "true"
   DEPLOY_ON: "true"
   ##########################
@@ -53,44 +53,47 @@ jobs:
   test:
     needs: pipe_config
     if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
-    runs-on: ubuntu-latest
-    env:
-      # Host location root directory where Coverage Results are stored after Test Suite runs
-      HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
-    steps:
-      - uses: actions/checkout@v4
+    uses: ./.github/workflows/test.yml
+    with:
+      pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
+    # runs-on: ubuntu-latest
+    # env:
+    #   # Host location root directory where Coverage Results are stored after Test Suite runs
+    #   HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
+    # steps:
+    #   - uses: actions/checkout@v4
 
-      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18.16.x'
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
-          # token: ''   # add custom issued token for better rate-limiting
+    #   # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
+    #   - uses: actions/setup-node@v4
+    #     with:
+    #       node-version: '18.16.x'
+    #       cache: 'yarn'
+    #       cache-dependency-path: 'yarn.lock'
+    #       # token: ''   # add custom issued token for better rate-limiting
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile --production=false
+    #   - name: Install Dependencies
+    #     run: yarn install --frozen-lockfile --production=false
 
-      - name: Run Tests
-        run: yarn test
+    #   - name: Run Tests
+    #     run: yarn test
 
-      - name: Set CODE COVERAGE CI ARTIFACT name
-        if: always()
-        id: set_coverage_artifact_name
-        run: echo COVERAGE_ARTIFACT="coverage" >> $GITHUB_OUTPUT
+    #   - name: Set CODE COVERAGE CI ARTIFACT name
+    #     if: always()
+    #     id: set_coverage_artifact_name
+    #     run: echo COVERAGE_ARTIFACT="coverage" >> $GITHUB_OUTPUT
 
-      # CI ARTIFACTS - Code Coverage
-      - name: Upload Test Coverage results as CI Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          # name under which to upload the Artifact(s) and later reference them
-          name: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
-          # Path to the file/folder to upload
-          path: ${{ env.HOST_COVERAGE_DIR }}
-          if-no-files-found: error
-    outputs:
-      COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+    #   # CI ARTIFACTS - Code Coverage
+    #   - name: Upload Test Coverage results as CI Artifacts
+    #     if: always()
+    #     uses: actions/upload-artifact@v4
+    #     with:
+    #       # name under which to upload the Artifact(s) and later reference them
+    #       name: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+    #       # Path to the file/folder to upload
+    #       path: ${{ env.HOST_COVERAGE_DIR }}
+    #       if-no-files-found: error
+    # outputs:
+    #   COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
 
 # COVERAGE HOST
   codecov:
@@ -98,35 +101,6 @@ jobs:
     uses: ./.github/workflows/codecov.yml
     # as long as test was triggered, we run codecov. both when Test PASSed or FAILed
     if: always() && ${{ !contains(fromJSON('["skipped", "cancelled"]'), needs.test.result) }}
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - uses: actions/checkout@v4
-    #   - name: Get Codecov binary
-    #     run: |
-    #       curl -Os https://uploader.codecov.io/latest/linux/codecov
-    #       chmod +x codecov
-
-    #   # CI ARTIFACTS - Download ##
-    #   - name: Download Code Coverage Reports - Artifacts
-    #     uses: actions/download-artifact@v4
-    #     with:
-    #       # Artifact reference name (aka key) to download
-    #       name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
-    #       # Host local path to download the Artifact to
-    #       path: coverage
-
-    #   ## CODECOV ##
-    #   - name: Upload Coverage Reports to Codecov
-    #     env:
-    #       OS_NAME: 'linux'
-    #       NODEJS: '18'
-    #       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    #     run: |
-    #       for file in ./coverage/clover*.xml; do
-    #         ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
-    #         echo "Sent to Codecov: $file !"
-    #       done
-
     with:
       coverage_ci_artifact: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
       file_prefix: clover
@@ -172,49 +146,9 @@ jobs:
   lint:
     needs: pipe_config
     if: needs.pipe_config.outputs.LINT_ON == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18.16.x'
-          cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
-          # token: ''   # add custom issued token for better rate-limiting
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile --production=false
-
-      - name: Run ESlint against all code
-        run: |
-          eslint_pass_boolean_flag=1
-
-          # set flag to 0 if eslint fails
-          yarn eslint || eslint_pass_boolean_flag=0
-
-          if [ $eslint_pass_boolean_flag -eq 1 ]; then
-            echo "[INFO] Code Lint PASSED!"
-          else
-            echo "[ERROR] Code Lint FAILED!"
-          fi
-
-          if [ $eslint_pass_boolean_flag -eq 1 ]; then
-            job_status=0
-          else
-            if [ ${{ needs.pipe_config.outputs.ALLOW_lINT_TO_FAIL }} == "true" ]; then
-              echo "[WARN] Lint failed but ALLOW_lINT_TO_FAIL is true"
-              job_status=0
-            else
-              echo "[ERROR] Lint failed and ALLOW_lINT_TO_FAIL is false"
-              job_status=1
-            fi
-          fi
-          echo "Exiting with status code: $job_status"
-          exit $job_status
-
-
+    uses: ./.github/workflows/lint.yml
+    with:
+      pipe_config: '{"ALLOW_lINT_TO_FAIL": "${{ needs.pipe_config.outputs.ALLOW_lINT_TO_FAIL }}"}'
 
 
 

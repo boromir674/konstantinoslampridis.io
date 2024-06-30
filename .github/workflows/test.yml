@@ -1,0 +1,57 @@
+name: 'Run Unit Tests'
+on:
+  workflow_call:
+    inputs:
+      pipe_config:
+        required: true
+        type: string
+        description: 'Configuration for the Unit Tests'
+    outputs:
+      COVERAGE_ARTIFACT:
+        description: "Coverage CI Artifact (id/alias) of uploaded Coverage Results"
+        value: ${{ jobs.build.outputs.COVERAGE_ARTIFACT }}
+jobs: 
+  jest:
+    runs-on: ubuntu-latest
+    outputs:
+      COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+    env:
+      # Expected path of root directory, on host, where Coverage Results are stored after Test Suite runs
+      HOST_COVERAGE_DIR: ${{ github.workspace }}/coverage
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          # token: ''   # add custom issued token for better rate-limiting
+
+      - name: read pipe config and extract allow_fail key/value
+        run: |
+          echo "ALLOW_lINT_TO_FAIL=${{fromJson(inputs.pipe_config).ALLOW_lINT_TO_FAIL}}" >> $GITHUB_ENV
+      - run: echo ${{ env.ALLOW_lINT_TO_FAIL }}
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile --production=false
+
+      - name: Run Tests
+        run: yarn test
+
+      - name: Set CODE COVERAGE CI ARTIFACT name
+        if: always()
+        id: set_coverage_artifact_name
+        run: echo COVERAGE_ARTIFACT="coverage" >> $GITHUB_OUTPUT
+
+      # CI ARTIFACTS - Code Coverage
+      - name: Upload Test Coverage results as CI Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          # name under which to upload the Artifact(s) and later reference them
+          name: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
+          # Path to the file/folder to upload
+          path: ${{ env.HOST_COVERAGE_DIR }}
+          if-no-files-found: error

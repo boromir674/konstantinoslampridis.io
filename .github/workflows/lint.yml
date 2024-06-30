@@ -28,7 +28,7 @@ jobs:
 
       - name: Run ESlint against all code
         env:
-          ALLOW_lINT_TO_FAIL: ${{fromJson(needs.pipe_config.outputs.pipe_config).ALLOW_lINT_TO_FAIL}}
+          ALLOW_lINT_TO_FAIL: ${{ fromJson(inputs.pipe_config).ALLOW_lINT_TO_FAIL }}
         run: |
           eslint_pass_boolean_flag=1
 

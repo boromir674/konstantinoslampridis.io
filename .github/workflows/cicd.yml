@@ -14,8 +14,8 @@ env:
 
   ##### JOB ON/OFF SWITCHES - Top Level overrides #####
   UNIT_TESTS_ON: "true"
-  LINT_ON: "true"
-  BUILD_ON: "false"
+  LINT_ON: "false"
+  BUILD_ON: "true"
   PUBLISH_ON: "true"
   DEPLOY_ON: "true"
   ##########################

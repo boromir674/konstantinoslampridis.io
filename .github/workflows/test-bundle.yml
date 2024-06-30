@@ -151,11 +151,11 @@ jobs:
         run: |
           echo "## Static Directory" >> $GITHUB_STEP_SUMMARY
           if [ ! -d static ]; then
-            echo "[INFO] static directory isn't present."
-            echo 'Directory `static` isn't present in the bundle' >> $GITHUB_STEP_SUMMARY
+            echo "[INFO] 'static' directory isn't present."
+            echo "Directory \`static\` isn't present in the bundle" >> $GITHUB_STEP_SUMMARY
           else
-            echo "[INFO] static directory is present."
-            echo 'Directory `static` is present in the bundle' >> $GITHUB_STEP_SUMMARY
+            echo "[INFO] 'static' directory is present."
+            echo "Directory \`static\` is present in the bundle" >> $GITHUB_STEP_SUMMARY
           fi
 
       # Test 5: Verify the presence of the 404 directory

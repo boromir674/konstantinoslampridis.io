@@ -3,11 +3,17 @@
 */
 
 import React from "react"
+import * as Gatsby from "gatsby"
 
-// Snapshot Testing
+// '@emotion/jest' matchers
+import { matchers } from "@emotion/jest";
+
+// Rendering into a Snapshot
 import renderer from "react-test-renderer"
 
-import * as Gatsby from "gatsby"
+// Add the custom matchers provided by '@emotion/jest'
+// provides toHaveStyleRule; ie expect(tree).toHaveStyleRule('color', 'hotpink')
+expect.extend(matchers);
 
 // Imports for Business Logic
 import App from '../src/Components/App';
@@ -729,5 +735,10 @@ describe(`App: Snapshot Testing`, () => {
     it(`renders correctly`, () => {
         const tree = renderer.create(<App />).toJSON()
         expect(tree).toMatchSnapshot()
+    })
+
+    it(`renders with expected margins`, () => {
+        const tree = renderer.create(<App />).toJSON()
+        expect(tree).toHaveStyleRule("margin", "0")
     })
 })

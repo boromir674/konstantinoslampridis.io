@@ -56,7 +56,10 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
- 
+
+  # e2e:
+  # https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
+
 # COVERAGE HOST
   codecov:
     needs: test

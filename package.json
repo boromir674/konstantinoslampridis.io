@@ -14,6 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest",
+    "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "typecheck-live": "tsc --noEmit --watch --pretty",
     "storybook": "storybook dev -p 6006",

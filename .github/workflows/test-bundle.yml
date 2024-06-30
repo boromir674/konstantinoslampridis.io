@@ -128,8 +128,8 @@ jobs:
             echo "[ERROR] polyfill-*.js is missing!"
             exit 1
           fi
-          if [ ! -f styles-*.css ]; then
-            echo "[ERROR] styles-*.css is missing!"
+          if [ ! -f styles.*.css ]; then
+            echo "[ERROR] styles.*.css is missing!"
             exit 1
           fi
           if [ ! -f webpack-runtime-*.js ]; then

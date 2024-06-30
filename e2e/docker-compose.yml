@@ -28,6 +28,11 @@ services:
     working_dir: /e2e
     volumes:
       - ./:/e2e
+    entrypoint: cypress run --spec "cypress/integration/*.cy.ts"
+    # run specs and avoid specs in cypress/integration/examples folder:
+    # - cypress/integration/margins_spec.cy.ts
+    # - cypress/integration/spec.cy.ts
+
 
 # Start the application, run the headless tests and close services:
 # docker-compose up --exit-code-from cypress

@@ -13,13 +13,16 @@ on:
 env:
 
   ##### JOB ON/OFF SWITCHES - Top Level overrides #####
-  UNIT_TESTS_ON: "false"
+  UNIT_TESTS_ON: "true"
   LINT_ON: "false"
+  BUILD_ON: "true"
   PUBLISH_ON: "true"
+  DEPLOY_ON: "true"
   ##########################
 
   #### 2nd Level overrides ####
   ALWAYS_LINT: "false"
+  ALWAYS_BUILD: "false"
 
   ## Pipe Settings ##
   ALLOW_lINT_TO_FAIL: "true"
@@ -35,15 +38,18 @@ jobs:
           echo LINT_ON="${{ env.LINT_ON }}" >> $GITHUB_OUTPUT
           echo PUBLISH_ON="${{ env.PUBLISH_ON }}" >> $GITHUB_OUTPUT
           echo ALLOW_lINT_TO_FAIL="${{ env.ALLOW_lINT_TO_FAIL }}" >> $GITHUB_OUTPUT
+          echo DEPLOY_ON="${{ env.DEPLOY_ON }}" >> $GITHUB_OUTPUT
     outputs:
       # Output Top Level overides
       UNIT_TESTS_ON: ${{ steps.set_pipe_config.outputs.UNIT_TESTS_ON }}
       LINT_ON: ${{ steps.set_pipe_config.outputs.LINT_ON }}
       PUBLISH_ON: ${{ steps.set_pipe_config.outputs.PUBLISH_ON }}
+      DEPLOY_ON: ${{ steps.set_pipe_config.outputs.DEPLOY_ON }}
 
       # Pipeline Configuration
       ALLOW_lINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_lINT_TO_FAIL }}
 
+### TEST ###
   test:
     needs: pipe_config
     if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
@@ -86,40 +92,17 @@ jobs:
     outputs:
       COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}
 
-
+# COVERAGE HOST
   codecov:
-  # leverages repository secret CODECOV_TOKEN
     needs: test
+    uses: ./.github/workflows/codecov.yml
     # as long as test was triggered, we run codecov. both when Test PASSed or FAILed
     if: always() && ${{ !contains(fromJSON('["skipped", "cancelled"]'), needs.test.result) }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Get Codecov binary
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-
-      # CI ARTIFACTS - Download ##
-      - name: Download Code Coverage Reports - Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          # Artifact reference name (aka key) to download
-          name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
-          # Host local path to download the Artifact to
-          path: coverage
-
-      ## CODECOV ##
-      - name: Upload Coverage Reports to Codecov
-        env:
-          OS_NAME: 'linux'
-          NODEJS: '18'
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-          for file in ./coverage/clover*.xml; do
-            ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
-            echo "Sent to Codecov: $file !"
-          done
+    with:
+      file_prefix: clover
+    secrets:
+      # leverages repository secret CODECOV_TOKEN
+      CODECOV_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
 ## BUILD MINIFIED BUNDLE
   build:
@@ -132,22 +115,29 @@ jobs:
 # Test Web Bundle
   test_bundle:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      # Verify Bundle Size is lower than 3MB
-      # eg parse 2,6M /data/repos/static-site-generator/public-auto
-      - name: Verify Bundle Size smaller than 3MB
-        run: |
-          echo "[INFO] Bundle Size: ${{ needs.build.outputs.BUNDLE_SIZE }}"
-          bundle_size=$(echo "${{ needs.build.outputs.BUNDLE_SIZE }}" | cut -d' ' -f1)
-          echo "[DEBUG] Bundle Size: $bundle_size"
-          if [ $(echo "$bundle_size" | tr -d 'M') -gt 3 ]; then
-            echo "[ERROR] Bundle Size is GREATER than 3MB!"
-            echo "exiting with status code 1"
-            exit 1
-          else
-            echo "[INFO] Bundle Size is LESS than 3MB"
-          fi
+    uses: ./.github/workflows/test-bundle.yml
+    with:
+      bundle_ci_artifact: web_bundle
+      bundle_size: ${{ needs.build.outputs.BUNDLE_SIZE }}
+      bundle_size_acceptance: 3
+
+  signal_deploy:
+    needs: test_bundle
+    if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
+    uses: ./.github/workflows/signal-deploy.yml
+    with:
+      main_branch: main
+      release_branch: release
+
+  # Deploy Web Bundle
+  # deploy:
+  #   # runs if test_bundle ran and passed AND git ref is v* tag
+  #   needs: [pipe_config, signal_deploy]
+  #   if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
+  #   uses: ./.github/workflows/deploy.yml
+  #   with:
+  #     ci_artifact:
+
 
   lint:
     needs: pipe_config

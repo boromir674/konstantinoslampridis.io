@@ -1,0 +1,45 @@
+name: 'Upload Coverage to Codecov.io'
+
+on:
+  workflow_call:
+    inputs:
+      file_prefix:
+        description: 'Prefix of the file to upload'
+        required: false
+        default: 'clover'
+        type: string
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+  
+jobs:
+  codecov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Codecov binary
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+
+      - uses: actions/checkout@v4
+
+      # CI ARTIFACTS - Download ##
+      - name: Download Code Coverage Reports - Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          # Artifact reference name (aka key) to download
+          name: ${{ needs.test.outputs.COVERAGE_ARTIFACT }}
+          # Host local path to download the Artifact to
+          path: coverage
+
+      ## CODECOV ##
+      - name: Upload Coverage Reports to Codecov
+        env:
+          OS_NAME: 'linux'
+          NODEJS: '18'
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          for file in ./coverage/${{ inputs.file_prefix }}*.xml; do
+            ./codecov -f $file -e "OS=$OS_NAME,NODE=$NODEJS" --flags unittests --verbose
+            echo "Sent to Codecov: $file !"
+          done

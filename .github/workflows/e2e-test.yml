@@ -1,0 +1,10 @@
+name: End to End Tests
+on:
+  workflow_call:
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run e2e tests, with cypress
+        run: docker-compose up --exit-code-from cypress

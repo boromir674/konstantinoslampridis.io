@@ -49,7 +49,7 @@ jobs:
       # Pipeline Configuration
       ALLOW_lINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_lINT_TO_FAIL }}
 
-### TEST ###
+### UNIT TEST ###
   test:
     needs: pipe_config
     if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
@@ -57,7 +57,15 @@ jobs:
     with:
       pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
 
-  # e2e:
+### E2E TEST ###
+
+  e2e:
+    needs: pipe_config
+    if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
+    uses: ./.github/workflows/e2e-test.yml
+
+
+  # parallel multi-browser e2e tests:
   # https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
 
 # COVERAGE HOST

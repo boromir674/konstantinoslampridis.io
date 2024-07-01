@@ -103,7 +103,7 @@ jobs:
 
   signal_deploy:
     needs: test_bundle
-    # PROD if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
+    if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:
       main_branch: main
@@ -117,16 +117,14 @@ jobs:
       id-token: write   # to verify the deployment originates from an appropriate source
 
     # runs if test_bundle ran and passed AND git ref is v* tag
-    # PROD needs: [pipe_config, signal_deploy]
-    # PROD if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
-    needs: build
+    needs: [pipe_config, signal_deploy]
+    if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
     uses: ./.github/workflows/gh-pages.yml
     with:
       # map prod: s3 and test: github-apges
       # environment: '${{ needs.signal_deploy.outputs.ENVIRONMENT_NAME == PROD_DEPLOYMENT && 's3' || needs.signal_deploy.outputs.ENVIRONMENT_NAME == 'TEST_DEPLOYMENT' && 'github-pages' || needs.signal_deploy.outputs.ENVIRONMENT_NAME}}'
       # pass environment name as it
-      # PROD environment: ${{ needs.signal_deploy.outputs.ENVIRONMENT_NAME }}
-      environment: PROD_DEPLOYMENT
+      environment: ${{ needs.signal_deploy.outputs.ENVIRONMENT_NAME }}
       website_artifact: web_bundle
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

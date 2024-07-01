@@ -78,9 +78,9 @@ jobs:
           artifact_name: github-pages
 
       ## DEPLOY S3 ##
-      # aws-cli is available on the host image!
       - name: Deploy to S3
-        if: inputs.environment == 's3'
+        # if: inputs.environment == 's3'
+        if: inputs.environment == 'PROD_DEPLOYMENT'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

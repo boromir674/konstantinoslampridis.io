@@ -73,14 +73,10 @@ CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
 # cp ./public-container/* ./public/
 
 # PROD CASE 2: Build minified bundle of static html/css/js files and servewith simple file server
-FROM prod_env as serve_files
-RUN yarn build
+FROM prod_env AS serve_files
 COPY scripts/generate-robots-file.sh .
-RUN ./generate-robots-file.sh /app/public/robots.txt
-
-RUN rm public/sitemap-index.xml
-RUN mv public/sitemap-0.xml public/sitemap.xml
-
+COPY scripts/build-production-bundle.sh .
+RUN sh ./build-production-bundle.sh ./public/robots.txt
 EXPOSE 9000
 CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 # SERVE the "static" files on localhost

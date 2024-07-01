@@ -34,26 +34,25 @@ jobs:
     environment:
       # name: ${{ inputs.environment }}
       name: ${{ inputs.environment == 'PROD_DEPLOYMENT' && 's3' || inputs.environment == 'TEST_DEPLOYMENT' && 'github-pages' || 'unsupported-env-name' }}
-      # url is outputed here! See actions/deploy-pages@v4 hack below
-      url: ${{ steps.deployment.outputs.page_url }}
+      # # url is outputed here! See actions/deploy-pages@v4 hack below
+      # url: ${{ steps.deployment.outputs.page_url }}
 
     # Specify runner + deployment step
     steps:
-      ## DEPLOY Github Pages ##
-      - name: Deploy to GitHub Pages
-        # if: inputs.environment == 'github-pages'
-        if: inputs.environment == 'TEST_DEPLOYMENT'
-        id: deployment
-        # has a hack that makes environment.url act as output of this action
-        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
-        with:
-          artifact_name: ${{ inputs.website_artifact }}
+      ## DEPLOY Github Pages ## V1 not working
+      # - name: Deploy to GitHub Pages
+      #   # if: inputs.environment == 'github-pages'
+      #   if: inputs.environment == 'TEST_DEPLOYMENT'
+      #   id: deployment
+      #   # has a hack that makes environment.url act as output of this action
+      #   uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+      #   with:
+      #     artifact_name: ${{ inputs.website_artifact }}
 
-      ## DEPLOY S3 ##
       # CI ARTIFACTS - Download Html/js/css files #
       - name: Download Web Bundle html/css/js - Artifacts
         # if: inputs.environment == 's3'
-        if: inputs.environment == 'PROD_DEPLOYMENT'
+        # if: inputs.environment == 'PROD_DEPLOYMENT'
         uses: actions/download-artifact@v4
         with:
           # Artifact reference name (aka key) to download
@@ -61,6 +60,15 @@ jobs:
           # Host local path to download the Artifact to
           path: public
 
+      # V2 requires prior artifacts download
+      - name: Deploy to Github Pages
+        if: inputs.environment == 'TEST_DEPLOYMENT'
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      ## DEPLOY S3 ##
       # aws-cli is available on the host image!
       - name: Deploy to S3
         if: inputs.environment == 's3'

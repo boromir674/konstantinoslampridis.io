@@ -41,7 +41,8 @@ jobs:
     steps:
       ## DEPLOY Github Pages ##
       - name: Deploy to GitHub Pages
-        if: inputs.environment == 'github-pages'
+        # if: inputs.environment == 'github-pages'
+        if: inputs.environment == 'TEST_DEPLOYMENT'
         id: deployment
         # has a hack that makes environment.url act as output of this action
         uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
@@ -51,7 +52,8 @@ jobs:
       ## DEPLOY S3 ##
       # CI ARTIFACTS - Download Html/js/css files #
       - name: Download Web Bundle html/css/js - Artifacts
-        if: inputs.environment == 's3'
+        # if: inputs.environment == 's3'
+        if: inputs.environment == 'PROD_DEPLOYMENT'
         uses: actions/download-artifact@v4
         with:
           # Artifact reference name (aka key) to download

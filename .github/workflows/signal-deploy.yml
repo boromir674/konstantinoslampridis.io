@@ -41,14 +41,14 @@ jobs:
       - run: git branch --track "${{ env.RELEASE_BR }}" "origin/${{ env.RELEASE_BR }}"
 
       - name: "Check if '${{ github.ref }}' tag is on '${{ env.MAIN_BR }}' branch"
-        uses: rickstaa/action-contains-tag@v1
+        uses: rickstaa/action-contains-tag@a9ff27d505ba2bf074a2ebb48b208e76d35ff308
         id: main_contains_tag
         with:
           reference: ${{ env.MAIN_BR }}
           tag: "${{ github.ref }}"
 
       - name: "Check if '${{ github.ref }}' tag is on '${{ env.RELEASE_BR }}' branch"
-        uses: rickstaa/action-contains-tag@v1
+        uses: rickstaa/action-contains-tag@a9ff27d505ba2bf074a2ebb48b208e76d35ff308
         id: release_contains_tag
         with:
           reference: ${{ env.RELEASE_BR }}

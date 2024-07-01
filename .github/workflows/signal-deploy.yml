@@ -27,6 +27,8 @@ jobs:
   ## JOB: Signal for Automated PyPI Upload ##
   check_which_git_branch_we_are_on:
     runs-on: ubuntu-latest
+    # logic below assumes github.ref is a tag, so we allow to run only on tag push
+    # PROD if: startsWith(github.ref, 'refs/tags/')
     env:
       RELEASE_BR: ${{ inputs.release_branch }}
       MAIN_BR: ${{ inputs.main_branch }}
@@ -54,7 +56,7 @@ jobs:
           reference: ${{ env.RELEASE_BR }}
           tag: "${{ github.ref }}"
 
-      - name: Pick Production or Test Environment, if tag on master or release branch respectively
+      - name: Pick Production or Test Environment, if tag on MAIN_BR or release branch respectively
         id: set_environment_name
         run: |
           DEPLOY=true
@@ -63,7 +65,7 @@ jobs:
           elif [[ "${{ steps.release_contains_tag.outputs.retval }}" == "true" ]]; then
             echo "ENVIRONMENT_NAME=TEST_DEPLOYMENT" >> $GITHUB_OUTPUT
           else
-            echo "A tag was pushed but not on master or release branch. No deployment will be done."
+            echo "A tag was pushed but not on ${MAIN_BR} or ${RELEASE_BR} branch. No deployment will be done."
             DEPLOY=false
           fi
           echo "AUTOMATED_DEPLOY=$DEPLOY" >> $GITHUB_OUTPUT

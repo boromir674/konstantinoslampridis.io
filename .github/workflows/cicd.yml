@@ -100,6 +100,11 @@ jobs:
 
   # Deploy Web Bundle
   deploy:
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
     # runs if test_bundle ran and passed AND git ref is v* tag
     needs: [pipe_config, signal_deploy]
     if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}

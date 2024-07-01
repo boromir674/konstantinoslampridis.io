@@ -123,7 +123,7 @@ jobs:
       id-token: write   # to verify the deployment originates from an appropriate source
     needs: [pipe_config, signal_deploy]
     if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
-    uses: ./.github/workflows/gh-pages.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       # map prod: s3 and test: github-pages
       environment: ${{ needs.signal_deploy.outputs.ENVIRONMENT_NAME == 'PROD_DEPLOYMENT' && 's3' || needs.signal_deploy.outputs.ENVIRONMENT_NAME == 'TEST_DEPLOYMENT' && 'github-pages' || 'unsupported-environment' }}

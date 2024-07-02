@@ -1,11 +1,101 @@
 name: End to End Tests
 on:
   workflow_call:
+    inputs:
+      website_artifact:
+        required: true
+        type: string
+        description: 'CI Artifact (id/alias) of uploaded Build Results'
+
 jobs:
-  cypress:
+  install:
     runs-on: ubuntu-latest
+    container:
+      # image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
+      image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+      options: --user 1001
     steps:
-      - uses: actions/checkout@v4
-      - name: Run e2e tests, with cypress
-        working-directory: ./e2e
-        run: docker-compose up --exit-code-from cypress
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+
+      # report machine parameters
+      - run: yarn run cypress info
+      - run: node --version
+      - run: node -p 'os.cpus()'
+
+      # BUILD HTML/JS/CSS Bundle
+      - run: yarn build
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
+  electron:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # CI ARTIFACTS - Download Html/js/css files #
+      - name: Download Web Bundle html/css/js - Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.website_artifact }}
+          path: build
+
+      - name: Node info
+        run: node -v
+
+      - name: __e Dir
+        run: ls /__e
+
+      - name: "UI Tests - Chrome"
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn run cypress info
+          start: yarn serve
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "UI - Chrome"
+          spec: e2e/cypress/integration/*.cy.ts
+          # spec: cypress/tests/ui/*
+          # config-file: cypress.config.ts
+        env:
+          # CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "cypress:server:args"
+
+# Cypress - UI Tests - Electron
+# working solution: takes 2m 30s
+  # cypress:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: cypress/included:3.2.0
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Run e2e tests, with cypress
+  #       working-directory: ./e2e
+  #       run: docker-compose up --exit-code-from cypress
+
+# Notes
+# TODO
+# parallel multi-browser e2e tests:
+  # https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
+  # https://github.com/cypress-io/github-action?tab=readme-ov-file#yarn-classic

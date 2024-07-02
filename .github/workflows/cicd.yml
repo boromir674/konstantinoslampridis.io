@@ -67,9 +67,6 @@ jobs:
     if: needs.pipe_config.outputs.E2E_TESTS_ON == 'true'
     uses: ./.github/workflows/e2e-test.yml
 
-  # parallel multi-browser e2e tests:
-  # https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
-
   lint:
     needs: pipe_config
     if: needs.pipe_config.outputs.LINT_ON == 'true'

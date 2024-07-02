@@ -8,40 +8,42 @@ on:
         description: 'CI Artifact (id/alias) of uploaded Build Results'
 
 jobs:
-  install:
+  # install:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     # image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
+  #     image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+  #     options: --user 1001
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+
+  #     - name: Cypress install
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         runTests: false
+
+  #     # report machine parameters
+  #     - run: yarn run cypress info
+  #     - run: node --version
+  #     - run: node -p 'os.cpus()'
+
+  #     # BUILD HTML/JS/CSS Bundle
+  #     - run: yarn build
+
+  #     - name: Save build folder
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: build
+  #         if-no-files-found: error
+  #         path: build
+
+  browser:
     runs-on: ubuntu-latest
     container:
-      # image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
-      image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
-      options: --user 1001
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
-        with:
-          runTests: false
-
-      # report machine parameters
-      - run: yarn run cypress info
-      - run: node --version
-      - run: node -p 'os.cpus()'
-
-      # BUILD HTML/JS/CSS Bundle
-      - run: yarn build
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
-
-  electron:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+      # image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+      # image with cypress already installed
+      image: cypress/included:cypress-12.17.3-node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
       options: --user 1001
     steps:
       - name: Checkout
@@ -59,28 +61,40 @@ jobs:
 
       - name: __e Dir
         run: ls /__e
-
-      - name: "UI Tests - Chrome"
-        uses: cypress-io/github-action@v6
+      # Case 3: docker run ...
+      # Case 1
+      # move all files/folders recursively from e2e dir, outside one level
+      - run: mv e2e/* ./
+      - uses: cypress-io/github-action@v6
         with:
-          build: yarn run cypress info
-          start: yarn serve
-          wait-on: "http://localhost:9000"
-          wait-on-timeout: 120
           browser: chrome
-          record: true
-          parallel: true
-          group: "UI - Chrome"
-          spec: e2e/cypress/integration/*.cy.ts
-          # spec: cypress/tests/ui/*
-          # config-file: cypress.config.ts
+          spec: cypress/integration/*.cy.ts
+          # headed: true
+
         env:
-          # CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEBUG: "cypress:server:args"
+          CYPRESS_INSTALL_BINARY: 0
+      # Case 2: plays well with cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+      # - name: "UI Tests - Chrome"
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: yarn run cypress info
+      #     start: yarn serve
+      #     wait-on: "http://localhost:9000"
+      #     wait-on-timeout: 120
+      #     browser: chrome
+      #     record: true
+      #     parallel: true
+      #     group: "UI - Chrome"
+      #     spec: e2e/cypress/integration/*.cy.ts
+      #     # spec: cypress/tests/ui/*
+      #     # config-file: cypress.config.ts
+      #   env:
+      #     # CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      #     # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     # Recommended: pass the GitHub token lets this action correctly
+      #     # determine the unique run id necessary to re-run the checks
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     DEBUG: "cypress:server:args"
 
 # Cypress - UI Tests - Electron
 # working solution: takes 2m 30s

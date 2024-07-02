@@ -60,12 +60,7 @@ jobs:
     with:
       pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
 
-### E2E TEST ###
 
-  e2e:
-    needs: pipe_config
-    if: needs.pipe_config.outputs.E2E_TESTS_ON == 'true'
-    uses: ./.github/workflows/e2e-test.yml
 
   lint:
     needs: pipe_config
@@ -89,11 +84,20 @@ jobs:
 
 ## BUILD MINIFIED BUNDLE
   build:
-    needs: [test, e2e]
+    # needs: [test]
+    # TODO: add need test and allow bypass with policy
     uses: ./.github/workflows/build-bundle.yml
     # if: always()
     with:
       ci_artifact: web_bundle
+
+### E2E TEST ###
+  e2e:
+    needs: [pipe_config, build]
+    if: needs.pipe_config.outputs.E2E_TESTS_ON == 'true'
+    uses: ./.github/workflows/e2e-test.yml
+    with:
+      website_artifact: web_bundle
 
 # Test Web Bundle
   test_bundle:

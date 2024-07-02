@@ -61,18 +61,28 @@ jobs:
 
       - name: __e Dir
         run: ls /__e
-      # Case 3: docker run ...
+
+      # Case 3: inside container from within e2e dir
+      - name: "UI Tests - Chrome"
+        working-directory: /e2e
+        run: cypress run --browser chrome --spec cypress/integration/*.cy.ts
+
+        # Case 4: without container section
+        # run: |
+        #   docker run -it -v .:/e2e -w /e2e --entrypoint=cypress cypress/included:13.10.0 run --browser chrome
+
       # Case 1
       # move all files/folders recursively from e2e dir, outside one level
-      - run: mv e2e/* ./
-      - uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          spec: cypress/integration/*.cy.ts
-          # headed: true
+      # - run: mv e2e/* ./
+      # - uses: cypress-io/github-action@v6
+      #   with:
+      #     browser: chrome
+      #     spec: cypress/integration/*.cy.ts
+      #     # headed: true
 
-        env:
-          CYPRESS_INSTALL_BINARY: 0
+      #   env:
+      #     CYPRESS_INSTALL_BINARY: 0
+
       # Case 2: plays well with cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
       # - name: "UI Tests - Chrome"
       #   uses: cypress-io/github-action@v6

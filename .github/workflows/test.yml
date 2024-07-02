@@ -55,3 +55,17 @@ jobs:
           # Path to the file/folder to upload
           path: ${{ env.HOST_COVERAGE_DIR }}
           if-no-files-found: error
+
+# TODO
+# DOCKER LAYER CACHING between ci runs/builds
+  # build-with-docker:
+  #   name: Build with Docker
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: docker/setup-buildx-action@v3
+  #     - uses: docker/build-push-action@v5
+  #       with:
+  #         context: .
+  #         cache-from: type=gha
+  #         cache-to: type=gha,mode=max

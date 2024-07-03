@@ -10,7 +10,7 @@ on:
       COVERAGE_ARTIFACT:
         description: "Coverage CI Artifact (id/alias) of uploaded Coverage Results"
         value: ${{ jobs.build.outputs.COVERAGE_ARTIFACT }}
-jobs: 
+jobs:
   jest:
     runs-on: ubuntu-latest
     outputs:

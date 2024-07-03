@@ -26,7 +26,7 @@ env:
   ALWAYS_BUILD: "false"
 
   ## Pipe Settings ##
-  ALLOW_lINT_TO_FAIL: "true"
+  ALLOW_LINT_TO_FAIL: "true"
 
 jobs:
   pipe_config:
@@ -38,7 +38,7 @@ jobs:
           echo UNIT_TESTS_ON="${{ env.UNIT_TESTS_ON }}" >> $GITHUB_OUTPUT
           echo LINT_ON="${{ env.LINT_ON }}" >> $GITHUB_OUTPUT
           echo PUBLISH_ON="${{ env.PUBLISH_ON }}" >> $GITHUB_OUTPUT
-          echo ALLOW_lINT_TO_FAIL="${{ env.ALLOW_lINT_TO_FAIL }}" >> $GITHUB_OUTPUT
+          echo ALLOW_LINT_TO_FAIL="${{ env.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
           echo DEPLOY_ON="${{ env.DEPLOY_ON }}" >> $GITHUB_OUTPUT
           echo E2E_TESTS_ON="${{ env.E2E_TESTS_ON }}" >> $GITHUB_OUTPUT
     outputs:
@@ -50,7 +50,7 @@ jobs:
       DEPLOY_ON: ${{ steps.set_pipe_config.outputs.DEPLOY_ON }}
 
       # Pipeline Configuration
-      ALLOW_lINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_lINT_TO_FAIL }}
+      ALLOW_LINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_LINT_TO_FAIL }}
 
 ### UNIT TEST ###
   test:
@@ -67,7 +67,7 @@ jobs:
     if: needs.pipe_config.outputs.LINT_ON == 'true'
     uses: ./.github/workflows/lint.yml
     with:
-      pipe_config: '{"ALLOW_lINT_TO_FAIL": "${{ needs.pipe_config.outputs.ALLOW_lINT_TO_FAIL }}"}'
+      pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe_config.outputs.ALLOW_LINT_TO_FAIL }}"}'
 
 # COVERAGE HOST
   codecov:

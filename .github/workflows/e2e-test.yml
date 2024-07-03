@@ -64,7 +64,7 @@ jobs:
 
       # Case 3: inside container from within e2e dir
       - name: "UI Tests - Chrome"
-        working-directory: /e2e
+        working-directory: ./e2e
         run: cypress run --browser chrome --spec cypress/integration/*.cy.ts
 
         # Case 4: without container section

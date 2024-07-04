@@ -62,10 +62,16 @@ jobs:
       - name: __e Dir
         run: ls /__e
 
+      - name: Start File Server on localhost:9000
+        run: yarn serve -H 0.0.0.0
+
+      - name: Wait for File Server to start
+        run: npx wait-on http://localhost:9000
+
       # Case 3: inside container from within e2e dir
       - name: "UI Tests - Chrome"
         working-directory: ./e2e
-        run: cypress run --browser chrome --spec cypress/e2e/*.cy.js
+        run: cypress run --browser chrome --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
 
         # Case 4: without container section
         # run: |

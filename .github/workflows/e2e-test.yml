@@ -66,16 +66,9 @@ jobs:
       - name: 'Start File Server on localhost:9000'
         run: npx -y http-server ./build -p 9000 &
 
-      # - name: Wait for File Server to start
-      #   run: npx -y wait-on http://localhost:9000
-
-      # alternative
       - name: Wait for File Server to start
-        run: |
-          while ! curl -s http://localhost:9000 > /dev/null; do
-            echo "Waiting for http://localhost:9000"
-            sleep 1
-          done
+        # no 'curl' bin in this image to do 'simple polling'
+        run: npx -y wait-on http://localhost:9000
 
       # Case 3: inside container from within e2e dir
       - name: "UI Tests - Chrome"

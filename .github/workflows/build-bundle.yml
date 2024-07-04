@@ -52,7 +52,7 @@ jobs:
           cache-dependency-path: 'yarn.lock'
 
       - name: Install Production Dependencies
-        run: yarn install --frozen-lockfile --production=true && yarn cache clean
+        run: yarn install --frozen-lockfile --production=true
 
       - name: Gatsby Build bundled html/css/js, using Webpack
         env:

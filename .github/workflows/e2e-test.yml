@@ -62,6 +62,8 @@ jobs:
       - name: __e Dir
         run: ls /__e
 
+      - run: yarn install
+
       - name: Start File Server on localhost:9000
         run: yarn serve -H 0.0.0.0
 

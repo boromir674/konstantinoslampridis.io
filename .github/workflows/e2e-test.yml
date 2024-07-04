@@ -8,43 +8,17 @@ on:
         description: 'CI Artifact (id/alias) of uploaded Build Results'
 
 jobs:
-  # install:
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     # image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
-  #     image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
-  #     options: --user 1001
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Cypress install
-  #       uses: cypress-io/github-action@v6
-  #       with:
-  #         runTests: false
-
-  #     # report machine parameters
-  #     - run: yarn run cypress info
-  #     - run: node --version
-  #     - run: node -p 'os.cpus()'
-
-  #     # BUILD HTML/JS/CSS Bundle
-  #     - run: yarn build
-
-  #     - name: Save build folder
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: build
-  #         if-no-files-found: error
-  #         path: build
-
   browser:
     runs-on: ubuntu-latest
+    name: ${{ matrix.browser }}
     container:
       # image: cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
       # image with cypress already installed
       image: cypress/included:cypress-12.17.3-node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
       options: --user 1001
+    strategy:
+      matrix:
+        browser: ["chrome", "edge", "firefox"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,12 +36,12 @@ jobs:
       - name: __e Dir
         run: ls /__e
 
-      - name: "UI Tests - Chrome"
+      - name: "UI Tests - ${{ matrix.browser }}"
         run: |
           npx -y http-server ./build -p 9000 &
           SERVER_PID=$!
           npx -y wait-on http://localhost:9000
-          cd ./e2e && cypress run --browser chrome --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
+          cd ./e2e && cypress run --browser ${{ matrix.browser }} --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
           kill $SERVER_PID
 
 

@@ -62,57 +62,14 @@ jobs:
       - name: __e Dir
         run: ls /__e
 
-      # specify sth like 192.1
-      - name: 'Start File Server on localhost:9000'
-        run: npx -y http-server ./build -p 9000 &
-
-      - name: Wait for File Server to start
-        # no 'curl' bin in this image to do 'simple polling'
-        run: npx -y wait-on http://localhost:9000
-
-      # Case 3: inside container from within e2e dir
       - name: "UI Tests - Chrome"
-        working-directory: ./e2e
-        run: cypress run --browser chrome --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
+        run: |
+          npx -y http-server ./build -p 9000 &
+          SERVER_PID=$!
+          npx -y wait-on http://localhost:9000
+          cd ./e2e && cypress run --browser chrome --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
+          kill $SERVER_PID
 
-        # Case 4: without container section
-        # run: |
-        #   docker run -it -v .:/e2e -w /e2e --entrypoint=cypress cypress/included:13.10.0 run --browser chrome
-
-      # Case 1
-      # move all files/folders recursively from e2e dir, outside one level
-      # - run: mv e2e/* ./
-      # - uses: cypress-io/github-action@v6
-      #   with:
-      #     browser: chrome
-      #     spec: cypress/integration/*.cy.ts
-      #     # headed: true
-
-      #   env:
-      #     CYPRESS_INSTALL_BINARY: 0
-
-      # Case 2: plays well with cypress/browsers:node-18.20.3-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
-      # - name: "UI Tests - Chrome"
-      #   uses: cypress-io/github-action@v6
-      #   with:
-      #     build: yarn run cypress info
-      #     start: yarn serve
-      #     wait-on: "http://localhost:9000"
-      #     wait-on-timeout: 120
-      #     browser: chrome
-      #     record: true
-      #     parallel: true
-      #     group: "UI - Chrome"
-      #     spec: e2e/cypress/integration/*.cy.ts
-      #     # spec: cypress/tests/ui/*
-      #     # config-file: cypress.config.ts
-      #   env:
-      #     # CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-      #     # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      #     # Recommended: pass the GitHub token lets this action correctly
-      #     # determine the unique run id necessary to re-run the checks
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     DEBUG: "cypress:server:args"
 
 # Cypress - UI Tests - Electron
 # working solution: takes 2m 30s

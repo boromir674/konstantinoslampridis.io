@@ -63,7 +63,7 @@ jobs:
         run: ls /__e
 
       - name: 'Start File Server on localhost:9000'
-        run: npx -y http-server ./public-auto -p 9000
+        run: npx -y http-server ./public-auto -p 9000 &
 
       - name: Wait for File Server to start
         run: npx -y wait-on http://localhost:9000

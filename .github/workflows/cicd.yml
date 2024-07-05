@@ -12,14 +12,14 @@ on:
 
 env:
 
-  ##### JOB ON/OFF SWITCHES - Top Level overrides #####
-  UNIT_TESTS_ON: "false"
+  ##### Top Level overrides - JOB ON/OFF SWITCHES #####
+  UNIT_TESTS_ON: "true"
   E2E_TESTS_ON: "true"
-  LINT_ON: "false"
-  BUILD_ON: "false"
+  LINT_ON: "true"
+  BUILD_ON: "true"
   PUBLISH_ON: "true"
   DEPLOY_ON: "true"
-  ##########################
+  ### true for rest of logic to takeover ########
 
   #### 2nd Level overrides ####
   ALWAYS_LINT: "false"
@@ -32,15 +32,16 @@ jobs:
   pipe_config:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Configure Pipeline
         id: set_pipe_config
-        run: |
-          echo UNIT_TESTS_ON="${{ env.UNIT_TESTS_ON }}" >> $GITHUB_OUTPUT
-          echo LINT_ON="${{ env.LINT_ON }}" >> $GITHUB_OUTPUT
-          echo PUBLISH_ON="${{ env.PUBLISH_ON }}" >> $GITHUB_OUTPUT
-          echo ALLOW_LINT_TO_FAIL="${{ env.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
-          echo DEPLOY_ON="${{ env.DEPLOY_ON }}" >> $GITHUB_OUTPUT
-          echo E2E_TESTS_ON="${{ env.E2E_TESTS_ON }}" >> $GITHUB_OUTPUT
+        run: chmod +x .github/set_env.sh && .github/set_env.sh
+          # echo UNIT_TESTS_ON="${{ env.UNIT_TESTS_ON }}" >> $GITHUB_OUTPUT
+          # echo LINT_ON="${{ env.LINT_ON }}" >> $GITHUB_OUTPUT
+          # echo PUBLISH_ON="${{ env.PUBLISH_ON }}" >> $GITHUB_OUTPUT
+          # echo ALLOW_LINT_TO_FAIL="${{ env.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
+          # echo DEPLOY_ON="${{ env.DEPLOY_ON }}" >> $GITHUB_OUTPUT
+          # echo E2E_TESTS_ON="${{ env.E2E_TESTS_ON }}" >> $GITHUB_OUTPUT
     outputs:
       # Output Top Level overides
       UNIT_TESTS_ON: ${{ steps.set_pipe_config.outputs.UNIT_TESTS_ON }}
@@ -59,8 +60,6 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
-
-
 
   lint:
     needs: pipe_config
@@ -84,7 +83,7 @@ jobs:
 
 ## BUILD MINIFIED BUNDLE
   gatsby:
-    # needs: [test]
+    needs: test
     # TODO: add need test and allow bypass with policy
     uses: ./.github/workflows/build-bundle.yml
     # if: always()

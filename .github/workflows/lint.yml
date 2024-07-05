@@ -9,7 +9,6 @@ on:
         default: '{"LINT_ON":"true","ALLOW_lINT_TO_FAIL":"false"}'
 jobs:
   eslint:
-    # needs: pipe_config
     # if: needs.pipe_config.outputs.LINT_ON == 'true'
     runs-on: ubuntu-latest
     steps:

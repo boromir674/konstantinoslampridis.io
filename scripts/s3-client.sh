@@ -77,35 +77,35 @@ default_acl=$(yq -r '.acl.default // "private"' "$config_file")
 
 # helper functions
 
-exclude_file() {
-  file=$1
-  if [ "$dry_run" = true ]; then
-    echo "[DRY RUN] Removing FILE $file from file set to upload."
-  else
-    rm $file
-  fi
-}
+# exclude_file() {
+#   file=$1
+#   if [ "$dry_run" = true ]; then
+#     echo "[DRY RUN] Removing FILE $file from file set to upload."
+#   else
+#     rm $file
+#   fi
+# }
 
-rename_file() {
-  file=$1
-  target_file_path=$2
-  if [ "$dry_run" = true ]; then
-    echo "[DRY RUN] Renaming FILE $file to $target_file_path"
-  else
-    mv $file $target_file_path
-  fi
-}
+# rename_file() {
+#   file=$1
+#   target_file_path=$2
+#   if [ "$dry_run" = true ]; then
+#     echo "[DRY RUN] Renaming FILE $file to $target_file_path"
+#   else
+#     mv $file $target_file_path
+#   fi
+# }
 
-belongs_to_excluded_files() {
-  file=$1
-  exclusion_list=$2
-  for excluded_file in $exclusion_list; do
-    if [ "$file" = "$excluded_file" ]; then
-      return 0
-    fi
-  done
-  return 1
-}
+# belongs_to_excluded_files() {
+#   file=$1
+#   exclusion_list=$2
+#   for excluded_file in $exclusion_list; do
+#     if [ "$file" = "$excluded_file" ]; then
+#       return 0
+#     fi
+#   done
+#   return 1
+# }
 
 
 # Upload files/folders to S3 bucket
@@ -117,45 +117,40 @@ for path in $paths; do
   if [ -d "$path" ]; then
     echo "[INFO] Processing DIR: $path"
 
-    # prepare by excluding and/or renaming files
-    for file in $path/*; do
-      filename=$(basename "$file")
+    # # prepare by excluding and/or renaming files
+    # for file in $path/*; do
+    #   filename=$(basename "$file")
 
-      # echo "[DEBUG] Processing FILE: $filename"
+    #   # echo "[DEBUG] Processing FILE: $filename"
 
-      # exclude file if it is in the list of excluded files
-      if belongs_to_excluded_files $filename $paths_to_exclude; then
-        exclude_file $file
-        continue
-      fi
+    #   # exclude file if it is in the list of excluded files
+    #   if belongs_to_excluded_files $filename $paths_to_exclude; then
+    #     exclude_file $file
+    #     continue
+    #   fi
 
-      # rename file if it is in the list of files to rename
-      for rename in $files_to_rename; do
-        source_file_name=$(echo $rename | cut -d':' -f1)
-        target_file_name=$(echo $rename | cut -d':' -f2)
-        # echo "[DEBUG] Comparing $filename with $source_file_name"
-        if [ "$filename" = "$source_file_name" ]; then
-          rename_file $file "$(dirname $file)/${target_file_name}"
-        fi
-      done
-    done
+    #   # rename file if it is in the list of files to rename
+    #   for rename in $files_to_rename; do
+    #     source_file_name=$(echo $rename | cut -d':' -f1)
+    #     target_file_name=$(echo $rename | cut -d':' -f2)
+    #     # echo "[DEBUG] Comparing $filename with $source_file_name"
+    #     if [ "$filename" = "$source_file_name" ]; then
+    #       rename_file $file "$(dirname $file)/${target_file_name}"
+    #     fi
+    #   done
+    # done
 
     # upload files recursively
     if [ "$dry_run" = true ]; then
-      echo "[DRY RUN] aws s3 cp \"$path\" \"s3://$s3_bucket\" --recursive --acl $acl"
+      echo "[DRY RUN] aws s3 sync \"$path\" \"s3://${s3_bucket}\" --delete --acl \"$acl\""
     else
-      aws s3 cp "$path" "s3://$s3_bucket" --recursive --acl "$acl"
+      aws s3 sync "$path" "s3://${s3_bucket}" --delete --acl "$acl"
     fi
 
-  # if path is a file then upload it directly
+  # if path is a file message that only directories are supported
   elif [ -f "$path" ]; then
-    echo "[INFO] Processing FILE: $path"
-
-    if [ "$dry_run" = true ]; then
-      echo "[DRY RUN] aws s3 cp \"$path\" \"s3://$s3_bucket\" --acl $acl"
-    else
-      aws s3 cp "$path" "s3://$s3_bucket" --acl $acl
-    fi
+    echo "[ERROR] Only directories are supported: $path" 1>&2
+    exit 1
   # if path is neither a file nor a folder then throw an error
   else
     echo "Invalid path: $path" 1>&2

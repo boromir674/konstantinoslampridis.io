@@ -1,0 +1,55 @@
+name: 'Code Lint using ESlint'
+on:
+  workflow_call:
+    inputs:
+      pipe_config:
+        description: 'Pipe Config'
+        required: true
+        type: string
+        default: '{"LINT_ON":"true","ALLOW_LINT_TO_FAIL":"false"}'
+jobs:
+  eslint:
+    # if: needs.pipe_config.outputs.LINT_ON == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/actions/setup-node?tab=readme-ov-file#caching-global-packages-data
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+          # token: ''   # add custom issued token for better rate-limiting
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile --production=false
+
+      - name: Run ESlint against all code
+        env:
+          ALLOW_LINT_TO_FAIL: ${{ fromJson(inputs.pipe_config).ALLOW_LINT_TO_FAIL }}
+        run: |
+          eslint_pass_boolean_flag=1
+
+          # set flag to 0 if eslint fails
+          yarn lint || eslint_pass_boolean_flag=0
+
+          if [ $eslint_pass_boolean_flag -eq 1 ]; then
+            echo "[INFO] Code Lint PASSED!"
+          else
+            echo "[ERROR] Code Lint FAILED!"
+          fi
+
+          if [ $eslint_pass_boolean_flag -eq 1 ]; then
+            job_status=0
+          else
+            if [ ${{ env.ALLOW_LINT_TO_FAIL }} == "true" ]; then
+              echo "[WARN] Lint failed but ALLOW_LINT_TO_FAIL is true"
+              job_status=0
+            else
+              echo "[ERROR] Lint failed and ALLOW_LINT_TO_FAIL is false"
+              job_status=1
+            fi
+          fi
+          echo "Exiting with status code: $job_status"
+          exit $job_status

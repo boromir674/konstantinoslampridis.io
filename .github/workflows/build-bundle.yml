@@ -1,0 +1,97 @@
+name: 'Build Minified Bundle'
+
+# Reusable Workflow to make a Production Build
+
+# Production build in the case of SSR, is building the html/css/js minified bundle
+# for static file serving
+
+
+
+on:
+  workflow_call:
+    inputs:
+    # Optional CI Artifact key/placeholder for bundle
+      ci_artifact:
+        required: false
+        type: string
+        description: 'CI Artifact key/placeholder for bundle'
+        default: 'bundle'
+
+    ### OUTPUTS ###
+    # Map the workflow outputs to job outputs
+    outputs:
+      BUNDLE_CI_ARTIFACT:
+        description: "CI Artifact (id/alias) of uploaded minified html/css/js Bundle"
+        value: ${{ jobs.build.outputs.BUNDLE_CI_ARTIFACT }}
+      BUNDLE_SIZE:
+        description: "Size of the minified html/css/js Bundle"
+        value: ${{ jobs.build.outputs.BUNDLE_SIZE }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      _IMAGE_NAME: 'spa-prod-bundle'
+    outputs:
+      BUNDLE_CI_ARTIFACT: ${{ steps.set_coverage_artifact.outputs.BUNDLE_CI_ARTIFACT }}
+      BUNDLE_SIZE: ${{ steps.bundle_size.outputs.BUNDLE_SIZE }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # PREV
+      # - name: Build Docker Image
+      #   run: docker build -f Dockerfile.build --target build_prod_bundle -t "${_IMAGE_NAME}" .
+      
+      # - name: Build Minified Web html/css/js bundle
+      #   run: 'docker run -t --rm -v "${PWD}/public/:/app/public/" ${_IMAGE_NAME}'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install Production Dependencies
+        run: yarn install --frozen-lockfile --production=true
+
+      - name: Gatsby Build bundled html/css/js, using Webpack
+        env:
+          # Disable telemetry for Gatsby
+          GATSBY_TELEMETRY_DISABLED: 1
+        run: yarn build
+
+      - name: Use single sitemap.xml file to represent the site
+        run: |
+          rm public/sitemap-index.xml
+          mv public/sitemap-0.xml public/sitemap.xml
+
+      - name: Create robots.txt file
+        env:
+          output_file: public/robots.txt
+        run: |
+          cat > "$output_file" << EOF
+          User-agent: *
+          Crawl-delay: 120
+          Disallow: /*?
+          Sitemap: https://konstantinoslampridis.io/sitemap.xml
+          EOF
+
+      - name: Measure Bundle Size
+        id: bundle_size
+        run: echo BUNDLE_SIZE=$(du -sh ${PWD}/public/) >> $GITHUB_OUTPUT
+
+      - run: 'echo "Bundle Size: ${{ steps.bundle_size.outputs.BUNDLE_SIZE }}"'
+
+      # CI ARTIFACTS - Upload Minified Bundle
+      - name: Upload Minified html/css/js Bundle, as CI Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          # name under which to upload the Artifact(s) and later reference them
+          name: ${{ inputs.ci_artifact }}
+          # Path to the file/folder to upload
+          path: public
+          if-no-files-found: error
+
+      - name: Output the BUNDLE_CI_ARTIFACT
+        run: echo BUNDLE_CI_ARTIFACT="${{ inputs.ci_artifact }}" >> $GITHUB_OUTPUT
+        id: set_coverage_artifact

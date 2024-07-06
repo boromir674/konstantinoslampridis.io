@@ -9,4 +9,5 @@ yarn build
 rm public/sitemap-index.xml
 mv public/sitemap-0.xml public/sitemap.xml
 
+chmod +x ./generate-robots-file.sh
 ./generate-robots-file.sh ${robots_file_destination_file_path}

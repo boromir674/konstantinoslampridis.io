@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from "react";
+import React, { FC, useState, useCallback } from "react";
 
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
 

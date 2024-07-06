@@ -1,0 +1,78 @@
+name: 'Configure Pipeline'
+on:
+  workflow_call:
+    inputs:
+    # TOP LEVEL Overrides
+      UNIT_TESTS_ON:
+        description: 'Unit-Tests Job Override'
+        required: false
+        type: string
+      LINT_ON:
+        description: 'Lint Job Override'
+        required: false
+        type: string
+      BUILD_ON:
+        description: 'Build Job Override'
+        required: false
+        type: string
+      E2E_TESTS_ON:
+        description: 'E2E-Tests Job Override'
+        required: false
+        type: string
+      DEPLOY_ON:
+        description: 'Deploy Job Override'
+        required: false
+        type: string
+    # Other Configurations
+      ALLOW_LINT_TO_FAIL:
+        description: 'Allow Lint Job to fail'
+        required: false
+        type: boolean
+
+    outputs:
+    # TOP LEVEL OVERRIDES: possible values are ['true', 'false', '']
+      UNIT_TESTS_ON:
+        description: "Top-level Unit-Test Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.UNIT_TESTS_ON }}
+      LINT_ON:
+        description: "Top-level Lint Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.LINT_ON }}
+      BUILD_ON:
+        description: "Top-level Build Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.BUILD_ON }}
+      E2E_TESTS_ON:
+        description: "Top-level E2E-Tests Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.E2E_TESTS_ON }}
+      DEPLOY_ON:
+        description: "Top-level Deploy Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.DEPLOY_ON }}
+    # Allow Lint QA Job to fail
+      ALLOW_LINT_TO_FAIL:
+        description: "Allow Lint Job to fail. Set to true to allow Lint Job to fail without failing the entire pipeline. Set to false to fail the entire pipeline if Lint Job fails. By default 'true'"
+        value: ${{ jobs.configure.outputs.ALLOW_LINT_TO_FAIL }}
+
+      # CONFIG:
+      #   value: ${{ toJson(jobs.configure.outputs) }}
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure Pipeline
+        id: set_pipe_config
+        # Output the environment variables to the $GIT_OUTPUT file
+        run: |
+          echo UNIT_TESTS_ON="${{ vars.UNIT_TESTS_ON || inputs.UNIT_TESTS_ON }}" >> $GITHUB_OUTPUT
+          echo LINT_ON="${{ vars.LINT_ON || inputs.LINT_ON }}" >> $GITHUB_OUTPUT
+          echo ALLOW_LINT_TO_FAIL="${{ vars.ALLOW_LINT_TO_FAIL || inputs.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
+          echo BUILD_ON="${{ vars.BUILD_ON || inputs.BUILD_ON }}" >> $GITHUB_OUTPUT
+          echo E2E_TESTS_ON="${{ vars.E2E_TESTS_ON || inputs.E2E_TESTS_ON }}" >> $GITHUB_OUTPUT
+          echo DEPLOY_ON="${{ vars.DEPLOY_ON || inputs.DEPLOY_ON }}" >> $GITHUB_OUTPUT
+    outputs:
+      # Output Top Level overides
+      UNIT_TESTS_ON: ${{ steps.set_pipe_config.outputs.UNIT_TESTS_ON }}
+      LINT_ON: ${{ steps.set_pipe_config.outputs.LINT_ON }}
+      ALLOW_LINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_LINT_TO_FAIL }}
+      BUILD_ON: ${{ steps.set_pipe_config.outputs.BUILD_ON }}
+      E2E_TESTS_ON: ${{ steps.set_pipe_config.outputs.E2E_TESTS_ON }}
+      DEPLOY_ON: ${{ steps.set_pipe_config.outputs.DEPLOY_ON }}

@@ -17,12 +17,13 @@ jobs:
   pipe:
     uses: ./.github/workflows/pipe_config.yml
     with:
-      UNIT_TESTS_ON: false
+      # UNIT_TESTS_ON: false  # shutdown unit-tests
       ALLOW_LINT_TO_FAIL: true
-      # LINT_ON: ${{ vars.LINT_ON }}
+      # LINT_ON: false  # shutdown lint
+      # DEPLOY_ON: true  # force deployment
+
       # BUILD_ON: ${{ vars.BUILD_ON }}
       # E2E_TESTS_ON: ${{ vars.E2E_TESTS_ON }}
-      # DEPLOY_ON: ${{ vars.DEPLOY_ON }}
 
 ### UNIT TEST ###
   test:
@@ -56,8 +57,16 @@ jobs:
 ## BUILD MINIFIED BUNDLE
   gatsby:
     needs: test
-    if: always() && ( needs.pipe.outputs.BUILD_ON == 'true' || ( needs.pipe.outputs.BUILD_ON == '' && needs.test.result == 'success' ) )
+    if: always() && ( needs.pipe.outputs.BUILD_ON == 'true' || ( needs.pipe.outputs.BUILD_ON == '' && ( needs.pipe.outputs.DEPLOY_ON == 'true' || needs.test.result == 'success' ) ) )
+    # TODO rename as below, for current solutoin to have better semantics
+    # if: always() && ( needs.pipe.outputs.FORCE_BUILD == 'true' || ( needs.pipe.outputs.FORCE_BUILD == '' && needs.test.result == 'success' ) )
+
+    # ALT SOLUTION:
+    # if: always() && needs.pipe.outputs.BUILD_ON == 'true' \
+    #  && ( needs.pipe.outputs.FORCE_BUILD == 'true' || needs.test.result == 'success' )
+
     # TODO: support different logic: allow Pass, and allow Skipped policies
+
     uses: ./.github/workflows/build-bundle.yml
     with:
       ci_artifact: web_bundle

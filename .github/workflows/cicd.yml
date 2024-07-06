@@ -11,58 +11,35 @@ on:
       - v*
 
 env:
-
   ##### Top Level overrides - JOB ON/OFF SWITCHES #####
-  UNIT_TESTS_ON: ""
-  E2E_TESTS_ON: "true"
-  LINT_ON: "true"
-  BUILD_ON: "true"
-  PUBLISH_ON: "true"
-  DEPLOY_ON: "true"
-  ### true for rest of logic to takeover ########
+  # if set to 'true' will gurantee trigger
+  # if set to 'false' will gurantee NOT trigger
+  # if set to '' will trigger if the implicit policy is true: ie if previous Jobs are green, if some custom signal is true, etc
 
-  #### 2nd Level overrides ####
-  ALWAYS_LINT: "false"
-  ALWAYS_BUILD: "false"
+  # UNIT_TESTS_ON: ""
+  # LINT_ON: "true"
+  # E2E_TESTS_ON: ""
+  # DEPLOY_ON: ""
 
   ## Pipe Settings ##
   ALLOW_LINT_TO_FAIL: "true"
 
 jobs:
-  pipe_config:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Configure Pipeline
-        id: set_pipe_config
-        run: chmod +x .github/set_env.sh && .github/set_env.sh
-    outputs:
-      # Output Top Level overides
-      UNIT_TESTS_ON: ${{ steps.set_pipe_config.outputs.UNIT_TESTS_ON }}
-      E2E_TESTS_ON: ${{ steps.set_pipe_config.outputs.E2E_TESTS_ON }}
-      LINT_ON: ${{ steps.set_pipe_config.outputs.LINT_ON }}
-      PUBLISH_ON: ${{ steps.set_pipe_config.outputs.PUBLISH_ON }}
-      DEPLOY_ON: ${{ steps.set_pipe_config.outputs.DEPLOY_ON }}
-
-      # Pipeline Configuration
-      ALLOW_LINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_LINT_TO_FAIL }}
+# CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
+# note: if in Jobs here, cannot access env context (can the vars)
+# can retire this Job if all ifs leverage vars for reading Top-Level overrides
+  pipe:
+    uses: ./.github/workflows/pipe_config.yml
 
 ### UNIT TEST ###
   test:
-    needs: pipe_config
-    if: always() && ( needs.pipe_config.outputs.UNIT_TESTS_ON == 'true' || ( needs.pipe_config.outputs.UNIT_TESTS_ON == '' && needs.pipe_config.result == 'success' ) )
+    needs: pipe
+    if: always() && ( needs.pipe.outputs.UNIT_TESTS_ON == 'true' || ( needs.pipe.outputs.UNIT_TESTS_ON == '' && needs.pipe.result == 'success' ) )
     uses: ./.github/workflows/test.yml
     with:
-      pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
+      pipe_config: ${{ toJson(needs.pipe.outputs) }}
 
-  lint:
-    needs: pipe_config
-    if: needs.pipe_config.outputs.LINT_ON == 'true'
-    uses: ./.github/workflows/lint.yml
-    with:
-      pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe_config.outputs.ALLOW_LINT_TO_FAIL }}"}'
-
-# COVERAGE HOST
+# HOST COVERAGE Results
   codecov:
     needs: test
     uses: ./.github/workflows/codecov.yml
@@ -75,19 +52,27 @@ jobs:
       # leverages repository secret CODECOV_TOKEN
       CODECOV_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
+  lint:
+    needs: pipe
+    if: always() && ( needs.pipe.outputs.LINT_ON == 'true' || ( needs.pipe.outputs.LINT_ON == '' && needs.pipe.result == 'success' ) )
+    uses: ./.github/workflows/lint.yml
+    with:
+      pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe.outputs.ALLOW_LINT_TO_FAIL }}"}'
+
+
 ## BUILD MINIFIED BUNDLE
   gatsby:
     needs: test
-    # TODO: add need test and allow bypass with policy
+    if: always() && ( needs.pipe.outputs.BUILD_ON == 'true' || ( needs.pipe.outputs.BUILD_ON == '' && needs.pipe.result == 'success' ) )
+    # TODO: support different logic: allow Pass, and allow Skipped policies
     uses: ./.github/workflows/build-bundle.yml
-    # if: always()
     with:
       ci_artifact: web_bundle
 
 ### E2E TEST ###
   e2e:
-    needs: [pipe_config, gatsby]
-    if: needs.pipe_config.outputs.E2E_TESTS_ON == 'true'
+    needs: [pipe, gatsby]
+    if: always() && ( needs.pipe.outputs.E2E_TESTS_ON == 'true' || ( needs.pipe.outputs.E2E_TESTS_ON == '' && success() ) )
     uses: ./.github/workflows/e2e-test.yml
     with:
       website_artifact: web_bundle
@@ -111,12 +96,20 @@ jobs:
 
   # Deploy Web Bundle
   deploy:
+    # if DEPLOY_ON override boolean switch is set:
+    # - true  --> Deployment WILL happen
+    # - false --> Deployment will NOT happen
+
+    # if boolean switch NOT SET then implicit default policy condition must be met:
+    # - previous Jobs must succeed and signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
+    needs: [pipe, signal_deploy]
+    if: always() && ( needs.pipe.outputs.DEPLOY_ON == 'true' || ( needs.pipe.outputs.DEPLOY_ON == '' && needs.pipe.result == 'success' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' ) )
+
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
-    needs: [pipe_config, signal_deploy]
-    if: ${{ needs.pipe_config.outputs.DEPLOY_ON == 'true' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
+
     uses: ./.github/workflows/deploy.yml
     with:
       # map prod: s3 and test: github-pages
@@ -126,7 +119,3 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-
-  # test_dockerized:
-  #   # needs caching to compete in speed with setup-node cache
-  #   # INVESTIGATE how to combine cache and docker images

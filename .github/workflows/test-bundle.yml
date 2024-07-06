@@ -79,8 +79,8 @@ jobs:
 
       # ls -l into the bundle directory
       - name: List Bundle Directory
-        working-directory: ${{ env._BUNDLE_DIR }}
-        run: ls -l
+        run: ls -l ${{ env._BUNDLE_DIR }}
+      - run: ls -laR ${{ env._BUNDLE_DIR }}
 
       # Test 1: Verify standard files are present: index.html, sitemap.xml, etc
       - name: Verify index.html, sitemap.xml, robots.txt, webpack.stats.json, etc are present

@@ -6,7 +6,7 @@ on:
         description: 'Pipe Config'
         required: true
         type: string
-        default: '{"LINT_ON":"true","ALLOW_lINT_TO_FAIL":"false"}'
+        default: '{"LINT_ON":"true","ALLOW_LINT_TO_FAIL":"false"}'
 jobs:
   eslint:
     # if: needs.pipe_config.outputs.LINT_ON == 'true'
@@ -27,7 +27,7 @@ jobs:
 
       - name: Run ESlint against all code
         env:
-          ALLOW_lINT_TO_FAIL: ${{ fromJson(inputs.pipe_config).ALLOW_lINT_TO_FAIL }}
+          ALLOW_LINT_TO_FAIL: ${{ fromJson(inputs.pipe_config).ALLOW_LINT_TO_FAIL }}
         run: |
           eslint_pass_boolean_flag=1
 
@@ -43,11 +43,11 @@ jobs:
           if [ $eslint_pass_boolean_flag -eq 1 ]; then
             job_status=0
           else
-            if [ ${{ env.ALLOW_lINT_TO_FAIL }} == "true" ]; then
-              echo "[WARN] Lint failed but ALLOW_lINT_TO_FAIL is true"
+            if [ ${{ env.ALLOW_LINT_TO_FAIL }} == "true" ]; then
+              echo "[WARN] Lint failed but ALLOW_LINT_TO_FAIL is true"
               job_status=0
             else
-              echo "[ERROR] Lint failed and ALLOW_lINT_TO_FAIL is false"
+              echo "[ERROR] Lint failed and ALLOW_LINT_TO_FAIL is false"
               job_status=1
             fi
           fi

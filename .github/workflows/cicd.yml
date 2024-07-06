@@ -20,7 +20,7 @@ jobs:
       UNIT_TESTS_ON: false  # shutdown unit-tests
       ALLOW_LINT_TO_FAIL: true
       # LINT_ON: false  # shutdown lint
-      # DEPLOY_ON: true  # force deployment
+      DEPLOY_ON: true  # force deployment
 
       # BUILD_ON: ${{ vars.BUILD_ON }}
       # E2E_TESTS_ON: ${{ vars.E2E_TESTS_ON }}

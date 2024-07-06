@@ -10,26 +10,19 @@ on:
     tags:
       - v*
 
-env:
-  ##### Top Level overrides - JOB ON/OFF SWITCHES #####
-  # if set to 'true' will gurantee trigger
-  # if set to 'false' will gurantee NOT trigger
-  # if set to '' will trigger if the implicit policy is true: ie if previous Jobs are green, if some custom signal is true, etc
-
-  UNIT_TESTS_ON: "false"
-  # LINT_ON: "true"
-  # E2E_TESTS_ON: ""
-  # DEPLOY_ON: ""
-
-  ## Pipe Settings ##
-  ALLOW_LINT_TO_FAIL: "true"
-
 jobs:
 # CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
 # note: if in Jobs here, cannot access env context (can the vars)
 # can retire this Job if all ifs leverage vars for reading Top-Level overrides
   pipe:
     uses: ./.github/workflows/pipe_config.yml
+    with:
+      UNIT_TESTS_ON: false
+      # LINT_ON: ${{ vars.LINT_ON }}
+      # ALLOW_LINT_TO_FAIL: ${{ vars.ALLOW_LINT_TO_FAIL }}
+      # BUILD_ON: ${{ vars.BUILD_ON }}
+      # E2E_TESTS_ON: ${{ vars.E2E_TESTS_ON }}
+      # DEPLOY_ON: ${{ vars.DEPLOY_ON }}
 
 ### UNIT TEST ###
   test:

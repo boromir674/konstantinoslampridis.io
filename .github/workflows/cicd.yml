@@ -13,7 +13,7 @@ on:
 env:
 
   ##### Top Level overrides - JOB ON/OFF SWITCHES #####
-  UNIT_TESTS_ON: "true"
+  # UNIT_TESTS_ON: "true"
   E2E_TESTS_ON: "true"
   LINT_ON: "true"
   BUILD_ON: "true"
@@ -36,12 +36,6 @@ jobs:
       - name: Configure Pipeline
         id: set_pipe_config
         run: chmod +x .github/set_env.sh && .github/set_env.sh
-          # echo UNIT_TESTS_ON="${{ env.UNIT_TESTS_ON }}" >> $GITHUB_OUTPUT
-          # echo LINT_ON="${{ env.LINT_ON }}" >> $GITHUB_OUTPUT
-          # echo PUBLISH_ON="${{ env.PUBLISH_ON }}" >> $GITHUB_OUTPUT
-          # echo ALLOW_LINT_TO_FAIL="${{ env.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
-          # echo DEPLOY_ON="${{ env.DEPLOY_ON }}" >> $GITHUB_OUTPUT
-          # echo E2E_TESTS_ON="${{ env.E2E_TESTS_ON }}" >> $GITHUB_OUTPUT
     outputs:
       # Output Top Level overides
       UNIT_TESTS_ON: ${{ steps.set_pipe_config.outputs.UNIT_TESTS_ON }}
@@ -56,7 +50,7 @@ jobs:
 ### UNIT TEST ###
   test:
     needs: pipe_config
-    if: needs.pipe_config.outputs.UNIT_TESTS_ON == 'true'
+    if: always() && ( needs.pipe_config.outputs.UNIT_TESTS_ON == 'true' || ( needs.pipe_config.outputs.UNIT_TESTS_ON == '' && needs.pipe_config.result == 'success' ) )
     uses: ./.github/workflows/test.yml
     with:
       pipe_config: ${{ toJson(needs.pipe_config.outputs) }}
@@ -108,7 +102,7 @@ jobs:
       bundle_size_acceptance: 3
 
   signal_deploy:
-    needs: test_bundle
+    needs: [test_bundle, e2e]
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:

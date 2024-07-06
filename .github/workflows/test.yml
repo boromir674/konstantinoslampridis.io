@@ -31,8 +31,8 @@ jobs:
 
       - name: read pipe config and extract allow_fail key/value
         run: |
-          echo "ALLOW_lINT_TO_FAIL=${{fromJson(inputs.pipe_config).ALLOW_lINT_TO_FAIL}}" >> $GITHUB_ENV
-      - run: echo ${{ env.ALLOW_lINT_TO_FAIL }}
+          echo "ALLOW_LINT_TO_FAIL=${{ fromJson(inputs.pipe_config).ALLOW_LINT_TO_FAIL }}" >> $GITHUB_ENV
+      - run: echo ${{ env.ALLOW_LINT_TO_FAIL }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile --production=false

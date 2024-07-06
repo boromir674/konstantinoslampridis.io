@@ -20,7 +20,7 @@ jobs:
       UNIT_TESTS_ON: false  # shutdown unit-tests
       ALLOW_LINT_TO_FAIL: true
       # LINT_ON: false  # shutdown lint
-      DEPLOY_ON: true  # force deployment
+      # DEPLOY_ON: true  # force deployment
 
       # BUILD_ON: ${{ vars.BUILD_ON }}
       # E2E_TESTS_ON: ${{ vars.E2E_TESTS_ON }}
@@ -73,7 +73,7 @@ jobs:
 
 ### E2E TEST ###
   e2e:
-    needs: [pipe, gatsby]
+    needs: [gatsby]
     if: always() && ( needs.pipe.outputs.E2E_TESTS_ON == 'true' || ( needs.pipe.outputs.E2E_TESTS_ON == '' && success() ) )
     uses: ./.github/workflows/e2e-test.yml
     with:
@@ -104,7 +104,7 @@ jobs:
 
     # if boolean switch NOT SET then implicit default policy condition must be met:
     # - previous Jobs must succeed and signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
-    needs: [pipe, signal_deploy]
+    needs: [signal_deploy]
     if: always() && ( needs.pipe.outputs.DEPLOY_ON == 'true' || ( needs.pipe.outputs.DEPLOY_ON == '' && needs.pipe.result == 'success' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' ) )
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment

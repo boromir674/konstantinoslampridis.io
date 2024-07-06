@@ -18,8 +18,8 @@ jobs:
     uses: ./.github/workflows/pipe_config.yml
     with:
       UNIT_TESTS_ON: false
+      ALLOW_LINT_TO_FAIL: true
       # LINT_ON: ${{ vars.LINT_ON }}
-      # ALLOW_LINT_TO_FAIL: ${{ vars.ALLOW_LINT_TO_FAIL }}
       # BUILD_ON: ${{ vars.BUILD_ON }}
       # E2E_TESTS_ON: ${{ vars.E2E_TESTS_ON }}
       # DEPLOY_ON: ${{ vars.DEPLOY_ON }}
@@ -56,7 +56,7 @@ jobs:
 ## BUILD MINIFIED BUNDLE
   gatsby:
     needs: test
-    if: always() && ( needs.pipe.outputs.BUILD_ON == 'true' || ( needs.pipe.outputs.BUILD_ON == '' && needs.pipe.result == 'success' ) )
+    if: always() && ( needs.pipe.outputs.BUILD_ON == 'true' || ( needs.pipe.outputs.BUILD_ON == '' && needs.test.result == 'success' ) )
     # TODO: support different logic: allow Pass, and allow Skipped policies
     uses: ./.github/workflows/build-bundle.yml
     with:

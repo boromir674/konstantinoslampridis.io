@@ -88,10 +88,15 @@ jobs:
             # echo "$(cat ${RUNTIME_JSON})" >> $GITHUB_STEP_SUMMARY
             # loop over RUNTIME_JSON Lines and exhon one by one
             while IFS= read -r line; do
+              echo "$line"
               echo "$line" >> $GITHUB_STEP_SUMMARY
             done < "${RUNTIME_JSON}"
             echo "```" >> $GITHUB_STEP_SUMMARY
             echo test_echo2>> $GITHUB_STEP_SUMMARY
+            while IFS= read -r line; do
+              echo "$line"
+              echo "$line" >> $GITHUB_STEP_SUMMARY
+            done < "${RUNTIME_JSON}"
 
           else
             echo "[INFO] LHCI passed all default Lighthouse Assertions!"

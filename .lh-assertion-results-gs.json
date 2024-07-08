@@ -8,69 +8,9 @@
     ],
     "operator": ">=",
     "passed": false,
-    "auditId": "errors-in-console",
-    "level": "error",
-    "url": "http://localhost:37821/404.html",
-    "auditTitle": "Browser errors were logged to the console",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:37821/404.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 1,
-    "values": [
-      1
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "legacy-javascript",
-    "level": "warn",
-    "url": "http://localhost:37821/404.html",
-    "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "meta-description",
-    "level": "error",
-    "url": "http://localhost:37821/404.html",
-    "auditTitle": "Document does not have a meta description",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/meta-description/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
     "auditId": "crawlable-anchors",
     "level": "error",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Links are not crawlable",
     "auditDocumentationLink": "https://support.google.com/webmasters/answer/9112205"
   },
@@ -85,7 +25,7 @@
     "passed": false,
     "auditId": "dom-size",
     "level": "warn",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Avoid an excessive DOM size",
     "auditDocumentationLink": "https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations"
   },
@@ -100,7 +40,7 @@
     "passed": false,
     "auditId": "errors-in-console",
     "level": "error",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Browser errors were logged to the console",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
   },
@@ -115,7 +55,7 @@
     "passed": false,
     "auditId": "heading-order",
     "level": "error",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Heading elements are not in a sequentially-descending order",
     "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/heading-order"
   },
@@ -130,22 +70,22 @@
     "passed": false,
     "auditId": "legacy-javascript",
     "level": "warn",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
     "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.64,
+    "actual": 0.61,
     "values": [
-      0.64
+      0.61
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "max-potential-fid",
     "level": "warn",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Max Potential First Input Delay",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
   },
@@ -160,83 +100,23 @@
     "passed": false,
     "auditId": "target-size",
     "level": "error",
-    "url": "http://localhost:37821/index.html",
+    "url": "https://konstantinoslampridis.io/",
     "auditTitle": "Touch targets do not have sufficient size or spacing.",
     "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/target-size"
   },
   {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "errors-in-console",
-    "level": "error",
-    "url": "http://localhost:37821/404/index.html",
-    "auditTitle": "Browser errors were logged to the console",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:37821/404/index.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
-  },
-  {
     "name": "maxLength",
     "expected": 0,
-    "actual": 1,
+    "actual": 4,
     "values": [
-      1
+      4
     ],
     "operator": "<=",
     "passed": false,
-    "auditId": "legacy-javascript",
+    "auditId": "uses-long-cache-ttl",
     "level": "warn",
-    "url": "http://localhost:37821/404/index.html",
-    "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "meta-description",
-    "level": "error",
-    "url": "http://localhost:37821/404/index.html",
-    "auditTitle": "Document does not have a meta description",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/meta-description/"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 1,
-    "values": [
-      1
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "unused-javascript",
-    "level": "error",
-    "url": "http://localhost:37821/404/index.html",
-    "auditTitle": "Reduce unused JavaScript",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
+    "url": "https://konstantinoslampridis.io/",
+    "auditTitle": "Serve static assets with an efficient cache policy",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
   }
 ]

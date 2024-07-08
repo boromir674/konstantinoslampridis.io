@@ -1,0 +1,78 @@
+name: Lighthouse Audit
+on:
+  workflow_call:
+    inputs:
+      # OPTIONAL
+      target_ci_artifact:
+        required: false
+        type: string
+        description: 'CI Artifact with static website to audit'
+      target_url:
+        required: false
+        type: string
+        description: 'URL to audit'
+      # REQUIRED
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      # Install lhci
+      - run: yarn global add @lhci/cli@0.14.x
+
+      # Checkout code into dedicate 'code' subdirectory
+      - uses: actions/checkout@v4
+        with:
+          # Relative path under $GITHUB_WORKSPACE to place the repository
+          path: 'code'
+      
+      # Keep only Lighthouse-relevant config files
+      - run: |
+          mv code/.lighthouserc.json .
+
+      # Run Lighthouse CI
+
+      # Healthcheck
+      - run: lhci healthcheck
+
+      - name: Derive Lighthouse CLI flags from inputs
+        # if input url use --url and value
+        # if input ci artifact, will will download and serve the artifact later
+        # else exit with error msg and 1 exit code
+        run: |
+          if [ -n "${{ github.event.inputs.target_url }}" ]; then
+            if [ -n "${{ github.event.inputs.target_ci_artifact }}" ]; then
+              echo "ERROR: Both target_url and target_ci_artifact inputs are provided. Please provide only one."
+              exit 1
+            fi
+            echo "AUDIT_TARGET=url BUILD_ON${{ github.event.inputs.target_url }}" >> $GITHUB_ENV
+          elif [ -n "${{ github.event.inputs.target_ci_artifact }}" ]; then
+            echo "[INFO] Will donwload and serve Static Site from CI Artifacts"
+            echo "SINGAL_ARTIFACT=true" >> $GITHUB_ENV
+            echo "AUDIT_TARGET=staticDistDir ./public" >> $GITHUB_ENV
+          fi
+
+      - name: 'Download Website bundle (files) from CI Artifact'
+        if: env.SINGAL_ARTIFACT == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.target_ci_artifact }}
+          path: public
+
+      # Collect
+      - run: 'lhci autorun "--collect.${{ env.AUDIT_TARGET }}" -n 3'
+
+      # JSON and Html files
+      - run: ls -la ./.lighthouseci/
+
+      # Upload
+      - uses: actions/upload-artifact@v4
+        with:
+          path: ./.lighthouseci/  # upload this folder
+          name: lighthouseci  # under this Artifact name

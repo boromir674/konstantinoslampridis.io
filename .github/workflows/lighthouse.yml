@@ -31,8 +31,8 @@ jobs:
           path: 'code'
       
       # Keep only Lighthouse-relevant config files
-      - run: |
-          mv code/.lighthouserc.json .
+      # - run: |
+      #     mv code/.lighthouserc.json .
 
       # Run Lighthouse CI
 

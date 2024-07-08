@@ -81,11 +81,12 @@ jobs:
             echo ""  >> $GITHUB_STEP_SUMMARY
 
             echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
-
+            echo test_echo1 >> $GITHUB_STEP_SUMMARY
             ls -la ${RUNTIME_JSON}
             echo "```json" >> $GITHUB_STEP_SUMMARY
-            cat ${RUNTIME_JSON} >> $GITHUB_STEP_SUMMARY
+            echo $(cat ${RUNTIME_JSON}) >> $GITHUB_STEP_SUMMARY
             echo "```" >> $GITHUB_STEP_SUMMARY
+            echo test_echo2>> $GITHUB_STEP_SUMMARY
 
           else
             echo "[INFO] LHCI passed all default Lighthouse Assertions!"

@@ -65,13 +65,25 @@ jobs:
           name: ${{ inputs.target_ci_artifact }}
           path: public
 
-      # - if: ${{ inputs.target_url }}
-      #   run: 'lhci autorun "--collect.url=${{ inputs.target_url }}" --collect.numberOfRuns=1'
+      - name: "Audit Site run Assertions and capture exit code"
+        # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
+        run: |
+          lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1
+          exit_code=$?
+          echo "[INFO] LHCI exit code: $exit_code"
+          echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
+          echo " - LHCI exit code: $exit_code" >> $GITHUB_STEP_SUMMARY
+          if [ $exit_code -ne 0 ]; then
+            echo "[INFO] LHCI did not pass all default Lighthouse Assertions!"
+            echo " - LHCI did not pass all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
+            echo ""  >> $GITHUB_STEP_SUMMARY
+            echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
+            echo "```json" >> $GITHUB_STEP_SUMMARY
+            cat ./.lighthouseci/assertion-results.json >> $GITHUB_STEP_SUMMARY
+            echo "```" >> $GITHUB_STEP_SUMMARY
+          fi
 
-      # AUTORUN
-      - run: 'lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1'
-
-      # JSON and Html files
+      # per .html audit reports in JSON and Html + assertion-results.json
       - run: ls -la ./.lighthouseci/
         if: always()
 
@@ -81,3 +93,22 @@ jobs:
         with:
           path: ./.lighthouseci/  # upload this folder
           name: lighthouseci  # under this Artifact name
+
+      # verify assertion-results.json and .ls-assertion-results-gs.json are the same
+      - name: 'Verify Gold Standard Performance reached!'
+        if: always()
+        env:
+          RUNTIME_JSON: .lighthouseci/assertion-results.json
+          GOLD_STANDARD_JSON: .ls-assertion-results-gs.json
+        run: |
+          diff -u ${RUNTIME_JSON} ${GOLD_STANDARD_JSON}
+          exit_code=$?
+          echo "[INFO] Diff exit code: $exit_code"
+          echo ""  >> $GITHUB_STEP_SUMMARY
+          if [ $exit_code -ne 0 ]; then
+            echo "[ERROR] Assertion Results differ from Gold Standard!"
+            echo " - Assertion Results differ from Gold Standard!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "[INFO] Assertion Results match Gold Standard!"
+            echo " - Assertion Results match Gold Standard!" >> $GITHUB_STEP_SUMMARY
+          fi

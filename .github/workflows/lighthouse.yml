@@ -49,11 +49,13 @@ jobs:
               echo "ERROR: Both target_url and target_ci_artifact inputs are provided. Please provide only one."
               exit 1
             fi
-            echo "AUDIT_TARGET=url BUILD_ON${{ github.event.inputs.target_url }}" >> $GITHUB_ENV
+            echo "AUDIT_TARGET='url=${{ github.event.inputs.target_url }}'" >> $GITHUB_ENV
+            echo "[INFO] Will audit URL: ${{ github.event.inputs.target_url }}"
           elif [ -n "${{ github.event.inputs.target_ci_artifact }}" ]; then
             echo "[INFO] Will donwload and serve Static Site from CI Artifacts"
             echo "SINGAL_ARTIFACT=true" >> $GITHUB_ENV
             echo "AUDIT_TARGET=staticDistDir ./public" >> $GITHUB_ENV
+            echo "[INFO] Will audit Static Site from CI Artifact: ${{ github.event.inputs.target_ci_artifact }}"
           fi
 
       - name: 'Download Website bundle (files) from CI Artifact'
@@ -64,7 +66,9 @@ jobs:
           path: public
 
       # Collect
-      - run: 'lhci autorun "--collect.${{ env.AUDIT_TARGET }}" -n 3'
+      - if: ${{ inputs.target_url }}
+        run: 'lhci autorun "--collect.url=${{ inputs.target_url }}" --collect.numberOfRuns=1'
+      # - run: 'lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collectn 3'
 
       # JSON and Html files
       - run: ls -la ./.lighthouseci/

@@ -82,6 +82,7 @@ jobs:
 
             echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
 
+            ls -la ${RUNTIME_JSON}
             echo "```json" >> $GITHUB_STEP_SUMMARY
             cat ${RUNTIME_JSON} >> $GITHUB_STEP_SUMMARY
             echo "```" >> $GITHUB_STEP_SUMMARY
@@ -358,18 +359,23 @@ jobs:
       #     ]
       #     EOF
 
+      # each json is an array of objects x, each x.auditId property is a unique ID of assertion
       # verify assertion-results.json and .ls-assertion-results-gs.json are the same
       - name: 'Verify Gold Standard Performance reached!'
         if: always()
+        # use jq create two objects with keys being the x.auditId 
+        # then make sure all top-level properties/keys are the same (using jq) and
+        # and each object under the same top-level key is identical
         run: |
-          diff -u ${RUNTIME_JSON} ${GOLD_STANDARD_JSON}
-          exit_code=$?
-          echo "[INFO] Diff exit code: $exit_code"
-          echo ""  >> $GITHUB_STEP_SUMMARY
-          if [ $exit_code -ne 0 ]; then
-            echo "[ERROR] Assertion Results differ from Gold Standard!"
-            echo " - Assertion Results differ from Gold Standard!" >> $GITHUB_STEP_SUMMARY
+          jq -s 'add | map({(.auditId): .}) | add' ${RUNTIME_JSON} > ${RUNTIME_JSON}.jq
+          jq -s 'add | map({(.auditId): .}) | add' ${GOLD_STANDARD_JSON} > ${GOLD_STANDARD_JSON}.jq
+          jq -n --argfile runtime ${RUNTIME_JSON}.jq --argfile gold_standard ${GOLD_STANDARD_JSON}.jq '$runtime == $gold_standard' || exit_code=1
+
+          if [ $exit_code -eq 0 ]; then
+            echo "[INFO] Lighthouse Job PASSED!"
+            echo " - Lighthouse Job reached Gold Standard!" >> $GITHUB_STEP_SUMMARY
           else
-            echo "[INFO] Assertion Results match Gold Standard!"
-            echo " - Assertion Results match Gold Standard!" >> $GITHUB_STEP_SUMMARY
+            echo "[ERROR] Lighthouse Job FAILED!"
+            echo " - Lighthouse Job did not reach Gold Standard!" >> $GITHUB_STEP_SUMMARY
           fi
+          exit $exit_code

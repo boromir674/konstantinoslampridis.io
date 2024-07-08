@@ -54,7 +54,6 @@ jobs:
     with:
       pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe.outputs.ALLOW_LINT_TO_FAIL }}"}'
 
-
 ## BUILD MINIFIED BUNDLE
   gatsby:
     needs: test
@@ -73,6 +72,7 @@ jobs:
       ci_artifact: web_bundle
   audit:
     needs: gatsby
+    if: always()
     uses: ./.github/workflows/lighthouse.yml
     with:
       target_ci_artifact: web_bundle

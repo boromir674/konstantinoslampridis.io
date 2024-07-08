@@ -157,6 +157,90 @@ For the interactive `Cypress` (GUI) App you can run an instance at (linux) local
 ./e2e/run-cypress-gui.sh
 ```
 
+## Lighthouse CI
+
+Lighthouse Audit can "happen" `locally`, `on CI`, `with docker`, optionally in *headless mode*.
+
+- Help: `npm exec --package=lighthouse -c 'lighthouse --help'`
+- save trace contents and devtools logs to disk: `--save-assets`
+
+### From `Local Terminal`
+
+Update your `npm` if need be
+
+```sh
+nvm install stable
+nvm use stable
+```
+lighthouse https://konstantinoslampridis.io --output=json --output-path=./report.json
+#### Non Headless with Chrome
+```sh
+npm exec lighthouse https://konstantinoslampridis.io --no-enable-error-reporting --verbose \
+    --output=json --output=html
+```
+
+**Expect:**
+- a shipped chrome browser to start-up
+- an html report of the audit result: konstantinoslampridis.io\<datetime\>.report.htm
+
+Note: 
+
+```sh
+npm exec lighthouse https://konstantinoslampridis.io --no-enable-error-reporting --verbose \
+    --output=json --output-path=./report.json
+```
+
+does not produce report in JSON! See `lhci` below.
+
+
+#### Headless with Chrome
+
+`lhci`: https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/architecture.md
+
+Help:
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci --help'
+```
+
+Run 3 Audits to account for results variance:
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --url https://konstantinoslampridis.io'
+```
+
+Run 1 Audit:
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --url https://konstantinoslampridis.io -n 1'
+```
+
+**Expect:** 1 `lhr-*.html` and 1 `lhr-*.json` file inside `./.lighthouseci/` folder
+
+Serve static site from `public-auto` folder and  
+audit each *.html found in static site:
+
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --staticDistDir ./public-auto -n 1'
+```
+
+**Expect:** 3 `lhr-*.html` and 3 `lhr-*.json` file inside `./.lighthouseci/` folder
+```
+Started a web server on port 36699...
+Running Lighthouse 1 time(s) on http://localhost:36699/404.html
+Run #1...done.
+Running Lighthouse 1 time(s) on http://localhost:36699/index.html
+Run #1...done.
+Running Lighthouse 1 time(s) on http://localhost:36699/404/index.html
+Run #1...done.
+```
+
+**Run Healthcheck, Audit, and Assertions** on live url, with *1 iteration*
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.url='https://konstantinoslampridis.io' --collect.numberOfRuns=1'
+```
+
+#### Docker
+https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/recipes/docker-client/Dockerfile
+
+
 # Main Use Case of konstantinoslampridis.io
 
 ```mermaid

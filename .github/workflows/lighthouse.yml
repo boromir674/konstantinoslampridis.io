@@ -367,23 +367,22 @@ jobs:
           COMPARE: code/scripts/ci-compare-json-arrays.py
         run: |
           chmod +x ${{ env.COMPARE }}
-          ${{ env.COMPARE }} ${RUNTIME_JSON} ${GOLD_STANDARD_JSON} || exit_code=1
+          ${{ env.COMPARE }} ${RUNTIME_JSON} ${GOLD_STANDARD_JSON} || pass_comparison=0
 
-
-          # # use jq create two objects with keys being the x.auditId 
-          # # then make sure all top-level properties/keys are the same (using jq) and
-          # # and each object under the same top-level key is identical
-          # run: |
-          #   jq -s 'add | map({(.auditId): .}) | add' ${RUNTIME_JSON} > ${RUNTIME_JSON}.jq
-          #   jq -s 'add | map({(.auditId): .}) | add' ${GOLD_STANDARD_JSON} > ${GOLD_STANDARD_JSON}.jq
-          #   jq -n --argfile runtime ${RUNTIME_JSON}.jq --argfile gold_standard ${GOLD_STANDARD_JSON}.jq '$runtime == $gold_standard' || exit_code=1
-
-
-          if [ $exit_code -eq 0 ]; then
-            echo "[INFO] Lighthouse Job PASSED!"
-            echo " - Lighthouse Job reached Gold Standard!" >> $GITHUB_STEP_SUMMARY
-          else
+          if [ $pass_comparison -eq 0 ]; then
             echo "[ERROR] Lighthouse Job FAILED!"
             echo " - Lighthouse Job did not reach Gold Standard!" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "[INFO] Lighthouse Job PASSED!"
+            echo " - Lighthouse Job reached Gold Standard!" >> $GITHUB_STEP_SUMMARY
           fi
-          exit $exit_code
+          
+
+        # # use jq create two objects with keys being the x.auditId 
+        # # then make sure all top-level properties/keys are the same (using jq) and
+        # # and each object under the same top-level key is identical
+        # run: |
+        #   jq -s 'add | map({(.auditId): .}) | add' ${RUNTIME_JSON} > ${RUNTIME_JSON}.jq
+        #   jq -s 'add | map({(.auditId): .}) | add' ${GOLD_STANDARD_JSON} > ${GOLD_STANDARD_JSON}.jq
+        #   jq -n --argfile runtime ${RUNTIME_JSON}.jq --argfile gold_standard ${GOLD_STANDARD_JSON}.jq '$runtime == $gold_standard' || exit_code=1

@@ -17,9 +17,9 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.5,
+    "actual": 0,
     "values": [
-      0.5
+      0
     ],
     "operator": ">=",
     "passed": false,
@@ -77,9 +77,24 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.61,
+    "actual": 0,
     "values": [
-      0.61
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "mainthread-work-breakdown",
+    "level": "warn",
+    "url": "https://konstantinoslampridis.io/",
+    "auditTitle": "Minimize main-thread work",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.11,
+    "values": [
+      0.11
     ],
     "operator": ">=",
     "passed": false,

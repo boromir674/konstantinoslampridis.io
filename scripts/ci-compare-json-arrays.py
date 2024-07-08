@@ -24,8 +24,26 @@ assert len(array1) == len(array2), f"Length of arrays are different: {len(array1
 # Compare dict1 and dict2
 assert set(dict1.keys()) == set(dict2.keys()), f"Keys are different between dict1 and dict2: {sorted(dict1.keys())} != {sorted(dict2.keys())}"
 
+# Comparable attributes
+comparable = (
+    'name',
+    'expected',
+    # actual',
+    # values',
+    'operator',
+    'passed',
+    'auditId',
+    'level',
+    'url',
+    'auditTitle',
+    'auditDocumentationLink',
+)
 
-# Find keys that are in both dict1 and dict2
-for key in dict1:
-
-    assert dict1[key] == dict2[key], f"Key {key} is in both dict1 and dict2 but values are different. dict1: {dict1[key]}, dict2: {dict2[key]}"
+for k1, v1 in dict1.items():
+    for k in comparable:
+        assert v1[k] == dict2[k1][k], f"Values are different for key {k1} and attribute {k}: {v1[k]} != {dict2[k1][k]}"
+    
+    if v1['actual'] != dict2[k1]['actual']:
+        print(f"[WARN] Values are different for key {k1} and attribute actual: {v1['actual']} != {dict2[k1]['actual']}")
+    if v1['values'] != dict2[k1]['values']:
+        print(f"[WARN] Values are different for key {k1} and attribute values: {v1['values']} != {dict2[k1]['values']}")

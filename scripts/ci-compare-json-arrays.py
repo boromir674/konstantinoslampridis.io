@@ -14,14 +14,15 @@ array2 = json.load(open(f2))
 # print(array1[0], '\n')
 # print(array2)
 
-assert len(array1) == len(array2), "Length of arrays are different"
-
 # transform arrays/lists to dicts
 dict1 = {x['auditId']: x for x in array1}
 dict2 = {x['auditId']: x for x in array2}
 
+assert len(array1) == len(array2), f"Length of arrays are different: {len(array1)} != {len(array2)}. Keys: {sorted(dict1.keys())} != {sorted(dict2.keys())}"
+
+
 # Compare dict1 and dict2
-assert set(dict1.keys()) == set(dict2.keys()), "Keys are different between dict1 and dict2"
+assert set(dict1.keys()) == set(dict2.keys()), f"Keys are different between dict1 and dict2: {sorted(dict1.keys())} != {sorted(dict2.keys())}"
 
 
 # Find keys that are in both dict1 and dict2

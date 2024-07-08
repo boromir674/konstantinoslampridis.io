@@ -49,7 +49,7 @@ jobs:
               echo "ERROR: Both target_url and target_ci_artifact inputs are provided. Please provide only one."
               exit 1
             fi
-            echo "AUDIT_TARGET='url=${{ inputs.target_url }}'" >> $GITHUB_ENV
+            echo "AUDIT_TARGET=url=${{ inputs.target_url }}" >> $GITHUB_ENV
             echo "[INFO] Will audit URL: ${{ inputs.target_url }}"
           elif [ -n "${{ inputs.target_ci_artifact }}" ]; then
             echo "[INFO] Will donwload and serve Static Site from CI Artifacts"

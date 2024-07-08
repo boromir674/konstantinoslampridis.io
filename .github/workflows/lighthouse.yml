@@ -21,7 +21,6 @@ jobs:
         with:
           node-version: '18.16.x'
           cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
 
       # Install lhci
       - run: yarn global add @lhci/cli@0.14.x

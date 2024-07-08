@@ -16,6 +16,8 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+    env:
+      GOLD_STANDARD_JSON: .lh-assertion-results-gs.json
     steps:
       - uses: actions/setup-node@v4
         with:
@@ -68,19 +70,21 @@ jobs:
       - name: "Audit Site run Assertions and capture exit code"
         # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
         run: |
-          lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1
-          exit_code=$?
-          echo "[INFO] LHCI exit code: $exit_code"
+          lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0
+
           echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
-          echo " - LHCI exit code: $exit_code" >> $GITHUB_STEP_SUMMARY
-          if [ $exit_code -ne 0 ]; then
-            echo "[INFO] LHCI did not pass all default Lighthouse Assertions!"
+
+          if [ $pass_all_assertions -eq 0 ]; then
+            echo "[WARN] LHCI did not pass all default Lighthouse Assertions!"
             echo " - LHCI did not pass all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
             echo ""  >> $GITHUB_STEP_SUMMARY
             echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
             echo "```json" >> $GITHUB_STEP_SUMMARY
             cat ./.lighthouseci/assertion-results.json >> $GITHUB_STEP_SUMMARY
             echo "```" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "[INFO] LHCI passed all default Lighthouse Assertions!"
+            echo " - LHCI passed all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
           fi
 
       # per .html audit reports in JSON and Html + assertion-results.json
@@ -94,12 +98,259 @@ jobs:
           path: ./.lighthouseci/  # upload this folder
           name: lighthouseci  # under this Artifact name
 
+      - name: Runtime Creation of GS JSON file from developer
+        if: always()
+        run: |
+          cat > ${GOLD_STANDARD_JSON} <<EOF
+          [
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "errors-in-console",
+              "level": "error",
+              "url": "http://localhost:37821/404.html",
+              "auditTitle": "Browser errors were logged to the console",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "html-has-lang",
+              "level": "error",
+              "url": "http://localhost:37821/404.html",
+              "auditTitle": "`<html>` element does not have a `[lang]` attribute",
+              "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
+            },
+            {
+              "name": "maxLength",
+              "expected": 0,
+              "actual": 1,
+              "values": [
+                1
+              ],
+              "operator": "<=",
+              "passed": false,
+              "auditId": "legacy-javascript",
+              "level": "warn",
+              "url": "http://localhost:37821/404.html",
+              "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
+              "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "meta-description",
+              "level": "error",
+              "url": "http://localhost:37821/404.html",
+              "auditTitle": "Document does not have a meta description",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/meta-description/"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "crawlable-anchors",
+              "level": "error",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Links are not crawlable",
+              "auditDocumentationLink": "https://support.google.com/webmasters/answer/9112205"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0.5,
+              "values": [
+                0.5
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "dom-size",
+              "level": "warn",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Avoid an excessive DOM size",
+              "auditDocumentationLink": "https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "errors-in-console",
+              "level": "error",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Browser errors were logged to the console",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "heading-order",
+              "level": "error",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Heading elements are not in a sequentially-descending order",
+              "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/heading-order"
+            },
+            {
+              "name": "maxLength",
+              "expected": 0,
+              "actual": 2,
+              "values": [
+                2
+              ],
+              "operator": "<=",
+              "passed": false,
+              "auditId": "legacy-javascript",
+              "level": "warn",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
+              "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0.64,
+              "values": [
+                0.64
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "max-potential-fid",
+              "level": "warn",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Max Potential First Input Delay",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "target-size",
+              "level": "error",
+              "url": "http://localhost:37821/index.html",
+              "auditTitle": "Touch targets do not have sufficient size or spacing.",
+              "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/target-size"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "errors-in-console",
+              "level": "error",
+              "url": "http://localhost:37821/404/index.html",
+              "auditTitle": "Browser errors were logged to the console",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "html-has-lang",
+              "level": "error",
+              "url": "http://localhost:37821/404/index.html",
+              "auditTitle": "`<html>` element does not have a `[lang]` attribute",
+              "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
+            },
+            {
+              "name": "maxLength",
+              "expected": 0,
+              "actual": 1,
+              "values": [
+                1
+              ],
+              "operator": "<=",
+              "passed": false,
+              "auditId": "legacy-javascript",
+              "level": "warn",
+              "url": "http://localhost:37821/404/index.html",
+              "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
+              "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
+            },
+            {
+              "name": "minScore",
+              "expected": 0.9,
+              "actual": 0,
+              "values": [
+                0
+              ],
+              "operator": ">=",
+              "passed": false,
+              "auditId": "meta-description",
+              "level": "error",
+              "url": "http://localhost:37821/404/index.html",
+              "auditTitle": "Document does not have a meta description",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/meta-description/"
+            },
+            {
+              "name": "maxLength",
+              "expected": 0,
+              "actual": 1,
+              "values": [
+                1
+              ],
+              "operator": "<=",
+              "passed": false,
+              "auditId": "unused-javascript",
+              "level": "error",
+              "url": "http://localhost:37821/404/index.html",
+              "auditTitle": "Reduce unused JavaScript",
+              "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
+            }
+          ]
+          EOF
+
       # verify assertion-results.json and .ls-assertion-results-gs.json are the same
       - name: 'Verify Gold Standard Performance reached!'
         if: always()
         env:
           RUNTIME_JSON: .lighthouseci/assertion-results.json
-          GOLD_STANDARD_JSON: .ls-assertion-results-gs.json
         run: |
           diff -u ${RUNTIME_JSON} ${GOLD_STANDARD_JSON}
           exit_code=$?

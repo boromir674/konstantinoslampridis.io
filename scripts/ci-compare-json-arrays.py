@@ -29,10 +29,19 @@ if len(runtime) > len(gold_standard):
 
     sys.exit(exit_code)
 
+#### LIVE/RUNTIME better than Gold Standard ####
 if len(runtime) < len(gold_standard):  # potential improvement over tracked GS
     # can signal for raising standards by updating the tracked GS
-    print(f"[INFO] Audit assertions are less than the Gold Standard: {len(runtime)} <= {len(gold_standard)}")
-    print(f"[INFO] Gold Standard could be improved by removing some of the audit assertions it contains")
+    print(
+        f"[INFO] Audit assertions are less than the Gold Standard: {len(runtime)} <= {len(gold_standard)}\n"
+        "[INFO] Live Audit passed more assertions than the Gold Standard!\n"
+        "[INFO] Lighthouse Standards could be raised by updating the Gold Standard (GS) and"
+        "and specifically by removing some failed assertion objects from the GS array JSON\n"
+    )
+    # pretty print the audit objects where live audit exceeded GS
+    print("AuditId's where live audit exceeded GS:")
+    for audit_id in sorted(set(data_gold_standard.keys()) - set(data_runtime.keys())):
+        print(json.dumps(data_gold_standard[audit_id], indent=2, sort_keys=True))
 
 
 # Compare dict1 and dict2

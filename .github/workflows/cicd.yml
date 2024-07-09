@@ -11,17 +11,6 @@ on:
       - v*
 
 jobs:
-  temp:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo a >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "inside back ticks" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-
 # CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
 # note: if in Jobs here, cannot access env context (can the vars)
 # can retire this Job if all ifs leverage vars for reading Top-Level overrides

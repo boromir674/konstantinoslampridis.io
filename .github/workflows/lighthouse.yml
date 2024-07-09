@@ -76,28 +76,18 @@ jobs:
           echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
 
           if [ $pass_all_assertions -eq 0 ]; then
-            echo "[WARN] LHCI did not pass all default Lighthouse Assertions!"
-            echo " - LHCI did not pass all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
+            echo "[WARN] LHCI did NOT pass all default Lighthouse Assertions!"
+            echo " - LHCI did NOT pass all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
             echo ""  >> $GITHUB_STEP_SUMMARY
 
             echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-
-            # OPT 1
-            # echo "$(cat ${RUNTIME_JSON})" >> $GITHUB_STEP_SUMMARY
-
-            # OPT 2
-            # loop over RUNTIME_JSON Lines and exhon one by one
-            while IFS= read -r line; do
-              echo "$line"
-              echo "$line" >> $GITHUB_STEP_SUMMARY
-            done < "${RUNTIME_JSON}"
-
+            cat "${RUNTIME_JSON}" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
           else
-            echo "[INFO] LHCI passed all default Lighthouse Assertions!"
-            echo " - LHCI passed all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
+            echo "[INFO] LHCI PASSED all default Lighthouse Assertions!"
+            echo " - LHCI PASSED all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
           fi
 
       # per .html audit reports in JSON and Html + assertion-results.json
@@ -387,12 +377,3 @@ jobs:
             echo " - Lighthouse Job did not reach Gold Standard!" >> $GITHUB_STEP_SUMMARY
           fi
           exit $exit_code
-          
-
-        # # use jq create two objects with keys being the x.auditId 
-        # # then make sure all top-level properties/keys are the same (using jq) and
-        # # and each object under the same top-level key is identical
-        # run: |
-        #   jq -s 'add | map({(.auditId): .}) | add' ${RUNTIME_JSON} > ${RUNTIME_JSON}.jq
-        #   jq -s 'add | map({(.auditId): .}) | add' ${GOLD_STANDARD_JSON} > ${GOLD_STANDARD_JSON}.jq
-        #   jq -n --argfile runtime ${RUNTIME_JSON}.jq --argfile gold_standard ${GOLD_STANDARD_JSON}.jq '$runtime == $gold_standard' || exit_code=1

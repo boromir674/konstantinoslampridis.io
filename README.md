@@ -236,6 +236,17 @@ Run #1...done.
 ```sh
 npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.url='https://konstantinoslampridis.io' --collect.numberOfRuns=1'
 ```
+**Expect:** 1 `lhr-*.html`, 1 `lhr-*.json` file and 1 `Assertions file`  inside `./.lighthouseci/` folder
+
+**Run Healthcheck, Audit, and Assertions** on local website bundle files, with *1 iteration*
+
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=1'
+```
+
+**Expect:** 1 `lhr-*.html`, 1 `lhr-*.json` file and 1 `Assertions file`  inside `./.lighthouseci/` folder
+
+
 
 #### Docker
 https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/recipes/docker-client/Dockerfile

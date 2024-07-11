@@ -68,7 +68,7 @@ jobs:
           name: ${{ inputs.target_ci_artifact }}
           path: public
 
-      - name: "Audit Site run Assertions and capture exit code"
+      - name: "Audit Site, run Assertions and capture exit code"
         # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
         run: |
           lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0

@@ -18,13 +18,15 @@ jobs:
     uses: ./.github/workflows/pipe_config.yml
     with:
       ALLOW_LINT_TO_FAIL: true
-      # Override Switches: true gurantees Job run, false gurantees Job NOT run
+
+      ##### OVERRIDE SWITCHES #####
+      # true gurantees Job run, false gurantees Job NOT run
       OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
       OVERRIDE_LINT: false  # shutdown lint
-      # OVERRIDE_BUILD: true  # force build
+      OVERRIDE_BUILD: true  # force build
       # OVERRIDE_DEPLOY: true  # force deployment
       OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
-
+      #############################
 
 ### UNIT TEST ###
   test:
@@ -71,13 +73,14 @@ jobs:
     with:
       ci_artifact: web_bundle
 
+# LIGHTHOUSE CI
   audit:
-    # needs: gatsby
+    needs: gatsby
     # if: always()
     uses: ./.github/workflows/lighthouse.yml
     with:
-      # target_ci_artifact: web_bundle
-      target_url: 'https://konstantinoslampridis.io'
+      target_ci_artifact: web_bundle
+      # target_url: 'https://konstantinoslampridis.io'
 
 ### E2E TEST ###
   e2e:

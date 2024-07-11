@@ -181,13 +181,13 @@ jobs:
           fi
 
       # Test 7: Verify the presence of a favicon
-      # - name: Verify favicon is present
-      #   working-directory: ${{ env._BUNDLE_DIR }}
-      #   run: |
-      #     if [ ! -f favicon.ico ]; then
-      #       echo "[ERROR] favicon.ico is missing!"
-      #       exit 1
-      #     fi
+      - name: Verify favicon is present
+        working-directory: ${{ env._BUNDLE_DIR }}
+        run: |
+          if [ ! -f favicon.ico ]; then
+            echo "[ERROR] favicon.ico is missing!"
+            exit 1
+          fi
 
       # Strict Sanity Check for all expected files
       # find Directory_name -ls

@@ -29,6 +29,10 @@ if len(runtime) > len(gold_standard):
 
     sys.exit(exit_code)
 
+if len(runtime) == len(gold_standard):
+    # make sure they have the same keys
+    assert set(data_runtime.keys()) == set(data_gold_standard.keys()), "Keys are different between runtime and Gold Standard"
+
 #### LIVE/RUNTIME better than Gold Standard ####
 if len(runtime) < len(gold_standard):  # potential improvement over tracked GS
     # can signal for raising standards by updating the tracked GS

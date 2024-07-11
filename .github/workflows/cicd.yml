@@ -24,6 +24,7 @@ jobs:
       OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
       OVERRIDE_LINT: false  # shutdown lint
       OVERRIDE_BUILD: true  # force build
+      OVERRIDE_LIGHTHOUSE: true  # force lighthouse
       # OVERRIDE_DEPLOY: true  # force deployment
       OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
       #############################
@@ -76,7 +77,7 @@ jobs:
 # LIGHTHOUSE CI
   audit:
     needs: gatsby
-    # if: always()
+    if: always() && ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == 'true' || ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == '' && success() ) )
     uses: ./.github/workflows/lighthouse.yml
     with:
       target_ci_artifact: web_bundle
@@ -93,6 +94,8 @@ jobs:
 # Test Web Bundle
   test_bundle:
     needs: gatsby
+    # without if, it does not trigger if Gatsby success() Unit Test NO success()
+    if: always() && needs.gatsby.result == 'success'
     uses: ./.github/workflows/test-bundle.yml
     with:
       bundle_ci_artifact: web_bundle

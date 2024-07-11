@@ -15,6 +15,10 @@ on:
         description: 'Build Job Override'
         required: false
         type: string
+      OVERRIDE_LIGHTHOUSE:
+        description: 'Lighthouse Job Override'
+        required: false
+        type: string
       OVERRIDE_E2E_TESTS:
         description: 'E2E-Tests Job Override'
         required: false
@@ -41,6 +45,9 @@ on:
       OVERRIDE_BUILD:
         description: "Top-level Build Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
         value: ${{ jobs.configure.outputs.OVERRIDE_BUILD }}
+      OVERRIDE_LIGHTHOUSE:
+        description: "Top-level Lighthouse Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
+        value: ${{ jobs.configure.outputs.OVERRIDE_LIGHTHOUSE }}
       OVERRIDE_E2E_TESTS:
         description: "Top-level E2E-Tests Job Override. Set to true to gurantee trigger. Set to false to guarantee NOT trigger. By default 'tigger if previous Jobs are green'"
         value: ${{ jobs.configure.outputs.OVERRIDE_E2E_TESTS }}
@@ -67,6 +74,7 @@ jobs:
           echo OVERRIDE_LINT="${{ vars.OVERRIDE_LINT || inputs.OVERRIDE_LINT }}" >> $GITHUB_OUTPUT
           echo ALLOW_LINT_TO_FAIL="${{ vars.ALLOW_LINT_TO_FAIL || inputs.ALLOW_LINT_TO_FAIL }}" >> $GITHUB_OUTPUT
           echo OVERRIDE_BUILD="${{ vars.OVERRIDE_BUILD || inputs.OVERRIDE_BUILD }}" >> $GITHUB_OUTPUT
+          echo OVERRIDE_LIGHTHOUSE="${{ vars.OVERRIDE_LIGHTHOUSE || inputs.OVERRIDE_LIGHTHOUSE }}" >> $GITHUB_OUTPUT
           echo OVERRIDE_E2E_TESTS="${{ vars.OVERRIDE_E2E_TESTS || inputs.OVERRIDE_E2E_TESTS }}" >> $GITHUB_OUTPUT
           echo OVERRIDE_DEPLOY="${{ vars.OVERRIDE_DEPLOY || inputs.OVERRIDE_DEPLOY }}" >> $GITHUB_OUTPUT
     outputs:
@@ -75,5 +83,6 @@ jobs:
       OVERRIDE_LINT: ${{ steps.set_pipe_config.outputs.OVERRIDE_LINT }}
       ALLOW_LINT_TO_FAIL: ${{ steps.set_pipe_config.outputs.ALLOW_LINT_TO_FAIL }}
       OVERRIDE_BUILD: ${{ steps.set_pipe_config.outputs.OVERRIDE_BUILD }}
+      OVERRIDE_LIGHTHOUSE: ${{ steps.set_pipe_config.outputs.OVERRIDE_LIGHTHOUSE }}
       OVERRIDE_E2E_TESTS: ${{ steps.set_pipe_config.outputs.OVERRIDE_E2E_TESTS }}
       OVERRIDE_DEPLOY: ${{ steps.set_pipe_config.outputs.OVERRIDE_DEPLOY }}

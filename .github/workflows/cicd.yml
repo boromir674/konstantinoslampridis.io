@@ -21,12 +21,14 @@ jobs:
 
       ##### OVERRIDE SWITCHES #####
       # true gurantees Job run, false gurantees Job NOT run
-      OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
-      OVERRIDE_LINT: false  # shutdown lint
-      OVERRIDE_BUILD: true  # force build
-      OVERRIDE_LIGHTHOUSE: true  # force lighthouse
+
+      # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
+      # OVERRIDE_LINT: false  # shutdown lint
+      # OVERRIDE_BUILD: true  # force build
+      # OVERRIDE_LIGHTHOUSE: true  # force lighthouse
       # OVERRIDE_DEPLOY: true  # force deployment
-      OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
+      # OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
+
       #############################
 
 ### UNIT TEST ###

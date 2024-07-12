@@ -105,7 +105,7 @@ jobs:
       expected_number_of_files: 39
       bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
       # other test data
-      bundle_size_acceptance: 2.7
+      bundle_size_acceptance: 2.3
 
   signal_deploy:
     needs: [test_bundle, e2e, test]

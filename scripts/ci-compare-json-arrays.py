@@ -9,25 +9,28 @@ gold_standard_file = sys.argv[2]
 
 exit_code = 0
 
-runtime: t.List = json.load(open(runtime_data_file))
-gold_standard: t.List = json.load(open(gold_standard_file))
+runtime: t.List[t.Dict] = json.load(open(runtime_data_file))
+gold_standard: t.List[t.Dict] = json.load(open(gold_standard_file))
 
-runtime_list: t.List = sorted(runtime, key=lambda x: x['auditId'])
-gold_standard_list: t.List = sorted(gold_standard, key=lambda x: x['auditId'])
+runtime_list: t.List[t.Dict] = sorted(runtime, key=lambda x: x['auditId'])
+gold_standard_list: t.List[t.Dict] = sorted(gold_standard, key=lambda x: x['auditId'])
 
+runtime_id_set = set([x['auditId'] for x in runtime])
+gold_standard_id_set = set([x['auditId'] for x in gold_standard])
 
 # Print formatted runtime and gold standard as 2 columns
 title_1 = "Runtime"
 title_2 = "Gold Standard"
 _bigger_list = runtime_list if len(runtime_list) > len(gold_standard_list) else gold_standard_list
-__max_len_string = max(runtime_list + [title_1], key=lambda x: len(x['auditId']))['auditId']
-__max_len = len(__max_len_string)
+__lengthier_runtime_auditId_string = max(
+    [a['auditId'] for a in runtime_list] + [title_1], key=len)
+__max_len = len(__lengthier_runtime_auditId_string)
 print(f"\n{title_1:<{__max_len}} {title_2}")
 for i in range(len(_bigger_list)):
-    el1: str = runtime_list[i] if i < len(runtime_list) else ''
-    el2: str = gold_standard_list[i] if i < len(gold_standard_list) else ''
+    el1: str = runtime_list[i]['auditId'] if i < len(runtime_list) else ''
+    el2: str = gold_standard_list[i]['auditId'] if i < len(gold_standard_list) else ''
     # automatically append spaces to the first runtime auditId string
-    print(f"{el1['auditId']:<{__max_len}} {el2['auditId']}")
+    print(f"{el1:<{__max_len}} {el2}")
 
 
 # transform runtime and Gold Standard (GS) lists to dicts
@@ -113,3 +116,6 @@ for audit_id, v1 in data_runtime.items():
 
     if v1['values'] != data_gold_standard[audit_id]['values']:
         print(f"[WARN] Values are different for key {audit_id} and attribute 'values': {v1['values']} != {data_gold_standard[audit_id]['values']}")
+
+# Print Success !
+print("\nAutomated Test PASSED !\n")

@@ -114,7 +114,7 @@ comparable = (
     'passed',
     'auditId',
     'level',
-    'url',
+    # 'url',
     'auditTitle',
     'auditDocumentationLink',
 )

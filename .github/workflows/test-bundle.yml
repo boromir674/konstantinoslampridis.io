@@ -36,8 +36,8 @@ jobs:
           echo "[INFO] Bundle Size: ${{ inputs.bundle_size }}"
           _bundle_size=$(echo "${{ inputs.bundle_size }}" | cut -d' ' -f1)
           echo "[DEBUG] Bundle Size: $_bundle_size"
-          if [ $(echo "$_bundle_size" | tr -d 'M') -gt 3 ]; then
-            echo "[ERROR] Bundle Size is GREATER than 3MB!"
+          if [ $(echo "$_bundle_size" | tr -d 'M') -gt ${{ inputs.bundle_size_acceptance }} ]; then
+            echo "[ERROR] Bundle Size is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
             echo "exiting with status code 1"
             exit 1
           else

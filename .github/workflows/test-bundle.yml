@@ -36,12 +36,13 @@ jobs:
           echo "[INFO] Bundle Size: ${{ inputs.bundle_size }}"
           _bundle_size=$(echo "${{ inputs.bundle_size }}" | cut -d' ' -f1)
           echo "[DEBUG] Bundle Size: $_bundle_size"
-          if [ $(echo "$_bundle_size" | tr -d 'M') -gt ${{ inputs.bundle_size_acceptance }} ]; then
+          # syntax for POSIX shells that don't support (())
+          if [ "$(echo "$_bundle_size" | tr -d 'M')" -gt "${{ inputs.bundle_size_acceptance }}" ]; then
             echo "[ERROR] Bundle Size is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
             echo "exiting with status code 1"
             exit 1
           else
-            echo "[INFO] Bundle Size is LESS than 3MB"
+            echo "[INFO] Bundle Size is LESS than ${{ inputs.bundle_size_acceptance }} MB"
           fi
 
       # CI ARTIFACTS - Download Web Bundle html/css/js ##

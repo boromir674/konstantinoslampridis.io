@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import typing as t
 import sys
 import json
 
@@ -8,8 +9,26 @@ gold_standard_file = sys.argv[2]
 
 exit_code = 0
 
-runtime = json.load(open(runtime_data_file))
-gold_standard = json.load(open(gold_standard_file))
+runtime: t.List = json.load(open(runtime_data_file))
+gold_standard: t.List = json.load(open(gold_standard_file))
+
+runtime_list: t.List = sorted(runtime, key=lambda x: x['auditId'])
+gold_standard_list: t.List = sorted(gold_standard, key=lambda x: x['auditId'])
+
+
+# Print formatted runtime and gold standard as 2 columns
+title_1 = "Runtime"
+title_2 = "Gold Standard"
+_bigger_list = runtime_list if len(runtime_list) > len(gold_standard_list) else gold_standard_list
+__max_len_string = max(runtime_list + [title_1], key=lambda x: len(x['auditId']))['auditId']
+__max_len = len(__max_len_string)
+print(f"\n{title_1:<{__max_len}} {title_2}")
+for i in range(len(_bigger_list)):
+    el1: str = runtime_list[i] if i < len(runtime_list) else ''
+    el2: str = gold_standard_list[i] if i < len(gold_standard_list) else ''
+    # automatically append spaces to the first runtime auditId string
+    print(f"{el1['auditId']:<{__max_len}} {el2['auditId']}")
+
 
 # transform runtime and Gold Standard (GS) lists to dicts
 data_runtime = {x['auditId']: x for x in runtime}
@@ -18,7 +37,7 @@ data_gold_standard = {x['auditId']: x for x in gold_standard}
 # remove mainthread-work-breakdown from runtime and warn
 if 'mainthread-work-breakdown' in data_runtime:
     main_thread_work_breakdown = data_runtime.pop('mainthread-work-breakdown')
-    print("[WARN] mainthread-work-breakdown is removed from runtime Assertion Results JSON")
+    print("\n[WARN] mainthread-work-breakdown is removed from runtime Assertion Results JSON")
     print(json.dumps(main_thread_work_breakdown, indent=2, sort_keys=True))
     print("This is an assertion that is only known to fail on the CI server, but not locally.")
 

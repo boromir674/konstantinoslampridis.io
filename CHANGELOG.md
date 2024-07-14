@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.5.2-rc] - 14/07/2024
+
+Automated **Lighthouse CI** Tests and improved **CI/CD Pipeline**.
+
+### Lighthouse CI
+- new `Lighthouse` (LH) Reusable Workflow for Headless LH **Audits/Assertions**
+- configure CI/CD Pipe to run `LH` on `built` web bundle (ie minified from `webpack`)
+- report Live/Runtime Lighthouse Assertion Results as `md`, in Step Summary
+
+### Other CI improvements
+- improve Job Summary of 'Build Bundle' and 'Test Bundle' Workflows
+- pass CI only if Minified web bundle does not exceed 2.7MB
+- improve 'Test Bundle' Job trigger condition and add sanity check
+- use `OVERRIDE_*` for naming the **`Top-level Override Switches`**
+
+### Docs
+- add section for lighthouse and `lhci` CLI's
+
+### Docker
+- declare a compose for running Headless Lighthouse
+
+### Other
+- update `.gitignore` and `.dockerignore` files
+
+
 ## [1.5.0] - 29/04/2024
 
 ### Added

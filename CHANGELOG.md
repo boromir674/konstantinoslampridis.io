@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 Reducing the Minified Bundle to 2.3MB from 2.7MB
 - **~15%** Bundle Size reduction
+- getting rid of [`polyfill`](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)
+  - polyfill-6534e443b1457de06b09.js
+  - polyfill-6534e443b1457de06b09.js.map
 
 ### Build
 - do a 'yarn upgrade'

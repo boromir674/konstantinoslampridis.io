@@ -47,15 +47,17 @@ _bigger_list = runtime_list if len(runtime_list) > len(gold_standard_list) else 
 __lengthier_runtime_key = max(
     [key(a) for a in runtime_list] + [title_1], key=len
 )
+HARD_CODED_MAX_INDEX_SPACE = 3
+INDEX_SPACE = HARD_CODED_MAX_INDEX_SPACE * ' '
 __max_len = len(__lengthier_runtime_key)
-print(f"\n{title_1:<{__max_len}} {title_2}")
+print(f"\n{INDEX_SPACE} {title_1:<{__max_len}} {title_2}")
 for i in range(len(_bigger_list)):
     # el1: str = runtime_list[i]['auditId'] if i < len(runtime_list) else ''
     # el2: str = gold_standard_list[i]['auditId'] if i < len(gold_standard_list) else ''
     el1: str = key(runtime_list[i]) if i < len(runtime_list) else ''
     el2: str = key(gold_standard_list[i]) if i < len(gold_standard_list) else ''
     # automatically append spaces to the first runtime auditId string
-    print(f"{el1:<{__max_len}} {el2}")
+    print(f"{i:<{HARD_CODED_MAX_INDEX_SPACE}} {el1:<{__max_len}} {el2}")
 
 
 # transform runtime and Gold Standard (GS) lists to dicts
@@ -66,6 +68,8 @@ assert set(data_runtime.keys()) == set(data_gold_standard.keys()), (
     "Keys are different between Runtime and Gold Standard:\n\n"
     f"Runtime: {sorted(data_runtime.keys())}\n"
     f"Gold Standard: {sorted(data_gold_standard.keys())}\n"
+    f"\n* R - GS = {set(data_runtime.keys()) - set(data_gold_standard.keys())}\n"
+    f"* GS - R = {set(data_gold_standard.keys()) - set(data_runtime.keys())}\n"
 )
 
 # # Failed Audit assertions to be at most the number of GS Fails: level errors + warn

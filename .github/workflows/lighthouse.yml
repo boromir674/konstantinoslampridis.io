@@ -1,0 +1,131 @@
+name: Lighthouse Audit
+on:
+  workflow_call:
+    inputs:
+      # OPTIONAL
+      target_ci_artifact:
+        required: false
+        type: string
+        description: 'CI Artifact with static website to audit'
+      target_url:
+        required: false
+        type: string
+        description: 'URL to audit'
+      # REQUIRED
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    env:
+      RUNTIME_JSON: .lighthouseci/assertion-results.json
+      GOLD_STANDARD_JSON: .lh-assertion-results-gs.json
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.x'
+
+      # Install lhci
+      - run: yarn global add @lhci/cli@0.14.x
+
+      # Checkout code into dedicate 'code' subdirectory
+      - uses: actions/checkout@v4
+        with:
+          # Relative path under $GITHUB_WORKSPACE to place the repository
+          path: 'code'
+      
+      # Keep only Lighthouse-relevant config files
+      # - run: |
+      #     mv code/.lighthouserc.json .
+
+      # Run Lighthouse CI
+
+      # Healthcheck
+      - run: lhci healthcheck
+
+      - name: Derive Lighthouse CLI flags from inputs
+        # if input url use --url and value
+        # if input ci artifact, will will download and serve the artifact later
+        # else exit with error msg and 1 exit code
+        run: |
+          if [ -n "${{ inputs.target_url }}" ]; then
+            if [ -n "${{ inputs.target_ci_artifact }}" ]; then
+              echo "ERROR: Both target_url and target_ci_artifact inputs are provided. Please provide only one."
+              exit 1
+            fi
+            echo "AUDIT_TARGET=url=${{ inputs.target_url }}" >> $GITHUB_ENV
+            echo "[INFO] Will audit URL: ${{ inputs.target_url }}"
+          elif [ -n "${{ inputs.target_ci_artifact }}" ]; then
+            echo "[INFO] Will donwload and serve Static Site from CI Artifacts"
+            echo "SINGAL_ARTIFACT=true" >> $GITHUB_ENV
+            echo "AUDIT_TARGET=staticDistDir ./public" >> $GITHUB_ENV
+            echo "[INFO] Will audit Static Site from CI Artifact: ${{ inputs.target_ci_artifact }}"
+          fi
+
+      - name: 'Download Website bundle (files) from CI Artifact'
+        if: env.SINGAL_ARTIFACT == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.target_ci_artifact }}
+          path: public
+
+      - name: "Audit Site, run Assertions and capture exit code"
+        # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
+        run: |
+          lhci autorun "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0
+
+          echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
+
+          if [ $pass_all_assertions -eq 0 ]; then
+            echo "[WARN] LHCI did NOT pass all default Lighthouse Assertions!"
+            echo " - LHCI did NOT pass all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
+            echo ""  >> $GITHUB_STEP_SUMMARY
+
+            echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat "${RUNTIME_JSON}" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+          else
+            echo "[INFO] LHCI PASSED all default Lighthouse Assertions!"
+            echo " - LHCI PASSED all default Lighthouse Assertions!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # per .html audit reports in JSON and Html + assertion-results.json
+      - run: ls -la ./.lighthouseci/
+        if: always()
+
+      # Upload
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          path: ./.lighthouseci/  # upload this folder
+          name: lighthouseci  # under this Artifact name
+
+      - uses: actions/checkout@v4
+        if: always()
+        with:
+          # directory to clone into
+          path: code
+
+      - run: mv code/${{ env.GOLD_STANDARD_JSON }} .
+
+      # each json is an array of objects x, each x.auditId property is a unique ID of assertion
+      # verify assertion-results.json and .ls-assertion-results-gs.json are the same
+      # Verify Gold Standard Performance reached!'
+      - name: 'Compare ${{ env.RUNTIME_JSON }} to ${{ env.GOLD_STANDARD_JSON }}'
+        if: always()
+        env:
+          COMPARE: code/scripts/ci-compare-json-arrays.py
+        run: |
+          chmod +x ${{ env.COMPARE }}
+          exit_code=0
+          ${{ env.COMPARE }} ${{ env.RUNTIME_JSON }} ${{ env.GOLD_STANDARD_JSON }} || exit_code=1
+
+          if [ $exit_code -eq 0 ]; then
+            echo "[INFO] Lighthouse Job PASSED!"
+            echo " - Lighthouse Job reached Gold Standard!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "[ERROR] Lighthouse Job FAILED!"
+            echo " - Lighthouse Job did not reach Gold Standard!" >> $GITHUB_STEP_SUMMARY
+          fi
+          exit $exit_code

@@ -8,11 +8,15 @@ import { useCallback } from 'react';
 */
 const useHandleNavigationClickFunction = (elementId: string) => 
     useCallback(() => {
-        const target = document.querySelector(elementId);
-        if (target) {
+        const element = document.querySelector(elementId);
+        // NEW
+        // const element = document.getElementById(elementId);
+        if (element) {
             const yOffset = -100; // adjust this as needed
-            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
+            // NEW
+            // element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         }
     }, [elementId]);
 

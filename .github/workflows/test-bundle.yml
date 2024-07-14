@@ -40,11 +40,13 @@ jobs:
 
       - name: Measure Bundle Size
         id: bundle_size
+
         # parse '2.7M  public' into '2.7M'
         run: echo BUNDLE_SIZE=$(du -sh "${{ env._BUNDLE_DIR }}" | cut -f1) >> $GITHUB_ENV
-      - run: 'echo "*Bundle Size*: **${{ steps.bundle_size.outputs.BUNDLE_SIZE }}**" >> $GITHUB_STEP_SUMMARY'
 
-      - run: echo BUNDLE_SIZE_IN_MB=$(du -sh ${{ env._BUNDLE_DIR }} | tr -d 'MB') >> $GITHUB_ENV
+      - run: 'echo "*Bundle Size*: **${{ env.BUNDLE_SIZE }}**" >> $GITHUB_STEP_SUMMARY'
+
+      - run: echo "BUNDLE_SIZE_IN_MB=$(echo '${{ env.BUNDLE_SIZE }}' | tr -d 'MB')" >> $GITHUB_ENV
 
       - run: echo "SIZE_VALUE=$(echo '${{ env.BUNDLE_SIZE_IN_MB }}' | tr ',' '.')" >> $GITHUB_ENV
 

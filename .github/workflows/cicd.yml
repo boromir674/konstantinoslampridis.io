@@ -61,8 +61,8 @@ jobs:
 
 ## BUILD MINIFIED BUNDLE
   gatsby:
-    needs: test
-    if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.test.result == 'success' ) ) )
+    needs: pipe
+    if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
     # TODO rename as below, for current solutoin to have better semantics
     # if: always() && ( needs.pipe.outputs.FORCE_BUILD == 'true' || ( needs.pipe.outputs.FORCE_BUILD == '' && needs.test.result == 'success' ) )
 
@@ -87,7 +87,7 @@ jobs:
 
 ### E2E TEST ###
   e2e:
-    needs: [gatsby]
+    needs: gatsby
     if: always() && ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == 'true' || ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == '' && success() ) )
     uses: ./.github/workflows/e2e-test.yml
     with:
@@ -108,7 +108,7 @@ jobs:
       bundle_size_acceptance: 2.7
 
   signal_deploy:
-    needs: [test_bundle, e2e]
+    needs: [test_bundle, e2e, test]
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:

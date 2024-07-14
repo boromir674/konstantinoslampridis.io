@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - "*"
+    # we use release branch for semver/changelog updates and deploying 'rc' tags
+    # thus we filter out events for branch 'release', to NOT trigger
+      - "!release"
     tags:
       - v*
 

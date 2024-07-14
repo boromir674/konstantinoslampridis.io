@@ -51,13 +51,13 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, paddin
   return (
     <NavContainerNew>
       {items.map((item, index) => (
-        <ScrollingNavigationItemGeneric
+        <ScrollingNavigationItemGeneric // alows wiring onClick event to scroll
           renderProps={({ active, onClick }) => (
-            <AppHorNavItem
+            <AppHorNavItem  // anchor <a>
               key={index}
               theme={{ colorSet, padding }}
               active={active}
-              onClick={onClick}
+              onClick={onClick}  // useHandleNavigationClickFunction(htmlID)
             >
               {item.label}
             </AppHorNavItem>

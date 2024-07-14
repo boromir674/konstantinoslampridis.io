@@ -36,6 +36,30 @@ services:
     # - cypress/integration/margins_spec.cy.ts
     # - cypress/integration/spec.cy.ts
 
+## Run Headless Cypress tests (and then close services):
+# docker-compose up cypress --exit-code-from cypress
 
-# Start the application, run the headless tests and close services:
-# docker-compose up --exit-code-from cypress
+  lighthouse:
+    build:
+      context: ../
+      dockerfile: Dockerfile.lighthouse
+    depends_on:
+      - my_app
+# docker run -it --rm -e CHROME_PATH=/usr/bin/google-chrome -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY lh http://ssg-fs:9001 --no-enable-error-reporting
+# docker run -it --rm -u $(id -u):$(id -g) -e CHROME_PATH=/usr/bin/google-chrome -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY lh http://ssg-fs:9001 --no-enable-error-reporting
+# drop in bash: docker run -it --rm -e CHROME_PATH=/usr/bin/google-chrome -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --entrypoint bash lh
+# alias lh='yarn run lighthouse'
+    environment:
+      - CHROME_PATH=/usr/bin/google-chrome
+      - DISPLAY=$DISPLAY
+    entrypoint: yarn run lighthouse
+    # command: http://my_app:9000 --verbose --no-enable-error-reporting
+    command: https://konstantinoslampridis.io --chrome-flags="--headless --no-sandbox" --verbose --no-enable-error-reporting
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    # -u $(id -u):$(id -g)
+    user: root
+
+
+## Run Lighthouse in Headless mode (and then close services):
+# docker-compose up lighthouse --exit-code-from lighthouse

@@ -5,7 +5,7 @@ FROM runtime as env
 WORKDIR /app
 ENV GATSBY_TELEMETRY_DISABLED=1
 
-# RUN apt-get update && apt-get install -y --install-recommends util-linux
+# RUN apt-get update -y && apt-get install -y --no-install-recommends util-linux && rm -rf /var/lib/apt/lists/*
 
 FROM runtime as base
 COPY package.json .

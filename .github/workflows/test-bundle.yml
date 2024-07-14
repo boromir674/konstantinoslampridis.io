@@ -29,22 +29,6 @@ jobs:
     env:
       _BUNDLE_DIR: web_bundle
     steps:
-      # Verify Bundle Size is lower than 3MB
-      # eg parse 2,6M /data/repos/static-site-generator/public-auto
-      - name: Verify Reported Bundle Size smaller than ${{ inputs.bundle_size_acceptance }}MB
-        run: |
-          echo "[INFO] Bundle Size: ${{ inputs.bundle_size }}"
-          _bundle_size=$(echo "${{ inputs.bundle_size }}" | cut -d' ' -f1)
-          echo "[DEBUG] Bundle Size: $_bundle_size"
-          # syntax for POSIX shells that don't support (())
-          if [ "$(echo "$_bundle_size" | tr -d 'M')" -gt "${{ inputs.bundle_size_acceptance }}" ]; then
-            echo "[ERROR] Bundle Size is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
-            echo "exiting with status code 1"
-            exit 1
-          else
-            echo "[INFO] Bundle Size is LESS than ${{ inputs.bundle_size_acceptance }} MB"
-          fi
-
       # CI ARTIFACTS - Download Web Bundle html/css/js ##
       - name: Download Web Bundle - Artifacts
         uses: actions/download-artifact@v4
@@ -53,6 +37,27 @@ jobs:
           name: ${{ inputs.bundle_ci_artifact }}
           # Host local path to download the Artifact to
           path: ${{ env._BUNDLE_DIR }}
+
+      - name: Measure Bundle Size
+        id: bundle_size
+        run: echo BUNDLE_SIZE=$(du -sh "${{ env._BUNDLE_DIR }}" | cut -d' ' -f1) >> $GITHUB_OUTPUT
+      - run: 'echo "*Bundle Size*: **${{ steps.bundle_size.outputs.BUNDLE_SIZE }}**" >> $GITHUB_STEP_SUMMARY'
+
+      - run: echo BUNDLE_SIZE_IN_MB=$(du -sh ${{ env._BUNDLE_DIR }} | tr -d 'MB') >> $GITHUB_ENV
+
+      - name: 'Verify Bundle Size smaller than ${{ inputs.bundle_size_acceptance }} MB'
+        run: |
+          if [ $(bc <<< "${{ env.BUNDLE_SIZE_IN_MB }} > ${{ inputs.bundle_size_acceptance }}") -eq 1 ]; then
+            echo "[ERROR] Bundle Size ${{ env.BUNDLE_SIZE_IN_MB }} is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
+            echo "[INFO] Regression has happened! Exiting with status code 1"
+            echo "**Regression has happend!**" >> $GITHUB_STEP_SUMMARY
+            echo " - Bundle Size: **${{ env.BUNDLE_SIZE_IN_MB }} MB**" >> $GITHUB_STEP_SUMMARY
+            echo "is bigger than" >> $GITHUB_STEP_SUMMARY
+            echo " - Max Acceptable Bundle Size: **${{ inputs.bundle_size_acceptance }} MB**" >> $GITHUB_STEP_SUMMARY
+            echo "'Automated Bundle Tests' **shall FAIL**" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
       
       # Web bundle TESTS, assuming it is a gatsby SSR site of an SPA
 

@@ -81,6 +81,7 @@ jobs:
         run: echo BUNDLE_SIZE=$(du -sh ${PWD}/public/) >> $GITHUB_OUTPUT
 
       - run: 'echo "Bundle Size: ${{ steps.bundle_size.outputs.BUNDLE_SIZE }}"'
+      - run: 'echo "*Bundle Size*: **${{ steps.bundle_size.outputs.BUNDLE_SIZE }}**" >> $GITHUB_STEP_SUMMARY'
 
       # CI ARTIFACTS - Upload Minified Bundle
       - name: Upload Minified html/css/js Bundle, as CI Artifacts

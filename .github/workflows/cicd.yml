@@ -30,7 +30,7 @@ jobs:
       # OVERRIDE_BUILD: true  # force build
       # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
       # OVERRIDE_DEPLOY: true  # force deployment
-      # OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
+      OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
 
       #############################
 

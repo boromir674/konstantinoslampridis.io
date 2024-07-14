@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.5.2] - 14/07/2024
+
+Reducing the Minified Bundle to 2.3MB from 2.7MB
+- **~15%** Bundle Size reduction
+
+### Build
+- do a 'yarn upgrade'
+
+### CI
+- update regression threshold at 2.3MB Bundle Size
+- add Unit Tests as input to deploy signal & gatsby build earlier
+
+
 ## [1.5.2-rc] - 14/07/2024
 
 Automated **Lighthouse CI** Tests and improved **CI/CD Pipeline**.

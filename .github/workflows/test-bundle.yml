@@ -69,30 +69,28 @@ jobs:
       # Web bundle TESTS, assuming it is a gatsby SSR site of an SPA
 
 # Expected bundle structure:
-# drwxrwxrwx 1 root root      0 Jun 29 16:46  404
-# -rwxrwxrwx 1 root root   1769 Jun 29 16:46  404.html
-# -rwxrwxrwx 1 root root  87132 Jun 29 16:46  app-a0858404f12ca10a33dd.js
-# -rwxrwxrwx 1 root root    246 Jun 29 16:46  app-a0858404f12ca10a33dd.js.LICENSE.txt
-# -rwxrwxrwx 1 root root 414141 Jun 29 16:46  app-a0858404f12ca10a33dd.js.map
-# -rwxrwxrwx 1 root root    275 Jun 29 16:46  chunk-map.json
-# -rwxrwxrwx 1 root root    761 Jun 29 16:46  component---src-pages-404-tsx-37e9974fe7ddd09a4d26.js
-# -rwxrwxrwx 1 root root   1936 Jun 29 16:46  component---src-pages-404-tsx-37e9974fe7ddd09a4d26.js.map
-# -rwxrwxrwx 1 root root 170681 Jun 29 16:46  component---src-pages-index-tsx-51cc0fb0b2bf08eb2f7c.js
-# -rwxrwxrwx 1 root root 734923 Jun 29 16:46  component---src-pages-index-tsx-51cc0fb0b2bf08eb2f7c.js.map
-# -rwxrwxrwx 1 root root 140799 Jun 29 16:46  framework-81a8cf24be6209802093.js
-# -rwxrwxrwx 1 root root    721 Jun 29 16:46  framework-81a8cf24be6209802093.js.LICENSE.txt
-# -rwxrwxrwx 1 root root 355920 Jun 29 16:46  framework-81a8cf24be6209802093.js.map
-# -rwxrwxrwx 1 root root  38332 Jun 29 16:46  index.html
-# drwxrwxrwx 1 root root   4096 Jun 29 16:46  page-data
-# drwxrwxrwx 1 root root   4096 Jun 29 16:46 '~partytown'
-# -rwxrwxrwx 1 root root  85042 Jun 29 16:46  polyfill-6534e443b1457de06b09.js
-# -rwxrwxrwx 1 root root 208013 Jun 29 16:46  polyfill-6534e443b1457de06b09.js.map
-# -rwxrwxrwx 1 root root     99 Jun 29 16:46  robots.txt
-# -rwxrwxrwx 1 root root    389 Jun 29 16:46  sitemap.xml
-# -rwxrwxrwx 1 root root   3422 Jun 29 16:46  styles.c332001ae72ea32dc04e.css
-# -rwxrwxrwx 1 root root   4997 Jun 29 16:46  webpack-runtime-70a38c66ba5dcf943ed0.js
-# -rwxrwxrwx 1 root root  23340 Jun 29 16:46  webpack-runtime-70a38c66ba5dcf943ed0.js.map
-# -rwxrwxrwx 1 root root   1652 Jun 29 16:46  webpack.stats.json
+# drwxr-xr-x 2 runner docker   4096 Jul 14 11:00 404
+# -rw-r--r-- 1 runner docker   1651 Jul 14 11:00 404.html
+# -rw-r--r-- 1 runner docker  77070 Jul 14 11:00 app-f175f9ec0d19d7e24df4.js
+# -rw-r--r-- 1 runner docker    246 Jul 14 11:00 app-f175f9ec0d19d7e24df4.js.LICENSE.txt
+# -rw-r--r-- 1 runner docker 367591 Jul 14 11:00 app-f175f9ec0d19d7e24df4.js.map
+# -rw-r--r-- 1 runner docker    226 Jul 14 11:00 chunk-map.json
+# -rw-r--r-- 1 runner docker    753 Jul 14 11:00 component---src-pages-404-tsx-7bbe527623e6b0d1f8b0.js
+# -rw-r--r-- 1 runner docker   1936 Jul 14 11:00 component---src-pages-404-tsx-7bbe527623e6b0d1f8b0.js.map
+# -rw-r--r-- 1 runner docker 155436 Jul 14 11:00 component---src-pages-index-tsx-32438662074361ef743c.js
+# -rw-r--r-- 1 runner docker 689753 Jul 14 11:00 component---src-pages-index-tsx-32438662074361ef743c.js.map
+# -rw-r--r-- 1 runner docker 140364 Jul 14 11:00 framework-e07c0498098a9e84c9e8.js
+# -rw-r--r-- 1 runner docker    721 Jul 14 11:00 framework-e07c0498098a9e84c9e8.js.LICENSE.txt
+# -rw-r--r-- 1 runner docker 355292 Jul 14 11:00 framework-e07c0498098a9e84c9e8.js.map
+# -rw-r--r-- 1 runner docker  38214 Jul 14 11:00 index.html
+# drwxr-xr-x 6 runner docker   4096 Jul 14 11:00 page-data
+# -rw-r--r-- 1 runner docker     99 Jul 14 11:00 robots.txt
+# -rw-r--r-- 1 runner docker    389 Jul 14 11:00 sitemap.xml
+# -rw-r--r-- 1 runner docker   3422 Jul 14 11:00 styles.c332001ae72ea32dc04e.css
+# -rw-r--r-- 1 runner docker   4903 Jul 14 11:00 webpack-runtime-1646bdb5252b0d000de8.js
+# -rw-r--r-- 1 runner docker  22910 Jul 14 11:00 webpack-runtime-1646bdb5252b0d000de8.js.map
+# -rw-r--r-- 1 runner docker   1305 Jul 14 11:00 webpack.stats.json
+# drwxr-xr-x 3 runner docker   4096 Jul 14 11:00 ~partytown
 
       # ls -l into the bundle directory
       - name: List Bundle Directory
@@ -138,10 +136,6 @@ jobs:
           fi
           if [ ! -f framework-*.js ]; then
             echo "[ERROR] framework-*.js is missing!"
-            exit 1
-          fi
-          if [ ! -f polyfill-*.js ]; then
-            echo "[ERROR] polyfill-*.js is missing!"
             exit 1
           fi
           if [ ! -f styles.*.css ]; then

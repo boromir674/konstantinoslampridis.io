@@ -8,14 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [1.5.2] - 14/07/2024
 
-**Reducing the Minified Bundle to 2.3MB from 2.7MB**
+Reducing the Minified Bundle to 2.3MB from 2.7MB
 - **~15%** Bundle Size reduction
 - getting rid of [`polyfill`](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)
   - polyfill-6534e443b1457de06b09.js
   - polyfill-6534e443b1457de06b09.js.map
-
-**Improving Lighthouse Audit Score**:
-- Eliminating the [`max-potential-fid`](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/) failed LH Assertion
 
 ### Build
 - do a 'yarn upgrade'

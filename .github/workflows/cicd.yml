@@ -108,7 +108,7 @@ jobs:
       bundle_size_acceptance: 2.3
 
   signal_deploy:
-    needs: [test_bundle, e2e, test]
+    needs: [test_bundle, e2e, test, audit]
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:

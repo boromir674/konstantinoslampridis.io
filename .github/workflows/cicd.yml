@@ -111,15 +111,8 @@ jobs:
       bundle_size_acceptance: 2.3
 
   signal_deploy:
-    needs: [test_bundle, e2e, test, audit]
-    if: always() && ${{ startsWith(github.event.ref, 'refs/tags/v') }} && (
-        success() || (
-          needs.test_bundle.result == 'success' &&
-          needs.e2e.result == 'success' &&
-          needs.test.result == 'success' &&
-          needs.audit.result == 'skipped' && needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == 'false'
-        )
-      )
+    needs: [test_bundle, e2e, test]
+    if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:
       main_branch: main

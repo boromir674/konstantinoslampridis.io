@@ -102,7 +102,7 @@ jobs:
     with:
       bundle_ci_artifact: web_bundle
       # expectations for assertions
-      expected_number_of_files: 39
+      expected_number_of_files: 37
       bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
       # other test data
       bundle_size_acceptance: 2.3

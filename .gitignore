@@ -122,3 +122,4 @@ stories/
 temp/
 sitemap.xml
 notes.md
+\.lighthouseci/

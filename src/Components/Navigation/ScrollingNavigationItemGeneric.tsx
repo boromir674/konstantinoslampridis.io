@@ -21,12 +21,12 @@ interface ScrollingNavItemProps {
 
 const ScrollingNavigationItem: FC<ScrollingNavItemProps> = ({
   renderProps,
-  data: { to, active },
+  data: { to: htmlID, active },
   children,
 }) => {
   // we want handleClick to NOT be recreated on re-render which happens on props or state change
   // handleClick will only be re-created if the 'to' props changes (which is not expected to happen at runtime never)
-  const handleNavigationClick = useHandleNavigationClickFunction(to);
+  const handleNavigationClick = useHandleNavigationClickFunction(htmlID);
 
   return renderProps({ active, onClick: handleNavigationClick });
 };

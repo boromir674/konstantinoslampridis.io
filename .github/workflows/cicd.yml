@@ -96,7 +96,7 @@ jobs:
 # Test Web Bundle
   test_bundle:
     needs: gatsby
-    # without if, it does not trigger if Gatsby success() Unit Test NO success()
+    # allow running regardless of gatsby's 'needs' !
     if: always() && needs.gatsby.result == 'success'
     uses: ./.github/workflows/test-bundle.yml
     with:

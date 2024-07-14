@@ -40,18 +40,21 @@ jobs:
 
       - name: Measure Bundle Size
         id: bundle_size
-        run: echo BUNDLE_SIZE=$(du -sh "${{ env._BUNDLE_DIR }}" | cut -d' ' -f1) >> $GITHUB_OUTPUT
+        # parse '2.7M  public' into '2.7M'
+        run: echo BUNDLE_SIZE=$(du -sh "${{ env._BUNDLE_DIR }}" | cut -f1) >> $GITHUB_ENV
       - run: 'echo "*Bundle Size*: **${{ steps.bundle_size.outputs.BUNDLE_SIZE }}**" >> $GITHUB_STEP_SUMMARY'
 
       - run: echo BUNDLE_SIZE_IN_MB=$(du -sh ${{ env._BUNDLE_DIR }} | tr -d 'MB') >> $GITHUB_ENV
 
+      - run: echo "SIZE_VALUE=$(echo '${{ env.BUNDLE_SIZE_IN_MB }}' | tr ',' '.')" >> $GITHUB_ENV
+
       - name: 'Verify Bundle Size smaller than ${{ inputs.bundle_size_acceptance }} MB'
         run: |
-          if [ $(bc <<< "${{ env.BUNDLE_SIZE_IN_MB }} > ${{ inputs.bundle_size_acceptance }}") -eq 1 ]; then
-            echo "[ERROR] Bundle Size ${{ env.BUNDLE_SIZE_IN_MB }} is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
+          if [ $(bc <<< "${{ env.SIZE_VALUE }} > ${{ inputs.bundle_size_acceptance }}") -eq 1 ]; then
+            echo "[ERROR] Bundle Size ${{ env.SIZE_VALUE }} is GREATER than ${{ inputs.bundle_size_acceptance }} MB!"
             echo "[INFO] Regression has happened! Exiting with status code 1"
             echo "**Regression has happend!**" >> $GITHUB_STEP_SUMMARY
-            echo " - Bundle Size: **${{ env.BUNDLE_SIZE_IN_MB }} MB**" >> $GITHUB_STEP_SUMMARY
+            echo " - Bundle Size: **${{ env.SIZE_VALUE }} MB**" >> $GITHUB_STEP_SUMMARY
             echo "is bigger than" >> $GITHUB_STEP_SUMMARY
             echo " - Max Acceptable Bundle Size: **${{ inputs.bundle_size_acceptance }} MB**" >> $GITHUB_STEP_SUMMARY
             echo "'Automated Bundle Tests' **shall FAIL**" >> $GITHUB_STEP_SUMMARY

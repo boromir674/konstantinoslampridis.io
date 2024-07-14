@@ -61,6 +61,8 @@ jobs:
             echo " - Max Acceptable Bundle Size: **${{ inputs.bundle_size_acceptance }} MB**" >> $GITHUB_STEP_SUMMARY
             echo "'Automated Bundle Tests' **shall FAIL**" >> $GITHUB_STEP_SUMMARY
             exit 1
+          else
+            echo "**Congrats!** Bundle Size did not exceed ${{ inputs.bundle_size_acceptance }} MB" >> $GITHUB_STEP_SUMMARY
           fi
 
       

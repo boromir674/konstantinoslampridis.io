@@ -1,38 +1,40 @@
 # Use Node v18
-FROM node:18.16.0-slim AS runtime
+FROM node:18.16.0-slim AS node_18
 
-FROM runtime as env
+FROM node_18 as runtime_env
+# Runtime/Application Environment
 WORKDIR /app
 ENV GATSBY_TELEMETRY_DISABLED=1
 
 # RUN apt-get update -y && apt-get install -y --no-install-recommends util-linux && rm -rf /var/lib/apt/lists/*
 
-FROM runtime as base
+FROM scratch AS dependencies
+WORKDIR /workspace
 COPY package.json .
 COPY yarn.lock .
 
 # Node BUILDER 1
-
 # Static Site Generator / Static File Builder
 # we need ONLY PROD dependencies from package.json
-FROM base AS prod_install
+FROM node_18 AS prod_install
+COPY --from=dependencies /workspace .
+RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 # we avoid unintented updates to yarn.lock by using --frozen-lockfile
 # this is helpful since we force the user's yarn.lock into the image
 # and the build process does not know whether the lock was produced in the same env as this on
-RUN yarn install --frozen-lockfile --production=true && yarn cache clean
 
 # Node BUILDER 2
 # Test, List, Typecheck
 # we need PROD + DEV dependencies from package.json
-FROM base AS dev_install
+FROM node_18 AS dev_install
+COPY --from=dependencies /workspace .
 RUN yarn install --frozen-lockfile --production=false && yarn cache clean
 
-FROM scratch AS source
-WORKDIR /app
 
 # Code BUILDER
-FROM source AS code
-# Copy Code / Config / Text Data
+FROM scratch AS source
+WORKDIR /app
+# Copy Source: Code, Config, Readme
 COPY src src
 COPY gatsby-config.ts .
 COPY gatsby-node.ts .
@@ -41,36 +43,17 @@ COPY babel.config.js .
 COPY package.json .
 COPY README.md .
 
+
 FROM source AS prod_build
-
-# Copy Code / Config / Text Data into /app
-COPY --from=code /app .
-
 # Copy PROD dependencies into /app/node_modules
 COPY --from=prod_install /node_modules node_modules
-
 # Copy GraphQL Build-time required Data Files
 COPY data.yaml .
 COPY data-portfolio.yml .
 
-FROM env as prod_env
-COPY --from=prod_build /app .
-# PROD CASE 1: Build minified bundle of static html/css/js files
-# BUILD (bundle) into "static" files ready to serve. Static files include
-# minified code (ie webpack html/css/js bundle) built on server (SSR) for the
-# content to display, but also site 'metadata' such as sitemap.xml, robots.txt
-FROM prod_env as build_prod_bundle
-COPY scripts/generate-robots-file.sh .
-COPY scripts/build-production-bundle.sh .
-CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
-# ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
 
-# Example
-# docker build -f Dockerfile.build --target build -t me/ssg-builder .
-# docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
-# cd /data/repos/static-site-generator
-# rm -rf ./public/*
-# cp ./public-container/* ./public/
+FROM runtime_env AS prod_env
+COPY --from=prod_build /app .
 
 # PROD CASE 2: Build minified bundle of static html/css/js files and servewith simple file server
 FROM prod_env AS serve_files
@@ -99,25 +82,25 @@ CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 
 FROM source AS dev_build
 # Copy Code / Config /app
-COPY --from=code /app .
+# COPY --from=code /app .
 # Copy PROD + DEV dependencies into /app/node_modules
 COPY --from=dev_install /node_modules node_modules
 
 
-FROM env as dev_env
+FROM runtime_env AS dev_env
 COPY --from=dev_build /app .
 
 
 # Dev 1: TYPE CHECK
-FROM dev_env as type_check
+FROM dev_env AS type_check
 CMD [ "yarn", "typecheck" ]
 
 # Dev 2: TYPE CHECK LIVE
-FROM dev_env as type_check_live
+FROM dev_env AS type_check_live
 CMD [ "yarn", "typecheck-live" ]
 
 # Dev 3: UNIT TESTS
-FROM dev_env as test
+FROM dev_env AS test
 ENV NODE_ENV=test
 COPY jest.config.ts .
 COPY jest-preprocess.js .
@@ -126,7 +109,7 @@ COPY loadershim.js .
 CMD [ "yarn", "test" ]
 
 # Dev 4: LINTING
-FROM dev_env as eslint
+FROM dev_env AS eslint
 COPY .eslintrc.cjs .
 CMD [ "yarn", "eslint", "." ]
 
@@ -141,3 +124,24 @@ CMD [ "yarn", "storybook" ]
 # Example 1
 # docker build -t ssg-storybook -f Dockerfile.build --target storybook .
 # docker run -it --rm -p 6006:6006 ssg-storybook
+
+
+
+
+
+# PROD CASE 1: Build minified bundle of static html/css/js files
+# BUILD (bundle) into "static" files ready to serve. Static files include
+# minified code (ie webpack html/css/js bundle) built on server (SSR) for the
+# content to display, but also site 'metadata' such as sitemap.xml, robots.txt
+FROM prod_env as build_prod_bundle
+COPY scripts/generate-robots-file.sh .
+COPY scripts/build-production-bundle.sh .
+CMD [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
+# ENTRYPOINT [ "sh", "/app/build-production-bundle.sh", "/app/public/robots.txt" ]
+
+# Example
+# docker build -f Dockerfile.build --target build -t me/ssg-builder .
+# docker run -it --rm -v /data/repos/static-site-generator/public-container:/app/public me/ssg-builder
+# cd /data/repos/static-site-generator
+# rm -rf ./public/*
+# cp ./public-container/* ./public/

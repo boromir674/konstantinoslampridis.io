@@ -1,0 +1,55 @@
+services:
+  # docker-compose run --rm yarn
+  yarn:
+    image: node:18.16.0-slim
+    working_dir: /app
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./node_modules/git:/app/node_modules/
+      - ./package.json:/app/package.json
+      - ./yarn.lock:/app/yarn.lock
+    # spawn a shell by default inside the container
+    entrypoint: /bin/bash
+  
+  # rm -rf ./public && docker-compose run --rm ssg
+  ssg:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: build_prod_bundle
+    volumes:
+      - ./public/:/app/public/
+
+
+  # docker-compose run --rm storybook
+  # - exposes in the network
+  # - guarantees access from browser and no port re-uses colission!
+
+  # docker-compose run --service-ports --rm storybook
+  # - exposes in localhost:6006, but port re-use colission may happen
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: storybook
+    tty: true  # docker run -t
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./src/:/app/src/
+
+  # docker-compose run --rm typecheck
+  typecheck:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: type_check
+    volumes:
+      - ./src/:/app/src/
+      - ./tsconfig.json:/app/tsconfig.json
+
+
+# Refs:
+# - diff between 'run' and 'up'
+#   https://stackoverflow.com/questions/33066528/should-i-use-docker-compose-up-or-run

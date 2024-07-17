@@ -77,6 +77,20 @@ services:
       - ./__mocks__:/app/__mocks__/
 
 
+  ### CONVERT CSS to JSON ###
+  css2json:
+    image: node:18.16.0-slim
+    working_dir: /design-system
+    volumes:
+      # Bind mount script
+      - ./src/design-system/css2json.js:/design-system/css2json.js
+      # Bind mount input CSS file
+      - ./src/design-system/tokens.css:/design-system/tokens.css
+      # Bind mount output JSON file
+      - ./src/design-system/tokens.json:/design-system/tokens.json
+    command: node css2json.js tokens.css tokens.json
+
+
 # Refs:
 # - diff between 'run' and 'up'
 #   https://stackoverflow.com/questions/33066528/should-i-use-docker-compose-up-or-run

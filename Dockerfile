@@ -44,24 +44,31 @@ COPY package.json .
 COPY README.md .
 
 # Static Files BUILDER
-FROM scratch AS static
-COPY static static
+# FROM scratch AS static
+# COPY static static
 
 
-# Provides Source, Assets, Node Modules
-FROM source AS prod_build
-# Copy PROD dependencies into /app/node_modules
-COPY --from=prod_install /node_modules node_modules
-# Copy GraphQL Build-time required Data Files
-COPY data.yaml .
-COPY data-portfolio.yml .
-# Copy Static: favicons(s), images
-COPY --from=static static static
+# # Provides Source, Assets, Node Modules
+# FROM source AS prod_build
+# # Copy PROD dependencies into /app/node_modules
+# COPY --from=prod_install /node_modules node_modules
+# # Copy GraphQL Build-time required Data Files
+# COPY data.yaml .
+# COPY data-portfolio.yml .
+# # Copy Static: favicons(s), images
+# COPY --from=static static static
 
 
 # Env where Gatsby should (build, develop, serve) run
 FROM runtime_env as gatsby_build
-COPY --from=prod_build /app .
+COPY --from=prod_install /node_modules node_modules
+# Copy Source Code: Code and Assets
+COPY --from=source /app .
+# Copy GraphQL Build-time required Data Files
+COPY data.yaml .
+COPY data-portfolio.yml .
+# Copy Static: favicons(s), images
+COPY static static
 # Source is present: Code, Assets, and Static
 
 
@@ -91,15 +98,16 @@ CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
 # Dev Operations, Testing, Type Check, Linting
 
 # Provides Source, Assets, Node Modules
-FROM source AS dev_build
-# Copy PROD + DEV dependencies into /app/node_modules
-COPY --from=dev_install /node_modules node_modules
-# Source (Code, Assets, Config, no Static) and Dev Dependencies
+# FROM source AS dev_build
+# # Copy PROD + DEV dependencies into /app/node_modules
+# COPY --from=dev_install /node_modules node_modules
+# # Source (Code, Assets, Config, no Static) and Dev Dependencies
 
 
 FROM runtime_env AS dev_env
-COPY --from=dev_build /app .
-
+COPY --from=dev_install /node_modules node_modules
+# Copy Source Code: Code and Assets
+COPY --from=source /app .
 
 # Dev 1: TYPE CHECK
 FROM dev_env AS type_check

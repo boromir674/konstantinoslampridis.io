@@ -16,7 +16,6 @@ services:
   ssg:
     build:
       context: .
-      dockerfile: Dockerfile.build
       target: build_prod_bundle
     volumes:
       - ./public/:/app/public/
@@ -31,7 +30,6 @@ services:
   storybook:
     build:
       context: .
-      dockerfile: Dockerfile.build
       target: storybook
     tty: true  # docker run -t
     ports:
@@ -43,7 +41,6 @@ services:
   typecheck:
     build:
       context: .
-      dockerfile: Dockerfile.build
       target: type_check
     volumes:
       - ./src/:/app/src/
@@ -54,7 +51,6 @@ services:
   lint:
     build:
       context: .
-      dockerfile: Dockerfile.build
       target: eslint
     volumes:
       - ./src/:/app/src/
@@ -66,7 +62,6 @@ services:
   test:
     build:
       context: .
-      dockerfile: Dockerfile.build
       target: test
     volumes:
       - ./coverage/:/app/coverage/

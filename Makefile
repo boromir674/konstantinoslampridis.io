@@ -124,26 +124,13 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 		ssg-prod-im bash
 
 
-
 # TEST
 test:  ## Run Test Suite
-	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/coverage:/app/coverage \
-		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
-		-v /data/repos/static-site-generator/src:/app/src \
-		$(TEST_IMAGE_NAME) yarn test $(filter-out $@,$(MAKECMDGOALS))
+	docker-compose run --build --rm test yarn test $(filter-out $@,$(MAKECMDGOALS))
 
 test_env:  ## Run Bash in Test Environment
-	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/coverage:/app/coverage \
-		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
-		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
-		-v /data/repos/static-site-generator/.testing-static-queries.json:/app/.testing-static-queries.json \
-		--entrypoint bash \
-		$(TEST_IMAGE_NAME)
+	docker-compose run --build --rm test bash
+
 
 # yarn test --verbose
 
@@ -164,8 +151,7 @@ typecheck_live:  ## Type Checking in Typescript, with Hot Reload
 
 # ESLINT
 eslint:  ## Code Linting, using ESLint (Typescript)
-	docker build -f Dockerfile.build --target eslint -t $(ESLINT_IMAGE_NAME) .
-	docker run -it --rm $(ESLINT_IMAGE_NAME)
+	docker-compose run --rm --build lint
 
 
 clean:

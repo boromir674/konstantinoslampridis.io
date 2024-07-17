@@ -39,7 +39,7 @@ services:
     volumes:
       - ./src/:/app/src/
 
-  # docker-compose run --rm typecheck
+  # docker-compose run --build --rm typecheck
   typecheck:
     build:
       context: .
@@ -48,6 +48,34 @@ services:
     volumes:
       - ./src/:/app/src/
       - ./tsconfig.json:/app/tsconfig.json
+
+  ### LINT ###
+  # docker-compose run --rm --build lint
+  lint:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: eslint
+    volumes:
+      - ./src/:/app/src/
+      - ./.eslintrc.cjs:/app/.eslintrc.cjs
+      - ./tsconfig.json:/app/tsconfig.json
+
+  ### UNIT TEST ###
+  # docker-compose run --rm --build test
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: test
+    volumes:
+      - ./coverage/:/app/coverage/
+      - ./__tests__/:/app/__tests__/
+      - ./src/:/app/src/
+      # Test Code and Test (Data) Snapshots
+      - ./__tests__:/app/__tests__/
+      # Mock objects to GraphQL queries
+      - ./__mocks__:/app/__mocks__/
 
 
 # Refs:

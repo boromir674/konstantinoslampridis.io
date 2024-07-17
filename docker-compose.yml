@@ -48,10 +48,14 @@ services:
 
   ### LINT ###
   # docker-compose run --rm --build lint
+  # docker-compose run --rm --build lint . --fix
   lint:
     build:
       context: .
       target: eslint
+    entrypoint: "yarn run eslint"
+    command: .
+    # entrypoint: yarn lint
     volumes:
       - ./src/:/app/src/
       - ./.eslintrc.cjs:/app/.eslintrc.cjs

@@ -81,7 +81,7 @@ CMD [ "yarn", "serve", "-H", "0.0.0.0" ]
 # PROD CASE 3: Run a hot-reload development server, with PROD dependencies
 
 # Run development server
-FROM prod_env AS dev_server
+FROM gatsby_build AS dev_server
 # VSCode debug ports: 9929 9230
 EXPOSE 8000 9929 9230
 CMD [ "yarn", "develop", "--host", "0.0.0.0", "--verbose" ]
@@ -120,7 +120,7 @@ CMD [ "yarn", "test" ]
 # Dev 4: LINTING
 FROM dev_env AS eslint
 COPY .eslintrc.cjs .
-CMD [ "yarn", "eslint", "." ]
+CMD [ "yarn", "run", "eslint", "." ]
 
 # Dev 5: STORYBOOK
 FROM dev_env AS storybook

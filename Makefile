@@ -150,7 +150,7 @@ typecheck_live:  ## Type Checking in Typescript, with Hot Reload
 
 
 # ESLINT
-eslint:  ## Code Linting, using ESLint (Typescript)
+lint:  ## Code Linting, using ESLint (Typescript)
 	docker-compose run --rm --build lint
 
 

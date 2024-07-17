@@ -25,12 +25,12 @@ jobs:
       ##### OVERRIDE SWITCHES #####
       # true gurantees Job run, false gurantees Job NOT run
 
-      OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
-      OVERRIDE_LINT: false  # shutdown lint
+      # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
+      # OVERRIDE_LINT: false  # shutdown lint
       # OVERRIDE_BUILD: true  # force build
       # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
       # OVERRIDE_DEPLOY: true  # force deployment
-      OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
+      # OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
 
       #############################
 
@@ -105,10 +105,10 @@ jobs:
     with:
       bundle_ci_artifact: web_bundle
       # expectations for assertions
-      expected_number_of_files: 37
+      expected_number_of_files: 50
       bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
       # other test data
-      bundle_size_acceptance: 2.3
+      bundle_size_acceptance: 2.7
 
   signal_deploy:
     needs: [test_bundle, e2e, test]

@@ -18,8 +18,8 @@ help: ## This help.
 
 
 # STATIC FILE GENERATOR/BUNDLER/BUILDER
-builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
-	docker build -f Dockerfile.build --target build_prod_bundle -t $(BUILDER_NAME) .
+builder: Dockerfile  ## Build an image to prepare for building/bundling the html/js/css "static" files
+	docker build --target build_prod_bundle -t $(BUILDER_NAME) .
 
 # BUILD PROD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
@@ -137,21 +137,20 @@ test_env:  ## Run Bash in Test Environment
 
 # TYPE CHECK
 typecheck:  ## Headless Type Checking in Typescript
-	docker build -f Dockerfile.build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
-	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
+	docker-compose run --build --rm typecheck
+
 
 typecheck_live:  ## Type Checking in Typescript, with Hot Reload
-	docker build -f Dockerfile.build --target type_check_live -t $(TYPE_CHECK_IMAGE_NAME_LIVE) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/gatsby-config.ts:/app/gatsby-config.ts \
-		-v /data/repos/static-site-generator/gatsby-node.ts:/app/gatsby-node.ts \
-		$(TYPE_CHECK_IMAGE_NAME_LIVE)
+	docker-compose run --build --rm typecheck yarn typecheck-live
 
 
 # ESLINT
 lint:  ## Code Linting, using ESLint (Typescript)
 	docker-compose run --rm --build lint
+
+# Lighthouse CI
+lhci:  ## Run Lighthouse CI
+	npm exec -y --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public' --collect.numberOfRuns=1'
 
 
 clean:

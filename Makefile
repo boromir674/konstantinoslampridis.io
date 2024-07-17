@@ -29,6 +29,13 @@ build_static_files: builder  ## Build the "static" files and copy them into the 
 		$(BUILDER_NAME)
 	du -sh /data/repos/static-site-generator/public-auto
 
+# BUILD PROD STATIC WEBSITE
+gatsby:  ## Build the "static" files and copy them into the 'public-container' folder
+	rm -rf public/
+	docker-compose run --build --rm ssg
+	du -sh /data/repos/static-site-generator/public
+
+
 # STATIC FILE SERVER
 static_file_server:  ## Run a server on localhost that serves the (built) "static" files
 	docker build -f Dockerfile.build --target serve_files -t $(FILE_SERVER_NAME) .

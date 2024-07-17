@@ -6,7 +6,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-      - ./node_modules/git:/app/node_modules/
+      - ./node_modules/:/app/node_modules/
       - ./package.json:/app/package.json
       - ./yarn.lock:/app/yarn.lock
     # spawn a shell by default inside the container

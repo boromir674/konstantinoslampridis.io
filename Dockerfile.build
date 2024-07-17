@@ -60,7 +60,7 @@ COPY --from=static static static
 
 
 # Env where Gatsby should (build, develop, serve) run
-FROM env as gatsby_build
+FROM runtime_env as gatsby_build
 COPY --from=prod_build /app .
 # Source is present: Code, Assets, and Static
 

@@ -2,8 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/).
+This project adheres to [Semantic Versioning](https://semver.org/).
+
+
+## [1.6.0] - 17/07/2024
+
+Adding **favicon(s)**.
+
+### Feature
+- add Favicon png and automatically generate at different sizes at build time
+
+### Build
+- support building site with static Favicons
+
+### CI
+- expect 50 Web Bundle files of 2.7MB in disk
+- remove 2 expected 'erros-in-console' failed assertions from Lighthouse GS
+- expect 8 favicons of specific different sizes, in icons/ dir
+- explicitly pass the lighthouserc file to lhci CLI
+- add set lighthouse.preset to 'all' and lower 'max-potential-fid' quality requirement
+
+### Other
+- improve reasoning for implementing Design Tokens with CSS Properties
+- lint code
+- remove unused ThemeProvider
+- remove unused Component
+- polish docker, compose, and make
+- rename Dockerfile.build to Dockerfile
+- add docker-compose.yml
 
 
 ## [1.5.2] - 14/07/2024

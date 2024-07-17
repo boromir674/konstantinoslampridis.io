@@ -190,6 +190,61 @@ const config: GatsbyConfig = {
     //     defaultSizes: "gzip"
     //   },
     // },
+
+
+    ////////// PLUGIN gatsby-plugin-manifest //////////
+
+    // Generate a manifest file for the site and favicon's for various devices
+    // https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/
+    // combine with gatsby-plugin-offline to declare Service Workers in the manifest
+
+    // Chromium-based browsers, including Google Chrome, Samsung Internet, and Microsoft Edge, require that the manifest includes the following members:
+    // name or short_name
+    // icons must contain a 192px and a 512px icon
+    // start_url
+    // display and/or display_override
+    // prefer-related-application must be false or not present
+
+    // Notes:
+    // - A manifest with Service Workers (to help run in offline/bad-connection situations)
+    //   is a PWA prerequisite
+    // - A favicon helps eliminate console 404 errors and makes the site look more professional
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Konstantinos Lampridis`,
+        short_name: `K. Lampridis`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        // https://web.dev/articles/add-manifest#display
+        // 'standalone', 'fullscreen', 'minimal-ui', 'browser'
+        display: `standalone`,
+        // generates favicons at different implicit sizes
+        // one of formats: JPEG, PNG, WebP, TIFF, GIF or SVG
+        icon: `static/favicon.png`, // This path is relative to the root of the site.
+        // Cache busting for icons
+        cache_busting_mode: `none`, // `query`(default), `name`, or `none`
+      },
+    },
+
+    ////////// PLUGIN gatsby-plugin-offline //////////
+    // fix dependencies and update gatsby to newer before trying this plugin
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/`],
+    //     // workboxConfig: {
+    //     //   importWorkboxFrom: `cdn`,
+    //     // },
+    //     workboxConfig: {
+    //       // below needs cache_busting_mode: `none` from gatsby-plugin-manifest
+    //       globPatterns: ['**/icon*.png']
+    //    }
+ 
+    //   },
+    // },
+
   ],
 };
 

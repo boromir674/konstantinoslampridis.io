@@ -18,8 +18,8 @@ help: ## This help.
 
 
 # STATIC FILE GENERATOR/BUNDLER/BUILDER
-builder: Dockerfile.build  ## Build an image to prepare for building/bundling the html/js/css "static" files
-	docker build -f Dockerfile.build --target build_prod_bundle -t $(BUILDER_NAME) .
+builder: Dockerfile  ## Build an image to prepare for building/bundling the html/js/css "static" files
+	docker build --target build_prod_bundle -t $(BUILDER_NAME) .
 
 # BUILD PROD STATIC WEBSITE
 build_static_files: builder  ## Build the "static" files and copy them into the 'public-container' folder
@@ -28,6 +28,13 @@ build_static_files: builder  ## Build the "static" files and copy them into the 
 		-v /data/repos/static-site-generator/public-auto/:/app/public/ \
 		$(BUILDER_NAME)
 	du -sh /data/repos/static-site-generator/public-auto
+
+# BUILD PROD STATIC WEBSITE
+gatsby:  ## Build the "static" files and copy them into the 'public-container' folder
+	rm -rf public/
+	docker-compose run --build --rm ssg
+	du -sh /data/repos/static-site-generator/public
+
 
 # STATIC FILE SERVER
 static_file_server:  ## Run a server on localhost that serves the (built) "static" files
@@ -117,48 +124,33 @@ prod_shell:  ## Run an interactive shell into the dev ssg (+devDependencies) con
 		ssg-prod-im bash
 
 
-
 # TEST
 test:  ## Run Test Suite
-	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/coverage:/app/coverage \
-		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
-		-v /data/repos/static-site-generator/src:/app/src \
-		$(TEST_IMAGE_NAME) yarn test $(filter-out $@,$(MAKECMDGOALS))
+	docker-compose run --build --rm test yarn test $(filter-out $@,$(MAKECMDGOALS))
 
 test_env:  ## Run Bash in Test Environment
-	docker build -f Dockerfile.build --target test -t $(TEST_IMAGE_NAME) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/coverage:/app/coverage \
-		-v /data/repos/static-site-generator/__tests__:/app/__tests__ \
-		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/__mocks__:/app/__mocks__ \
-		-v /data/repos/static-site-generator/.testing-static-queries.json:/app/.testing-static-queries.json \
-		--entrypoint bash \
-		$(TEST_IMAGE_NAME)
+	docker-compose run --build --rm test bash
+
 
 # yarn test --verbose
 
 
 # TYPE CHECK
 typecheck:  ## Headless Type Checking in Typescript
-	docker build -f Dockerfile.build --target type_check -t $(TYPE_CHECK_IMAGE_NAME) .
-	docker run -it --rm $(TYPE_CHECK_IMAGE_NAME)
+	docker-compose run --build --rm typecheck
+
 
 typecheck_live:  ## Type Checking in Typescript, with Hot Reload
-	docker build -f Dockerfile.build --target type_check_live -t $(TYPE_CHECK_IMAGE_NAME_LIVE) .
-	docker run -it --rm \
-		-v /data/repos/static-site-generator/src:/app/src \
-		-v /data/repos/static-site-generator/gatsby-config.ts:/app/gatsby-config.ts \
-		-v /data/repos/static-site-generator/gatsby-node.ts:/app/gatsby-node.ts \
-		$(TYPE_CHECK_IMAGE_NAME_LIVE)
+	docker-compose run --build --rm typecheck yarn typecheck-live
 
 
 # ESLINT
-eslint:  ## Code Linting, using ESLint (Typescript)
-	docker build -f Dockerfile.build --target eslint -t $(ESLINT_IMAGE_NAME) .
-	docker run -it --rm $(ESLINT_IMAGE_NAME)
+lint:  ## Code Linting, using ESLint (Typescript)
+	docker-compose run --rm --build lint
+
+# Lighthouse CI
+lhci:  ## Run Lighthouse CI
+	npm exec -y --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public' --collect.numberOfRuns=1'
 
 
 clean:

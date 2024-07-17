@@ -1,5 +1,15 @@
 const fs = require("fs");
 
+// Provide the input CSS file path and output JSON file path here
+// const inputFilePath =
+//   "/data/repos/static-site-generator/src/design-system/tokens.css";
+// const outputFilePath = "/data/repos/static-site-generator/del-test-tokens.json";
+
+// Read inputFilePath and outputFilePath from console arguments
+const inputFilePath = process.argv[2];
+const outputFilePath = process.argv[3];
+
+
 function parseCSS(cssString) {
   const lines = cssString.split("\n");
   const tokens = {};
@@ -26,7 +36,15 @@ function parseCSS(cssString) {
       const [tokenName, tokenValue] = line
         .split(":")
         .map((part) => part.trim());
-      tokens[currentCategory][tokenName] = tokenValue;
+      // assert last character is ';'
+      if (tokenValue[tokenValue.length - 1] !== ";") {
+        console.error("Error: Missing ';' at the end of token value:", tokenValue);
+        console.error("Token name:", tokenName);
+        console.error("Line number:", i + 1);
+        return;
+      }
+      // remove last ';' from tokenValue
+      tokens[currentCategory][tokenName] = tokenValue.slice(0, -1);
     }
   }
 
@@ -40,7 +58,25 @@ function cssFileToJson(inputFilePath, outputFilePath) {
       console.error("Error reading the CSS file:", err);
     } else {
       // Convert CSS to JSON
-      const jsonData = parseCSS(cssString);
+      let jsonData = parseCSS(cssString);
+      
+      // assert object has exact keys: Colors "Font Families", "Font Weights", "Font Sizes", "Line Heights", "Letter Spacings"
+      const keys = Object.keys(jsonData);
+      const expectedKeys = ["Colors", "Font Families", "Font Weights", "Font Sizes", "Line Heights", "Letter Spacings"];
+      const missingKeys = expectedKeys.filter(key => !keys.includes(key));
+      if (missingKeys.length > 0) {
+        console.error("Error: Missing keys in JSON object:", missingKeys);
+        return;
+      }
+
+      // assert Colors key "points" to some Object (ie {})
+      if (typeof jsonData.Colors !== "object") {
+        console.error("Error: 'Colors' key should point to an object");
+        return;
+      }
+
+      // make that Object the top-level object
+      jsonData = jsonData.Colors;
 
       // Write JSON to the output file
       fs.writeFile(
@@ -62,9 +98,6 @@ function cssFileToJson(inputFilePath, outputFilePath) {
   });
 }
 
-// Provide the input CSS file path and output JSON file path here
-const inputFilePath =
-  "/data/repos/static-site-generator/src/design-system/tokens.css";
-const outputFilePath = "/data/repos/static-site-generator/del-test-tokens.json";
+
 
 cssFileToJson(inputFilePath, outputFilePath);

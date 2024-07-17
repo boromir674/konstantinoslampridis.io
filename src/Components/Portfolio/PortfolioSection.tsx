@@ -249,8 +249,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         measureBeforeMount={true}
       >
         {data.map((item, index) => {
-          let row: number = 0;
-          let col: number = 0;
+          let row = 0;
+          let col = 0;
 
           const maxNumberOfLinksOrReleases = Math.max(
             (item.resource_links || []).length,

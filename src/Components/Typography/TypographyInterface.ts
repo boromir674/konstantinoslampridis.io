@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // Define your own Theme type. This is a placeholder and should be replaced with your actual Theme type.
-interface Theme {}
+// interface Theme {}
 
 // Define your own SxProps type. This is a placeholder and should be replaced with your actual SxProps type.
 interface SxProps {
@@ -51,14 +51,14 @@ export interface TypographyProps {
   gutterBottom?: boolean;
 }
 
-export type TypographyTypeMap<AdditionalProps = {}, RootComponent extends React.ElementType = 'span'> = {
+export type TypographyTypeMap<AdditionalProps = object, RootComponent extends React.ElementType = 'span'> = {
   props: AdditionalProps & TypographyProps;
   defaultComponent: RootComponent;
 };
 
 /**
  * `TypographyPropsVariantOverrides` is a type used to override the styles of specific typography variants.
- * Currently, it's an empty object, which means no overrides are defined.
+ * Currently, it's an empty object with type `Record<string, never>`, which means no overrides are defined.
  * To use it, add keys that match the variant names (like 'h1', 'h2', etc.) and values that are objects containing the CSS properties to override.
  * For example, to override the font size of 'h1', you would do:
  * 
@@ -72,4 +72,4 @@ export type TypographyTypeMap<AdditionalProps = {}, RootComponent extends React.
  * 
  * This would apply a font size of '32px' to all 'h1' variants of the Typography component.
  */
-export type TypographyPropsVariantOverrides = {};
+export type TypographyPropsVariantOverrides = Record<string, never>;

@@ -1,7 +1,8 @@
 /* Single Source of Truth for Design Tokens
-* We chose to use CSS Custom Properties for our design tokens because they are
-* they are a native way to define styling, they provide an automated way to
-* be viewed in Storybook, allow devs to compose themes and modules with plain css,
+* We chose to use CSS Custom Properties for our design tokens because
+* - it is a natural way to define Styling (CSS was designed for that)
+* - they seamlessly integrate with our Front-end Lab, implemented with Storybook
+* - they allow devs to compose themes and modules with plain CSS
 * 
 Annotated with comments designed to integrate with the 'storybook-design-token' storybook addon. See .storybook/main.ts
 */

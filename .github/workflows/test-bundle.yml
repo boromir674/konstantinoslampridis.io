@@ -187,6 +187,43 @@ jobs:
             exit 1
           fi
 
+      # Test 7: Verify the presence of a favicon's
+      - name: "Verify favicon's at different sizes are present"
+        working-directory: '${{ env._BUNDLE_DIR }}/icons'
+        run: |
+          if [ ! -f icon-144x144.png ]; then
+            echo "[ERROR] icon-144x144.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-192x192.png ]; then
+            echo "[ERROR] icon-192x192.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-256x256.png ]; then
+            echo "[ERROR] icon-256x256.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-384x384.png ]; then
+            echo "[ERROR] icon-384x384.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-48x48.png ]; then
+            echo "[ERROR] icon-48x48.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-512x512.png ]; then
+            echo "[ERROR] icon-512x512.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-72x72.png ]; then
+            echo "[ERROR] icon-72x72.png is missing!"
+            exit 1
+          fi
+          if [ ! -f icon-96x96.png ]; then
+            echo "[ERROR] icon-96x96.png is missing!"
+            exit 1
+          fi
+
       # Strict Sanity Check for all expected files
       # find Directory_name -ls
       - name: 'Sanity Check that exactly ${{ inputs.expected_number_of_files }} files are included in the bundle'

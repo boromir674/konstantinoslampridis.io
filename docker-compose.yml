@@ -1,0 +1,97 @@
+services:
+  # docker-compose run --rm yarn
+  yarn:
+    image: node:18.16.0-slim
+    working_dir: /app
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./node_modules/:/app/node_modules/
+      - ./package.json:/app/package.json
+      - ./yarn.lock:/app/yarn.lock
+    # spawn a shell by default inside the container
+    entrypoint: /bin/bash
+  
+  # rm -rf ./public && docker-compose run --rm ssg
+  ssg:
+    build:
+      context: .
+      target: build_prod_bundle
+    volumes:
+      - ./public/:/app/public/
+
+
+  # docker-compose run --rm storybook
+  # - exposes in the network
+  # - guarantees access from browser and no port re-uses colission!
+
+  # docker-compose run --service-ports --rm storybook
+  # - exposes in localhost:6006, but port re-use colission may happen
+  storybook:
+    build:
+      context: .
+      target: storybook
+    tty: true  # docker run -t
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./src/:/app/src/
+
+  # docker-compose run --build --rm typecheck
+  typecheck:
+    build:
+      context: .
+      target: type_check
+    volumes:
+      - ./src/:/app/src/
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./gatsby-node.ts:/app/gatsby-node.ts
+
+  ### LINT ###
+  # docker-compose run --rm --build lint
+  # docker-compose run --rm --build lint . --fix
+  lint:
+    build:
+      context: .
+      target: eslint
+    entrypoint: "yarn run eslint"
+    command: .
+    # entrypoint: yarn lint
+    volumes:
+      - ./src/:/app/src/
+      - ./.eslintrc.cjs:/app/.eslintrc.cjs
+      - ./tsconfig.json:/app/tsconfig.json
+
+  ### UNIT TEST ###
+  # docker-compose run --rm --build test
+  test:
+    build:
+      context: .
+      target: test
+    volumes:
+      - ./coverage/:/app/coverage/
+      - ./__tests__/:/app/__tests__/
+      - ./src/:/app/src/
+      # Test Code and Test (Data) Snapshots
+      - ./__tests__:/app/__tests__/
+      # Mock objects to GraphQL queries
+      - ./__mocks__:/app/__mocks__/
+
+
+  ### CONVERT CSS to JSON ###
+  css2json:
+    image: node:18.16.0-slim
+    working_dir: /design-system
+    volumes:
+      # Bind mount script
+      - ./src/design-system/css2json.js:/design-system/css2json.js
+      # Bind mount input CSS file
+      - ./src/design-system/tokens.css:/design-system/tokens.css
+      # Bind mount output JSON file
+      - ./src/design-system/tokens.json:/design-system/tokens.json
+    command: node css2json.js tokens.css tokens.json
+
+
+# Refs:
+# - diff between 'run' and 'up'
+#   https://stackoverflow.com/questions/33066528/should-i-use-docker-compose-up-or-run

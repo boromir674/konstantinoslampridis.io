@@ -3,7 +3,7 @@ import { Children, ReactNode, ComponentType } from 'react'
 
 export const isEmptyChildren = (children: ReactNode) => Children.count(children) === 0
 
-export const isFunction = <T extends Function>(value: any): value is T =>
+export const isFunction = <T extends (...args: any[]) => any>(value: unknown): value is T =>
   typeof value === 'function'
 
   export const getComponentName = (component: ComponentType<any>) =>

@@ -72,7 +72,7 @@ const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({
   id: htmlID,
 }) => {
   const dataLen = data.experience_items.length;
-  var timeStep: number;
+  let timeStep: number;
   // if itemsColorModeSwitchDelay not given or 0 then time step is 0
   if (theme.itemsColorModeSwitchDelay) {
     timeStep = theme.itemsColorModeSwitchDelay / (dataLen - 1);

@@ -9,7 +9,7 @@ function ToggleSliderHandle(props: ToggleSliderHandleProps) {
   return <div style={{ width: props.size, height: props.size, ...props }} />;
 }
 
-interface ToggleSliderBarProps extends CSSProperties {}
+type ToggleSliderBarProps = CSSProperties
 
 function ToggleSliderBar(props: ToggleSliderBarProps) {
   return <div style={props} />;

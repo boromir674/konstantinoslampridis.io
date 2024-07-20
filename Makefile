@@ -84,12 +84,7 @@ storybook: ## Run the Storybook server on localhost, with "hot-reload" of source
 
 ## YARN
 yarn:  ## Yarn Environment
-	docker build -f Dockerfile.build --target prod_env -t $(YARN_ADD_NAME) .
-	docker run -it --rm \
-		-v $(PWD)/package.json:/app/package.json \
-		-v $(PWD)/yarn.lock:/app/yarn.lock \
-		-v $(PWD)/node_modules/:/app/node_modules/ \
-		$(YARN_ADD_NAME) bash
+	docker-compose run --rm --build yarn
 
 yarn_add:  ## Do Yarn Add <package-name>
 	docker build -f Dockerfile.build --target prod_env -t $(YARN_ADD_NAME) .

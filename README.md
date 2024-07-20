@@ -88,6 +88,15 @@ We achieve that by utilizing `Design Tokens`, and we document them by rendering 
 
 TLDR See [Makefile](Makefile)
 
+## Aliases
+
+```sh
+alias measure-bundle-size='du -sh public'
+alias count-bundle-files='find public -type f -ls | wc -l'
+alias list-bundle-files='find public -type f -ls'
+```
+
+
 ## Build Time Data
 The site will mostly use **data** computed/fetched at **build time**.  
 We will use the **gatsby-source-graphql** to seemlessly define 

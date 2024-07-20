@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.6.1] - 20/07/2024
+
+Reducing the Minified Bundle back to 2.3MB from regressed 2.7MB
+- **~15%** Bundle Size reduction
+- again getting rid of [`polyfill`](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill) from the Minified Bundle (webpack).
+  - polyfill-6534e443b1457de06b09.js
+  - polyfill-6534e443b1457de06b09.js.map
+
+We pin package dependencies to versions same as v1.5.2. Then we add the 'gatsby-plugin-manifest' package which generates favicons.  
+This achieves the desired effect of having a smaller Bundle Size.
+
+### Build
+- revert yarn.lock to v1.5.2 and added gatsby-plugin-manifest
+
+### CI
+- reduce Lighthouse 'max-potential-fid' assertion score to 0.11
+
+### Docs
+- add usefull aliases for development in Readme Dev section
+
+### Other
+- leverate docker-compose for 'make yarn' target
+
+
 ## [1.6.0] - 17/07/2024
 
 Adding **favicon(s)**.

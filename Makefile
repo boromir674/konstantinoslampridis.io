@@ -38,7 +38,7 @@ gatsby:  ## Build the "static" files and copy them into the 'public-container' f
 
 # STATIC FILE SERVER
 static_file_server:  ## Run a server on localhost that serves the (built) "static" files
-	docker build -f Dockerfile.build --target serve_files -t $(FILE_SERVER_NAME) .
+	docker build -f Dockerfile --target serve_files -t $(FILE_SERVER_NAME) .
 	docker run -p 9000:9000 -it --rm $(FILE_SERVER_NAME)
 
 # SERVE STATIC FILES
@@ -63,8 +63,8 @@ copy_shell_lock:
 	docker cp ssg_dummy_container_to_run_shell:/app/yarn.lock ./yarn.lock
 
 # Install only Prod deps and deploy a dev-server with hot reload
-build_dev_server: Dockerfile.build  ## Build development server image
-	docker build -f Dockerfile.build --target dev_server -t $(DEV_SERVER_NAME) .
+build_dev_server: Dockerfile  ## Build development server image
+	docker build -f Dockerfile --target dev_server -t $(DEV_SERVER_NAME) .
 
 # DEV SERVER on localhost
 run_dev_server: build_dev_server  ## Run a development server on localhost, with "hot-reloading"

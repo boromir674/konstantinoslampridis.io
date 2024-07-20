@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.6.2] - 20/07/2024
+
+Pinning package dependencies (`yarn.lock`) to versions same as v1.5.1.  
+Then we add the `gatsby-plugin-manifest` package which generates favicons.
+This **fixes a bug** wehre the Portfolio items were not draggable and were incorrectly placed on the grid.
+
+### Fix
+- portfolio items not draggable and incorrectly placed on grid
+
+### CI
+- expect **2 extra Polyfill** files, and **2.7MB Bundle Size** in `test-bundle` workflow
+
+### Other
+- fix 'run_dev_server' and 'static_file_server' make targets
+
+
 ## [1.6.1] - 20/07/2024
 
 Reducing the Minified Bundle back to 2.3MB from regressed 2.7MB

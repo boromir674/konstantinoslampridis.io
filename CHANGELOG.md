@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.6.3] - 21/07/2024
+
+Update to latest `Gatsby 4.x`, and update its `plugins`, and `babel`  
+dev dep to their corresponding latest allowed
+
+
 ## [1.6.2] - 20/07/2024
 
 Pinning package dependencies (`yarn.lock`) to versions same as v1.5.1.  

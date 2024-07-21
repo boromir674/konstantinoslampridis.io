@@ -27,10 +27,10 @@ jobs:
 
       # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
       # OVERRIDE_LINT: false  # shutdown lint
-      # OVERRIDE_BUILD: true  # force build
-      # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
+      OVERRIDE_BUILD: true  # force build
+      OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
+      OVERRIDE_E2E_TESTS: false  # prevent E2E tests
       # OVERRIDE_DEPLOY: true  # force deployment
-      # OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
 
       #############################
 

@@ -28,12 +28,10 @@ We currently use
 **Bundle Size: 2.7MB**
 ### Lighthouse
 
-|       | Performance | Accessibility | Best Practices | SEO | PWA |
-|-------|-------------|---------------|----------------|-----|-----|
-| Live  | 100         | 98            | 95             | 91  | N/A  |
-| Light | 100        | 98            | 100            | 91  | N/A |
-| Dark  | 100          | 98            | 100            | 91  | N/A |
-| Mobile | 95 | 98 | 100 | N/A |
+| Live    | Performance | Accessibility | Best Practices | SEO | PWA |
+| ------- | ----------- | ------------- | -------------- | --- | --- |
+| Desktop | 100         | 93            | 100            | 92  | N/A |
+| Mobile  | 99          | 93            | 100            | 92  | N/A |
 
 # Architecture
 
@@ -96,6 +94,9 @@ alias count-bundle-files='find public -type f -ls | wc -l'
 alias list-bundle-files='find public -type f -ls'
 ```
 
+```
+tt=v1.6.2; git del-tag $tt; git tag $tt; git del-remote-tag $tt; git push-tag $tt
+```
 
 ## Build Time Data
 The site will mostly use **data** computed/fetched at **build time**.  
@@ -155,11 +156,11 @@ graph LR;
 
 We reconginze 3 levels of testing:
 
-| Name          | Running | Primary Tool | Invocation shortcut |
-| ----          | ------- | ---- | -------------------------- |
-| Unit Testing  | Automated | Jest | `make test`
-| End-2-end testing | Automated | Cypress | `make test` |
-| Visual Testing | Manual | Storybook | `yarn storybook` |
+| Name              | Running   | Primary Tool | Invocation shortcut |
+| ----------------- | --------- | ------------ | ------------------- |
+| Unit Testing      | Automated | Jest         | `make test`         |
+| End-2-end testing | Automated | Cypress      | `make test`         |
+| Visual Testing    | Manual    | Storybook    | `yarn storybook`    |
 
 For the interactive `Cypress` (GUI) App you can run an instance at (linux) localhost, leveraging `docker-compose`:
 ```shell

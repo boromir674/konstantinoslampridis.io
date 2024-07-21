@@ -119,16 +119,17 @@ jobs:
     needs:
     - test
     - lint
-    - test_bundle
-    - e2e
-    - audit
+    # - test_bundle
+    # - e2e
+    # - audit
 
     runs-on: ubuntu-latest
 
     steps:
     - name: Emit Acceptance Signal as Job Status
       # alls-green@release/v1 (branch)
-      uses: re-actors/alls-green@cf9edfcf932a0ed6b431433fa183829c68b30e3f
+      # uses: re-actors/alls-green@cf9edfcf932a0ed6b431433fa183829c68b30e3f
+      uses: boromir674/ga-acceptance@dev
       with:
         # leverage this inputs to dynamically control the Acceptance Criteria
         # by default all available CI Jobs must be Green

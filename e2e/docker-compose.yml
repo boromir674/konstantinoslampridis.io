@@ -9,7 +9,6 @@ services:
     build:
       context: ../
       target: serve_files
-      dockerfile: Dockerfile.build
     ports:
       - "9000:9000"
     # environment:

@@ -20,6 +20,25 @@ services:
     volumes:
       - ./public/:/app/public/
 
+## HOT-RELOAD SERVER ##
+
+  dev_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+      target: dev_server
+    tty: true  # docker run -t
+    ports:
+      # App server
+      - "8000:8000"
+      # VScode
+      - "9929:9929"
+      - "9230:9230"
+    volumes:
+      - ./src/:/app/src/
+      - ./gatsby-node.ts:/app/gatsby-node.ts
+      - ./tsconfig.json:/app/tsconfig.json
+
 
   # docker-compose run --rm storybook
   # - exposes in the network

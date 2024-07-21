@@ -105,6 +105,9 @@ jobs:
 
             - Once merged, our changes are set for the final stage of release preparation.
             "
+        env:
+          GITHUB_TOKEN: ${{ secrets.SSG_GO_PR_TO_BOARDING }}  # allow event to trigger "listener" Workflows
+
       ##### Auto Merge: Train --> Release #####
       - name: 'Merge PR   ${{ env.TRAIN }}  -->  ${{ env.RELEASE_BR }}'
         run: gh pr merge "${{ env.TRAIN }}" --auto --delete-branch --merge

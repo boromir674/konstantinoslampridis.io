@@ -110,8 +110,36 @@ jobs:
       # other test data
       bundle_size_acceptance: 2.4
 
+
+# This Workflow implements both CI and CD, with its Jobs.
+# So we put the Dynamic Acceptance/Check here, which should be wired up to the CI Jobs.
+  check:
+    if: always()
+
+    needs:
+    - test
+    - lint
+    - test_bundle
+    - e2e
+    - audit
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Emit Acceptance Signal as Job Status
+      # alls-green@release/v1 (branch)
+      uses: re-actors/alls-green@cf9edfcf932a0ed6b431433fa183829c68b30e3f
+      with:
+        # leverage this inputs to dynamically control the Acceptance Criteria
+        # by default all available CI Jobs must be Green
+        # Example setup:
+        # - use default of 'all' to require all Jobs to be Green, with Auto merge ON and PR to main
+        # allowed-failures: docs, linters
+        # allowed-skips: non-voting-flaky-job
+        jobs: ${{ toJSON(needs) }}
+
   signal_deploy:
-    needs: [test_bundle, e2e, test]
+    needs: check
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:
@@ -126,7 +154,7 @@ jobs:
 
     # if boolean switch NOT SET then implicit default policy condition must be met:
     # - previous Jobs must succeed and signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
-    needs: [signal_deploy]
+    needs: signal_deploy
     if: always() && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || ( needs.pipe.outputs.OVERRIDE_DEPLOY == '' && needs.pipe.result == 'success' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' ) )
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -143,28 +171,3 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-
-
-# This Workflow implements both CI and CD, with its Jobs.
-# So we put the Dynamic Acceptance/Check here, whoch should be wired up to the CI Jobs.
-
-  check:
-    if: always()
-
-    needs:
-    - test
-    - lint
-    - test_bundle
-    - e2e
-    - audit
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Emit Acceptance Signal as Job Status
-      # alls-green@release/v1 (branch)
-      uses: re-actors/alls-green@223e4bb7a751b91f43eda76992bcfbf23b8b0302
-      with:
-        # allowed-failures: docs, linters
-        # allowed-skips: non-voting-flaky-job
-        jobs: ${{ toJSON(needs) }}

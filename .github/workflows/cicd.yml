@@ -143,3 +143,28 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+
+
+# This Workflow implements both CI and CD, with its Jobs.
+# So we put the Dynamic Acceptance/Check here, whoch should be wired up to the CI Jobs.
+
+  check:
+    if: always()
+
+    needs:
+    - test
+    - lint
+    - test_bundle
+    - e2e
+    - audit
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Emit Acceptance Signal as Job Status
+      # alls-green@release/v1 (branch)
+      uses: re-actors/alls-green@223e4bb7a751b91f43eda76992bcfbf23b8b0302
+      with:
+        # allowed-failures: docs, linters
+        # allowed-skips: non-voting-flaky-job
+        jobs: ${{ toJSON(needs) }}

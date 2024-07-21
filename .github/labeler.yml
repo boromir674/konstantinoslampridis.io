@@ -1,0 +1,143 @@
+## Pull Request Labeler Configuration ##
+# https://github.com/actions/labeler
+
+
+####### LABELS based on FILE CHANGES #######
+
+# Here, we declare Rules for Labeling PR based on the file changes
+
+# Each Label is added, when their Rule(s) are ALL True
+# - 'any' block is True, if any of the conditions are True
+# - 'all' block is True, if all of the conditions are True
+
+# Typically a Label, only features one of 'any' or 'all' block
+
+# If each label declares Rules that are mutually exclusive, in boolean logic, accross labels,
+# then the set of matching file paths are non-overlapping, across the labels.
+# Useful if implemnting mutually exlusive labels, when our code supprots it; ie 'src', 'docs' 'tests' etc
+
+### SRC ###
+# Add 'business_logic' label to any change within the 'src' dir
+business_logic:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: 
+        - 'src/*'
+        - 'src/**/*'
+  # exclude any changes within subfolder 'src/stories/' dir
+  - all:
+    - changed-files:
+      - all-globs-to-all-files:
+        - '!src/stories/*'
+        - '!src/stories/**/*'
+
+stories:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file:
+        - 'src/stories/*'
+        - 'src/stories/**/*'
+
+### TESTS ###
+## Add 'test' label to any change within the 'tests' dir #
+test:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: 
+        - '__tests__/*'
+        - '__tests__/**/*'
+
+  # exclude any changes within the 'tests/data/' dir
+  - all:
+    - changed-files:
+      - all-globs-to-all-files:
+        - '!__tests__/__snapshots__/*'
+        - '!__tests__/__snapshots__/**/*'
+
+test_snapshot:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file:
+        - '__tests__/__snapshots__/*'
+        - '__tests__/__snapshots__/**/*'
+
+### SCRIPTS ###
+scripts:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file:
+        - 'scripts/**'
+
+### DOCS ###
+# Any change within the 'docs' dir, or the '.readthedocs.yml' file
+docs:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: 
+        - 'docs/*'
+        - 'docs/**/*'
+        - '.readthedocs.yml'
+        - 'README.rst'
+        - 'README.md'
+
+### CI ###
+ci:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: ['.github/*', '.github/**/*']
+
+### DOCKER ###
+docker:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: 
+        - 'Dockerfile'
+        - 'docker-compose.yml'
+        - 'docker-compose.*.yml'
+        - '.dockerignore'
+
+### Package (npm/yarn) ###
+package:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file: 
+        - 'package.json'
+        - 'yarn.lock'
+
+config:
+  - any:
+    - changed-files:
+      - any-glob-to-any-file:
+        - 'tsconfig.json'
+        # Test Configs
+        - 'loadershim.js'
+        - 'jest.config.ts'
+        - 'jest-preprocess.js'
+        # Gatsby Configs
+        - 'gatsby-node.ts'
+        - 'gatsby-config.ts'
+        # Babel Configs
+        - 'babel.config.js'
+        # Lint Configs
+        - '.eslintrc.js'
+
+
+####### LABELS based on BRANCH NAME #######
+
+## Pull Request Labeling Rules based Base Branch
+
+# Add 'release' label to any PR that is opened against the `main` branch
+release:
+  - base-branch: 'main'
+
+# Add 'boarding_auto' label to any PR that is opened against the `boarding-auto` branch
+# [GITOPS]: This should act as a signal, ie for a Listener Workflow to Merge the PR
+boarding_auto:
+  - base-branch: ['^boarding-auto', 'boarding-auto']
+  - base-branch: ['^board-n-release', 'board-n-release']
+
+
+# Add 'feature' label to any PR where the head branch name starts with
+# `feature` or has a `feature` section in the name
+feature:
+  - head-branch: ['^feature', 'feature']

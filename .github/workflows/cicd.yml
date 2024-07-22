@@ -135,7 +135,7 @@ jobs:
       # CASE 2: when the CD part of the Pipeline also runs that means that we are etiher on release
       # or main branch, and/or on an PR. So, in this case we want to enforce all job.needs to
       # be GREEN, so we simply pass only jobs: ${{ toJSON(needs) }}
-      allowed-skips: ${{ needs.*.outputs.result == 'skipped' || '[]' }}
+      allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}
       needs_json: ${{ toJSON(needs) }}  # should never change
 
   signal_deploy:

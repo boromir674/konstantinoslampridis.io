@@ -136,7 +136,7 @@ jobs:
       # or main branch, and/or on an PR. So, in this case we want to enforce all job.needs to
       # be GREEN, so we simply pass only jobs: ${{ toJSON(needs) }}
       allowed-skips: ${{ needs.*.outputs.result == 'skipped' || '[]' }}
-      jobs: ${{ toJSON(needs) }}  # should never change
+      needs_json: ${{ toJSON(needs) }}  # should never change
 
   signal_deploy:
     needs: check  # add ['test', 'e2e', ..] if 'check' job.if and/or job.needs changes

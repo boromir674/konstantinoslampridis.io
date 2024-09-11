@@ -122,19 +122,8 @@ jobs:
     # needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
     needs: ['test', 'lint']
     # , 'lint', 'test_bundle', 'e2e', 'audit']
-    # uses: boromir674/ga-acceptance@dev
-    uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@dev-branch
+    uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
-      # leverage inputs to dynamically control the Acceptance Criteria
-      # by default all job.needs Jobs must be Green
-
-      # allowed-failures: docs, linters
-      # CASE 1: when this Workflow only runs the CI part (no deploy) then
-      # we want this Job to not affect the Green/Red Github Workflow Status.
-      # So in this case we dynamically add whatever skipped Jobs from Overrides to the 'allowed-skips'
-      # CASE 2: when the CD part of the Pipeline also runs that means that we are etiher on release
-      # or main branch, and/or on an PR. So, in this case we want to enforce all job.needs to
-      # be GREEN, so we simply pass only jobs: ${{ toJSON(needs) }}
       allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}
       needs_json: ${{ toJSON(needs) }}  # should never change
 

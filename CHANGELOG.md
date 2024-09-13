@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 #### Feature
 - style Introduction Section text
 
+#### Test
+- update snapshots data
+
 
 ## [1.7.0] - 13/09/2024
 

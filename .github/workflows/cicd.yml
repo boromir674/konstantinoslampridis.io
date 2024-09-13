@@ -66,7 +66,7 @@ jobs:
     with:
       pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe.outputs.ALLOW_LINT_TO_FAIL }}"}'
 
-## BUILD MINIFIED BUNDLE
+## BUILD PRODUCTION MINIFIED BUNDLE
   gatsby:
     needs: pipe
     if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
@@ -114,14 +114,11 @@ jobs:
       # other test data
       bundle_size_acceptance: 2.4
 
-
-# This Workflow implements both CI and CD, with its Jobs.
-# So we put the Dynamic Acceptance/Check here, which should be wired up to the CI Jobs.
+  # LOGICAL AGGRGATION OF CI
   check:
     if: always()
-    # needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
-    needs: ['test', 'lint']
-    # , 'lint', 'test_bundle', 'e2e', 'audit']
+    needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    # needs: ['test', 'lint']
     uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
       allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}

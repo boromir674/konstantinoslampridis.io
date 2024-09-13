@@ -1,5 +1,34 @@
 projects:
 
+## AUTOMATED WORKLFOWS
+- title: Automated Workflows
+  development_period: Nov 2023 - Present
+  status: mature
+  description: Automated Workflows, for implementing CI/CD and Git Ops, with Github Actions.
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/automated-workflows
+    - type: documentation
+      url: https://automated-workflows.readthedocs.io/
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/automated-workflows/actions/workflows/cicd.yml
+  release:
+    - type: github
+      command: 'curl -LJO https://github.com/boromir674/automated-workflows/archive/refs/tags/v1.13.1.tar.gz'
+      artifact_version: v1.13.1
+      name: automated-workflows
+      url: https://github.com/boromir674/automated-workflows/releases/tag/v1.13.1
+  tags:
+    - Github Actions
+    - YAML
+    - Bash
+    - JQ
+    - Automation
+    - Git Ops
+    - CI/CD
+
+## PYTHON PACKAGE GENENERATOR
+
 - title: Python Package Generator
   development_period: Apr 2022 - Feb 2024
   status: mature
@@ -160,6 +189,57 @@ projects:
     - PyPI
     - automation
     - CLI
+
+# ACTION SEM VER BUMPER
+# \cvprojectgeneric{Semantic Version Bumper}{Sep 2024}{stable}{boromir674/action-semver-bumper}{action-changelog-ci}{v2.0.0}{gh}
+
+# Bump a Semantic Version given Bump Level, with a Github Action.\\
+# \par
+# \vspace{5pt}
+# \cvtag{Github Actions} \cvtag{YAML} \cvtag{Bash} \cvtag{jq}\\
+- title: Action Semantic Version Bumper
+  development_period: Sep 2024
+  status: stable
+  description: >
+    Bump a Semantic Version given Bump Level, with a Github Action.
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/action-semver-bumper
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/action-semver-bumper/actions
+  release:
+    - type: github
+      artifact_version: v1.0.0
+
+# ACTION CHANGELOG CI
+- title: Action Changelog CI
+  development_period: Aug 2024 - Present
+  status: stable
+  description: >
+    Continuous Integration of CHANGELOG.md, with a Github Action.
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/action-changelog-ci
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/action-changelog-ci/actions
+  release:
+    - type: github
+      artifact_version: v2.0.0
+
+# ACTION GENERAGE MARKDOWN/JSON CHANGELOG
+- title: Action Generate Changelog
+  development_period: Sep 2024 - Present
+  status: stable
+  description: >
+    Group Commit Subjects into Categories and output Markdown or JSON.
+  resource_links:
+    - type: source_code_repo
+      url: https://github.com/boromir674/action-generate-changelog
+    - type: 'ci/cd'
+      url: https://github.com/boromir674/action-generate-changelog/actions
+  release:
+    - type: github
+      artifact_version: v2.0.0
 
 - title: Pytest Subprocess Plugin
   development_period: Jul 2022

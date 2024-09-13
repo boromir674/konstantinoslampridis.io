@@ -12,7 +12,7 @@ on:
 
 jobs:
   pr_to_boarding:
-    uses: boromir674/automated-workflows/.github/workflows/go-pr-to-boarding.yml@test
+    uses: boromir674/automated-workflows/.github/workflows/go-pr-to-boarding.yml@v1.13.1
     with:
       # PR from <user_branch>  -->  <github.ref>-<user_branch>
       # board_tag becomes the first part of the new branch's name string

@@ -9,7 +9,11 @@ on:
       - "*"
     # we use release branch for semver/changelog updates and deploying 'rc' tags
     # thus we filter out events for branch 'release', to NOT trigger
+    # avoid triggering on sem ver bump / changelog update commits
       - "!release"
+      # [Git Ops]: do not trigger on Branches used only for PR labeling
+      - '!board-n-release-*'
+      - '!board-request-*'
     tags:
       - v*
 
@@ -27,10 +31,10 @@ jobs:
 
       # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
       # OVERRIDE_LINT: false  # shutdown lint
-      # OVERRIDE_BUILD: true  # force build
+      # OVERRIDE_BUILD: false  # prevent build
       # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
+      # OVERRIDE_E2E_TESTS: false  # prevent E2E tests
       # OVERRIDE_DEPLOY: true  # force deployment
-      # OVERRIDE_E2E_TESTS: false  # shutdown unit-tests
 
       #############################
 
@@ -62,7 +66,7 @@ jobs:
     with:
       pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe.outputs.ALLOW_LINT_TO_FAIL }}"}'
 
-## BUILD MINIFIED BUNDLE
+## BUILD PRODUCTION MINIFIED BUNDLE
   gatsby:
     needs: pipe
     if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
@@ -110,8 +114,18 @@ jobs:
       # other test data
       bundle_size_acceptance: 2.4
 
+  # LOGICAL AGGRGATION OF CI
+  check:
+    if: always()
+    needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    # needs: ['test', 'lint']
+    uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
+    with:
+      allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}
+      needs_json: ${{ toJSON(needs) }}  # should never change
+
   signal_deploy:
-    needs: [test_bundle, e2e, test]
+    needs: check  # add ['test', 'e2e', ..] if 'check' job.if and/or job.needs changes
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:
@@ -126,7 +140,7 @@ jobs:
 
     # if boolean switch NOT SET then implicit default policy condition must be met:
     # - previous Jobs must succeed and signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
-    needs: [signal_deploy]
+    needs: signal_deploy
     if: always() && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || ( needs.pipe.outputs.OVERRIDE_DEPLOY == '' && needs.pipe.result == 'success' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' ) )
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment

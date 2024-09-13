@@ -58,7 +58,7 @@ jobs:
           echo "[INFO]: Latest Prod Git Tag: $LATEST_PROD_GIT_TAG"
 
           LATEST_PROD_SEM_VER=${LATEST_PROD_GIT_TAG:1}"
-          echo "**Discovered Sem Ver, previously published: $LATEST_PROD_SEM_VER**" >> $GITHUB_STEP_SUMMARY
+          echo "**Discovered Sem Ver, previously published: ${LATEST_PROD_SEM_VER}**" >> $GITHUB_STEP_SUMMARY
 
       # READ NEW SEM VER from pushed git tag, ie '1.2.0' from 'auto-prod-1.2.0'
       - name: Read New Sem Ver from Tag

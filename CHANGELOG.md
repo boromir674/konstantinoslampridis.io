@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.7.0] - 13/09/2024
+
+**New Content Updates:**
+- `D-Cube` Experience Item
+- Open Source Projects
+  - `Automated Workflows`
+  - `Action Sem Ver Bumper`
+  - `Action Changelog CI`
+  - `Action Generate Changelog`
+
+### Changes
+
+#### Feature
+* 2c772f3 (HEAD -> release, origin/release) feat(exp): add 'D-Cube' Experience Item and improve 'Ecodev' one
+* 5dc254a feat: render 4 new Projects in Portfolio
+
+#### CI
+- call Resuable Workflow for 'Tag on Main' Workflow
+- bump 'boromir674/automated-workflows' to v1.13.1 for 'PR to boarding' and 'Check CI Green' Jobs
+- ci: use boromir674/all-greens fork
+- ci: use commit from recent fix in all-greens action
+- improve script code
+- implement dynamic acceptance Job, using the all-greens action
+- fix automated derivation of New Prod Tag
+
+
 ## [1.6.3] - 21/07/2024
 
 Update to latest `Gatsby 4.x`, and update its `plugins`, and `babel`  

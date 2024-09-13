@@ -59,6 +59,29 @@ education:
 
 professional:
   experience_items:
+
+    # D-CUBE
+    - title: 'AI Ops Engineer - Contractor'
+      company: 'D-Cube P.C.'
+      location: 'Thermi - Thessaloniki, Greece'
+      duration: 'Apr 2024 - Jul 2024'
+      description: >
+        Spearheaded CI/CD, automated testing, and containerization to streamline development processes and accelerate deployments.
+      activities:
+        - Developed and deployed a custom Interactive Embedding Space Exploration web app to help the AI team detect outliers, improving data anomaly detection accuracy.
+        - Containerized multi-layered AI software stacks, enabling hardware-agnostic deployments and enhancing scalability.
+        - Developed Azure Pipeline Templates, for common CI/CD tasks like build, test, lint, docs, and deploy, to address the SDLC inefficiencies, enabling the AI team to adopt best practices.
+      technology_tags:
+        - 'Docker'
+        - 'Azure Pipelines'
+        - Python
+        - 'FastAPI'
+        - 'WSL'
+        - 'Deep Learning'
+        - Tensorflow
+        - Nvidia/CUDA
+        - GraphQL
+
     # ECO DEVELOPMENT
     - title: 'Tech Lead - Contractor'
       company: 'Eco Development S.A.'
@@ -67,21 +90,21 @@ professional:
       description: >
         Supervisor of the 'Data Analytics' team, responsible for the development of the company's Machine Learning Models and Data Pipelines Infrastructure.
       activities:
-        - Engineering Data Pipelines to facilitate ETL wokflows
-        - Auditing Eco Development's ML predictive models for mosquito abundance and disease risk
-        - Redesigning the company's ML models to improve performance and scalability
+        - Developed an automated ML Model Evaluation framework, focused on catching critical misclassifications, ensuring reliable predictions that aid in reducing operational costs.
+        - Managed GCP administration and engineered data pipelines to facilitate ETL workflows, optimizing data processing efficiency and improving data availability for analysis.
+        - Established a DevOps culture by implementing CI/CD pipelines, automated testing, and containerization, significantly reducing deployment times and increasing development productivity.
+        - Introduced SSO, with Bitwarden, and Agile/Scrum with Jira and Confluence, enhancing security, streamlining team collaboration, and fostering an agile development environment.
       technology_tags:
-        - 'Python'
-        - 'Machine Learning'
-        - Random Forest
-        - 'Gradient Boosting Methods'
-        - 'Variational Autoencoders'
-        - 'Pandas'
-        - SQL
-        - Pytest
+        - Python
         - GCP
+        - Docker
         - BigQuery
-        - Scrum/Agile
+        - Cloud Functions
+        - Deep Learning
+        - 'Variational Autoencoders'
+        - SQL
+        - Pandas
+
     # INFOVISTA SAS
     - title: 'DevOps Engineer - Contractor'
       company: 'Infovista SAS'

@@ -1,0 +1,22 @@
+#####################################
+## Auto Merge PR to Main  - GitOps ##
+#####################################
+
+# Part of 'release-me' Git Ops Process: User Br -> release -> main
+
+# Triggers on pushed auto-prod-* tags
+
+on:
+  push:
+    tags:
+      - auto-prod-*
+jobs:
+  # please add 'main' Rule Required Checks, before running this job
+  auto_merge_pr_to_main:
+    uses: boromir674/automated-workflows/.github/workflows/go-auto-merge-main.yml@test
+    with:
+      main_branch: ${{ vars.GIT_MAIN_BRANCH || 'main' }}
+      release_branch: ${{ vars.GIT_RELEASE_BRANCH || 'release' }}
+      commit_message: 'My Shiny Python Package'
+    secrets:
+      pat_token: ${{ secrets.SSG_GO_PR_TO_BOARDING }}

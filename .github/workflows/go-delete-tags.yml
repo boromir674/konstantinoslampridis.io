@@ -1,0 +1,28 @@
+##########################
+## Delete Tags - GitOps ##
+##########################
+
+# JOB: Delete Git Tags, acting as push events that trigger Git Ops Workflows
+# TRIGGER: when PR from 'release' to 'main/master' Closes with Code Merge
+#   AND PR title starts with '[GITOPS]'
+#   AND PR has 'auto-deploy' Label
+# REQUIRES: Secret GH_PAT_CONTENT_RW with Repo Content RW permission/access
+
+# GITOPS: Part of 'release-me' Process: User Br -> release -> main
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      # access with ${{ github.event.pull_request.base.ref }}
+      - main
+      - master
+jobs:
+  delete_tags:
+    if: github.event.pull_request.merged == true &&
+      github.event.pull_request.head.ref == 'release' &&
+      contains(github.event.pull_request.labels.*.name, 'auto-deploy')
+    uses: boromir674/automated-workflows/.github/workflows/go-delete-tags.yml@test
+    secrets:
+      # pass in GITHUB PAT with Repo Content RW permission/access
+      GH_PAT_CONTENT_RW: ${{ secrets.SSG_GO_PR_TO_BOARDING }}

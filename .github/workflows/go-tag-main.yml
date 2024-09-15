@@ -1,0 +1,32 @@
+#################################
+## Create Tag on Main - GitOps ##
+#################################
+
+# Part of 'release-me' Git Ops Process: User Br -> release -> main
+
+# Triggers when PR, from (head) branch 'release', closes with code merge to main,
+# (or master), and PR has label auto-deploy
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      # access with ${{ github.event.pull_request.base.ref }}
+      - main
+      - master
+
+jobs:
+  tag_main:
+    # if merged code to main via PR AND HEAD branch "was" 'release' AND PR has label 'auto-deploy'
+    if: github.event.pull_request.merged == true &&
+      github.event.pull_request.head.ref == 'release' &&
+      contains(github.event.pull_request.labels.*.name, 'auto-deploy')
+    uses: boromir674/automated-workflows/.github/workflows/go-tag-main.yml@test
+    with:
+      gh_username: ${{ vars.TAG_USER_NAME }}
+      gh_email: ${{ vars.TAG_USER_EMAIL }}
+      main_branch: ${{ github.event.pull_request.base.ref }}
+    secrets:
+      # needs Content write to create Tag!
+      # needs Actions write to allow other workflows to listen to tag event!
+      GH_PAT_ACTION_RW: ${{ secrets.SSG_GO_PR_TO_BOARDING }}

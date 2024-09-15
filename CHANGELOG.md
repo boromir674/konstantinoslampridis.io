@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.0] - 14/09/2024
+
+### Changes
+
+#### Feature
+- style Introduction Section text
+
+#### Test
+- update snapshots data
+
 
 ## [1.7.0] - 13/09/2024
 
@@ -18,8 +28,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changes
 
 #### Feature
-* 2c772f3 (HEAD -> release, origin/release) feat(exp): add 'D-Cube' Experience Item and improve 'Ecodev' one
-* 5dc254a feat: render 4 new Projects in Portfolio
+- add 'D-Cube' Experience Item and improve 'Ecodev' one
+- render 4 new Projects in Portfolio
 
 #### CI
 - call Resuable Workflow for 'Tag on Main' Workflow

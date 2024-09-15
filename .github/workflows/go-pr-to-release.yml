@@ -1,0 +1,23 @@
+###############################################
+## PR to Release with Auto Merge - GitOps ##
+###############################################
+
+# export tt='release-me'; git tag -d "$tt"; git push --delete origin "$tt"; git tag "$tt" && git push origin "$tt"
+
+# - Triggers on tag 'release-me'
+
+# - Part of 'release-me' Git Ops Process: User Br -> release -> main
+
+on:
+  push:
+    tags:
+      - release-me  # Request to be included in next Release and create a Release
+jobs:
+  pr_to_release:
+    uses: boromir674/automated-workflows/.github/workflows/go-pr-to-release.yml@test
+    with:
+      release_branch: ${{ vars.GIT_RELEASE_BRANCH || 'release' }}
+    secrets:
+      # Called Job needs read/write to Content and PRs
+      # To allow listeners to trigger add also read/write to Actions
+      github_pat: ${{ secrets.SSG_GO_PR_TO_BOARDING }}

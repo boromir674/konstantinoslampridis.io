@@ -16,7 +16,7 @@
 on:
   push:
     tags:
-      - auto-prod-*
+      - auto-prod-legacy-*
 
 jobs:
   merge_release_into_main:

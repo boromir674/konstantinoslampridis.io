@@ -444,18 +444,51 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
       class="css-lpnzm1"
     >
       <div
-        class="css-y93gho"
+        class="css-8938kg"
         id="introduction-section"
       >
-        <p>
+        <p
+          style="font-size: 1.75rem; line-height: 1.6; margin: 1rem 0px;"
+        >
           Welcome to the online space of 
           <strong>
             John Doe
           </strong>
-           
-          :-)
+          .
         </p>
-        Here you will find mostly information about my Open Source Portfolio, professional experience, skills and education.
+        <p
+          class="css-1ywv6q5"
+        >
+          Here you will find information about my
+           
+          <span
+            style="font-weight: bold; color: rgb(65, 0, 3);"
+          >
+            Open Source Project Portfolio
+          </span>
+          ,
+           
+          <span
+            style="font-weight: bold; color: rgb(65, 0, 3);"
+          >
+            Professional Experience
+          </span>
+          ,
+           
+          <span
+            style="font-weight: bold; color: rgb(65, 0, 3);"
+          >
+            Skills
+          </span>
+          , and
+           
+          <span
+            style="font-weight: bold; color: rgb(65, 0, 3);"
+          >
+            Education
+          </span>
+          .
+        </p>
       </div>
       <div
         class="css-mnc2za"

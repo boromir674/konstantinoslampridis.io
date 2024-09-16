@@ -2,9 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import React, { FC } from "react";
 
 import BigScreenViewInteractive from "./BigScreenViewInteractive";
-import { mergeStylings, commonStyling, ComputedTheme } from "../AppStyles";
-import lightMode from '../LightMode';
-import darkMode from '../DarkMode';
+import { lightTheme, darkTheme } from '../theme';
 import { UserDefinedTextData } from '../types';
 
 // Leverage CSS modules to do CSS reset
@@ -23,7 +21,7 @@ interface EducationItemUserTextData {
 interface BuildTimeData {
   userDefinedWebsiteData: UserDefinedTextData
 }
-lightMode.portfolio.item.resourceLinks
+// lightMode.portfolio.item.resourceLinks
 const App: FC = () => {
   const {
     userDefinedWebsiteData: { personal, education, professional, portfolio },
@@ -89,8 +87,8 @@ const App: FC = () => {
     {}
   );
 
-  const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-  const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+  // const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+  // const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
 
   // compute maximum number of Releases contained in a single portfolio item
   const maxNumberOfReleasesPerPortfolioItems = portfolio.reduce(

@@ -4,13 +4,7 @@ import { BottomFooterPane } from "./BottomFooterPane";
 // Apply CSS reset
 // import '../../global.css';
 
-import lightMode from '../../LightMode'
-import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
-
+import { lightTheme, darkTheme } from '../../theme';
 export default {
   component: BottomFooterPane,
   title: "BottomFooterPane",

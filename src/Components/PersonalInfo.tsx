@@ -17,6 +17,17 @@ interface URLProps {
     textColor: string;
   };
 }
+
+interface SocialLink {
+  label: string;
+  url: string;
+}
+
+interface CurricularDoc {
+  label: string;
+  url: string;
+}
+
 interface PersonalInfoProps {
   userData: PersonalInfoInterface;
   theme: {
@@ -47,6 +58,9 @@ const InfoItem = styled.div`
 const InfoKey = styled.span`
   font-weight: bold;
   font-size: 18px;
+  // use sans-serif font
+  font-family: sans-serif;
+  // font-family: "Roboto", sans-serif;
 `;
 
 const InfoValue = styled.span`
@@ -122,7 +136,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {github} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {github} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
@@ -137,7 +151,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {gitlab} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {gitlab} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
@@ -152,7 +166,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {linkedin} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {linkedin} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
@@ -171,7 +185,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
                 textColor: theme.linkColor,
               }}
             >
-              '1 Page Resume' <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+              '1 Page Resume' <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
             </MyLink>
           </InfoURLVerticalFlexContainerItem>
           {/* CV + PROJECTS */}
@@ -184,7 +198,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
                 textColor: theme.linkColor,
               }}
             >
-              'CV + Projects' <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+              'CV + Projects' <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
             </MyLink>
           </InfoURLVerticalFlexContainerItem>
         </InfoURLVerticalFlexContainer>

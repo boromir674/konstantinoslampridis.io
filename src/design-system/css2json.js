@@ -62,6 +62,8 @@ function cssFileToJson(inputFilePath, outputFilePath) {
       
       // assert object has exact keys: Colors "Font Families", "Font Weights", "Font Sizes", "Line Heights", "Letter Spacings"
       const keys = Object.keys(jsonData);
+
+      // Sanity Check acting as a regression test
       const expectedKeys = ["Colors", "Font Families", "Font Weights", "Font Sizes", "Line Heights", "Letter Spacings"];
       const missingKeys = expectedKeys.filter(key => !keys.includes(key));
       if (missingKeys.length > 0) {
@@ -69,7 +71,7 @@ function cssFileToJson(inputFilePath, outputFilePath) {
         return;
       }
 
-      // assert Colors key "points" to some Object (ie {})
+      // Sanity Check that Colors key "points" to some Object (ie {})
       if (typeof jsonData.Colors !== "object") {
         console.error("Error: 'Colors' key should point to an object");
         return;

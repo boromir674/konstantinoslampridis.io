@@ -9,10 +9,7 @@ import { render } from "@testing-library/react";
 
 // Business-logic Imports
 import BigScreenView, { BigScreenViewProps } from "../src/Components/BigScreenView";
-import lightMode from "../src/LightMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../src/AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+import { lightTheme } from '../src/theme';
 
 
 // PROPS VALUES

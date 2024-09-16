@@ -111,7 +111,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           Name:
         </span>
@@ -126,7 +126,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           Email:
         </span>
@@ -141,7 +141,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           Github:
         </span>
@@ -189,7 +189,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           Gitlab:
         </span>
@@ -237,7 +237,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           LinkedIn:
         </span>
@@ -286,7 +286,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       >
          
         <span
-          className="css-1jbfuhw"
+          className="css-1k8l5t4"
         >
           Curricular Docs:
         </span>

@@ -123,3 +123,6 @@ temp/
 sitemap.xml
 notes.md
 \.lighthouseci/
+e2e/cypress/e2e/1-getting-started/
+e2e/cypress/e2e/2-advanced-examples
+movie.mp4

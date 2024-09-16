@@ -368,7 +368,7 @@ Annotated with comments designed to integrate with the 'storybook-design-token' 
 
 
   /* body - large */
-  --md-sys-typescale-body-large-font-family-name: Roboto;
+  --md-sys-typescale-body-large-font-family-name: 'Roboto, sans-serif';
   --md-sys-typescale-body-large-font-family-style: Regular;
   /**
   * @tokens Font Weights

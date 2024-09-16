@@ -8,6 +8,8 @@
 */
 import React from "react";
 import { css, ThemeContext } from "@emotion/react";
+import { withDefaultProps } from "../hoc";
+import Typography from '../Typography'
 import ExpItemActivity from "./ExpItemActivity";
 import styled from "@emotion/styled";
 import AppTag, { AppTagProps } from "../AppTag";
@@ -17,6 +19,8 @@ interface TechTagsContainerProps {
   theme?: {
     backgroundColor?: string;
     textColor?: string;
+    fontFamily?: string;
+    fontSize?: string;
   };
 }
 
@@ -28,6 +32,24 @@ const TechTagsContainer = styled.div<TechTagsContainerProps>`
   padding-bottom: 22px;
   display: flex;
   flex-wrap: wrap;
+  font-family: ${(props) => props.theme.fontFamily || "inherit"};
+  font-size: ${(props) => props.theme.fontSize || "inherit"};
+`;
+
+interface ExperienceItemTitleProps {
+  theme?: {
+    fontFamily?: string;
+    fontSize?: string;
+  };
+};
+const ExperienceItemTitleH3 = withDefaultProps({
+  variant: "h3",
+}, Typography);
+const ExperienceItemTitle = styled(ExperienceItemTitleH3) <ExperienceItemTitleProps>`
+  margin: 0;
+  font-family: ${props => props.theme?.fontFamily || "inherit"};
+  font-size: ${props => props.theme?.fontSize || "24px"};
+  font-weight: bold;
 `;
 
 interface ProfItemProps {
@@ -41,6 +63,14 @@ interface ProfItemProps {
   technology_tags: string[];
   // app theme (ie color set of color modes)
   theme: {
+    title?: {
+      fontFamily?: string;
+      fontSize?: string;
+    };
+    body?: {
+      fontFamily?: string;
+      fontSize?: string;
+    };
     tags: {
       item: AppTagProps["theme"];
     };
@@ -50,6 +80,8 @@ interface ProfItemProps {
 // V2
 const ProfItem: React.FC<ProfItemProps> = ({
   theme: {
+    title: titleTheme,
+    body: bodyTheme,
     tags: { item: tagTheme },
   },
   title,
@@ -70,27 +102,29 @@ const ProfItem: React.FC<ProfItemProps> = ({
           margin-bottom: 16px;
         `}
       >
-        <h3
-          css={css`
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          `}
-        >
-          {title}
-        </h3>
+        <ExperienceItemTitle theme={titleTheme}>{title}</ExperienceItemTitle>
+        {/* <Typography
+          variant={'body1'} // <p> element
+          style={{
+            margin: 0,
+            fontFamily: bodyTheme?.fontFamily || "inherit",
+            fontSize: bodyTheme?.fontSize || "14px",
+          }} */}
         <p
           css={css`
             margin: 0;
-            font-size: 14px;
+            font-size: ${bodyTheme?.fontSize || "14px"};
+            font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
         >
           {location}
         </p>
+        {/* </Typography> */}
         <p
           css={css`
             margin: 0;
-            font-size: 14px;
+            font-family: ${bodyTheme?.fontFamily || "inherit"};
+            font-size: ${bodyTheme?.fontSize || "14px"};
           `}
         >
           {company}
@@ -98,7 +132,8 @@ const ProfItem: React.FC<ProfItemProps> = ({
         <p
           css={css`
             margin: 0;
-            font-size: 14px;
+            font-size: ${bodyTheme?.fontSize || "14px"};
+            font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
         >
           {duration}
@@ -106,20 +141,26 @@ const ProfItem: React.FC<ProfItemProps> = ({
         <p
           css={css`
             margin: 8px 0;
-            font-size: 14px;
+            font-size: ${bodyTheme?.fontSize || "14px"};
+            font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
         >
           {description}
         </p>
         {/* Job Activities */}
-        <p style={{ marginBottom: 12 }}>Activities</p>
+        <p style={{
+          marginBottom: 12,
+          fontFamily: bodyTheme?.fontFamily,
+          fontSize: bodyTheme?.fontSize,
+        }}>Activities</p>
         <ul
           css={css`
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: ${bodyTheme?.fontSize || "14px"};
+            font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
         >
           {activities.map((activity, index) => (
@@ -135,7 +176,10 @@ const ProfItem: React.FC<ProfItemProps> = ({
           ))}
         </ul>
         {/* Technology Tags */}
-        <TechTagsContainer>
+        <TechTagsContainer theme={{
+          fontFamily: tagTheme.fontFamily,
+          fontSize: tagTheme.fontSize,
+        }}>
           {technology_tags.map((tag, index) => (
             <AppTag key={index} theme={tagTheme}>
               {tag}
@@ -148,3 +192,4 @@ const ProfItem: React.FC<ProfItemProps> = ({
 };
 
 export default ProfItem;
+export type { ProfItemProps };

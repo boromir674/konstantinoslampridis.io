@@ -1,6 +1,8 @@
 import ExpItemActivity from "./ExpItemActivity";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+// import lightTheme from "../../LightMode";
+// import darkTheme from "../../DarkMode";
+
+import { lightTheme, darkTheme } from '../../theme';
 
 export default {
   component: ExpItemActivity,

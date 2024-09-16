@@ -16,15 +16,48 @@ const commonStyling = {
     lineHeight: "1.5",
     letterSpacing: "0.00938em",
     // Domain Specific Styling
+    // PERSNOAL INFO SECTION
+    personal: {
+        infoItem: {
+            // --md-sys-typescale-headline-small-font-size
+            key: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                // fontFamily: 'Roboto, sans-serif',
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+                // fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-small-font-size'],
+            },
+            value: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+            },
+        },
+    },
+    // PROFESSIONAL SECTION
     professional: {
         title: {
             padding: "15px",
+            fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
+            fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-family-name'],
         },
         item: {
             padding: "15px",
             onHoverTransformDuration: "0.5s",
             onHoverBackgroundColorChangeDuration: "0.7s",
             // onHoverTransitionDelay: '1s',
+            title: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-medium-font-family-name"],
+                // fontFamily: 'Roboto, sans-serif',
+                // fontSize: "34px",
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-medium-font-size'],
+            },
+            body: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+            },
+            tag: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+            },
         },
         itemsColorModeSwitchDelay: 1.2,
     },

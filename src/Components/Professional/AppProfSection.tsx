@@ -17,6 +17,8 @@ interface ProfessionalSectionProps {
       backgroundColor: string;
       // other styles
       padding?: string;
+      fontFamily?: string;
+      fontSize?: string;
     };
     item: {
       // other styles
@@ -29,12 +31,22 @@ interface ProfessionalSectionProps {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      title: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      body: {
+        fontFamily: string;
+        fontSize: string;
+      };
       tag: {
         backgroundColor: string;
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
         outlineColor: string;
+        fontFamily: string;
+        fontSize: string;
       };
     };
     containerBackgroundColor: string;
@@ -47,13 +59,16 @@ interface ProfessionalExperienceSectionTitleProps {
     textColor: string;
     backgroundColor: string;
     padding?: string;
+    fontFamily?: string;
+    fontSize?: string;
   };
 }
 const ProfessionalExperienceSectionTitle = styled.h1<ProfessionalExperienceSectionTitleProps>`
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.backgroundColor};
   padding: ${(props) => props.theme.padding || "0px"};
-  font-size: 32px;
+  font-family: ${(props) => props.theme.fontFamily || "Roboto, sans-serif"};
+  font-size: ${(props) => props.theme.fontSize || "32px;"};
 `;
 
 interface ProfessionalExperienceSectionContainerProps {

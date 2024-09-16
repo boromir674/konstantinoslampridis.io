@@ -18,10 +18,9 @@ interface AppVerticalMainPaneTheme {
     textColor: string;
   };
   professional: {
-    title: {
-      textColor: string;
-      backgroundColor: string;
-    };
+    // Professional Section Heading
+    title: ProfessionalSectionProps["theme"]["title"];
+    // Professional/Experience Item
     item: {
       backgroundColor: string;
       textColor: string;
@@ -31,16 +30,13 @@ interface AppVerticalMainPaneTheme {
       // onHoverTransitionDelay: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      title: ProfessionalSectionProps["theme"]["item"]["title"];
+      body: ProfessionalSectionProps["theme"]["item"]["body"];
       tag: ProfessionalSectionProps["theme"]["item"]["tag"];
     };
     containerBackgroundColor: string;
   };
-  // portfolio: {
-  //   // Color Mode Design
-  //   color: string;
-  //   // Other Design
-  //   width: string;
-  // };
+
   // portfolio: ResponsiveLocalStorageLayoutProps["theme"];
   portfolio: {
     container: ResponsiveLocalStorageLayoutProps["theme"]["container"];
@@ -128,9 +124,17 @@ const VerticalMainPane: React.FC<AppVerticalMainPaneProps> = ({
       <ProfessionalSection
         id={sectionIDs ? sectionIDs[1] : "professional-section"}
         theme={{
+          ...theme.professional,
           containerBackgroundColor: theme.professional.containerBackgroundColor,
-          item: theme.professional.item,
+          // item: theme.professional.item,
+          item: {
+            ...theme.professional.item,
+            tag: theme.professional.item.tag,
+            title: theme.professional.item.title,
+            body: theme.professional.item.body,
+          },
           title: {
+            ...theme.professional.title,
             textColor: theme.professional.title.textColor,
             backgroundColor:
               theme.professional.title.backgroundColor

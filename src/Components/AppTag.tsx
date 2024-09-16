@@ -17,6 +17,8 @@ interface AppTagProps {
     onHoverBackgroundColor: string;
     onHoverTextColor?: string;
     outlineColor: string;
+    fontFamily?: string;
+    fontSize?: string;
   };
 }
 
@@ -30,7 +32,9 @@ const AppTag = styled.span<AppTagProps>`
     color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
   }
   // OTHER STYLES
-  font-size: 14px;
+  font-family: ${(props) => props.theme.fontFamily || "inherit"};
+  font-size: ${(props) => props.theme.fontSize || "inherit"};
+
   padding: 8px 12px;
   border-radius: 20px;
   margin: 4px;

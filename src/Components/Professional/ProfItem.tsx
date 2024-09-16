@@ -17,17 +17,43 @@ interface ProfessionalItemTheme {
   // onHoverTransitionDelay: string;
   onHoverTransformDuration: string;
   onHoverBackgroundColorChangeDuration: string;
+  title: {
+    fontFamily: string;
+    fontSize: string;
+  };
+  body: {
+    fontFamily: string;
+    fontSize: string;
+  };
   tag: {
     backgroundColor: string;
     textColor: string;
     onHoverBackgroundColor: string;
     onHoverTextColor: string;
     outlineColor: string;
+    fontFamily: string;
+    fontSize: string;
   };
 }
 
+// type same as ProfessionalItemTheme but omits tag.fontFamily and tag.fontSize
+interface AppProfessionalItemContainerProps {
+  // styles unrelated to colors
+  padding?: string;
+
+  backgroundColor: string;
+  textColor: string;
+  linkColor: string;
+  onHoverBackgroundColor: string;
+  onHoverTextColor: string;
+  // onHoverTransitionDelay: string;
+  onHoverTransformDuration: string;
+  onHoverBackgroundColorChangeDuration: string;
+}
+
 interface AppProfessionalItemProps {
-  theme: ProfessionalItemTheme;
+  // same type but exclude tag.fontFamily and tag.fontSize
+  theme: AppProfessionalItemContainerProps;
   children?: React.ReactNode;
 }
 
@@ -80,25 +106,41 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
         technology_tags,
       },
       onClick,
-      theme,
-    }: renderPropsArgs) => (
-      <AppProfessionalItem theme={theme} onClick={onClick}>
-        <ProfItemPOC
-          title={title}
-          duration={duration}
-          location={location}
-          company={company}
-          description={description}
-          activities={activities}
-          technology_tags={technology_tags}
-          theme={{
-            tags: {
-              item: theme.tag,
-            },
-          }}
-        />
-      </AppProfessionalItem>
-    ),
+      // theme,
+      theme: {
+        title: titleTheme,
+        body,
+        tag,
+        ...rest
+      }
+    }: renderPropsArgs) => {
+      return (
+        <AppProfessionalItem theme={rest} onClick={onClick}>
+          <ProfItemPOC
+            title={title}
+            duration={duration}
+            location={location}
+            company={company}
+            description={description}
+            activities={activities}
+            technology_tags={technology_tags}
+            theme={{
+              title: {
+                fontFamily: titleTheme.fontFamily,
+                fontSize: titleTheme.fontSize,
+              },
+              body: {
+                fontFamily: body.fontFamily,
+                fontSize: body.fontSize,
+              },
+              tags: {
+                item: tag,
+              },
+            }}
+          />
+        </AppProfessionalItem>
+      )
+    },
     [theme]
   );
 
@@ -117,3 +159,5 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
 };
 
 export default AppProfItem;
+export type { AppProfItemProps };
+

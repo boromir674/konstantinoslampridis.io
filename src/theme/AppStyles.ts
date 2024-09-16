@@ -137,6 +137,23 @@ interface Theme {
 
 // Used internally for type checking
 interface ComputedTheme extends Theme {
+  //// ALL PERSONAL INFORMATION STYLES
+  personal: {
+    textColor: Theme["personal"]["textColor"];
+    urlTextColor: Theme["personal"]["urlTextColor"];
+    containerBackgroundColor: Theme["personal"]["containerBackgroundColor"];
+    externalURLSVGColor: Theme["personal"]["externalURLSVGColor"];
+    infoItem: {
+      key: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      value: {
+        fontFamily: string;
+        fontSize: string;
+      };
+    };
+  };
   //// ALL PROFESSIONAL STYLES
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
@@ -144,6 +161,8 @@ interface ComputedTheme extends Theme {
       textColor: Theme["professional"]["title"]["textColor"];
       backgroundColor: Theme["professional"]["title"]["backgroundColor"];
       padding: string;
+      fontFamily: string;
+      fontSize: string;
     };
     item: {
       padding?: string;
@@ -154,12 +173,22 @@ interface ComputedTheme extends Theme {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      title: {
+        fontFamily: string;
+        fontSize: string;
+      },
+      body: {
+        fontFamily: string;
+        fontSize: string;
+      },
       tag: {
         backgroundColor: string;
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
         outlineColor: string;
+        fontFamily: string;
+        fontSize: string;
       };
     };
     // defines whether there will be a delay between the the top item and the

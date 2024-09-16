@@ -1,13 +1,13 @@
 // Theme / Style initialization Operations
 import lightMode from "../LightMode";
 import darkMode from "../DarkMode";
-import commonStyling from "./CommonTheme";
+import commonStyles from "./CommonTheme";
 
 import { type ComputedTheme, type Theme } from "./AppStyles";
 
 
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
-type CommonStyling = typeof commonStyling;
+type CommonStyling = typeof commonStyles;
 
 const mergeStylings = (
   theme: Theme,
@@ -17,17 +17,25 @@ const mergeStylings = (
     ...theme,
     ...commonStyling,
 
+    personal: {
+      ...theme.personal,
+      ...commonStyling.personal,
+    },
+
     professional: {
       containerBackgroundColor: theme.professional.containerBackgroundColor,
       title: {
         ...theme.professional.title,
         ...commonStyling.professional.title,
       },
-      itemsColorModeSwitchDelay:
-        commonStyling.professional.itemsColorModeSwitchDelay,
+      itemsColorModeSwitchDelay: commonStyling.professional.itemsColorModeSwitchDelay,
       item: {
         ...theme.professional.item,
         ...commonStyling.professional.item,
+        tag: {
+          ...theme.professional.item.tag,
+          ...commonStyling.professional.item.tag,
+        },
       },
     },
 
@@ -86,7 +94,7 @@ const mergeStylings = (
 };
 
 
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyles);
+const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyles);
 
 export { lightTheme, darkTheme };

@@ -67,3 +67,4 @@ const NavItem = styled.a<NavItemProps>`
 `;
 
 export default NavItem;
+export type { NavItemProps };

@@ -86,7 +86,7 @@ const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
                 {/* Resource Links - HEADER TITLE */}
                 <Typography variant="h3"
                     style={{
-                        // fontFamily: theme.headerFontFamily,
+                        // fontFamily: 'Roboto, sans-serif',
                         color: theme.headerColor,
                         // marginBottom: theme.headerMarginBottom
                     }}

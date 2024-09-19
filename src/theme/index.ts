@@ -48,7 +48,15 @@ const mergeStylings = (
       // },
       item: {
         ...theme.education.item,
-        ...commonStyling.education.item,
+        padding: commonStyling.education.item.padding,
+        onHoverTransformDuration: commonStyling.education.item.onHoverTransformDuration,
+        onHoverBackgroundColorChangeDuration: commonStyling.education.item.onHoverBackgroundColorChangeDuration,
+        tag: {
+          ...theme.education.item.tag,
+          ...commonStyling.education.item.tags,
+        },
+        body: commonStyling.education.item.body,
+        degreeTitle: commonStyling.education.item.degreeTitle,
       },
     },
     portfolio: {

@@ -371,17 +371,10 @@ const bigScreenViewProps: BigScreenViewProps = {
         },
         verticalSidePane: {
             personalInfo: {
-                containerBackgroundColor: lightTheme.personal.containerBackgroundColor,
-                textColor: lightTheme.personal.textColor,
+                ...lightTheme.personal,
                 linkColor: lightTheme.personal.urlTextColor,
-                externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
             },
-            education: {
-                // containerBackgroundColor:
-                //   lightTheme.education.containerBackgroundColor,
-                // title: lightTheme.education.title,
-                item: lightTheme.education.item,
-            },
+            education: lightTheme.education,
         },
         verticalMainPane: {
             introduction: lightTheme.introduction,

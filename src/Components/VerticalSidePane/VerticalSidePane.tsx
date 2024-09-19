@@ -5,18 +5,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import PersonalInfoInterface from "../../PersonalInfoInterface";
 import EducationDataInterface from "../../EducationItemDataInterface";
-import PersonalInfo from "../PersonalInfo";
+import PersonalInfo, { type PersonalInfoProps } from "../PersonalInfo";
 import { Education, AppEducationSectionProps } from "../Education";
 
 interface AppVerticalSidePaneTheme {
   containerBackground?: string;
   textColor?: string;
-  personalInfo: {
-    containerBackgroundColor: string;
-    textColor: string;
-    linkColor: string;
-    externalURLSVGColor: string;
-  };
+  personalInfo: PersonalInfoProps["theme"];
   education: AppEducationSectionProps["theme"];
 }
 

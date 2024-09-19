@@ -103,194 +103,190 @@ const App: FC = () => {
 
   return (
     // <main>
-      <BigScreenViewInteractive
-        // style={{}}
-        navigationSections={[
-          {
-            htmlID: "introduction-section",
-            barLabel: "Introduction",
+    <BigScreenViewInteractive
+      // style={{}}
+      navigationSections={[
+        {
+          htmlID: "introduction-section",
+          barLabel: "Introduction",
+        },
+        {
+          htmlID: "professional-section",
+          barLabel: "Professional",
+        },
+        {
+          htmlID: "open-source-portfolio-section",
+          barLabel: "Open Source Portfolio",
+        },
+      ]}
+      data={{
+        verticalMainPane: {
+          introduction: {
+            name: personal.name,
           },
-          {
-            htmlID: "professional-section",
-            barLabel: "Professional",
-          },
-          {
-            htmlID: "open-source-portfolio-section",
-            barLabel: "Open Source Portfolio",
-          },
-        ]}
-        data={{
-          verticalMainPane: {
-            introduction: {
-              name: personal.name,
-            },
-            professional: professional.experience_items,
+          professional: professional.experience_items,
 
-            portfolio: portfolio.map((item: UserDefinedTextData['portfolio'][0]) => ({
-              ...item,
-              release: item.release.map((release) => ({
-                ...release,
-                urlText: release.url,
-              })),
+          portfolio: portfolio.map((item: UserDefinedTextData['portfolio'][0]) => ({
+            ...item,
+            release: item.release.map((release) => ({
+              ...release,
+              urlText: release.url,
             })),
-          },
+          })),
+        },
 
+        verticalSidePane: {
+          personal: {
+            name: personal.name,
+            email: personal.email,
+            github: name2Url["github"],
+            gitlab: name2Url["gitlab"],
+            linkedin: name2Url["linkedin"],
+          },
+          education: education.map(
+            (item: EducationItemUserTextData, index: number) => ({
+              degree_title: item.degree,
+              university_name: item.name,
+              location: item.location,
+              duration: item.date,
+              thesis_title: item.thesis_title,
+              topics: item.topics,
+            })
+          ),
+        },
+      }}
+      colorSet={{
+        // LIGHT THEME - MODE
+        light: {
+          containerBackgroundColor: lightTheme.backgroundColor,
+          topHeaderPane: {
+            themeSwitch: lightTheme.themeSwitch,
+            navigationBar: lightTheme.navigationBar,
+            backgroundColor: lightTheme.topHeaderPane.backgroundColor,
+          },
           verticalSidePane: {
-            personal: {
-              name: personal.name,
-              email: personal.email,
-              github: name2Url["github"],
-              gitlab: name2Url["gitlab"],
-              linkedin: name2Url["linkedin"],
+            personalInfo: {
+              // pass Theme Personal Color Design
+              ...lightTheme.personal,
+              // adjust interface
+              linkColor: lightTheme.personal.urlTextColor,
             },
-            education: education.map(
-              (item: EducationItemUserTextData, index: number) => ({
-                degree_title: item.degree,
-                university_name: item.name,
-                location: item.location,
-                duration: item.date,
-                thesis_title: item.thesis_title,
-                topics: item.topics,
-              })
-            ),
+            education: lightTheme.education,
           },
-        }}
-        colorSet={{
-          // LIGHT THEME - MODE
-          light: {
-            containerBackgroundColor: lightTheme.backgroundColor,
-            topHeaderPane: {
-              themeSwitch: lightTheme.themeSwitch,
-              navigationBar: lightTheme.navigationBar,
-              backgroundColor: lightTheme.topHeaderPane.backgroundColor,
-            },
-            verticalSidePane: {
-              personalInfo: {
-                // pass Theme Personal Color Design
-                ...lightTheme.personal,
-                // adjust interface
-                linkColor: lightTheme.personal.urlTextColor,
-              },
-              education: {
-                item: lightTheme.education.item,
-              },
-            },
-            verticalMainPane: {
-              introduction: lightTheme.introduction,
-              professional: lightTheme.professional,
-              portfolio: {
-                ...lightTheme.portfolio,
-                item: {
-                  ...lightTheme.portfolio.item,
-                  theme: {
-                    links: {
-                      ...lightTheme.portfolio.item.resourceLinks,
-                      item: {
-                        ...lightTheme.portfolio.item.resourceLinks.item,
-                        icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => ({
-                          svgStyles: {
-                            width: "12px",
-                            height: "12px",
-                            fill: lightTheme.portfolio.item.resourceLinks.item.color,
-                          },
-                        })),
-                      },
-                    },
-                    releases: {
-                      ...lightTheme.portfolio.item.releases,
-                      headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
-                      headerColor: lightTheme.portfolio.item.releases.color,
-                      releaseButtonTheme: {
-                        ...lightTheme.portfolio.item.releases.item,
-                        icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems }, () => ({
-                          svgStyles: {
-                            width: "12px",
-                            height: "12px",
-                            fill: lightTheme.portfolio.item.releases.item.color,
-                          },
-                        })),
-                      },
+          verticalMainPane: {
+            introduction: lightTheme.introduction,
+            professional: lightTheme.professional,
+            portfolio: {
+              ...lightTheme.portfolio,
+              item: {
+                ...lightTheme.portfolio.item,
+                theme: {
+                  links: {
+                    ...lightTheme.portfolio.item.resourceLinks,
+                    item: {
+                      ...lightTheme.portfolio.item.resourceLinks.item,
+                      icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => ({
+                        svgStyles: {
+                          width: "12px",
+                          height: "12px",
+                          fill: lightTheme.portfolio.item.resourceLinks.item.color,
+                        },
+                      })),
                     },
                   },
-                },
-              },
-              // ...lightTheme,
-              // containerBackgroundColor: lightTheme.backgroundColor,
-            },
-            bottomFooterPane: {
-              ...lightTheme.footerStyles,
-              // svgStyles: {
-              //   width: "15px",
-              //   height: "15px",
-              // }
-            },
-          },
-          // DARK THEME - MODE
-          dark: {
-            containerBackgroundColor: darkTheme.backgroundColor,
-            topHeaderPane: {
-              themeSwitch: darkTheme.themeSwitch,
-              navigationBar: darkTheme.navigationBar,
-              backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-            },
-            verticalSidePane: {
-              personalInfo: {
-                // pass Theme Personal Color Design
-                ...darkTheme.personal,
-                // adjust interface
-                linkColor: darkTheme.personal.urlTextColor,
-              },
-              education: {
-                item: darkTheme.education.item,
-              },
-            },
-            verticalMainPane: {
-              ...darkTheme,
-              portfolio: {
-                ...darkTheme.portfolio,
-                item: {
-                  ...darkTheme.portfolio.item,
-                  theme: {
-                    links: {
-                      ...darkTheme.portfolio.item.resourceLinks,
-                      item: {
-                        ...darkTheme.portfolio.item.resourceLinks.item,
-                        icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => ({
-                          svgStyles: {
-                            width: "12px",
-                            height: "12px",
-                            fill: darkTheme.portfolio.item.resourceLinks.item.color,
-                          },
-                        })),
-                      },
-                    },
-                    releases: {
-                      ...darkTheme.portfolio.item.releases,
-                      headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
-                      headerColor: darkTheme.portfolio.item.releases.color,
-                      releaseButtonTheme: {
-                        ...darkTheme.portfolio.item.releases.item,
-                        icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems }, () => ({
-                          svgStyles: {
-                            width: "12px",
-                            height: "12px",
-                            fill: darkTheme.portfolio.item.releases.item.color,
-                          },
-                        })),
-                      },
+                  releases: {
+                    ...lightTheme.portfolio.item.releases,
+                    headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+                    headerColor: lightTheme.portfolio.item.releases.color,
+                    releaseButtonTheme: {
+                      ...lightTheme.portfolio.item.releases.item,
+                      icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems }, () => ({
+                        svgStyles: {
+                          width: "12px",
+                          height: "12px",
+                          fill: lightTheme.portfolio.item.releases.item.color,
+                        },
+                      })),
                     },
                   },
                 },
               },
             },
-            bottomFooterPane: darkTheme.footerStyles,
+            // ...lightTheme,
+            // containerBackgroundColor: lightTheme.backgroundColor,
           },
-        }}
-        html={{
-          verticalMainPaneID: "vertical-main-pane",
-          bottomFooterPaneID: "bottom-footer-pane",
-        }}
-      />
+          bottomFooterPane: {
+            ...lightTheme.footerStyles,
+            // svgStyles: {
+            //   width: "15px",
+            //   height: "15px",
+            // }
+          },
+        },
+        // DARK THEME - MODE
+        dark: {
+          containerBackgroundColor: darkTheme.backgroundColor,
+          topHeaderPane: {
+            themeSwitch: darkTheme.themeSwitch,
+            navigationBar: darkTheme.navigationBar,
+            backgroundColor: darkTheme.topHeaderPane.backgroundColor,
+          },
+          verticalSidePane: {
+            personalInfo: {
+              // pass Theme Personal Color Design
+              ...darkTheme.personal,
+              // adjust interface
+              linkColor: darkTheme.personal.urlTextColor,
+            },
+            education: darkTheme.education,
+          },
+          verticalMainPane: {
+            ...darkTheme,
+            portfolio: {
+              ...darkTheme.portfolio,
+              item: {
+                ...darkTheme.portfolio.item,
+                theme: {
+                  links: {
+                    ...darkTheme.portfolio.item.resourceLinks,
+                    item: {
+                      ...darkTheme.portfolio.item.resourceLinks.item,
+                      icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => ({
+                        svgStyles: {
+                          width: "12px",
+                          height: "12px",
+                          fill: darkTheme.portfolio.item.resourceLinks.item.color,
+                        },
+                      })),
+                    },
+                  },
+                  releases: {
+                    ...darkTheme.portfolio.item.releases,
+                    headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
+                    headerColor: darkTheme.portfolio.item.releases.color,
+                    releaseButtonTheme: {
+                      ...darkTheme.portfolio.item.releases.item,
+                      icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems }, () => ({
+                        svgStyles: {
+                          width: "12px",
+                          height: "12px",
+                          fill: darkTheme.portfolio.item.releases.item.color,
+                        },
+                      })),
+                    },
+                  },
+                },
+              },
+            },
+          },
+          bottomFooterPane: darkTheme.footerStyles,
+        },
+      }}
+      html={{
+        verticalMainPaneID: "vertical-main-pane",
+        bottomFooterPaneID: "bottom-footer-pane",
+      }}
+    />
     // </main>
   );
 };

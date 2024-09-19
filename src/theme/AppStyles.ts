@@ -136,6 +136,11 @@ interface Theme {
 }
 
 // Used internally for type checking
+type TagTheme = Theme["education"]["item"]["tag"];
+interface ComputedTagTheme extends TagTheme {
+  fontFamily: string;
+  fontSize: string;
+}
 interface ComputedTheme extends Theme {
   //// ALL PERSONAL INFORMATION STYLES
   personal: {
@@ -206,6 +211,7 @@ interface ComputedTheme extends Theme {
     //   backgroundColor: string;
     //   padding: string;
     // };
+    containerBackgroundColor: string;
     item: {
       padding?: string;
       backgroundColor: string;
@@ -216,9 +222,17 @@ interface ComputedTheme extends Theme {
       // Common Styling that does not depend on color
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
-      tag: Theme["education"]["item"]["tag"];
+      degreeTitle: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      body: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      // tag: Theme["education"]["item"]["tag"];
+      tag: ComputedTagTheme;
     };
-    containerBackgroundColor: string;
   };
   //// ALL PORTFOLIO STYLES
   portfolio: {

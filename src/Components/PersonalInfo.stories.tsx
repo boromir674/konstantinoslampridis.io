@@ -14,7 +14,7 @@ const LightProps: PersonalInfoProps = {
     email: "email@gg.navi",
     github: "github.com/boromir674",
     gitlab: "gitlab.com/boromir674",
-    linkedin: "lknin/boromir674",
+    linkedin: "linkedin/boromir674",
   },
   theme: {
     ...lightTheme.personal,

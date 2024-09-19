@@ -66,6 +66,7 @@ interface PortfolioSectionContainerProps {
 const PortfolioSectionContainer = styled.div<PortfolioSectionContainerProps>`
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.color};
+  font-family: "Roboto", sans-serif;
 `;
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);

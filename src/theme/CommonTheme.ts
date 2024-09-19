@@ -62,6 +62,7 @@ const commonStyling = {
         itemsColorModeSwitchDelay: 1.2,
     },
     education: {
+        // EDUCATION SECTION TITLE
         title: {
             padding: "15px",
         },
@@ -70,6 +71,20 @@ const commonStyling = {
             onHoverBackgroundColorChangeDuration: "0.7s",
             // onHoverTransitionDelay: '1s',
             padding: "15px",
+            degreeTitle: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-family-name'],
+                // fontSize: DESIGN_TOKENS['--md-sys-typescale-display-small-font-size']
+                // fontSize: '54px',
+            },
+            body: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+            },
+            tags: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+            }
         },
     },
     portfolio: {

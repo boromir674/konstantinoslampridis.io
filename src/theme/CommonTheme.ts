@@ -89,6 +89,14 @@ const commonStyling = {
     },
     portfolio: {
         item: {
+            projectTitle: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
+            },
+            projectDescription: {
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-size"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
+            },
             outline: {
                 width: "3px",
             },

@@ -181,6 +181,8 @@ const App: FC = () => {
               item: {
                 ...lightTheme.portfolio.item,
                 theme: {
+                  // Portfolio Project Item - Project Title and Description
+                  ...lightTheme.portfolio.item,
                   links: {
                     ...lightTheme.portfolio.item.resourceLinks,
                     item: {
@@ -194,6 +196,7 @@ const App: FC = () => {
                       })),
                     },
                   },
+                  // Portfolio Project Item - Software Releases
                   releases: {
                     ...lightTheme.portfolio.item.releases,
                     headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
@@ -247,6 +250,10 @@ const App: FC = () => {
               item: {
                 ...darkTheme.portfolio.item,
                 theme: {
+                  ...darkTheme.portfolio.item,
+                  // Portfolio Project Item - Project Title and Description
+                  // projectTitle: darkTheme.portfolio.item.projectTitle,
+                  // projectDescription: darkTheme.portfolio.item.projectDescription,
                   links: {
                     ...darkTheme.portfolio.item.resourceLinks,
                     item: {

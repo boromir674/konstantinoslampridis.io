@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from "react";
 import Typography from '../Typography';
 import styled from "@emotion/styled";
+import { withDefaultProps } from "../hoc";
 import PortfolioItemInterface, {
   ReleaseItemData,
 } from "../../PortfolioItemInterface";
@@ -54,9 +55,50 @@ const RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT: { [key: string]: string } = {
   'ci/cd': 'CI/CD',
 };
 
+// COMPONENT - Project Title
+interface PortfolioItemProjectTitleProps {
+  theme: {
+    fontFamily: string;
+    fontSize?: string;
+  };
+};
+const PortfolioItemProjectTitleH2 = withDefaultProps({
+  variant: "h2",
+}, Typography);
+const PortfolioItemProjectTitle = styled(PortfolioItemProjectTitleH2) <PortfolioItemProjectTitleProps>`
+  margin: 0;
+  font-family: ${props => props.theme?.fontFamily || "inherit"};
+  font-size: ${props => props.theme?.fontSize || "24px"};
+  font-weight: bold;
+`;
+
+// COMPONENT - Project Description
+interface PortfolioItemProjectDescriptionProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+};
+const PortfolioItemProjectDescriptionP = withDefaultProps({
+  variant: "body1",
+}, Typography);
+const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
+  // margin: 0;
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontSize};
+  // font-weight: bold;
+`;
 interface AppPortfolioItemProps {
   data: PortfolioItemInterface;
   theme: {
+    projectTitle: {
+      fontFamily: string;
+      fontSize?: string;
+    };
+    projectDescription: {
+      fontFamily: string;
+      fontSize: string;
+    };
     links: AppProjectLinksPaneProps['theme'];
     releases: ReleasesPaneProps["theme"];
   };
@@ -64,13 +106,14 @@ interface AppPortfolioItemProps {
 }
 
 const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
+  console.log('theme', theme);
   return (
     <>
-      <h1>{d.title}</h1>
+      <PortfolioItemProjectTitle theme={theme.projectTitle}>{d.title}</PortfolioItemProjectTitle>
       {/* Project Description. Could be github description or description from CV Pdf */}
-      <Typography variant="body1" gutterBottom>
+      <PortfolioItemProjectDescription theme={theme.projectDescription}>
         {d.description}
-      </Typography>
+      </PortfolioItemProjectDescription>
       <BottomPartBlock>
         <LeftPane>
           {d.resource_links ? (

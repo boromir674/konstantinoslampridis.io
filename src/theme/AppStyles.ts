@@ -239,6 +239,12 @@ interface ComputedTheme extends Theme {
     container: Theme["portfolio"]["container"];
     sectionHeader: Theme["portfolio"]["sectionHeader"];
     item: {
+      projectTitle: {
+        fontFamily: string;
+      };
+      projectDescription: {
+        fontFamily: string;
+      };
       outline: {
         color: string;
         width: string;

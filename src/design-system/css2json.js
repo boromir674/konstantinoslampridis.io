@@ -16,6 +16,7 @@ function parseCSS(cssString) {
   let currentCategory = null;
 
   for (let i = 0; i < lines.length; i++) {
+    console.log("[DEBUG} TOKEN TOP LEVEL KEYS:", Object.keys(tokens));
     const line = lines[i].trim();
     // skip empty lines first and foremost
     if (
@@ -30,7 +31,10 @@ function parseCSS(cssString) {
       const parts = line.split("@")[1].trim().split(" ");
       const category = parts.slice(1).join(" ");
       currentCategory = category;
-      tokens[currentCategory] = {};
+      // Update value that tracks the Currently Processing Category
+      if (!tokens[currentCategory]) {
+        tokens[currentCategory] = {};
+      }
     } else if (line.startsWith("--md")) {
       // Extract tokens like "--md-sys-color-primary: #ff9288;"
       const [tokenName, tokenValue] = line
@@ -59,7 +63,7 @@ function cssFileToJson(inputFilePath, outputFilePath) {
     } else {
       // Convert CSS to JSON
       let jsonData = parseCSS(cssString);
-      
+
       // assert object has exact keys: Colors "Font Families", "Font Weights", "Font Sizes", "Line Heights", "Letter Spacings"
       const keys = Object.keys(jsonData);
 

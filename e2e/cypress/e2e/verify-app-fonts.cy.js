@@ -17,9 +17,7 @@ describe("Verify Fonts Primary/Secondary are applied as expected", () => {
 
     // THEN Navigation Bar Text should have the Primary Font
     it(`Verify Navigation Bar has Primary Font: ${EXPECTED_PRIMARY_FONT}`, () => {
-        // cy.get('nav').should('have.css', 'font-family', EXPECTED_PRIMARY_FONT);
-        // TODO: FIX by using Font from Design System
-        cy.get('nav').should('have.css', 'font-family', '"Times New Roman"');
+        cy.get('nav').should('have.css', 'font-family', EXPECTED_PRIMARY_FONT);
     });
 
     // THEN the text of the Professional Section Title Header should have the Primary Font

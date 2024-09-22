@@ -79,7 +79,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       </div>
     </div>
     <nav
-      className="css-1cyn0a8"
+      className="css-qx08l1"
     >
       <a
         className="css-arku82"
@@ -378,7 +378,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-eqcqji"
       >
         <h3
-          className="css-djbww"
+          className="css-1td1kb3"
           style={
             {
               "marginBottom": undefined,
@@ -479,7 +479,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-eqcqji"
       >
         <h3
-          className="css-djbww"
+          className="css-1td1kb3"
           style={
             {
               "marginBottom": undefined,

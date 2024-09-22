@@ -67,6 +67,10 @@ const mergeStylings = (
     portfolio: {
       ...theme.portfolio,
       ...commonStyling.portfolio,
+      sectionHeader: {
+        ...theme.portfolio.sectionHeader,
+        ...commonStyling.portfolio.sectionHeader,
+      },
       item: {
         ...theme.portfolio.item,
         ...commonStyling.portfolio.item,
@@ -77,14 +81,11 @@ const mergeStylings = (
         // Project Links - Pane
         resourceLinks: {
           ...theme.portfolio.item.resourceLinks,
+          ...commonStyling.portfolio.item.resourceLinks,
           item: {
             ...theme.portfolio.item.resourceLinks.item,
             ...commonStyling.portfolio.item.resourceLinks.item,
           },
-          header: {
-            fontFamily: "",
-            fontSize: ""
-          }
         },
         // Software Releases - Pane
         releases: {

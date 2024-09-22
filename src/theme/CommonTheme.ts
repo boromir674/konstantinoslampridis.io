@@ -93,29 +93,39 @@ const commonStyling = {
             }
         },
     },
+    // PORTFOLIO SECTION
     portfolio: {
+        sectionHeader: {
+            fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
+            fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
+        },
+        resetLayoutButton: {
+            fontFamily: DESIGN_TOKENS["--md-sys-typescale-label-large-font-family-name"],
+            fontSize: DESIGN_TOKENS['--md-sys-typescale-label-large-font-size'],
+            // fontSize: "22px",
+        },
         item: {
             projectTitle: {
                 fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
             },
             projectDescription: {
-                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
-                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
             },
             outline: {
                 width: "3px",
             },
             // Resource Links - Pane
-            resourceLinks: {
+            resourceLinks: {  // TODO test that font size and family is passed as css styles through props
                 header: {
-                    fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                    fontFamily: DESIGN_TOKENS["--md-sys-typescale-title-medium-font-family-name"],
                     // fontFamily: 'times new roman',
-                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+                    fontSize: DESIGN_TOKENS['--md-sys-typescale-title-medium-font-size'],
                 },
                 item: {
                     fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
-                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
+                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
                     iconStyles: {
                         width: "14px",
                         height: "14px",
@@ -123,9 +133,9 @@ const commonStyling = {
                 },
             },
             // Releases Pane
-            releases: {
-                headerFont: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-family-name'],
-                headerFontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
+            releases: {  // TODO test that font size and family is passed as css styles through props
+                headerFont: DESIGN_TOKENS['--md-sys-typescale-title-medium-font-family-name'],
+                headerFontSize: DESIGN_TOKENS['--md-sys-typescale-title-medium-font-size'],
                 headerMarginBottom: "15px",
                 item: {
                     font: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-family-name'],

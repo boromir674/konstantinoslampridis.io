@@ -146,6 +146,12 @@ interface ComputedNavigationBarTheme extends NavigationBarTheme {
   fontFamily: string;
   fontSize: string;
 };
+type PortfolioSectionTitleHeaderTheme = Theme["portfolio"]["sectionHeader"];
+interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitleHeaderTheme {
+  fontFamily: string;
+  fontSize: string;
+}
+
 interface ComputedTheme extends Theme {
   navigationBar: ComputedNavigationBarTheme;
   //// ALL PERSONAL INFORMATION STYLES
@@ -243,7 +249,16 @@ interface ComputedTheme extends Theme {
   //// ALL PORTFOLIO STYLES
   portfolio: {
     container: Theme["portfolio"]["container"];
-    sectionHeader: Theme["portfolio"]["sectionHeader"];
+    // Portfolio Section Title/Header
+    sectionHeader: ComputedPortfolioSectionTitleHeaderTheme;
+    // Reset Layout Button
+    resetLayoutButton: {
+      fontFamily: string;
+      fontSize: string;
+      // color: string;
+      // backgroundColor: string;
+    };
+    // Common styles per Portfolio Item
     item: {
       projectTitle: {
         fontFamily: string;

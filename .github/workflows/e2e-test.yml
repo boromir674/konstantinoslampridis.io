@@ -39,5 +39,5 @@ jobs:
           npx -y http-server ./build -p 9000 &
           SERVER_PID=$!
           npx -y wait-on http://localhost:9000
-          cd ./e2e && cypress run --browser ${{ matrix.browser }} --spec cypress/e2e/*.cy.js --config baseUrl=http://localhost:9000
+          cd ./e2e && cypress run --browser ${{ matrix.browser }} --spec "cypress/e2e/*.cy.js" --config baseUrl=http://localhost:9000
           kill $SERVER_PID

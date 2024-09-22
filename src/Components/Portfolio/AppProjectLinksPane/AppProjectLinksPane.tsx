@@ -84,16 +84,14 @@ const IconWrapper = styled.span`
 // COMPONENT - Resource Links Header / Title
 interface ResourceLinksHeaderProps {
     theme: {
-        fontFamily: string;
+        fontFamily?: string;
         fontSize: string;
         color: string;
     };
 };
-const ResourceLinksHeaderH3 = withDefaultProps({
-    variant: "h3",
-}, Typography);
+const ResourceLinksHeaderH3 = withDefaultProps({variant: "h3"}, Typography);
 const ResourceLinksHeader = styled(ResourceLinksHeaderH3) <ResourceLinksHeaderProps>`
-    font-family: ${props => props.theme.fontFamily};
+    font-family: ${props => props.theme.fontFamily || "inherit"};
     font-size: ${props => props.theme.fontSize};
     color: ${props => props.theme.color};
 `;

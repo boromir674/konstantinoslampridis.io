@@ -79,14 +79,24 @@ interface PortfolioItemProjectDescriptionProps {
     fontSize: string;
   };
 };
-const PortfolioItemProjectDescriptionP = withDefaultProps({
-  variant: "body1",
-}, Typography);
+const PortfolioItemProjectDescriptionP = withDefaultProps({variant: "body1"}, Typography);
 const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
   // margin: 0;
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
   // font-weight: bold;
+`;
+// COMPONENT - Software maturity Level
+interface SoftwareMaturityLevelProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+};
+const SoftwareMaturityLevelSpan = withDefaultProps({component: 'span'}, Typography);
+const SoftwareMaturityLevel = styled(SoftwareMaturityLevelSpan) <SoftwareMaturityLevelProps>`
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontSize};
 `;
 interface AppPortfolioItemProps {
   data: PortfolioItemInterface;
@@ -136,13 +146,15 @@ const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]
           )}
         </LeftPane>
         <RightPane>
-          <span>Software maturity level: {d.status}</span>
+          {/* NOTE: we are using the same objects as the Props of PortfolioItemProjectDescription */}
+          <SoftwareMaturityLevel theme={theme.projectDescription}>Software maturity level: {d.status}</SoftwareMaturityLevel>
           {/* A Block where each element covers a line */}
           {/* Each element should be able to wrap below according to size of block */}
           {d.release ? (
             <AppReleasePane data={d.release} theme={{
               headerFontFamily: theme.releases.headerFontFamily,
               headerColor: theme.releases.headerColor,
+              headerFontSize: theme.releases.headerFontSize,
               headerMarginBottom: theme.releases.headerMarginBottom,
               releaseButtonTheme: theme.releases.releaseButtonTheme,
             }} />

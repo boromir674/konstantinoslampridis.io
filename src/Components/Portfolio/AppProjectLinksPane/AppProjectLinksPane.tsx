@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 
 import { createSVGIcon } from '../../SVGIcons';
 
-
+import { withDefaultProps } from '../../hoc';
 import Typography from '../../Typography';
 
 import AppResourceLinkButton from './AppResourceLinkButton'
@@ -43,6 +43,10 @@ interface AppProjectLinksPaneProps {
     theme: {
         // headerFontFamily: string;
         headerColor: string;
+        header: {
+            fontFamily: string;
+            fontSize: string;
+        };
         item: {  // Styles per Project Link
             color: string;
             backgroundColor: string;
@@ -77,6 +81,23 @@ const IconWrapper = styled.span`
   margin-right: 5px;
 `;
 
+// COMPONENT - Resource Links Header / Title
+interface ResourceLinksHeaderProps {
+    theme: {
+        fontFamily: string;
+        fontSize: string;
+        color: string;
+    };
+};
+const ResourceLinksHeaderH3 = withDefaultProps({
+    variant: "h3",
+}, Typography);
+const ResourceLinksHeader = styled(ResourceLinksHeaderH3) <ResourceLinksHeaderProps>`
+    font-family: ${props => props.theme.fontFamily};
+    font-size: ${props => props.theme.fontSize};
+    color: ${props => props.theme.color};
+`;
+
 const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
     // ovverides for svg and its inner path(s) styles, need to recompute only if specific theme properties change
 
@@ -84,16 +105,8 @@ const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
         <DivContainer>
             <DivContent>
                 {/* Resource Links - HEADER TITLE */}
-                <Typography variant="h3"
-                    style={{
-                        // fontFamily: 'Roboto, sans-serif',
-                        color: theme.headerColor,
-                        // marginBottom: theme.headerMarginBottom
-                    }}
-                >
-                    Resource Links
-                </Typography>
-
+                <ResourceLinksHeader theme={{...theme.header, color: theme.headerColor}}>Resource Links</ResourceLinksHeader>
+                {/* Resource Links - List of Links */}
                 <ResourcesLinksDiv>
                     {data.links.map((link, index) => (
                         <AppResourceLinkButton

@@ -127,7 +127,8 @@ const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]
               }}
               theme={{
                 headerColor: theme.links.headerColor,
-                item: theme.links.item
+                item: theme.links.item,
+                header: theme.links.header,
               }}
             ></AppProjectLinksPane>
           ) : (

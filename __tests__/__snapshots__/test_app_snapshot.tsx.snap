@@ -2361,21 +2361,27 @@ Working asynchronously and fully remotely on adding features and automating (bac
       </div>
     </div>
     <div
-      className="css-rc6x81"
+      className="css-1koo0nk"
       id="open-source-portfolio-section"
     >
       <h1
+        className="css-gj5vb0"
         style={
           {
-            "backgroundColor": "#ffdad6",
-            "color": "#2c1513",
+            "marginBottom": undefined,
           }
         }
       >
         Open Source & Portfolio
       </h1>
       <button
+        className="css-1ysyhpi"
         onClick={[Function]}
+        style={
+          {
+            "marginBottom": undefined,
+          }
+        }
       >
         Reset Layout
       </button>

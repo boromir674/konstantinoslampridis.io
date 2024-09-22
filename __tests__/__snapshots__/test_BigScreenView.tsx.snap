@@ -649,15 +649,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="css-rc6x81"
+        class="css-1koo0nk"
         id="open-source-portfolio-section"
       >
         <h1
-          style="background-color: rgb(255, 218, 214); color: rgb(44, 21, 19);"
+          class="css-gj5vb0"
         >
           Open Source & Portfolio
         </h1>
-        <button>
+        <button
+          class="css-1ysyhpi"
+        >
           Reset Layout
         </button>
         <div

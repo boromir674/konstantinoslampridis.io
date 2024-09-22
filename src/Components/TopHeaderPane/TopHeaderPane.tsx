@@ -7,6 +7,8 @@ import { HorizontalNavBar } from "../Navigation";
 interface TopHeaderPaneTheme {
   backgroundColor: string;
   navigationBar: {
+    fontFamily: string;
+    fontSize: string;
     textColor: string;
     backgroundColor: string;
     hoverBackgroundColor: string;
@@ -90,6 +92,8 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
         )}
         activeItem={sections[0].name}
         theme={{
+          fontFamily: theme.navigationBar.fontFamily,
+          fontSize: theme.navigationBar.fontSize,
           colorSet: theme.navigationBar,
           padding: {
             vertical: "8px",

@@ -8,6 +8,12 @@ import DESIGN_TOKENS from "../design-system/tokens.json";
 
 
 const commonStyling = {
+    // NAVIGATION BAR (in header)
+    navigationBar: {
+        fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-small-font-family-name"],
+        // fontFamily: 'Roboto, sans-serif',
+        fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-small-font-size'],
+    },
     // fontFamily: "Roboto, sans-serif",
     fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
     // fontSize: "16px",
@@ -73,7 +79,7 @@ const commonStyling = {
             padding: "15px",
             degreeTitle: {
                 fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
-                fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-family-name'],
+                fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
                 // fontSize: DESIGN_TOKENS['--md-sys-typescale-display-small-font-size']
                 // fontSize: '54px',
             },
@@ -94,7 +100,7 @@ const commonStyling = {
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
             },
             projectDescription: {
-                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-size"],
+                fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
             },
             outline: {
@@ -102,7 +108,14 @@ const commonStyling = {
             },
             // Resource Links - Pane
             resourceLinks: {
+                header: {
+                    fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
+                    // fontFamily: 'times new roman',
+                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+                },
                 item: {
+                    fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
+                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
                     iconStyles: {
                         width: "14px",
                         height: "14px",
@@ -111,10 +124,12 @@ const commonStyling = {
             },
             // Releases Pane
             releases: {
-                headerFont: "Roboto, sans-serif",
+                headerFont: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-family-name'],
+                headerFontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
                 headerMarginBottom: "15px",
                 item: {
-                    font: "Roboto, sans-serif",
+                    font: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-family-name'],
+                    fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
                     iconStyles: {
                         width: "14px",
                         height: "14px",

@@ -141,7 +141,13 @@ interface ComputedTagTheme extends TagTheme {
   fontFamily: string;
   fontSize: string;
 }
+type NavigationBarTheme = Theme["navigationBar"];
+interface ComputedNavigationBarTheme extends NavigationBarTheme {
+  fontFamily: string;
+  fontSize: string;
+};
 interface ComputedTheme extends Theme {
+  navigationBar: ComputedNavigationBarTheme;
   //// ALL PERSONAL INFORMATION STYLES
   personal: {
     textColor: Theme["personal"]["textColor"];
@@ -241,9 +247,11 @@ interface ComputedTheme extends Theme {
     item: {
       projectTitle: {
         fontFamily: string;
+        fontSize: string;
       };
       projectDescription: {
         fontFamily: string;
+        fontSize: string;
       };
       outline: {
         color: string;
@@ -256,12 +264,19 @@ interface ComputedTheme extends Theme {
       resourceLinks: {
         backgroundColor: string;
         headerColor: string;
+        header: {
+          fontFamily: string;
+          fontSize: string;
+        };
         item: {
           // Colors
           backgroundColor: string;
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // Font
+          fontFamily: string;
+          fontSize: string;
           // Sizing for SVG Icons
           iconStyles: {
             width: string;
@@ -275,6 +290,8 @@ interface ComputedTheme extends Theme {
         color: string;
         // other styles
         fontFamily: string;
+        headerFontFamily: string;
+        headerFontSize: string;
         headerMarginBottom: string;
         item: {
           // Color styles
@@ -284,6 +301,8 @@ interface ComputedTheme extends Theme {
           onHoverColor: string;
           // other styles
           fontFamily: string;
+          font: string;
+          fontSize: string;
           // Sizing for SVG Icons
           iconStyles: {
             width: string;

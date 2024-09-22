@@ -17,6 +17,11 @@ const mergeStylings = (
     ...theme,
     ...commonStyling,
 
+    navigationBar: {
+      ...theme.navigationBar,
+      ...commonStyling.navigationBar
+    },
+
     personal: {
       ...theme.personal,
       ...commonStyling.personal,
@@ -76,10 +81,16 @@ const mergeStylings = (
             ...theme.portfolio.item.resourceLinks.item,
             ...commonStyling.portfolio.item.resourceLinks.item,
           },
+          header: {
+            fontFamily: "",
+            fontSize: ""
+          }
         },
         // Software Releases - Pane
         releases: {
           ...theme.portfolio.item.releases,
+          ...commonStyling.portfolio.item.releases,
+          headerFontFamily: commonStyling.portfolio.item.releases.headerFont,
           fontFamily: commonStyling.portfolio.item.releases.headerFont,
           headerMarginBottom: commonStyling.portfolio.item.releases.headerMarginBottom,
           item: {

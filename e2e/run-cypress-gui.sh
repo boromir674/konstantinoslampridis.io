@@ -8,6 +8,6 @@ xhost +
 
 # docker-compose -f docker-compose.yml -f cy-open.yml up --exit-code-from cypress
 
-docker-compose -f e2e/docker-compose.yml -f e2e/cy-open.yml up --exit-code-from cypress
+docker-compose -f e2e/docker-compose.yml -f e2e/cy-open.yml up --build --exit-code-from cypress
 
 xhost -

@@ -31,7 +31,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         </div>
       </div>
       <nav
-        class="css-1cyn0a8"
+        class="css-qx08l1"
       >
         <a
           class="css-arku82"
@@ -60,13 +60,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-kp9dvk"
         >
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             Name:
           </span>
            
           <span
-            class="css-3vqpkh"
+            class="css-1pgu2xd"
           >
             John Doe
           </span>
@@ -75,13 +75,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-kp9dvk"
         >
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             Email:
           </span>
            
           <span
-            class="css-3vqpkh"
+            class="css-1pgu2xd"
           >
             jd@email.io
           </span>
@@ -90,13 +90,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-kp9dvk"
         >
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             Github:
           </span>
            
           <span
-            class="css-3vqpkh"
+            class="css-1pgu2xd"
           >
             <a
               class="css-1gyz2k7"
@@ -138,13 +138,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-kp9dvk"
         >
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             Gitlab:
           </span>
            
           <span
-            class="css-3vqpkh"
+            class="css-1pgu2xd"
           >
             <a
               class="css-1gyz2k7"
@@ -186,13 +186,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-kp9dvk"
         >
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             LinkedIn:
           </span>
            
           <span
-            class="css-3vqpkh"
+            class="css-1pgu2xd"
           >
             <a
               class="css-1gyz2k7"
@@ -235,7 +235,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         >
            
           <span
-            class="css-1jbfuhw"
+            class="css-bwb5ro"
           >
             Curricular Docs:
           </span>
@@ -327,12 +327,12 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-eqcqji"
         >
           <h3
-            class="css-dbagas"
+            class="css-1td1kb3"
           >
             MSc in Artificial Intelligence
           </h3>
           <h4
-            class="css-p7xzix"
+            class="css-oh44f7"
           >
             University of Amsterdam
           </h4>
@@ -341,19 +341,19 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           >
             <a>
               <p
-                class="css-uzd3yx"
+                class="css-12f1dh1"
               >
                 Amsterdam, Netherlands
               </p>
               <span
-                class="css-1l6q7jx"
+                class="css-9o6sth"
               >
                 2014 - 2019
               </span>
             </a>
           </span>
           <p
-            class="css-dbagas"
+            class="css-1mvjx7v"
           >
             Thesis: 
             Political Spectrum Aware Topic Model
@@ -362,22 +362,22 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             class="css-bvngjg"
           >
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               ML
             </span>
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               CV
             </span>
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               RL
             </span>
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               NLP
             </span>
@@ -387,12 +387,12 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-eqcqji"
         >
           <h3
-            class="css-dbagas"
+            class="css-1td1kb3"
           >
             BSc in Applied Informatics
           </h3>
           <h4
-            class="css-p7xzix"
+            class="css-oh44f7"
           >
             University of Macedonia
           </h4>
@@ -401,19 +401,19 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           >
             <a>
               <p
-                class="css-uzd3yx"
+                class="css-12f1dh1"
               >
                 Thessaloniki, Greece
               </p>
               <span
-                class="css-1l6q7jx"
+                class="css-9o6sth"
               >
                 2008 - 2013
               </span>
             </a>
           </span>
           <p
-            class="css-dbagas"
+            class="css-1mvjx7v"
           >
             Thesis: 
             Computational Analysis of Simplex Points Algorithm
@@ -422,17 +422,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             class="css-bvngjg"
           >
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               Operating Systems
             </span>
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               Linear Programming
             </span>
             <span
-              class="css-ccouac"
+              class="css-1szrj99"
             >
               Discreet Mathematics
             </span>
@@ -444,7 +444,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
       class="css-lpnzm1"
     >
       <div
-        class="css-8938kg"
+        class="css-8her76"
         id="introduction-section"
       >
         <p
@@ -495,7 +495,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         id="professional-section"
       >
         <h1
-          class="css-149z3qr"
+          class="css-1glvia5"
         >
           Professional Career
         </h1>
@@ -506,7 +506,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
           >
             <h3
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              class="css-1wtdklz"
             >
               Software Engineer
             </h3>
@@ -531,7 +531,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               I worked at GG Navi as a Software Engineer.
             </p>
             <p
-              style="margin-bottom: 12px;"
+              style="margin-bottom: 12px; font-family: Roboto, sans-serif; font-size: 16px;"
             >
               Activities
             </p>
@@ -558,15 +558,15 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               </li>
             </ul>
             <div
-              class="css-tiry6g"
+              class="css-112f423"
             >
               <span
-                class="css-1ywvkip"
+                class="css-e1ywo8"
               >
                 python
               </span>
               <span
-                class="css-1ywvkip"
+                class="css-e1ywo8"
               >
                 docker
               </span>
@@ -574,13 +574,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="css-ea9ttx"
+          class="css-yhb7v1"
         >
           <div
             css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
           >
             <h3
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              class="css-1wtdklz"
             >
               Software Engineer
             </h3>
@@ -605,7 +605,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               I worked at GG Navi as a Software Engineer.
             </p>
             <p
-              style="margin-bottom: 12px;"
+              style="margin-bottom: 12px; font-family: Roboto, sans-serif; font-size: 16px;"
             >
               Activities
             </p>
@@ -632,15 +632,15 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               </li>
             </ul>
             <div
-              class="css-tiry6g"
+              class="css-112f423"
             >
               <span
-                class="css-1ywvkip"
+                class="css-e1ywo8"
               >
                 python
               </span>
               <span
-                class="css-1ywvkip"
+                class="css-e1ywo8"
               >
                 docker
               </span>
@@ -653,11 +653,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         id="open-source-portfolio-section"
       >
         <h1
-          style="background-color: rgb(255, 218, 214); color: rgb(44, 21, 19);"
+          class="css-gj5vb0"
         >
           Open Source & Portfolio
         </h1>
-        <button>
+        <button
+          class="css-1ysyhpi"
+        >
           Reset Layout
         </button>
         <div

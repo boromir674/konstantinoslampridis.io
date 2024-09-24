@@ -9,10 +9,7 @@ import { render } from "@testing-library/react";
 
 // Business-logic Imports
 import BigScreenView, { BigScreenViewProps } from "../src/Components/BigScreenView";
-import lightMode from "../src/LightMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../src/AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
+import { lightTheme } from '../src/theme';
 
 
 // PROPS VALUES
@@ -27,17 +24,10 @@ const args: BigScreenViewProps = {
     },
     verticalSidePane: {
       personalInfo: {
-        containerBackgroundColor: lightTheme.personal.containerBackgroundColor,
-        textColor: lightTheme.personal.textColor,
+        ...lightTheme.personal,
         linkColor: lightTheme.personal.urlTextColor,
-        externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
       },
-      education: {
-        // containerBackgroundColor:
-        //   lightTheme.education.containerBackgroundColor,
-        // title: lightTheme.education.title,
-        item: lightTheme.education.item,
-      },
+      education: lightTheme.education,
     },
     verticalMainPane: {
       introduction: lightTheme.introduction,
@@ -281,7 +271,7 @@ const args: BigScreenViewProps = {
                 urlText: "https://pypi.org/projects/cookiecutter-python-package",
                 artifact_version: "v0.6.1",
               },
-    
+
             ],
             tags: [
               "Neural Style Transfer",
@@ -397,7 +387,7 @@ describe("Test App width = 700", () => {
   test("matches the snapshot", () => {
     const { container: mobile } = render(
       <ResponsiveContext.Provider value={{ width: 700 }}>
-        <BigScreenView {...Light.args}/>
+        <BigScreenView {...Light.args} />
       </ResponsiveContext.Provider>
     );
     expect(mobile).toMatchSnapshot();

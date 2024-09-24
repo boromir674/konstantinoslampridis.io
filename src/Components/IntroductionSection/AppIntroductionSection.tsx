@@ -22,6 +22,8 @@ interface StyledIntroductionSectionContainerProps {
 }
 
 const StyledIntroductionSectionContainer = styled.div<StyledIntroductionSectionContainerProps>`
+  // font-family: 'Roboto', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   background-color: ${(props) => props.theme.containerBackgroundColor};
   color: ${(props) => props.theme.textColor};
   font-size: 24px;

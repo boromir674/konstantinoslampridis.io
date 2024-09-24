@@ -17,12 +17,7 @@ import VerticalMainPane, { AppVerticalMainPaneProps } from '../src/Components/Ve
 import BottomFooterPane, { BottomFooterPaneProps } from '../src/Components/BottomFooterPane';
 import BigScreenView, { BigScreenViewProps } from "../src/Components/BigScreenView";
 
-import lightMode from "../src/LightMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../src/AppStyles";
-
-// Support Code: Constant Props Values
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-
+import { lightTheme } from '../src/theme';
 
 // Vertical Main Pane - input props
 const verticalMainPaneProps: AppVerticalMainPaneProps = {
@@ -376,17 +371,10 @@ const bigScreenViewProps: BigScreenViewProps = {
         },
         verticalSidePane: {
             personalInfo: {
-                containerBackgroundColor: lightTheme.personal.containerBackgroundColor,
-                textColor: lightTheme.personal.textColor,
+                ...lightTheme.personal,
                 linkColor: lightTheme.personal.urlTextColor,
-                externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
             },
-            education: {
-                // containerBackgroundColor:
-                //   lightTheme.education.containerBackgroundColor,
-                // title: lightTheme.education.title,
-                item: lightTheme.education.item,
-            },
+            education: lightTheme.education,
         },
         verticalMainPane: {
             introduction: lightTheme.introduction,

@@ -136,7 +136,41 @@ interface Theme {
 }
 
 // Used internally for type checking
+type TagTheme = Theme["education"]["item"]["tag"];
+interface ComputedTagTheme extends TagTheme {
+  fontFamily: string;
+  fontSize: string;
+}
+type NavigationBarTheme = Theme["navigationBar"];
+interface ComputedNavigationBarTheme extends NavigationBarTheme {
+  fontFamily: string;
+  fontSize: string;
+};
+type PortfolioSectionTitleHeaderTheme = Theme["portfolio"]["sectionHeader"];
+interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitleHeaderTheme {
+  fontFamily: string;
+  fontSize: string;
+}
+
 interface ComputedTheme extends Theme {
+  navigationBar: ComputedNavigationBarTheme;
+  //// ALL PERSONAL INFORMATION STYLES
+  personal: {
+    textColor: Theme["personal"]["textColor"];
+    urlTextColor: Theme["personal"]["urlTextColor"];
+    containerBackgroundColor: Theme["personal"]["containerBackgroundColor"];
+    externalURLSVGColor: Theme["personal"]["externalURLSVGColor"];
+    infoItem: {
+      key: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      value: {
+        fontFamily: string;
+        fontSize: string;
+      };
+    };
+  };
   //// ALL PROFESSIONAL STYLES
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
@@ -144,6 +178,8 @@ interface ComputedTheme extends Theme {
       textColor: Theme["professional"]["title"]["textColor"];
       backgroundColor: Theme["professional"]["title"]["backgroundColor"];
       padding: string;
+      fontFamily: string;
+      fontSize: string;
     };
     item: {
       padding?: string;
@@ -154,12 +190,22 @@ interface ComputedTheme extends Theme {
       onHoverTextColor: string;
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
+      title: {
+        fontFamily: string;
+        fontSize: string;
+      },
+      body: {
+        fontFamily: string;
+        fontSize: string;
+      },
       tag: {
         backgroundColor: string;
         textColor: string;
         onHoverBackgroundColor: string;
         onHoverTextColor: string;
         outlineColor: string;
+        fontFamily: string;
+        fontSize: string;
       };
     };
     // defines whether there will be a delay between the the top item and the
@@ -177,6 +223,7 @@ interface ComputedTheme extends Theme {
     //   backgroundColor: string;
     //   padding: string;
     // };
+    containerBackgroundColor: string;
     item: {
       padding?: string;
       backgroundColor: string;
@@ -187,15 +234,40 @@ interface ComputedTheme extends Theme {
       // Common Styling that does not depend on color
       onHoverTransformDuration: string;
       onHoverBackgroundColorChangeDuration: string;
-      tag: Theme["education"]["item"]["tag"];
+      degreeTitle: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      body: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      // tag: Theme["education"]["item"]["tag"];
+      tag: ComputedTagTheme;
     };
-    containerBackgroundColor: string;
   };
   //// ALL PORTFOLIO STYLES
   portfolio: {
     container: Theme["portfolio"]["container"];
-    sectionHeader: Theme["portfolio"]["sectionHeader"];
+    // Portfolio Section Title/Header
+    sectionHeader: ComputedPortfolioSectionTitleHeaderTheme;
+    // Reset Layout Button
+    resetLayoutButton: {
+      fontFamily: string;
+      fontSize: string;
+      // color: string;
+      // backgroundColor: string;
+    };
+    // Common styles per Portfolio Item
     item: {
+      projectTitle: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      projectDescription: {
+        fontFamily: string;
+        fontSize: string;
+      };
       outline: {
         color: string;
         width: string;
@@ -207,12 +279,19 @@ interface ComputedTheme extends Theme {
       resourceLinks: {
         backgroundColor: string;
         headerColor: string;
+        header: {
+          fontFamily: string;
+          fontSize: string;
+        };
         item: {
           // Colors
           backgroundColor: string;
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // Font
+          fontFamily: string;
+          fontSize: string;
           // Sizing for SVG Icons
           iconStyles: {
             width: string;
@@ -226,6 +305,8 @@ interface ComputedTheme extends Theme {
         color: string;
         // other styles
         fontFamily: string;
+        headerFontFamily: string;
+        headerFontSize: string;
         headerMarginBottom: string;
         item: {
           // Color styles
@@ -235,6 +316,8 @@ interface ComputedTheme extends Theme {
           onHoverColor: string;
           // other styles
           fontFamily: string;
+          font: string;
+          fontSize: string;
           // Sizing for SVG Icons
           iconStyles: {
             width: string;
@@ -256,154 +339,9 @@ interface ComputedTheme extends Theme {
   }
 }
 
-// DESIGNER SPACE
-// COMMON Styling Configuration between Light and Dark Modes
-
-const commonStyling = {
-  fontFamily: "Roboto, sans-serif",
-  fontSize: "16px",
-  fontWeight: "400",
-  lineHeight: "1.5",
-  letterSpacing: "0.00938em",
-  // Domain Specific Styling
-  professional: {
-    title: {
-      padding: "15px",
-    },
-    item: {
-      padding: "15px",
-      onHoverTransformDuration: "0.5s",
-      onHoverBackgroundColorChangeDuration: "0.7s",
-      // onHoverTransitionDelay: '1s',
-    },
-    itemsColorModeSwitchDelay: 1.2,
-  },
-  education: {
-    title: {
-      padding: "15px",
-    },
-    item: {
-      onHoverTransformDuration: "1.6s",
-      onHoverBackgroundColorChangeDuration: "0.7s",
-      // onHoverTransitionDelay: '1s',
-      padding: "15px",
-    },
-  },
-  portfolio: {
-    item: {
-      outline: {
-        width: "3px",
-      },
-      // Resource Links - Pane
-      resourceLinks: {
-        item: {
-          iconStyles: {
-            width: "14px",
-            height: "14px",
-          },
-        },
-      },
-      // Releases Pane
-      releases: {
-        headerFont: "Roboto, sans-serif",
-        headerMarginBottom: "15px",
-        item: {
-          font: "Roboto, sans-serif",
-          iconStyles: {
-            width: "14px",
-            height: "14px",
-          },
-        },
-      },
-    },
-  },
-  footerStyles: {
-    svgStyles: {
-      width: "18px",
-      height: "18px",
-    },
-    // fill: lightTheme.portfolio.item.releases.item.color,
-  },
-};
 
 
-// Computing the final (Light + Common Styles, Dark + Common Styles) Theme
-type CommonStyling = typeof commonStyling;
 
-const mergeStylings = (
-  theme: Theme,
-  commonStyling: CommonStyling
-): ComputedTheme => {
-  return {
-    ...theme,
-    ...commonStyling,
 
-    professional: {
-      containerBackgroundColor: theme.professional.containerBackgroundColor,
-      title: {
-        ...theme.professional.title,
-        ...commonStyling.professional.title,
-      },
-      itemsColorModeSwitchDelay:
-        commonStyling.professional.itemsColorModeSwitchDelay,
-      item: {
-        ...theme.professional.item,
-        ...commonStyling.professional.item,
-      },
-    },
-
-    education: {
-      ...theme.education,
-      ...commonStyling.education,
-      // title: {
-      //   ...theme.education.title,
-      //   ...commonStyling.education.title,
-      // },
-      item: {
-        ...theme.education.item,
-        ...commonStyling.education.item,
-      },
-    },
-    portfolio: {
-      ...theme.portfolio,
-      ...commonStyling.portfolio,
-      item: {
-        ...theme.portfolio.item,
-        ...commonStyling.portfolio.item,
-        outline: {
-          ...theme.portfolio.item.outline,
-          ...commonStyling.portfolio.item.outline,
-        },
-        // Project Links - Pane
-        resourceLinks: {
-          ...theme.portfolio.item.resourceLinks,
-          item: {
-            ...theme.portfolio.item.resourceLinks.item,
-            ...commonStyling.portfolio.item.resourceLinks.item,
-          },
-        },
-        // Software Releases - Pane
-        releases: {
-          ...theme.portfolio.item.releases,
-          fontFamily: commonStyling.portfolio.item.releases.headerFont,
-          headerMarginBottom: commonStyling.portfolio.item.releases.headerMarginBottom,
-          item: {
-            ...theme.portfolio.item.releases.item,
-            ...commonStyling.portfolio.item.releases.item,
-            fontFamily: commonStyling.portfolio.item.releases.item.font,
-          },
-        },
-      },
-    },
-    footerStyles: {
-      ...theme.footerStyles,
-      ...commonStyling.footerStyles,
-      svgStyles: {
-        ...theme.footerStyles.svgStyles,
-        ...commonStyling.footerStyles.svgStyles,
-      }
-    },
-  };
-};
-
-export { type ComputedTheme, type Theme, mergeStylings, commonStyling };
+// export { type ComputedTheme, type Theme, mergeStylings, commonStyling };
+export { type ComputedTheme, type Theme };

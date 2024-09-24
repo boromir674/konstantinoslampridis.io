@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { withDefaultProps } from "./hoc";
+import Typography from "./Typography";
 import AppTag from "./AppTag";
 import EducationItemData from '../EducationItemDataInterface';
 
@@ -12,29 +14,80 @@ const EducationSectionContainer = styled.div`
 //   margin-bottom: 20px;
 // `;
 
-const DegreeTitle = styled.h3`
+
+interface DegreeTitleProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+  children?: React.ReactNode;
+}
+const DegreeTitle = styled(withDefaultProps({
+  variant: 'h3',
+}, Typography)) <DegreeTitleProps>`
   margin-bottom: 5px;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
-const UniversityTitle = styled.h4`
+interface UniversityTitleProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+}
+const UniversityTitle = styled(withDefaultProps({
+  variant: 'h4',
+}, Typography)) <UniversityTitleProps>`
   margin-top: 7px;
   margin-bottom: 5px;
   font-style: italic;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
-const Location = styled.p`
-  font-size: 16px;
+interface LocationProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+}
+const Location = styled(withDefaultProps({
+  variant: 'body1',  // <p> element
+}, Typography)) <LocationProps>`
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize || "16px"};
   // color: #888;
   margin-top: 5px;
 `;
 
-const StudiesDuration = styled.span`
+interface StudiesDurationProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+}
+const StudiesDuration = styled(withDefaultProps({
+  component: 'span',
+}, Typography)) <StudiesDurationProps>`
   font-style: italic;
   margin-bottom: 10px;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
-const ThesisTitle = styled.p`
+interface ThesisTitleProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+}
+const ThesisTitle = styled(withDefaultProps({
+  variant: 'body1',  // <p> element
+}, Typography)) <ThesisTitleProps>`
   margin-bottom: 5px;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
 const TopicTagsContainer = styled.div`
@@ -64,6 +117,14 @@ interface EducationItemTheme {
   // onHoverTransitionDelay: string;
   onHoverTransformDuration: string;
   onHoverBackgroundColorChangeDuration: string;
+  degreeTitle: {
+    fontFamily: string;
+    fontSize: string;
+  };
+  body: {
+    fontFamily: string;
+    fontSize: string;
+  };
   tag: {
     // color design, that switchs on color mode
     backgroundColor: string;
@@ -71,6 +132,8 @@ interface EducationItemTheme {
     onHoverBackgroundColor: string;
     onHoverTextColor: string;
     outlineColor: string;
+    fontFamily: string;
+    fontSize: string;
   };
 }
 interface StyledAppEducationItemProps {
@@ -89,15 +152,15 @@ const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
     box-shadow 0.3s,
     background-color
       ${(props) =>
-        props.theme.onHoverBackgroundColorChangeDuration};
+    props.theme.onHoverBackgroundColorChangeDuration};
   cursor: pointer;
   &:hover {
     transform: scale(1.02);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
     background-color: ${(props) =>
-      props.theme.onHoverBackgroundColor};
+    props.theme.onHoverBackgroundColor};
     color: ${(props) =>
-      props.theme.onHoverTextColor || props.theme.textColor};
+    props.theme.onHoverTextColor || props.theme.textColor};
   }
 `;
 interface AppEducationItemProps {
@@ -118,16 +181,16 @@ const EducationItem: React.FC<AppEducationItemProps> = ({
 }) => {
   return (
     <StyledAppEduItem theme={theme}>
-      <DegreeTitle>{degree_title}</DegreeTitle>
-      <UniversityTitle>{university_name}</UniversityTitle>
+      <DegreeTitle theme={theme.degreeTitle}>{degree_title}</DegreeTitle>
+      <UniversityTitle theme={theme.body}>{university_name}</UniversityTitle>
       <span css={css`
         display: flex;
         flex-wrap: wrap;
       `}><a>
-        <Location>{location}</Location><StudiesDuration>{duration}</StudiesDuration>
+          <Location theme={theme.body}>{location}</Location><StudiesDuration theme={theme.body}>{duration}</StudiesDuration>
         </a>
       </span>
-      <ThesisTitle>Thesis: {thesis_title}</ThesisTitle>
+      <ThesisTitle theme={theme.body}>Thesis: {thesis_title}</ThesisTitle>
       <TopicTagsContainer>
         {topics.map((topic, index) => (
           <AppTag

@@ -7,6 +7,7 @@
   TSX + CSS + DOCKER + GATSBY = Static Website Generator
 </h1>
 
+> https://konstantinoslampridis.io
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/boromir674/konstantinoslampridis.io/cicd.yml?link=https%3A%2F%2Fgithub.com%2Fboromir674%2Fkonstantinoslampridis.io%2Factions%2Fworkflows%2Fcicd.yml)
 
@@ -45,16 +46,14 @@ Our Hooks are in [src/Hooks](src/Hooks)
 ## Components
 
 In this repo we develop Components for mainly serving 3 purposes:
-- Having Generic Components as re-usable pieces of code
-- Having Components that wrap Generic Components and styling code
+- Having `Generic Components` as re-usable pieces of application code
+- Having `App Components` that wrap Generic Components and styling code
 
 ### **Generic/Lib Components**
 Should be implmented so that they fit the use-cases the client code is going to need.  
 See for example the [ScrollingNavigationItemGeneric.tsx Component](src/Components/ScrollingNavigationItemGeneric.tsx) which:
 - allows the client code to pass a `renderProps` callback in the constructor (as `props`)
 - uses a `react hook` to take care of the `onClick` interaction that should happen
-
-They should be implemented so that they are portable to other apps too!
 
 ### **Styled/App Components**
 These are the App-specific (usually tight to app styles) components that each app developer should implement sooner or later.  
@@ -63,8 +62,8 @@ These are the App-specific (usually tight to app styles) components that each ap
 - Theming should be supported.
 - Should be implemented so that the client code does not care about providing styling
 information (except for an optional `Theme`).  
-- the usually accept a `props.data` value usually text data to be used in rendering
-- 
+- they usually accept a `props.data` value usually text data to be used in rendering
+
 See for example the [PersonalInfo Component](src/Components/PersonalInfo.tsx), which uses `@emotion/styled` to define the `Component Styling`.
 
 
@@ -74,13 +73,11 @@ The default view is for big screens and is a grid of TopheaderPane, leftSidePane
 All the Panes should be rendered inside a Component with the `View` name as indicator.
 
 # Style/Design System
-Our definition of `Style System`:  
-A way to document the decisions taken for picking the style/theme used
-throughout the app.
-Color palettes, margin configurations, font configurations, and css-related
-properties go here.
+> Declaration of developer's decisions, for picking the style/theme used in the app.
 
-We achieve that by utilizing `Design Tokens`, and we document them by rendering a dedicated `storybook` Story.
+**Color palettes, margin configurations, font configurations, and other css property values go here.**
+
+We achieve that by utilizing `Design Tokens`, and we document them by rendering the `DesignSystem` **Story**.
 
 # Dev
 
@@ -134,8 +131,9 @@ Deploying `storybook` on localhost (dev server with some hot-reloading), enables
   ```
 - **Run storybook** on **localhost**
   ```shell
-  yarn storybook
+  make storybook
   ```
+
 ## Delivery Process
 
 Our case fits the Static Site Generator.  
@@ -325,23 +323,3 @@ We use `webpack` to bundle and minify code (html, js, css).
 
 We can configure `sourcemaps` to control whether the "reversed map" bundle to source code is included in the bundle.  
 See https://itnext.io/using-sourcemaps-on-production-without-revealing-the-source-code-%EF%B8%8F-d41e78e20c89
-
-In case the error persists with useStaticQuery in SEO component:
-- try using the `>StaticQuey<` wrapper component instead of the Hook
-- read https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/deploying-to-s3-cloudfront/
-- investigate configuring the `paga-data.json` browser/CDN caching strategy
-
-## Docker (legacy) notes
-
-- Get the yarn.lock-install-remove-cache in host machine:
-
-  ```shell
-  docker build --name myname .
-  docker run --name temp-ssg -it --rm myname sh
-  ```
-
-  in new terminal
-
-  ```shell
-  docker cp temp-ssg:/app/yarn.lock ./yarn.lock-install-remove-cache
-  ```

@@ -74,7 +74,7 @@ run_dev_server: build_dev_server  ## Run a development server on localhost, with
 
 # STORYBOOK DEV SERVER on localhost
 storybook: ## Run the Storybook server on localhost, with "hot-reload" of source code (no storybook config)
-	docker build -f Dockerfile.build --target storybook -t $(STORYBOOK_NAME) .
+	docker build -f Dockerfile --target storybook -t $(STORYBOOK_NAME) .
 	docker run -it --rm -p 6006:6006 \
 	-v /data/repos/static-site-generator/src:/app/src \
 	$(STORYBOOK_NAME)

@@ -1,12 +1,7 @@
 import BigScreenViewInteractive, {
   BigScreenViewInteractiveProps,
 } from "./BigScreenViewInteractive";
-import lightMode from "../LightMode";
-import darkMode from "../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+import { lightTheme, darkTheme } from '../theme';
 
 // STORY CONFIGURATION
 export default {
@@ -295,11 +290,9 @@ const arg1: BigScreenViewInteractiveProps = {
       },
       verticalSidePane: {
         personalInfo: {
-          containerBackgroundColor:
-            lightTheme.personal.containerBackgroundColor,
-          textColor: lightTheme.personal.textColor,
+          ...lightTheme.personal,
+          // Adapter Code
           linkColor: lightTheme.personal.urlTextColor,
-          externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
         },
         education: {
           item: lightTheme.education.item,
@@ -357,10 +350,9 @@ const arg1: BigScreenViewInteractiveProps = {
       },
       verticalSidePane: {
         personalInfo: {
-          containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
-          textColor: darkTheme.personal.textColor,
+          ...darkTheme.personal,
+          // Adapter Code
           linkColor: darkTheme.personal.urlTextColor,
-          externalURLSVGColor: darkTheme.personal.externalURLSVGColor,
         },
         education: {
           item: darkTheme.education.item,

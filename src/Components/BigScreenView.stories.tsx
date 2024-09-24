@@ -1,10 +1,5 @@
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
-import lightMode from "../LightMode";
-import darkMode from "../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+import { lightTheme, darkTheme } from '../theme';
 
 // STORY CONFIGURATION
 export default {
@@ -29,12 +24,11 @@ const args: BigScreenViewProps = {
         textColor: lightTheme.personal.textColor,
         linkColor: lightTheme.personal.urlTextColor,
         externalURLSVGColor: lightTheme.personal.externalURLSVGColor,
+        infoItem: lightTheme.personal.infoItem,
       },
+      // Education needs adapter code to match the theme
       education: {
-        // containerBackgroundColor:
-        //   lightTheme.education.containerBackgroundColor,
-        // title: lightTheme.education.title,
-        item: lightTheme.education.item,
+        item: lightTheme.education.item
       },
     },
     verticalMainPane: {
@@ -279,7 +273,7 @@ const args: BigScreenViewProps = {
                 urlText: "https://pypi.org/projects/cookiecutter-python-package",
                 artifact_version: "v0.6.1",
               },
-    
+
             ],
             tags: [
               "Neural Style Transfer",
@@ -385,116 +379,119 @@ const args: BigScreenViewProps = {
     },
   },
 };
-
 export const Light = {
   args,
 };
 
-export const Dark = {
-  args: {
-    ...Light.args,
-    theme: {
-      containerBackgroundColor: darkTheme.backgroundColor,
-      topHeaderPane: {
-        navigationBar: darkTheme.navigationBar,
-        backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-        themeSwitch: darkTheme.themeSwitch,
+// DARK MODE
+const darkProps: BigScreenViewProps = {
+  ...args,
+  theme: {
+    containerBackgroundColor: darkTheme.backgroundColor,
+    topHeaderPane: {
+      navigationBar: darkTheme.navigationBar,
+      backgroundColor: darkTheme.topHeaderPane.backgroundColor,
+      themeSwitch: darkTheme.themeSwitch,
+    },
+    // topHeaderPane: {
+    //   navigationBar: darkTheme.navigationBar,
+    //   backgroundColor: darkTheme.topHeaderPane.backgroundColor,
+    // },
+    verticalSidePane: {
+      personalInfo: {
+        containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
+        textColor: darkTheme.personal.textColor,
+        linkColor: darkTheme.personal.urlTextColor,
+        infoItem: darkTheme.personal.infoItem,
+        externalURLSVGColor: darkTheme.personal.externalURLSVGColor,
       },
-      // topHeaderPane: {
-      //   navigationBar: darkTheme.navigationBar,
-      //   backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-      // },
-      verticalSidePane: {
-        personalInfo: {
-          containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
-          textColor: darkTheme.personal.textColor,
-          linkColor: darkTheme.personal.urlTextColor,
-        },
-        education: {
-          containerBackgroundColor: darkTheme.education.containerBackgroundColor,
-          item: darkTheme.education.item,
-        },
+      education: {
+        item: darkTheme.education.item,
       },
-      verticalMainPane: {
-        ...darkTheme,
-        containerBackgroundColor: darkTheme.backgroundColor,
-        portfolio: {
-          ...darkTheme.portfolio,
-          item: {
-            ...darkTheme.portfolio.item,
-            theme: {
-              releases: {
-                headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
-                headerColor: darkTheme.portfolio.item.releases.color,
-                headerMarginBottom: darkTheme.portfolio.item.releases.headerMarginBottom,
-                releaseButtonTheme: {
-                  ...darkTheme.portfolio.item.releases.item,
-                  icons: [
-                    /// pypi
-                    {
-                      svgStyles: {
-                        fill: darkTheme.portfolio.item.releases.item.color,
-                        width: "14px",
-                        height: "14px",
-                      },
+    },
+    verticalMainPane: {
+      ...darkTheme,
+      // containerBackgroundColor: darkTheme.backgroundColor,
+      portfolio: {
+        ...darkTheme.portfolio,
+        item: {
+          ...darkTheme.portfolio.item,
+          theme: {
+            releases: {
+              headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
+              headerColor: darkTheme.portfolio.item.releases.color,
+              headerMarginBottom: darkTheme.portfolio.item.releases.headerMarginBottom,
+              releaseButtonTheme: {
+                ...darkTheme.portfolio.item.releases.item,
+                icons: [
+                  /// pypi
+                  {
+                    svgStyles: {
+                      fill: darkTheme.portfolio.item.releases.item.color,
+                      width: "14px",
+                      height: "14px",
                     },
-                    /// docker
-                    {
-                      svgStyles: {
-                        fill: darkTheme.portfolio.item.releases.item.color,
-                        width: "14px",
-                        height: "14px",
-                      },
+                  },
+                  /// docker
+                  {
+                    svgStyles: {
+                      fill: darkTheme.portfolio.item.releases.item.color,
+                      width: "14px",
+                      height: "14px",
                     },
-                    /// github
-                    {
-                      svgStyles: {
-                        fill: darkTheme.portfolio.item.releases.item.color,
-                        width: "14px",
-                        height: "14px",
-                      },
+                  },
+                  /// github
+                  {
+                    svgStyles: {
+                      fill: darkTheme.portfolio.item.releases.item.color,
+                      width: "14px",
+                      height: "14px",
                     },
-                  ],
-                },
-              },
-              // Project Links Pane, ie source code repo docs, etc
-              links: {
-                headerColor: darkTheme.portfolio.item.resourceLinks.headerColor,
-                item: {
-                  ...darkTheme.portfolio.item.resourceLinks.item,
-                  icons: [
-                    // github
-                    {
-                      svgStyles: {
-                        width: "12px",
-                        height: "12px",
-                        fill: darkTheme.portfolio.item.resourceLinks.item.color
-                      },
-                    },
-                    // docs
-                    {
-                      svgStyles: {
-                        width: "12px",
-                        height: "12px",
-                        fill: darkTheme.portfolio.item.resourceLinks.item.color
-                      },
-                    },
-                    // ci/cd
-                    {
-                      svgStyles: {
-                        width: "12px",
-                        height: "12px",
-                        fill: darkTheme.portfolio.item.resourceLinks.item.color
-                      },
-                    },
-                  ],
-                }
+                  },
+                ],
               },
             },
+            // Project Links Pane, ie source code repo docs, etc
+            links: {
+              headerColor: darkTheme.portfolio.item.resourceLinks.headerColor,
+              item: {
+                ...darkTheme.portfolio.item.resourceLinks.item,
+                icons: [
+                  // github
+                  {
+                    svgStyles: {
+                      width: "12px",
+                      height: "12px",
+                      fill: darkTheme.portfolio.item.resourceLinks.item.color
+                    },
+                  },
+                  // docs
+                  {
+                    svgStyles: {
+                      width: "12px",
+                      height: "12px",
+                      fill: darkTheme.portfolio.item.resourceLinks.item.color
+                    },
+                  },
+                  // ci/cd
+                  {
+                    svgStyles: {
+                      width: "12px",
+                      height: "12px",
+                      fill: darkTheme.portfolio.item.resourceLinks.item.color
+                    },
+                  },
+                ],
+              }
+            },
           },
-        }
-      },
-      bottomFooterPane: darkTheme.footerStyles,
+        },
+      }
     },
+    bottomFooterPane: darkTheme.footerStyles,
   },
+};
+
+export const Dark = {
+  args: darkProps,
 };

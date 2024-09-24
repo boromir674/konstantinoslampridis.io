@@ -1,15 +1,7 @@
-// Import component
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
-// Import Component props Interface
-import PortfolioItemInterface from "../../PortfolioItemInterface";
 
-// Import Style Objects boilerplate
-import lightMode from "../../LightMode";
-import darkMode from "../../DarkMode";
-import { ComputedTheme, mergeStylings, commonStyling } from "../../AppStyles";
-
-const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+// Import Style Objects
+import { lightTheme, darkTheme } from '../../theme';
 
 // Story Configuration
 export default {

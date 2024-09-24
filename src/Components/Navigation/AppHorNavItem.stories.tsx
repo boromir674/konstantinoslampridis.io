@@ -1,6 +1,7 @@
-import AppHorNavItem from "./AppHorNavItem";
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import AppHorNavItem, { type NavItemProps } from "./AppHorNavItem";
+
+import { lightTheme, darkTheme } from '../../theme';
+
 
 export default {
   component: AppHorNavItem,
@@ -8,40 +9,60 @@ export default {
   tags: ["autodocs"],
 };
 
-// Deactivated Light
-export const DeactivatedLight = {
+interface ComponentVariantExport {
+  args: NavItemProps;
+}
+
+const DeactivatedLight: ComponentVariantExport = {
   args: {
-    // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
+    theme: {
+      colorSet: lightTheme.navigationBar,
+      // colorSet: {
+      //   textColor: "",
+      //   backgroundColor: "",
+      //   hoverBackgroundColor: "",
+      //   hoverTextColor: "",
+      //   activatedTextColor: "",
+      //   activatedBackgroundColor: ""
+      // },
+      padding: {
+        vertical: "8px",
+        horizontal: "28px",
+      },
+    },
     active: false,
     children: "Not in current view",
   },
 };
-
-// Deactivated Dark
-export const DeactivatedDark = {
-  args: {
-    // same interface as the props of the Component
-    ...DeactivatedLight.args,
-    colorSet: darkTheme.navigationBar,
-  },
-};
+export { DeactivatedLight };
 
 // Activated Light
-export const ActivatedLight = {
+const ActivatedLight: ComponentVariantExport = {
   args: {
-    // same interface as the props of the Component
-    colorSet: lightTheme.navigationBar,
+    ...DeactivatedLight.args,
     active: true,
     children: "In current view",
   },
 };
+export { ActivatedLight };
 
-// Activated dark
-export const ActivatedDark = {
+// Deactivated Dark
+const DeactivatedDark: ComponentVariantExport = {
   args: {
-    // same interface as the props of the Component
-    ...ActivatedLight.args,
-    colorSet: darkTheme.navigationBar,
+    ...DeactivatedLight.args,
+    theme: {
+      ...DeactivatedLight.args.theme,
+      colorSet: darkTheme.navigationBar,
+    },
   },
 };
+export { DeactivatedDark };
+
+// Activated dark
+const ActivatedDark: ComponentVariantExport = {
+  args: {
+    ...ActivatedLight.args,
+    theme: DeactivatedDark.args.theme,
+  },
+};
+export { ActivatedDark };

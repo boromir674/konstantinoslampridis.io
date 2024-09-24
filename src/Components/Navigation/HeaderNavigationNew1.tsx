@@ -6,7 +6,15 @@ import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
 import ScrollingNavigationItemGeneric from "./ScrollingNavigationItemGeneric";
 import AppHorNavItem from "./AppHorNavItem";
 
-const NavContainerNew = styled.nav`
+interface NavContainerProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+};
+const NavContainer = styled.nav<NavContainerProps>`
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${(props) => props.theme.fontSize};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -18,13 +26,15 @@ const NavContainerNew = styled.nav`
   gap: 1px;
 `;
 
-interface HeaderNavProps {
+interface HorizontaNavBarProps {
   items: {
     label: string;
     to_element_id: string;
   }[];
   activeItem: string;
   theme: {
+    fontFamily: string;
+    fontSize: string;
     colorSet: {
       textColor: string;
       backgroundColor: string;
@@ -41,7 +51,7 @@ interface HeaderNavProps {
   };
 }
 
-const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, padding } }) => {
+const HorizontalNavBar: FC<HorizontaNavBarProps> = ({ items, theme: { fontFamily, fontSize, colorSet, padding } }) => {
   // whenever the user makes a scroll we capture the "screen view position"
   // and we store in the 'activeLinkIndex' state attribute of this component
   // since the state value gets updated on scroll event,
@@ -49,7 +59,10 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, paddin
   const activeLinkIndex = useScreenScrollHandler(items);
 
   return (
-    <NavContainerNew>
+    <NavContainer theme={{
+      fontFamily,
+      fontSize,
+    }}>
       {items.map((item, index) => (
         <ScrollingNavigationItemGeneric // alows wiring onClick event to scroll
           renderProps={({ active, onClick }) => (
@@ -70,7 +83,7 @@ const HorizontalNavBar: FC<HeaderNavProps> = ({ items, theme: { colorSet, paddin
           }}
         ></ScrollingNavigationItemGeneric>
       ))}
-    </NavContainerNew>
+    </NavContainer>
   );
 };
 

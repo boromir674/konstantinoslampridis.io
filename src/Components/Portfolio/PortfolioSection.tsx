@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
+import Typography from '../Typography';
+
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
@@ -68,6 +70,47 @@ const PortfolioSectionContainer = styled.div<PortfolioSectionContainerProps>`
   color: ${(props) => props.theme.color};
 `;
 
+// COMPONENT - Portfolio Section Header/Title
+interface PortfolioSectionTitleProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+    color: string;
+    backgroundColor: string;
+  };
+};
+const PortfolioSectionTitleH1 = withDefaultProps({
+  variant: "h1",
+}, Typography);
+const PortfolioSectionTitle = styled(PortfolioSectionTitleH1) <PortfolioSectionTitleProps>`
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontSize};
+  color: ${props => props.theme.color};
+  background-color: ${props => props.theme.backgroundColor};
+`;
+
+// COMPONENT - Reset Layout Button
+
+import { ButtonHTMLAttributes } from "react";
+interface ResetLayoutButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+    // color: string;
+    // backgroundColor: string;
+  };
+};
+const ResetLayoutButtonWithTypography = withDefaultProps({
+  component: 'button',
+}, Typography);
+const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutButtonProps>`
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontSize};
+`;
+  // color: ${props => props.theme.color};
+  // background-color: ${props => props.theme.backgroundColor};
+
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
 
@@ -80,10 +123,9 @@ interface ResponsiveLocalStorageLayoutProps {
       backgroundColor: string;
     };
     // HEADER with Title; ie 'Open Source & Portfolio'
-    sectionHeader: {
-      backgroundColor: string;
-      color: string;
-    };
+    sectionHeader: PortfolioSectionTitleProps["theme"];
+    // Reset Layout Button
+    resetLayoutButton: ResetLayoutButtonProps["theme"],
     // Each Portfolio Item Card
     item: {
       outline?: string;  // styles the 'outline' css of the LayoutItem component
@@ -230,8 +272,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         color: theme.item.color,
       }}>
       {/* Portfolio Section TITLE*/}
-      <h1 style={{ ...theme.sectionHeader }}>Open Source & Portfolio</h1>
-      <button onClick={resetLayout}>Reset Layout</button>
+      <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
+      {/* Portfolio Section - RESET Layout Button */}
+      <ResetLayoutButton onClick={resetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
+      {/* <button onClick={resetLayout}>Reset Layout</button> */}
+      {/* Portfolio Section - GRID LAYOUT */}
       <ResponsiveReactGridLayout
         className={className}
         cols={cols}

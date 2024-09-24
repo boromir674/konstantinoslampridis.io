@@ -59,7 +59,7 @@ jobs:
         with:
           artifact_name: github-pages
 
-      ## DEPLOY S3 ##
+      ## DEPLOY S3 - Make S3 bucket Destination just like Source ##
       - name: Deploy to S3
         if: inputs.environment == 's3'
         env:

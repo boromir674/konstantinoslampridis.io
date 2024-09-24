@@ -1,18 +1,24 @@
-import AppProfSection from './AppProfSection';
-import lightTheme from "../../LightMode";
-import darkTheme from "../../DarkMode";
+import AppProfSection, { type ProfessionalSectionProps } from './AppProfSection';
 
+import { lightTheme, darkTheme } from '../../theme';
+
+// Story summary / metadata
 export default {
   component: AppProfSection,
   title: "AppProfSection",
   tags: ["autodocs"],
 };
 
+interface ComponentStory {
+  args: ProfessionalSectionProps;
+}
+
 // 1: Light Mode Colors
-export const LightMode = {
+const LightMode: ComponentStory = {
   args: {
-      // same interface as the props of the Component
-      data: {experience_items: [
+    // same interface as the props of the Component
+    data: {
+      experience_items: [
         {
           title: "Software Engineer",
           company: "GG Navi",
@@ -31,24 +37,20 @@ export const LightMode = {
           description: "I worked at GG Navi as a Software Engineer.",
           technology_tags: ["python", 'docker'],
         },
-      ]},
-      theme: lightTheme.professional,
-      // {
-      //   item: lightTheme.professional.item,
-      //   containerBackground: lightTheme.professional.containerBackground,
-      // },
+      ]
+    },
+    theme: lightTheme.professional,
+    id: 'storybook-professional-section-light',
   },
 };
-
+export { LightMode };
 
 // 2: Dark Mode Colors
-export const DarkMode = {
+const DarkMode: ComponentStory = {
   args: {
     ...LightMode.args,
     theme: darkTheme.professional,
-    // theme: {
-    //   item: darkTheme.professional.item,
-    //   containerBackground: darkTheme.professional.containerBackground,
-    // },
+    id: 'storybook-professional-section-dark',
   },
 };      
+export { DarkMode };

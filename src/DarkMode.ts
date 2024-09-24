@@ -1,6 +1,6 @@
 /* DESIGN your Dark Mode Color Theme */
 import DESIGN_TOKENS from "./design-system/tokens.json";
-import { Theme } from "./AppStyles";
+import { Theme } from "./theme/AppStyles";
 
 /////////// DARK MODE ///////////
 

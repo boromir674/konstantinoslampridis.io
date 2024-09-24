@@ -79,7 +79,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       </div>
     </div>
     <nav
-      className="css-1cyn0a8"
+      className="css-qx08l1"
     >
       <a
         className="css-arku82"
@@ -111,13 +111,13 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           Name:
         </span>
          
         <span
-          className="css-3vqpkh"
+          className="css-1pgu2xd"
         >
           Konstantinos Lampridis
         </span>
@@ -126,13 +126,13 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           Email:
         </span>
          
         <span
-          className="css-3vqpkh"
+          className="css-1pgu2xd"
         >
           k.lampridis@hotmail.com
         </span>
@@ -141,13 +141,13 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           Github:
         </span>
          
         <span
-          className="css-3vqpkh"
+          className="css-1pgu2xd"
         >
           <a
             className="css-1gyz2k7"
@@ -189,13 +189,13 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           Gitlab:
         </span>
          
         <span
-          className="css-3vqpkh"
+          className="css-1pgu2xd"
         >
           <a
             className="css-1gyz2k7"
@@ -237,13 +237,13 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-kp9dvk"
       >
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           LinkedIn:
         </span>
          
         <span
-          className="css-3vqpkh"
+          className="css-1pgu2xd"
         >
           <a
             className="css-1gyz2k7"
@@ -286,7 +286,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       >
          
         <span
-          className="css-1jbfuhw"
+          className="css-bwb5ro"
         >
           Curricular Docs:
         </span>
@@ -378,12 +378,22 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-eqcqji"
       >
         <h3
-          className="css-dbagas"
+          className="css-1td1kb3"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           MSc in Artificial Intelligence
         </h3>
         <h4
-          className="css-p7xzix"
+          className="css-oh44f7"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           University of Amsterdam
         </h4>
@@ -403,19 +413,34 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         >
           <a>
             <p
-              className="css-uzd3yx"
+              className="css-12f1dh1"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
             >
               Amsterdam, Netherlands
             </p>
             <span
-              className="css-1l6q7jx"
+              className="css-9o6sth"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
             >
               2014 - 2019
             </span>
           </a>
         </span>
         <p
-          className="css-dbagas"
+          className="css-1mvjx7v"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           Thesis: 
           Political Spectrum Aware Topic Model
@@ -424,27 +449,27 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           className="css-bvngjg"
         >
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Machine Learning
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Computer Vision
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Natural Language Processing
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Autonomous Agents
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Reinforcement Learning
           </span>
@@ -454,12 +479,22 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-eqcqji"
       >
         <h3
-          className="css-dbagas"
+          className="css-1td1kb3"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           BSc in Applied Informatics
         </h3>
         <h4
-          className="css-p7xzix"
+          className="css-oh44f7"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           University of Macedonia
         </h4>
@@ -479,19 +514,34 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         >
           <a>
             <p
-              className="css-uzd3yx"
+              className="css-12f1dh1"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
             >
               Thessaloniki, Greece
             </p>
             <span
-              className="css-1l6q7jx"
+              className="css-9o6sth"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
             >
               2008 - 2013
             </span>
           </a>
         </span>
         <p
-          className="css-dbagas"
+          className="css-1mvjx7v"
+          style={
+            {
+              "marginBottom": undefined,
+            }
+          }
         >
           Thesis: 
           Exterior Point Simplex Algorithm Analysis
@@ -500,52 +550,52 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           className="css-bvngjg"
         >
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Computer Programming
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Computer Science
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Data Structures
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Algorithm Analysis
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Software Engineering
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Operating Systems
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Computer Architecture
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Discete Mathematics
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Statistics
           </span>
           <span
-            className="css-ccouac"
+            className="css-1szrj99"
           >
             Micro/Macro Economics
           </span>
@@ -558,7 +608,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
     id="vertical-main-pane"
   >
     <div
-      className="css-8938kg"
+      className="css-8her76"
       id="introduction-section"
     >
       <p
@@ -640,7 +690,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       id="professional-section"
     >
       <h1
-        className="css-149z3qr"
+        className="css-1glvia5"
       >
         Professional Career
       </h1>
@@ -665,17 +715,10 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -685,11 +728,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -701,11 +745,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -717,11 +762,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -733,11 +779,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -749,6 +796,8 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -759,14 +808,15 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -813,60 +863,60 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Machine Learning
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Random Forest
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Gradient Boosting Methods
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Variational Autoencoders
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Pandas
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               SQL
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Pytest
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               GCP
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               BigQuery
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scrum/Agile
             </span>
@@ -874,7 +924,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-16hehss"
         onClick={[Function]}
       >
         <div
@@ -894,17 +944,10 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -914,11 +957,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -930,11 +974,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -946,11 +991,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -962,11 +1008,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -977,6 +1024,8 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -987,14 +1036,15 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1067,70 +1117,70 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Docker
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Git
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Bash
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Gitlab CI
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Pytest
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               PostgreSQL
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               VMware
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Jira/Confluence
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Platform Engineering
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scum/Agile
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               GitOps
             </span>
@@ -1138,7 +1188,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-17741q9"
         onClick={[Function]}
       >
         <div
@@ -1158,17 +1208,10 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -1178,11 +1221,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1194,11 +1238,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -1210,11 +1255,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1226,11 +1272,12 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1243,6 +1290,8 @@ Working asynchronously and fully remotely on adding features and automating (bac
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -1253,14 +1302,15 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1320,60 +1370,60 @@ Working asynchronously and fully remotely on adding features and automating (bac
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               FastAPI
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Docker
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Amundsen
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               VueJS
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Automated Testing
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Pytest
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               REST API
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               OpenAPI
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scrum/Agile
             </span>
@@ -1381,7 +1431,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-8b1see"
         onClick={[Function]}
       >
         <div
@@ -1401,17 +1451,10 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -1421,11 +1464,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1437,11 +1481,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -1453,11 +1498,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1469,11 +1515,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1484,6 +1531,8 @@ Working asynchronously and fully remotely on adding features and automating (bac
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -1494,14 +1543,15 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1600,90 +1650,90 @@ Working asynchronously and fully remotely on adding features and automating (bac
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Django
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               CircleCI
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Docker
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Pytest
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Javascript
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               React
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Bluetooth
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS Lambda
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS EB
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS Cloudwatch
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               AWS SQS
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               HTML
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               CSS
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Angular
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Firebase
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scrum/Agile
             </span>
@@ -1691,7 +1741,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-tmbde5"
         onClick={[Function]}
       >
         <div
@@ -1711,17 +1761,10 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -1731,11 +1774,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1747,11 +1791,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -1763,11 +1808,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1779,11 +1825,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1795,6 +1842,8 @@ Working asynchronously and fully remotely on adding features and automating (bac
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -1805,14 +1854,15 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1846,50 +1896,50 @@ Working asynchronously and fully remotely on adding features and automating (bac
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Machine Learning
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Linear Regression
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               SQL
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Flask
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               REST API
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               OpenAPI
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Azure Web App
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scrum/Agile
             </span>
@@ -1897,7 +1947,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-b2goo5"
         onClick={[Function]}
       >
         <div
@@ -1917,17 +1967,10 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -1937,11 +1980,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1953,11 +1997,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -1969,11 +2014,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -1985,11 +2031,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2000,6 +2047,8 @@ Working asynchronously and fully remotely on adding features and automating (bac
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -2010,14 +2059,15 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2064,35 +2114,35 @@ Working asynchronously and fully remotely on adding features and automating (bac
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Python
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Topic Modeling
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Latent Dirichlet Allocation (LDA)
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Machine Learning
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Git
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Celery
             </span>
@@ -2100,7 +2150,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-ea9ttx"
+        className="css-yhb7v1"
         onClick={[Function]}
       >
         <div
@@ -2120,17 +2170,10 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            css={
+            className="css-1wtdklz"
+            style={
               {
-                "map": undefined,
-                "name": "138jslu",
-                "next": undefined,
-                "styles": "
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-          ",
-                "toString": [Function],
+                "marginBottom": undefined,
               }
             }
           >
@@ -2140,11 +2183,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2156,11 +2200,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "1iupolk",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
           ",
                 "toString": [Function],
               }
@@ -2172,11 +2217,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "q3etlh",
+                "name": "18huki6",
                 "next": undefined,
                 "styles": "
             margin: 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2188,11 +2234,12 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "zj6f4f",
+                "name": "e1zrhy",
                 "next": undefined,
                 "styles": "
             margin: 8px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2203,6 +2250,8 @@ Working asynchronously and fully remotely on adding features and automating (bac
           <p
             style={
               {
+                "fontFamily": "Roboto, sans-serif",
+                "fontSize": "16px",
                 "marginBottom": 12,
               }
             }
@@ -2213,14 +2262,15 @@ Working asynchronously and fully remotely on adding features and automating (bac
             css={
               {
                 "map": undefined,
-                "name": "7v1qxm",
+                "name": "41bqsa",
                 "next": undefined,
                 "styles": "
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: 14px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
           ",
                 "toString": [Function],
               }
@@ -2254,55 +2304,55 @@ Working asynchronously and fully remotely on adding features and automating (bac
             </li>
           </ul>
           <div
-            className="css-tiry6g"
+            className="css-112f423"
           >
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Machine Learning
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Natural Language Processing
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Conditional Random Fields
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Hidden Markov Models
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Feature Engineering
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Perl
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Git
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Bash
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               Scrum/Agile
             </span>
             <span
-              className="css-1ywvkip"
+              className="css-e1ywo8"
             >
               CI/CD
             </span>
@@ -2315,17 +2365,23 @@ Working asynchronously and fully remotely on adding features and automating (bac
       id="open-source-portfolio-section"
     >
       <h1
+        className="css-gj5vb0"
         style={
           {
-            "backgroundColor": "#ffdad6",
-            "color": "#2c1513",
+            "marginBottom": undefined,
           }
         }
       >
         Open Source & Portfolio
       </h1>
       <button
+        className="css-1ysyhpi"
         onClick={[Function]}
+        style={
+          {
+            "marginBottom": undefined,
+          }
+        }
       >
         Reset Layout
       </button>

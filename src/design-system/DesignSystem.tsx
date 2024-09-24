@@ -23,9 +23,7 @@ const ColorPalette: FC = () => {
 
   const getColorValue = (category: string, step: number) => {
     const palette = `--${category}${step}`;
-    console.log("PALLETE", palette);
     const res: string = colorData[`${palette}`];
-    console.log(res);
     return res;
   };
   return (

@@ -17,6 +17,17 @@ interface URLProps {
     textColor: string;
   };
 }
+
+interface SocialLink {
+  label: string;
+  url: string;
+}
+
+interface CurricularDoc {
+  label: string;
+  url: string;
+}
+
 interface PersonalInfoProps {
   userData: PersonalInfoInterface;
   theme: {
@@ -24,7 +35,17 @@ interface PersonalInfoProps {
     textColor: string;
     linkColor: string;
     externalURLSVGColor: string;
-  };
+    infoItem: {
+      key: {
+        fontFamily: string;
+        fontSize: string;
+      };
+      value: {
+        fontFamily: string;
+        fontSize: string;
+      };
+    };
+  }
 }
 
 const Container = styled.div<ContainerProps>`
@@ -44,16 +65,30 @@ const InfoItem = styled.div`
   padding: 10px;
 `;
 
-const InfoKey = styled.span`
+interface InfoKeyProps {
+  theme: {
+    fontFamily: string;
+    fontSize: string;
+  };
+}
+const InfoKey = styled.span<InfoKeyProps>`
   font-weight: bold;
-  font-size: 18px;
+  // font-size: 18px;
+  font-size: ${(props) => props.theme.fontSize};
+  font-family: ${(props) => props.theme.fontFamily};
+  // use sans-serif font
+  // font-family: sans-serif;
+  // font-family: "Roboto", sans-serif;
 `;
 
-const InfoValue = styled.span`
+type InforValueProps = InfoKeyProps;
+const InfoValue = styled.span<InforValueProps>`
   display: inline-flex;
   align-items: center;
-  font-size: 16px;
   margin-top: 5px;
+  font-family: ${(props) => props.theme.fontFamily};
+  // font-size: 16px;
+  font-size: ${(props) => props.theme.fontSize};
 `;
 
 const InfoURLVerticalFlexContainer = styled.div`
@@ -106,14 +141,14 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
   return (
     <Container theme={theme}>
       <InfoItem>
-        <InfoKey>Name:</InfoKey> <InfoValue>{name}</InfoValue>
+        <InfoKey theme={theme.infoItem.key}>Name:</InfoKey> <InfoValue theme={theme.infoItem.value}>{name}</InfoValue>
       </InfoItem>
       <InfoItem>
-        <InfoKey>Email:</InfoKey> <InfoValue>{email}</InfoValue>
+        <InfoKey theme={theme.infoItem.key}>Email:</InfoKey> <InfoValue theme={theme.infoItem.value}>{email}</InfoValue>
       </InfoItem>
       <InfoItem>
-        <InfoKey>Github:</InfoKey>{" "}
-        <InfoValue>
+        <InfoKey theme={theme.infoItem.key}>Github:</InfoKey>{" "}
+        <InfoValue theme={theme.infoItem.value}>
           <MyLink
             href={`https://${github}`}
             target="_blank"
@@ -122,13 +157,13 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {github} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {github} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
       <InfoItem>
-        <InfoKey>Gitlab:</InfoKey>{" "}
-        <InfoValue>
+        <InfoKey theme={theme.infoItem.key}>Gitlab:</InfoKey>{" "}
+        <InfoValue theme={theme.infoItem.value}>
           <MyLink
             href={`https://${gitlab}`}
             target="_blank"
@@ -137,13 +172,13 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {gitlab} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {gitlab} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
       <InfoItem>
-        <InfoKey>LinkedIn:</InfoKey>{" "}
-        <InfoValue>
+        <InfoKey theme={theme.infoItem.key}>LinkedIn:</InfoKey>{" "}
+        <InfoValue theme={theme.infoItem.value}>
           <MyLink
             href={`https://${linkedin}`}
             target="_blank"
@@ -152,14 +187,14 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
               textColor: theme.linkColor,
             }}
           >
-            {linkedin} <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+            {linkedin} <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
           </MyLink>
         </InfoValue>
       </InfoItem>
       {/* Render the various PDF documents and link to their publicly accessible urls */}
       <InfoItem>
         {" "}
-        <InfoKey>Curricular Docs:</InfoKey>{" "}
+        <InfoKey theme={theme.infoItem.key}>Curricular Docs:</InfoKey>{" "}
         <InfoURLVerticalFlexContainer>
           {/* 1 PAGE RESUME */}
           <InfoURLVerticalFlexContainerItem theme={{ textColor: "#fff" }}>
@@ -171,7 +206,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
                 textColor: theme.linkColor,
               }}
             >
-              '1 Page Resume' <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+              '1 Page Resume' <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
             </MyLink>
           </InfoURLVerticalFlexContainerItem>
           {/* CV + PROJECTS */}
@@ -184,7 +219,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
                 textColor: theme.linkColor,
               }}
             >
-              'CV + Projects' <AppExternalURLIcon theme={{lineColor: theme.externalURLSVGColor}}/>
+              'CV + Projects' <AppExternalURLIcon theme={{ lineColor: theme.externalURLSVGColor }} />
             </MyLink>
           </InfoURLVerticalFlexContainerItem>
         </InfoURLVerticalFlexContainer>
@@ -194,3 +229,4 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
 };
 
 export default PersonalInfo;
+export type { PersonalInfoProps };

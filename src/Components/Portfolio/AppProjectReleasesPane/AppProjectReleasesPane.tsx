@@ -69,9 +69,37 @@ const IconWrapper = styled.span`
 
 
 const FALLBACK_COMMANDS: { [key: string]: string } = {
-    github: 'curl -L ...',
-    pypi: 'pip install ...',
-    docker: 'docker pull ...',
+    github: 'curl -LJO',
+    pypi: 'pip install',
+    docker: 'docker pull',
+};
+
+
+const DEFAULT_RELEASE: { [key: string]: { createCommand: (release: ReleaseItemData) => string, createURL: (release: ReleaseItemData) => string } } = {
+    // github: (release) => `curl -LJO ${release.urlText || `https://github.com/boromir674/${release.name}/releases/tag/${release.artifact_version}`}`,
+    // pypi: (release) => `pip install ${release.name}`,
+    // docker: (release) => `docker pull ${release.name}`,
+    github: {
+        createCommand: (release) => `curl -LJO ${release.urlText || `https://github.com/boromir674/${release.name}/releases/tag/${release.artifact_version}`}`,
+        createURL: (release) => `https://github.com/boromir674/${release.name}/releases/tag/${release.artifact_version}`,
+    },
+    pypi: {
+        createCommand: (release) => `pip install ${release.name}`,
+        createURL: (release) => `https://pypi.org/project/${release.name}/`,
+    },
+    docker: {
+        createCommand: (release) => `docker pull ${release.name}`,
+        createURL: (release) => `https://hub.docker.com/r/boromir674/${release.name}`,
+    },
+};
+
+const createCommand = (release: ReleaseItemData) => {
+    const commandMaker = DEFAULT_RELEASE[release.type].createCommand;
+    return commandMaker(release);
+}
+const deriveURL = (release: ReleaseItemData) => {
+    const urlMaker = DEFAULT_RELEASE[release.type].createURL;
+    return urlMaker(release);
 };
 
 
@@ -115,8 +143,9 @@ const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
                     <SoftwareReleaseButton
                         key={index}
                         data={{
-                            command: release.command || FALLBACK_COMMANDS[release.type],
-                            urlText: release.urlText,
+                            // command: release.command || FALLBACK_COMMANDS[release.type],
+                            command: release.command || createCommand(release),
+                            urlText: release.urlText || deriveURL(release),
                         }}
                         theme={theme.releaseButtonTheme}
                     >

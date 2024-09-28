@@ -14,9 +14,10 @@ projects:
       url: https://github.com/boromir674/automated-workflows/actions/workflows/cicd.yml
   release:
     - type: github
-      command: 'curl -LJO https://github.com/boromir674/automated-workflows/archive/refs/tags/v1.13.1.tar.gz'
-      artifact_version: v1.13.1
       name: automated-workflows
+      artifact_version: v1.13.1
+      # NOTE: if command and/or url not specified, then they are automatically derived
+      command: 'curl -LJO https://github.com/boromir674/automated-workflows/archive/refs/tags/v1.13.1.tar.gz'
       url: https://github.com/boromir674/automated-workflows/releases/tag/v1.13.1
   tags:
     - Github Actions
@@ -120,13 +121,13 @@ projects:
       url: https://app.circleci.com/pipelines/github/boromir674/software-patterns
   release:
     - type: pypi
+      name: software-patterns
+      artifact_version: 2.0.0
       command: pip install software-patterns
       url: https://pypi.org/project/software-patterns/
-      name: software-patterns
     - type: github
-      command: 'curl -LJO https://github.com/boromir674/software-patterns/archive/refs/tags/v2.0.0.tar.gz'
-      url: https://github.com/boromir674/software-patterns/releases/tag/v2.0.0
       name: software-patterns
+      artifact_version: v2.0.0
   description: >
     A Python library with reusable Software Design Patterns with Types.
   tags:
@@ -149,11 +150,14 @@ projects:
       url: https://github.com/boromir674/pytest-object-getter/actions
   release:
     - type: pypi
-      command: pip install pytest-object-getter
       name: pytest-object-getter
       artifact_version: "1.0.2"
+      command: pip install pytest-object-getter
+      url: https://pypi.org/project/pytest-object-getter/
     - type: github
+      name: pytest-object-getter
       artifact_version: v1.0.2
+      # url: https://github.com/boromir674/pytest-object-getter/releases/tag/v1.0.2
   description: >
     A Pytest Plugin providing a `fixture` to dynamically import any object
     from a python (3rd party) module, while mocking its namespace on demand.
@@ -175,7 +179,9 @@ projects:
     - type: pypi
       name: software-release
       artifact_version: "0.1.0"
+      url: https://pypi.org/project/software-release/
     - type: github
+      name: software-release
       artifact_version: v0.1.0
   description: >
     A CLI that streamlines the process of making a "new" Software Release to
@@ -209,6 +215,7 @@ projects:
       url: https://github.com/boromir674/action-semver-bumper/actions
   release:
     - type: github
+      name: action-semver-bumper
       artifact_version: v1.0.0
 
 # ACTION CHANGELOG CI
@@ -224,6 +231,7 @@ projects:
       url: https://github.com/boromir674/action-changelog-ci/actions
   release:
     - type: github
+      name: action-changelog-ci
       artifact_version: v2.0.0
 
 # ACTION GENERAGE MARKDOWN/JSON CHANGELOG
@@ -239,6 +247,7 @@ projects:
       url: https://github.com/boromir674/action-generate-changelog/actions
   release:
     - type: github
+      name: action-generate-changelog
       artifact_version: v2.0.0
 
 - title: Pytest Subprocess Plugin
@@ -257,6 +266,7 @@ projects:
       name: pytest-subprocess
       artifact_version: "0.10.0"
     - type: github
+      name: pytest-subprocess
       artifact_version: v0.10.0
   description: >
     A Pytest Plugin providing a `fixture` to assist in testing sub-processes
@@ -279,13 +289,15 @@ projects:
       url: https://travis-ci.org/boromir674/topic-modeling-toolkit
   release:
     - type: pypi
+      name: topic-modeling-toolkit
+      artifact_version: 0.5.6
       command: pip install topic-modeling-toolkit
-      name: cookiecutter-python-package
       url: https://pypi.org/project/topic-modeling-toolkit/
     - type: github
+      name: topic-modeling-toolkit
+      artifact_version: v0.5.6
       command: curl -LJO https://github.com/boromir674/topic-modeling-toolkit/archive/refs/tags/v0.5.6.tar.gz
       url: https://github.com/boromir674/topic-modeling-toolkit/releases/tag/v0.5.6
-      artifact_version: v0.5.6
   description: >
     A Python Package hosting multiple (CLI) programs that facilitate Topic
     Modeling research operations, on a collection of documents.
@@ -316,9 +328,10 @@ projects:
       artifact_version: "0.7.1"
       url: https://pypi.org/project/so-magic/
     - type: github
+      name: so-magic
+      artifact_version: v0.7.1
       command: curl -LJO https://github.com/boromir674/so-magic/archive/refs/tags/v0.7.1.tar.gz
       url: https://github.com/boromir674/so-magic/releases/tag/v0.7.1
-      artifact_version: v0.7.1
   description: >
     A Python library to infer Self-Organising Map models, based on structured
     data.
@@ -406,11 +419,8 @@ projects:
     - type: pypi
       name: music-album-creation
       artifact_version: "1.4.0"
-      command: pip install music-album-creation
-      url: https://pypi.org/project/music-album-creation/
     - type: github
-      url: https://github.com/boromir674/music-album-creator/releases/tag/v1.4.0
-      command: 'curl -LJO https://github.com/boromir674/music-album-creator/archive/refs/tags/v1.4.0.tar.gz'
+      name: music-album-creator
       artifact_version: v1.4.0
   description: >
     Download a youtube video, convert and segment it into audio tracks,

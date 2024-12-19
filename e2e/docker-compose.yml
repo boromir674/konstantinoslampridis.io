@@ -14,7 +14,7 @@ services:
     # environment:
     #   - PORT=8123
 
-  # Cypress container
+  # Run Headless Cypress CI: docker-compose run --build --rm cypress
   cypress:
     # the Docker image to use from https://github.com/cypress-io/cypress-docker-images
     # image: "cypress/included:3.2.0"

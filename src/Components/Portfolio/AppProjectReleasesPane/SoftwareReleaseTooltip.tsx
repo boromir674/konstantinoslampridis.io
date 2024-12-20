@@ -62,61 +62,6 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                         {command}
                     </code>
                 </pre>
-                {/* OLD DESIGN */}
-                {/* {copied && <span style={{ color: 'green', marginLeft: '10px' }}>Copied!</span>} */}
-
-                {/* OPT 1 */}
-                {/* {copied && (
-                    <div style={{
-                        position: 'absolute',
-                        top: '-30px', // Adjust as needed
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        padding: '5px 10px',
-                        backgroundColor: 'yellow',
-                        border: '1px solid black',
-                        borderRadius: '10px',
-                        boxShadow: '2px 2px 5px rgba(0,0,0,0.3)',
-                        zIndex: 1,
-                        whiteSpace: 'nowrap',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                      }}>
-                    Copied!
-                    </div>
-                )} */}
-
-                {/* OPT 2 */}
-                {/* {copied && (
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '-150px', // Adjust as needed
-                        transform: 'translateY(-50%)',
-                        padding: '5px 10px',
-                        backgroundColor: 'yellow',
-                        border: '1px solid black',
-                        borderRadius: '10px',
-                        boxShadow: '2px 2px 5px rgba(0,0,0,0.3)',
-                        zIndex: 1,
-                        whiteSpace: 'nowrap',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}>
-                        <span style={{ marginRight: '5px' }}>Copied!</span>
-                        <div style={{
-                            width: '0',
-                            height: '0',
-                            borderLeft: '10px solid yellow',
-                            borderTop: '5px solid transparent',
-                            borderBottom: '5px solid transparent',
-                            position: 'absolute',
-                            right: '-10px',
-                        }}></div>
-                    </div>
-                )} */}
             
                 {/* OPT 3 */}
                 {copied && (
@@ -128,7 +73,8 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                         left: '-70px', // Adjusted to be closer to the right
                         transform: 'translateY(-50%)',
                         padding: '5px 10px',
-                        backgroundColor: 'yellow',
+                        color: theme.color,
+                        backgroundColor: theme.backgroundColor,
                         border: '1px solid black',
                         borderRadius: '10px',
                         boxShadow: '2px 2px 5px rgba(0,0,0,0.3)',
@@ -143,7 +89,7 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                         <div style={{
                             width: '0',
                             height: '0',
-                            borderLeft: '10px solid yellow',
+                            borderLeft: `10px solid ${theme.color}`,
                             borderTop: '5px solid transparent',
                             borderBottom: '5px solid transparent',
                             position: 'absolute',
@@ -151,7 +97,6 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                         }}></div>
                     </div>
                 )}
-
 
             </div>
             {/* WEB PAGE URL */}

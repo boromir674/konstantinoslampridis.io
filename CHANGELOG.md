@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.10.0] - 21/12/2024
+
+### Changes
+
+#### Feature
+- use app Theme for color styles of Copy pop-up
+- simple Copied pop-up on shell cmd user copy
+- copy to clipboard on shell command click
+- style Introduction Section text
+
+#### CI
+- accept 2.5MB of prod build Bundle Size; a 4.17% increase from previous 2.4MB
+- improve inputs description for Headless Lighthouse Reusable Workflow
+- properly invalidate Cloudfront Distribution
+
+#### Test
+- update snapshots data
+
+#### Dev
+- add new story to examine Single Release Button inside a Reactive Grid
+- install make in Dev Container and run 'yarn install' at post Start
+
+
 ## [1.8.0] - 14/09/2024
 
 ### Changes

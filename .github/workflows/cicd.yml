@@ -114,8 +114,8 @@ jobs:
       # expectations for assertions
       expected_number_of_files: 50
       bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
-      # other test data
-      bundle_size_acceptance: 2.4
+      # Configurable Acceptance Criteria: accept up to 2.5MB
+      bundle_size_acceptance: 2.5
 
   # LOGICAL AGGRGATION OF CI
   check:

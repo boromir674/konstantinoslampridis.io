@@ -24,30 +24,6 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   // other properties...
   id: "arbitrary-id-not-used-by-components-in-this-DOM-scope",
   data: [
-    // PROJECT 0
-    // {
-    //   title: "Some Project",
-    //   development_period: "2020-2021",
-    //   status: "Mature",
-    //   description:
-    //     "A CLI tool to generate a Python package with a single command.",
-    //   source_code_repo: "boromir674/cookiecutter-python-package",
-    //   resource_links: [
-    //     {
-    //       url: 'https://github.com/example/repo',
-    //       type: 'github',
-    //     },
-    //   ],
-    //   release: [
-    //     {
-    //       type: "pypi",
-    //       name: "Project with 1 Artifact Released",
-    //       artifact_version: "2.4.0",
-    //       urlText: "https://pypi.org/projects/cookiecutter-python-package",
-    //     },
-    //   ],
-    //   tags: ["Python", "CLI", "Automation", "Docker"],
-    // },
     // PROJECT 1
     {
       title: "Python Package Generator",
@@ -334,10 +310,10 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
 };
 
+// STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Light Theme
 export const Light = {
   args: argsLight
 };
-
 
 const argsDark: ResponsiveLocalStorageLayoutProps = {
   ...argsLight,
@@ -423,6 +399,19 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
   },
 };
 
+// STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Dark Theme
 export const Dark = {
   args: argsDark
+};
+
+
+// STORY: Responsive Grid with 1 Layout Item that has 1 single Release Button
+export const SingleItem = {
+  args: {
+    ...argsLight,
+    data: [{
+      ...argsLight.data[0],
+      release: argsLight.data[0].release ? [argsLight.data[0].release[0]] : []
+    }],
+  }
 };

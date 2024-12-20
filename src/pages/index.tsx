@@ -13,5 +13,5 @@ export default IndexPage;
 
 // the HeadFC Component allows to alter the <head> html element or insert elements in it
 
-// ADD content of the <head> element mostly used for metadata nd SEO
+// ADD content of the <head> element mostly used for metadata and SEO
 export const Head: HeadFC = () => <SEO />;

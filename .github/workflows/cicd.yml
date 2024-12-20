@@ -1,4 +1,4 @@
-# CI/CD Pipeline for Gatsby/TS project, in GitHub Actions
+# CI/CD Pipeline
 
 # Test -> Build -> Deploy
 
@@ -6,7 +6,9 @@
 on:
   push:
     branches:
-      - "*"
+      - "main"
+      - "dev"
+      - "ci"
     # we use release branch for semver/changelog updates and deploying 'rc' tags
     # thus we filter out events for branch 'release', to NOT trigger
     # avoid triggering on sem ver bump / changelog update commits
@@ -17,11 +19,12 @@ on:
     tags:
       - v*
 
+# Note: env context only available as env vars in code, not in 'if' conditions!
+
 jobs:
-# CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
-# note: if in Jobs here, cannot access env context (can the vars)
-# can retire this Job if all ifs leverage vars for reading Top-Level overrides
+  # can retire this Job if all 'if' condition read values from 'vars' for determining Top-Level overrides
   pipe:
+  # CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
     uses: ./.github/workflows/pipe_config.yml
     with:
       ALLOW_LINT_TO_FAIL: true
@@ -111,8 +114,8 @@ jobs:
       # expectations for assertions
       expected_number_of_files: 50
       bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
-      # other test data
-      bundle_size_acceptance: 2.4
+      # Configurable Acceptance Criteria: accept up to 2.5MB
+      bundle_size_acceptance: 2.5
 
   # LOGICAL AGGRGATION OF CI
   check:

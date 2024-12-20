@@ -6,12 +6,11 @@ on:
       target_ci_artifact:
         required: false
         type: string
-        description: 'CI Artifact with static website to audit'
+        description: 'CI Artifact with static website to audit. If provided, will run a simple file server to serve the static site files download from CI Artifact. Mutually exclusive with target_url input.'
       target_url:
         required: false
         type: string
-        description: 'URL to audit'
-      # REQUIRED
+        description: 'URL to audit. If provided, will run Lighthouse CI against this public URL. Mutually exclusive with target_ci_artifact input.'
 
 jobs:
   lighthouse:
@@ -43,10 +42,7 @@ jobs:
       # Healthcheck
       - run: lhci healthcheck
 
-      - name: Derive Lighthouse CLI flags from inputs
-        # if input url use --url and value
-        # if input ci artifact, will will download and serve the artifact later
-        # else exit with error msg and 1 exit code
+      - name: 'Derive whether to Audit Static Dist Dir or public URL, from inputs: --collect lhci flag argument'
         run: |
           if [ -n "${{ inputs.target_url }}" ]; then
             if [ -n "${{ inputs.target_ci_artifact }}" ]; then
@@ -62,6 +58,7 @@ jobs:
             echo "[INFO] Will audit Static Site from CI Artifact: ${{ inputs.target_ci_artifact }}"
           fi
 
+      # CI ARTIFACT DOWNLOAD
       - name: 'Download Website bundle (files) from CI Artifact'
         if: env.SINGAL_ARTIFACT == 'true'
         uses: actions/download-artifact@v4

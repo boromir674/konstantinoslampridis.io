@@ -22,6 +22,11 @@ RUN su node -c "umask 0002 && npm install -g ${NODE_MODULES}" \
 #     && apt-get -y install --no-install-recommends <your-package-list-here> \
 #     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update -y && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends \
+    make \
+    && rm -rf /var/lib/apt/lists/*
+
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"

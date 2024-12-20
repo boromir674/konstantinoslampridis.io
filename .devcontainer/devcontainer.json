@@ -41,8 +41,8 @@
 	//"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && poetry install -E test",
 	// to enable git commands
 	"postStartCommand": {
-		"yarn_install": "yarn install --frozen-lockfile --prodution=false --non-interactive",
-		"yarn_develop": "yarn develop"
+		"yarn_install": "yarn install --frozen-lockfile --production=false --non-interactive",
+		// "yarn_develop": "yarn develop"
 		// "git_add_safe": "git config --global --add safe.directory ${containerWorkspaceFolder}",
 	},
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.

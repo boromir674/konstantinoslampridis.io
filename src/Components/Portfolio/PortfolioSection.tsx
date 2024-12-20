@@ -221,7 +221,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     layoutItem: LayoutInterface,
     placeholder: LayoutInterface,
   ) => {
-    console.log("RESIZE HAPPENED");
     if (layoutItem.w <= 2) {
       const newValue = layoutItem.h + 2;
       // modifying `layoutItem` to enforce constraints
@@ -266,8 +265,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     saveToLS("layouts", allLayouts);
     // we store the layouts in the component's state, and trigger a re-render
     setLayouts(allLayouts);
-    // log in console a formatted string to show the current layout
-    console.log("ANY LAYOUTS Change HAPPENED");
   };
 
   // CONSTANT: starting width of each Portfolio Item

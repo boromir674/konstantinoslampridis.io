@@ -63,7 +63,6 @@ const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
 
 
 const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme, data: { command, urlText }, children }) => {
-    console.log("Component");
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [copied, setCopied] = useState(false);
 
@@ -73,7 +72,6 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
     const tooltipRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        console.log("useEffect");
         // if the Tooltip is not visible, do nothing
         if (!tooltipVisible) {
             return;
@@ -82,7 +80,6 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
         const handleClickOutsideOfButtonAndTooltip = (event: MouseEvent) => {
             // Needs to exlcude Button, since we have the 'handleClickOnButton' listener on the button itself
             if (buttonRef.current && !buttonRef.current.contains(event.target as Node) && tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
-                console.log("Clicked Outside of Button and Tooltip: Hiding Tooltip");
                 setTooltipVisible(false);
                 setZIndex(0);
             }
@@ -103,7 +100,6 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
     ///// Handle Click on the button /////
     const handleClickOnButton = () => {
         // if (!tooltipVisible) {
-            console.log("onClick Handler");
             setTooltipVisible(!tooltipVisible);
             // if visible set zIndex to 10 else 0
             setZIndex(tooltipVisible ? 0 : 10);
@@ -117,7 +113,6 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
 
     // Handle Click on the Command after Tooltip has appeared
     const handleCopyCommand = () => {
-        console.log("Copy Handler");
         navigator.clipboard.writeText(command).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000); // Hide the "copied" message after 2 seconds

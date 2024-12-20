@@ -13,6 +13,9 @@ interface SoftwareReleaseTooltipProps {
         urlText: string;
     }
     visible: boolean;
+    onCopyCommand: () => void;
+    copied: boolean;
+    onClick: () => void;
 }
 
 // Inner Components
@@ -35,7 +38,7 @@ const MyLink = styled(Link)`
 `;
 
 // declared using forwardRef. This opts it into receiving the ref from above as the second ref argument which is declared after props.
-const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltipProps>(({ theme, data: { command, urlText }, visible }, ref) => {
+const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltipProps>(({ theme, data: { command, urlText }, visible, onCopyCommand, copied }, ref) => {
     if (!visible) return null;
 
     return (
@@ -54,12 +57,13 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
             }}
         >
             {/* SHELL COMMAND */}
-            <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
+            <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }} onClick={onCopyCommand}>
                 <pre style={{ margin: 0 }}>
                     <code style={{ color: '#d63384' }}>
                         {command}
                     </code>
                 </pre>
+                {copied && <span style={{ color: 'green', marginLeft: '10px' }}>Copied!</span>}
             </div>
             {/* WEB PAGE URL */}
             <div style={{

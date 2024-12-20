@@ -24,6 +24,30 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   // other properties...
   id: "arbitrary-id-not-used-by-components-in-this-DOM-scope",
   data: [
+    // PROJECT 0
+    // {
+    //   title: "Some Project",
+    //   development_period: "2020-2021",
+    //   status: "Mature",
+    //   description:
+    //     "A CLI tool to generate a Python package with a single command.",
+    //   source_code_repo: "boromir674/cookiecutter-python-package",
+    //   resource_links: [
+    //     {
+    //       url: 'https://github.com/example/repo',
+    //       type: 'github',
+    //     },
+    //   ],
+    //   release: [
+    //     {
+    //       type: "pypi",
+    //       name: "Project with 1 Artifact Released",
+    //       artifact_version: "2.4.0",
+    //       urlText: "https://pypi.org/projects/cookiecutter-python-package",
+    //     },
+    //   ],
+    //   tags: ["Python", "CLI", "Automation", "Docker"],
+    // },
     // PROJECT 1
     {
       title: "Python Package Generator",
@@ -209,23 +233,30 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   ],
   // THEME - Styles - Colors
   theme: {
-
     // OUTER MOST element of 'Portfolio Section Header' + 'Portfolio Projects Interactive Grid'
-    container: lightTheme.portfolio.container,  // Portfolio Section Container
+    container: lightTheme.portfolio.container, // Portfolio Section Container
 
     // HEADER with Title; ie 'Open Source & Portfolio'
-    sectionHeader: lightTheme.portfolio.sectionHeader,  // Portfolio Section Header
+    sectionHeader: lightTheme.portfolio.sectionHeader, // Portfolio Section Header
+
+    // Reset Layout - Button
+    resetLayoutButton: lightTheme.portfolio.resetLayoutButton,
 
     // Portfolio Project Item
     item: {
       // outline:
       outline: `${lightTheme.portfolio.item.outline.width} solid ${lightTheme.portfolio.item.outline.color}`,
-      backgroundColor: lightTheme.portfolio.item.backgroundColor,  // not used
-      color: lightTheme.portfolio.item.color,  // Project Header color css property
+      backgroundColor: lightTheme.portfolio.item.backgroundColor, // not used
+      color: lightTheme.portfolio.item.color, // Project Header color css property
       theme: {
-        // Releases Pane
+        // Project Title
+        projectTitle: lightTheme.portfolio.item.projectTitle,
+        // Project Description
+        projectDescription: lightTheme.portfolio.item.projectDescription,
+        // Project Releases Pane
         releases: {
           headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+          headerFontSize: lightTheme.portfolio.item.releases.headerFontSize,
           headerColor: lightTheme.portfolio.item.releases.color,
           headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
           releaseButtonTheme: {
@@ -256,11 +287,15 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
                 },
               },
             ],
-          }
+          },
         },
         // Project Links Pane, ie source code repo docs, etc
         links: {
           headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
+          header: {
+            fontFamily: lightTheme.portfolio.item.resourceLinks.header.fontFamily,
+            fontSize: lightTheme.portfolio.item.resourceLinks.header.fontSize,
+          },
           item: {
             ...lightTheme.portfolio.item.resourceLinks.item,
             icons: [
@@ -289,8 +324,8 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
                 },
               },
             ],
-          }
-        }
+          },
+        },
       }
     },
   },
@@ -347,6 +382,7 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
         },
         links: {
           headerColor: darkTheme.portfolio.item.resourceLinks.headerColor,
+          header: darkTheme.portfolio.item.resourceLinks.header,
           item: {
             ...darkTheme.portfolio.item.resourceLinks.item,
             icons: [
@@ -373,6 +409,14 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
               },
             ],
           }
+        },
+        projectTitle: {
+          fontFamily: "",
+          fontSize: undefined
+        },
+        projectDescription: {
+          fontFamily: "",
+          fontSize: ""
         }
       }
     },

@@ -13,6 +13,9 @@ interface SoftwareReleaseTooltipProps {
         urlText: string;
     }
     visible: boolean;
+    onCopyCommand: () => void;
+    copied: boolean;
+    onClick: () => void;
 }
 
 // Inner Components
@@ -35,9 +38,8 @@ const MyLink = styled(Link)`
 `;
 
 // declared using forwardRef. This opts it into receiving the ref from above as the second ref argument which is declared after props.
-const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltipProps>(({ theme, data: { command, urlText }, visible }, ref) => {
+const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltipProps>(({ theme, data: { command, urlText }, visible, onCopyCommand, copied }, ref) => {
     if (!visible) return null;
-
     return (
         // CONTAINER
         <div
@@ -54,12 +56,48 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
             }}
         >
             {/* SHELL COMMAND */}
-            <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }}>
+            <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }} onClick={onCopyCommand}>
                 <pre style={{ margin: 0 }}>
                     <code style={{ color: '#d63384' }}>
                         {command}
                     </code>
                 </pre>
+            
+                {/* OPT 3 */}
+                {copied && (
+                    <div style={{
+                        position: 'absolute',
+                        // Smaller values move higher
+                        top: '27%', // Adjusted to be a bit higher
+                        // Smaller values move to the right
+                        left: '-70px', // Adjusted to be closer to the right
+                        transform: 'translateY(-50%)',
+                        padding: '5px 10px',
+                        color: theme.color,
+                        backgroundColor: theme.backgroundColor,
+                        border: '1px solid black',
+                        borderRadius: '10px',
+                        boxShadow: '2px 2px 5px rgba(0,0,0,0.3)',
+                        zIndex: 1,
+                        whiteSpace: 'nowrap',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}>
+                        <span style={{ marginRight: '5px' }}>Copied!</span>
+                        <div style={{
+                            width: '0',
+                            height: '0',
+                            borderLeft: `10px solid ${theme.color}`,
+                            borderTop: '5px solid transparent',
+                            borderBottom: '5px solid transparent',
+                            position: 'absolute',
+                            right: '-10px',
+                        }}></div>
+                    </div>
+                )}
+
             </div>
             {/* WEB PAGE URL */}
             <div style={{

@@ -86,7 +86,7 @@ professional:
     - title: 'Tech Lead - Contractor'
       company: 'Eco Development S.A.'
       location: 'Fyliro - Thessaloniki, Greece'
-      duration: 'May 2023 - Present'
+      duration: 'May 2023 - Nov 2023'
       description: >
         Supervisor of the 'Data Analytics' team, responsible for the development of the company's Machine Learning Models and Data Pipelines Infrastructure.
       activities:
@@ -169,7 +169,7 @@ professional:
         - Increased web app security by implementing '2FA flow' involving 'QR-Code scanning'
         - Enabled sales for global customers in Australia, Indonesia, Hong-Kong and Singapore, by integrating our web app with the Invenco 3PL web API to periodically exchange data, using an authorized serverless app (AWS Lambda app)
         - Migrated web app's legacy "http polling" to real-time/event-driven solution  and achieve data exchange with the newly published Rakuten web API
-        - Enabled web app autoamated invoice generation and delivery to customers, with custom solution.
+        - Enabled web app automated invoice generation and delivery to customers, with custom solution.
         - Adding features for the IoT mobile (iOS \& Android) app, providing a UI to allow inter-device Bluetooth communication.
         - Developed a Terminal App, providing a Wizard to guide Bluetooth Device Testing on factory-site.
       technology_tags:

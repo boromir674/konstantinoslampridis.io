@@ -169,7 +169,7 @@ projects:
     - PyPI
 
 - title: Python Software Release
-  development_period: May 2022
+  development_period: May 2022 - Jul 2022
   status: stable
   source_code_repo: boromir674/software-release
   resource_links:
@@ -185,7 +185,7 @@ projects:
       artifact_version: v0.1.0
   description: >
     A CLI that streamlines the process of making a "new" Software Release to
-    Github, using Semantic Versioning. Implemeted in Python, the CLI provides
+    Github, using Semantic Versioning. Implemented in Python, the CLI provides
     a wizard, that guides the user through the semi-automated "release process".
   tags:
     - Automated Software Release

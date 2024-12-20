@@ -116,7 +116,7 @@ interface AppPortfolioItemProps {
 }
 
 const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
-  console.log('theme', theme);
+  // console.log('theme', theme);
   return (
     <>
       <PortfolioItemProjectTitle theme={theme.projectTitle}>{d.title}</PortfolioItemProjectTitle>

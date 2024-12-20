@@ -209,23 +209,30 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   ],
   // THEME - Styles - Colors
   theme: {
-
     // OUTER MOST element of 'Portfolio Section Header' + 'Portfolio Projects Interactive Grid'
-    container: lightTheme.portfolio.container,  // Portfolio Section Container
+    container: lightTheme.portfolio.container, // Portfolio Section Container
 
     // HEADER with Title; ie 'Open Source & Portfolio'
-    sectionHeader: lightTheme.portfolio.sectionHeader,  // Portfolio Section Header
+    sectionHeader: lightTheme.portfolio.sectionHeader, // Portfolio Section Header
+
+    // Reset Layout - Button
+    resetLayoutButton: lightTheme.portfolio.resetLayoutButton,
 
     // Portfolio Project Item
     item: {
       // outline:
       outline: `${lightTheme.portfolio.item.outline.width} solid ${lightTheme.portfolio.item.outline.color}`,
-      backgroundColor: lightTheme.portfolio.item.backgroundColor,  // not used
-      color: lightTheme.portfolio.item.color,  // Project Header color css property
+      backgroundColor: lightTheme.portfolio.item.backgroundColor, // not used
+      color: lightTheme.portfolio.item.color, // Project Header color css property
       theme: {
-        // Releases Pane
+        // Project Title
+        projectTitle: lightTheme.portfolio.item.projectTitle,
+        // Project Description
+        projectDescription: lightTheme.portfolio.item.projectDescription,
+        // Project Releases Pane
         releases: {
           headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+          headerFontSize: lightTheme.portfolio.item.releases.headerFontSize,
           headerColor: lightTheme.portfolio.item.releases.color,
           headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
           releaseButtonTheme: {
@@ -256,11 +263,15 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
                 },
               },
             ],
-          }
+          },
         },
         // Project Links Pane, ie source code repo docs, etc
         links: {
           headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
+          header: {
+            fontFamily: lightTheme.portfolio.item.resourceLinks.header.fontFamily,
+            fontSize: lightTheme.portfolio.item.resourceLinks.header.fontSize,
+          },
           item: {
             ...lightTheme.portfolio.item.resourceLinks.item,
             icons: [
@@ -289,8 +300,8 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
                 },
               },
             ],
-          }
-        }
+          },
+        },
       }
     },
   },
@@ -299,10 +310,10 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
 };
 
+// STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Light Theme
 export const Light = {
   args: argsLight
 };
-
 
 const argsDark: ResponsiveLocalStorageLayoutProps = {
   ...argsLight,
@@ -347,6 +358,7 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
         },
         links: {
           headerColor: darkTheme.portfolio.item.resourceLinks.headerColor,
+          header: darkTheme.portfolio.item.resourceLinks.header,
           item: {
             ...darkTheme.portfolio.item.resourceLinks.item,
             icons: [
@@ -373,12 +385,33 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
               },
             ],
           }
+        },
+        projectTitle: {
+          fontFamily: "",
+          fontSize: undefined
+        },
+        projectDescription: {
+          fontFamily: "",
+          fontSize: ""
         }
       }
     },
   },
 };
 
+// STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Dark Theme
 export const Dark = {
   args: argsDark
+};
+
+
+// STORY: Responsive Grid with 1 Layout Item that has 1 single Release Button
+export const SingleItem = {
+  args: {
+    ...argsLight,
+    data: [{
+      ...argsLight.data[0],
+      release: argsLight.data[0].release ? [argsLight.data[0].release[0]] : []
+    }],
+  }
 };

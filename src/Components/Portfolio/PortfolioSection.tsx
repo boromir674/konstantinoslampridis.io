@@ -1,5 +1,5 @@
-import React, { useState, useCallback, FC, useRef } from "react";
-import { WidthProvider, Responsive } from "react-grid-layout";
+import React, { useState, FC } from "react";
+import { WidthProvider, Responsive, Layout } from "react-grid-layout";
 import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
@@ -18,12 +18,26 @@ import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
 
 
-// taken from react-grid-layout source code
-type Layout = ReadonlyArray<LayoutInterface>;
-// taken from react-grid-layout source code
-interface Layouts {
-  [P: string]: Layout[];
+//// aliases same as react-grid-layout source code
+type LayoutArray = ReadonlyArray<LayoutInterface>;
+
+/**
+ * Layouts is an object mapping breakpoints to layouts.
+ * e.g. `{lg: Layout[], md: Layout[], ...}`
+ */
+type LayoutsObject = {
+  //     lg: LayoutArray;
+  //     md: LayoutArray;
+  //     sm: LayoutArray;
+  //     xs: LayoutArray;
+  //     xxs: LayoutArray;
+  [key: string]: LayoutInterface[];
 }
+
+//// Local Types for prevent future errors below
+type ResponsiveReactGridLayoutOnResize = (layout: LayoutArray, oldLayoutItem: LayoutInterface, layoutItem: LayoutInterface, placeholder: LayoutInterface) => void;
+
+type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
 
 ////  GRID ITEM Top Level Component  ////
 
@@ -150,6 +164,8 @@ interface ResponsiveLocalStorageLayoutProps {
   rowHeight: number;
 }
 
+// COMPONENT - Reactive Grid Layout (with Local Storage support)
+
 // used to set up default values for the properties of the component
 // if the client does not provide them
 const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
@@ -160,7 +176,9 @@ const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   element_to_render: PortfolioItemCard,
 };
 
-
+/**
+ * On initial render, the Portfolio Section will have a default layout, derived automatically by Responsive Grid logic, with Portfolio Items. 
+ */
 const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   id: htmlID,
   data,
@@ -171,101 +189,92 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   cols,
   rowHeight,
 }) => {
-  // this component uses a react 'ref' (aka reference in any programming language)
-  // to store the content heights as reported per item in the layout
-  // The value of the reference is persisted (remains unchanged) between component re-renderings;
-  // Updating a reference doesn't trigger a component re-rendering.
-  // numerical id to number mapping
-  // const layoutItemHeights = useRef<{ [key: string]: number }>({});
-  // console.log("HEIGHTS", layoutItemHeights.current);
-  // const layoutItemHeights = useRef<Record<string, number>>({});
 
-  // const storeUpdatedItemHeight = useCallback((id: string, height: number) => {
-  //   // designed as a handler (or the update function of a listener)
-  //   // SHOULD MATCH the variable in PortfolioItemV3.tsx
-  //   const padding = 10;
-  //   layoutItemHeights.current[id] = height - 2 * padding;
-  //   console.log("UPDATE Heights with", id, height);
-  //   console.log("NEW Heights", layoutItemHeights.current);
-  // }, []);
+    const [layouts, setLayouts] = useState<LayoutsObject>(
+      JSON.parse(JSON.stringify(originalLayouts))
+    );
 
-  const onResize = (
-    layout: Layout,
+  /**
+   * Handle resize of Portfolio Item, while user drags and drops the bottom right corner of the Portfolio Item.
+   * 
+   * @summary This function is called continuously while the user resizes a Portfolio Item.
+   * It starts running right after the bottom-right corner is pressed, continues to run while user drags the mouse, and stops running right after mouse is released.
+   *
+   * It is used to enforce constraints on the resizing of the Portfolio Item.
+   *
+   * Conditionally modifies the layoutItem and placeholder objects, to enforce constraints on the resizing of the Portfolio Item.
+   *
+   * Currently it uses simple heuristic for increasing the Height when the Width decreases.
+   * 
+   * Simple Algorithm::
+   * - If      width <= 2 units -->  add 2 units to height
+   * - Else If width <= 3 units -->  add 1 unit  to height
+   * 
+   * @param layout - all Layout Items as array of objects of LayoutInterface type
+   * @param oldLayoutItem - the resized LayoutInterface object, before the resize
+   * @param layoutItem - the resized LayoutInterface object, after the resize. This object is mutable, and can be modified
+   * @param placeholder - 
+   */
+  const handleItemResize: ResponsiveReactGridLayoutOnResize = (
+    layout: ReadonlyArray<LayoutInterface>,
     oldLayoutItem: LayoutInterface,
     layoutItem: LayoutInterface,
-    placeholder: any
+    placeholder: LayoutInterface,
   ) => {
-    // `oldLayoutItem` contains the state of the item before the resize.
-    // You can modify `layoutItem` to enforce constraints.
-
-    // the layoutItemWidths ref is expected to be updated after first component mount,
-    // since we attach the storeUpdatedItemWidth as listener to the useElementSize hook
-    // of LayoutItems (see below)
-
-    // given the reported height that the content of the LayoutItem needs
-    // we set the minHeight accordingly
-
-
-    // we use dedicated height levels: 4, 7, 8 for to handle 3 cases of maxNumberOfLinksOrReleases
-
-    // rule to handle Portfolio Items without releases or project links
-    // if previous Layout had h = 4, we assume it has no releases or links
-
-    // if (oldLayoutItem.h === 4) {
-    //   console.log("oldLayoutItem.h === 4");
-
-    // } else if (layoutItem.w <= 2) {
-
+    console.log("RESIZE HAPPENED");
     if (layoutItem.w <= 2) {
       const newValue = layoutItem.h + 2;
+      // modifying `layoutItem` to enforce constraints
       layoutItem.h = newValue;
       placeholder.h = newValue;
 
     } else if (layoutItem.w <= 3) {
       const newValue = layoutItem.h + 1;
+      // modifying `layoutItem` to enforce constraints
       layoutItem.h = newValue;
       placeholder.h = newValue;
     }
-
-    // if (layoutItem.w <= 2) {
-    //   const newValue = layoutItem.h + 2;
-    //   layoutItem.h = newValue;
-    //   placeholder.h = newValue;
-    // } else if (layoutItem.w <= 3) {
-    //   const newValue = layoutItem.h + 1;
-    //   layoutItem.h = newValue;
-    //   placeholder.h = newValue;
-    // }
   };
 
-  const [layouts, setLayouts] = useState(
-    JSON.parse(JSON.stringify(originalLayouts))
-  );
-
+  /**
+   * Set the Layouts Object State to empty object {}.
+   * 
+   * Causes a re-render of the component, with Default Layout automatically derived by React Grid Layout to solve collisions.
+   */
   const resetLayout = () => {
-    // we set the state layouts to {} empty,
-    // which triggers a re-render, which initializes component
-    // with layouts from storage if found, or else with {}, which
-    // lets React Grid Layout to decide how to solve collisions
     setLayouts({});
   };
 
-  // code executed on layout change
-  // eg when user drags an item around
-  // when user resizes an item)
-  // the layout object encodes the current state of the grid and items in it (positions, sizes)
-  const onLayoutChange = (layout: Layout, layouts: any) => {
+  /**
+   * Handle any change from user interaction, in the current layout of the Portfolio Items.
+   *
+   * Runs once on following events:
+   *  - after a drag-n-drop action by the user
+   *  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
+   *  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
+   *
+   * When executed it saves the current layout in local storage, and updates Component state with it.
+   *
+   * @param currentLayout - the current layout of the Portfolio Items
+   * @param allLayouts - all layouts of the Portfolio Items, as a map of breakpoints (ie 'lg', 'md', 'sm', 'xs', 'xxs') to LayoutInterface arrays
+   */
+  const onLayoutChange: ResponsiveReactGridLayoutonLayoutChange = (
+    currentLayout: ReadonlyArray<LayoutInterface>,
+    allLayouts: LayoutsObject
+  ) => {
     // on layout change we store the layouts object in local storage
-    saveToLS("layouts", layouts);
-    // we store the layouts in the component's state
-    setLayouts(layouts);
+    saveToLS("layouts", allLayouts);
+    // we store the layouts in the component's state, and trigger a re-render
+    setLayouts(allLayouts);
     // log in console a formatted string to show the current layout
-    // console.log("LAYOUTS", layouts);
+    console.log("ANY LAYOUTS Change HAPPENED");
   };
-  // starting width of each Portfolio Item
+
+  // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
+
   return (
-    <PortfolioSectionContainer
+    <PortfolioSectionContainer // DIV
       id={htmlID}
       theme={{
         backgroundColor: theme.container.backgroundColor,
@@ -281,14 +290,17 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         className={className}
         cols={cols}
         rowHeight={rowHeight}
+        // Initialize Layouts from Local Storage or else with Empty Object
         layouts={layouts}
+
+        // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
         onLayoutChange={onLayoutChange}
-        // when resize happens we run this
-        // Resize can happen if User drags the Card from the bottom right,
-        // in this case we want to dynamically force the Card to NOT shrink its height or width beyond a certain point
-        // eg: user might try to decrease height too much, and we want to ensure that contents are visible, which requires a minimum height
-        // eg: user might try to decrease width too much, and we want to ensure that contents are visible, which requires a minimum width
-        onResize={onResize}
+
+        // handle resize, happening when user drags from bottom right
+        // this runs after user clicks bottom-right and while they keep the mouse clicked. It runs 'continuously' on every pixel moved sort-a-thing.
+        // currently we use simple heuristic to increase height when width decreases
+        onResize={handleItemResize}  // if W <= 2 add 2 H else if W <= 3 add 1 H
+
         // If true, WidthProvider will measure the container's width before mounting children.
         // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
         measureBeforeMount={true}
@@ -357,6 +369,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 zIndex: zIndex,
               }}
             >
+              {/* Initialize the ZIndexContext with state value and setter */}
               <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
                 <ResponsiveLayoutItemContent
                   data={item}

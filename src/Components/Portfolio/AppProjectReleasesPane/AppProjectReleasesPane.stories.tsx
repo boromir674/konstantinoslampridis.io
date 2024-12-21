@@ -1,10 +1,34 @@
+import React, { FC } from 'react';
+
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
 
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../../theme';
 
+// Buttons that span modal dialog, such as Release Button and Resource Link Button
+// require access to the ZIndex Context to be able to update their parents' z-index state.
+// here we do not update any parent, but we still need it to instantiate the component
+import ZIndexContext from '../../../ZIndexContext';
+
+
+// Proxy Component that encapsulates Content initialization
+const initialContent = {
+  zIndex: 1,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setZIndex: (zIndex: number) => null,
+};
+
+const ReleasePaneWithZIndex: FC<ReleasesPaneProps> = (props: ReleasesPaneProps) => {
+  return (
+    <ZIndexContext.Provider value={initialContent}>
+      <AppReleasePane {...props} />
+    </ZIndexContext.Provider>
+  )
+};
+
+
 export default {
-  component: AppReleasePane,
+  component: ReleasePaneWithZIndex,
   title: "AppReleasePane",
   tags: ["autodocs"],
 };
@@ -34,6 +58,7 @@ const args: ReleasesPaneProps = {
     },
   ],
   theme: {
+    headerFontSize: "24px",
     headerFontFamily: "Courier New, Courier, monospace",
     headerColor: "#555",
     headerMarginBottom: "20px",
@@ -64,6 +89,7 @@ const args: ReleasesPaneProps = {
   },
 };
 
+
 export const Simple = {
   args,
 };
@@ -72,6 +98,7 @@ const argsLight: ReleasesPaneProps = {
   ...args,
   theme: {
     // Release Pane Title Header
+    headerFontSize: "24px",
     headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
     headerColor: lightTheme.portfolio.item.releases.color,
     headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
@@ -128,6 +155,7 @@ export const Light = {
 const argsDark: ReleasesPaneProps = {
   ...args,
   theme: {
+    ...args.theme,
     // Release Pane Title Header
     headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
     headerColor: darkTheme.portfolio.item.releases.color,

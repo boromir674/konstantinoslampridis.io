@@ -366,7 +366,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 zIndex: zIndex,
               }}
             >
-              {/* Initialize the ZIndexContext with state value and setter */}
+              {/* Initialize the ZIndexContext with this state value and state setter */}
+              {/* Allows inner Buttons that pop-up dialogs, to modify the zIndex of their parent (this Layout Item) prevents dialog not being shown "above" other content. */}
+
               <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
                 <ResponsiveLayoutItemContent
                   data={item}

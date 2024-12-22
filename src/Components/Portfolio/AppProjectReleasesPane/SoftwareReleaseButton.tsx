@@ -1,3 +1,4 @@
+/** Provides SoftwareReleaseButtonComponent for rendering Release Items of a Project */
 import React, { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
 import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";

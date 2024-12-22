@@ -10,12 +10,7 @@ export default {
   title: "PortfolioSection",
   tags: ["autodocs"],
 };
-// const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
-//   className: "layout",
-//   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-//   rowHeight: 41,
-//   element_to_render: PortfolioItemCard as FC<PortfolioLayoutItemContentProps>,
-// };
+
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
   // other properties...
@@ -405,13 +400,15 @@ export const Dark = {
 };
 
 
-// STORY: Responsive Grid with 1 Layout Item that has 1 single Release Button
+// STORY: Responsive Grid with 1 Layout Item that has 2 Release Buttons
 export const SingleItem = {
   args: {
     ...argsLight,
     data: [{
       ...argsLight.data[0],
-      release: argsLight.data[0].release ? [argsLight.data[0].release[0]] : []
+      // release: argsLight.data[0].release ? [argsLight.data[0].release[0]] : []
+      // 2 release items
+      release: argsLight.data[0].release ? [argsLight.data[0].release[0], argsLight.data[0].release[1]] : []
     }],
   }
 };

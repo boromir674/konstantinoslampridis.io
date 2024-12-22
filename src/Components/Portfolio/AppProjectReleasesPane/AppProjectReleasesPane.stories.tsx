@@ -12,15 +12,13 @@ import ZIndexContext from '../../../ZIndexContext';
 
 
 // Proxy Component that encapsulates Content initialization
-const initialContent = {
-  zIndex: 1,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setZIndex: (zIndex: number) => null,
-};
-
 const ReleasePaneWithZIndex: FC<ReleasesPaneProps> = (props: ReleasesPaneProps) => {
   return (
-    <ZIndexContext.Provider value={initialContent}>
+    <ZIndexContext.Provider value={{
+      // zIndex: 1,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setZIndex: (zIndex: number) => null,
+    }}>
       <AppReleasePane {...props} />
     </ZIndexContext.Provider>
   )
@@ -32,6 +30,7 @@ export default {
   title: "AppReleasePane",
   tags: ["autodocs"],
 };
+
 
 const args: ReleasesPaneProps = {
   data: [

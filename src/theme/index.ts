@@ -9,6 +9,18 @@ import { type ComputedTheme, type Theme } from "./AppStyles";
 // Computing the final (Light + Common Styles, Dark + Common Styles) Theme
 type CommonStyling = typeof commonStyles;
 
+/**
+ * Compute Theme object by merging a Color (Styles) Theme with Common Styles.
+ * 
+ * Takes a Color (Styles) Theme (ie LightMode, DarkMode) and Common Styles that
+ * (CSS Styles that do not overlap with Color (Styles) Theme) and merges them
+ * into a single Computed Theme object. This Computed Theme object should
+ * contain all Styling information required to render whole App's Component Tree.
+ * 
+ * @param {Theme} theme a Color (Styles) Theme (i.e. LightMode, DarkMode)
+ * @param {CommonStyling} commonStyling Common Styles that do not overlap with Color (Styles) Theme
+ * @returns {ComputedTheme} a computed Theme object
+ */
 const mergeStylings = (
   theme: Theme,
   commonStyling: CommonStyling
@@ -117,4 +129,4 @@ const mergeStylings = (
 const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyles);
 const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyles);
 
-export { lightTheme, darkTheme };
+export { lightTheme, darkTheme, type ComputedTheme };

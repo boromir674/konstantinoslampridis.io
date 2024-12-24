@@ -5,6 +5,7 @@ import BigScreenViewInteractive, { BigScreenViewInteractiveProps } from "./BigSc
 import { lightTheme, darkTheme } from '../theme';
 import { UserDefinedTextData } from '../types';
 import { useThemeAdapterCallback } from '../Hooks/useThemeAdapter';
+import { useDataAdapterCallback } from '../Hooks/useDataAdapter';
 
 // Leverage CSS modules to do CSS reset
 // import '../global.css'; // Import the global CSS reset
@@ -24,10 +25,14 @@ interface EducationItemUserTextData {
 interface BuildTimeData {
   userDefinedWebsiteData: UserDefinedTextData
 }
-// lightMode.portfolio.item.resourceLinks
+
+
+//// APP COMPONENT; Top-Level without Props ////
 const App: FC = () => {
+  // READ From GraphQL DATA LAYER
   const {
-    userDefinedWebsiteData: { personal, education, professional, portfolio },
+    // userDefinedWebsiteData: { personal, education, professional, portfolio },
+    userDefinedWebsiteData,
   } = useStaticQuery<BuildTimeData>(graphql`
     query {
       userDefinedWebsiteData {
@@ -86,27 +91,22 @@ const App: FC = () => {
   `);
 
   const [adaptTheme] = useThemeAdapterCallback();
-  const name2Url = personal.links.reduce(
-    (acc: any, { name, id, url }: any) => ({ ...acc, [id]: url }),
-    {}
-  );
-
-  // const lightTheme: ComputedTheme = mergeStylings(lightMode, commonStyling);
-  // const darkTheme: ComputedTheme = mergeStylings(darkMode, commonStyling);
+  const [adaptData] = useDataAdapterCallback();
 
   // compute maximum number of Releases contained in a single portfolio item
-  const maxNumberOfReleasesPerPortfolioItems = portfolio.reduce(
+  const maxNumberOfReleasesPerPortfolioItems = useMemo(() => userDefinedWebsiteData.portfolio.reduce(
     (acc, { release = [] }) => Math.max(acc, release.length),
     0
-  );
+  ), [userDefinedWebsiteData]);
   // compute maximum number of links contained in a single portfolio item
-  const maxNumberOfLinksPerPortfolioItems = portfolio.reduce(
+  const maxNumberOfLinksPerPortfolioItems = useMemo(() => userDefinedWebsiteData.portfolio.reduce(
     (acc, { resource_links = [] }) => Math.max(acc, resource_links.length),
     0
-  );
+  ), [userDefinedWebsiteData]);
 
   const computeTheme = useCallback((theme: RawColorTheme) => {
     const appTheme = adaptTheme(theme);
+    // Adapt 'icon' to 'icons' by crating an rray of the same item multiple times
     const adaptedAppTheme: AppColorTheme = {
       ...appTheme,
       verticalMainPane: {
@@ -141,9 +141,10 @@ const App: FC = () => {
     return adaptedAppTheme;
   }, [adaptTheme]);
 
+  // Memoized Data and Themes
+  const appData = useMemo(() => adaptData(userDefinedWebsiteData), [adaptData, userDefinedWebsiteData]);
   const lightAppTheme = useMemo(() => computeTheme(lightTheme), [computeTheme, lightTheme]);
   const darkAppTheme = useMemo(() => computeTheme(darkTheme), [computeTheme, darkTheme]);
-  // appTheme.verticalMainPane.portfolio.item.theme.links.item.icon,
 
   return (
     // <main>
@@ -163,42 +164,7 @@ const App: FC = () => {
           barLabel: "Open Source Portfolio",
         },
       ]}
-      data={{
-        verticalMainPane: {
-          introduction: {
-            name: personal.name,
-          },
-          professional: professional.experience_items,
-
-          portfolio: portfolio.map((item: UserDefinedTextData['portfolio'][0]) => ({
-            ...item,
-            release: item.release.map((release) => ({
-              ...release,
-              urlText: release.url,
-            })),
-          })),
-        },
-
-        verticalSidePane: {
-          personal: {
-            name: personal.name,
-            email: personal.email,
-            github: name2Url["github"],
-            gitlab: name2Url["gitlab"],
-            linkedin: name2Url["linkedin"],
-          },
-          education: education.map(
-            (item: EducationItemUserTextData, index: number) => ({
-              degree_title: item.degree,
-              university_name: item.name,
-              location: item.location,
-              duration: item.date,
-              thesis_title: item.thesis_title,
-              topics: item.topics,
-            })
-          ),
-        },
-      }}
+      data={appData}
       colorSet={{
         // LIGHT THEME - MODE
         light: lightAppTheme,

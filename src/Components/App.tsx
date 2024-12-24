@@ -166,10 +166,8 @@ const App: FC = () => {
       ]}
       data={appData}
       colorSet={{
-        // LIGHT THEME - MODE
-        light: lightAppTheme,
-        // DARK THEME - MODE
-        dark: darkAppTheme,
+        light: lightAppTheme,  // LIGHT / DARK THEME - MODE
+        dark: darkAppTheme,    // DARK THEME - MODE
       }}
       html={{
         verticalMainPaneID: "vertical-main-pane",

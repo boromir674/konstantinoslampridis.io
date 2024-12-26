@@ -1,8 +1,6 @@
-interface HeaderStyles {
-  primaryColor: string;
-  secondaryColor: string;
-}
+/** Provides Theme (Color Mode) and ComputedTheme (Color Mode + Common Styles) Types */
 
+// EXPORTED: LIGHT or DARK Mode
 // Represents a set of colors corresponding to the Business Logic of the App
 // Usually this interface can describe the colors of a so-called "color mode"
 // For example Light/Dark mode/theme
@@ -121,6 +119,10 @@ interface Theme {
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // <pre> / <code> Colors
+          codeColor: string;
+          codeBackgroundColor: string;
+          onHoverCodeBackgroundColor: string;
         };
       };
     };
@@ -152,6 +154,7 @@ interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitle
   fontSize: string;
 }
 
+// EXPORTED: INTERFACE of Merged "Color + Common" Styles
 interface ComputedTheme extends Theme {
   navigationBar: ComputedNavigationBarTheme;
   //// ALL PERSONAL INFORMATION STYLES
@@ -171,7 +174,7 @@ interface ComputedTheme extends Theme {
       };
     };
   };
-  //// ALL PROFESSIONAL STYLES
+  //// ALL PROFESSIONAL Section STYLES
   professional: {
     containerBackgroundColor: Theme["professional"]["containerBackgroundColor"];
     title: {
@@ -216,7 +219,7 @@ interface ComputedTheme extends Theme {
     // item changed colors, 4 seconds would pass
     itemsColorModeSwitchDelay: number;
   };
-  //// ALL EDUCATION STYLES
+  //// ALL EDUCATION Section STYLES
   education: {
     // title: {
     //   textColor: string;
@@ -246,7 +249,7 @@ interface ComputedTheme extends Theme {
       tag: ComputedTagTheme;
     };
   };
-  //// ALL PORTFOLIO STYLES
+  //// ALL PORTFOLIO Section STYLES
   portfolio: {
     container: Theme["portfolio"]["container"];
     // Portfolio Section Title/Header
@@ -314,6 +317,10 @@ interface ComputedTheme extends Theme {
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // <pre> / <code> Colors
+          codeColor: string;
+          codeBackgroundColor: string;
+          onHoverCodeBackgroundColor: string;
           // other styles
           fontFamily: string;
           font: string;
@@ -339,6 +346,4 @@ interface ComputedTheme extends Theme {
   }
 }
 
-
-// export { type ComputedTheme, type Theme, mergeStylings, commonStyling };
 export { type ComputedTheme, type Theme };

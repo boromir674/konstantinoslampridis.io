@@ -1,5 +1,4 @@
-// COMMON Styling Configuration between Light and Dark Modes
-// Common Theme Design Object
+/** Provides the App's Common Styles Object, between Light and Dark Mode */
 
 // When you want to modify your Page Design (ie change font for a page section)
 // you should do it here in the commonStyling object

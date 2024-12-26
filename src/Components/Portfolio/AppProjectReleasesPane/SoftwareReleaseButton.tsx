@@ -1,7 +1,7 @@
 /** Provides SoftwareReleaseButtonComponent for rendering Release Items of a Project */
 import React, { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
-import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";
+import SoftwareReleaseTooltip, { SoftwareReleaseTooltipProps } from "./SoftwareReleaseTooltip";
 import ZIndexContext from '../../../ZIndexContext';
 
 
@@ -11,6 +11,10 @@ interface SoftwareReleaseButtonProps {
         backgroundColor: string;
         onHoverColor: string;
         onHoverBackgroundColor: string;
+        // <pre> / <code> Colors
+        codeColor: string;
+        codeBackgroundColor: string;
+        conHoverCodeBackgroundColor: string;
     };
     data: {
         command: string;
@@ -138,6 +142,10 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
                 visible={tooltipVisible} theme={{
                     color: theme.color,
                     backgroundColor: theme.backgroundColor,
+                    // <pre> / <code> Colors
+                    codeColor: theme.codeColor,
+                    codeBackgroundColor: theme.codeBackgroundColor,
+                    onHoverCodeBackgroundColor: theme.onHoverCodeBackgroundColor,
                 }} data={{
                     urlText,
                     command,

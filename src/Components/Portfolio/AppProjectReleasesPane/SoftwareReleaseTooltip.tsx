@@ -7,6 +7,10 @@ interface SoftwareReleaseTooltipProps {
     theme: {
         color: string;
         backgroundColor: string;
+        // <pre> / <code> Colors
+        codeColor: string;
+        codeBackgroundColor: string;
+        onHoverCodeBackgroundColor: string;
     };
     data: {
         command: string;
@@ -24,6 +28,21 @@ interface URLProps {
         textColor: string;
     };
 }
+// Shell Command DIV
+interface ShellDivProps {
+    children: React.ReactNode;
+    codeBackgroundColor: string;
+    onHoverCodeBackgroundColor: string;
+}
+const ShellDiv = styled.div<ShellDivProps>`
+  background-color: ${(props) => props.codeBackgroundColor};
+  &:hover {
+    background-color: ${(props) => props.onHoverCodeBackgroundColor};
+  }
+  padding: 10px;
+  border-radius: 5px;
+`;
+
 const Link = styled.a<URLProps>`
   color: ${(props) => props.theme.textColor};
   // text-decoration: none;
@@ -56,13 +75,14 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
             }}
         >
             {/* SHELL COMMAND */}
-            <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }} onClick={onCopyCommand}>
+            {/* <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }} onClick={onCopyCommand}> */}
+            <ShellDiv codeBackgroundColor={theme.codeBackgroundColor} onHoverCodeBackgroundColor={theme.onHoverCodeBackgroundColor} onClick={onCopyCommand}>
                 <pre style={{ margin: 0 }}>
-                    <code style={{ color: '#d63384' }}>
+                    <code style={{ color: theme.codeColor }}>
                         {command}
                     </code>
                 </pre>
-            
+
                 {/* OPT 3 */}
                 {copied && (
                     <div style={{
@@ -98,7 +118,7 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                     </div>
                 )}
 
-            </div>
+            </ShellDiv>
             {/* WEB PAGE URL */}
             <div style={{
                 paddingLeft: '6px',
@@ -121,3 +141,4 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
 
 
 export default SoftwareReleaseTooltip;
+export type { SoftwareReleaseTooltipProps };

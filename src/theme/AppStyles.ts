@@ -119,6 +119,8 @@ interface Theme {
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // Theme of Dialog visible on Release click
+          dialogBackgroundColor: string;
           // <pre> / <code> Colors
           codeColor: string;
           codeBackgroundColor: string;
@@ -317,6 +319,8 @@ interface ComputedTheme extends Theme {
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // Theme of Dialog visible on Release click
+          dialogBackgroundColor: string;
           // <pre> / <code> Colors
           codeColor: string;
           codeBackgroundColor: string;

@@ -8,7 +8,7 @@ import Typography from '../../Typography';
 
 
 import { ReleaseItemData } from "../../../PortfolioItemInterface";
-import SoftwareReleaseButton, { SoftwareReleaseButtonTheme } from './SoftwareReleaseButton';
+import SoftwareReleaseButton, { SoftwareReleaseButtonProps } from './SoftwareReleaseButton';
 
 type ReleaseTypeNames = "pypi" | "docker" | "github" | "gh_release";
 
@@ -27,8 +27,8 @@ interface Theme {
     headerColor: string;
     headerMarginBottom: string;
     headerFontSize: string;
-    // Styles per Release item
-    releaseButtonTheme: SoftwareReleaseButtonTheme & {
+    // Same Styles are used per Release item
+    releaseButtonTheme: SoftwareReleaseButtonProps["theme"] & {
         icons?: {
             svgStyles?: React.SVGProps<SVGSVGElement>;
             // Path props, except for d attribute

@@ -18,7 +18,11 @@ const PortfolioSectionMultiGrid: FC<PortfolioSectionMultiGridProps> = (props) =>
   return (
     // if array has 1 item render it, if multiple wrap them in a div
     <>
-      {props.grids.length === 1 ? <PortfolioSection {...props.grids[0]} /> : <div style={{ display: "flex", flexDirection: "row" }}>{props.grids.map(function (gridArgs, index) { return (<PortfolioSection key={index} {...gridArgs} />) })}</div>}
+      {props.grids.length === 1 ? <PortfolioSection {...props.grids[0]} /> : <div style={{
+        display: "flex", flexDirection: "row",
+        // make box width bigger
+        // width: "100vw",
+      }}>{props.grids.map(function (gridArgs, index) { return (<PortfolioSection key={index} {...gridArgs} />) })}</div>}
     </>
   );
 }
@@ -419,7 +423,7 @@ export const Dark = {
 
 
 // STORY: Responsive Grid with 1 Layout Item that has 2 Release Buttons
-export const SingleItem = {
+export const SingleItemWithTwoReleaseButtons = {
   args: {
     grids: [{
       ...argsLight,
@@ -433,39 +437,93 @@ export const SingleItem = {
   }
 };
 
-// STORY: 2 Grids to compare Contrast of different Theme Color schemes
+
+// STORY: 2 Dark Grids to compare Contrast of different Theme Color schemes
+// Each Grid has only 1 Item which is sufficient to compare Color schemes contrast
 export const TwoDarkGridsSideBySide = {
-  args: { grids: [argsDark, {
-    // EXPERIMENTAL COLOR SCHEME to Consider for next ITERATION
-    ...argsDark,
-    theme: {
-      ...argsDark.theme,
-      item: {
-        ...argsDark.theme.item,
-
-        // backgroundColor: argsDark.theme.item.backgroundColor,
-        // color: argsDark.theme.item.color,
-
+  args: {
+    grids: [
+      { ...argsDark, data: [argsDark.data[0]] },
+      {
+        // EXPERIMENTAL COLOR SCHEME to Consider for next ITERATION
+        ...argsDark,
+        data: [argsDark.data[0]],
         theme: {
-          ...argsDark.theme.item.theme,
-          releases: {
-            ...argsDark.theme.item.theme.releases,
-            // headerColor: darkTheme.portfolio.item.releases.color,
-            // headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
-            releaseButtonTheme: {
-              ...argsDark.theme.item.theme.releases.releaseButtonTheme,
-              // Darker than Release Button Background
-              dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
-              // Same as Release Button Background
-              codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
-              // CURRENT DESIGN
-              // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
-              // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
-              onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
+          ...argsDark.theme,
+          item: {
+            ...argsDark.theme.item,
+
+            // Portfolio Item Background Color
+            // backgroundColor: argsDark.theme.item.backgroundColor,
+            // color: argsDark.theme.item.color,
+
+            theme: {
+              ...argsDark.theme.item.theme,
+              releases: {
+                ...argsDark.theme.item.theme.releases,
+                // headerColor: darkTheme.portfolio.item.releases.color,
+                // headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
+                releaseButtonTheme: {
+                  ...argsDark.theme.item.theme.releases.releaseButtonTheme,
+                  // Darker than Release Button Background
+                  dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+                  // Same as Release Button Background
+                  codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
+                  // CURRENT DESIGN
+                  // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
+                  // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
+                  onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
+                },
+              },
+            },
+          },
+        },
+      }]
+  }
+};
+
+
+// STORY: 2 Light Grids to compare Contrast of different Theme Color schemes
+const twoLightGridsSideBySideArgs: PortfolioSectionMultiGridProps = {
+  ...TwoDarkGridsSideBySide.args,
+  grids: [
+    { ...argsLight, data: [argsLight.data[0]] },
+    {
+      // EXPERIMENTAL COLOR SCHEME to Consider for next ITERATION
+      ...argsLight,
+      data: [argsLight.data[0]],
+      theme: {
+        ...argsLight.theme,
+        item: {
+          ...argsLight.theme.item,
+
+          // backgroundColor: argsDark.theme.item.backgroundColor,
+          // color: argsDark.theme.item.color,
+
+          theme: {
+            ...argsLight.theme.item.theme,
+            releases: {
+              ...argsLight.theme.item.theme.releases,
+              // headerColor: darkTheme.portfolio.item.releases.color,
+              // headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
+              releaseButtonTheme: {
+                ...argsLight.theme.item.theme.releases.releaseButtonTheme,
+                // Darker than Release Button Background
+                dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+                // Same as Release Button Background
+                codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
+                // CURRENT DESIGN
+                // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
+                // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
+                onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
+              },
             },
           },
         },
       },
-    },
-  }]}
+    }]
+};
+
+export const TwoLightGridsSideBySide = {
+  args: twoLightGridsSideBySideArgs
 };

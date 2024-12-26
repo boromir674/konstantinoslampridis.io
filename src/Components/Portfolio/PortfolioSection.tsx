@@ -1,5 +1,5 @@
 import React, { useState, FC } from "react";
-import { WidthProvider, Responsive, Layout } from "react-grid-layout";
+import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
@@ -13,12 +13,11 @@ import { LayoutInterface } from './LayoutInterface';
 
 import ZIndexContext from '../../ZIndexContext';
 
-
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
 
 
-//// aliases same as react-grid-layout source code
+//// Type Aliases same as react-grid-layout source code
 type LayoutArray = ReadonlyArray<LayoutInterface>;
 
 /**
@@ -269,7 +268,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
-
   return (
     <PortfolioSectionContainer // DIV
       id={htmlID}
@@ -344,8 +342,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
 
           return (
-            <LayoutItem
-              //   ref={portfolioHTMLELsRefs[index]}
+
+            <LayoutItem  // DIV
               key={index}
               data-grid={{
                 i: index.toString(),
@@ -366,12 +364,16 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 zIndex: zIndex,
               }}
             >
-              {/* Initialize the ZIndexContext with state value and setter */}
-              <ZIndexContext.Provider value={{ zIndex, setZIndex }}>
-                <ResponsiveLayoutItemContent
+              {/* Initialize the ZIndexContext with this state value and state setter */}
+              {/* Allows inner Buttons that pop-up dialogs, to modify the zIndex of their parent (this Layout Item) prevents dialog not being shown "above" other content. */}
+
+              <ZIndexContext.Provider value={{
+                // zIndex,
+                setZIndex }}>
+                <ResponsiveLayoutItemContent // 2 DIVs
                   data={item}
                   renderProps={(d: PortfolioItemInterface) => {
-                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;
+                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
                   }}
                 />
               </ZIndexContext.Provider>

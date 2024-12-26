@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.11.0] - 26/12/2024
+
+### Changes
+
+#### Feature
+- better Dark Mode Release Button/Dialog/Code Color Contrast
+- memoize and useCallback for everything in App Component
+
+#### CI
+- fix secret passing to deploy.yml called Workflow
+
+#### Test
+- Personal Info with dedicated Snapshot and low-level sanity check
+
+#### Dev
+- create Stories for Comparing Light Grid Color Contrast
+- solve and add @types/jest for IDE typechecking of Jest Tests, in Dev Container
+- use useCallback with render props pattern in AppPortfolioItem
+- leave only the setZIndex function in the ZIndex Contenxt Interface
+- eliminate warning from Stories that need ZIndex Context Provider, by adding it
+
+
 ## [1.10.0] - 21/12/2024
 
 ### Changes

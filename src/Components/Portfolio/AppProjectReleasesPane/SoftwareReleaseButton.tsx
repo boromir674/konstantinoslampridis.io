@@ -1,15 +1,22 @@
+/** Provides SoftwareReleaseButtonComponent for rendering Release Items and ToolTip/Dialogs of a Project */
 import React, { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
-import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";
+import SoftwareReleaseTooltip, { SoftwareReleaseTooltipProps } from "./SoftwareReleaseTooltip";
 import ZIndexContext from '../../../ZIndexContext';
 
-
 interface SoftwareReleaseButtonProps {
+    // Styles of 
     theme: {
         color: string;
         backgroundColor: string;
         onHoverColor: string;
         onHoverBackgroundColor: string;
+        // Dialog Theme
+        dialogBackgroundColor: string;
+        // <pre> / <code> Colors
+        codeColor: string;
+        codeBackgroundColor: string;
+        onHoverCodeBackgroundColor: string;
     };
     data: {
         command: string;
@@ -18,6 +25,7 @@ interface SoftwareReleaseButtonProps {
     children: ReactNode;
 }
 
+// Inner Styles of the clickable Release Item Button
 interface SoftwareReleaseButtonTheme {
     color: string;
     backgroundColor: string;
@@ -136,7 +144,11 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
                 onClick={handleTooltipClick}
                 visible={tooltipVisible} theme={{
                     color: theme.color,
-                    backgroundColor: theme.backgroundColor,
+                    backgroundColor: theme.dialogBackgroundColor,
+                    // <pre> / <code> Colors
+                    codeColor: theme.codeColor,
+                    codeBackgroundColor: theme.codeBackgroundColor,
+                    onHoverCodeBackgroundColor: theme.onHoverCodeBackgroundColor,
                 }} data={{
                     urlText,
                     command,
@@ -149,9 +161,8 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
             />
         </div>
     );
-
 };
 
 
 export default SoftwareReleaseButtonComponent;
-export type { SoftwareReleaseButtonTheme };
+export type { SoftwareReleaseButtonProps };

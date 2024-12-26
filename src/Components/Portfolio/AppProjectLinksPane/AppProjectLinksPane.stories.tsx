@@ -1,5 +1,5 @@
 /* Storybook code for SVGIcon */
-
+import { FC } from 'react';
 // import Component and Props Type
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
 
@@ -7,9 +7,28 @@ import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinks
 import { lightTheme, darkTheme } from '../../../theme';
 
 
+// Buttons that span modal dialog, such as Release Button and Resource Link Button
+// require access to the ZIndex Context to be able to update their parents' z-index state.
+// here we do not update any parent, but we still need it to instantiate the component
+import ZIndexContext from '../../../ZIndexContext';
+
+
+// Proxy Component that encapsulates Content initialization
+const AppProjectLinksPaneWithZIndex: FC<AppProjectLinksPaneProps> = (props: AppProjectLinksPaneProps) => {
+  return (
+    <ZIndexContext.Provider value={{
+      zIndex: 1,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setZIndex: (zIndex: number) => null,
+    }}>
+      <AppProjectLinksPane {...props} />
+    </ZIndexContext.Provider>
+  )
+};
+
 // Configuration for rendering the component in storybook
 export default {
-    component: AppProjectLinksPane,
+    component: AppProjectLinksPaneWithZIndex,
     title: "AppProjectLinksPane",
     tags: ["autodocs"],
 };

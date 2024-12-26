@@ -3,9 +3,6 @@ import styled from "@emotion/styled";
 
 import PortfolioItemDataInterface from '../../../PortfolioItemInterface';
 
-// import { useElementSizeRef } from "../../../Hooks/useElementSizeRef";
-// import { useLayoutEffect } from "react";
-
 interface PortfolioLayoutItemContentProps {
   layoutItemID?: string;
   renderProps: (portfolioItemData: PortfolioItemDataInterface) => React.ReactNode;
@@ -61,6 +58,8 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   renderProps,
   layoutItemID,
 }) => {
+
+
   // const [blockRef, { width, height }] = useElementSizeRef();
   // whenever the width or height change we want to notify our listeners
   // each listener is expected tohave supplied a callback that we use to notify them
@@ -78,7 +77,6 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
 
   return (
     <OuterContainer>
-      {/* <InnerContainer ref={blockRef}> */}
       <InnerContainer>
         {renderProps(data)}
       </InnerContainer>

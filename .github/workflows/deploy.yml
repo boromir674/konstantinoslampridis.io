@@ -13,11 +13,13 @@ on:
         description: 'The website artifact to download and deploy to Github Pages'
     secrets:
       # Bypassing https://github.com/actions/runner/issues/1490
-      AWS_ACCESS_KEY_ID: 
+      AWS_ACCESS_KEY_ID:
         required: false
-      AWS_SECRET_ACCESS_KEY: 
+      AWS_SECRET_ACCESS_KEY:
         required: false
-      AWS_BUCKET_NAME: 
+      AWS_BUCKET_NAME:
+        required: false
+      AWS_CLOUDFRONT_DISTRIBUTION_ID:
         required: false
 
 jobs:

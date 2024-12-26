@@ -129,6 +129,27 @@ const darkColorMode: Theme = {
           // onHoverBackgroundColor: DESIGN_TOKENS["--md-sys-color-tertiary-dark"],
           onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
           onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
+          // <pre> / <code> Colors
+          codeColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
+          // CODE BACKGROUND, should better be lighter than the Dialog Background, for better contrast
+          // More Yellowish Tone to the Code Background
+          // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
+          // Darker than the Dialog Backgound, which is OK to distinguish
+          // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
+          // This is way too light for a dark theme Background !!!
+          // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
+          // Tiny bit darker than the Dialog background: not distinguishable enough
+          // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-dark'],
+          // Darker than Dialog, generally a nice Color. maybe to consider for other backgrounds
+          // good enough for now
+
+          // NEW DESIGN
+          // DIALOG BACKGROUND: Darker than Release Button Background
+          dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
+          // CODE SNIPPET BACKGROUND: Same as Release Button Background, lighter than Dialog Background
+          codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
+          // ON HOVER: Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
+          onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
         },
       },
     },

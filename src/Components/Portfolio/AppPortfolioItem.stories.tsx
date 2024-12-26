@@ -1,11 +1,31 @@
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
-
+import { FC } from "react";
 // Import Style Objects
 import { lightTheme, darkTheme } from '../../theme';
 
+
+// Buttons that span modal dialog, such as Release Button and Resource Link Button
+// require access to the ZIndex Context to be able to update their parents' z-index state.
+// here we do not update any parent, but we still need it to instantiate the component
+import ZIndexContext from '../../ZIndexContext';
+
+
+// Proxy Component that encapsulates Content initialization
+const AppPortfolioItemZIndex: FC<AppPortfolioItemProps> = (props: AppPortfolioItemProps) => {
+  return (
+    <ZIndexContext.Provider value={{
+    //   zIndex: 1,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setZIndex: (zIndex: number) => null,
+    }}>
+      <AppPortfolioItem {...props} />
+    </ZIndexContext.Provider>
+  )
+};
+
 // Story Configuration
 export default {
-    component: AppPortfolioItem,
+    component: AppPortfolioItemZIndex,
     title: "AppPortfolioItem",
     tags: ["autodocs"],
 };

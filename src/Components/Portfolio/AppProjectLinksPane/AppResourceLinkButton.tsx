@@ -56,7 +56,7 @@ const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
     padding: 8px;
   }
 `;
-
+// TODO merge into one component (Resource Link + Release Item)
 const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlText, children }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { setZIndex } = useContext(ZIndexContext);

@@ -1,3 +1,4 @@
+/** Component that renders a Div with Project's Content (ie Title, Description, etc) */
 import React, { FC, useCallback } from "react";
 import Typography from '../Typography';
 import styled from "@emotion/styled";
@@ -7,7 +8,6 @@ import PortfolioItemInterface, {
 } from "../../PortfolioItemInterface";
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
-
 
 const LeftPane = styled.div`
   display: flex;
@@ -116,9 +116,9 @@ interface AppPortfolioItemProps {
 }
 
 const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
-  // console.log('theme', theme);
   return (
     <>
+
       <PortfolioItemProjectTitle theme={theme.projectTitle}>{d.title}</PortfolioItemProjectTitle>
       {/* Project Description. Could be github description or description from CV Pdf */}
       <PortfolioItemProjectDescription theme={theme.projectDescription}>
@@ -169,9 +169,11 @@ const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]
 
 // React Component
 const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
+  // const JSXInstance = useMemo(() => render(data, theme), [data, theme]);
+  const renderCallback = useCallback(() => render(data, theme), [data, theme]);
   return (
     <div>
-      {render(data, theme)}
+      {renderCallback()}
     </div>
   );
 };

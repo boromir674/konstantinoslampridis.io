@@ -2,6 +2,10 @@
 import DESIGN_TOKENS from "./design-system/tokens.json";
 import { Theme } from "./theme/AppStyles";
 
+// TODO implement some helper(s) to allow declaring key/value pairs as below:
+// backgroundColor: "surface-variant-light,
+
+
 /////////// LIGHT MODE ///////////
 
 const lightColorMode: Theme = {
@@ -172,6 +176,7 @@ const lightColorMode: Theme = {
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light']
           
           onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-primary-light'],
+          dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-light'],
 
         },
       },

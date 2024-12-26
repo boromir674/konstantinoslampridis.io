@@ -343,10 +343,6 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
           headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
           releaseButtonTheme: {
             ...darkTheme.portfolio.item.releases.item,
-            // OLD DESIGN
-            dialogBackgroundColor: darkTheme.portfolio.item.releases.item.backgroundColor,
-            // dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
-            // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
             icons: [
               /// pypi
               {
@@ -464,7 +460,7 @@ export const TwoDarkGridsSideBySide = {
               codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
               // CURRENT DESIGN
               // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
-              // NEW DESIGN
+              // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
               onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
             },
           },

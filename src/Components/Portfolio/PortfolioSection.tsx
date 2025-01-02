@@ -4,12 +4,13 @@ import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
+import useLayoutsState from '../../Hooks/useLayoutsState';
 import Typography from '../Typography';
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
-import { LayoutInterface } from './LayoutInterface';
+import { LayoutInterface, LayoutsObject } from '../../interfaces';
 
 import ZIndexContext from '../../ZIndexContext';
 
@@ -19,19 +20,6 @@ import "../../css/react-resizable.css";
 
 //// Type Aliases same as react-grid-layout source code
 type LayoutArray = ReadonlyArray<LayoutInterface>;
-
-/**
- * Layouts is an object mapping breakpoints to layouts.
- * e.g. `{lg: Layout[], md: Layout[], ...}`
- */
-type LayoutsObject = {
-  //     lg: LayoutArray;
-  //     md: LayoutArray;
-  //     sm: LayoutArray;
-  //     xs: LayoutArray;
-  //     xxs: LayoutArray;
-  [key: string]: LayoutInterface[];
-}
 
 //// Local Types for prevent future errors below
 type ResponsiveReactGridLayoutOnResize = (layout: LayoutArray, oldLayoutItem: LayoutInterface, layoutItem: LayoutInterface, placeholder: LayoutInterface) => void;
@@ -120,12 +108,11 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
 `;
-  // color: ${props => props.theme.color};
-  // background-color: ${props => props.theme.backgroundColor};
+// color: ${props => props.theme.color};
+// background-color: ${props => props.theme.backgroundColor};
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const originalLayouts = getFromLS("layouts") || {};
 
 interface ResponsiveLocalStorageLayoutProps {
   id: string;
@@ -189,9 +176,40 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   rowHeight,
 }) => {
 
-    const [layouts, setLayouts] = useState<LayoutsObject>(
-      JSON.parse(JSON.stringify(originalLayouts))
-    );
+  // Code for implementing Saving and Loading Layouts from Local Storage
+  const [layouts, setLayouts, saveToLS] = useLayoutsState();
+
+  /**
+   * Set the Layouts Object State to empty object {}.
+   * 
+   * Causes a re-render of the component, with Default Layout automatically derived by React Grid Layout to solve collisions.
+   */
+  const handleResetLayout = () => {
+    setLayouts({});
+  };
+
+  /**
+   * Handle any change from user interaction, in the current layout of the Portfolio Items.
+   *
+   * Runs once on following events:
+   *  - after a drag-n-drop action by the user
+   *  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
+   *  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
+   *
+   * When executed it saves the current layout in local storage, and updates Component state with it.
+   *
+   * @param currentLayout - the current layout of the Portfolio Items
+   * @param allLayouts - all layouts of the Portfolio Items, as a map of breakpoints (ie 'lg', 'md', 'sm', 'xs', 'xxs') to LayoutInterface arrays
+   */
+  const onLayoutChange: ResponsiveReactGridLayoutonLayoutChange = (
+    currentLayout: ReadonlyArray<LayoutInterface>,
+    allLayouts: LayoutsObject
+  ) => {
+    // on layout change we store the layouts object in local storage
+    saveToLS("layouts", allLayouts);
+    // we store the layouts in the component's state, and trigger a re-render
+    setLayouts(allLayouts);
+  };
 
   /**
    * Handle resize of Portfolio Item, while user drags and drops the bottom right corner of the Portfolio Item.
@@ -234,38 +252,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     }
   };
 
-  /**
-   * Set the Layouts Object State to empty object {}.
-   * 
-   * Causes a re-render of the component, with Default Layout automatically derived by React Grid Layout to solve collisions.
-   */
-  const resetLayout = () => {
-    setLayouts({});
-  };
-
-  /**
-   * Handle any change from user interaction, in the current layout of the Portfolio Items.
-   *
-   * Runs once on following events:
-   *  - after a drag-n-drop action by the user
-   *  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
-   *  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
-   *
-   * When executed it saves the current layout in local storage, and updates Component state with it.
-   *
-   * @param currentLayout - the current layout of the Portfolio Items
-   * @param allLayouts - all layouts of the Portfolio Items, as a map of breakpoints (ie 'lg', 'md', 'sm', 'xs', 'xxs') to LayoutInterface arrays
-   */
-  const onLayoutChange: ResponsiveReactGridLayoutonLayoutChange = (
-    currentLayout: ReadonlyArray<LayoutInterface>,
-    allLayouts: LayoutsObject
-  ) => {
-    // on layout change we store the layouts object in local storage
-    saveToLS("layouts", allLayouts);
-    // we store the layouts in the component's state, and trigger a re-render
-    setLayouts(allLayouts);
-  };
-
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
   return (
@@ -278,7 +264,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
       {/* Portfolio Section TITLE*/}
       <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
       {/* Portfolio Section - RESET Layout Button */}
-      <ResetLayoutButton onClick={resetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
+      <ResetLayoutButton onClick={handleResetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
       {/* <button onClick={resetLayout}>Reset Layout</button> */}
       {/* Portfolio Section - GRID LAYOUT */}
       <ResponsiveReactGridLayout
@@ -369,7 +355,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
               <ZIndexContext.Provider value={{
                 // zIndex,
-                setZIndex }}>
+                setZIndex
+              }}>
                 <ResponsiveLayoutItemContent // 2 DIVs
                   data={item}
                   renderProps={(d: PortfolioItemInterface) => {
@@ -385,43 +372,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   );
 };
 
-/** 
-* Get a value, from local storage, by key
-* @param key - key to get from local storage
-* @returns value from local storage
-*/
-function getFromLS(key: string) {
-  type LS = {
-    [key: string]: any;
-  };
-  let ls: LS = {};
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      ls = JSON.parse(window.localStorage.getItem("rgl-8") || "{}");
-    } catch (e) {
-      /* Ignore */
-    }
-  }
-  return ls[key];
-}
-
-/** 
-* Save a jsonified key value pair to local storage, under the key "rgl-8".
-* @summary Saves a jsonified key value pair to local storage, by setting the
-* "rgl-8" key to point to the jsonified key value pair
-* @param key - key to save to local storage
-* @param value - value to save to local storage
-*/
-function saveToLS(key: string, value: any) {
-  if (typeof window !== "undefined" && window.localStorage) {
-    window.localStorage.setItem(
-      "rgl-8",
-      JSON.stringify({
-        [key]: value,
-      })
-    );
-  }
-}
 
 // allow client to ommit any of items in the defaultProps, since we have set up fallbacks
 export default withDefaultProps(defaultProps, ResponsiveLocalStorageLayout);

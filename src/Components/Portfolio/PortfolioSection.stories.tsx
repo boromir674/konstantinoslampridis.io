@@ -8,6 +8,10 @@ import DESIGN_TOKENS from "../../design-system/tokens.json";
 import { lightTheme, darkTheme } from '../../theme';
 import { on } from "events";
 
+import PortfolioItemInterface from "../../PortfolioItemInterface";
+import { AppPortfolioItemProps } from "./AppPortfolioItem";
+type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
+
 
 // Adapted Component of PortfolioSection allowing multiple Grids (side-by-side) for Style comparison
 interface PortfolioSectionMultiGridProps {
@@ -33,6 +37,9 @@ export default {
   tags: ["autodocs"],
 };
 
+const renderPropsOverride: RenderProps = (data, theme) => {
+  return <div></div>
+}
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
   // other properties...
@@ -324,6 +331,7 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
   },
   // Other Props, most likely with dedicated fallback values
   ...defaultProps,
+  // renderProps: renderPropsOverride,
   element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
 };
 

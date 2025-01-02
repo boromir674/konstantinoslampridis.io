@@ -26,8 +26,6 @@ type ResponsiveReactGridLayoutOnResize = (layout: LayoutArray, oldLayoutItem: La
 
 type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
 
-////  GRID ITEM Top Level Component  ////
-
 interface LayoutItemProps {
   moved?: boolean;
   static?: boolean;
@@ -47,6 +45,7 @@ interface LayoutItemProps {
   onResizeStop?: (layoutItem: LayoutItemProps, event: MouseEvent) => void;
 }
 
+////  GRID ITEM Top Level DIV Component  ////
 const LayoutItem = styled.div<LayoutItemProps>`
   border-style: ridge;
   display: flex;
@@ -91,7 +90,6 @@ const PortfolioSectionTitle = styled(PortfolioSectionTitleH1) <PortfolioSectionT
 `;
 
 // COMPONENT - Reset Layout Button
-
 import { ButtonHTMLAttributes } from "react";
 interface ResetLayoutButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme: {
@@ -111,9 +109,9 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
 // color: ${props => props.theme.color};
 // background-color: ${props => props.theme.backgroundColor};
 
-
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
+type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
 interface ResponsiveLocalStorageLayoutProps {
   id: string;
   data: PortfolioItemInterface[];
@@ -134,6 +132,13 @@ interface ResponsiveLocalStorageLayoutProps {
       theme: AppPortfolioItemProps['theme'];
     };
   };
+  // The Render Props Callback to override defaults
+  // renderProps={(d: PortfolioItemInterface) => {
+  //   return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
+  // }}
+  renderProps: RenderProps;
+
+  // Direct Child Component of LayoutItem that receives Render Props Callback
   element_to_render: typeof PortfolioItemCard;
   className?: string;
   cols: {
@@ -159,6 +164,8 @@ const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   // TODO make this dynamic based on the content of the PortfolioItem
   rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
+  renderProps: (data, theme) => <AppPortfolioItem data={data} theme={theme} />,
+  // Direct Child Component of LayoutItem that receives Render Props Callback
   element_to_render: PortfolioItemCard,
 };
 
@@ -170,6 +177,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   data,
   theme,
   // Default props
+  renderProps: inputRenderProps,
   element_to_render: ResponsiveLayoutItemContent,
   className,
   cols,
@@ -254,6 +262,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
+
   return (
     <PortfolioSectionContainer // DIV
       id={htmlID}
@@ -286,6 +295,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
         measureBeforeMount={true}
       >
+        {/* NEW VERSION */}
+
+        {/* OLD VERSION */}
         {data.map((item, index) => {
           let row = 0;
           let col = 0;
@@ -359,14 +371,17 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
               }}>
                 <ResponsiveLayoutItemContent // 2 DIVs
                   data={item}
-                  renderProps={(d: PortfolioItemInterface) => {
-                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
-                  }}
+                  // renderProps={(d: PortfolioItemInterface) => {
+                  //   return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
+                  // }}
+                  renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
                 />
               </ZIndexContext.Provider>
             </LayoutItem>
           );
         })}
+
+
       </ResponsiveReactGridLayout>
     </PortfolioSectionContainer>
   );

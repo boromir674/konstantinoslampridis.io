@@ -166,7 +166,7 @@ const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
   renderProps: (data, theme) => <AppPortfolioItem data={data} theme={theme} />,
   // Direct Child Component of LayoutItem that receives Render Props Callback
-  element_to_render: PortfolioItemCard,
+  element_to_render: PortfolioItemCard,  // 2 DIVS
 };
 
 /**
@@ -177,8 +177,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   data,
   theme,
   // Default props
-  renderProps: inputRenderProps,
-  element_to_render: ResponsiveLayoutItemContent,
+  renderProps: inputRenderProps,  // Renders Component with Content
+  element_to_render: ResponsiveLayoutItemContent,  // 2 DIVS
   className,
   cols,
   rowHeight,

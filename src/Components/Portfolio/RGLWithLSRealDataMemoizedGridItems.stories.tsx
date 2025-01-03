@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, useCallback } from "react";
+import React, { FC, useRef, useState, useCallback, useContext, useMemo } from "react";
 
 // Import the "Responsive" version of the GridLayout to support "Breakpoints" and Layouts
 import { Responsive, WidthProvider } from "react-grid-layout";
@@ -8,9 +8,14 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 //cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
 import styled from "@emotion/styled";
 
+// import App Styles Symbols
+import { lightTheme, darkTheme } from '../../theme';
 import PortfolioItemInterface from "../../PortfolioItemInterface";
-
-
+import useLayoutsState from '../../Hooks/useLayoutsState'
+import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
+import ZIndexContext from '../../ZIndexContext';
+// import "../../css/react-grid-layout.css";
+// import "../../css/react-resizable.css";
 ////// CONSTANT DATA //////
 const data: PortfolioItemInterface[] = [
     // PROJECT 1
@@ -198,7 +203,24 @@ const data: PortfolioItemInterface[] = [
 ];
 
 
-////  GRID ITEM Top Level DIV Component  ////
+// Single Grid Item Interface
+import { LayoutInterface } from './LayoutInterface';
+import { jsx } from "@emotion/react";
+
+type LayoutsObject = {
+    //     lg: LayoutArray;
+    //     md: LayoutArray;
+    //     sm: LayoutArray;
+    //     xs: LayoutArray;
+    //     xxs: LayoutArray;
+    [key: string]: LayoutInterface[];
+}
+
+type LayoutArray = ReadonlyArray<LayoutInterface>;
+type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
+
+
+//// COMPONENT that Renders Top-Level DIV of a Grid Item  ////
 interface LayoutItemProps {
     moved?: boolean;
     static?: boolean;
@@ -230,17 +252,30 @@ const LayoutItem = styled.div<LayoutItemProps>`
   // margin-bottom: 10px;
 `;
 
-
+// COMPONENT - DESIGNER'S ENTRYPOINT
+// Use to implement Hover Effects and other Styles on Grid Items
+const ItemWithHover = styled.span`
+  // SCALE ON HOVER
+  &:hover {
+    transform: scale(1.03);
+    // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    // background-color:
+    // color:
+  }
+`
 
 // Grid Item Component that counts self re-renders, simulates constant data from props with string type for demonstration
 interface CounterGridItemProps {
     constantDataFromProps: string;
     children?: React.ReactNode;
+    linksPane: AppProjectLinksPaneProps;
     // onClick?: () => void;
 }
 const CounterGridItem: FC<CounterGridItemProps> = (props) => {
     const rendersNo = useRef(0)
-    // const [counter, setCounter] = useState(0)
+    // Initialize the zIndex state for this item
+    // const { zIndex: contextZIndex } = useContext(ZIndexContext);
+    // const [, setZIndex] = useState(contextZIndex);
 
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
@@ -248,85 +283,189 @@ const CounterGridItem: FC<CounterGridItemProps> = (props) => {
     logComponentRerender()
 
     return (
-        <span><p>{props.children}{"->"}{props.constantDataFromProps}: {rendersNo.current}</p></span>
+        // <ZIndexContext.Provider value={{
+        //     setZIndex
+        // }}>
+        <ItemWithHover>
+            <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
+            <AppProjectLinksPane {...props.linksPane} />
+        </ItemWithHover>
+
     );
 }
-
-
-// HOOK - Use Layouts State
-// Single Grid Item Interface
-import { LayoutInterface } from './LayoutInterface';
-
-type LayoutsObject = {
-    //     lg: LayoutArray;
-    //     md: LayoutArray;
-    //     sm: LayoutArray;
-    //     xs: LayoutArray;
-    //     xxs: LayoutArray;
-    [key: string]: LayoutInterface[];
-}
-// HOOK - Use Layouts State and Encode/decode to and from Local Storage
-type useLayoutsStateHook = (initialLayouts?: LayoutsObject) => [LayoutsObject, React.Dispatch<React.SetStateAction<LayoutsObject>>, (key: string, value: LayoutsObject) => void, (key: string) => LayoutsObject];
-const useLayoutsState: useLayoutsStateHook = (initialLayouts?: LayoutsObject) => {
-
-    /** 
-    * Get a value, from local storage, by key
-    * @param key - key to get from local storage
-    * @returns value from local storage
-    */
-    const getFromLS = (key: string) => {
-        type LS = {
-            [key: string]: any;
-        };
-        let ls: LS = {};
-        if (typeof window !== "undefined" && window.localStorage) {
-            try {
-                ls = JSON.parse(window.localStorage.getItem("rgl-8") || "{}");
-            } catch (e) {
-                /* Ignore */
-            }
-        }
-        return ls[key];
-    }
-
-    /** 
-  * Save a jsonified key value pair to local storage, under the key "rgl-8".
-  * @summary Saves a jsonified key value pair to local storage, by setting the
-  * "rgl-8" key to point to the jsonified key value pair
-  * @param key - key to save to local storage
-  * @param value - value to save to local storage
-  */
-    const saveToLS = (key: string, value: LayoutsObject) => {
-        if (typeof window !== "undefined" && window.localStorage) {
-            window.localStorage.setItem(
-                "rgl-8",
-                JSON.stringify({
-                    [key]: value,
-                })
-            );
-        }
-
-    }
-
-    const [layouts, setLayouts] = useState<LayoutsObject>(
-        JSON.parse(JSON.stringify(getFromLS("layouts") || initialLayouts))
-    );
-
-    return [layouts, setLayouts, saveToLS, getFromLS]
-}
-
-type LayoutArray = ReadonlyArray<LayoutInterface>;
-type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
 
 
 // Both <ResponsiveReactGridLayout> and <ReactGridLayout> take width to calculate positions on drag events. In simple cases a HOC WidthProvider can be used to automatically determine width upon initialization and window resize events.
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+type realDataGridItemCallback = (props: { index: number, itemOutline: string, linksPane: AppProjectLinksPaneProps, zIndex: number, setZIndex: (zIndex: number) => void }) => React.ReactNode;
+
+type renderChildCallback = (reactNode: React.ReactNode) => React.ReactNode;
 type GridRealDataWithLSAndMemoizedItemsProps = {
     itemOutline: string;
     data: PortfolioItemInterface[];
 }
+type ExternalLinkTypeNames = "github" | 'source_code_repo' | "docs" | "documentation" | "ci/cd";
+type StateInitializer = (length: number) => number[];
 const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
+    // ID to State mapping: Initial State of ZIndex's for each Grid Item
+
+    const initialState: number[] = useMemo(() => {
+        return new Array(props.data.length).fill(0);
+    }, [props.data.length]);
+
+    const [zIndices, setZIndices] = useState(initialState);
+
+    // render Callback to use in Memoize Operation
+    const realDataGridItem: realDataGridItemCallback = (props) => {
+        return <LayoutItem
+            style={{
+                outline: props.itemOutline,
+                // allows increasing top-level grid item height, to allow children pop-ups to be visible
+                zIndex: props.zIndex,  // zIndex probably requires to extract this into a separate FC Component, skip for now
+            }}
+            key={props.index}
+            data-grid={{
+                // Index starts from 0
+                i: props.index.toString(),
+                x: props.index, y: 1, w: 1, h: 2
+            }}
+        >
+            <ZIndexContext.Provider value={{
+                // zIndex,
+                setZIndex: props.setZIndex,
+                // setZIndex: (newZIndex: number) => {
+                //     setZIndices((prevZIndices) => {
+                //         return {
+                //             ...prevZIndices,
+                //             [idx]: {
+                //                 zIndex: newZIndex
+                //             }
+                //         };
+                //     });
+                // }
+            }}>
+
+                <CounterGridItem linksPane={props.linksPane} className="text" constantDataFromProps="Render Times">ID {props.index}, props.zIndex: {props.zIndex}, state ZIndex: {}</CounterGridItem>
+            </ZIndexContext.Provider>
+
+        </LayoutItem>;
+    }
+
+    // MEMOIZE GRID CHILDREN !!!
+    // works for moving and resizing but not when opening modal dialog
+    // modal dialog re-renders all Grid Items, due to to the State being aan array
+    const children = React.useMemo(() => {
+        // return new Array(props.count).fill(undefined).map((val, idx) => {
+        return props.data.map((val, idx) => {
+            // Initialize the zIndex state for this item
+
+            return realDataGridItem({
+                index: idx,
+                itemOutline: props.itemOutline,
+                // zIndex: zIndex,
+                linksPane: {
+                    data: {
+                        // links: [
+                        //     {
+                        //         title: 'Source Code',
+                        //         url: 'https://github.com/example/repo',
+                        //         type: 'github',
+                        //     },
+                        //     {
+                        //         title: 'Documentation',
+                        //         url: 'https://example.com/docs',
+                        //         type: 'docs',
+                        //     },
+                        //     {
+                        //         title: 'CI/CD Pipeline',
+                        //         url: 'https://example.com/ci-cd',
+                        //         type: 'ci/cd',
+                        //     },
+                        // ],
+                        // links: [],
+                        links: (val.resource_links || []).map((link) => {
+                            return {
+                                title: link.type,
+                                url: link.url,
+                                type: link.type as ExternalLinkTypeNames,
+                            };
+                        }),
+                    },
+                    theme: {
+                        // Link Pane Title Header
+                        // headerFontFamily: lightTheme.portfolio.item.resourceLinks.fontFamily,
+                        headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
+                        // item: lightTheme.portfolio.item.resourceLinks.item,
+                        item: {
+                            ...lightTheme.portfolio.item.resourceLinks.item,
+                            icons: [
+                                // github
+                                {
+                                    svgStyles: {
+                                        width: "14px",
+                                        height: "14px",
+                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                    },
+                                },
+                                // docs
+                                {
+                                    svgStyles: {
+                                        width: "14px",
+                                        height: "14px",
+                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                    },
+                                },
+                                // ci/cd
+                                {
+                                    svgStyles: {
+                                        width: "14px",
+                                        height: "14px",
+                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                    },
+                                },
+                            ],
+                        },
+                        header: {
+                            fontFamily: '',
+                            fontSize: ''
+                        }
+                    }
+                },
+                // state as Object (seems to work but renders all items in grid when open modal-dialog)
+                // // Initial zIndex for this item
+                // zIndex: zIndices[idx].zIndex,
+                // // Callback to set zIndex for this item
+                // setZIndex: (newZIndex: number) => {
+                //     setZIndices((prevZIndices) => {
+                //         return {
+                //             ...prevZIndices,
+                //             [idx]: {
+                //                 zIndex: newZIndex
+                //             }
+                //         };
+                //     });
+                // }
+
+                // state as array of numbers number[]
+                // Initial zIndex for this item
+                zIndex: zIndices[idx],
+                // Callback to set zIndex for this item
+                setZIndex: (newZIndex: number) => {
+                    setZIndices((prevZIndices) => {
+                        return prevZIndices.map((zIndex, index) => {
+                            if (index === idx) {
+                                return newZIndex;
+                            } else {
+                                return zIndex;
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    }, [props.data, props.itemOutline, zIndices]);
+
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
@@ -353,32 +492,44 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
         setLayouts(allLayouts);
     };
 
-    // Code for Memoizing each Child Grid Item !
-    const children = React.useMemo(() => {
-        // return new Array(props.count).fill(undefined).map((val, idx) => {
-        return props.data.map((val, idx) => {
-            return <LayoutItem key={idx}
-            // style={{ outline: "1px solid black" }}
-            style={{
-                outline: props.itemOutline,
-                // allows increasing top-level grid item height, to allow children pop-ups to be visible
-                // zIndex: zIndex,  // zIndex probably requires to extract this into a separate FC Component, skip for now
-              }}
-            data-grid={{ x: idx, y: 1, w: 1, h: 1 }}>
-                <CounterGridItem className="text" constantDataFromProps="Render Times">ID {idx}</CounterGridItem>
-            </LayoutItem>;
-        });
-    }, [props.data, props.itemOutline]);
+    // const renderChild: renderChildCallback = (reactNode: React.ReactNode) => {
+    //     // Initialize the zIndex state for this item
+    //     const [zIndex, setZIndex] = useState(0);
+    //     return <ZIndexContext.Provider value={{
+    //         zIndex,
+    //         setZIndex
+    //     }}>
+    //         {reactNode}
+    //     </ZIndexContext.Provider>
+    // };
+
     return <>
         {/* SUPPORT ELEMENTS */}
-        <p>Render Times: {rendersNo.current}</p>
+        <p>GRID CONTAINER Render Times: {rendersNo.current}</p>
+        {/* SHOW Layouts as JSON */}
+        <p>Layouts: {JSON.stringify(layouts)}</p>
+        {/* RESET LAYOUT BUTTON */}
         <button onClick={handleClickResetLayoutButton}>Reset Layout</button>
         {/* GRID ELEMENT */}
         <ResponsiveGridLayout
             layouts={layouts}
             // Handler User Layout Changes by ensuring they are persisted in Local Storage
             onLayoutChange={onLayoutChange}
-            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}>{children}</ResponsiveGridLayout>
+            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}>
+            {/* {function (_children) {
+                const [zIndex, setZIndex] = useState(0);
+                return _children.map((child) => {
+                    return <ZIndexContext.Provider value={{
+                        // zIndex,
+                        setZIndex
+                    }}>
+                        {child}
+                    </ZIndexContext.Provider>
+                });
+            }(children)} */}
+            {children}
+            {/* {children.map((child) => renderChild(child))} */}
+        </ResponsiveGridLayout>
     </>;
 }
 

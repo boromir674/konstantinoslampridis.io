@@ -11,9 +11,14 @@ import styled from "@emotion/styled";
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
 import PortfolioItemInterface from "../../PortfolioItemInterface";
+import { AppPortfolioItemProps } from './AppPortfolioItem';
 import useLayoutsState from '../../Hooks/useLayoutsState'
-import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
+import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane/AppProjectLinksPaneExperimental';
 import ZIndexContext from '../../ZIndexContext';
+
+// keep same public interface as PortfolioSection
+import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from './PortfolioSection'
+
 // import "../../css/react-grid-layout.css";
 // import "../../css/react-resizable.css";
 ////// CONSTANT DATA //////
@@ -205,7 +210,6 @@ const data: PortfolioItemInterface[] = [
 
 // Single Grid Item Interface
 import { LayoutInterface } from './LayoutInterface';
-import { jsx } from "@emotion/react";
 
 type LayoutsObject = {
     //     lg: LayoutArray;
@@ -254,7 +258,8 @@ const LayoutItem = styled.div<LayoutItemProps>`
 
 // COMPONENT - DESIGNER'S ENTRYPOINT
 // Use to implement Hover Effects and other Styles on Grid Items
-const ItemWithHover = styled.span`
+// This is the Elements inside the Top-Level DIV. Can be fragment. Here span is used for simplicity.
+const ItemWithHover = styled.div`
   // SCALE ON HOVER
   &:hover {
     transform: scale(1.03);
@@ -263,33 +268,39 @@ const ItemWithHover = styled.span`
     // color:
   }
 `
+const ResponsiveLayoutItemContent = portfolioSectionDefaultProps.element_to_render;
 
 // Grid Item Component that counts self re-renders, simulates constant data from props with string type for demonstration
 interface CounterGridItemProps {
-    constantDataFromProps: string;
+    // constantDataFromProps: string;
     children?: React.ReactNode;
-    linksPane: AppProjectLinksPaneProps;
+    // linksPane: AppProjectLinksPaneProps;
+    data: PortfolioItemInterface;
+    renderItem: ResponsiveLocalStorageLayoutProps["renderProps"]
     // onClick?: () => void;
 }
 const CounterGridItem: FC<CounterGridItemProps> = (props) => {
     const rendersNo = useRef(0)
-    // Initialize the zIndex state for this item
-    // const { zIndex: contextZIndex } = useContext(ZIndexContext);
-    // const [, setZIndex] = useState(contextZIndex);
-
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
     }, [])
     logComponentRerender()
 
+    const renderItem = useCallback((data: PortfolioItemInterface) => {
+        return props.renderItem(data);
+    }, []);
+
     return (
-        // <ZIndexContext.Provider value={{
-        //     setZIndex
-        // }}>
-        <ItemWithHover>
-            <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
-            <AppProjectLinksPane {...props.linksPane} />
-        </ItemWithHover>
+        // <ItemWithHover>
+        //     <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
+        //     <AppProjectLinksPane {...props.linksPane} />
+        // </ItemWithHover>
+
+        <ResponsiveLayoutItemContent // 2 DIVs
+            data={props.data}
+            renderProps={props.renderItem}
+        // renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
+        />
 
     );
 }
@@ -300,22 +311,28 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 type realDataGridItemCallback = (props: { index: number, itemOutline: string, linksPane: AppProjectLinksPaneProps, zIndex: number, setZIndex: (zIndex: number) => void }) => React.ReactNode;
 
-type renderChildCallback = (reactNode: React.ReactNode) => React.ReactNode;
 type GridRealDataWithLSAndMemoizedItemsProps = {
     itemOutline: string;
     data: PortfolioItemInterface[];
+    theme: ResponsiveLocalStorageLayoutProps["theme"];
 }
 type ExternalLinkTypeNames = "github" | 'source_code_repo' | "docs" | "documentation" | "ci/cd";
-type StateInitializer = (length: number) => number[];
 
 const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
-
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
     }, [])
     logComponentRerender()
+    // Helper Code for computing Common svg styles
+    const commonSVGStyles = useMemo(() => {
+        return {
+            width: "14px",
+            height: "14px",
+            fill: darkTheme.portfolio.item.releases.item.color
+        }
+    }, []);
 
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
@@ -354,7 +371,7 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
             <ZIndexContext.Provider value={{
                 setZIndex: props.setZIndex,
             }}>
-                <CounterGridItem linksPane={props.linksPane} className="text" constantDataFromProps="Render Times">ID {props.index}, zIndex: {props.zIndex}</CounterGridItem>
+                <CounterGridItem linksPane={props.linksPane} className="text" constantDataFromProps="LINKS Render Times">ID {props.index}, zIndex: {props.zIndex}</CounterGridItem>
             </ZIndexContext.Provider>
 
         </LayoutItem>;
@@ -446,6 +463,8 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                     //     setZIndex: setZIndex,
                     // });
                     console.log("Rendering Grid Item: ", index);
+                    console.log("Item Data: ", item);
+                    console.log("Theme: ", props.theme);
                     return (
                         <LayoutItem
                             style={{
@@ -463,57 +482,14 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                             <ZIndexContext.Provider value={{
                                 setZIndex: setZIndex,
                             }}>
-                                <CounterGridItem linksPane={{
-                                    data: {
-                                        links: (item.resource_links || []).map((link) => {
-                                            return {
-                                                title: link.type,
-                                                url: link.url,
-                                                type: link.type as ExternalLinkTypeNames,
-                                            };
-                                        }),
-                                    },
-                                    theme: {
-                                        // Link Pane Title Header
-                                        // headerFontFamily: lightTheme.portfolio.item.resourceLinks.fontFamily,
-                                        headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
-                                        // item: lightTheme.portfolio.item.resourceLinks.item,
-                                        item: {
-                                            ...lightTheme.portfolio.item.resourceLinks.item,
-                                            icons: [
-                                                // github
-                                                {
-                                                    svgStyles: {
-                                                        width: "14px",
-                                                        height: "14px",
-                                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                                    },
-                                                },
-                                                // docs
-                                                {
-                                                    svgStyles: {
-                                                        width: "14px",
-                                                        height: "14px",
-                                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                                    },
-                                                },
-                                                // ci/cd
-                                                {
-                                                    svgStyles: {
-                                                        width: "14px",
-                                                        height: "14px",
-                                                        fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                                    },
-                                                },
-                                            ],
-                                        },
-                                        header: {
-                                            fontFamily: '',
-                                            fontSize: ''
-                                        }
-                                    }
-                                }}
-                                    className="text" constantDataFromProps="Render Times">ID {index}, zIndex: {zIndex}</CounterGridItem>
+                                <CounterGridItem
+                                    data={item}
+                                    // TODO useCALLBACK
+                                    // renderItem={portfolioSectionDefaultProps.renderProps}
+                                    renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
+                                >
+                                    {/* ID {index}, zIndex: {zIndex} */}
+                                </CounterGridItem>
                             </ZIndexContext.Provider>
                         </LayoutItem>
                     )
@@ -534,6 +510,103 @@ export default {
 const SimpleArgs: GridRealDataWithLSAndMemoizedItemsProps = {
     data,
     itemOutline: "1px solid black",
+    theme: {
+        // OUTER MOST element of 'Portfolio Section Header' + 'Portfolio Projects Interactive Grid'
+        container: lightTheme.portfolio.container, // Portfolio Section Container
+
+        // HEADER with Title; ie 'Open Source & Portfolio'
+        sectionHeader: lightTheme.portfolio.sectionHeader, // Portfolio Section Header
+
+        // Reset Layout - Button
+        resetLayoutButton: lightTheme.portfolio.resetLayoutButton,
+
+        // Portfolio Project Item
+        item: {
+            // outline:
+            outline: `${lightTheme.portfolio.item.outline.width} solid ${lightTheme.portfolio.item.outline.color}`,
+            backgroundColor: lightTheme.portfolio.item.backgroundColor, // not used
+            color: lightTheme.portfolio.item.color, // Project Header color css property
+            theme: {
+                // Project Title
+                projectTitle: lightTheme.portfolio.item.projectTitle,
+                // Project Description
+                projectDescription: lightTheme.portfolio.item.projectDescription,
+                // Project Releases Pane
+                releases: {
+                    headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
+                    headerFontSize: lightTheme.portfolio.item.releases.headerFontSize,
+                    headerColor: lightTheme.portfolio.item.releases.color,
+                    headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
+                    releaseButtonTheme: {
+                        ...lightTheme.portfolio.item.releases.item,
+                        icons: [
+                            /// pypi
+                            {
+                                svgStyles: {
+                                    fill: lightTheme.portfolio.item.releases.item.color,
+                                    width: "14px",
+                                    height: "14px",
+                                },
+                            },
+                            /// docker
+                            {
+                                svgStyles: {
+                                    fill: lightTheme.portfolio.item.releases.item.color,
+                                    width: "14px",
+                                    height: "14px",
+                                },
+                            },
+                            /// github
+                            {
+                                svgStyles: {
+                                    fill: lightTheme.portfolio.item.releases.item.color,
+                                    width: "14px",
+                                    height: "14px",
+                                },
+                            },
+                        ],
+                    },
+                },
+                // Project Links Pane, ie source code repo docs, etc
+                links: {
+                    headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
+                    header: {
+                        fontFamily: lightTheme.portfolio.item.resourceLinks.header.fontFamily,
+                        fontSize: lightTheme.portfolio.item.resourceLinks.header.fontSize,
+                    },
+                    item: {
+                        ...lightTheme.portfolio.item.resourceLinks.item,
+                        icons: [
+                            // github
+                            {
+                                svgStyles: {
+                                    width: "12px",
+                                    height: "12px",
+                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                },
+                            },
+                            // docs
+                            {
+                                svgStyles: {
+                                    width: "12px",
+                                    height: "12px",
+                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                },
+                            },
+                            // ci/cd
+                            {
+                                svgStyles: {
+                                    width: "12px",
+                                    height: "12px",
+                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
+                                },
+                            },
+                        ],
+                    },
+                },
+            }
+        },
+    },
 }
 
 export const MinimumNumberOfItemReRenders = {

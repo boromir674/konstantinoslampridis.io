@@ -367,8 +367,7 @@ const argsDark: ResponsiveLocalStorageLayoutProps = {
               {
                 svgStyles: {
                   ...argsLight.theme.item.theme.releases.releaseButtonTheme.icons?.[1].svgStyles,
-                  // leave default black fill color
-                  // fill: darkTheme.portfolio.item.releases.item.color,
+                  fill: darkTheme.portfolio.item.releases.item.color,
                 },
               },
               /// github

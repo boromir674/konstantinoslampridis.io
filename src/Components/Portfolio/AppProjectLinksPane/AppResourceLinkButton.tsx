@@ -84,7 +84,7 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
       const handleClickOnButton = () => {
         setTooltipVisible(!tooltipVisible);
         // if visible set zIndex to 10 else 0
-        setZIndex(tooltipVisible ? 0 : 10);
+        setZIndex(tooltipVisible ? 0 : 100);
       };
 
   return (

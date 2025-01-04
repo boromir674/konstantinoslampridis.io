@@ -332,18 +332,7 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
             }}
         >
             <ZIndexContext.Provider value={{
-                // zIndex,
-                setZIndex: props.setZIndex,
-                // setZIndex: (newZIndex: number) => {
-                //     setZIndices((prevZIndices) => {
-                //         return {
-                //             ...prevZIndices,
-                //             [idx]: {
-                //                 zIndex: newZIndex
-                //             }
-                //         };
-                //     });
-                // }
+                setZIndex: props.setZIndex,  // provide update ZIndex to allow children elements update their Top-Level Grid Item zIndex
             }}>
 
                 <CounterGridItem linksPane={props.linksPane} className="text" constantDataFromProps="Render Times">ID {props.index}, props.zIndex: {props.zIndex}, state ZIndex: {}</CounterGridItem>
@@ -366,24 +355,6 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
                 // zIndex: zIndex,
                 linksPane: {
                     data: {
-                        // links: [
-                        //     {
-                        //         title: 'Source Code',
-                        //         url: 'https://github.com/example/repo',
-                        //         type: 'github',
-                        //     },
-                        //     {
-                        //         title: 'Documentation',
-                        //         url: 'https://example.com/docs',
-                        //         type: 'docs',
-                        //     },
-                        //     {
-                        //         title: 'CI/CD Pipeline',
-                        //         url: 'https://example.com/ci-cd',
-                        //         type: 'ci/cd',
-                        //     },
-                        // ],
-                        // links: [],
                         links: (val.resource_links || []).map((link) => {
                             return {
                                 title: link.type,
@@ -432,21 +403,6 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
                         }
                     }
                 },
-                // state as Object (seems to work but renders all items in grid when open modal-dialog)
-                // // Initial zIndex for this item
-                // zIndex: zIndices[idx].zIndex,
-                // // Callback to set zIndex for this item
-                // setZIndex: (newZIndex: number) => {
-                //     setZIndices((prevZIndices) => {
-                //         return {
-                //             ...prevZIndices,
-                //             [idx]: {
-                //                 zIndex: newZIndex
-                //             }
-                //         };
-                //     });
-                // }
-
                 // state as array of numbers number[]
                 // Initial zIndex for this item
                 zIndex: zIndices[idx],
@@ -492,17 +448,6 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
         setLayouts(allLayouts);
     };
 
-    // const renderChild: renderChildCallback = (reactNode: React.ReactNode) => {
-    //     // Initialize the zIndex state for this item
-    //     const [zIndex, setZIndex] = useState(0);
-    //     return <ZIndexContext.Provider value={{
-    //         zIndex,
-    //         setZIndex
-    //     }}>
-    //         {reactNode}
-    //     </ZIndexContext.Provider>
-    // };
-
     return <>
         {/* SUPPORT ELEMENTS */}
         <p>GRID CONTAINER Render Times: {rendersNo.current}</p>
@@ -516,19 +461,7 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
             // Handler User Layout Changes by ensuring they are persisted in Local Storage
             onLayoutChange={onLayoutChange}
             cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}>
-            {/* {function (_children) {
-                const [zIndex, setZIndex] = useState(0);
-                return _children.map((child) => {
-                    return <ZIndexContext.Provider value={{
-                        // zIndex,
-                        setZIndex
-                    }}>
-                        {child}
-                    </ZIndexContext.Provider>
-                });
-            }(children)} */}
             {children}
-            {/* {children.map((child) => renderChild(child))} */}
         </ResponsiveGridLayout>
     </>;
 }
@@ -536,7 +469,7 @@ const GridRealDataWithLSAndMemoizedItems: FC<GridRealDataWithLSAndMemoizedItemsP
 
 export default {
     component: GridRealDataWithLSAndMemoizedItems,
-    title: "Grid from Real Data, with Local Storage and Memoized Items",
+    title: "Grid/With Centrally managed ZIndex State and Memoized Items",
     tags: ["autodocs"],
 };
 

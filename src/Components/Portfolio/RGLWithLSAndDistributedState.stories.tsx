@@ -15,6 +15,7 @@ import { AppPortfolioItemProps } from './AppPortfolioItem';
 import useLayoutsState from '../../Hooks/useLayoutsState'
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane/AppProjectLinksPaneExperimental';
 import ZIndexContext from '../../ZIndexContext';
+import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
 
 // keep same public interface as PortfolioSection
 import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from './PortfolioSection'
@@ -295,13 +296,14 @@ const CounterGridItem: FC<CounterGridItemProps> = (props) => {
         //     <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
         //     <AppProjectLinksPane {...props.linksPane} />
         // </ItemWithHover>
-
-        <ResponsiveLayoutItemContent // 2 DIVs
-            data={props.data}
-            renderProps={props.renderItem}
-        // renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
-        />
-
+        <>
+            <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
+            <ResponsiveLayoutItemContent // 2 DIVs
+                data={props.data}
+                renderProps={props.renderItem}
+            // renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
+            />
+        </>
     );
 }
 
@@ -316,7 +318,6 @@ type GridRealDataWithLSAndMemoizedItemsProps = {
     data: PortfolioItemInterface[];
     theme: ResponsiveLocalStorageLayoutProps["theme"];
 }
-type ExternalLinkTypeNames = "github" | 'source_code_repo' | "docs" | "documentation" | "ci/cd";
 
 const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
     // Helper Code for Showing Number of Renders
@@ -337,21 +338,18 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
 
-    // Handler for Clicking on RESET Button
+    // EVENT HANDLERS - RESET BUTTON
     const handleClickResetLayoutButton = () => {
         setLayouts({});
     };
 
-    // Handler for ensuring User Layout Changes are persisted in Local Storage
-    const onLayoutChange: ResponsiveReactGridLayoutonLayoutChange = (
-        currentLayout: ReadonlyArray<LayoutInterface>,
-        allLayouts: LayoutsObject
-    ) => {
-        // on layout change we store the layouts object in local storage
-        saveToLS("layouts", allLayouts);
-        // we store the layouts in the component's state, and trigger a re-render
-        setLayouts(allLayouts);
-    };
+    // EVENT HANDLERS - GRID LAYOUT
+    const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
+        setLayouts,
+        saveToLS: useCallback((allLayouts: LayoutsObject) => {
+            saveToLS("layouts", allLayouts);
+        }, [saveToLS]),
+    });
 
     // render Callback to use in Memoize Operation
     const realDataGridItem: realDataGridItemCallback = useCallback((props) => {
@@ -387,8 +385,11 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
         {/* GRID ELEMENT */}
         <ResponsiveGridLayout
             layouts={layouts}
-            // Handler User Layout Changes by ensuring they are persisted in Local Storage
-            onLayoutChange={onLayoutChange}
+            // Save to LS and set State when Layout-Change Events happen:
+            //  - after a drag-n-drop action by the user
+            //  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
+            //  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
+            onLayoutChange={handleLayoutChange}
             cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}>
             {data.map((item, index) => {
                 // STATE INITIALIZATION PER GRID ITEM
@@ -476,7 +477,8 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                             data-grid={{
                                 // Index starts from 0
                                 i: index.toString(),
-                                x: index, y: 1, w: 1, h: 2
+                                x: index, y: 1,
+                                w: 3, h: 4
                             }}
                         >
                             <ZIndexContext.Provider value={{
@@ -488,7 +490,7 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                                     // renderItem={portfolioSectionDefaultProps.renderProps}
                                     renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
                                 >
-                                    {/* ID {index}, zIndex: {zIndex} */}
+                                    ID {index}, zIndex: {zIndex}
                                 </CounterGridItem>
                             </ZIndexContext.Provider>
                         </LayoutItem>

@@ -17,6 +17,8 @@ interface PortfolioLayoutItemContentProps {
 }
 
 const InnerContainer = styled.div`
+  // Make Description Text wrap to below line a bit earlier, avoiding word overflow
+  width: 95%;
   // when mouse is on element make cursor a pointer
   cursor: pointer;
   // interpret all geometry properties to be relevant to the out side block

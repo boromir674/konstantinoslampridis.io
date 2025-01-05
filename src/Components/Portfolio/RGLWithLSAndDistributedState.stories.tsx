@@ -11,11 +11,9 @@ import styled from "@emotion/styled";
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
 import PortfolioItemInterface from "../../PortfolioItemInterface";
-import { AppPortfolioItemProps } from './AppPortfolioItem';
 import useLayoutsState from '../../Hooks/useLayoutsState'
-import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane/AppProjectLinksPaneExperimental';
-import ZIndexContext from '../../ZIndexContext';
 import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
+import ZIndexContext from '../../ZIndexContext';
 
 // keep same public interface as PortfolioSection
 import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from './PortfolioSection'
@@ -208,7 +206,6 @@ const data: PortfolioItemInterface[] = [
     },
 ];
 
-
 // Single Grid Item Interface
 import { LayoutInterface } from './LayoutInterface';
 
@@ -220,10 +217,6 @@ type LayoutsObject = {
     //     xxs: LayoutArray;
     [key: string]: LayoutInterface[];
 }
-
-type LayoutArray = ReadonlyArray<LayoutInterface>;
-type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
-
 
 //// COMPONENT that Renders Top-Level DIV of a Grid Item  ////
 interface LayoutItemProps {
@@ -257,19 +250,22 @@ const LayoutItem = styled.div<LayoutItemProps>`
   // margin-bottom: 10px;
 `;
 
-// COMPONENT - DESIGNER'S ENTRYPOINT
-// Use to implement Hover Effects and other Styles on Grid Items
-// This is the Elements inside the Top-Level DIV. Can be fragment. Here span is used for simplicity.
-const ItemWithHover = styled.div`
-  // SCALE ON HOVER
-  &:hover {
-    transform: scale(1.03);
-    // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    // background-color:
-    // color:
-  }
-`
+// DESIGNER'S ENTRYPOINT: interface is FC<{data, renderProps}>
+// App Default is FC PortfolioItemCard, which renders 2 STYLED DIVs and uses prop
+// render callback(data, theme) to create/render the inner DIV's elements
+
+// DESIGNER'S ENTRYPOINT: Grid Item Styles
+// To Change App Design (ie scale Grid Item more on-hover) modify
+// Styled DIVs declared in PortfolioItemCard module
+
+// COMPONENT that Renders 2 DIVS as Outer and Inner Container
 const ResponsiveLayoutItemContent = portfolioSectionDefaultProps.element_to_render;
+
+// DESIGNER'S ENTRYPOINT: (data, theme) => React.ReactNode Interface
+// To control what/how elements (ie content and/or styles) are rendered inside each
+// portfolioSectionDefaultProps.element_to_render Component (2 DIVs), modify
+// the portfolioSectionDefaultProps.renderProps or use different callback
+const renderItemElements = portfolioSectionDefaultProps.renderProps;
 
 // Grid Item Component that counts self re-renders, simulates constant data from props with string type for demonstration
 interface CounterGridItemProps {
@@ -287,38 +283,24 @@ const CounterGridItem: FC<CounterGridItemProps> = (props) => {
     }, [])
     logComponentRerender()
 
-    const renderItem = useCallback((data: PortfolioItemInterface) => {
-        return props.renderItem(data);
-    }, []);
-
     return (
-        // <ItemWithHover>
-        //     <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
-        //     <AppProjectLinksPane {...props.linksPane} />
-        // </ItemWithHover>
         <>
-            <p>{props.children}{" -> "}{props.constantDataFromProps}: {rendersNo.current}</p>
+            <p>{props.children}{" -> "}"NB Renders": {rendersNo.current}</p>
             <ResponsiveLayoutItemContent // 2 DIVs
                 data={props.data}
-                renderProps={props.renderItem}
+                renderProps={props.renderItem}  // Children Elements
             // renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
             />
         </>
     );
 }
-
-
 // Both <ResponsiveReactGridLayout> and <ReactGridLayout> take width to calculate positions on drag events. In simple cases a HOC WidthProvider can be used to automatically determine width upon initialization and window resize events.
 const ResponsiveGridLayout = WidthProvider(Responsive);
-
-type realDataGridItemCallback = (props: { index: number, itemOutline: string, linksPane: AppProjectLinksPaneProps, zIndex: number, setZIndex: (zIndex: number) => void }) => React.ReactNode;
-
 type GridRealDataWithLSAndMemoizedItemsProps = {
     itemOutline: string;
     data: PortfolioItemInterface[];
     theme: ResponsiveLocalStorageLayoutProps["theme"];
 }
-
 const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)
@@ -337,12 +319,8 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
 
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
-
     // EVENT HANDLERS - RESET BUTTON
-    const handleClickResetLayoutButton = () => {
-        setLayouts({});
-    };
-
+    const handleClickResetLayoutButton = useCallback(() => {setLayouts({})}, [setLayouts]);
     // EVENT HANDLERS - GRID LAYOUT
     const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
         setLayouts,
@@ -350,30 +328,6 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
             saveToLS("layouts", allLayouts);
         }, [saveToLS]),
     });
-
-    // render Callback to use in Memoize Operation
-    const realDataGridItem: realDataGridItemCallback = useCallback((props) => {
-        return <LayoutItem
-            style={{
-                outline: props.itemOutline,
-                // allows increasing top-level grid item height, to allow children pop-ups to be visible
-                zIndex: props.zIndex,  // zIndex probably requires to extract this into a separate FC Component, skip for now
-            }}
-            key={props.index}
-            data-grid={{
-                // Index starts from 0
-                i: props.index.toString(),
-                x: props.index, y: 1, w: 1, h: 2
-            }}
-        >
-            <ZIndexContext.Provider value={{
-                setZIndex: props.setZIndex,
-            }}>
-                <CounterGridItem linksPane={props.linksPane} className="text" constantDataFromProps="LINKS Render Times">ID {props.index}, zIndex: {props.zIndex}</CounterGridItem>
-            </ZIndexContext.Provider>
-
-        </LayoutItem>;
-    }, []);
 
     return <>
         {/* SUPPORT ELEMENTS */}
@@ -400,69 +354,6 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                 // works for moving and resizing but not when opening modal dialog
                 // modal dialog re-renders all Grid Items, due to to the State being aan array
                 const child = React.useMemo(() => {
-                    // return new Array(props.count).fill(undefined).map((val, idx) => {
-
-                    // Initialize the zIndex state for this item
-
-                    // return realDataGridItem({
-                    //     index: index,
-                    //     itemOutline: props.itemOutline,
-                    //     // zIndex: zIndex,
-                    //     linksPane: {
-                    //         data: {
-                    //             links: (item.resource_links || []).map((link) => {
-                    //                 return {
-                    //                     title: link.type,
-                    //                     url: link.url,
-                    //                     type: link.type as ExternalLinkTypeNames,
-                    //                 };
-                    //             }),
-                    //         },
-                    //         theme: {
-                    //             // Link Pane Title Header
-                    //             // headerFontFamily: lightTheme.portfolio.item.resourceLinks.fontFamily,
-                    //             headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
-                    //             // item: lightTheme.portfolio.item.resourceLinks.item,
-                    //             item: {
-                    //                 ...lightTheme.portfolio.item.resourceLinks.item,
-                    //                 icons: [
-                    //                     // github
-                    //                     {
-                    //                         svgStyles: {
-                    //                             width: "14px",
-                    //                             height: "14px",
-                    //                             fill: lightTheme.portfolio.item.resourceLinks.item.color
-                    //                         },
-                    //                     },
-                    //                     // docs
-                    //                     {
-                    //                         svgStyles: {
-                    //                             width: "14px",
-                    //                             height: "14px",
-                    //                             fill: lightTheme.portfolio.item.resourceLinks.item.color
-                    //                         },
-                    //                     },
-                    //                     // ci/cd
-                    //                     {
-                    //                         svgStyles: {
-                    //                             width: "14px",
-                    //                             height: "14px",
-                    //                             fill: lightTheme.portfolio.item.resourceLinks.item.color
-                    //                         },
-                    //                     },
-                    //                 ],
-                    //             },
-                    //             header: {
-                    //                 fontFamily: '',
-                    //                 fontSize: ''
-                    //             }
-                    //         }
-                    //     },
-                    //     // Initial zIndex for this item
-                    //     zIndex: zIndex,
-                    //     // Callback to set zIndex for this item
-                    //     setZIndex: setZIndex,
-                    // });
                     console.log("Rendering Grid Item: ", index);
                     console.log("Item Data: ", item);
                     console.log("Theme: ", props.theme);
@@ -478,7 +369,7 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                                 // Index starts from 0
                                 i: index.toString(),
                                 x: index, y: 1,
-                                w: 3, h: 4
+                                w: 3, h: 3
                             }}
                         >
                             <ZIndexContext.Provider value={{
@@ -486,9 +377,9 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                             }}>
                                 <CounterGridItem
                                     data={item}
-                                    // TODO useCALLBACK
-                                    // renderItem={portfolioSectionDefaultProps.renderProps}
-                                    renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
+                                    // Renders Elements of Grid Item, given data and theme
+                                    // renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
+                                    renderItem={(d: PortfolioItemInterface) => renderItemElements(d, props.theme.item.theme)}
                                 >
                                     ID {index}, zIndex: {zIndex}
                                 </CounterGridItem>

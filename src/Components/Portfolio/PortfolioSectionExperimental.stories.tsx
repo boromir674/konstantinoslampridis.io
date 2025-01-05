@@ -6,7 +6,6 @@ import DESIGN_TOKENS from "../../design-system/tokens.json";
 
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
-import { on } from "events";
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import { AppPortfolioItemProps } from "./AppPortfolioItem";
@@ -55,6 +54,7 @@ const GridItemContents = (props: { backgroundColor: string, children?: React.Rea
 
 // STORY SPECIFIC CODE
 const renderPropsOverride: RenderProps = (data, theme) => {
+    // GIRD ITEM ELEMENTS (inside 2 DIVs)
     return <>
         {/* Component to Count Number of Render Times */}
         <GridItemContents backgroundColor={theme.releases.releaseButtonTheme.backgroundColor}></GridItemContents>

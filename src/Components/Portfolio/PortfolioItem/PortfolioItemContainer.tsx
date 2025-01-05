@@ -16,20 +16,9 @@ interface PortfolioLayoutItemContentProps {
   ) => void)[];
 }
 
-const OuterContainer = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  // height: max-content;
-  width: 90%;
+const InnerContainer = styled.div`
   // when mouse is on element make cursor a pointer
   cursor: pointer;
-  // when mouse is over element change color a bit
-  // defining outline here is buggy 
-`;
-
-const InnerContainer = styled.div`
   // interpret all geometry properties to be relevant to the out side block
   position: absolute;
   padding: 10px;
@@ -76,11 +65,9 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   // }, [height, layoutItemID]);
 
   return (
-    <OuterContainer>
       <InnerContainer>
         {renderProps(data)}
       </InnerContainer>
-    </OuterContainer>
   );
 };
 

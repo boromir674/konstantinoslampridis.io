@@ -79,7 +79,7 @@ interface PortfolioItemProjectDescriptionProps {
     fontSize: string;
   };
 };
-const PortfolioItemProjectDescriptionP = withDefaultProps({variant: "body1"}, Typography);
+const PortfolioItemProjectDescriptionP = withDefaultProps({ variant: "body1" }, Typography);
 const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
   // margin: 0;
   font-family: ${props => props.theme.fontFamily};
@@ -93,7 +93,7 @@ interface SoftwareMaturityLevelProps {
     fontSize: string;
   };
 };
-const SoftwareMaturityLevelSpan = withDefaultProps({component: 'span'}, Typography);
+const SoftwareMaturityLevelSpan = withDefaultProps({ component: 'span' }, Typography);
 const SoftwareMaturityLevel = styled(SoftwareMaturityLevelSpan) <SoftwareMaturityLevelProps>`
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
@@ -112,70 +112,57 @@ interface AppPortfolioItemProps {
     links: AppProjectLinksPaneProps['theme'];
     releases: ReleasesPaneProps["theme"];
   };
-  //   renderRelease: (r: PortfolioItemInterface["release"][0]) => React.ReactNode;
 }
 
-const render = (d: PortfolioItemInterface, theme: AppPortfolioItemProps["theme"]) => {
-  return (
-    <>
-
-      <PortfolioItemProjectTitle theme={theme.projectTitle}>{d.title}</PortfolioItemProjectTitle>
-      {/* Project Description. Could be github description or description from CV Pdf */}
-      <PortfolioItemProjectDescription theme={theme.projectDescription}>
-        {d.description}
-      </PortfolioItemProjectDescription>
-      <BottomPartBlock>
-        <LeftPane>
-          {d.resource_links ? (
-            <AppProjectLinksPane
-              data={{
-                links: d.resource_links.map((link) => ({
-                  title: RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT[link.type],
-                  url: link.url,
-                  type: link.type as 'github' | 'docs' | 'ci/cd' | 'source_code_repo' | 'documentation',
-                })),
-              }}
-              theme={{
-                headerColor: theme.links.headerColor,
-                item: theme.links.item,
-                header: theme.links.header,
-              }}
-            ></AppProjectLinksPane>
-          ) : (
-            <></>
-          )}
-        </LeftPane>
-        <RightPane>
-          {/* NOTE: we are using the same objects as the Props of PortfolioItemProjectDescription */}
-          <SoftwareMaturityLevel theme={theme.projectDescription}>Software maturity level: {d.status}</SoftwareMaturityLevel>
-          {/* A Block where each element covers a line */}
-          {/* Each element should be able to wrap below according to size of block */}
-          {d.release ? (
-            <AppReleasePane data={d.release} theme={{
-              headerFontFamily: theme.releases.headerFontFamily,
-              headerColor: theme.releases.headerColor,
-              headerFontSize: theme.releases.headerFontSize,
-              headerMarginBottom: theme.releases.headerMarginBottom,
-              releaseButtonTheme: theme.releases.releaseButtonTheme,
-            }} />
-          ) : (
-            <></>
-          )}
-        </RightPane>
-      </BottomPartBlock>
-    </>
-  );
-};
-
-// React Component
 const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
-  // const JSXInstance = useMemo(() => render(data, theme), [data, theme]);
-  const renderCallback = useCallback(() => render(data, theme), [data, theme]);
-  return (
-    <div>
-      {renderCallback()}
-    </div>
-  );
+  const renderCallback = useCallback(() => <>
+    <PortfolioItemProjectTitle theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
+    {/* Project Description. Could be github description or description from CV Pdf */}
+    <PortfolioItemProjectDescription theme={theme.projectDescription}>
+      {data.description}
+    </PortfolioItemProjectDescription>
+    <BottomPartBlock>
+      <LeftPane>
+        {data.resource_links ? (
+          <AppProjectLinksPane
+            data={{
+              links: data.resource_links.map((link) => ({
+                title: RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT[link.type],
+                url: link.url,
+                type: link.type as 'github' | 'docs' | 'ci/cd' | 'source_code_repo' | 'documentation',
+              })),
+            }}
+            theme={{
+              headerColor: theme.links.headerColor,
+              item: theme.links.item,
+              header: theme.links.header,
+            }}
+          ></AppProjectLinksPane>
+        ) : (
+          <></>
+        )}
+      </LeftPane>
+      <RightPane>
+        {/* NOTE: we are using the same objects as the Props of PortfolioItemProjectDescription */}
+        <SoftwareMaturityLevel theme={theme.projectDescription}>Software maturity level: {data.status}</SoftwareMaturityLevel>
+        {/* A Block where each element covers a line */}
+        {/* Each element should be able to wrap below according to size of block */}
+        {data.release ? (
+          <AppReleasePane data={data.release} theme={{
+            headerFontFamily: theme.releases.headerFontFamily,
+            headerColor: theme.releases.headerColor,
+            headerFontSize: theme.releases.headerFontSize,
+            headerMarginBottom: theme.releases.headerMarginBottom,
+            releaseButtonTheme: theme.releases.releaseButtonTheme,
+          }} />
+        ) : (
+          <></>
+        )}
+      </RightPane>
+    </BottomPartBlock>
+  </>,
+    [data, theme]);
+  return <>{renderCallback()}</>;
 };
 
 export default AppPortfolioItem;

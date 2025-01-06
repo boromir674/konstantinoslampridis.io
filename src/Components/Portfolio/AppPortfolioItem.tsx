@@ -30,19 +30,6 @@ const BottomPartBlock = styled.div`
   padding-top: 10px;
 `;
 
-const ReleasesPane = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-`;
-
-const ReleaseListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-`;
 
 // Helper function definition
 type RenderRelease = (release: ReleaseItemData, index: number) => React.ReactNode;
@@ -167,5 +154,4 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
 
 export default AppPortfolioItem;
 
-export { ReleasesPane, ReleaseListContainer };
 export type { RenderRelease, AppPortfolioItemProps };

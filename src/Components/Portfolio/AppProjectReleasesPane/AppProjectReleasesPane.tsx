@@ -58,22 +58,25 @@ const ReleasesPane = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  // margin-bottom: 10px;
-  // bottomn padding
-  padding-bottom: 10px;
+  width: 100%; /* Match the container width */
+  max-width: 100%; /* Prevent exceeding the parent width */
+  box-sizing: border-box; /* Include padding and border in width calculations */
+  overflow-wrap: break-word; /* Ensure long text breaks into the next line */
+  word-break: break-word; /* Handle long strings without spaces */
+`;
+const ArtifactVersion = styled.span`
+  white-space: nowrap; /* Prevent breaking semantic version into multiple lines */
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for clipped content */
+  display: inline-block; /* Ensure text respects width constraints */
+  max-width: 100%; /* Prevent overflow beyond container width */
+// max-width: 800px; /* Adjust this value to set the truncation threshold */
+
 `;
 
 const IconWrapper = styled.span`
   margin-right: 5px;
 `;
-
-
-const FALLBACK_COMMANDS: { [key: string]: string } = {
-    github: 'curl -LJO',
-    pypi: 'pip install',
-    docker: 'docker pull',
-};
-
 
 const DEFAULT_RELEASE: { [key: string]: { createCommand: (release: ReleaseItemData) => string, createURL: (release: ReleaseItemData) => string } } = {
     // github: (release) => `curl -LJO ${release.urlText || `https://github.com/boromir674/${release.name}/releases/tag/${release.artifact_version}`}`,
@@ -92,7 +95,6 @@ const DEFAULT_RELEASE: { [key: string]: { createCommand: (release: ReleaseItemDa
         createURL: (release) => `https://hub.docker.com/r/boromir674/${release.name}`,
     },
 };
-
 const createCommand = (release: ReleaseItemData) => {
     const commandMaker = DEFAULT_RELEASE[release.type].createCommand;
     return commandMaker(release);
@@ -120,16 +122,8 @@ const ReleasesHeader = styled(ReleasesHeaderH3) <ReleasesHeaderProps>`
     margin-bottom: ${props => props.theme.marginBottom};
 `;
 
-const StyledH3 = styled.h3<Theme>`
-  font-family: ${props => props.headerFontFamily};
-  color: ${props => props.headerColor};
-  margin-bottom: ${props => props.headerMarginBottom};
-`;
-
-
 const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
     return (
-
         <ReleasesPane>
             {/* <StyledH3 {...theme}>Releases</StyledH3> */}
             <ReleasesHeader theme={{
@@ -160,8 +154,8 @@ const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
                             )}
                         </IconWrapper>
                         <span>{release.name}</span>
-                        <span>{release.artifact_version}</span>
-                        <ReleaseType>{release.type.toUpperCase()}</ReleaseType>
+                        <ArtifactVersion>{release.artifact_version}</ArtifactVersion>
+                        {/* <ReleaseType>{release.type.toUpperCase()}</ReleaseType> */}
                     </SoftwareReleaseButton>
                 ))}
             </ReleaseList>

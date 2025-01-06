@@ -96,7 +96,6 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
         onHoverColor={theme.onHoverColor}
         onHoverBackgroundColor={theme.onHoverBackgroundColor}
       >
-        {/* <span>{link.title}</span> */}
         {children}
       </ResourceLinkButton>
       <ResourceLinkTooltip

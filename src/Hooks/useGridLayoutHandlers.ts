@@ -2,19 +2,14 @@ import { useCallback } from 'react';
 
 import { LayoutInterface, LayoutsObject } from '../interfaces';
 
-//// Type Aliases same as react-grid-layout source code
-type LayoutArray = ReadonlyArray<LayoutInterface>;
+type LayoutChangeEventHandler = (layout: ReadonlyArray<LayoutInterface>, layouts: LayoutsObject) => void;
+type ItemResizeEventHandler = (layout: ReadonlyArray<LayoutInterface>, oldItem: LayoutInterface, newItem: LayoutInterface, placeholder: LayoutInterface) => void;
 
-type LayoutChangeEventHandler = (layout: LayoutArray, layouts: LayoutsObject) => void;
-
-type LayoutChangeCallbacks = {
+const useGridLayoutHandlers: (layoutChangeCallbacks: {
     saveToLS: (value: LayoutsObject) => void;
     setLayouts: (layouts: LayoutsObject) => void;
-}
-type UseLayoutHandlersHook = (layoutChangeCallbacks: LayoutChangeCallbacks) => [LayoutChangeEventHandler, any];
-
-const useGridLayoutHandlers: UseLayoutHandlersHook = (layoutChangeCallbacks) => {
-    // integrates with { WidthProvider, Responsive } from "react-grid-layout";
+}) => [LayoutChangeEventHandler, ItemResizeEventHandler] = (layoutChangeCallbacks) => {
+    // interfaces with { WidthProvider, Responsive } from "react-grid-layout";
 
     /**
      * Handle Layout-Change Event, by calling the provided callbacks which accept a LayoutsObject.
@@ -71,12 +66,14 @@ const useGridLayoutHandlers: UseLayoutHandlersHook = (layoutChangeCallbacks) => 
         layoutItem: LayoutInterface,
         placeholder: LayoutInterface,
     ) => {
+        // TODO add code that reads "live" size of the item contents (title, description, link/releases lists)
+        // and adjusts it height accordingly !
+
         if (layoutItem.w <= 2) {  // if user resized item with "very small" width
             const heightPlusTwo = layoutItem.h + 2;
             // modifying `layoutItem` to enforce constraints
             layoutItem.h = heightPlusTwo;
             placeholder.h = heightPlusTwo;
-
         } else if (layoutItem.w <= 3) {  // if user resized item resulting in "small" width
             const heightPlusOne = layoutItem.h + 1;
             // modifying `layoutItem` to enforce constraints

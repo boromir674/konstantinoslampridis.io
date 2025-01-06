@@ -147,10 +147,11 @@ interface ResponsiveLocalStorageLayoutProps {
   rowHeight: number;
 }
 
-// COMPONENT - Reactive Grid Layout (with Local Storage support)
+// DESIGNER's ENTRYPOINT
 
 // used to set up default values for the properties of the component
 // if the client does not provide them
+/** Default Design of breakpoints via 'cols' */
 const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   className: "layout",
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
@@ -163,6 +164,7 @@ const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   element_to_render: PortfolioItemCard,  // 2 DIVS
 };
 
+// COMPONENT - Reactive Grid Layout (with Local Storage support)
 /**
  * On initial render, the Portfolio Section will have a default layout, derived automatically by Responsive Grid logic, with Portfolio Items. 
  */

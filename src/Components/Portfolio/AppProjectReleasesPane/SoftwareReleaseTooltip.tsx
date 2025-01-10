@@ -30,14 +30,15 @@ interface URLProps {
 }
 // Shell Command DIV
 interface ShellDivProps {
-    children: React.ReactNode;
-    codeBackgroundColor: string;
-    onHoverCodeBackgroundColor: string;
+    theme: {
+        codeBackgroundColor: string;
+        onHoverCodeBackgroundColor: string;
+    }
 }
 const ShellDiv = styled.div<ShellDivProps>`
-  background-color: ${(props) => props.codeBackgroundColor};
+  background-color: ${(props) => props.theme.codeBackgroundColor};
   &:hover {
-    background-color: ${(props) => props.onHoverCodeBackgroundColor};
+    background-color: ${(props) => props.theme.onHoverCodeBackgroundColor};
   }
   padding: 10px;
   border-radius: 5px;
@@ -76,7 +77,13 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
         >
             {/* SHELL COMMAND */}
             {/* <div style={{ backgroundColor: '#f0f0f0', padding: '10px', borderRadius: '5px' }} onClick={onCopyCommand}> */}
-            <ShellDiv codeBackgroundColor={theme.codeBackgroundColor} onHoverCodeBackgroundColor={theme.onHoverCodeBackgroundColor} onClick={onCopyCommand}>
+            <ShellDiv
+                theme={{
+                    codeBackgroundColor: theme.codeBackgroundColor,
+                    onHoverCodeBackgroundColor: theme.onHoverCodeBackgroundColor,
+                }}
+                onClick={onCopyCommand}
+            >
                 <pre style={{ margin: 0 }}>
                     <code style={{ color: theme.codeColor }}>
                         {command}

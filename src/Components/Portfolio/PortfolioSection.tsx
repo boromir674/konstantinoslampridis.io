@@ -292,7 +292,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                   x: col,
                   y: row,
                   minW: 3,
-                  minH: 7,
+                  // if initial Height is smaller than 7-units, set minH to it, else 7
+                  minH: setStartingHeigth() < 7 ? setStartingHeigth() : 7, // this is compared to maxH and h nad if smaller throws warning on dev server
+                  // maxH: 10,
                 }}
                 style={{
                   outline: theme.item.outline,

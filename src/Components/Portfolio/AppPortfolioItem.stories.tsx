@@ -14,7 +14,6 @@ import ZIndexContext from '../../ZIndexContext';
 const AppPortfolioItemZIndex: FC<AppPortfolioItemProps> = (props: AppPortfolioItemProps) => {
   return (
     <ZIndexContext.Provider value={{
-    //   zIndex: 1,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       setZIndex: (zIndex: number) => null,
     }}>

@@ -13,27 +13,15 @@ type RawColorTheme = typeof lightTheme | typeof darkTheme;
 type AppColorTheme = BigScreenViewInteractiveProps["colorSet"]["light"] | BigScreenViewInteractiveProps["colorSet"]["dark"];
 
 
-interface EducationItemUserTextData {
-  name: string;
-  location: string;
-  degree: string;
-  date: string;
-  thesis_title: string;
-  topics: string[];
-}
-
-interface BuildTimeData {
-  userDefinedWebsiteData: UserDefinedTextData
-}
-
-
 //// APP COMPONENT; Top-Level without Props ////
 const App: FC = () => {
   // READ From GraphQL DATA LAYER
   const {
     // userDefinedWebsiteData: { personal, education, professional, portfolio },
     userDefinedWebsiteData,
-  } = useStaticQuery<BuildTimeData>(graphql`
+  } = useStaticQuery<{
+    userDefinedWebsiteData: UserDefinedTextData
+  }>(graphql`
     query {
       userDefinedWebsiteData {
         personal {
@@ -149,7 +137,6 @@ const App: FC = () => {
   return (
     // <main>
     <BigScreenViewInteractive
-      // style={{}}
       navigationSections={[
         {
           htmlID: "introduction-section",

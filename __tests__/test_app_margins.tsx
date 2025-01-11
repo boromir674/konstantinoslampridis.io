@@ -732,6 +732,12 @@ const useStaticQuery = jest.spyOn(Gatsby, `useStaticQuery`)
 describe("App: render App in the DOM and verify body properties", () => {
     beforeEach(() => {
         useStaticQuery.mockImplementation(() => grapghQLMockData)
+        // mock ResizeObserver browser-api
+        window.ResizeObserver = jest.fn().mockImplementation(() => ({
+            observe: jest.fn(),
+            unobserve: jest.fn(),
+            disconnect: jest.fn(),
+        }))
     })
 
     afterEach(() => {

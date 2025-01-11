@@ -26,13 +26,13 @@ We currently use
 
 ## Audit
 
-**Bundle Size: 2.7MB**
+**Bundle Size: 2.5MB**
 ### Lighthouse
 
 | Live    | Performance | Accessibility | Best Practices | SEO | PWA |
 | ------- | ----------- | ------------- | -------------- | --- | --- |
 | Desktop | 100         | 93            | 100            | 92  | N/A |
-| Mobile  | 99          | 93            | 100            | 92  | N/A |
+| Mobile  | 96          | 93            | 100            | 92  | N/A |
 
 # Architecture
 

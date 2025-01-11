@@ -2386,8 +2386,2680 @@ Working asynchronously and fully remotely on adding features and automating (bac
         Reset Layout
       </button>
       <div
-        className="layout react-grid-layout"
-      />
+        className="react-grid-layout layout"
+        onDragEnter={[Function]}
+        onDragLeave={[Function]}
+        onDragOver={[Function]}
+        onDrop={[Function]}
+        style={
+          {
+            "height": "2101px",
+          }
+        }
+      >
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 9,
+              "i": "0",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 0,
+              "y": 0,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(10px,10px)",
+              "OTransform": "translate(10px,10px)",
+              "WebkitTransform": "translate(10px,10px)",
+              "height": "449px",
+              "msTransform": "translate(10px,10px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(10px,10px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Python Package Generator
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A tool command-line interface (CLI) to automatically scaffold a new Python Open Source Project, along with multiple config files! Implemented using Python, Github Actions, Sphinx \\& Cookiecutter.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  mature
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 32 32"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          generate-python
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          2.4.0
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          cookiecutter-python-package
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          2.4.0
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          cookiecutter-python-package
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          v2.4.0
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 9,
+              "i": "1",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 4,
+              "y": 0,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(433px,10px)",
+              "OTransform": "translate(433px,10px)",
+              "WebkitTransform": "translate(433px,10px)",
+              "height": "449px",
+              "msTransform": "translate(433px,10px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(433px,10px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Neural Style Transfer
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          artificial-artwork
+                        </span>
+                        <span
+                          className="css-42txja"
+                        />
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 32 32"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          neural-style-transfer
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          1.0.2
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          neural-style-transfer
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          v1.0.2
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "2",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 0,
+              "y": 1,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(10px,469px)",
+              "OTransform": "translate(10px,469px)",
+              "WebkitTransform": "translate(10px,469px)",
+              "height": "398px",
+              "msTransform": "translate(10px,469px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(10px,469px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Software Patterns
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A Python library with reusable Software Design Patterns with Types.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          software-patterns
+                        </span>
+                        <span
+                          className="css-42txja"
+                        />
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          software-patterns
+                        </span>
+                        <span
+                          className="css-42txja"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "3",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 4,
+              "y": 1,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(433px,469px)",
+              "OTransform": "translate(433px,469px)",
+              "WebkitTransform": "translate(433px,469px)",
+              "height": "398px",
+              "msTransform": "translate(433px,469px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(433px,469px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Pytest Object Getter
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A Pytest Plugin providing a \`fixture\` to dynamically import any object from a python (3rd party) module, while mocking its namespace on demand.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  mature
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          pytest-object-getter
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          1.0.2
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v1.0.2
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "4",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 0,
+              "y": 2,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(10px,877px)",
+              "OTransform": "translate(10px,877px)",
+              "WebkitTransform": "translate(10px,877px)",
+              "height": "398px",
+              "msTransform": "translate(10px,877px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(10px,877px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Python Software Release
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A CLI that streamlines the process of making a "new" Software Release to Github, using Semantic Versioning. Implemeted in Python, the CLI provides a wizard, that guides the user through the semi-automated "release process".
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          software-release
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          0.1.0
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v0.1.0
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "5",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 4,
+              "y": 2,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(433px,877px)",
+              "OTransform": "translate(433px,877px)",
+              "WebkitTransform": "translate(433px,877px)",
+              "height": "398px",
+              "msTransform": "translate(433px,877px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(433px,877px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Pytest Subprocess Plugin
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A Pytest Plugin providing a \`fixture\` to assist in testing sub-processes and reduce boilerplate test code.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          pytest-subprocess
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          0.10.0
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v0.10.0
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 7,
+              "i": "6",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 0,
+              "y": 3,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(10px,1285px)",
+              "OTransform": "translate(10px,1285px)",
+              "WebkitTransform": "translate(10px,1285px)",
+              "height": "347px",
+              "msTransform": "translate(10px,1285px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(10px,1285px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Topic Modeling Toolkit
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A Python Package hosting multiple (CLI) programs that facilitate Topic Modeling research operations, on a collection of documents.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  mature
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          cookiecutter-python-package
+                        </span>
+                        <span
+                          className="css-42txja"
+                        />
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v0.5.6
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "7",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 4,
+              "y": 3,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(433px,1285px)",
+              "OTransform": "translate(433px,1285px)",
+              "WebkitTransform": "translate(433px,1285px)",
+              "height": "398px",
+              "msTransform": "translate(433px,1285px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(433px,1285px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              So Magic
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A Python library to infer Self-Organising Map models, based on structured data.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          so-magic
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          0.7.1
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v0.7.1
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "8",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 0,
+              "y": 4,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(10px,1642px)",
+              "OTransform": "translate(10px,1642px)",
+              "WebkitTransform": "translate(10px,1642px)",
+              "height": "398px",
+              "msTransform": "translate(10px,1642px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(10px,1642px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              PyDoer
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              A CLI program that renders a menu of options, each of which launches one or more Terminal Applications, "bootstrapped" with one or more custom bash commands. Implemented with Python and Bash allowing all options & commands to be designed by the User, through a json file.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  mature
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          pydoer
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          1.0.2
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          doer
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          v1.0.2
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+        <div
+          className="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
+          data-grid={
+            {
+              "h": 8,
+              "i": "9",
+              "minH": 7,
+              "minW": 3,
+              "w": 4,
+              "x": 4,
+              "y": 4,
+            }
+          }
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          style={
+            {
+              "MozTransform": "translate(433px,1693px)",
+              "OTransform": "translate(433px,1693px)",
+              "WebkitTransform": "translate(433px,1693px)",
+              "height": "398px",
+              "msTransform": "translate(433px,1693px)",
+              "outline": "3px solid #857371",
+              "position": "absolute",
+              "transform": "translate(433px,1693px)",
+              "width": "413px",
+              "zIndex": 0,
+            }
+          }
+        >
+          <div
+            className="css-8p9vxz"
+          >
+            <h2
+              className="css-1ujy8on"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Music Album Creator
+            </h2>
+            <p
+              className="css-1hbtrgj"
+              style={
+                {
+                  "marginBottom": undefined,
+                }
+              }
+            >
+              Download a youtube video, convert and segment it into audio tracks, attach metadata (per track) and save to disk.
+
+            </p>
+            <div
+              className="css-1o0lbyo"
+            >
+              <div
+                className="css-18dgpf5"
+              >
+                <div
+                  className="css-tqife0"
+                >
+                  <div
+                    className="css-0"
+                  >
+                    <h3
+                      className="css-1tn7zvf"
+                      style={
+                        {
+                          "marginBottom": undefined,
+                        }
+                      }
+                    >
+                      Resource Links
+                    </h3>
+                    <div
+                      className="css-18ef9vj"
+                    >
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                            >
+                              <path
+                                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Source Code
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 20 20"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M 3 1 L 3 3 L 2 3 L 2 4 L 3 4 L 3 5 L 2 5 L 2 6 L 3 6 L 3 7 L 2 7 L 2 8 L 3 8 L 3 9 L 2 9 L 2 10 L 3 10 L 3 11 L 2 11 L 2 12 L 3 12 L 3 13 L 2 13 L 2 14 L 3 14 L 3 15 L 2 15 L 2 16 L 3 16 L 3 17 L 2 17 L 2 18 L 3 18 L 3 20 L 18 20 L 18 1 L 3 1 z M 4 2 L 17 2 L 17 19 L 4 19 L 4 18 L 5 18 L 5 17 L 4 17 L 4 16 L 5 16 L 5 15 L 4 15 L 4 14 L 5 14 L 5 13 L 4 13 L 4 12 L 5 12 L 5 11 L 4 11 L 4 10 L 5 10 L 5 9 L 4 9 L 4 8 L 5 8 L 5 7 L 4 7 L 4 6 L 5 6 L 5 5 L 4 5 L 4 4 L 5 4 L 5 3 L 4 3 L 4 2 z M 7 6 L 7 7 L 15 7 L 15 6 L 7 6 z M 8 8 L 8 9 L 14 9 L 14 8 L 8 8 z "
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            Documentation
+                          </span>
+                        </button>
+                      </div>
+                      <div
+                        onClick={[Function]}
+                      >
+                        <button
+                          className="css-edxqf5"
+                        >
+                          <span
+                            className="css-2dse8b"
+                          >
+                            <svg
+                              fill="#2c1513"
+                              height="12px"
+                              version="1.1"
+                              viewBox="0 0 16 16"
+                              width="12px"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                clipRule="evenodd"
+                                d="M2.75 2.5A1.75 1.75 0 001 4.25v1C1 6.216 1.784 7 2.75 7h1a1.75 1.75 0 001.732-1.5H6.5a.75.75 0 01.75.75v3.5A2.25 2.25 0 009.5 12h1.018c.121.848.85 1.5 1.732 1.5h1A1.75 1.75 0 0015 11.75v-1A1.75 1.75 0 0013.25 9h-1a1.75 1.75 0 00-1.732 1.5H9.5a.75.75 0 01-.75-.75v-3.5A2.25 2.25 0 006.5 4H5.482A1.75 1.75 0 003.75 2.5h-1zM2.5 4.25A.25.25 0 012.75 4h1a.25.25 0 01.25.25v1a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-1zm9.75 6.25a.25.25 0 00-.25.25v1c0 .138.112.25.25.25h1a.25.25 0 00.25-.25v-1a.25.25 0 00-.25-.25h-1z"
+                                fillRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                          <span>
+                            CI/CD
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-1y544bo"
+              >
+                <span
+                  className="css-cig3pz"
+                  style={
+                    {
+                      "marginBottom": undefined,
+                    }
+                  }
+                >
+                  Software maturity level: 
+                  stable
+                </span>
+                <div
+                  className="css-v1j3u1"
+                >
+                  <h3
+                    className="css-9ssiqh"
+                    style={
+                      {
+                        "marginBottom": undefined,
+                      }
+                    }
+                  >
+                    Releases
+                  </h3>
+                  <div
+                    className="css-1iyoj2o"
+                  >
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            version="1.1"
+                            viewBox="0 0 24 24"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                            />
+                            <path
+                              d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                            />
+                          </svg>
+                        </span>
+                        <span>
+                          music-album-creation
+                        </span>
+                        <span
+                          className="css-42txja"
+                        >
+                          1.4.0
+                        </span>
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className="css-1tvdvhd"
+                        onClick={[Function]}
+                      >
+                        <span
+                          className="css-2dse8b"
+                        >
+                          <svg
+                            fill="#2c1513"
+                            height="12px"
+                            viewBox="-64 0 512 512"
+                            width="12px"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                            />
+                          </svg>
+                        </span>
+                        <span />
+                        <span
+                          className="css-42txja"
+                        >
+                          v1.4.0
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span
+            className="react-resizable-handle react-resizable-handle-se"
+            onMouseDown={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+          />
+        </div>
+      </div>
     </div>
   </div>
   <div

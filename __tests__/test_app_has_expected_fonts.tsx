@@ -732,6 +732,12 @@ const useStaticQuery = jest.spyOn(Gatsby, `useStaticQuery`)
 describe("Test Primary and Secondary Fonts are used in the app", () => {
     beforeEach(() => {
         useStaticQuery.mockImplementation(() => grapghQLMockData)
+        // mock ResizeObserver browser-api
+        window.ResizeObserver = jest.fn().mockImplementation(() => ({
+            observe: jest.fn(),
+            unobserve: jest.fn(),
+            disconnect: jest.fn(),
+        }))
     })
 
     afterEach(() => {

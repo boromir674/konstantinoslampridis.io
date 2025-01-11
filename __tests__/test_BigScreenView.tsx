@@ -384,6 +384,16 @@ export const Light = {
 
 
 describe("Test App width = 700", () => {
+
+  beforeEach(() => {
+    // mock ResizeObserver browser-api
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }))
+  })
+
   test("matches the snapshot", () => {
     const { container: mobile } = render(
       <ResponsiveContext.Provider value={{ width: 700 }}>

@@ -725,7 +725,14 @@ const useStaticQuery = jest.spyOn(Gatsby, `useStaticQuery`)
 describe(`App: Snapshot Testing`, () => {
     // Mock the useStaticQuery hook, by returning our mock data
     beforeEach(() => {
+        // mock GraphQL query
         useStaticQuery.mockImplementation(() => grapghQLMockData)
+        // mock ResizeObserver browser-api
+        window.ResizeObserver = jest.fn().mockImplementation(() => ({
+            observe: jest.fn(),
+            unobserve: jest.fn(),
+            disconnect: jest.fn(),
+        }))
     })
 
     afterEach(() => {

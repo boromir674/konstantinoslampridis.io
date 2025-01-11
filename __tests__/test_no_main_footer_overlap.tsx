@@ -323,8 +323,18 @@ const bottomFooterPaneProps: BottomFooterPaneProps = {
     theme: lightTheme.footerStyles,
 };
 
+beforeEach(() => {
+    // mock ResizeObserver browser-api
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }))
+  })
+
 ///// TEST 1 /////
 test("Main/Footer - Overlap: render fragment with Main and Footer and verify they do not overlap", () => {
+
     // render in DOM
     render(
         <>
@@ -735,6 +745,7 @@ const bigScreenViewProps: BigScreenViewProps = {
 
 ///// TEST 2 /////
 test("Main/Footer - Overlap: render BigScreenView verify Main and Footer do not overlap", () => {
+
     // render in DOM
     render(
         <BigScreenView {...bigScreenViewProps} />
@@ -766,6 +777,7 @@ test("Main/Footer - Overlap: render BigScreenView verify Main and Footer do not 
 
 ///// TEST 3 /////
 test("Main/Footer - Overlap: render BigScreenView with width 350 and verify Main and Footer do not overlap", () => {
+
     // render in DOM
     const { container: mobile } = render(
         <ResponsiveContext.Provider value={{ width: 350 }}>

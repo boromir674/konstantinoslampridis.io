@@ -17,7 +17,6 @@ import ZIndexContext from '../../../ZIndexContext';
 const AppProjectLinksPaneWithZIndex: FC<AppProjectLinksPaneProps> = (props: AppProjectLinksPaneProps) => {
   return (
     <ZIndexContext.Provider value={{
-      zIndex: 1,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       setZIndex: (zIndex: number) => null,
     }}>
@@ -88,6 +87,10 @@ const args: AppProjectLinksPaneProps = {
                 },
             ],
         },
+        header: {
+            fontFamily: '',
+            fontSize: ''
+        }
     },
     // headerMarginBottom: lightTheme.portfolio.item.links.headerMarginBottom,
     // Item in Links List/Catalog

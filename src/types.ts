@@ -1,3 +1,5 @@
+// GATSBY DATA LAYER - INTERFACES
+
 interface PersonalWebsiteData {
   name: string;
   email: string;
@@ -53,5 +55,6 @@ interface UserDefinedTextData {
     tags: string[];
   }[];
 };
+
 
 export type { UserDefinedTextData };

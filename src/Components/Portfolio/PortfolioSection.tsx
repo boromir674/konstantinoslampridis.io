@@ -1,44 +1,25 @@
-import React, { useState, FC } from "react";
-import { WidthProvider, Responsive } from "react-grid-layout";
+import React, { useState, useCallback, FC } from "react";
+import {
+  // WidthProvider,
+  Responsive } from "react-grid-layout";
+import WidthProvider from '../../HoC/WidthProvider';
 import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
+import useLayoutsState from '../../Hooks/useLayoutsState';
+import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
 import Typography from '../Typography';
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
-import { LayoutInterface } from './LayoutInterface';
+import { LayoutsObject } from '../../interfaces';
 
 import ZIndexContext from '../../ZIndexContext';
 
 import "../../css/react-grid-layout.css";
 import "../../css/react-resizable.css";
-
-
-//// Type Aliases same as react-grid-layout source code
-type LayoutArray = ReadonlyArray<LayoutInterface>;
-
-/**
- * Layouts is an object mapping breakpoints to layouts.
- * e.g. `{lg: Layout[], md: Layout[], ...}`
- */
-type LayoutsObject = {
-  //     lg: LayoutArray;
-  //     md: LayoutArray;
-  //     sm: LayoutArray;
-  //     xs: LayoutArray;
-  //     xxs: LayoutArray;
-  [key: string]: LayoutInterface[];
-}
-
-//// Local Types for prevent future errors below
-type ResponsiveReactGridLayoutOnResize = (layout: LayoutArray, oldLayoutItem: LayoutInterface, layoutItem: LayoutInterface, placeholder: LayoutInterface) => void;
-
-type ResponsiveReactGridLayoutonLayoutChange = (layout: LayoutArray, layouts: LayoutsObject) => void;
-
-////  GRID ITEM Top Level Component  ////
 
 interface LayoutItemProps {
   moved?: boolean;
@@ -59,6 +40,7 @@ interface LayoutItemProps {
   onResizeStop?: (layoutItem: LayoutItemProps, event: MouseEvent) => void;
 }
 
+////  GRID ITEM Top Level DIV Component  ////
 const LayoutItem = styled.div<LayoutItemProps>`
   border-style: ridge;
   display: flex;
@@ -103,7 +85,6 @@ const PortfolioSectionTitle = styled(PortfolioSectionTitleH1) <PortfolioSectionT
 `;
 
 // COMPONENT - Reset Layout Button
-
 import { ButtonHTMLAttributes } from "react";
 interface ResetLayoutButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme: {
@@ -120,13 +101,13 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
 `;
-  // color: ${props => props.theme.color};
-  // background-color: ${props => props.theme.backgroundColor};
+// color: ${props => props.theme.color};
+// background-color: ${props => props.theme.backgroundColor};
 
-
+// WITH WIDTH from WINDOW
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const originalLayouts = getFromLS("layouts") || {};
 
+type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
 interface ResponsiveLocalStorageLayoutProps {
   id: string;
   data: PortfolioItemInterface[];
@@ -147,6 +128,13 @@ interface ResponsiveLocalStorageLayoutProps {
       theme: AppPortfolioItemProps['theme'];
     };
   };
+  // The Render Props Callback to override defaults
+  // renderProps={(d: PortfolioItemInterface) => {
+  //   return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
+  // }}
+  renderProps: RenderProps;
+
+  // Direct Child Component of LayoutItem that receives Render Props Callback
   element_to_render: typeof PortfolioItemCard;
   className?: string;
   cols: {
@@ -163,18 +151,24 @@ interface ResponsiveLocalStorageLayoutProps {
   rowHeight: number;
 }
 
-// COMPONENT - Reactive Grid Layout (with Local Storage support)
+// DESIGNER's ENTRYPOINT
 
 // used to set up default values for the properties of the component
 // if the client does not provide them
+/** Default Design of breakpoints via 'cols' */
 const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
   className: "layout",
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   // TODO make this dynamic based on the content of the PortfolioItem
   rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
-  element_to_render: PortfolioItemCard,
+  // Responsible for Content of Grid Item
+  renderProps: (data, theme) => <AppPortfolioItem data={data} theme={theme} />,
+  // Direct Child Component of LayoutItem that receives the above Render Props Callback
+  // Responsible for Styles of Grid Item
+  element_to_render: PortfolioItemCard,  // 2 DIVS
 };
 
+// COMPONENT - Reactive Grid Layout (with Local Storage support)
 /**
  * On initial render, the Portfolio Section will have a default layout, derived automatically by Responsive Grid logic, with Portfolio Items. 
  */
@@ -183,91 +177,36 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   data,
   theme,
   // Default props
-  element_to_render: ResponsiveLayoutItemContent,
+  renderProps: inputRenderProps,  // Renders Component with Content
+  element_to_render: ResponsiveLayoutItemContent,  // 2 DIVS
   className,
   cols,
   rowHeight,
 }) => {
 
-    const [layouts, setLayouts] = useState<LayoutsObject>(
-      JSON.parse(JSON.stringify(originalLayouts))
-    );
+  // Code for implementing Saving and Loading Layouts from Local Storage
+  const [layouts, setLayouts, saveToLS] = useLayoutsState();
 
-  /**
-   * Handle resize of Portfolio Item, while user drags and drops the bottom right corner of the Portfolio Item.
-   * 
-   * @summary This function is called continuously while the user resizes a Portfolio Item.
-   * It starts running right after the bottom-right corner is pressed, continues to run while user drags the mouse, and stops running right after mouse is released.
-   *
-   * It is used to enforce constraints on the resizing of the Portfolio Item.
-   *
-   * Conditionally modifies the layoutItem and placeholder objects, to enforce constraints on the resizing of the Portfolio Item.
-   *
-   * Currently it uses simple heuristic for increasing the Height when the Width decreases.
-   * 
-   * Simple Algorithm::
-   * - If      width <= 2 units -->  add 2 units to height
-   * - Else If width <= 3 units -->  add 1 unit  to height
-   * 
-   * @param layout - all Layout Items as array of objects of LayoutInterface type
-   * @param oldLayoutItem - the resized LayoutInterface object, before the resize
-   * @param layoutItem - the resized LayoutInterface object, after the resize. This object is mutable, and can be modified
-   * @param placeholder - 
-   */
-  const handleItemResize: ResponsiveReactGridLayoutOnResize = (
-    layout: ReadonlyArray<LayoutInterface>,
-    oldLayoutItem: LayoutInterface,
-    layoutItem: LayoutInterface,
-    placeholder: LayoutInterface,
-  ) => {
-    if (layoutItem.w <= 2) {
-      const newValue = layoutItem.h + 2;
-      // modifying `layoutItem` to enforce constraints
-      layoutItem.h = newValue;
-      placeholder.h = newValue;
-
-    } else if (layoutItem.w <= 3) {
-      const newValue = layoutItem.h + 1;
-      // modifying `layoutItem` to enforce constraints
-      layoutItem.h = newValue;
-      placeholder.h = newValue;
-    }
-  };
-
+  // EVENT HANDLERS - RESET BUTTON
   /**
    * Set the Layouts Object State to empty object {}.
    * 
    * Causes a re-render of the component, with Default Layout automatically derived by React Grid Layout to solve collisions.
    */
-  const resetLayout = () => {
+  const handleResetLayout = () => {
     setLayouts({});
   };
-
-  /**
-   * Handle any change from user interaction, in the current layout of the Portfolio Items.
-   *
-   * Runs once on following events:
-   *  - after a drag-n-drop action by the user
-   *  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
-   *  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
-   *
-   * When executed it saves the current layout in local storage, and updates Component state with it.
-   *
-   * @param currentLayout - the current layout of the Portfolio Items
-   * @param allLayouts - all layouts of the Portfolio Items, as a map of breakpoints (ie 'lg', 'md', 'sm', 'xs', 'xxs') to LayoutInterface arrays
-   */
-  const onLayoutChange: ResponsiveReactGridLayoutonLayoutChange = (
-    currentLayout: ReadonlyArray<LayoutInterface>,
-    allLayouts: LayoutsObject
-  ) => {
-    // on layout change we store the layouts object in local storage
-    saveToLS("layouts", allLayouts);
-    // we store the layouts in the component's state, and trigger a re-render
-    setLayouts(allLayouts);
-  };
+  // EVENT HANDLERS - GRID LAYOUT
+  const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
+    setLayouts,
+    saveToLS: useCallback((allLayouts: LayoutsObject) => {
+      saveToLS("layouts", allLayouts);
+    }, [saveToLS]),
+  });
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
+
   return (
     <PortfolioSectionContainer // DIV
       id={htmlID}
@@ -278,8 +217,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
       {/* Portfolio Section TITLE*/}
       <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
       {/* Portfolio Section - RESET Layout Button */}
-      <ResetLayoutButton onClick={resetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
-      {/* <button onClick={resetLayout}>Reset Layout</button> */}
+      <ResetLayoutButton onClick={handleResetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
       {/* Portfolio Section - GRID LAYOUT */}
       <ResponsiveReactGridLayout
         className={className}
@@ -289,17 +227,20 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         layouts={layouts}
 
         // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
-        onLayoutChange={onLayoutChange}
+        onLayoutChange={handleLayoutChange}
 
         // handle resize, happening when user drags from bottom right
         // this runs after user clicks bottom-right and while they keep the mouse clicked. It runs 'continuously' on every pixel moved sort-a-thing.
         // currently we use simple heuristic to increase height when width decreases
         onResize={handleItemResize}  // if W <= 2 add 2 H else if W <= 3 add 1 H
 
+        // if true the items will appear and animate/"transition" to match the state Layouts Object
+        // if false, the items will appear instantly, without any animation
         // If true, WidthProvider will measure the container's width before mounting children.
         // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
-        measureBeforeMount={true}
+        measureBeforeMount={false}
       >
+        {/* GRID LAYOUT CHILDREN - START */}
         {data.map((item, index) => {
           let row = 0;
           let col = 0;
@@ -339,89 +280,56 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
             }
             return height
           };
-
-
-          return (
-
-            <LayoutItem  // DIV
-              key={index}
-              data-grid={{
-                i: index.toString(),
-                w: startingWidth,
-                // Card height, on initial render, when local storage is empty
-                // each card's height should be determined dynamically, based on the content
-                // content depends on the number of Resource Links or Software Releases
-
-                h: setStartingHeigth(),
-                x: col,
-                y: row,
-                minW: 3,
-                minH: 7,
-              }}
-              style={{
-                outline: theme.item.outline,
-                // allows increasing top-level grid item height, to allow children pop-ups to be visible
-                zIndex: zIndex,
-              }}
-            >
-              {/* Initialize the ZIndexContext with this state value and state setter */}
-              {/* Allows inner Buttons that pop-up dialogs, to modify the zIndex of their parent (this Layout Item) prevents dialog not being shown "above" other content. */}
-
-              <ZIndexContext.Provider value={{
-                // zIndex,
-                setZIndex }}>
-                <ResponsiveLayoutItemContent // 2 DIVs
-                  data={item}
-                  renderProps={(d: PortfolioItemInterface) => {
-                    return <AppPortfolioItem data={d} theme={theme.item.theme} />;  // Fragment of elements (title, content, etc)
-                  }}
-                />
-              </ZIndexContext.Provider>
-            </LayoutItem>
-          );
+          // MEMOIZATION OF GRID ITEMS
+          //  - avoids all item re-renders when moving or resizing!
+          //  - zIndex changes only trigger re-render of relevant Item
+          const child = React.useMemo(() => {
+            return (
+              <LayoutItem  // DIV
+                key={index}
+                data-grid={{
+                  i: index.toString(),
+                  w: startingWidth,
+                  // Card height, on initial render, when local storage is empty
+                  // each card's height should be determined dynamically, based on the content
+                  // content depends on the number of Resource Links or Software Releases
+                  h: setStartingHeigth(),
+                  x: col,
+                  y: row,
+                  minW: 3,
+                  // if initial Height is smaller than 7-units, set minH to it, else 7
+                  minH: setStartingHeigth() < 7 ? setStartingHeigth() : 7, // this is compared to maxH and h and if smaller throws warning on dev server
+                  // maxH: 10,
+                }}
+                style={{
+                  outline: theme.item.outline,
+                  // allows increasing top-level grid item height, to allow children pop-ups to be visible
+                  zIndex: zIndex,
+                }}
+              >
+                {/* Initialize the ZIndexContext with state setter */}
+                {/* Allow increasing this zIndex when modal (ie Resource Link) dialogs appears,
+                to prevent dialog being shown "lower" than neighbouring Grid Items content. */}
+                <ZIndexContext.Provider value={{
+                  setZIndex
+                }}>
+                  <ResponsiveLayoutItemContent // 2 DIVs
+                    data={item}
+                    // Renders Fragment of Elements with Grid Item Contents
+                    renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
+                  />
+                </ZIndexContext.Provider>
+              </LayoutItem>
+            );
+          }, [data, theme.item.outline, index, item, zIndex]);
+          return child;
         })}
+        {/* GRID LAYOUT CHILDREN - STOP */}
       </ResponsiveReactGridLayout>
     </PortfolioSectionContainer>
   );
 };
 
-/** 
-* Get a value, from local storage, by key
-* @param key - key to get from local storage
-* @returns value from local storage
-*/
-function getFromLS(key: string) {
-  type LS = {
-    [key: string]: any;
-  };
-  let ls: LS = {};
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      ls = JSON.parse(window.localStorage.getItem("rgl-8") || "{}");
-    } catch (e) {
-      /* Ignore */
-    }
-  }
-  return ls[key];
-}
-
-/** 
-* Save a jsonified key value pair to local storage, under the key "rgl-8".
-* @summary Saves a jsonified key value pair to local storage, by setting the
-* "rgl-8" key to point to the jsonified key value pair
-* @param key - key to save to local storage
-* @param value - value to save to local storage
-*/
-function saveToLS(key: string, value: any) {
-  if (typeof window !== "undefined" && window.localStorage) {
-    window.localStorage.setItem(
-      "rgl-8",
-      JSON.stringify({
-        [key]: value,
-      })
-    );
-  }
-}
 
 // allow client to ommit any of items in the defaultProps, since we have set up fallbacks
 export default withDefaultProps(defaultProps, ResponsiveLocalStorageLayout);

@@ -63,8 +63,8 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { setZIndex } = useContext(ZIndexContext);
 
-  const buttonRef = useRef<HTMLElement>(null);
-  const tooltipRef = useRef<HTMLElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -92,7 +92,8 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
   return (
     <div onClick={handleClickOnButton}>
       <ResourceLinkButton
-        ref={buttonRef as RefObject<HTMLButtonElement>}
+        // ref={buttonRef as RefObject<HTMLButtonElement>}
+        ref={buttonRef}
         theme={{
           color: theme.color,
           backgroundColor: theme.backgroundColor,
@@ -103,7 +104,7 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
         {children}
       </ResourceLinkButton>
       <ResourceLinkTooltip
-        ref={tooltipRef as RefObject<HTMLDivElement>}
+        ref={tooltipRef}
         visible={tooltipVisible} theme={{
           color: theme.color,
           backgroundColor: theme.backgroundColor,

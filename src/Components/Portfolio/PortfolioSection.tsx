@@ -1,5 +1,8 @@
 import React, { useState, useCallback, FC } from "react";
-import { WidthProvider, Responsive } from "react-grid-layout";
+import {
+  // WidthProvider,
+  Responsive } from "react-grid-layout";
+import WidthProvider from '../../HoC/WidthProvider';
 import styled from "@emotion/styled";
 
 import PortfolioItemCard from "./PortfolioItem";
@@ -101,6 +104,7 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
 // color: ${props => props.theme.color};
 // background-color: ${props => props.theme.backgroundColor};
 
+// WITH WIDTH from WINDOW
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
@@ -214,7 +218,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
       <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
       {/* Portfolio Section - RESET Layout Button */}
       <ResetLayoutButton onClick={handleResetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
-      {/* <button onClick={resetLayout}>Reset Layout</button> */}
       {/* Portfolio Section - GRID LAYOUT */}
       <ResponsiveReactGridLayout
         className={className}
@@ -231,9 +234,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         // currently we use simple heuristic to increase height when width decreases
         onResize={handleItemResize}  // if W <= 2 add 2 H else if W <= 3 add 1 H
 
+        // if true the items will appear and animate/"transition" to match the state Layouts Object
+        // if false, the items will appear instantly, without any animation
         // If true, WidthProvider will measure the container's width before mounting children.
         // Use this if you'd like to completely eliminate any resizing animation on application/component mount.
-        measureBeforeMount={true}
+        measureBeforeMount={false}
       >
         {/* GRID LAYOUT CHILDREN - START */}
         {data.map((item, index) => {
@@ -293,7 +298,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                   y: row,
                   minW: 3,
                   // if initial Height is smaller than 7-units, set minH to it, else 7
-                  minH: setStartingHeigth() < 7 ? setStartingHeigth() : 7, // this is compared to maxH and h nad if smaller throws warning on dev server
+                  minH: setStartingHeigth() < 7 ? setStartingHeigth() : 7, // this is compared to maxH and h and if smaller throws warning on dev server
                   // maxH: 10,
                 }}
                 style={{

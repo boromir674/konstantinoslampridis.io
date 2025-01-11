@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.12.0] - 11/01/2025
+
+### Changes
+
+#### Feature
+- make `Portfolio Section` **SSR** compatible
+- dynamically adjust Portfolio Item content's "text-wrap", on `User item-resize`
+- prevent `Portfolio Description` from overflowing to the right in cases where Grid Item is small
+- change `zIndex` to 100 (from 10) when on Resource Link Hover
+
+#### Refactor
+- eliminate all dev server warnings
+- remove 2 DIVs from the Element (sub) tree that `Portfolio Item` renders
+- **memoize** `Portfolio Items` to minimize re-renders git st
+- allow passing renderProps callback through Portfolio Section props
+- delegate Layouts State and LS integration to new Hook
+
+#### Docs
+- update README's reported Bundle Size to 2.4MB from old 2.7MB
+- clean code, add comments, and docstrings
+
+#### Story
+- add the `Portfolio Section Experimental` Story to Experiment/Verify new code-updates on Portfolio Section
+- add multiple Grid Stories to verify PoC's
+
+
 ## [1.11.0] - 26/12/2024
 
 ### Changes

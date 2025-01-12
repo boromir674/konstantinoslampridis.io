@@ -2,13 +2,27 @@ import { useCallback } from 'react';
 
 import { LayoutInterface, LayoutsObject } from '../interfaces';
 
+
+
 type LayoutChangeEventHandler = (layout: ReadonlyArray<LayoutInterface>, layouts: LayoutsObject) => void;
 type ItemResizeEventHandler = (layout: ReadonlyArray<LayoutInterface>, oldItem: LayoutInterface, newItem: LayoutInterface, placeholder: LayoutInterface) => void;
 
-const useGridLayoutHandlers: (layoutChangeCallbacks: {
-    saveToLS: (value: LayoutsObject) => void;
-    setLayouts: (layouts: LayoutsObject) => void;
-}) => [LayoutChangeEventHandler, ItemResizeEventHandler] = (layoutChangeCallbacks) => {
+interface DefaultHandlerAlgorithm {
+    (layout: ReadonlyArray<LayoutInterface>, oldLayoutItem: LayoutInterface, newLayoutItem: LayoutInterface, placeholder: LayoutInterface): void;
+}
+interface ContentAwareHandlerAlgorithm {
+    (layout: ReadonlyArray<LayoutInterface>, oldLayoutItem: LayoutInterface, newLayoutItem: LayoutInterface, placeholder: LayoutInterface, dims: { width: number; height: number }): void;
+}
+
+const useGridLayoutHandlers: (
+    layoutChangeCallbacks: {
+        saveToLS: (value: LayoutsObject) => void;
+        setLayouts: (layouts: LayoutsObject) => void;
+        // handleItemResizeAdapter: (handleItemResizeAdaptee: ItemResizeEventHandlerAdaptee) => void;
+    },
+    dimsReporterCallback: () => { width: number; height: number },
+) => [LayoutChangeEventHandler, ItemResizeEventHandler] = (
+    layoutChangeCallbacks, dimsReporterCallback) => {
     // interfaces with { WidthProvider, Responsive } from "react-grid-layout";
 
     /**
@@ -34,6 +48,27 @@ const useGridLayoutHandlers: (layoutChangeCallbacks: {
         // we store the layouts in the component's state, and trigger a re-render
         layoutChangeCallbacks.setLayouts(allLayouts);
     }, [layoutChangeCallbacks.saveToLS, layoutChangeCallbacks.setLayouts]);
+
+    // Helpers
+    const defaultAlgo: DefaultHandlerAlgorithm = useCallback((layout: ReadonlyArray<LayoutInterface>, oldLayoutItem: LayoutInterface, layoutItem: LayoutInterface, placeholder: LayoutInterface) => {
+        if (layoutItem.w <= 2) {  // if user resized item with "very small" width
+            const heightPlusTwo = layoutItem.h + 2;
+            // modifying `layoutItem` to enforce constraints
+            layoutItem.h = heightPlusTwo;
+            placeholder.h = heightPlusTwo;
+        } else if (layoutItem.w <= 3) {  // if user resized item resulting in "small" width
+            const heightPlusOne = layoutItem.h + 1;
+            // modifying `layoutItem` to enforce constraints
+            layoutItem.h = heightPlusOne;
+            placeholder.h = heightPlusOne;
+        }
+    }, []);
+
+    const contentAwareAlgo: ContentAwareHandlerAlgorithm = useCallback((layout: ReadonlyArray<LayoutInterface>, oldLayoutItem: LayoutInterface, layoutItem: LayoutInterface, placeholder: LayoutInterface, dims: { width: number; height: number }) => {
+        // leverage live Dims fron inner Content to adjust! if need be
+        console.log('Content Aware Algo: ', dims);
+        
+    }, []);
 
     /**
      * Handle Grid-Item-Resize Event, by heuristically modifying Item Height.
@@ -68,19 +103,11 @@ const useGridLayoutHandlers: (layoutChangeCallbacks: {
     ) => {
         // TODO add code that reads "live" size of the item contents (title, description, link/releases lists)
         // and adjusts it height accordingly !
-
-        if (layoutItem.w <= 2) {  // if user resized item with "very small" width
-            const heightPlusTwo = layoutItem.h + 2;
-            // modifying `layoutItem` to enforce constraints
-            layoutItem.h = heightPlusTwo;
-            placeholder.h = heightPlusTwo;
-        } else if (layoutItem.w <= 3) {  // if user resized item resulting in "small" width
-            const heightPlusOne = layoutItem.h + 1;
-            // modifying `layoutItem` to enforce constraints
-            layoutItem.h = heightPlusOne;
-            placeholder.h = heightPlusOne;
-        }
-    }, []);
+        contentAwareAlgo(layout, oldLayoutItem, layoutItem, placeholder, dimsReporterCallback());
+        //  - If      width <= 2 units -->  add 2 units to height
+        //  - Else If width <= 3 units -->  add 1 unit  to height
+        defaultAlgo(layout, oldLayoutItem, layoutItem, placeholder);
+    }, [defaultAlgo]);
 
     return [handleLayoutChange, handleItemResize];
 };

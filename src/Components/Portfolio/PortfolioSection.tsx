@@ -197,12 +197,18 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     setLayouts({});
   };
   // EVENT HANDLERS - GRID LAYOUT
+  const liveDims = { width: 4, height: 7 };
   const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
+    // Callables (aka functions/callbacks) that handleLayoutChange calls
     setLayouts,
     saveToLS: useCallback((allLayouts: LayoutsObject) => {
       saveToLS("layouts", allLayouts);
     }, [saveToLS]),
-  });
+    // Callable (aka functions/callbacks) that handleItemResize calls
+    // handleItemResizeAdapter: useCallback((_handleItemResize: (dims: { width: number; height: number }) => void) => {_handleItemResize(liveDims)}, [liveDims])
+  },
+    useCallback(() => liveDims, [liveDims])
+  );
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;

@@ -9,25 +9,30 @@ import PortfolioItemInterface, {
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
 
+// COMPONENT rendering a DIV Designed to host the Left and Right Panes
+interface BottomPartBlockProps { theme: { minGapBetweenPanes: string } };
+const BottomPartBlock = styled.div<BottomPartBlockProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  // control the Minimum gap between the Left and Right Panes that should be preserved
+  gap: ${props => props.theme.minGapBetweenPanes};
+`;
+// COMPONENT rendering a DIV Designed to host the Project Links Pane
 const LeftPane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 `;
+// COMPONENT rendering a DIV Designed to host the Releases Pane
 const RightPane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-`;
-
-const BottomPartBlock = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
 `;
 
 
@@ -85,31 +90,36 @@ const SoftwareMaturityLevel = styled(SoftwareMaturityLevelSpan) <SoftwareMaturit
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
 `;
+
+// Dynamic Sub TYPES of Exported Component
+type AppPortfolioItemPropsTheme = BottomPartBlockProps['theme'] & {
+  projectTitle: {
+    fontFamily: string;
+    fontSize?: string;
+  };
+  projectDescription: {
+    fontFamily: string;
+    fontSize: string;
+  };
+  links: AppProjectLinksPaneProps['theme'];
+  releases: ReleasesPaneProps["theme"];
+};
+// TYPES of Exported Component
 interface AppPortfolioItemProps {
   data: PortfolioItemInterface;
-  theme: {
-    projectTitle: {
-      fontFamily: string;
-      fontSize?: string;
-    };
-    projectDescription: {
-      fontFamily: string;
-      fontSize: string;
-    };
-    links: AppProjectLinksPaneProps['theme'];
-    releases: ReleasesPaneProps["theme"];
-  };
+  theme: AppPortfolioItemPropsTheme;
 }
 
 const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
+  console.log("Min Gap Value", theme.minGapBetweenPanes);
   const renderCallback = useCallback(() => <>
     <PortfolioItemProjectTitle theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
     {/* Project Description. Could be github description or description from CV Pdf */}
     <PortfolioItemProjectDescription theme={theme.projectDescription}>
       {data.description}
     </PortfolioItemProjectDescription>
-    <BottomPartBlock>
-      <LeftPane>
+    <BottomPartBlock theme={{ minGapBetweenPanes: theme.minGapBetweenPanes }}>  {/* DIV Bottom Part Block */}
+      <LeftPane>  {/* DIV Left Pane */}
         {data.resource_links ? (
           <AppProjectLinksPane
             data={{
@@ -129,7 +139,7 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
           <></>
         )}
       </LeftPane>
-      <RightPane>
+      <RightPane>  {/* DIV Right Pane */}
         {/* NOTE: we are using the same objects as the Props of PortfolioItemProjectDescription */}
         <SoftwareMaturityLevel theme={theme.projectDescription}>Software maturity level: {data.status}</SoftwareMaturityLevel>
         {/* A Block where each element covers a line */}

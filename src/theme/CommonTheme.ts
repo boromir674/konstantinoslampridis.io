@@ -94,27 +94,35 @@ const commonStyling = {
     },
     // PORTFOLIO SECTION
     portfolio: {
+        // PORTFOLIO SECTION TITLE
         sectionHeader: {
             fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
             fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
         },
+        // GRID LAYOUT - RESET BUTTON
         resetLayoutButton: {
             fontFamily: DESIGN_TOKENS["--md-sys-typescale-label-large-font-family-name"],
             fontSize: DESIGN_TOKENS['--md-sys-typescale-label-large-font-size'],
             // fontSize: "22px",
         },
+        // STYLES PER (GRID) PORTFOLIO ITEM
         item: {
+            // PROJECT TITLE
             projectTitle: {
                 fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-large-font-family-name"],
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-headline-large-font-size'],
             },
+            // PROJECT DESCRIPTION
             projectDescription: {
                 fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
             },
+            // OUTER-MOST OUTLINE (ie lines surrouding the box) 
             outline: {
                 width: "3px",
             },
+            // Minimum "gap" between Left/Right Links/Releases Panes that should be preserved, when item is shrinked (ie on resize via user's drag-n-drop of botton right handle) and releases are pushed to the left (inside the Grid Item)
+            minGapBetweenPanes: "10px",
             // Resource Links - Pane
             resourceLinks: {  // TODO test that font size and family is passed as css styles through props
                 header: {
@@ -122,6 +130,7 @@ const commonStyling = {
                     // fontFamily: 'times new roman',
                     fontSize: DESIGN_TOKENS['--md-sys-typescale-title-medium-font-size'],
                 },
+                // Resource Link Item
                 item: {
                     fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
                     fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
@@ -147,6 +156,7 @@ const commonStyling = {
             },
         },
     },
+    // PAGE FOOTER
     footerStyles: {
         svgStyles: {
             width: "18px",

@@ -1,7 +1,8 @@
 import React, { useState, useCallback, FC } from "react";
 import {
   // WidthProvider,
-  Responsive } from "react-grid-layout";
+  Responsive
+} from "react-grid-layout";
 import WidthProvider from '../../HoC/WidthProvider';
 import styled from "@emotion/styled";
 
@@ -186,7 +187,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
   // Code for implementing Saving and Loading Layouts from Local Storage
   const [layouts, setLayouts, saveToLS] = useLayoutsState();
-
   // EVENT HANDLERS - RESET BUTTON
   /**
    * Set the Layouts Object State to empty object {}.

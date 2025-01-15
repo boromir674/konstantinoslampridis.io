@@ -111,7 +111,6 @@ interface AppPortfolioItemProps {
 }
 
 const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
-  console.log("Min Gap Value", theme.minGapBetweenPanes);
   const renderCallback = useCallback(() => <>
     <PortfolioItemProjectTitle theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
     {/* Project Description. Could be github description or description from CV Pdf */}

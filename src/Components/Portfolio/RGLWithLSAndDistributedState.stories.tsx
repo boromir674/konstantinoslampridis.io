@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, useCallback, useContext, useMemo } from "react";
+import React, { FC, type ReactNode, useRef, useState, useCallback, useContext, useMemo } from "react";
 
 // Import the "Responsive" version of the GridLayout to support "Breakpoints" and Layouts
 import { Responsive, WidthProvider } from "react-grid-layout";
@@ -9,7 +9,8 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import styled from "@emotion/styled";
 
 // import App Styles Symbols
-import { lightTheme, darkTheme } from '../../theme';
+import { lightTheme, darkTheme, type ComputedTheme } from '../../theme';
+
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import useLayoutsState from '../../Hooks/useLayoutsState'
 import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
@@ -18,10 +19,12 @@ import ZIndexContext from '../../ZIndexContext';
 // keep same public interface as PortfolioSection
 import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from './PortfolioSection'
 
+import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
+
 // import "../../css/react-grid-layout.css";
 // import "../../css/react-resizable.css";
 ////// CONSTANT DATA //////
-const data: PortfolioItemInterface[] = [
+const DATA: PortfolioItemInterface[] = [
     // PROJECT 1
     {
         title: "Python Package Generator",
@@ -218,7 +221,7 @@ type LayoutsObject = {
     [key: string]: LayoutInterface[];
 }
 
-//// COMPONENT that Renders Top-Level DIV of a Grid Item  ////
+//// COMPONENT, same as PROD, that Renders Top-Level DIV of a Grid Item  ////
 interface LayoutItemProps {
     moved?: boolean;
     static?: boolean;
@@ -250,6 +253,22 @@ const LayoutItem = styled.div<LayoutItemProps>`
   // margin-bottom: 10px;
 `;
 
+// RnD / Support Component to show number of Renders per Grid Item
+const GridItemContents = (props: { backgroundColor: string, children?: React.ReactNode }) => {
+    const rendersNo = useRef(0)
+    const logComponentRerender = useCallback(() => {
+        rendersNo.current = rendersNo.current + 1
+    }, [])
+
+    // Increment Render Counter
+    logComponentRerender()
+
+    return <div style={{ backgroundColor: props.backgroundColor }}>
+        <h2>Render Times: {rendersNo.current}</h2>
+    </div>
+}
+
+
 // DESIGNER'S ENTRYPOINT: interface is FC<{data, renderProps}>
 // App Default is FC PortfolioItemCard, which renders 2 STYLED DIVs and uses prop
 // render callback(data, theme) to create/render the inner DIV's elements
@@ -258,48 +277,52 @@ const LayoutItem = styled.div<LayoutItemProps>`
 // To Change App Design (ie scale Grid Item more on-hover) modify
 // Styled DIVs declared in PortfolioItemCard module
 
-// COMPONENT that Renders 2 DIVS as Outer and Inner Container
-const ResponsiveLayoutItemContent = portfolioSectionDefaultProps.element_to_render;
+const AppPortfolioItemWithDimsReporter = (props: PortfolioLayoutItemContentProps) => {
+    
+    // const [ ref, reportDimensions ] = useStatelessDimensions();
+
+    const DefaultPortfolioContentsContainer: FC<PortfolioLayoutItemContentProps> = portfolioSectionDefaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>;
+    return (
+        <DefaultPortfolioContentsContainer
+        // Give the Portfolio Container Div the ability to measure its dimensions
+        // ref={ref}
+        {...props} />
+    );
+};
+
+
+// COMPONENT that Renders 1 DIVS and call renderProps to render its children
+const ResponsiveLayoutItemContent: FC<{
+    data: PortfolioItemInterface;
+    renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
+}
+> = portfolioSectionDefaultProps.element_to_render as FC;
 
 // DESIGNER'S ENTRYPOINT: (data, theme) => React.ReactNode Interface
 // To control what/how elements (ie content and/or styles) are rendered inside each
 // portfolioSectionDefaultProps.element_to_render Component (2 DIVs), modify
 // the portfolioSectionDefaultProps.renderProps or use different callback
-const renderItemElements = portfolioSectionDefaultProps.renderProps;
-
-// Grid Item Component that counts self re-renders, simulates constant data from props with string type for demonstration
-interface CounterGridItemProps {
-    // constantDataFromProps: string;
-    children?: React.ReactNode;
-    // linksPane: AppProjectLinksPaneProps;
-    data: PortfolioItemInterface;
-    renderItem: ResponsiveLocalStorageLayoutProps["renderProps"]
-    // onClick?: () => void;
+const RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK = portfolioSectionDefaultProps.renderProps as ResponsiveLocalStorageLayoutProps["renderProps"];
+type RenderProps = typeof RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK;
+const renderItemElements: RenderProps = (data, theme) => {
+    // GIRD ITEM ELEMENTS (inside 2 DIVs)
+    console.log("Running Render Item Elements");
+    return <>
+        {/* Component to Count Number of Render Times */}
+        <GridItemContents backgroundColor={theme.releases.releaseButtonTheme.backgroundColor}></GridItemContents>
+        {/* Production Component Render */}
+        {/* Renders Title, Description, Links, and Releases */}
+        {RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK(data, theme)}
+    </>
 }
-const CounterGridItem: FC<CounterGridItemProps> = (props) => {
-    const rendersNo = useRef(0)
-    const logComponentRerender = useCallback(() => {
-        rendersNo.current = rendersNo.current + 1
-    }, [])
-    logComponentRerender()
 
-    return (
-        <>
-            <p>{props.children}{" -> "}"NB Renders": {rendersNo.current}</p>
-            <ResponsiveLayoutItemContent // 2 DIVs
-                data={props.data}
-                renderProps={props.renderItem}  // Children Elements
-            // renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
-            />
-        </>
-    );
-}
 // Both <ResponsiveReactGridLayout> and <ReactGridLayout> take width to calculate positions on drag events. In simple cases a HOC WidthProvider can be used to automatically determine width upon initialization and window resize events.
 const ResponsiveGridLayout = WidthProvider(Responsive);
 type GridRealDataWithLSAndMemoizedItemsProps = {
     itemOutline: string;
     data: PortfolioItemInterface[];
     theme: ResponsiveLocalStorageLayoutProps["theme"];
+    renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
 }
 const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
     // Helper Code for Showing Number of Renders
@@ -320,14 +343,38 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
     // EVENT HANDLERS - RESET BUTTON
-    const handleClickResetLayoutButton = useCallback(() => {setLayouts({})}, [setLayouts]);
+    const handleClickResetLayoutButton = useCallback(() => { setLayouts({}) }, [setLayouts]);
     // EVENT HANDLERS - GRID LAYOUT
-    const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
+    const [handleLayoutChange] = useGridLayoutHandlers({
         setLayouts,
         saveToLS: useCallback((allLayouts: LayoutsObject) => {
             saveToLS("layouts", allLayouts);
         }, [saveToLS]),
     });
+
+    // Global Resize Handler
+    const handleItemResize = (
+        layout,
+        oldItem,
+        newItem,
+        placeholder,
+        event,
+        element,
+    ) => {
+
+        console.log('RESIZE ALGO SIMPLE');
+        if (newItem.w <= 2) {  // if user resized item with "very small" width
+            const heightPlusTwo = newItem.h + 2;
+            // modifying `layoutItem` to enforce constraints
+            newItem.h = heightPlusTwo;
+            placeholder.h = heightPlusTwo;
+        } else if (newItem.w <= 3) {  // if user resized item resulting in "small" width
+            const heightPlusOne = newItem.h + 1;
+            // modifying `layoutItem` to enforce constraints
+            newItem.h = heightPlusOne;
+            placeholder.h = heightPlusOne;
+        }
+    };
 
     return <>
         {/* SUPPORT ELEMENTS */}
@@ -344,8 +391,10 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
             //  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
             //  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
             onLayoutChange={handleLayoutChange}
-            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}>
-            {data.map((item, index) => {
+            onResize={handleItemResize}
+            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        >
+            {DATA.map((item, index) => {
                 // STATE INITIALIZATION PER GRID ITEM
                 const [zIndex, setZIndex] = useState(0);
 
@@ -355,8 +404,6 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                 // modal dialog re-renders all Grid Items, due to to the State being aan array
                 const child = React.useMemo(() => {
                     console.log("Rendering Grid Item: ", index);
-                    console.log("Item Data: ", item);
-                    console.log("Theme: ", props.theme);
                     return (
                         <LayoutItem
                             style={{
@@ -375,14 +422,14 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                             <ZIndexContext.Provider value={{
                                 setZIndex: setZIndex,
                             }}>
-                                <CounterGridItem
+                                <ResponsiveLayoutItemContent
                                     data={item}
                                     // Renders Elements of Grid Item, given data and theme
                                     // renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
-                                    renderItem={(d: PortfolioItemInterface) => renderItemElements(d, props.theme.item.theme)}
+                                    renderProps={(d: PortfolioItemInterface) => props.renderProps(d, props.theme.item.theme)}
                                 >
-                                    ID {index}, zIndex: {zIndex}
-                                </CounterGridItem>
+                                    {/* ID {index}, zIndex: {zIndex} */}
+                                </ResponsiveLayoutItemContent>
                             </ZIndexContext.Provider>
                         </LayoutItem>
                     )
@@ -400,104 +447,142 @@ export default {
     tags: ["autodocs"],
 };
 
+// Full App Theme objects LIGHT/DARK
+const hookAdapterFunction = (theme: ComputedTheme) => {
+    return {
+        containerBackgroundColor: theme.backgroundColor,
+        topHeaderPane: {
+            themeSwitch: theme.themeSwitch,
+            navigationBar: theme.navigationBar,
+            backgroundColor: theme.topHeaderPane.backgroundColor,
+        },
+        verticalSidePane: {
+            personalInfo: {
+                // pass Theme Personal Color Design
+                ...theme.personal,
+                // adjust interface
+                linkColor: theme.personal.urlTextColor,
+            },
+            education: theme.education,
+        },
+        verticalMainPane: {
+            introduction: theme.introduction,
+            professional: theme.professional,
+            portfolio: {
+                ...theme.portfolio,
+                item: {
+                    ...theme.portfolio.item,
+                    theme: {
+                        // Portfolio Project Item - Project Title and Description
+                        ...theme.portfolio.item,
+                        links: {
+                            ...theme.portfolio.item.resourceLinks,
+                            item: {
+                                ...theme.portfolio.item.resourceLinks.item,
+                                icon: {
+                                    svgStyles: {
+                                        // TODO: supply from theme object
+                                        width: "12px",
+                                        height: "12px",
+                                        fill: theme.portfolio.item.resourceLinks.item.color,
+                                    },
+                                },
+                            },
+                        },
+                        // Portfolio Project Item - Software Releases
+                        releases: {
+                            ...theme.portfolio.item.releases,
+                            headerFontFamily: theme.portfolio.item.releases.fontFamily,
+                            headerColor: theme.portfolio.item.releases.color,
+                            releaseButtonTheme: {
+                                ...theme.portfolio.item.releases.item,
+                                icon: {
+                                    svgStyles: {
+                                        // TODO: supply from theme object
+                                        width: "12px",
+                                        height: "12px",
+                                        fill: theme.portfolio.item.releases.item.color,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            // ...theme,
+            // containerBackgroundColor: theme.backgroundColor,
+        },
+        bottomFooterPane: {
+            ...theme.footerStyles,
+            // svgStyles: {
+            //   width: "15px",
+            //   height: "15px",
+            // }
+        },
+    };
+};
+
+type RawColorTheme = typeof lightTheme | typeof darkTheme;
+
+// Adjust Theme to App Theme
+// compute maximum number of Releases contained in a single portfolio item
+const maxNumberOfReleasesPerPortfolioItems = () => DATA.reduce(
+    (acc, { release = [] }) => Math.max(acc, release.length),
+    0
+);
+// compute maximum number of links contained in a single portfolio item
+const maxNumberOfLinksPerPortfolioItems = () => DATA.reduce(
+    (acc, { resource_links = [] }) => Math.max(acc, resource_links.length),
+    0
+);
+const computeTheme = (theme: RawColorTheme) => {
+    const appTheme = hookAdapterFunction(theme);
+    // Adapt 'icon' to 'icons' by crating an rray of the same item multiple times
+    const adaptedAppTheme = {
+        ...appTheme,
+        verticalMainPane: {
+            ...appTheme.verticalMainPane,
+            portfolio: {
+                ...appTheme.verticalMainPane.portfolio,
+                item: {
+                    ...appTheme.verticalMainPane.portfolio.item,
+                    theme: {
+                        ...appTheme.verticalMainPane.portfolio.item.theme,
+                        links: {
+                            ...appTheme.verticalMainPane.portfolio.item.theme.links,
+                            item: {
+                                ...appTheme.verticalMainPane.portfolio.item.theme.links.item,
+                                icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems() }, () => appTheme.verticalMainPane.portfolio.item.theme.links.item.icon
+                                ),
+                            },
+                        },
+                        releases: {
+                            ...appTheme.verticalMainPane.portfolio.item.theme.releases,
+                            releaseButtonTheme: {
+                                ...appTheme.verticalMainPane.portfolio.item.theme.releases.releaseButtonTheme,
+                                icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems() }, () => appTheme.verticalMainPane.portfolio.item.theme.releases.releaseButtonTheme.icon
+                                ),
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    }
+    return adaptedAppTheme;
+};
+const lightAppTheme = computeTheme(lightTheme);
+const lightThemeObj = lightAppTheme.verticalMainPane.portfolio;
+
 const SimpleArgs: GridRealDataWithLSAndMemoizedItemsProps = {
-    data,
+    renderProps: renderItemElements,
+    data: DATA,
     itemOutline: "1px solid black",
     theme: {
-        // OUTER MOST element of 'Portfolio Section Header' + 'Portfolio Projects Interactive Grid'
-        container: lightTheme.portfolio.container, // Portfolio Section Container
-
-        // HEADER with Title; ie 'Open Source & Portfolio'
-        sectionHeader: lightTheme.portfolio.sectionHeader, // Portfolio Section Header
-
-        // Reset Layout - Button
-        resetLayoutButton: lightTheme.portfolio.resetLayoutButton,
-
-        // Portfolio Project Item
+        ...lightThemeObj,
         item: {
-            // outline:
-            outline: `${lightTheme.portfolio.item.outline.width} solid ${lightTheme.portfolio.item.outline.color}`,
-            backgroundColor: lightTheme.portfolio.item.backgroundColor, // not used
-            color: lightTheme.portfolio.item.color, // Project Header color css property
-            theme: {
-                // Project Title
-                projectTitle: lightTheme.portfolio.item.projectTitle,
-                // Project Description
-                projectDescription: lightTheme.portfolio.item.projectDescription,
-                // Project Releases Pane
-                releases: {
-                    headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
-                    headerFontSize: lightTheme.portfolio.item.releases.headerFontSize,
-                    headerColor: lightTheme.portfolio.item.releases.color,
-                    headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
-                    releaseButtonTheme: {
-                        ...lightTheme.portfolio.item.releases.item,
-                        icons: [
-                            /// pypi
-                            {
-                                svgStyles: {
-                                    fill: lightTheme.portfolio.item.releases.item.color,
-                                    width: "14px",
-                                    height: "14px",
-                                },
-                            },
-                            /// docker
-                            {
-                                svgStyles: {
-                                    fill: lightTheme.portfolio.item.releases.item.color,
-                                    width: "14px",
-                                    height: "14px",
-                                },
-                            },
-                            /// github
-                            {
-                                svgStyles: {
-                                    fill: lightTheme.portfolio.item.releases.item.color,
-                                    width: "14px",
-                                    height: "14px",
-                                },
-                            },
-                        ],
-                    },
-                },
-                // Project Links Pane, ie source code repo docs, etc
-                links: {
-                    headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
-                    header: {
-                        fontFamily: lightTheme.portfolio.item.resourceLinks.header.fontFamily,
-                        fontSize: lightTheme.portfolio.item.resourceLinks.header.fontSize,
-                    },
-                    item: {
-                        ...lightTheme.portfolio.item.resourceLinks.item,
-                        icons: [
-                            // github
-                            {
-                                svgStyles: {
-                                    width: "12px",
-                                    height: "12px",
-                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                },
-                            },
-                            // docs
-                            {
-                                svgStyles: {
-                                    width: "12px",
-                                    height: "12px",
-                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                },
-                            },
-                            // ci/cd
-                            {
-                                svgStyles: {
-                                    width: "12px",
-                                    height: "12px",
-                                    fill: lightTheme.portfolio.item.resourceLinks.item.color
-                                },
-                            },
-                        ],
-                    },
-                },
-            }
+            ...lightThemeObj.item,
+            outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
         },
     },
 }

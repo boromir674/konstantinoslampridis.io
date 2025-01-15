@@ -1,4 +1,4 @@
-import { FC, useRef, useCallback } from "react";
+import { FC, useRef, useCallback, forwardRef } from "react";
 import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
 import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
 
@@ -9,6 +9,12 @@ import { lightTheme, darkTheme, type ComputedTheme } from '../../theme';
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import { AppPortfolioItemProps } from "./AppPortfolioItem";
+
+// Hook to expose a callback that measures its element width
+import useExposeDimensionsReporter from '../../Hooks/useExposeDimensionsReporter';
+// Without State
+import useStatelessDimensions from "../../Hooks/useExposeStatelessDimsReporter";
+
 type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
 
 
@@ -367,7 +373,6 @@ const GridItemContents = (props: { backgroundColor: string, children?: React.Rea
     return <div style={{ backgroundColor: props.backgroundColor }}>
         <h2>Render Times: {rendersNo.current}</h2>
     </div>
-
 }
 
 // STORY SPECIFIC CODE
@@ -381,6 +386,19 @@ const renderPropsOverride: RenderProps = (data, theme) => {
         {defaultProps.renderProps(data, theme)}
     </>
 }
+
+const AppPortfolioItemWithDimsReporter = (props: PortfolioLayoutItemContentProps) => {
+    
+    const [ ref, reportDimensions ] = useStatelessDimensions();
+
+    const DefaultPortfolioContentsContainer: FC<PortfolioLayoutItemContentProps> = defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>;
+    return (
+        <DefaultPortfolioContentsContainer
+        // Give the Portfolio Container Div the ability to measure its dimensions
+        ref={ref}
+        {...props} />
+    );
+};
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
     // other properties...
@@ -397,107 +415,13 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
             outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
         },
     },
-    // theme: {
-    //     // OUTER MOST element of 'Portfolio Section Header' + 'Portfolio Projects Interactive Grid'
-    //     container: lightTheme.portfolio.container, // Portfolio Section Container
-
-    //     // HEADER with Title; ie 'Open Source & Portfolio'
-    //     sectionHeader: lightTheme.portfolio.sectionHeader, // Portfolio Section Header
-
-    //     // Reset Layout - Button
-    //     resetLayoutButton: lightTheme.portfolio.resetLayoutButton,
-
-    //     // Portfolio Project Item
-    //     item: {
-    //         // outline:
-    //         outline: `${lightTheme.portfolio.item.outline.width} solid ${lightTheme.portfolio.item.outline.color}`,
-    //         backgroundColor: lightTheme.portfolio.item.backgroundColor, // not used
-    //         color: lightTheme.portfolio.item.color, // Project Header color css property
-    //         theme: {
-    //             // Project Title
-    //             projectTitle: lightTheme.portfolio.item.projectTitle,
-    //             // Project Description
-    //             projectDescription: lightTheme.portfolio.item.projectDescription,
-    //             // Project Releases Pane
-    //             releases: {
-    //                 headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
-    //                 headerFontSize: lightTheme.portfolio.item.releases.headerFontSize,
-    //                 headerColor: lightTheme.portfolio.item.releases.color,
-    //                 headerMarginBottom: lightTheme.portfolio.item.releases.headerMarginBottom,
-    //                 releaseButtonTheme: {
-    //                     ...lightTheme.portfolio.item.releases.item,
-    //                     icons: [
-    //                         /// pypi
-    //                         {
-    //                             svgStyles: {
-    //                                 fill: lightTheme.portfolio.item.releases.item.color,
-    //                                 width: "14px",
-    //                                 height: "14px",
-    //                             },
-    //                         },
-    //                         /// docker
-    //                         {
-    //                             svgStyles: {
-    //                                 fill: lightTheme.portfolio.item.releases.item.color,
-    //                                 width: "14px",
-    //                                 height: "14px",
-    //                             },
-    //                         },
-    //                         /// github
-    //                         {
-    //                             svgStyles: {
-    //                                 fill: lightTheme.portfolio.item.releases.item.color,
-    //                                 width: "14px",
-    //                                 height: "14px",
-    //                             },
-    //                         },
-    //                     ],
-    //                 },
-    //             },
-    //             // Project Links Pane, ie source code repo docs, etc
-    //             links: {
-    //                 headerColor: lightTheme.portfolio.item.resourceLinks.headerColor,
-    //                 header: {
-    //                     fontFamily: lightTheme.portfolio.item.resourceLinks.header.fontFamily,
-    //                     fontSize: lightTheme.portfolio.item.resourceLinks.header.fontSize,
-    //                 },
-    //                 item: {
-    //                     ...lightTheme.portfolio.item.resourceLinks.item,
-    //                     icons: [
-    //                         // github
-    //                         {
-    //                             svgStyles: {
-    //                                 width: "12px",
-    //                                 height: "12px",
-    //                                 fill: lightTheme.portfolio.item.resourceLinks.item.color
-    //                             },
-    //                         },
-    //                         // docs
-    //                         {
-    //                             svgStyles: {
-    //                                 width: "12px",
-    //                                 height: "12px",
-    //                                 fill: lightTheme.portfolio.item.resourceLinks.item.color
-    //                             },
-    //                         },
-    //                         // ci/cd
-    //                         {
-    //                             svgStyles: {
-    //                                 width: "12px",
-    //                                 height: "12px",
-    //                                 fill: lightTheme.portfolio.item.resourceLinks.item.color
-    //                             },
-    //                         },
-    //                     ],
-    //                 },
-    //             },
-    //         }
-    //     },
-    // },
     // Other Props, most likely with dedicated fallback values
     ...defaultProps,
-    renderProps: renderPropsOverride,
-    element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
+    // called as renderProps as children of element_to_render Element/node
+    renderProps: renderPropsOverride,  // CONTENT
+    // Component that governs the html element (and its styles) that will contain the rendered CONTENT as children
+    // element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
+    element_to_render: AppPortfolioItemWithDimsReporter,
 };
 
 // STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Light Theme

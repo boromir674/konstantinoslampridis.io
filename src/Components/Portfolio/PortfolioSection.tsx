@@ -299,7 +299,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     console.log('HEIGHT-AWARE RESIZE ALGO');
     const index: string = newItem.i.toString();
 
-    const EXPERIMENTAL_UNIT_LENGTH = 44;  // px
+    // const EXPERIMENTAL_UNIT_LENGTH = 44;  // px
     const PRODUCTION_UNIT_LENGTH = 50;  // px   
 
     const UNIT_LENGTH = PRODUCTION_UNIT_LENGTH;  // px

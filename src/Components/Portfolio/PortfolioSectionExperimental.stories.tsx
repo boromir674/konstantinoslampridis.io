@@ -1,21 +1,15 @@
 import { FC, useRef, useCallback, forwardRef } from "react";
 import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
-import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
 
 import DESIGN_TOKENS from "../../design-system/tokens.json";
 
 // import App Styles Symbols
 import { lightTheme, darkTheme, type ComputedTheme } from '../../theme';
 
+// Import Content Component
+import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
+
 import PortfolioItemInterface from "../../PortfolioItemInterface";
-import { AppPortfolioItemProps } from "./AppPortfolioItem";
-
-// Hook to expose a callback that measures its element width
-import useExposeDimensionsReporter from '../../Hooks/useExposeDimensionsReporter';
-// Without State
-import useStatelessDimensions from "../../Hooks/useExposeStatelessDimsReporter";
-
-type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
 
 
 // Adapted Component of PortfolioSection allowing multiple Grids (side-by-side) for Style comparison
@@ -43,7 +37,7 @@ export default {
 };
 
 // DATA (Portfolio Items Array)
-const DATA = [
+const DATA: PortfolioItemInterface[] = [
     // PROJECT 1
     {
         title: "Python Package Generator",
@@ -361,46 +355,36 @@ const darkThemeObj = darkAppTheme.verticalMainPane.portfolio;
 
 
 // RnD / Support Component to show number of Renders per Grid Item
-const GridItemContents = (props: { backgroundColor: string, children?: React.ReactNode }) => {
+const CountRenderTimes = forwardRef((props: { backgroundColor: string, children?: React.ReactNode }, ref) => {
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
     }, [])
-
     // Increment Render Counter
     logComponentRerender()
-
-    return <div style={{ backgroundColor: props.backgroundColor }}>
+    return <div ref={ref} style={{ backgroundColor: props.backgroundColor }}>
         <h2>Render Times: {rendersNo.current}</h2>
     </div>
-}
+});
 
-// STORY SPECIFIC CODE
-const renderPropsOverride: RenderProps = (data, theme) => {
-    // GIRD ITEM ELEMENTS (inside 2 DIVs)
+const AppPortfolioItemWrapper = forwardRef((props: AppPortfolioItemProps, ref) => {
     return <>
         {/* Component to Count Number of Render Times */}
-        <GridItemContents backgroundColor={theme.releases.releaseButtonTheme.backgroundColor}></GridItemContents>
-        {/* Production Component Render */}
-        {/* Renders Title, Description, Links, and Releases */}
-        {defaultProps.renderProps(data, theme)}
+        <CountRenderTimes ref={ref} backgroundColor={props.theme.releases.releaseButtonTheme.backgroundColor}></CountRenderTimes>
+        {/* Production Component Contents Render */}
+        <AppPortfolioItem data={props.data} theme={props.theme} refs={props.refs} />
     </>
-}
+});
 
-const AppPortfolioItemWithDimsReporter = (props: PortfolioLayoutItemContentProps) => {
-    
-    const [ ref, reportDimensions ] = useStatelessDimensions();
+// type RenderProps = ResponsiveLocalStorageLayoutProps["renderProps"];
 
-    const DefaultPortfolioContentsContainer: FC<PortfolioLayoutItemContentProps> = defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>;
-    return (
-        <DefaultPortfolioContentsContainer
-        // Give the Portfolio Container Div the ability to measure its dimensions
-        ref={ref}
-        {...props} />
-    );
-};
+// NOT WORKING SINCE THE PROD CODE DALL with 3 args!
+// STORY SPECIFIC CODE
+const renderPropsOverride = (data, theme, refs, ref) => <AppPortfolioItemWrapper ref={ref} data={data} theme={theme} refs={refs} />
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
+    // Other Props, most likely with dedicated fallback values
+    ...defaultProps,
     // other properties...
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
     rowHeight: 41,
@@ -415,13 +399,7 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
             outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
         },
     },
-    // Other Props, most likely with dedicated fallback values
-    ...defaultProps,
-    // called as renderProps as children of element_to_render Element/node
     renderProps: renderPropsOverride,  // CONTENT
-    // Component that governs the html element (and its styles) that will contain the rendered CONTENT as children
-    // element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
-    element_to_render: AppPortfolioItemWithDimsReporter,
 };
 
 // STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Light Theme
@@ -460,7 +438,6 @@ export const SingleItemWithTwoReleaseButtons = {
         }]
     }
 };
-
 
 // STORY: 2 Dark Grids to compare Contrast of different Theme Color schemes
 // Each Grid has only 1 Item which is sufficient to compare Color schemes contrast
@@ -506,7 +483,6 @@ export const TwoDarkGridsSideBySide = {
     }
 };
 
-
 // STORY: 2 Light Grids to compare Contrast of different Theme Color schemes
 const twoLightGridsSideBySideArgs: PortfolioSectionMultiGridProps = {
     ...TwoDarkGridsSideBySide.args,
@@ -547,7 +523,6 @@ const twoLightGridsSideBySideArgs: PortfolioSectionMultiGridProps = {
             },
         }]
 };
-
 export const TwoLightGridsSideBySide = {
     args: twoLightGridsSideBySideArgs
 };

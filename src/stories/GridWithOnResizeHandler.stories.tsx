@@ -3,22 +3,22 @@ import React, { FC, forwardRef, type ReactNode, useRef, useState, useCallback, u
 import { Responsive, WidthProvider } from "react-grid-layout";
 import styled from "@emotion/styled";
 
-
 // Import Interfaces and Types
 import PortfolioItemInterface from "../PortfolioItemInterface";
-import { PortfolioLayoutItemContentProps } from '../Components/Portfolio/PortfolioItem/PortfolioItemContainer';
 
 // import App Styles Symbols
 import { lightTheme, darkTheme, type ComputedTheme } from '../theme';
 // Import Hooks
 import useDimsReporter from '../Hooks/useExposeStatelessDimsReporter';
-
-// Import Content Component
-import AppPortfolioItem from "../Components/Portfolio/AppPortfolioItem";
-
 import useLayoutsState from '../Hooks/useLayoutsState'
 import useGridLayoutHandlers from '../Hooks/useGridLayoutHandlers';
+
+// Import Context
 import ZIndexContext from '../ZIndexContext';
+
+// Import Content Component and Props Type
+import AppPortfolioItem, { AppPortfolioItemProps } from "../Components/Portfolio/AppPortfolioItem";
+
 
 // keep same public interface as PortfolioSection
 import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from '../Components/Portfolio/PortfolioSection';
@@ -258,9 +258,8 @@ const LayoutItem = styled.div<LayoutItemProps>`
   // margin-bottom: 10px;
 `;
 
-
 // RnD / Support Component to show number of Renders per Grid Item
-const GridItemContents = (props: { backgroundColor: string, children?: React.ReactNode }) => {
+const CountRenderTimes = forwardRef((props: { backgroundColor: string, children?: React.ReactNode }, ref) => {
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
@@ -269,58 +268,35 @@ const GridItemContents = (props: { backgroundColor: string, children?: React.Rea
     // Increment Render Counter
     logComponentRerender()
 
-    return <div style={{ backgroundColor: props.backgroundColor }}>
+    return <div ref={ref as React.RefObject<HTMLDivElement>}
+        style={{ backgroundColor: props.backgroundColor }}>
         <h2>Render Times: {rendersNo.current}</h2>
     </div>
-}
+});
 
 
 // PRODUCTION APP COMPONENT that Renders 1 DIV and calls renderProps to render its children
 const DefaultPortfolioContentsContainer = portfolioSectionDefaultProps.element_to_render as typeof portfolioSectionDefaultProps.element_to_render
 
 
-
-// RnD / Support Component with Dims Reporting capabilities
-const AppPortfolioItemWithDimsReporter = forwardRef((props: PortfolioLayoutItemContentProps, ref) => {
-
-    // const [ ref, reportDimensions ] = useStatelessDimensions();
-
-    return (
-        // <div ref={ref as React.RefObject<HTMLDivElement>}>
-        <DefaultPortfolioContentsContainer
-            // ref={ref as React.RefObject<HTMLDivElement>}
-            // Give the Portfolio Container Div the ability to measure its dimensions
-            // ref={ref}
-            {...props} />
-        // </div>
-    );
-});
-
 // DESIGNER'S INTERFACE: renderProps: (data, theme) => React.ReactNode Interface
 // To control what/how elements (ie content and/or styles) are rendered inside each
 // portfolioSectionDefaultProps.element_to_render Component (2 DIVs), modify
 // the portfolioSectionDefaultProps.renderProps or use different callback
-
 type RenderProps = ResponsiveLocalStorageLayoutProps["renderProps"];
 
-const RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK = portfolioSectionDefaultProps.renderProps as ResponsiveLocalStorageLayoutProps["renderProps"];
-
-
-
-const HARD_CODED_DEFAULT: RenderProps = (data, theme, refs) => <AppPortfolioItem data={data} theme={theme} refs={refs} />
-
-
-const renderItemElements: RenderProps = (data, theme, refs) => {
+const AppPortfolioItemWrapper = forwardRef((props: AppPortfolioItemProps, ref) => {
     return <>
         {/* Component to Count Number of Render Times */}
-        <GridItemContents backgroundColor={theme.releases.releaseButtonTheme.backgroundColor}></GridItemContents>
-        {/* Production Component Render */}
-        {/* Renders Title, Description, Links, and Releases */}
-        {/* {RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK(data, theme, refs)} */}
-        {HARD_CODED_DEFAULT(data, theme, refs)}
+        <CountRenderTimes ref={ref} backgroundColor={props.theme.releases.releaseButtonTheme.backgroundColor}></CountRenderTimes>
+        {/* Production Portfolio Items Contents */}
+        <AppPortfolioItem data={props.data} theme={props.theme} refs={props.refs} />
     </>
-}
+});
 
+
+// STORY SPECIFIC CODE
+const renderItemElements = (data, theme, refs, ref) => <AppPortfolioItemWrapper ref={ref} data={data} theme={theme} refs={refs} />;
 
 type ContentRegistry = Record<string, {
     ref: React.RefObject<HTMLElement | null>;
@@ -360,10 +336,13 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         });
         return acc;
     }
-    // DECLARE REFS, with unique index per Grid Item
+    // FACILITY with ref instances and their Dims Reporter
     const refs = useRef<ContentRegistry>(
         DATA.reduce(reducer, {})
     );
+
+    // Story-specific ref for reporting dims of CounterRenderTimes Div
+    const [counterRenderRef, counterRenderDimsReporter] = useDimsReporter();
 
     const handleClick = useCallback(() => {
         console.log('Records of Refs:', refs.current);
@@ -373,10 +352,9 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         console.log('Ref 0: ', refs.current['0'][2]['ref'].current);
     }, []);
 
-    const DIV_STYLE = { resize: "both", overflow: "auto", border: "1px solid black", padding: "10px" };
-
     // EVENT HANDLERS - GRID LAYOUT CHANGE
     const [handleLayoutChange] = useGridLayoutHandlers({
+        // todo: try running the content-aware algo on all item changed to adjust to content on this event too
         setLayouts,
         saveToLS: useCallback((allLayouts: LayoutsObject) => {
             saveToLS("layouts", allLayouts);
@@ -416,21 +394,23 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
 
         // NEW ALGORITHM: Content Aware Height Adjustment
         // assumes each "unit" is 160px
-        const record = refs.current[index];
-        const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
-            67.48;  // hack to account for item render times "header"
 
-        const occupiedUnits = Math.ceil(occupiedContentsHeight / 160);
+        const UNIT_LENGTH = 160;  // 160px
+
+        const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
+            counterRenderDimsReporter().height;  // account for story-specific design, where the CounterRender Div is included in Item Contents
+
+        const occupiedUnits = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
         console.log(`Item ${index} Required Content Height:`, occupiedContentsHeight, 'Units', occupiedUnits);
         if (!occupiedContentsHeight) {
             console.warn('Content Height is not available, because refs are not attached to the DOM element');
         } else {
             // if grid item height is not enough for inner content heigth
-            const userHeight = newItem.h * 160;
+            const userHeight = newItem.h * UNIT_LENGTH;
             console.log("User Height: ", userHeight, 'Units', newItem.h);
             if (userHeight < occupiedContentsHeight) {
                 // adjust newItem.h so that it is >= contentHeight
-                const adjustedHeightValue = Math.ceil(occupiedContentsHeight / 160);
+                const adjustedHeightValue = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
                 console.log("Prev height: ", newItem.h, "New Height: ", adjustedHeightValue);
                 newItem.h = adjustedHeightValue;
                 placeholder.h = adjustedHeightValue;
@@ -455,7 +435,6 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         <ResponsiveGridLayout
             layouts={layouts}
             onLayoutChange={handleLayoutChange}
-            // onResize={handleItemResize}
             onResize={handleItemResizeV2}
             cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         >
@@ -483,8 +462,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
                             <ZIndexContext.Provider value={{
                                 setZIndex: setZIndex,
                             }}>
-                                <AppPortfolioItemWithDimsReporter
-                                    // ref={refs.current[index.toString()] as React.RefObject<HTMLDivElement>}
+                                <DefaultPortfolioContentsContainer
                                     data={item}
                                     renderProps={(d: PortfolioItemInterface) => {
 
@@ -492,10 +470,11 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
                                             d,
                                             props.theme.item.theme,
                                             refs.current[index.toString()].map(({ ref }) => ref as React.RefObject<HTMLElement>),
+                                            counterRenderRef,
                                         )
                                     }}
                                 >
-                                </AppPortfolioItemWithDimsReporter>
+                                </DefaultPortfolioContentsContainer>
                             </ZIndexContext.Provider>
                         </LayoutItem>
                     )
@@ -638,18 +617,15 @@ const lightThemeObj = lightAppTheme.verticalMainPane.portfolio;
 
 
 // STORY that Binds Multiple Refs to Dynamically generated HTML Elements, using the 'static' syntax
-const MultiRefBindingWithStaticSyntaxArgs: DynamicMultiRefBindingToRenderedGridProps = {
-    renderProps: renderItemElements,
-    theme: {
-        ...lightThemeObj,
-        item: {
-            ...lightThemeObj.item,
-            outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
+export const DemonstratesIntegrationWithResponsiveGridLayout: {args : DynamicMultiRefBindingToRenderedGridProps} = {
+    args: {
+        renderProps: renderItemElements,
+        theme: {
+            ...lightThemeObj,
+            item: {
+                ...lightThemeObj.item,
+                outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
+            },
         },
     },
 };
-
-// STORY 1: Static ref binding
-export const DemonstratesIntegrationWithResponsiveGridLayout = {
-    args: MultiRefBindingWithStaticSyntaxArgs,
-}

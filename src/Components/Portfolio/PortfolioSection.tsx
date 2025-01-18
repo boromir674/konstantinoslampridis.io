@@ -1,10 +1,13 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useEffect, useRef, useState, useCallback, FC } from "react";
 import {
   // WidthProvider,
   Responsive
 } from "react-grid-layout";
 import WidthProvider from '../../HoC/WidthProvider';
 import styled from "@emotion/styled";
+
+// Import Hooks
+import useDimsReporter from '../../Hooks/useExposeStatelessDimsReporter';
 
 import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
@@ -108,7 +111,7 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
 // WITH WIDTH from WINDOW
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme']) => React.ReactNode;
+type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme'], refs?: React.RefObject<HTMLElement>[]) => React.ReactNode;
 interface ResponsiveLocalStorageLayoutProps {
   id: string;
   data: PortfolioItemInterface[];
@@ -154,20 +157,62 @@ interface ResponsiveLocalStorageLayoutProps {
 
 // DESIGNER's ENTRYPOINT
 
+// helper function
+// const defaultsMaker = (): {
+//   className: string,
+//   cols: {
+//     lg: number;
+//     md: number;
+//     sm: number;
+//     xs: number;
+//     xxs: number;
+//   },
+//   rowHeight: number,
+//   renderProps: RenderProps,
+//   element_to_render: typeof PortfolioItemCard,
+//  } => {
+//   return { a: 1 };
+// }
+
+interface AppPortfolioSectionDefaults {
+  className: string,
+  cols: {
+    lg: number;
+    md: number;
+    sm: number;
+    xs: number;
+    xxs: number;
+  },
+  rowHeight: number,
+  renderProps: RenderProps,
+  element_to_render: typeof PortfolioItemCard,
+}
+
+type DefaultsType<T> = T extends Partial<ResponsiveLocalStorageLayoutProps> ? T : never;
+// T should be checked that is a Partial<ResponsiveLocalStorageLayoutProps>
+// type DefaultMaker<T> = () 
+
 // used to set up default values for the properties of the component
 // if the client does not provide them
 /** Default Design of breakpoints via 'cols' */
-const defaultProps: Partial<ResponsiveLocalStorageLayoutProps> = {
+const defaultProps: DefaultsType<AppPortfolioSectionDefaults> = {
   className: "layout",
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   // TODO make this dynamic based on the content of the PortfolioItem
   rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
   // Responsible for Content of Grid Item
-  renderProps: (data, theme) => <AppPortfolioItem data={data} theme={theme} />,
+  renderProps: (data, theme, refs) => <AppPortfolioItem data={data} theme={theme} refs={refs} />,
   // Direct Child Component of LayoutItem that receives the above Render Props Callback
   // Responsible for Styles of Grid Item
-  element_to_render: PortfolioItemCard,  // 2 DIVS
+  element_to_render: PortfolioItemCard,  // 1 DIV, with children the renderProps(data, theme) result
 };
+
+/// Local Type Checking
+// Dimensions Reporter Interface
+type DimsReporter = () => { width: number; height: number };
+type Reducer<S, T> = (acc: S, _: T, index: number) => S;
+type ContentItem = { ref: React.RefObject<HTMLElement>, dimsReporter: DimsReporter };
+type ContentRegistry = Record<string, ContentItem[]>;
 
 // COMPONENT - Reactive Grid Layout (with Local Storage support)
 /**
@@ -196,19 +241,94 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   const handleResetLayout = () => {
     setLayouts({});
   };
-  // EVENT HANDLERS - GRID LAYOUT
-  const liveDims = { width: 4, height: 7 };
-  const [handleLayoutChange, handleItemResize] = useGridLayoutHandlers({
+  // EVENT HANDLERS - any GRID LAYOUT CHANGE
+  const [handleLayoutChange] = useGridLayoutHandlers({
     // Callables (aka functions/callbacks) that handleLayoutChange calls
     setLayouts,
     saveToLS: useCallback((allLayouts: LayoutsObject) => {
       saveToLS("layouts", allLayouts);
     }, [saveToLS]),
-    // Callable (aka functions/callbacks) that handleItemResize calls
-    // handleItemResizeAdapter: useCallback((_handleItemResize: (dims: { width: number; height: number }) => void) => {_handleItemResize(liveDims)}, [liveDims])
-  },
-    useCallback(() => liveDims, [liveDims])
+  });
+
+  // Intialize Ref storing the ContentRegistry of each Portfolio Item
+  const reducer: Reducer<ContentRegistry, PortfolioItemInterface> = (acc, _, index) => {
+    // we support binding 3 DOM Elements of Portfolio Item Content Elements
+    acc[index.toString()] = Array.from({ length: 3 }, () => {
+      const [ref, dimsReporter] = useDimsReporter();
+      return {
+        ref,
+        dimsReporter,
+      }
+    });
+    return acc;
+  }
+  // DECLARE ContentRegistry Ref, as mapping of Grid Item IDs to Array of 3 ContentItem
+  const contentRegistry = useRef<ContentRegistry>(
+    data.reduce(reducer, {})
   );
+
+  // Helper function to sum content Height of a Portfolio Item
+  const sumItemContentOccupiedHeight = useCallback((itemIndex: string) => {
+    const dimsReporters: DimsReporter[] = contentRegistry.current[itemIndex].map(({ dimsReporter }) => dimsReporter);
+    // DEBUG CODE
+    for (const dimsReporter of dimsReporters) {
+      if (!dimsReporter) {
+        console.warn('DimsReporter is null. Bind the ref to a DOM element.');
+        return 0;
+      }
+      const res = dimsReporter()
+      console.log('DimsReporter:', res);
+    }
+    // get reported dims and sum height values
+    const sumHeights = dimsReporters.reduce((acc, dimsReporter, _index) => {
+      return acc + dimsReporter().height;
+    }, 0);
+    return sumHeights;
+  }, [contentRegistry.current]);
+
+  // ON RESIZE EVENT HANDLER
+  // onResize events fire continuously while User's drag-n-drop on the bottom-right corner of a Grid Item
+  const handleItemResize = useCallback((
+    layout,
+    oldItem,
+    newItem,
+    placeholder,
+    event,
+    element,
+  ) => {
+    console.log('HEIGHT-AWARE RESIZE ALGO');
+    const index: string = newItem.i.toString();
+
+    const EXPERIMENTAL_UNIT_LENGTH = 44;  // px
+    const PRODUCTION_UNIT_LENGTH = 50;  // px   
+
+    const UNIT_LENGTH = PRODUCTION_UNIT_LENGTH;  // px
+
+    // NEW ALGORITHM: Content Aware Height Adjustment
+    // assumes each "unit" is 160px
+
+    const occupiedContentsHeight = sumItemContentOccupiedHeight(index)
+    // const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
+    //   67.48;  // hack to account for item render times "header"
+
+    const occupiedUnits = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
+    console.log(`Item ${index} Required Content Height:`, occupiedContentsHeight, 'Units', occupiedUnits);
+    if (!occupiedContentsHeight) {
+      console.warn('Content Height is not available, because refs are not attached to the DOM element');
+    } else {
+      // if grid item height is not enough for inner content heigth
+      const userHeight = newItem.h * UNIT_LENGTH;
+      console.log("User Height: ", userHeight, 'Units', newItem.h);
+      if (userHeight < occupiedContentsHeight) {
+        // adjust newItem.h so that it is >= contentHeight
+        const adjustedHeightValue = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
+        console.log("Prev height: ", newItem.h, "New Height: ", adjustedHeightValue);
+        newItem.h = adjustedHeightValue;
+        placeholder.h = adjustedHeightValue;
+      }
+    }
+  }, [sumItemContentOccupiedHeight, contentRegistry.current]);
+
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
@@ -235,10 +355,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
         onLayoutChange={handleLayoutChange}
 
-        // handle resize, happening when user drags from bottom right
-        // this runs after user clicks bottom-right and while they keep the mouse clicked. It runs 'continuously' on every pixel moved sort-a-thing.
-        // currently we use simple heuristic to increase height when width decreases
-        onResize={handleItemResize}  // if W <= 2 add 2 H else if W <= 3 add 1 H
+        // handle resize events, which fire 'continuously' while user holds mouse pressed, after clicking on the bottom-right of any Grid Item
+        onResize={handleItemResize}  // we use content-aware algorithm to increase height if inner content requires it
 
         // if true the items will appear and animate/"transition" to match the state Layouts Object
         // if false, the items will appear instantly, without any animation
@@ -266,7 +384,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
           // Initialize the zIndex state for this item
           const [zIndex, setZIndex] = useState(0);
-
           const setStartingHeigth = () => {
             // and a heuristic including the startingWidth and the number of characters in data.description
             // to determine the height of the Portfolio Item
@@ -286,13 +403,14 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
             }
             return height
           };
+
           // MEMOIZATION OF GRID ITEMS
           //  - avoids all item re-renders when moving or resizing!
-          //  - zIndex changes only trigger re-render of relevant Item
+          //  - zIndex changes only trigger re-render of its own parent LayoutItem
           const child = React.useMemo(() => {
             return (
               <LayoutItem  // DIV
-                key={index}
+                key={index.toString()}
                 data-grid={{
                   i: index.toString(),
                   w: startingWidth,
@@ -319,10 +437,16 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                 <ZIndexContext.Provider value={{
                   setZIndex
                 }}>
-                  <ResponsiveLayoutItemContent // 2 DIVs
+                  <ResponsiveLayoutItemContent // 1 DIV
                     data={item}
                     // Renders Fragment of Elements with Grid Item Contents
-                    renderProps={(d: PortfolioItemInterface) => { return inputRenderProps(d, theme.item.theme) }}
+                    renderProps={(d: PortfolioItemInterface) => {
+                      return inputRenderProps(
+                        d,
+                        theme.item.theme,
+                        contentRegistry.current[index.toString()].map(({ ref }) => ref as React.RefObject<HTMLElement>),
+                      )
+                    }}
                   />
                 </ZIndexContext.Provider>
               </LayoutItem>

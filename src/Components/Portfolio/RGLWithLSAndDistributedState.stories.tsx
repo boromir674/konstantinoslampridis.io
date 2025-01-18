@@ -254,7 +254,7 @@ const LayoutItem = styled.div<LayoutItemProps>`
 `;
 
 // RnD / Support Component to show number of Renders per Grid Item
-const GridItemContents = (props: { backgroundColor: string, children?: React.ReactNode }) => {
+const GridItemContents = (props: { backgroundColor: string, id: string, children?: React.ReactNode }) => {
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
@@ -264,7 +264,7 @@ const GridItemContents = (props: { backgroundColor: string, children?: React.Rea
     logComponentRerender()
 
     return <div style={{ backgroundColor: props.backgroundColor }}>
-        <h2>Render Times: {rendersNo.current}</h2>
+        <h2>ID {props.id}, Render Times: {rendersNo.current}</h2>
     </div>
 }
 
@@ -423,6 +423,7 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                                 setZIndex: setZIndex,
                             }}>
                                 <ResponsiveLayoutItemContent
+                                    stringID={index.toString()}
                                     data={item}
                                     // Renders Elements of Grid Item, given data and theme
                                     // renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}

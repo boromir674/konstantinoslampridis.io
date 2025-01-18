@@ -3,12 +3,18 @@ import React, { FC, forwardRef, type ReactNode, useRef, useState, useCallback, u
 import { Responsive, WidthProvider } from "react-grid-layout";
 import styled from "@emotion/styled";
 
-// import App Styles Symbols
-import { lightTheme, darkTheme, type ComputedTheme } from '../theme';
 
 // Import Interfaces and Types
 import PortfolioItemInterface from "../PortfolioItemInterface";
 import { PortfolioLayoutItemContentProps } from '../Components/Portfolio/PortfolioItem/PortfolioItemContainer';
+
+// import App Styles Symbols
+import { lightTheme, darkTheme, type ComputedTheme } from '../theme';
+// Import Hooks
+import useDimsReporter from '../Hooks/useExposeStatelessDimsReporter';
+
+// Import Content Component
+import AppPortfolioItem from "../Components/Portfolio/AppPortfolioItem";
 
 import useLayoutsState from '../Hooks/useLayoutsState'
 import useGridLayoutHandlers from '../Hooks/useGridLayoutHandlers';
@@ -299,7 +305,7 @@ type RenderProps = ResponsiveLocalStorageLayoutProps["renderProps"];
 
 const RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK = portfolioSectionDefaultProps.renderProps as ResponsiveLocalStorageLayoutProps["renderProps"];
 
-import AppPortfolioItem, { AppPortfolioItemProps } from "../Components/Portfolio/AppPortfolioItem";
+
 
 const HARD_CODED_DEFAULT: RenderProps = (data, theme, refs) => <AppPortfolioItem data={data} theme={theme} refs={refs} />
 
@@ -315,17 +321,8 @@ const renderItemElements: RenderProps = (data, theme, refs) => {
     </>
 }
 
-interface GridItemContentsRegistry {
-    [key: string]: {
-        // client can pass to rendered Components
-        ref: React.RefObject<HTMLDivElement | null>,
-        dimsReporter: DimsReporter,
-    };
-}
 
-type DimsReporterRegistry = Record<string, React.RefObject<DimsReporter | null>>;
-
-type DivRefsDict = Record<string, {
+type ContentRegistry = Record<string, {
     ref: React.RefObject<HTMLElement | null>;
     dimsReporter: DimsReporter;
 }[]>;
@@ -335,7 +332,7 @@ type Reducer<S, T> = (acc: S, _: T, index: number) => S;
 // COMPONENT: GRID LAYOUT
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-import useDimsReporter from '../Hooks/useExposeStatelessDimsReporter';
+
 interface DynamicMultiRefBindingToRenderedGridProps {
     theme: ResponsiveLocalStorageLayoutProps["theme"];
     renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
@@ -352,9 +349,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
 
-    const reducer: Reducer<DivRefsDict, PortfolioItemInterface> = (acc, _, index) => {
-        // const [ref, dimsReporter] = useDimsReporter();
-        // acc[index.toString()] = useRef<HTMLDivElement | null>(null);
+    const reducer: Reducer<ContentRegistry, PortfolioItemInterface> = (acc, _, index) => {
         // populate with array of 3 objects
         acc[index.toString()] = Array.from({ length: 3 }, () => {
             const [ref, dimsReporter] = useDimsReporter();
@@ -366,7 +361,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         return acc;
     }
     // DECLARE REFS, with unique index per Grid Item
-    const refs = useRef<DivRefsDict>(
+    const refs = useRef<ContentRegistry>(
         DATA.reduce(reducer, {})
     );
 
@@ -388,54 +383,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         }, [saveToLS]),
     });
 
-    // GLOBAL RESIZE HANDLER - OLD Version
-    const handleItemResize = (
-        layout,
-        oldItem,
-        newItem,
-        placeholder,
-        event,
-        element,
-    ) => {
-        console.log('RESIZE ALGO SIMPLE');
-        const index: string = newItem.i.toString();
-        // console.log(`Reading Element ${index} DIMS`, refs.current[index].current?.getBoundingClientRect());
-
-        // NEW ALGORITHM: Content Aware Height Adjustment
-        // assumes each "unit" is 160px
-        // here the reported dims are the same as the outer grid item div, so the logic does not work as expected. we need to report the inner content's dims they are rendered in
-        const contentHeight = refs.current[index].current?.getBoundingClientRect().height;
-        console.log('Content Aware Algo: ', index, contentHeight);
-        if (!contentHeight) {
-            console.warn('Content Height is not available, because ref is not yet attached to the DOM element');
-        } else {
-            // if grid item height is not enough for inner content heigth
-            const userHeight = newItem.h * 160;
-            if (userHeight < contentHeight) {
-                // adjust newItem.h so that it is >= contentHeight
-                const adjustedHeightValue = Math.ceil(contentHeight / 160);
-                console.log("Prev height: ", newItem.h, "New Height: ", adjustedHeightValue);
-                newItem.h = adjustedHeightValue;
-                placeholder.h = adjustedHeightValue;
-            }
-        }
-
-        // // OLG ALGORITHM: heuristic to adjust height based on width
-        // if (newItem.w <= 2) {  // if user resized item with "very small" width
-        //     const heightPlusTwo = newItem.h + 2;
-        //     // modifying `layoutItem` to enforce constraints
-        //     newItem.h = heightPlusTwo;
-        //     placeholder.h = heightPlusTwo;
-        // } else if (newItem.w <= 3) {  // if user resized item resulting in "small" width
-        //     const heightPlusOne = newItem.h + 1;
-        //     // modifying `layoutItem` to enforce constraints
-        //     newItem.h = heightPlusOne;
-        //     placeholder.h = heightPlusOne;
-        // }
-    };
-
     const sumItemContentOccupiedHeight = useCallback((itemIndex: string) => {
-        // convert {dimsReporter}[] to [rep1, rep2, ...]
         const dimsReporters: DimsReporter[] = refs.current[itemIndex].map(({ dimsReporter }) => dimsReporter);
         // DEBUG CODE
         for (const dimsReporter of dimsReporters) {
@@ -463,13 +411,12 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         event,
         element,
     ) => {
-        console.log('RESIZE ALGO SIMPLE V2');
+        console.log('HEIGHT-AWARE RESIZE ALGO');
         const index: string = newItem.i.toString();
 
         // NEW ALGORITHM: Content Aware Height Adjustment
         // assumes each "unit" is 160px
         const record = refs.current[index];
-        // console.log("Computing Occupied HEIGHT for ", index, record);
         const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
             67.48;  // hack to account for item render times "header"
 

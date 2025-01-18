@@ -1,4 +1,4 @@
-import React, { FC, forwardRef } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 
 import PortfolioItemDataInterface from '../../../PortfolioItemInterface';
@@ -44,16 +44,15 @@ const InnerContainer = styled.div`
 /** Renders the DIV and the children representing a Portfolio Item
  * 
  * The children are entirely controled via the props.data and props.renderProps callback.
- * Responsible for binding whatever ref is passed to it to the inner div DOM element.
  * 
  * Children can, for example, be Title, Description, Resouce Links, Software Releases.
  */
-const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = forwardRef<HTMLDivElement, PortfolioLayoutItemContentProps>(({
+const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   data,
   listeners_callbacks,
   renderProps,
   layoutItemID,
-}, ref) => {
+}) => {
   // const [blockRef, { width, height }] = useElementSizeRef();
   // whenever the width or height change we want to notify our listeners
   // each listener is expected tohave supplied a callback that we use to notify them
@@ -70,11 +69,11 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = forwardRef<HTMLDi
   // }, [height, layoutItemID]);
 
   return (
-    <InnerContainer ref={ref}>
+    <InnerContainer>
       {renderProps(data)}
     </InnerContainer>
   );
-});
+};
 
 export default LayoutItemContent;
 export type { PortfolioLayoutItemContentProps };

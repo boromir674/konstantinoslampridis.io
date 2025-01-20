@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, FC } from "react";
+import React, { useMemo, useEffect, useRef, useState, useCallback, FC } from "react";
 import {
   // WidthProvider,
   Responsive
@@ -8,11 +8,13 @@ import styled from "@emotion/styled";
 
 // Import Hooks
 import useDimsReporter from '../../Hooks/useExposeStatelessDimsReporter';
+import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
+import { useMemoizedResizeSuggestionAlgorithm } from '../../Hooks/useSuggestResize';
+import { useContentDimsAggregators } from '../../Hooks/useContentDimsAggregators';
 
 import PortfolioItemCard from "./PortfolioItem";
 import { withDefaultProps } from "../hoc";
 import useLayoutsState from '../../Hooks/useLayoutsState';
-import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
 import Typography from '../Typography';
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
@@ -232,6 +234,9 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
   // Code for implementing Saving and Loading Layouts from Local Storage
   const [layouts, setLayouts, saveToLS] = useLayoutsState();
+  // hook for delegating onResize Handler logic to
+  const [resizeAlgorithmCallback] = useMemoizedResizeSuggestionAlgorithm();
+
   // EVENT HANDLERS - RESET BUTTON
   /**
    * Set the Layouts Object State to empty object {}.
@@ -267,28 +272,18 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     data.reduce(reducer, {})
   );
 
-  // Helper function to sum content Height of a Portfolio Item
-  const sumItemContentOccupiedHeight = useCallback((itemIndex: string) => {
-    const dimsReporters: DimsReporter[] = contentRegistry.current[itemIndex].map(({ dimsReporter }) => dimsReporter);
-    // DEBUG CODE
-    for (const dimsReporter of dimsReporters) {
-      if (!dimsReporter) {
-        console.warn('DimsReporter is null. Bind the ref to a DOM element.');
-        return 0;
-      }
-      const res = dimsReporter()
-      console.log('DimsReporter:', res);
-    }
-    // get reported dims and sum height values
-    const sumHeights = dimsReporters.reduce((acc, dimsReporter, _index) => {
-      return acc + dimsReporter().height;
-    }, 0);
-    return sumHeights;
-  }, [contentRegistry.current]);
+  // create Callbacks to sum Heights and Widths of Portfolio Item Contents
+  const [sumContentHeight, sumContentWidth] = useContentDimsAggregators(contentRegistry.current,
+    'height', 'width'
+  );
 
   // ON RESIZE EVENT HANDLER
+
+  // Constants
+  const UNIT_LENGTH: number = 50;  // px
+
   // onResize events fire continuously while User's drag-n-drop on the bottom-right corner of a Grid Item
-  const handleItemResize = useCallback((
+  const handleItemResize = (
     layout,
     oldItem,
     newItem,
@@ -299,36 +294,27 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     console.log('HEIGHT-AWARE RESIZE ALGO');
     const index: string = newItem.i.toString();
 
-    // const EXPERIMENTAL_UNIT_LENGTH = 44;  // px
-    const PRODUCTION_UNIT_LENGTH = 50;  // px   
-
-    const UNIT_LENGTH = PRODUCTION_UNIT_LENGTH;  // px
-
-    // NEW ALGORITHM: Content Aware Height Adjustment
-    // assumes each "unit" is 160px
-
-    const occupiedContentsHeight = sumItemContentOccupiedHeight(index)
-    // const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
-    //   67.48;  // hack to account for item render times "header"
-
-    const occupiedUnits = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
-    console.log(`Item ${index} Required Content Height:`, occupiedContentsHeight, 'Units', occupiedUnits);
-    if (!occupiedContentsHeight) {
-      console.warn('Content Height is not available, because refs are not attached to the DOM element');
-    } else {
-      // if grid item height is not enough for inner content heigth
-      const userHeight = newItem.h * UNIT_LENGTH;
-      console.log("User Height: ", userHeight, 'Units', newItem.h);
-      if (userHeight < occupiedContentsHeight) {
-        // adjust newItem.h so that it is >= contentHeight
-        const adjustedHeightValue = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
-        console.log("Prev height: ", newItem.h, "New Height: ", adjustedHeightValue);
-        newItem.h = adjustedHeightValue;
-        placeholder.h = adjustedHeightValue;
+    // Get potential Height Unit Suggestion, with Content-Aware Adjustment
+    const suggestedUnitValues = resizeAlgorithmCallback(
+      newItem,  // information about Resized Item Dim Units; ie 1, 2, 3, 4, 5, 6
+      {
+        // contentHeight: useMemo(() => sumContentHeight(index), [sumContentHeight, index]),
+        contentHeight: sumContentHeight(index),
+        unit_length: UNIT_LENGTH,
+        // contentWidth: .., contentAdjustmentOffsetHeight: 0, // px
       }
+    );
+    // UPDATE: increase suggested in Height Units
+    if (suggestedUnitValues !== undefined && suggestedUnitValues.unitsHeight
+    ) {
+      newItem.h = suggestedUnitValues.unitsHeight;
+      placeholder.h = suggestedUnitValues.unitsHeight;
     }
-  }, [sumItemContentOccupiedHeight, contentRegistry.current]);
+    else {  // DEBUG CODE ELSE
+      console.warn('Content Height is not available, because refs are not attached to the DOM element');
+    }
 
+  };
 
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;

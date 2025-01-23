@@ -71,8 +71,11 @@ type AppPortfolioItemPropsTheme = BottomPartBlockProps['theme'] & {
     fontSize?: string;
   };
   projectDescription: {
+    // Font
     fontFamily: string;
     fontSize: string;
+    // Layout
+    margin: number;
   };
   links: AppProjectLinksPaneProps['theme'];
   releases: ReleasesPaneProps["theme"];
@@ -91,8 +94,9 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme, refs }) => {
     theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
     {/* Project Description. Could be github description or description from CV Pdf */}
     <PortfolioItemProjectDescription
-    ref={refs?.[1] ?? null}   // SELF-MEASURE DIMS
-    theme={theme.projectDescription}>
+      ref={refs?.[1] ?? null}   // SELF-MEASURE DIMS
+      theme={theme.projectDescription}
+    >
       {data.description}
     </PortfolioItemProjectDescription>
     <BottomPartBlock

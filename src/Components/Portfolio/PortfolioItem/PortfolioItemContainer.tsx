@@ -19,18 +19,25 @@ interface PortfolioLayoutItemContentProps {
 const InnerContainer = styled.div`
   // Make Description Text wrap to below line a bit earlier, avoiding word overflow
   width: 95%;
+
+  // make this div occupy the full height of its parent, ensuring any content
+  // inside it (this div) is also stretched to fit the full height
+  height: 100%;
+
   // when mouse is on element make cursor a pointer
   cursor: pointer;
   // interpret all geometry properties to be relevant to the out side block
   position: absolute;
   padding: 10px;
-// TODO SOS make this padding value dynamic
+
+  // TODO SOS make this padding value dynamic
 // SHOULD MATCH the variable in PortfolioItemV3.tsx
 
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
-  height: 100%;
+
+
   // padding-bottom: 20px;
   &:hover {
     transform: scale(1.01);

@@ -8,8 +8,11 @@ import { withDefaultProps } from '../hoc';
 // COMPONENT - Project Description
 interface PortfolioItemProjectDescriptionProps {
   theme: {
+    // Font
     fontFamily: string;
     fontSize: string;
+    // Layout
+    margin: number;
   };
 };
 const PortfolioItemProjectDescriptionP = withDefaultProps({
@@ -17,7 +20,9 @@ const PortfolioItemProjectDescriptionP = withDefaultProps({
 }, withForwardRef(Typography));
 
 const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
-  // margin: 0;
+  // override margin/padding browser defaults (ie if browser has these default value and no CSS Reset is used)
+  margin: ${props => props.theme.margin};
+  padding: 0;
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
   // font-weight: bold;

@@ -12,6 +12,7 @@ interface ResizeContext {
     unit_length: number;
     contentAdjustmentOffsetHeight?: number;  // measured in px
     contentAdjustmentOffsetWidth?: number;  // measured in px
+    width_unit_length?: number;
 };
 // OUTPUT
 /** Represents the object returned by the Algorithm: 'width'/'height' in Units */
@@ -26,41 +27,6 @@ type ResizeItemWithContextAlgoV4<E, C, R> = ((item: E, context: C, ...args: any[
 // local type alias for DRY
 type ResizeItemWithContextAlgorithm = ResizeItemWithContextAlgoV4<Item, ResizeContext, SuggestedItemUnits>;
 
-// const useResizeSuggestionAlgorithm = useCallback<ResizeItemWithContextAlgorithm>(
-//     // Concrete Implementation of Resize Suggestion Algorithm
-//     (item, context) => {
-//         const contentDims = {
-//             height: (context.contentHeight ?? 0) + (context.contentAdjustmentOffsetHeight ?? 0),
-//             width: (context.contentWidth ?? 0) + (context.contentAdjustmentOffsetWidth ?? 0)
-//         };
-//         if (contentDims.height) {
-
-//             // convert Item Height Units to PX
-//             // const userHeightPX = item.unitsHeight * context.unit_length;
-//             const userHeightPX: number = useMemo(() => item.h * context.unit_length, [item.h, context.unit_length]);
-
-//             console.log("User Height: ", userHeightPX, 'Units', item.h);
-
-//             // if User Height PX is "not enough" for Content Height
-//             if (userHeightPX < contentDims.height) {  // compare PX
-
-//                 // measure how many Units are needed to "cover" the Content Height
-//                 // const adjustedUnitsHeight: number = Math.ceil(contentDims.height / context.unit_length);
-//                 const adjustedUnitsHeight: number = useMemo(() => Math.ceil(contentDims.height / context.unit_length), [contentDims.height, context.unit_length]);
-
-//                 return {  // Suggest to adjust the Item's Height Units
-//                     unitsHeight: adjustedUnitsHeight
-//                 }
-//             }
-//         } else {
-//             console.warn('Content Height could not computed!');
-//         }
-//         // we have concluded that Item's Units "are sufficient" to cover the Content Height
-//         // so we suggest "no changes" without a return value
-//     }, [
-//     // Dependencies
-// ]);
-
 const useMemoizedResizeSuggestionAlgorithm: () => [ResizeItemWithContextAlgorithm] = () => {
         // Resize Algorithm with Context - Concrete Implementation
         const algorithCallback: ResizeItemWithContextAlgorithm = (item, context) => {
@@ -73,24 +39,15 @@ const useMemoizedResizeSuggestionAlgorithm: () => [ResizeItemWithContextAlgorith
                 };
                 if (contentDims.height) {
 
-                    // convert Item Height Units to PX
-                    // const userHeightPX = item.unitsHeight * context.unit_length;
-
-                    // const userHeightPX: number = useMemo(() => item.h * context.unit_length, [item.h, context.unit_length]);
-                    
+                    // convert current Item Height Units to PX
                     const userHeightPX: number = item.h * context.unit_length;
-
-                    console.log("User Height: ", userHeightPX, 'Units', item.h);
 
                     // if User Height PX is "not enough" for Content Height
                     if (userHeightPX < contentDims.height) {  // compare PX
 
                         // measure how many Units are needed to "cover" the Content Height
                         // const adjustedUnitsHeight: number = Math.ceil(contentDims.height / context.unit_length);
-
                         const adjustedUnitsHeight: number = Math.ceil(contentDims.height / context.unit_length);
-
-                        // const adjustedUnitsHeight: number = useMemo(() => Math.ceil(contentDims.height / context.unit_length), [contentDims.height, context.unit_length]);
 
                         return {  // Suggest to adjust the Item's Height Units
                             unitsHeight: adjustedUnitsHeight
@@ -99,8 +56,27 @@ const useMemoizedResizeSuggestionAlgorithm: () => [ResizeItemWithContextAlgorith
                 } else {
                     console.warn('Content Height could not computed!');
                 }
-                // we have concluded that Item's Units "are sufficient" to cover the Content Height
-                // so we suggest "no changes" without a return value
+                if (contentDims.width) {
+
+                    const width_unit_length = context.width_unit_length ?? context.unit_length;
+                    // convert current Item Width Units to PX
+                    const userWidthPX: number = item.w * width_unit_length;
+
+                    // if User Width PX is "not enough" for Content Width
+                    if (userWidthPX < contentDims.width) {  // compare PX
+
+                        // measure how many Units are needed to "cover" the Content Width
+                        const adjustedUnitsWidth: number = Math.ceil(contentDims.width / width_unit_length);
+
+                        return {  // Suggest to adjust the Item's Width Units
+                            unitsWidth: adjustedUnitsWidth
+                        }
+                    }
+
+                } else {
+                    console.warn('Content Width could not computed!');
+                }
+                // if "nothing" is returned then we suggest "no changes"
             }
 
             const suggestedItemUnitChanges = resizeSuggestionAlgo(item, context);

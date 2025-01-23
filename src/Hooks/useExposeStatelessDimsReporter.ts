@@ -1,8 +1,26 @@
 /** Hook for exposing DimsReporter stateless Interface instance */
 import React, {useRef, type MutableRefObject } from 'react';
 
-// HOOK
-/** Provides a ref to bind to a DOM element and a function to report its dimensions
+
+/** Returns a ref and a Layout (Dimensions) Reporter of a DOM (bound) element.
+ * 
+ * Provides a ref and a function that when called returns a
+ * {width: number; height: number} object.
+ * 
+ * The ref should be bound by client code to an html DOM element (ie in jsx),
+ * and only then the function "will work" (ie return the dimensions).
+ * 
+ * The function reports the Layout as width/height Integers matching the
+ * "Border Box" of the element.
+ * 
+ * If No CSS reset is applied:
+ *  -  "Border Box" is "Content Box" + Padding + Border
+ *    - ie Layout Height = Content Height + Padding + Border
+ * 
+ * Typically, offsetWidth and offsetHeight are measurements in pixels of the
+ * element's CSS width and height, including any borders, padding, and
+ * vertical scrollbars (if rendered). It does not include the width of
+ * pseudo-elements such as ::before or ::after.
  * 
  * @example
  *     const MyComponent = () => {

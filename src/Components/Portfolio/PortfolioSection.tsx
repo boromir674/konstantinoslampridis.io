@@ -291,26 +291,33 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     event,
     element,
   ) => {
-    console.log('HEIGHT-AWARE RESIZE ALGO');
     const index: string = newItem.i.toString();
 
     // Get potential Height Unit Suggestion, with Content-Aware Adjustment
     const suggestedUnitValues = resizeAlgorithmCallback(
       newItem,  // information about Resized Item Dim Units; ie 1, 2, 3, 4, 5, 6
       {
-        // contentHeight: useMemo(() => sumContentHeight(index), [sumContentHeight, index]),
-        contentHeight: sumContentHeight(index),
+        // fit Units to contentHeight, as sum of heights requested from browser-api
+        contentHeight: contentRegistry.current[index].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0),
+        // contentWidth: Math.max(...contentRegistry.current[index].map(({ dimsReporter }) => dimsReporter().width)),
         unit_length: UNIT_LENGTH,
-        // contentWidth: .., contentAdjustmentOffsetHeight: 0, // px
+        width_unit_length: 97.5,
+        // account for Description Component Margin
+        contentAdjustmentOffsetHeight: theme.item.theme.projectDescription.margin * 2,
+        // contentAdjustmentOffsetWidth: -40, // px
       }
     );
     // UPDATE: increase suggested in Height Units
-    if (suggestedUnitValues !== undefined && suggestedUnitValues.unitsHeight
-    ) {
-      newItem.h = suggestedUnitValues.unitsHeight;
-      placeholder.h = suggestedUnitValues.unitsHeight;
-    }
-    else {  // DEBUG CODE ELSE
+    if (suggestedUnitValues !== undefined) {
+      if (suggestedUnitValues.unitsHeight) {
+        newItem.h = suggestedUnitValues.unitsHeight;
+        placeholder.h = suggestedUnitValues.unitsHeight;
+      }
+      if (suggestedUnitValues.unitsWidth) {
+        newItem.w = suggestedUnitValues.unitsWidth;
+        placeholder.w = suggestedUnitValues.unitsWidth;
+      }
+    } else {  // DEBUG CODE ELSE
       console.warn('Content Height is not available, because refs are not attached to the DOM element');
     }
 

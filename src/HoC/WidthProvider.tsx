@@ -1,6 +1,5 @@
 /** Provides a Grid Layout SSR-compatible Width Provider */
 
-// @flow
 import * as React from "react";
 import PropTypes from "prop-types";
 // import ResizeObserver from "resize-observer-polyfill";
@@ -41,9 +40,6 @@ const serverSizeWidth = 1280;
 
 /*
  * A simple HOC that provides facility for listening to container resizes.
- *
- * The Flow type is pretty janky here. I can't just spread `WPProps` into this returned object - I wish I could - but it triggers
- * a flow bug of some sort that causes it to stop typechecking.
  */
 export default function WidthProvideRGL<Config>(
     ComposedComponent: React.AbstractComponent<Config>

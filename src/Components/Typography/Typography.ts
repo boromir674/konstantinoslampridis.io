@@ -1,4 +1,4 @@
-import React, { FC, CSSProperties } from "react";
+import React, { FC, CSSProperties, forwardRef } from "react";
 import {
   TypographyProps as MuiTypographyProps,
   Variant,
@@ -6,6 +6,7 @@ import {
 
 interface TypographyProps extends MuiTypographyProps {
   style?: CSSProperties;
+  ref: React.Ref<HTMLElement>;
 }
 
 const defaultVariantMapping: Record<Variant, string> = {
@@ -22,7 +23,7 @@ const defaultVariantMapping: Record<Variant, string> = {
   inherit: "p",
 };
 
-const Typography: FC<TypographyProps> = ({
+const Typography: FC<TypographyProps> = forwardRef(({
   variant = "body1",
   component,
   children,
@@ -30,18 +31,17 @@ const Typography: FC<TypographyProps> = ({
   gutterBottom = false,
   style = {},
   ...otherProps
-}) => {
+}, ref) => {
   const combinedStyle = {
     ...style,
     marginBottom: gutterBottom ? "1em" : undefined,
   };
-
   const Component = component || variantMapping[variant] || "span";
   return React.createElement(
     Component,
-    { ...otherProps, style: combinedStyle },
+    { ...otherProps, style: combinedStyle , ref},
     children
   );
-};
+});
 
 export default Typography;

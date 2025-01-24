@@ -5,7 +5,19 @@ const config: StorybookConfig = {
     name: "@storybook/react-webpack5",
     options: {},
   },
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: [
+    // Stories in ../src/stories/ get a prefix of "PoC/"
+    {
+      directory: '../src/stories',
+      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
+      titlePrefix: 'PoC',
+    },
+    // Production Stories have no prefix
+    {
+      directory: '../src/Components',
+      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    }
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",

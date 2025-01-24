@@ -42,6 +42,8 @@ const renderPropsOverride: RenderProps = (data, theme) => {
 }
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
+  // Other Props, most likely with dedicated fallback values
+  ...defaultProps,
   // other properties...
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   rowHeight: 41,
@@ -329,10 +331,9 @@ const argsLight: ResponsiveLocalStorageLayoutProps = {
       }
     },
   },
-  // Other Props, most likely with dedicated fallback values
-  ...defaultProps,
+
   // renderProps: renderPropsOverride,
-  element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
+  // element_to_render: defaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>,
 };
 
 // STORY: Portflolio Section as a Responsive Grid with a 4 Layout Items, and Light Theme

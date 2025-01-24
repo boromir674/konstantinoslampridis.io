@@ -672,24 +672,26 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(10px,10px);"
           >
             <div
-              class="css-8p9vxz"
+              class="css-8epc0j"
             >
               <h2
-                class="css-1eepvds"
+                class="css-vhglzv"
               >
                 Python Package Generator
               </h2>
               <p
-                class="css-rupaw9"
+                class="css-17u5w0h"
               >
                 A CLI tool to generate a Python package with a single command.
               </p>
               <div
-                class="css-1o0lbyo"
+                class="css-1up4hmp"
               >
+                  
                 <div
                   class="css-18dgpf5"
                 >
+                    
                   <div
                     class="css-tqife0"
                   >
@@ -788,6 +790,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 <div
                   class="css-1y544bo"
                 >
+                    
                   <span
                     class="css-62qrhu"
                   >
@@ -912,24 +915,26 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 449px; position: absolute; transform: translate(433px,10px);"
           >
             <div
-              class="css-8p9vxz"
+              class="css-8epc0j"
             >
               <h2
-                class="css-1eepvds"
+                class="css-vhglzv"
               >
                 Neural Style Transfer
               </h2>
               <p
-                class="css-rupaw9"
+                class="css-17u5w0h"
               >
                 Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
               </p>
               <div
-                class="css-1o0lbyo"
+                class="css-1up4hmp"
               >
+                  
                 <div
                   class="css-18dgpf5"
                 >
+                    
                   <div
                     class="css-tqife0"
                   >
@@ -1003,6 +1008,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 <div
                   class="css-1y544bo"
                 >
+                    
                   <span
                     class="css-62qrhu"
                   >
@@ -1127,24 +1133,26 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 500px; position: absolute; transform: translate(10px,418px);"
           >
             <div
-              class="css-8p9vxz"
+              class="css-8epc0j"
             >
               <h2
-                class="css-1eepvds"
+                class="css-vhglzv"
               >
                 Topic Modeling Toolkit
               </h2>
               <p
-                class="css-rupaw9"
+                class="css-17u5w0h"
               >
                 A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
               </p>
               <div
-                class="css-1o0lbyo"
+                class="css-1up4hmp"
               >
+                  
                 <div
                   class="css-18dgpf5"
                 >
+                    
                   <div
                     class="css-tqife0"
                   >
@@ -1191,6 +1199,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 <div
                   class="css-1y544bo"
                 >
+                    
                   <span
                     class="css-62qrhu"
                   >
@@ -1315,24 +1324,26 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(433px,469px);"
           >
             <div
-              class="css-8p9vxz"
+              class="css-8epc0j"
             >
               <h2
-                class="css-1eepvds"
+                class="css-vhglzv"
               >
                 Project with 2 Releases
               </h2>
               <p
-                class="css-rupaw9"
+                class="css-17u5w0h"
               >
                 A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
               </p>
               <div
-                class="css-1o0lbyo"
+                class="css-1up4hmp"
               >
+                  
                 <div
                   class="css-18dgpf5"
                 >
+                    
                   <div
                     class="css-tqife0"
                   >
@@ -1406,6 +1417,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 <div
                   class="css-1y544bo"
                 >
+                    
                   <span
                     class="css-62qrhu"
                   >

@@ -1,33 +1,38 @@
-import React, { FC, type ReactNode, useRef, useState, useCallback, useContext, useMemo } from "react";
+import React, { FC, forwardRef, type ReactNode, useRef, useState, useCallback, useContext, useMemo, useEffect } from "react";
 
-// Import the "Responsive" version of the GridLayout to support "Breakpoints" and Layouts
-import { Responsive, WidthProvider } from "react-grid-layout";
-// IE
-// layouts={layouts}
-//breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-//cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+import { Responsive, WidthProvider, ResponsiveProps } from "react-grid-layout";
 import styled from "@emotion/styled";
 
-// import App Styles Symbols
-import { lightTheme, darkTheme, type ComputedTheme } from '../../theme';
+// Import Interfaces and Types
+import PortfolioItemInterface from "../PortfolioItemInterface";
 
-import PortfolioItemInterface from "../../PortfolioItemInterface";
-import useLayoutsState from '../../Hooks/useLayoutsState'
-import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
-import ZIndexContext from '../../ZIndexContext';
+// import App Styles Symbols
+import { lightTheme, darkTheme, type ComputedTheme } from '../theme';
+// Import Hooks
+import useDimsReporter from '../Hooks/useExposeStatelessDimsReporter';
+import useLayoutsState from '../Hooks/useLayoutsState'
+import useGridLayoutHandlers from '../Hooks/useGridLayoutHandlers';
+
+// Import Context
+import ZIndexContext from '../ZIndexContext';
+
+// Import Content Component and Props Type
+import AppPortfolioItem, { AppPortfolioItemProps } from "../Components/Portfolio/AppPortfolioItem";
+
 
 // keep same public interface as PortfolioSection
-import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from './PortfolioSection'
+import { defaultProps as portfolioSectionDefaultProps, ResponsiveLocalStorageLayoutProps } from '../Components/Portfolio/PortfolioSection';
 
-import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
+/// Local Type Checking
+// Dimensions Reporter Interface
+type DimsReporter = () => { width: number; height: number };
 
-// import "../../css/react-grid-layout.css";
-// import "../../css/react-resizable.css";
+
 ////// CONSTANT DATA //////
 const DATA: PortfolioItemInterface[] = [
     // PROJECT 1
     {
-        title: "Python Package Generator",
+        title: "ID: 0 " + "Python Package Generator",
         development_period: "2020-2021",
         status: "Mature",
         description:
@@ -72,7 +77,7 @@ const DATA: PortfolioItemInterface[] = [
     },
     // PROJECT 2
     {
-        title: "Neural Style Transfer",
+        title: "ID: 1 " + "Neural Style Transfer",
         development_period: "2020-2021",
         status: "Stable",
         description:
@@ -121,7 +126,7 @@ const DATA: PortfolioItemInterface[] = [
     },
     // PROJECT 3
     {
-        title: "Topic Modeling Toolkit",
+        title: "ID: 2 " + "Topic Modeling Toolkit",
         development_period: "2018-2019",
         status: "Mature",
         description:
@@ -166,7 +171,7 @@ const DATA: PortfolioItemInterface[] = [
     },
     // Project with 2 Releases
     {
-        title: "Project with 2 Releases",
+        title: "ID: 3 " + "Project with 2 Releases",
         development_period: "2018-2019",
         status: "Mature",
         description:
@@ -210,7 +215,7 @@ const DATA: PortfolioItemInterface[] = [
 ];
 
 // Single Grid Item Interface
-import { LayoutInterface } from './LayoutInterface';
+import { LayoutInterface } from '../Components/Portfolio/LayoutInterface';
 
 type LayoutsObject = {
     //     lg: LayoutArray;
@@ -254,7 +259,7 @@ const LayoutItem = styled.div<LayoutItemProps>`
 `;
 
 // RnD / Support Component to show number of Renders per Grid Item
-const GridItemContents = (props: { backgroundColor: string, id: string, children?: React.ReactNode }) => {
+const CountRenderTimes = forwardRef((props: { backgroundColor: string, children?: React.ReactNode }, ref) => {
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
@@ -263,97 +268,136 @@ const GridItemContents = (props: { backgroundColor: string, id: string, children
     // Increment Render Counter
     logComponentRerender()
 
-    return <div style={{ backgroundColor: props.backgroundColor }}>
-        <h2>ID {props.id}, Render Times: {rendersNo.current}</h2>
+    return <div ref={ref as React.RefObject<HTMLDivElement>}
+        style={{ backgroundColor: props.backgroundColor }}>
+        <h2>Render Times: {rendersNo.current}</h2>
     </div>
-}
+});
 
 
-// DESIGNER'S ENTRYPOINT: interface is FC<{data, renderProps}>
-// App Default is FC PortfolioItemCard, which renders 2 STYLED DIVs and uses prop
-// render callback(data, theme) to create/render the inner DIV's elements
-
-// DESIGNER'S ENTRYPOINT: Grid Item Styles
-// To Change App Design (ie scale Grid Item more on-hover) modify
-// Styled DIVs declared in PortfolioItemCard module
-
-const AppPortfolioItemWithDimsReporter = (props: PortfolioLayoutItemContentProps) => {
-    
-    // const [ ref, reportDimensions ] = useStatelessDimensions();
-
-    const DefaultPortfolioContentsContainer: FC<PortfolioLayoutItemContentProps> = portfolioSectionDefaultProps.element_to_render as FC<PortfolioLayoutItemContentProps>;
-    return (
-        <DefaultPortfolioContentsContainer
-        // Give the Portfolio Container Div the ability to measure its dimensions
-        // ref={ref}
-        {...props} />
-    );
-};
+// PRODUCTION APP COMPONENT that Renders 1 DIV and calls renderProps to render its children
+const DefaultPortfolioContentsContainer = portfolioSectionDefaultProps.element_to_render as typeof portfolioSectionDefaultProps.element_to_render
 
 
-// COMPONENT that Renders 1 DIVS and call renderProps to render its children
-const ResponsiveLayoutItemContent: FC<{
-    data: PortfolioItemInterface;
-    renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
-}
-> = portfolioSectionDefaultProps.element_to_render as FC;
-
-// DESIGNER'S ENTRYPOINT: (data, theme) => React.ReactNode Interface
+// DESIGNER'S INTERFACE: renderProps: (data, theme) => React.ReactNode Interface
 // To control what/how elements (ie content and/or styles) are rendered inside each
 // portfolioSectionDefaultProps.element_to_render Component (2 DIVs), modify
 // the portfolioSectionDefaultProps.renderProps or use different callback
-const RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK = portfolioSectionDefaultProps.renderProps as ResponsiveLocalStorageLayoutProps["renderProps"];
-type RenderProps = typeof RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK;
-const renderItemElements: RenderProps = (data, theme) => {
-    // GIRD ITEM ELEMENTS (inside 2 DIVs)
-    console.log("Running Render Item Elements");
+type RenderProps = ResponsiveLocalStorageLayoutProps["renderProps"];
+
+const AppPortfolioItemWrapper = forwardRef((props: AppPortfolioItemProps, ref) => {
     return <>
         {/* Component to Count Number of Render Times */}
-        <GridItemContents backgroundColor={theme.releases.releaseButtonTheme.backgroundColor}></GridItemContents>
-        {/* Production Component Render */}
-        {/* Renders Title, Description, Links, and Releases */}
-        {RENDER_ITEM_CONTENTS_DEFAULT_CALLBACK(data, theme)}
+        <CountRenderTimes ref={ref} backgroundColor={props.theme.releases.releaseButtonTheme.backgroundColor}></CountRenderTimes>
+        {/* Production Portfolio Items Contents */}
+        <AppPortfolioItem data={props.data} theme={props.theme} refs={props.refs} />
     </>
-}
+});
 
-// Both <ResponsiveReactGridLayout> and <ReactGridLayout> take width to calculate positions on drag events. In simple cases a HOC WidthProvider can be used to automatically determine width upon initialization and window resize events.
-const ResponsiveGridLayout = WidthProvider(Responsive);
-type GridRealDataWithLSAndMemoizedItemsProps = {
-    itemOutline: string;
-    data: PortfolioItemInterface[];
+
+// STORY SPECIFIC CODE
+const renderItemElements = (data, theme, refs, ref) => <AppPortfolioItemWrapper ref={ref} data={data} theme={theme} refs={refs} />;
+
+type ContentRegistry = Record<string, {
+    ref: React.RefObject<HTMLElement | null>;
+    dimsReporter: DimsReporter;
+}[]>;
+
+type Reducer<S, T> = (acc: S, _: T, index: number) => S;
+
+// COMPONENT: GRID LAYOUT
+const ResponsiveGridLayout: React.ComponentClass<ResponsiveProps> = WidthProvider<ResponsiveProps>(Responsive) as React.ComponentClass<ResponsiveProps>;
+
+
+interface DynamicMultiRefBindingToRenderedGridProps {
     theme: ResponsiveLocalStorageLayoutProps["theme"];
     renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
-}
-const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (props) => {
+};
+// MAIN COMPONENT
+const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedGridProps> = (props) => {
+  // TODO allow passing from props
+  const descriptionMargin: number = 16;
+
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
         rendersNo.current = rendersNo.current + 1
     }, [])
     logComponentRerender()
-    // Helper Code for computing Common svg styles
-    const commonSVGStyles = useMemo(() => {
-        return {
-            width: "14px",
-            height: "14px",
-            fill: darkTheme.portfolio.item.releases.item.color
-        }
-    }, []);
 
     // Code for implementing Saving and Loading Layouts from Local Storage
     const [layouts, setLayouts, saveToLS] = useLayoutsState();
-    // EVENT HANDLERS - RESET BUTTON
-    const handleClickResetLayoutButton = useCallback(() => { setLayouts({}) }, [setLayouts]);
-    // EVENT HANDLERS - GRID LAYOUT
+
+    const reducer: Reducer<ContentRegistry, PortfolioItemInterface> = (acc, _, index) => {
+        // populate with array of 3 objects
+        acc[index.toString()] = Array.from({ length: 3 }, () => {
+            const [ref, dimsReporter] = useDimsReporter();
+            return {
+                ref,
+                dimsReporter,
+            }
+        });
+        return acc;
+    }
+    // FACILITY with ref instances and their Dims Reporter
+    const refs = useRef<ContentRegistry>(
+        DATA.reduce(reducer, {})
+    );
+
+    // Story-specific ref for reporting dims of CounterRenderTimes Div
+    const [counterRenderRef, counterRenderDimsReporter] = useDimsReporter();
+
+    const handleClick = useCallback(() => {
+        console.log('Records of Refs:', refs.current);
+        // REF 0
+        // console.log('Ref 0: ', refs.current['0'][0]['ref'].current);
+        // console.log('Ref 0: ', refs.current['0'][1]['ref'].current);
+        // console.log('Ref 0: ', refs.current['0'][2]['ref'].current);
+
+        console.log(`Item ${0} Render Counter `, counterRenderDimsReporter().height);
+        console.log(`Item ${0} Title Height: `, refs.current['0'][0]['dimsReporter']().height);
+        console.log(`Item ${0} Description Height: `, refs.current['0'][1]['dimsReporter']().height);
+        console.log(`Item ${0} Bottom Div Height: `, refs.current['0'][2]['dimsReporter']().height);
+        console.log(`Item ${0} Total Height: `, descriptionMargin * 2 + counterRenderDimsReporter().height + refs.current['0'].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0));
+        console.log(`Item ${0} Total Height: `, descriptionMargin * 2 + counterRenderDimsReporter().height + sumItemContentOccupiedHeight('0'));
+    }, []);
+
+    // EVENT HANDLERS - GRID LAYOUT CHANGE
     const [handleLayoutChange] = useGridLayoutHandlers({
+        // todo: try running the content-aware algo on all item changed to adjust to content on this event too
         setLayouts,
         saveToLS: useCallback((allLayouts: LayoutsObject) => {
             saveToLS("layouts", allLayouts);
         }, [saveToLS]),
     });
 
-    // Global Resize Handler
-    const handleItemResize = (
+    const sumItemContentOccupiedHeight = useCallback((itemIndex: string) => {
+        const dimsReporters: DimsReporter[] = refs.current[itemIndex].map(({ dimsReporter }) => dimsReporter);
+        // DEBUG CODE
+        for (const dimsReporter of dimsReporters) {
+            if (!dimsReporter) {
+                console.warn('DimsReporter is null. Bind the ref to a DOM element.');
+                return 0;
+            }
+            const res = dimsReporter()
+        }
+        // get reported dims and sum height values
+        const sumHeights = dimsReporters.reduce((acc, dimsReporter, _index) => {
+            return acc + dimsReporter().height;
+        }, 0);
+        return sumHeights;
+    }, [refs.current]);
+
+    // GLOBAL RESIZE HANDLER - NEW Version
+    const GRID_LAYOUT_WIDTH = 1000;   // 1000px
+
+    const [unitLength, setUnitLength] = useState(0);
+    const handleWidthChange = (containerWidth: number, margin: any, cols: number) => {
+        const newUnitLength = containerWidth / cols;
+        setUnitLength(newUnitLength);
+    };
+
+    const handleItemResizeV2 = useCallback((
         layout,
         oldItem,
         newItem,
@@ -361,55 +405,71 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
         event,
         element,
     ) => {
+        console.log(`HEIGHT-AWARE RESIZE ALGO - Item ${newItem.i}`);
+        const index: string = newItem.i.toString();
 
-        console.log('RESIZE ALGO SIMPLE');
-        if (newItem.w <= 2) {  // if user resized item with "very small" width
-            const heightPlusTwo = newItem.h + 2;
-            // modifying `layoutItem` to enforce constraints
-            newItem.h = heightPlusTwo;
-            placeholder.h = heightPlusTwo;
-        } else if (newItem.w <= 3) {  // if user resized item resulting in "small" width
-            const heightPlusOne = newItem.h + 1;
-            // modifying `layoutItem` to enforce constraints
-            newItem.h = heightPlusOne;
-            placeholder.h = heightPlusOne;
+        // NEW ALGORITHM: Content Aware Height Adjustment
+        // assumes each "unit" is 160px
+
+        const UNIT_LENGTH = unitLength;  // 160px
+
+        const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
+            descriptionMargin * 2 + 
+            counterRenderDimsReporter().height;  // account for story-specific design, where the CounterRender Div is included in Item Contents
+
+        const occupiedUnits = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
+        console.log(`Measured Content Height:`, occupiedContentsHeight, 'Estimated Units', occupiedUnits);
+        if (!occupiedContentsHeight) {
+            console.warn('Content Height is not available, because refs are not attached to the DOM element');
+        } else {
+            // if grid item height is not enough for inner content heigth
+            const userHeight = newItem.h * UNIT_LENGTH;
+            console.log("Estimated Placeholder Height: ", userHeight, 'Reported Units', newItem.h);
+            if (userHeight < occupiedContentsHeight) {
+                // adjust newItem.h so that it is >= contentHeight
+                const adjustedHeightValue = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
+                console.log("Prev height: ", newItem.h, "New Height: ", adjustedHeightValue);
+                newItem.h = adjustedHeightValue;
+                placeholder.h = adjustedHeightValue;
+            }
         }
+    }, [sumItemContentOccupiedHeight, refs.current, unitLength]);
+
+    const handleResetLayout = () => {
+        setLayouts({});
     };
 
     return <>
         {/* SUPPORT ELEMENTS */}
+        <button onClick={handleClick}>Click to Log All Refs</button>
+
         <p>GRID CONTAINER Render Times: {rendersNo.current}</p>
         {/* SHOW Layouts as JSON */}
-        <p>Layouts: {JSON.stringify(layouts)}</p>
+        {/* <p>Layouts: {JSON.stringify(layouts)}</p> */}
         {/* RESET LAYOUT BUTTON */}
-        <button onClick={handleClickResetLayoutButton}>Reset Layout</button>
-        {/* GRID ELEMENT */}
+        <button onClick={handleResetLayout}>Reset Layout</button>
+        {/* GRID ELEMENT with automatic width derivation on client-side */}
         <ResponsiveGridLayout
+            onWidthChange={handleWidthChange}
             layouts={layouts}
-            // Save to LS and set State when Layout-Change Events happen:
-            //  - after a drag-n-drop action by the user
-            //  - after a resize action on an Item (after mouse is released from bottom-right corner) by the user
-            //  - after user clicks on the 'Reset Layout' (aka Default Layout) button (after resetLayout)
+            // margin={[0, 0]}
             onLayoutChange={handleLayoutChange}
-            onResize={handleItemResize}
-            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            onResize={handleItemResizeV2}
+            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         >
             {DATA.map((item, index) => {
                 // STATE INITIALIZATION PER GRID ITEM
                 const [zIndex, setZIndex] = useState(0);
 
                 // MEMOIZATION OF GRID ITEMS
-                // MEMOIZE GRID CHILDREN !!!
-                // works for moving and resizing but not when opening modal dialog
-                // modal dialog re-renders all Grid Items, due to to the State being aan array
                 const child = React.useMemo(() => {
                     console.log("Rendering Grid Item: ", index);
                     return (
                         <LayoutItem
                             style={{
                                 outline: props.itemOutline,
-                                // allows increasing top-level grid item height, to allow children pop-ups to be visible
-                                zIndex: zIndex,  // zIndex probably requires to extract this into a separate FC Component, skip for now
+                                zIndex: zIndex,
                             }}
                             key={index}
                             data-grid={{
@@ -422,15 +482,19 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
                             <ZIndexContext.Provider value={{
                                 setZIndex: setZIndex,
                             }}>
-                                <ResponsiveLayoutItemContent
-                                    stringID={index.toString()}
+                                <DefaultPortfolioContentsContainer
                                     data={item}
-                                    // Renders Elements of Grid Item, given data and theme
-                                    // renderItem={(d: PortfolioItemInterface) => portfolioSectionDefaultProps.renderProps(d, props.theme.item.theme)}
-                                    renderProps={(d: PortfolioItemInterface) => props.renderProps(d, props.theme.item.theme)}
+                                    renderProps={(d: PortfolioItemInterface) => {
+
+                                        return props.renderProps(
+                                            d,
+                                            {...props.theme.item.theme, projectDescription: {...props.theme.item.theme.projectDescription, margin: descriptionMargin}},
+                                            refs.current[index.toString()].map(({ ref }) => ref as React.RefObject<HTMLElement>),
+                                            counterRenderRef,
+                                        )
+                                    }}
                                 >
-                                    {/* ID {index}, zIndex: {zIndex} */}
-                                </ResponsiveLayoutItemContent>
+                                </DefaultPortfolioContentsContainer>
                             </ZIndexContext.Provider>
                         </LayoutItem>
                     )
@@ -439,12 +503,13 @@ const GridWithDistributedState: FC<GridRealDataWithLSAndMemoizedItemsProps> = (p
             })}
         </ResponsiveGridLayout>
     </>;
+
 }
 
-
+// STORY Configuration
 export default {
-    component: GridWithDistributedState,
-    title: "Grid/With Distributed State and Memoized Items",
+    component: DynamicMultiRefBindingToRenderedGrid,
+    title: 'React Grid Layout/DynamicMultiRefBindingToRenderedGrid',
     tags: ["autodocs"],
 };
 
@@ -522,16 +587,11 @@ const hookAdapterFunction = (theme: ComputedTheme) => {
         },
     };
 };
-
 type RawColorTheme = typeof lightTheme | typeof darkTheme;
-
-// Adjust Theme to App Theme
-// compute maximum number of Releases contained in a single portfolio item
 const maxNumberOfReleasesPerPortfolioItems = () => DATA.reduce(
     (acc, { release = [] }) => Math.max(acc, release.length),
     0
 );
-// compute maximum number of links contained in a single portfolio item
 const maxNumberOfLinksPerPortfolioItems = () => DATA.reduce(
     (acc, { resource_links = [] }) => Math.max(acc, resource_links.length),
     0
@@ -575,19 +635,17 @@ const computeTheme = (theme: RawColorTheme) => {
 const lightAppTheme = computeTheme(lightTheme);
 const lightThemeObj = lightAppTheme.verticalMainPane.portfolio;
 
-const SimpleArgs: GridRealDataWithLSAndMemoizedItemsProps = {
-    renderProps: renderItemElements,
-    data: DATA,
-    itemOutline: "1px solid black",
-    theme: {
-        ...lightThemeObj,
-        item: {
-            ...lightThemeObj.item,
-            outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
+
+// STORY that Binds Multiple Refs to Dynamically generated HTML Elements, using the 'static' syntax
+export const DemonstratesIntegrationWithResponsiveGridLayout: {args : DynamicMultiRefBindingToRenderedGridProps} = {
+    args: {
+        renderProps: renderItemElements,
+        theme: {
+            ...lightThemeObj,
+            item: {
+                ...lightThemeObj.item,
+                outline: `${lightThemeObj.item.outline.width} solid ${lightThemeObj.item.outline.color}`
+            },
         },
     },
-}
-
-export const MinimumNumberOfItemReRenders = {
-    args: SimpleArgs,
-}
+};

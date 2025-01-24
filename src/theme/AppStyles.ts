@@ -156,7 +156,9 @@ interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitle
   fontSize: string;
 }
 
+
 // EXPORTED: INTERFACE of Merged "Color + Common" Styles
+// WHEN changes happen in CommonTheme or Theme, this interface should be checked if it needs to be updated
 interface ComputedTheme extends Theme {
   navigationBar: ComputedNavigationBarTheme;
   //// ALL PERSONAL INFORMATION STYLES
@@ -265,6 +267,9 @@ interface ComputedTheme extends Theme {
     };
     // Common styles per Portfolio Item
     item: {
+      // Minimum "gap" between Left/Right Links/Releases Panes that should be preserved, when item is shrinked (ie on resize via user's drag-n-drop of botton right handle) and releases are pushed to the left (inside the Grid Item)
+      minGapBetweenPanes: string;
+      // PROJECT TITLE
       projectTitle: {
         fontFamily: string;
         fontSize: string;
@@ -272,6 +277,9 @@ interface ComputedTheme extends Theme {
       projectDescription: {
         fontFamily: string;
         fontSize: string;
+        // top and bottom margin in pixels, for Description html tag
+        margin: number;
+
       };
       outline: {
         color: string;

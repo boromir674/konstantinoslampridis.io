@@ -2,6 +2,9 @@
 * @jest-environment jsdom
 */
 
+// NOTE: The default environment in Jest is a Node.js environment.
+// Since we are building a web app (browser client) we use a browser-like environment through jsdom instead.
+
 import React from "react";
 
 // Required to mock the graphql query

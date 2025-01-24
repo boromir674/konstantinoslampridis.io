@@ -156,6 +156,7 @@ interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitle
   fontSize: string;
 }
 
+
 // EXPORTED: INTERFACE of Merged "Color + Common" Styles
 // WHEN changes happen in CommonTheme or Theme, this interface should be checked if it needs to be updated
 interface ComputedTheme extends Theme {
@@ -276,6 +277,9 @@ interface ComputedTheme extends Theme {
       projectDescription: {
         fontFamily: string;
         fontSize: string;
+        // top and bottom margin in pixels, for Description html tag
+        margin: number;
+
       };
       outline: {
         color: string;

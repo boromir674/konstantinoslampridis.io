@@ -11,7 +11,7 @@ import PortfolioItemInterface, {
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
 import PortfolioItemProjectTitle from './PortfolioItemProjectTitle';
-import PortfolioItemProjectDescription from './PortfolioItemDescription';
+import PortfolioItemProjectDescription, { type PortfolioItemProjectDescriptionProps } from './PortfolioItemDescription';
 
 // COMPONENT rendering a DIV Designed to host the Left and Right Panes
 interface BottomPartBlockProps { theme: { minGapBetweenPanes: string }, ref: React.RefObject<HTMLDivElement> };
@@ -70,13 +70,7 @@ type AppPortfolioItemPropsTheme = BottomPartBlockProps['theme'] & {
     fontFamily: string;
     fontSize?: string;
   };
-  projectDescription: {
-    // Font
-    fontFamily: string;
-    fontSize: string;
-    // Layout
-    margin: number;
-  };
+  projectDescription: PortfolioItemProjectDescriptionProps["theme"];
   links: AppProjectLinksPaneProps['theme'];
   releases: ReleasesPaneProps["theme"];
 };

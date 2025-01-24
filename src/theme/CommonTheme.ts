@@ -116,6 +116,8 @@ const commonStyling = {
             projectDescription: {
                 fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-large-font-family-name"],
                 fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
+                // top and bottom margin in pixels, for Description <p> tag
+                margin: 16,
             },
             // OUTER-MOST OUTLINE (ie lines surrouding the box) 
             outline: {

@@ -11,7 +11,8 @@ interface PortfolioItemProjectDescriptionProps {
     // Font
     fontFamily: string;
     fontSize: string;
-    // Layout
+    //// Layout
+    /** Top and Bottom Margin, measured in pixels, for the rendered html tag */
     margin: number;
   };
 };
@@ -21,11 +22,16 @@ const PortfolioItemProjectDescriptionP = withDefaultProps({
 
 const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
   // override margin/padding browser defaults (ie if browser has these default value and no CSS Reset is used)
-  margin: ${props => props.theme.margin};
+  margin-top: ${props => props.theme.margin}px;
+  margin-bottom: ${props => props.theme.margin}px;
+
   padding: 0;
+
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
   // font-weight: bold;
 `;
 
 export default PortfolioItemProjectDescription;
+export type { PortfolioItemProjectDescriptionProps };
+

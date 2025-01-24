@@ -111,13 +111,16 @@ coverage
 # My Ignores
 ############################
 
-public
-public-container
-src/gatsby-types.d.ts
+public/
+public-container/
 public-auto/
+
+# ignore Gatsby auto-generated typescript types
+src/gatsby-types.d.ts
+
 wip/
 snippets/
-stories/
+
 .env
 temp/
 sitemap.xml
@@ -127,3 +130,4 @@ e2e/cypress/e2e/1-getting-started/
 e2e/cypress/e2e/2-advanced-examples
 movie.mp4
 __tests__/*.wip
+package-lock.json

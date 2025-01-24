@@ -1,6 +1,6 @@
 import React, { FC, forwardRef, type ReactNode, useRef, useState, useCallback, useContext, useMemo, useEffect } from "react";
 
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Responsive, WidthProvider, ResponsiveProps } from "react-grid-layout";
 import styled from "@emotion/styled";
 
 // Import Interfaces and Types
@@ -306,7 +306,7 @@ type ContentRegistry = Record<string, {
 type Reducer<S, T> = (acc: S, _: T, index: number) => S;
 
 // COMPONENT: GRID LAYOUT
-const ResponsiveGridLayout = WidthProvider(Responsive);
+const ResponsiveGridLayout: React.ComponentClass<ResponsiveProps> = WidthProvider<ResponsiveProps>(Responsive) as React.ComponentClass<ResponsiveProps>;
 
 
 interface DynamicMultiRefBindingToRenderedGridProps {
@@ -315,6 +315,9 @@ interface DynamicMultiRefBindingToRenderedGridProps {
 };
 // MAIN COMPONENT
 const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedGridProps> = (props) => {
+  // TODO allow passing from props
+  const descriptionMargin: number = 16;
+
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)
     const logComponentRerender = useCallback(() => {
@@ -347,9 +350,16 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
     const handleClick = useCallback(() => {
         console.log('Records of Refs:', refs.current);
         // REF 0
-        console.log('Ref 0: ', refs.current['0'][0]['ref'].current);
-        console.log('Ref 0: ', refs.current['0'][1]['ref'].current);
-        console.log('Ref 0: ', refs.current['0'][2]['ref'].current);
+        // console.log('Ref 0: ', refs.current['0'][0]['ref'].current);
+        // console.log('Ref 0: ', refs.current['0'][1]['ref'].current);
+        // console.log('Ref 0: ', refs.current['0'][2]['ref'].current);
+
+        console.log(`Item ${0} Render Counter `, counterRenderDimsReporter().height);
+        console.log(`Item ${0} Title Height: `, refs.current['0'][0]['dimsReporter']().height);
+        console.log(`Item ${0} Description Height: `, refs.current['0'][1]['dimsReporter']().height);
+        console.log(`Item ${0} Bottom Div Height: `, refs.current['0'][2]['dimsReporter']().height);
+        console.log(`Item ${0} Total Height: `, descriptionMargin * 2 + counterRenderDimsReporter().height + refs.current['0'].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0));
+        console.log(`Item ${0} Total Height: `, descriptionMargin * 2 + counterRenderDimsReporter().height + sumItemContentOccupiedHeight('0'));
     }, []);
 
     // EVENT HANDLERS - GRID LAYOUT CHANGE
@@ -370,7 +380,6 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
                 return 0;
             }
             const res = dimsReporter()
-            console.log('DimsReporter:', res);
         }
         // get reported dims and sum height values
         const sumHeights = dimsReporters.reduce((acc, dimsReporter, _index) => {
@@ -380,6 +389,13 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
     }, [refs.current]);
 
     // GLOBAL RESIZE HANDLER - NEW Version
+    const GRID_LAYOUT_WIDTH = 1000;   // 1000px
+
+    const [unitLength, setUnitLength] = useState(0);
+    const handleWidthChange = (containerWidth: number, margin: any, cols: number) => {
+        const newUnitLength = containerWidth / cols;
+        setUnitLength(newUnitLength);
+    };
 
     const handleItemResizeV2 = useCallback((
         layout,
@@ -389,25 +405,26 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         event,
         element,
     ) => {
-        console.log('HEIGHT-AWARE RESIZE ALGO');
+        console.log(`HEIGHT-AWARE RESIZE ALGO - Item ${newItem.i}`);
         const index: string = newItem.i.toString();
 
         // NEW ALGORITHM: Content Aware Height Adjustment
         // assumes each "unit" is 160px
 
-        const UNIT_LENGTH = 160;  // 160px
+        const UNIT_LENGTH = unitLength;  // 160px
 
         const occupiedContentsHeight = sumItemContentOccupiedHeight(index) +
+            descriptionMargin * 2 + 
             counterRenderDimsReporter().height;  // account for story-specific design, where the CounterRender Div is included in Item Contents
 
         const occupiedUnits = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
-        console.log(`Item ${index} Required Content Height:`, occupiedContentsHeight, 'Units', occupiedUnits);
+        console.log(`Measured Content Height:`, occupiedContentsHeight, 'Estimated Units', occupiedUnits);
         if (!occupiedContentsHeight) {
             console.warn('Content Height is not available, because refs are not attached to the DOM element');
         } else {
             // if grid item height is not enough for inner content heigth
             const userHeight = newItem.h * UNIT_LENGTH;
-            console.log("User Height: ", userHeight, 'Units', newItem.h);
+            console.log("Estimated Placeholder Height: ", userHeight, 'Reported Units', newItem.h);
             if (userHeight < occupiedContentsHeight) {
                 // adjust newItem.h so that it is >= contentHeight
                 const adjustedHeightValue = Math.ceil(occupiedContentsHeight / UNIT_LENGTH);
@@ -416,7 +433,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
                 placeholder.h = adjustedHeightValue;
             }
         }
-    }, [sumItemContentOccupiedHeight, refs.current]);
+    }, [sumItemContentOccupiedHeight, refs.current, unitLength]);
 
     const handleResetLayout = () => {
         setLayouts({});
@@ -431,12 +448,15 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
         {/* <p>Layouts: {JSON.stringify(layouts)}</p> */}
         {/* RESET LAYOUT BUTTON */}
         <button onClick={handleResetLayout}>Reset Layout</button>
-        {/* GRID ELEMENT */}
+        {/* GRID ELEMENT with automatic width derivation on client-side */}
         <ResponsiveGridLayout
+            onWidthChange={handleWidthChange}
             layouts={layouts}
+            // margin={[0, 0]}
             onLayoutChange={handleLayoutChange}
             onResize={handleItemResizeV2}
-            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }} breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         >
             {DATA.map((item, index) => {
                 // STATE INITIALIZATION PER GRID ITEM
@@ -468,7 +488,7 @@ const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedG
 
                                         return props.renderProps(
                                             d,
-                                            props.theme.item.theme,
+                                            {...props.theme.item.theme, projectDescription: {...props.theme.item.theme.projectDescription, margin: descriptionMargin}},
                                             refs.current[index.toString()].map(({ ref }) => ref as React.RefObject<HTMLElement>),
                                             counterRenderRef,
                                         )

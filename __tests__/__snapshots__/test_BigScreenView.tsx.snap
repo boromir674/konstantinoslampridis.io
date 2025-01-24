@@ -672,7 +672,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(10px,10px);"
           >
             <div
-              class="css-1cbhhcw"
+              class="css-8epc0j"
             >
               <h2
                 class="css-vhglzv"
@@ -915,7 +915,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 449px; position: absolute; transform: translate(433px,10px);"
           >
             <div
-              class="css-1cbhhcw"
+              class="css-8epc0j"
             >
               <h2
                 class="css-vhglzv"
@@ -1133,7 +1133,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 500px; position: absolute; transform: translate(10px,418px);"
           >
             <div
-              class="css-1cbhhcw"
+              class="css-8epc0j"
             >
               <h2
                 class="css-vhglzv"
@@ -1324,7 +1324,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(433px,469px);"
           >
             <div
-              class="css-1cbhhcw"
+              class="css-8epc0j"
             >
               <h2
                 class="css-vhglzv"

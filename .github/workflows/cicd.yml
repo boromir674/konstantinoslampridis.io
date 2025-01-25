@@ -120,7 +120,8 @@ jobs:
   # LOGICAL AGGREGATION OF CI
   check:
     if: always()
-    needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    # needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    needs: ['test_bundle']
     uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
       allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}

@@ -133,7 +133,7 @@ jobs:
     if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
     uses: ./.github/workflows/signal-deploy.yml
     with:
-      main_branch: dev
+      main_branch: main
       release_branch: release
 
   debug:

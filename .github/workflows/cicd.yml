@@ -32,11 +32,11 @@ jobs:
       ##### OVERRIDE JOB SWITCHES #####
       # true gurantees Job run, false gurantees Job NOT run
 
-      OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
-      OVERRIDE_LINT: false  # shutdown lint
+      # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
+      # OVERRIDE_LINT: false  # shutdown lint
       # OVERRIDE_BUILD: false  # prevent build
-      OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
-      OVERRIDE_E2E_TESTS: false  # prevent E2E tests
+      # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
+      # OVERRIDE_E2E_TESTS: false  # prevent E2E tests
       # OVERRIDE_DEPLOY: true  # force deployment
 
       #############################
@@ -120,10 +120,12 @@ jobs:
   # LOGICAL AGGREGATION OF CI
   check:
     if: always()
-    # needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
-    needs: ['test_bundle']
+    needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    # needs: ['test_bundle']
     uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
+      # TODO: allow-skips passes an empty array here
+      # check syntax needs.*.result == 'skipped'
       allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}
       needs_json: ${{ toJSON(needs) }}  # should never change
 
@@ -134,16 +136,6 @@ jobs:
     with:
       main_branch: main
       release_branch: release
-
-  debug:
-    needs: [signal_deploy, pipe]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - run: echo ${{ needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' }}
-      - run: echo ${{ needs.pipe.outputs.OVERRIDE_DEPLOY == '' }}
-      - run: echo ${{ needs.pipe.result == 'success' }}
-      - run: echo ${{ needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
 
   # Deploy Web Bundle
   deploy:

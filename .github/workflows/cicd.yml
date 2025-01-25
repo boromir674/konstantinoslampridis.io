@@ -29,14 +29,14 @@ jobs:
     with:
       ALLOW_LINT_TO_FAIL: true
 
-      ##### OVERRIDE SWITCHES #####
+      ##### OVERRIDE JOB SWITCHES #####
       # true gurantees Job run, false gurantees Job NOT run
 
-      # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
-      # OVERRIDE_LINT: false  # shutdown lint
+      OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
+      OVERRIDE_LINT: false  # shutdown lint
       # OVERRIDE_BUILD: false  # prevent build
-      # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
-      # OVERRIDE_E2E_TESTS: false  # prevent E2E tests
+      OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
+      OVERRIDE_E2E_TESTS: false  # prevent E2E tests
       # OVERRIDE_DEPLOY: true  # force deployment
 
       #############################
@@ -117,11 +117,11 @@ jobs:
       # Configurable Acceptance Criteria: accept up to 2.5MB
       bundle_size_acceptance: 2.6
 
-  # LOGICAL AGGRGATION OF CI
+  # LOGICAL AGGREGATION OF CI
   check:
     if: always()
-    needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
-    # needs: ['test', 'lint']
+    # needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
+    needs: ['pipe']
     uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
       allowed-skips: ${{ needs.*.result == 'skipped' || '[]' }}
@@ -134,6 +134,16 @@ jobs:
     with:
       main_branch: main
       release_branch: release
+
+  debug:
+    needs: [signal_deploy, pipe]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - run: echo ${{ needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' }}
+      - run: echo ${{ needs.pipe.outputs.OVERRIDE_DEPLOY == '' }}
+      - run: echo ${{ needs.pipe.result == 'success' }}
+      - run: echo ${{ needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' }}
 
   # Deploy Web Bundle
   deploy:

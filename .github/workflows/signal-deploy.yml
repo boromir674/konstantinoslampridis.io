@@ -41,16 +41,31 @@ jobs:
         with:
           fetch-depth: 0
 
-      - id: track_release_br
+      - run: git branch -a
+
+      - name: 'git branch --track "${{ env.RELEASE_BR }}" "origin/${{ env.RELEASE_BR }}"'
+        id: track_release_br
         run: |
           exit_code=0
           git branch --track "${{ env.RELEASE_BR }}" "origin/${{ env.RELEASE_BR }}" || exit_code=$?
-          echo "TRACK_EXIT_CODE=${exit_code}" >> $GITHUB_OUTPUT
+
           if [[ $exit_code -ne 0 ]]; then
             echo "[WARN] Could not track '${{ env.RELEASE_BR }}' branch. Possibly origin/${{ env.RELEASE_BR }} has been already deleted"
           fi
+          echo "TRACK_RELEASE_CODE=${exit_code}" >> $GITHUB_OUTPUT
+
+      - name: 'git branch --track "${{ env.MAIN_BR }}" "origin/${{ env.MAIN_BR }}"'
+        id: track_main_br
+        run: |
+          exit_code=0
+          git branch --track "${{ env.MAIN_BR }}" "origin/${{ env.MAIN_BR }}" || exit_code=$?
+          if [[ $exit_code -ne 0 ]]; then
+            echo "[WARN] Could not track '${{ env.MAIN_BR }}' branch!"
+          fi
+          echo "TRACK_MAIN_CODE=${exit_code}" >> $GITHUB_OUTPUT
 
       - name: "Check if '${{ github.ref }}' tag is on '${{ env.MAIN_BR }}' branch"
+        if: steps.track_main_br.outputs.TRACK_MAIN_CODE == 0
         uses: rickstaa/action-contains-tag@a9ff27d505ba2bf074a2ebb48b208e76d35ff308
         id: main_contains_tag
         with:
@@ -58,7 +73,7 @@ jobs:
           tag: "${{ github.ref }}"
 
       - name: "Check if '${{ github.ref }}' tag is on '${{ env.RELEASE_BR }}' branch"
-        if: steps.track_release_br.outputs.TRACK_EXIT_CODE == 0
+        if: steps.track_release_br.outputs.TRACK_RELEASE_CODE == 0
         uses: rickstaa/action-contains-tag@a9ff27d505ba2bf074a2ebb48b208e76d35ff308
         id: release_contains_tag
         with:

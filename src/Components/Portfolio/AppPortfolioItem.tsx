@@ -6,28 +6,37 @@ import { withDefaultProps } from "../hoc";
 import PortfolioItemInterface, {
   ReleaseItemData,
 } from "../../PortfolioItemInterface";
+
+// INNER CONTENT COMPONENTS
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
 import AppProjectLinksPane, { AppProjectLinksPaneProps } from './AppProjectLinksPane';
+import PortfolioItemProjectTitle from './PortfolioItemProjectTitle';
+import PortfolioItemProjectDescription, { type PortfolioItemProjectDescriptionProps } from './PortfolioItemDescription';
 
+// COMPONENT rendering a DIV Designed to host the Left and Right Panes
+interface BottomPartBlockProps { theme: { minGapBetweenPanes: string }, ref: React.RefObject<HTMLDivElement> };
+const BottomPartBlock = styled.div<BottomPartBlockProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  // control the Minimum gap between the Left and Right Panes that should be preserved
+  gap: ${props => props.theme.minGapBetweenPanes};
+`;
+// COMPONENT rendering a DIV Designed to host the Project Links Pane
 const LeftPane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 `;
+// COMPONENT rendering a DIV Designed to host the Releases Pane
 const RightPane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-`;
-
-const BottomPartBlock = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
 `;
 
 
@@ -42,37 +51,6 @@ const RESOURCE_LINK_TYPE_2_HUMAN_READABLE_TEXT: { [key: string]: string } = {
   'ci/cd': 'CI/CD',
 };
 
-// COMPONENT - Project Title
-interface PortfolioItemProjectTitleProps {
-  theme: {
-    fontFamily: string;
-    fontSize?: string;
-  };
-};
-const PortfolioItemProjectTitleH2 = withDefaultProps({
-  variant: "h2",
-}, Typography);
-const PortfolioItemProjectTitle = styled(PortfolioItemProjectTitleH2) <PortfolioItemProjectTitleProps>`
-  margin: 0;
-  font-family: ${props => props.theme?.fontFamily || "inherit"};
-  font-size: ${props => props.theme?.fontSize || "24px"};
-  font-weight: bold;
-`;
-
-// COMPONENT - Project Description
-interface PortfolioItemProjectDescriptionProps {
-  theme: {
-    fontFamily: string;
-    fontSize: string;
-  };
-};
-const PortfolioItemProjectDescriptionP = withDefaultProps({ variant: "body1" }, Typography);
-const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
-  // margin: 0;
-  font-family: ${props => props.theme.fontFamily};
-  font-size: ${props => props.theme.fontSize};
-  // font-weight: bold;
-`;
 // COMPONENT - Software maturity Level
 interface SoftwareMaturityLevelProps {
   theme: {
@@ -85,31 +63,40 @@ const SoftwareMaturityLevel = styled(SoftwareMaturityLevelSpan) <SoftwareMaturit
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
 `;
+
+// Dynamic Sub TYPES of Exported Component
+type AppPortfolioItemPropsTheme = BottomPartBlockProps['theme'] & {
+  projectTitle: {
+    fontFamily: string;
+    fontSize?: string;
+  };
+  projectDescription: PortfolioItemProjectDescriptionProps["theme"];
+  links: AppProjectLinksPaneProps['theme'];
+  releases: ReleasesPaneProps["theme"];
+};
+// TYPES of Exported Component
 interface AppPortfolioItemProps {
   data: PortfolioItemInterface;
-  theme: {
-    projectTitle: {
-      fontFamily: string;
-      fontSize?: string;
-    };
-    projectDescription: {
-      fontFamily: string;
-      fontSize: string;
-    };
-    links: AppProjectLinksPaneProps['theme'];
-    releases: ReleasesPaneProps["theme"];
-  };
+  theme: AppPortfolioItemPropsTheme;
+  refs? : React.RefObject<HTMLElement>[];
 }
 
-const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
+const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme, refs }) => {
+  // measures dims of 3 inner DOM Elements
   const renderCallback = useCallback(() => <>
-    <PortfolioItemProjectTitle theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
+    <PortfolioItemProjectTitle ref={refs?.[0] ?? null}  // SELF-MEASURE DIMS
+    theme={theme.projectTitle}>{data.title}</PortfolioItemProjectTitle>
     {/* Project Description. Could be github description or description from CV Pdf */}
-    <PortfolioItemProjectDescription theme={theme.projectDescription}>
+    <PortfolioItemProjectDescription
+      ref={refs?.[1] ?? null}   // SELF-MEASURE DIMS
+      theme={theme.projectDescription}
+    >
       {data.description}
     </PortfolioItemProjectDescription>
-    <BottomPartBlock>
-      <LeftPane>
+    <BottomPartBlock
+    ref={refs?.[2] ?? null}  // SELF-MEASURE DIMS
+    theme={{ minGapBetweenPanes: theme.minGapBetweenPanes }}>  {/* DIV Bottom Part Block */}
+      <LeftPane>  {/* DIV Left Pane */}
         {data.resource_links ? (
           <AppProjectLinksPane
             data={{
@@ -129,7 +116,7 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme }) => {
           <></>
         )}
       </LeftPane>
-      <RightPane>
+      <RightPane>  {/* DIV Right Pane */}
         {/* NOTE: we are using the same objects as the Props of PortfolioItemProjectDescription */}
         <SoftwareMaturityLevel theme={theme.projectDescription}>Software maturity level: {data.status}</SoftwareMaturityLevel>
         {/* A Block where each element covers a line */}

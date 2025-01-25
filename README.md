@@ -34,7 +34,51 @@ We currently use
 | Desktop | 100         | 93            | 100            | 92  | N/A |
 | Mobile  | 96          | 93            | 100            | 92  | N/A |
 
-# Architecture
+# App Architecture
+```mermaid
+block-beta
+  columns 7
+  
+  %% ROW 1
+  Pages["Pages"]
+  leftID1<[" "]>(left)
+  Components["Components:
+  
+  src/Components"]:5
+
+  %% ROW 2
+  space:4
+  up1<[" "]>(up)
+  space
+  up2<[" "]>(up)
+
+  %% ROW 3
+  Design_System["Design System
+  
+  src/design-system/"]
+
+  right11<[" "]>(right)
+    THEME_LIB["Theme Library
+
+    src/theme/"]
+
+  right2<[" "]>(right)
+  Hooks["React Hooks"]
+  space
+  %%Hoc["Higher-Order Components"]
+  Hoc["HoC"]
+
+
+  classDef front fill:#696,stroke:#333;
+  classDef back fill:#969,stroke:#333;
+  class Pages front
+  class Components back
+```
+
+---
+
+> See the [Detailed Project Architecture](./docs/architecture.md) or the [Single Diagram](./docs/arch-diagram.md) for a complete overview.
+
 
 ## Hooks
 Inspiration:  

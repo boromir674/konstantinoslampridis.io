@@ -19,18 +19,25 @@ interface PortfolioLayoutItemContentProps {
 const InnerContainer = styled.div`
   // Make Description Text wrap to below line a bit earlier, avoiding word overflow
   width: 95%;
+
+  // make this div occupy the full height of its parent, ensuring any content
+  // inside it (this div) is also stretched to fit the full height
+  height: 100%;
+
   // when mouse is on element make cursor a pointer
   cursor: pointer;
   // interpret all geometry properties to be relevant to the out side block
   position: absolute;
   padding: 10px;
-// TODO SOS make this padding value dynamic
+
+  // TODO SOS make this padding value dynamic
 // SHOULD MATCH the variable in PortfolioItemV3.tsx
 
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
-  height: 100%;
+
+
   // padding-bottom: 20px;
   &:hover {
     transform: scale(1.01);
@@ -41,16 +48,18 @@ const InnerContainer = styled.div`
   // define outline here is also buggy
 `;
 
-
-
+/** Renders the DIV and the children representing a Portfolio Item
+ * 
+ * The children are entirely controled via the props.data and props.renderProps callback.
+ * 
+ * Children can, for example, be Title, Description, Resouce Links, Software Releases.
+ */
 const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   data,
   listeners_callbacks,
   renderProps,
   layoutItemID,
 }) => {
-
-
   // const [blockRef, { width, height }] = useElementSizeRef();
   // whenever the width or height change we want to notify our listeners
   // each listener is expected tohave supplied a callback that we use to notify them
@@ -67,9 +76,9 @@ const LayoutItemContent: FC<PortfolioLayoutItemContentProps> = ({
   // }, [height, layoutItemID]);
 
   return (
-      <InnerContainer>
-        {renderProps(data)}
-      </InnerContainer>
+    <InnerContainer>
+      {renderProps(data)}
+    </InnerContainer>
   );
 };
 

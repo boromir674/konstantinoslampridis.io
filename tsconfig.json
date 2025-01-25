@@ -1,4 +1,19 @@
+// TSConfig - Compiler Options
+
+// A TSConfig file in a directory indicates that the directory is the root of a TypeScript or JavaScript project. The TSConfig file can be either a tsconfig.json or jsconfig.json, both have the same set of config variables.
+
+// There are over 100 options. Some examples include::
+// - The root fields for letting TypeScript know what files are available
+// - The `compilerOptions` fields
+// - The `watchOptions` fields, for tweaking the watch mode
+// - The `typeAcquisition` fields, for tweaking how types are added to JavaScript projects
+
+// Note: If you are starting a TSConfig from scratch, you may want to consider using tsc --init to bootstrap or use a TSConfig base.
+
 {
+  // all top-level options: files, extends, include, exclude, references
+
+  //// COMPILER OPTIONS ////
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 

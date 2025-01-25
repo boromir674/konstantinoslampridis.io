@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.13.0] - 24/01/2025
+
+### Changes
+
+#### Feature
+- run `Content-Aware Algorithm` on (Grid `Portfolio Item`) **Resize Item events**
+- preserve minimum gap between `Links` and `Releases Panes` in `Portfolio Item`
+
+#### Refactor
+- expose top and bottom margin CSS  props in AppTheme
+- preserve styles of AppPortfolioItem, but expose margin props
+- delegate Grid onResize Handler logic to new Hooks
+- add HoC and Hook for Content-Aware Algo solution
+- provide only the onLayoutChange handler via the useGridLayoutHandlers Hook
+- allow Typography to accept ref and bind it to DOM element
+- accept ref from PortfolioItemContainer (aka AppPortfolioItem) and bind to inner DIV
+
+#### Test
+- accept Portfolio Project Title css className changed snapshot hash
+
+#### CI
+- accept **Prod Builds** of **2.6MB size**
+
+#### Docs
+- docs: add **Architecture Diagrams**
+- add comments for `Typescript Compiler Options` in config file
+
+#### Story
+- track and commit all PoC Stories
+- Content-Aware RGL + Grid Item Render Times
+- PortfolioSection with Content-Aware onResize Handler
+- easier visual proof for useMemo with distributed State RGL PoC
+- demonstrate how to render an RGL with Content-Aware onResize Handler
+- add story as poc for content-aware onResize handler!
+- automatically nest Stories inside src/stories dir under the PoC group
+
+#### Dev
+- exclude from docker build the *.stories.* files
+
+
 ## [1.12.0] - 11/01/2025
 
 ### Changes

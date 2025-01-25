@@ -41,6 +41,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: git branch -a
+
       - id: track_release_br
         run: |
           exit_code=0

@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useRef, useState, useCallback, FC } from "react";
+import React, { type ButtonHTMLAttributes, useRef, useState, FC } from "react";
 import {
   // WidthProvider,
   Responsive
@@ -91,7 +91,7 @@ const PortfolioSectionTitle = styled(PortfolioSectionTitleH1) <PortfolioSectionT
 `;
 
 // COMPONENT - Reset Layout Button
-import { ButtonHTMLAttributes } from "react";
+
 interface ResetLayoutButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme: {
     fontFamily: string;
@@ -216,8 +216,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
 
   // Code for implementing Saving and Loading Layouts from Local Storage
   const [layouts, setLayouts, saveToLS] = useLayoutsState();
-  // hook for delegating onResize Handler logic to
-  const [resizeAlgorithmCallback] = useMemoizedResizeSuggestionAlgorithm();
 
   // EVENT HANDLERS - RESET BUTTON
   /**
@@ -245,35 +243,24 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   const contentRegistry = useRef<ContentRegistry>(
     data.reduce(reducer, {})
   );
-
-  const layoutChangeHandlerRef = useRef(null);
-  const resizeHandlerRef = useRef(null);
-  
-  useEffect(() => {
-    const [handleLayoutChange, handleOnResize] = useGridLayoutHandlers(
-      // Arg 0
-      {
-      // Callables (aka functions/callbacks) that handleLayoutChange calls
-      setLayouts,
-      saveToLS: (allLayouts: LayoutsObject) => {
-        saveToLS("layouts", allLayouts);
-      },
-    },
-    // Arg 1: ON RESIZE EVENT HANDLER
+  const [handleOnLayoutChange, handleOnResize] = useGridLayoutHandlers(
+    // Arg 0
     {
-      unitLength: 50,
-      getContentHeight: (gridItemID: string) => contentRegistry.current[gridItemID].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0),
-      // getContentHeight: (gridItemID: string) => sumContentHeight(gridItemID),
-      contentAdjustmentOffsetHeight: theme.item.theme.projectDescription.margin * 2,
-      widthUnitLength: 97.5,
-    });
+    // Callables (aka functions/callbacks) that handleLayoutChange calls
+    setLayouts,
+    saveToLS: (allLayouts: LayoutsObject) => {
+      saveToLS("layouts", allLayouts);
+    },
+  },
+  // Arg 1: ON RESIZE EVENT HANDLER
+  {
+    unitLength: 50,
+    getContentHeight: (gridItemID: string) => contentRegistry.current[gridItemID].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0),
+    // getContentHeight: (gridItemID: string) => sumContentHeight(gridItemID),
+    contentAdjustmentOffsetHeight: theme.item.theme.projectDescription.margin * 2,
+    widthUnitLength: 97.5,
+  });
 
-    layoutChangeHandlerRef.current = handleLayoutChange;
-    resizeHandlerRef.current = handleOnResize;
-
-  }, [setLayouts, saveToLS, contentRegistry.current, theme.item.theme.projectDescription.margin]);
-
-  
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
 
@@ -297,12 +284,11 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         layouts={layouts}
 
         // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
-        // onLayoutChange={handleLayoutChange}
-        onLayoutChange={layoutChangeHandlerRef.current}
+        onLayoutChange={handleOnLayoutChange}
 
         // handle resize events, which fire 'continuously' while user holds mouse pressed, after clicking on the bottom-right of any Grid Item
         // onResize={handleOnResize}  // we use content-aware algorithm to increase height if inner content requires it
-        onResize={resizeHandlerRef.current}
+        onResize={handleOnResize}
 
         // if true the items will appear and animate/"transition" to match the state Layouts Object
         // if false, the items will appear instantly, without any animation

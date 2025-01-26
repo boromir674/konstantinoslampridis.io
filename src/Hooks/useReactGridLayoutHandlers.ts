@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { LayoutInterface, LayoutsObject } from '../interfaces';
 import { ResponsiveProps, ItemCallback } from 'react-grid-layout';
 
@@ -51,62 +52,58 @@ const useReactGridLayoutHandlers: (
          * @param currentLayout - the current layout of the Portfolio Items; a LayoutInterface array
          * @param allLayouts - all layouts of the Portfolio Items, as a map of breakpoints (ie 'lg', 'md', 'sm', 'xs', 'xxs') to LayoutInterface arrays
          */
-        const handleLayoutChange: ResponsiveProps["onLayoutChange"] =
-            // useCallback(
-            (
-                currentLayout: LayoutInterface[],
-                allLayouts: LayoutsObject
-            ) => {
-                // on layout change we store the layouts object in local storage, under a key
-                layoutChangeCallbacks.saveToLS(allLayouts);
-                // we store the layouts in the component's state, and trigger a re-render
-                layoutChangeCallbacks.setLayouts(allLayouts);
-            }
-        // , [layoutChangeCallbacks.saveToLS, layoutChangeCallbacks.setLayouts]);
+        const handleLayoutChange: ResponsiveProps["onLayoutChange"] = useCallback((
+            currentLayout: LayoutInterface[],
+            allLayouts: LayoutsObject
+        ) => {
+            // on layout change we store the layouts object in local storage, under a key
+            layoutChangeCallbacks.saveToLS(allLayouts);
+            // we store the layouts in the component's state, and trigger a re-render
+            layoutChangeCallbacks.setLayouts(allLayouts);
+        }, [layoutChangeCallbacks.saveToLS, layoutChangeCallbacks.setLayouts]);
 
-
-        // onResize HANDLER
         const [resizeAlgo] = useResizeAlgorithm();
-        const handleOnResize: ItemCallback =
-            // useCallback(
-            (
-                layout,
-                oldItem,
-                newItem,
-                placeholder,
-                event,
-                element,
-            ) => {
-                const index: string = newItem.i.toString();
 
-                // Get potential Height Unit Suggestion, with Content-Aware Adjustment
-                // const suggestedUnitValues = resizeData.resizeAlgorithm(
-                const suggestedUnitValues = resizeAlgo(
-                    newItem,  // information about Resized Item Dim Units; ie 1, 2, 3, 4, 5, 6
-                    {
-                        // fit Units to contentHeight, as sum of heights requested from browser-api
-                        contentHeight: resizeData.getContentHeight(index),  // possibly queries the browser-api
-                        // contentWidth: Math.max(...contentRegistry.current[index].map(({ dimsReporter }) => dimsReporter().width)),
-                        unit_length: resizeData.unitLength,  // px
-                        width_unit_length: resizeData.widthUnitLength,  // px // 97.5,
-                        // account for Description Component Margin
-                        contentAdjustmentOffsetHeight: resizeData.contentAdjustmentOffsetHeight,  // px
-                        // contentAdjustmentOffsetWidth: -40, // px
-                    }
-                );
-                // UPDATE: increase suggested in Height Units
-                if (suggestedUnitValues !== undefined) {
-                    if (suggestedUnitValues.unitsHeight) {
-                        newItem.h = suggestedUnitValues.unitsHeight;
-                        placeholder.h = suggestedUnitValues.unitsHeight;
-                    }
-                    if (suggestedUnitValues.unitsWidth) {
-                        newItem.w = suggestedUnitValues.unitsWidth;
-                        placeholder.w = suggestedUnitValues.unitsWidth;
-                    }
+        // This can't be a useCallback because the ref is not available SSR
+        const handleOnResize: ItemCallback = useCallback((
+            layout,
+            oldItem,
+            newItem,
+            placeholder,
+            event,
+            element,
+        ) => {
+            const index: string = newItem.i.toString();
+
+            // Get potential Height Unit Suggestion, with Content-Aware Adjustment
+            // const suggestedUnitValues = resizeData.resizeAlgorithm(
+            const suggestedUnitValues = resizeAlgo(
+                newItem,  // information about Resized Item Dim Units; ie 1, 2, 3, 4, 5, 6
+                {
+                    // fit Units to contentHeight, as sum of heights requested from browser-api
+                    contentHeight: resizeData.getContentHeight(index),  // possibly queries the browser-api
+                    // contentWidth: Math.max(...contentRegistry.current[index].map(({ dimsReporter }) => dimsReporter().width)),
+                    unit_length: resizeData.unitLength,  // px
+                    width_unit_length: resizeData.widthUnitLength,  // px // 97.5,
+                    // account for Description Component Margin
+                    contentAdjustmentOffsetHeight: resizeData.contentAdjustmentOffsetHeight,  // px
+                    // contentAdjustmentOffsetWidth: -40, // px
+                }
+            );
+            // UPDATE: increase suggested in Height Units
+            if (suggestedUnitValues !== undefined) {
+                if (suggestedUnitValues.unitsHeight) {
+                    newItem.h = suggestedUnitValues.unitsHeight;
+                    placeholder.h = suggestedUnitValues.unitsHeight;
+                }
+                if (suggestedUnitValues.unitsWidth) {
+                    newItem.w = suggestedUnitValues.unitsWidth;
+                    placeholder.w = suggestedUnitValues.unitsWidth;
                 }
             }
-
+        }, [
+            resizeAlgo, resizeData.getContentHeight, resizeData.unitLength, resizeData.contentAdjustmentOffsetHeight, resizeData.widthUnitLength
+        ]);
 
         return [handleLayoutChange, handleOnResize];
     };

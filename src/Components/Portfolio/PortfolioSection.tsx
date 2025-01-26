@@ -317,10 +317,7 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         newItem.w = suggestedUnitValues.unitsWidth;
         placeholder.w = suggestedUnitValues.unitsWidth;
       }
-    } else {  // DEBUG CODE ELSE
-      console.warn('Content Height is not available, because refs are not attached to the DOM element');
     }
-
   };
 
   // CONSTANT: starting width of each Portfolio Item

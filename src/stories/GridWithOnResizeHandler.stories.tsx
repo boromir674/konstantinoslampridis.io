@@ -309,9 +309,13 @@ type Reducer<S, T> = (acc: S, _: T, index: number) => S;
 const ResponsiveGridLayout: React.ComponentClass<ResponsiveProps> = WidthProvider<ResponsiveProps>(Responsive) as React.ComponentClass<ResponsiveProps>;
 
 
+// Story-only Render Props Type to integrate with Render Counts added Component
+
+type StoryRenderProps = (data: Parameters<RenderProps>[0], theme: Parameters<RenderProps>[1], refs?: Parameters<RenderProps>[2], ref?: React.RefObject<HTMLElement>) => React.ReactNode;
+
 interface DynamicMultiRefBindingToRenderedGridProps {
     theme: ResponsiveLocalStorageLayoutProps["theme"];
-    renderProps: ResponsiveLocalStorageLayoutProps["renderProps"];
+    renderProps: StoryRenderProps;
 };
 // MAIN COMPONENT
 const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedGridProps> = (props) => {

@@ -158,24 +158,6 @@ interface ResponsiveLocalStorageLayoutProps {
 }
 
 // DESIGNER's ENTRYPOINT
-
-// helper function
-// const defaultsMaker = (): {
-//   className: string,
-//   cols: {
-//     lg: number;
-//     md: number;
-//     sm: number;
-//     xs: number;
-//     xxs: number;
-//   },
-//   rowHeight: number,
-//   renderProps: RenderProps,
-//   element_to_render: typeof PortfolioItemCard,
-//  } => {
-//   return { a: 1 };
-// }
-
 interface AppPortfolioSectionDefaults {
   className: string,
   cols: {

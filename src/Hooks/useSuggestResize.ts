@@ -99,4 +99,4 @@ const useMemoizedResizeSuggestionAlgorithm: () => [ResizeItemWithContextAlgorith
     return [algorithCallback];
 };
 
-export { useMemoizedResizeSuggestionAlgorithm };
+export { useMemoizedResizeSuggestionAlgorithm, type ResizeItemWithContextAlgorithm };

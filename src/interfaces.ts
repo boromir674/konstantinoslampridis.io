@@ -101,7 +101,7 @@ interface LayoutInterface extends Layout {
    */
   isBounded?: boolean | undefined;
 }
-
+/** An mapping of Breakpoints, as arbitrary strings, to Layout arrays */
 type LayoutsObject = {
     //     lg: LayoutArray;
     //     md: LayoutArray;

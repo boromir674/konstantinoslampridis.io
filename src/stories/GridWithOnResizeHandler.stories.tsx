@@ -11,7 +11,7 @@ import { lightTheme, darkTheme, type ComputedTheme } from '../theme';
 // Import Hooks
 import useDimsReporter from '../Hooks/useExposeStatelessDimsReporter';
 import useLayoutsState from '../Hooks/useLayoutsState'
-import useGridLayoutHandlers from '../Hooks/useGridLayoutHandlers';
+import useGridLayoutHandlers from '../Hooks/useReactGridLayoutHandlers';
 
 // Import Context
 import ZIndexContext from '../ZIndexContext';

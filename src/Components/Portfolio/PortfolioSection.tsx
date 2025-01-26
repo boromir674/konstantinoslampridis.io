@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 
 // Import Hooks
 import useDimsReporter from '../../Hooks/useExposeStatelessDimsReporter';
-import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
+import useGridLayoutHandlers from '../../Hooks/useReactGridLayoutHandlers';
 import { useMemoizedResizeSuggestionAlgorithm } from '../../Hooks/useSuggestResize';
 import { useContentDimsAggregators } from '../../Hooks/useContentDimsAggregators';
 
@@ -228,14 +228,6 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   const handleResetLayout = () => {
     setLayouts({});
   };
-  // EVENT HANDLERS - any GRID LAYOUT CHANGE
-  const [handleLayoutChange] = useGridLayoutHandlers({
-    // Callables (aka functions/callbacks) that handleLayoutChange calls
-    setLayouts,
-    saveToLS: useCallback((allLayouts: LayoutsObject) => {
-      saveToLS("layouts", allLayouts);
-    }, [saveToLS]),
-  });
 
   // Intialize Ref storing the ContentRegistry of each Portfolio Item
   const reducer: Reducer<ContentRegistry, PortfolioItemInterface> = (acc, _, index) => {
@@ -254,54 +246,34 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     data.reduce(reducer, {})
   );
 
-  // create Callbacks to sum Heights and Widths of Portfolio Item Contents
-  const [sumContentHeight, sumContentWidth] = useContentDimsAggregators(contentRegistry.current,
-    'height', 'width'
-  );
-
-  // ON RESIZE EVENT HANDLER
-
-  // Constants
-  const UNIT_LENGTH: number = 50;  // px
-
-  // onResize events fire continuously while User's drag-n-drop on the bottom-right corner of a Grid Item
-  const handleItemResize = (
-    layout,
-    oldItem,
-    newItem,
-    placeholder,
-    event,
-    element,
-  ) => {
-    const index: string = newItem.i.toString();
-
-    // Get potential Height Unit Suggestion, with Content-Aware Adjustment
-    const suggestedUnitValues = resizeAlgorithmCallback(
-      newItem,  // information about Resized Item Dim Units; ie 1, 2, 3, 4, 5, 6
+  const layoutChangeHandlerRef = useRef(null);
+  const resizeHandlerRef = useRef(null);
+  
+  useEffect(() => {
+    const [handleLayoutChange, handleOnResize] = useGridLayoutHandlers(
+      // Arg 0
       {
-        // fit Units to contentHeight, as sum of heights requested from browser-api
-        contentHeight: contentRegistry.current[index].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0),
-        // contentWidth: Math.max(...contentRegistry.current[index].map(({ dimsReporter }) => dimsReporter().width)),
-        unit_length: UNIT_LENGTH,
-        width_unit_length: 97.5,
-        // account for Description Component Margin
-        contentAdjustmentOffsetHeight: theme.item.theme.projectDescription.margin * 2,
-        // contentAdjustmentOffsetWidth: -40, // px
-      }
-    );
-    // UPDATE: increase suggested in Height Units
-    if (suggestedUnitValues !== undefined) {
-      if (suggestedUnitValues.unitsHeight) {
-        newItem.h = suggestedUnitValues.unitsHeight;
-        placeholder.h = suggestedUnitValues.unitsHeight;
-      }
-      if (suggestedUnitValues.unitsWidth) {
-        newItem.w = suggestedUnitValues.unitsWidth;
-        placeholder.w = suggestedUnitValues.unitsWidth;
-      }
-    }
-  };
+      // Callables (aka functions/callbacks) that handleLayoutChange calls
+      setLayouts,
+      saveToLS: (allLayouts: LayoutsObject) => {
+        saveToLS("layouts", allLayouts);
+      },
+    },
+    // Arg 1: ON RESIZE EVENT HANDLER
+    {
+      unitLength: 50,
+      getContentHeight: (gridItemID: string) => contentRegistry.current[gridItemID].reduce((acc, { dimsReporter }) => acc + dimsReporter().height, 0),
+      // getContentHeight: (gridItemID: string) => sumContentHeight(gridItemID),
+      contentAdjustmentOffsetHeight: theme.item.theme.projectDescription.margin * 2,
+      widthUnitLength: 97.5,
+    });
 
+    layoutChangeHandlerRef.current = handleLayoutChange;
+    resizeHandlerRef.current = handleOnResize;
+
+  }, [setLayouts, saveToLS, contentRegistry.current, theme.item.theme.projectDescription.margin]);
+
+  
   // CONSTANT: starting width of each Portfolio Item
   const startingWidth = 4;
 
@@ -325,10 +297,12 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         layouts={layouts}
 
         // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
-        onLayoutChange={handleLayoutChange}
+        // onLayoutChange={handleLayoutChange}
+        onLayoutChange={layoutChangeHandlerRef.current}
 
         // handle resize events, which fire 'continuously' while user holds mouse pressed, after clicking on the bottom-right of any Grid Item
-        onResize={handleItemResize}  // we use content-aware algorithm to increase height if inner content requires it
+        // onResize={handleOnResize}  // we use content-aware algorithm to increase height if inner content requires it
+        onResize={resizeHandlerRef.current}
 
         // if true the items will appear and animate/"transition" to match the state Layouts Object
         // if false, the items will appear instantly, without any animation

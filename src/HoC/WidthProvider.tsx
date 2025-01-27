@@ -1,70 +1,55 @@
 /** Provides a Grid Layout SSR-compatible Width Provider */
 
 import * as React from "react";
-import PropTypes from "prop-types";
 // import ResizeObserver from "resize-observer-polyfill";
 import clsx from "clsx";
 
-// util
-export type ReactRef<T extends HTMLElement> = {
-    current: T | null
-};
-
-
-interface WPDefaultProps {
-    measureBeforeMount: boolean
-};
-
-// eslint-disable-next-line no-unused-vars
-interface WPProps extends WPDefaultProps {
-    className?: string;
-    style?: Object;
-    //   ...WPDefaultProps
-    // "spread" WPDefaultProps
-
-};
 
 type WPState = {
     width: number
 };
+import {
+    // WidthProvider,
+    Responsive,
+    type ResponsiveProps,
+  } from "react-grid-layout";
 
-type ComposedProps<Config> = Config & {
+
+type AddedProps = {
+    // hoc adds new prop to ResponsiveProps
     measureBeforeMount?: boolean;
-    className?: string;
-    style?: Object;
-    width?: number;
 };
 
+// CONSTANTS
 const layoutClassName = "react-grid-layout";
 const serverSizeWidth = 1280;
 
 /*
  * A simple HOC that provides facility for listening to container resizes.
  */
-export default function WidthProvideRGL<Config>(
-    ComposedComponent: React.AbstractComponent<Config>
-): React.AbstractComponent<ComposedProps<Config>> {
+export default function WidthProvideRGL<Props extends {
+    // explicitly typecheck what props are required by the inner component passed to hoc
+    innerRef?: React.Ref<HTMLDivElement | null>;
+    width?: number;
+    className?: string;
+}> (
+    ComposedComponent: React.ComponentType<Props>
+): React.ComponentType<Props & AddedProps> {
     return class WidthProvider extends React.Component<
-        ComposedProps<Config>,
+        Props & AddedProps,
         WPState
     > {
-        static defaultProps: WPDefaultProps = {
+        static defaultProps: Partial<Props & AddedProps> = {
             measureBeforeMount: false
-        };
-
-        static propTypes = {
-            // If true, will not render children until mounted. Useful for getting the exact width before
-            // rendering, to prevent any unsightly resizing.
-            measureBeforeMount: PropTypes.bool
-        };
+        } as Partial<Props & AddedProps>;
 
         state: WPState = {
             width: serverSizeWidth,
         };
 
-        elementRef: ReactRef<HTMLDivElement> = React.createRef();
+        elementRef = React.createRef<HTMLDivElement>();
         mounted: boolean = false;
-        resizeObserver: ResizeObserver;
+        resizeObserver: ResizeObserver | undefined
 
         // SAVE Node Width to State and observe resize changes
         componentDidMount() {
@@ -89,19 +74,25 @@ export default function WidthProvideRGL<Config>(
             this.mounted = false;
             const node = this.elementRef.current;
             if (node instanceof HTMLElement) {
-                this.resizeObserver.unobserve(node);
+                (this.resizeObserver as ResizeObserver).unobserve(node);
             }
-            this.resizeObserver.disconnect();
+            (this.resizeObserver as ResizeObserver).disconnect();
         }
 
         render() {
-            const { measureBeforeMount, ...rest } = this.props;
+            const {
+                // destructure the AddedProps
+                measureBeforeMount,
+                // Keep the rest with same interface as inner Component
+                ...rest} = this.props;
+
             if (measureBeforeMount && !this.mounted) {
                 return (
                     <div
                         className={clsx(this.props.className, layoutClassName)}
                         style={{
                             ...this.props,
+                            // overrides possible width from props
                             width: serverSizeWidth // Default width during SSR
                         }}
                         ref={this.elementRef}
@@ -111,11 +102,11 @@ export default function WidthProvideRGL<Config>(
 
             return (
                 <ComposedComponent
-                    innerRef={this.elementRef}
-                    {...rest}
-                    // {...this.state}
-                    width={this.state.width || serverSizeWidth} // Default SSR width
+                {...rest as Props}
+                innerRef={this.elementRef}
 
+                // overrides possible width from props
+                width={this.state.width || serverSizeWidth} // Default SSR width
                 />
             );
         }

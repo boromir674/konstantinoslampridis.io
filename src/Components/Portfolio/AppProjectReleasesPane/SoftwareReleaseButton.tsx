@@ -132,7 +132,7 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
     return (
         <div>
             <SoftwareReleaseButton
-                onClick={handleClickOnButton}
+                onClick={handleClickOnButton} // onClick prop supported since element is <button> 
                 ref={buttonRef as RefObject<HTMLButtonElement>}
                 theme={{
                     color: theme.color,

@@ -1,7 +1,8 @@
 import React, { type ButtonHTMLAttributes, useRef, useState, FC } from "react";
 import {
   // WidthProvider,
-  Responsive
+  Responsive,
+  type ResponsiveProps,
 } from "react-grid-layout";
 import WidthProvider from '../../HoC/WidthProvider';
 import styled from "@emotion/styled";
@@ -111,7 +112,7 @@ const ResetLayoutButton = styled(ResetLayoutButtonWithTypography) <ResetLayoutBu
 // background-color: ${props => props.theme.backgroundColor};
 
 // WITH WIDTH from WINDOW
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ResponsiveReactGridLayout = WidthProvider<ResponsiveProps>(Responsive);
 
 type RenderProps = (data: PortfolioItemInterface, theme: AppPortfolioItemProps['theme'], refs?: React.RefObject<HTMLElement>[]) => React.ReactNode;
 interface ResponsiveLocalStorageLayoutProps {

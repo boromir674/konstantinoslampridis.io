@@ -2,8 +2,8 @@
 
 import { useCallback } from "react";
 
-import { ComputedTheme } from "../theme";
-import { BigScreenViewProps } from "../Components/BigScreenView";
+import { type ComputedTheme } from "../theme";
+import { type BigScreenViewProps } from "../Components/BigScreenView";
 
 // Type Aliases to allow extending
 type BigScreenViewPropsTheme = BigScreenViewProps["theme"];

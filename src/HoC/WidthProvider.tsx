@@ -104,7 +104,6 @@ export default function WidthProvideRGL<Config>(
                             ...this.props,
                             width: serverSizeWidth // Default width during SSR
                         }}
-                        // $FlowIgnore ref types
                         ref={this.elementRef}
                     />
                 );

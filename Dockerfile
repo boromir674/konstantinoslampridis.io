@@ -118,11 +118,13 @@ FROM dev_env AS type_check_live
 CMD [ "yarn", "typecheck-live" ]
 
 # Dev 3: UNIT TESTS
-FROM dev_env AS test
+FROM runtime_env AS test
+COPY --from=dev_install /node_modules node_modules
+COPY --from=dev_install /package.json package.json
 ENV NODE_ENV=test
-COPY jest.config.ts .
-COPY jest-preprocess.js .
-COPY loadershim.js .
+# COPY jest.config.ts .
+# COPY jest-preprocess.js .
+# COPY loadershim.js .
 CMD [ "yarn", "test" ]
 
 # Dev 4: LINTING

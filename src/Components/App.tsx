@@ -78,13 +78,13 @@ const App: FC = () => {
     }
   `);
 
-  const [adaptTheme, adaptThemeV2] = useThemeAdapterCallback();
+  const [adaptTheme] = useThemeAdapterCallback();
   const [adaptData] = useDataAdapterCallback();
 
   // Memoized Data and Themes
   const appData = useMemo(() => adaptData(userDefinedWebsiteData), [adaptData, userDefinedWebsiteData]);
-  const lightAppTheme = useMemo(() => adaptThemeV2(lightTheme), [adaptThemeV2, lightTheme]);
-  const darkAppTheme = useMemo(() => adaptThemeV2(darkTheme), [adaptThemeV2, darkTheme]);
+  const lightAppTheme = useMemo(() => adaptTheme(lightTheme), [adaptTheme, lightTheme]);
+  const darkAppTheme = useMemo(() => adaptTheme(darkTheme), [adaptTheme, darkTheme]);
 
   return (
     // <main>

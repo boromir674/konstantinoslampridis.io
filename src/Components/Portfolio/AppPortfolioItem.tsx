@@ -107,9 +107,11 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme, refs }) => {
               })),
             }}
             theme={{
-              headerColor: theme.links.headerColor,
-              item: theme.links.item,
+              // Links Pane Title Theme
               header: theme.links.header,
+              headerColor: theme.links.headerColor,
+              // Link Theme and Icon Theme per item
+              item: theme.links.item,
             }}
           ></AppProjectLinksPane>
         ) : (

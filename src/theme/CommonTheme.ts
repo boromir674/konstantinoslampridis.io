@@ -136,9 +136,11 @@ const commonStyling = {
                 item: {
                     fontFamily: DESIGN_TOKENS["--md-sys-typescale-body-medium-font-family-name"],
                     fontSize: DESIGN_TOKENS['--md-sys-typescale-body-large-font-size'],
-                    iconStyles: {
-                        width: "14px",
-                        height: "14px",
+                    icon: {
+                        svgStyles: {
+                            width: "12px",
+                            height: "12px",
+                        },
                     },
                 },
             },
@@ -150,9 +152,11 @@ const commonStyling = {
                 item: {
                     font: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-family-name'],
                     fontSize: DESIGN_TOKENS['--md-sys-typescale-body-medium-font-size'],
-                    iconStyles: {
-                        width: "14px",
-                        height: "14px",
+                    icon: {
+                        svgStyles: {
+                            width: "12px",
+                            height: "12px",
+                        },
                     },
                 },
             },

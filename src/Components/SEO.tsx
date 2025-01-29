@@ -1,17 +1,6 @@
 import React, { FC } from "react";
-// import { useSiteMetadata } from "../Hooks/useSiteMetadata";
 import { Helmet } from "react-helmet";
 import { graphql, useStaticQuery } from "gatsby"
-
-interface SEOProps {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-  pathname?: string;
-  lang?: string;
-  meta?: any[];
-  children?: React.ReactNode;
-}
 
 interface ConfigSiteMetadata {
   title: string;
@@ -25,30 +14,21 @@ type QueryResult = {
   }
 }
 
-
+interface SEOProps {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  pathname?: string;
+  lang?: string;
+  meta?: any[];
+  children?: React.ReactNode;
+}
 const SEO: FC<SEOProps> = ({
   title,
   description,
   pathname,
   children,
 }) => {
-  // PREV Implementation
-  // const {
-  //   title: defaultTitle,
-  //   description: defaultDescription,
-  //   siteUrl,
-  //   keywords: defaultKeywords,
-  //   image,
-  //   twitterUsername,
-  // } = useSiteMetadata();
-  // const seo = {
-  //   title: title || defaultTitle,
-  //   description: description || defaultDescription,
-  //   url: `${siteUrl}${pathname || ``}`,
-  //   keywords: defaultKeywords,
-  //   image: `${siteUrl}${image}`,
-  //   twitterUsername,
-  // };
 
   // NEW Implementatinon
   const {

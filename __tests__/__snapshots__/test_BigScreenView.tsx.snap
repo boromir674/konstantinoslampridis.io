@@ -675,17 +675,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-8epc0j"
             >
               <h2
-                class="css-vhglzv"
+                class="css-ssyvhw"
               >
                 Python Package Generator
               </h2>
               <p
-                class="css-17u5w0h"
+                class="css-1bf79uj"
               >
                 A CLI tool to generate a Python package with a single command.
               </p>
               <div
-                class="css-1up4hmp"
+                class="css-1pi72lr"
               >
                   
                 <div
@@ -699,7 +699,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       class="css-0"
                     >
                       <h3
-                        class="css-217ren"
+                        class="css-1tn7zvf"
                       >
                         Resource Links
                       </h3>
@@ -792,7 +792,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 >
                     
                   <span
-                    class="css-62qrhu"
+                    class="css-cig3pz"
                   >
                     Software maturity level: 
                     Mature
@@ -801,7 +801,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     class="css-v1j3u1"
                   >
                     <h3
-                      class="css-6h9x24"
+                      class="css-9ssiqh"
                     >
                       Releases
                     </h3>
@@ -817,10 +817,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 24 24"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -850,10 +850,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 32 32"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -880,9 +880,9 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               viewBox="-64 0 512 512"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -918,17 +918,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-8epc0j"
             >
               <h2
-                class="css-vhglzv"
+                class="css-ssyvhw"
               >
                 Neural Style Transfer
               </h2>
               <p
-                class="css-17u5w0h"
+                class="css-1bf79uj"
               >
                 Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
               </p>
               <div
-                class="css-1up4hmp"
+                class="css-1pi72lr"
               >
                   
                 <div
@@ -942,7 +942,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       class="css-0"
                     >
                       <h3
-                        class="css-217ren"
+                        class="css-1tn7zvf"
                       >
                         Resource Links
                       </h3>
@@ -1010,7 +1010,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 >
                     
                   <span
-                    class="css-62qrhu"
+                    class="css-cig3pz"
                   >
                     Software maturity level: 
                     Stable
@@ -1019,7 +1019,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     class="css-v1j3u1"
                   >
                     <h3
-                      class="css-6h9x24"
+                      class="css-9ssiqh"
                     >
                       Releases
                     </h3>
@@ -1035,10 +1035,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 24 24"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1068,10 +1068,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 32 32"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1098,9 +1098,9 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               viewBox="-64 0 512 512"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1136,17 +1136,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-8epc0j"
             >
               <h2
-                class="css-vhglzv"
+                class="css-ssyvhw"
               >
                 Topic Modeling Toolkit
               </h2>
               <p
-                class="css-17u5w0h"
+                class="css-1bf79uj"
               >
                 A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
               </p>
               <div
-                class="css-1up4hmp"
+                class="css-1pi72lr"
               >
                   
                 <div
@@ -1160,7 +1160,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       class="css-0"
                     >
                       <h3
-                        class="css-217ren"
+                        class="css-1tn7zvf"
                       >
                         Resource Links
                       </h3>
@@ -1201,7 +1201,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 >
                     
                   <span
-                    class="css-62qrhu"
+                    class="css-cig3pz"
                   >
                     Software maturity level: 
                     Mature
@@ -1210,7 +1210,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     class="css-v1j3u1"
                   >
                     <h3
-                      class="css-6h9x24"
+                      class="css-9ssiqh"
                     >
                       Releases
                     </h3>
@@ -1226,10 +1226,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 24 24"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1259,10 +1259,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 32 32"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1289,9 +1289,9 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               viewBox="-64 0 512 512"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1327,17 +1327,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-8epc0j"
             >
               <h2
-                class="css-vhglzv"
+                class="css-ssyvhw"
               >
                 Project with 2 Releases
               </h2>
               <p
-                class="css-17u5w0h"
+                class="css-1bf79uj"
               >
                 A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
               </p>
               <div
-                class="css-1up4hmp"
+                class="css-1pi72lr"
               >
                   
                 <div
@@ -1351,7 +1351,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       class="css-0"
                     >
                       <h3
-                        class="css-217ren"
+                        class="css-1tn7zvf"
                       >
                         Resource Links
                       </h3>
@@ -1419,7 +1419,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 >
                     
                   <span
-                    class="css-62qrhu"
+                    class="css-cig3pz"
                   >
                     Software maturity level: 
                     Mature
@@ -1428,7 +1428,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     class="css-v1j3u1"
                   >
                     <h3
-                      class="css-6h9x24"
+                      class="css-9ssiqh"
                     >
                       Releases
                     </h3>
@@ -1444,10 +1444,10 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               version="1.1"
                               viewBox="0 0 24 24"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -1477,9 +1477,9 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                           >
                             <svg
                               fill="#2c1513"
-                              height="14px"
+                              height="12px"
                               viewBox="-64 0 512 512"
-                              width="14px"
+                              width="12px"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path

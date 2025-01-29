@@ -118,6 +118,11 @@ const lightColorMode: Theme = {
           color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
           onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
           onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-light'],
+          icon: {
+            svgStyles: {
+              fill: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+            },
+          }
         }
         // linkColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
         // onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
@@ -141,7 +146,6 @@ const lightColorMode: Theme = {
           codeColor: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
 
           // CODE BACKGROUND, should better be a bit "darker" than the Dialog Background, for better contrast
-
           // Nice Light Grey Color in general. Darker than the Dialog Background. Good-enough, for now, it would be nicer to redesign this.
           // this is a nice "mellow" yellow background; definitely darker than the dialog. can work!
           codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-light'],
@@ -149,8 +153,6 @@ const lightColorMode: Theme = {
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-outline-variant-light'],
           // Not bad, redish color darker than the Dialog, but not too dark. Passable solution.
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-primary-light']
-
-
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-light'], // SAME AS Dialog Background
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'], // WHITE
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-light'],
@@ -174,10 +176,13 @@ const lightColorMode: Theme = {
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-light']
           // this is the slightest possible "darker" than the dialog background. it does not offer practical contrast.
           // codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-container-light']
-          
           onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-primary-light'],
           dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-light'],
-
+          icon: {
+            svgStyles: {
+              fill: DESIGN_TOKENS['--md-sys-color-on-secondary-container-light'],
+            }
+          }
         },
       },
     },

@@ -26,20 +26,19 @@ const ProjectTitle = styled(H2) <PortfolioItemProjectTitleProps>`
     font-weight: bold;
   `;
 
-const PortfolioItemProjectTitle = forwardRef((props: PortfolioItemProjectTitleProps, ref) => {
-    // Log the Bind Ref after Mount for testing/debugging purposes
-    useEffect(() => {
-        // if ref has not been bind log error
-        if (!ref.current) throw new Error('Ref is null. Bind the ref to a DOM element.');
-        console.log("Inner Bind Ref:", ref.current);
-    }, [ref]);
-    return (
-        <ProjectTitle theme={{
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "26px"
-        }} ref={ref as React.RefObject<HTMLElement>}>{props.children}</ProjectTitle>
-    )
-});
+const PortfolioItemProjectTitle = forwardRef<HTMLElement, PortfolioItemProjectTitleProps>((props: PortfolioItemProjectTitleProps, ref) => {
+        // Log the Bind Ref after Mount for testing/debugging purposes
+        useEffect(() => {
+            if (!ref) throw new Error('Ref is null. Bind the ref to a DOM element.');
+            console.log("Inner Bind Ref:", (ref as React.MutableRefObject<HTMLElement | null>).current);
+        }, [ref]);
+        return (
+            <ProjectTitle theme={{
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "26px"
+            }} ref={ref as React.RefObject<HTMLElement>}>{props.children}</ProjectTitle>
+        )
+    });
 
 // STORY Component
 const ClientComponent = () => {

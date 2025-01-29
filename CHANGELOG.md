@@ -1,8 +1,32 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+> All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
+
+## [1.13.1-dev] - 29/01/2025
+
+### Changes
+
+#### Refactor
+- use new Theme Adapter in App
+- allow passing IconStyle and IconStyle[] in Links/Releases Pane Component props
+- add docstrings
+- clean imports, reduce code, group event handlers in Component body
+- simplify props interface of div rendered by TopHeaderPane
+- declare onResize Handler with useCallback and delegate to useReactGridLayoutHandler
+- remove legacy console log statements
+
+#### Test
+- pass correct App Theme in all 'No Overlap' Tests
+- accept new snapshot, since test code passes different SVG Style width/style now
+- pass correct App Theme in BigScreenView
+
+#### Dev
+- better dockerfile and compose
+- eliminate all Typescript errors, using correct Types
+- add typecheck_env make target
+
 
 ## [1.13.0] - 24/01/2025
 

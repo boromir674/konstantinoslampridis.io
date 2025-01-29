@@ -4,25 +4,6 @@ import styled from "@emotion/styled";
 import { ToggleSlider } from "../MyToggleSwitch1";
 import { HorizontalNavBar } from "../Navigation";
 
-interface TopHeaderPaneTheme {
-  backgroundColor: string;
-  navigationBar: {
-    fontFamily: string;
-    fontSize: string;
-    textColor: string;
-    backgroundColor: string;
-    hoverBackgroundColor: string;
-    hoverTextColor: string;
-    activatedTextColor: string;
-    activatedBackgroundColor: string;
-  };
-  themeSwitch: {
-    backgroundColor: string;
-    backgroundColorActive: string;
-    handleBackgroundColor: string;
-    handleBackgroundColorActive: string;
-  };
-}
 
 /**
  * Data that the TopHeaderPane (for big screens) can receive
@@ -45,18 +26,35 @@ interface TopHeaderPaneData {
 }
 
 interface TopHeaderPaneProps {
-  theme: TopHeaderPaneTheme;
+  theme: {
+    backgroundColor: string;
+    navigationBar: {
+      fontFamily: string;
+      fontSize: string;
+      textColor: string;
+      backgroundColor: string;
+      hoverBackgroundColor: string;
+      hoverTextColor: string;
+      activatedTextColor: string;
+      activatedBackgroundColor: string;
+    };
+    themeSwitch: {
+      backgroundColor: string;
+      backgroundColorActive: string;
+      handleBackgroundColor: string;
+      handleBackgroundColorActive: string;
+    };
+  };
   data: TopHeaderPaneData;
 }
 
-interface TopHeaderPaneContainerProps {
-  theme: TopHeaderPaneTheme;
-  children?: React.ReactNode;
-}
 
-const TopHeaderPaneContainer = styled.div<TopHeaderPaneContainerProps>`
+const TopHeaderPaneContainer = styled.div<{theme: {
+  backgroundColor: string;
+  color: string;
+}}>`
   background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.navigationBar.textColor};
+  color: ${(props) => props.theme.color};
 
   position: fixed;
   top: 0;
@@ -76,7 +74,10 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
   data: { sections, active, onToggle },
 }) => {
   return (
-    <TopHeaderPaneContainer theme={theme}>
+    <TopHeaderPaneContainer theme={{
+      backgroundColor: theme.backgroundColor,
+      color: theme.navigationBar.textColor,
+    }}>
       <ToggleSlider
         active={active}
         onToggle={onToggle}

@@ -8,6 +8,11 @@ import { SvgDataMapping } from './SvgData';
 
 /** 
 * Instantiate an SVG from predefined data, with optional override ability.
+* 
+* Call to render JSX with an <svg> element and <path> elements from predefined
+* data. Allows overriding the default styles of the <svg> and <path> elements.
+* 
+* Override the svg style to implement light/dark color mode switch (aka theming).
 */
 const createSVGIcon = (
     icon_type: string,

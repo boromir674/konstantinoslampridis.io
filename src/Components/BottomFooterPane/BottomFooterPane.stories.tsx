@@ -1,5 +1,5 @@
 // Import React Component
-import { BottomFooterPane } from "./BottomFooterPane";
+import BottomFooterPane from "./BottomFooterPane";
 
 // Apply CSS reset
 // import '../../global.css';

@@ -1,30 +1,19 @@
 /**
  * A Vertical Side Pane, suitable to be on the left or right of a Main one.
  */
-import React from "react";
+import React, { type FC } from "react";
 import styled from "@emotion/styled";
 import PersonalInfoInterface from "../../PersonalInfoInterface";
 import EducationDataInterface from "../../EducationItemDataInterface";
 import PersonalInfo, { type PersonalInfoProps } from "../PersonalInfo";
 import { Education, AppEducationSectionProps } from "../Education";
 
-interface AppVerticalSidePaneTheme {
-  containerBackground?: string;
-  textColor?: string;
-  personalInfo: PersonalInfoProps["theme"];
-  education: AppEducationSectionProps["theme"];
-}
 
-interface VerticanSidePaneContainerProps {
-  theme: AppVerticalSidePaneTheme;
-}
-
-const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
+const StyledDiv = styled.div<{theme: { containerBackground?: string }}>`
   // left: 0px;
   // background-color: lightblue;
   background-color: ${(props) =>
-    props.theme.containerBackground ||
-    props.theme.personalInfo.containerBackgroundColor};
+    props.theme.containerBackground};
   display: flex;
   grid-area: Side;
   flex-direction: column;
@@ -45,24 +34,27 @@ const VerticanSidePaneContainer = styled.div<VerticanSidePaneContainerProps>`
 `;
 
 interface AppVerticalSidePaneProps {
-  theme: AppVerticalSidePaneTheme;
+  theme: {
+    containerBackground?: string;
+    textColor?: string;
+    personalInfo: PersonalInfoProps["theme"];
+    education: AppEducationSectionProps["theme"];
+  };
   data: {
     personal: PersonalInfoInterface;
     education: EducationDataInterface[];
   };
 }
 
-const VerticalSidePane: React.FC<AppVerticalSidePaneProps> = ({
-  theme,
-  data,
-}) => {
+const VerticalSidePane: FC<AppVerticalSidePaneProps> = ({ theme, data }) => {
   return (
-    <VerticanSidePaneContainer theme={theme}>
+    <StyledDiv theme={{
+      containerBackground: theme.containerBackground || theme.personalInfo.containerBackgroundColor,
+    }}>
       <PersonalInfo theme={theme.personalInfo} userData={data.personal} />
       <Education theme={{ item: theme.education.item }} data={data.education} />
-    </VerticanSidePaneContainer>
+    </StyledDiv>
   );
 };
 
-export type { AppVerticalSidePaneProps };
-export { VerticalSidePane };
+export { VerticalSidePane, type AppVerticalSidePaneProps };

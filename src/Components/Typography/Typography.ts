@@ -6,7 +6,7 @@ import {
 
 interface TypographyProps extends MuiTypographyProps {
   style?: CSSProperties;
-  ref: React.Ref<HTMLElement>;
+  ref?: React.Ref<HTMLElement>;
 }
 
 const defaultVariantMapping: Record<Variant, string> = {

@@ -138,6 +138,9 @@ typecheck:  ## Headless Type Checking in Typescript
 typecheck_live:  ## Type Checking in Typescript, with Hot Reload
 	docker-compose run --build --rm typecheck yarn typecheck-live
 
+typecheck_env:  ## Type Checking in Typescript, with Hot Reload
+	docker-compose run --build --rm typecheck bash
+
 
 # ESLINT
 lint:  ## Code Linting, using ESLint (Typescript)

@@ -1,14 +1,13 @@
 import React, { FC, SVGAttributes } from "react";
-
 import styled from "@emotion/styled";
 
+import { ReleaseItemData } from "../../../PortfolioItemInterface";
+import { IconStyles } from '../../../interfaces';
 import { createSVGIcon } from '../../SVGIcons';
 import { withDefaultProps } from '../../hoc';
 import Typography from '../../Typography';
+import SoftwareReleaseButton, { type SoftwareReleaseButtonProps } from './SoftwareReleaseButton';
 
-
-import { ReleaseItemData } from "../../../PortfolioItemInterface";
-import SoftwareReleaseButton, { SoftwareReleaseButtonProps } from './SoftwareReleaseButton';
 
 type ReleaseTypeNames = "pypi" | "docker" | "github" | "gh_release";
 
@@ -29,12 +28,8 @@ interface Theme {
     headerFontSize: string;
     // Same Styles are used per Release item
     releaseButtonTheme: SoftwareReleaseButtonProps["theme"] & {
-        icons?: {
-            svgStyles?: React.SVGProps<SVGSVGElement>;
-            // Path props, except for d attribute
-            pathStyles?: Omit<React.SVGProps<SVGPathElement>, "d">[];
-        }[],
-    },
+        icons?: IconStyles | IconStyles[];
+    };
 };
 
 interface ReleasesPaneProps {
@@ -114,7 +109,7 @@ interface ReleasesHeaderProps {
         marginBottom: string;
     };
 };
-const ReleasesHeaderH3 = withDefaultProps({variant: "h3"}, Typography);
+const ReleasesHeaderH3 = withDefaultProps({ variant: "h3" }, Typography);
 const ReleasesHeader = styled(ReleasesHeaderH3) <ReleasesHeaderProps>`
     font-family: ${props => props.theme.fontFamily || "inherit"};
     font-size: ${props => props.theme.fontSize};
@@ -146,11 +141,8 @@ const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
                         <IconWrapper>
                             {createSVGIcon(
                                 RELEASE_TYPE_ICONS[release.type as ReleaseTypeNames],
-                                theme.releaseButtonTheme.icons?.[index]
-                                // {
-                                //     svgStyles: theme.releaseButtonTheme.icons?.[index].svgStyles,
-                                //     pathStyles: theme.releaseButtonTheme.icons?.[index].pathStyles,
-                                // }
+                                // SVG style overrides (ie fill, width, height CSS) necessary for color mode switching
+                                Array.isArray(theme.releaseButtonTheme.icons) ? theme.releaseButtonTheme.icons[index] : theme.releaseButtonTheme.icons,
                             )}
                         </IconWrapper>
                         <span>{release.name}</span>

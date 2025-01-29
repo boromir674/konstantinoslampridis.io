@@ -94,7 +94,7 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme, refs }) => {
       {data.description}
     </PortfolioItemProjectDescription>
     <BottomPartBlock
-    ref={refs?.[2] ?? null}  // SELF-MEASURE DIMS
+    ref={refs?.[2] as React.RefObject<HTMLDivElement> ?? null}  // SELF-MEASURE DIMS
     theme={{ minGapBetweenPanes: theme.minGapBetweenPanes }}>  {/* DIV Bottom Part Block */}
       <LeftPane>  {/* DIV Left Pane */}
         {data.resource_links ? (
@@ -107,9 +107,11 @@ const AppPortfolioItem: FC<AppPortfolioItemProps> = ({ data, theme, refs }) => {
               })),
             }}
             theme={{
-              headerColor: theme.links.headerColor,
-              item: theme.links.item,
+              // Links Pane Title Theme
               header: theme.links.header,
+              headerColor: theme.links.headerColor,
+              // Link Theme and Icon Theme per item
+              item: theme.links.item,
             }}
           ></AppProjectLinksPane>
         ) : (

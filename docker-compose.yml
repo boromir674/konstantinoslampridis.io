@@ -88,14 +88,23 @@ services:
       context: .
       target: test
     volumes:
-      - ./coverage/:/app/coverage/
+      # Mount existing local folder to container
       - ./__tests__/:/app/__tests__/
       - ./src/:/app/src/
+
       # Test Code and Test (Data) Snapshots
       - ./__tests__:/app/__tests__/
+
       # Mock objects to GraphQL queries
       - ./__mocks__:/app/__mocks__/
 
+      # add also jest.config.ts, jest-preprocess.js, loadershim.js
+      - ./jest.config.ts:/app/jest.config.ts
+      - ./jest-preprocess.js:/app/jest-preprocess.js
+      - ./loadershim.js:/app/loadershim.js
+
+      # Mount generated coverage folder to local
+      - ./coverage/:/app/coverage/
 
   ### CONVERT CSS to JSON ###
   css2json:

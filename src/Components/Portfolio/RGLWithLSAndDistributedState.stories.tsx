@@ -13,7 +13,7 @@ import { lightTheme, darkTheme, type ComputedTheme } from '../../theme';
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import useLayoutsState from '../../Hooks/useLayoutsState'
-import useGridLayoutHandlers from '../../Hooks/useGridLayoutHandlers';
+import useGridLayoutHandlers from '../../Hooks/useReactGridLayoutHandlers';
 import ZIndexContext from '../../ZIndexContext';
 
 // keep same public interface as PortfolioSection

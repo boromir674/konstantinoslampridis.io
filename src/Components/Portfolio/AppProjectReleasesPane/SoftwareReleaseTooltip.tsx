@@ -19,7 +19,7 @@ interface SoftwareReleaseTooltipProps {
     visible: boolean;
     onCopyCommand: () => void;
     copied: boolean;
-    onClick: () => void;
+    onClick: (event: React.MouseEvent) => void;
 }
 
 // Inner Components

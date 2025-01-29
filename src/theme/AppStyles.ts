@@ -108,6 +108,12 @@ interface Theme {
           color: string;
           onHoverBackgroundColor: string;
           onHoverColor: string;
+          // common styles for all svg icons
+          icon: {
+            svgStyles: {
+              fill: string;
+            };
+          };
         };
       };
       // Releases Pane
@@ -125,6 +131,12 @@ interface Theme {
           codeColor: string;
           codeBackgroundColor: string;
           onHoverCodeBackgroundColor: string;
+          // common styles for all Release-related svg icons
+          icon: {
+            svgStyles: {
+              fill: string;
+            };
+          };
         };
       };
     };
@@ -154,6 +166,14 @@ type PortfolioSectionTitleHeaderTheme = Theme["portfolio"]["sectionHeader"];
 interface ComputedPortfolioSectionTitleHeaderTheme extends PortfolioSectionTitleHeaderTheme {
   fontFamily: string;
   fontSize: string;
+}
+
+// Theme-specific (Light/Dark) SVG style values
+type ThemeSVGStyles = Theme["portfolio"]["item"]["resourceLinks"]["item"]["icon"]["svgStyles"];
+interface SVGStyles extends ThemeSVGStyles {
+  // Common values (ie independent of color)
+  width: string;
+  height: string;
 }
 
 
@@ -305,10 +325,10 @@ interface ComputedTheme extends Theme {
           // Font
           fontFamily: string;
           fontSize: string;
-          // Sizing for SVG Icons
-          iconStyles: {
-            width: string;
-            height: string;
+          // Common Styles for all Links-related SVG Icons
+          icon: {
+            svgStyles: SVGStyles;
+            // pathStyles: ..
           },
         };
       };
@@ -337,10 +357,10 @@ interface ComputedTheme extends Theme {
           fontFamily: string;
           font: string;
           fontSize: string;
-          // Sizing for SVG Icons
-          iconStyles: {
-            width: string;
-            height: string;
+          // Common Styles for all Release-related SVG Icons
+          icon: {
+            svgStyles: SVGStyles;
+            // pathStyles: ..
           },
         };
       };
@@ -350,11 +370,7 @@ interface ComputedTheme extends Theme {
   footerStyles: {
     textColor: string;
     backgroundColor: string;
-    svgStyles: {
-      fill: string;
-      width: string;
-      height: string;
-    };
+    svgStyles: SVGStyles;
   }
 }
 

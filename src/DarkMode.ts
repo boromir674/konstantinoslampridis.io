@@ -116,6 +116,11 @@ const darkColorMode: Theme = {
           color: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
           onHoverBackgroundColor: DESIGN_TOKENS['--md-sys-color-tertiary-container-dark'],
           onHoverColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-container-dark'],
+          icon: {
+            svgStyles: {
+              fill: DESIGN_TOKENS['--md-sys-color-on-secondary-container-dark'],
+            }
+          }
         }
       },
       // RELEASES PANE - DARK
@@ -150,6 +155,11 @@ const darkColorMode: Theme = {
           codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
           // ON HOVER: Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
           onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
+          icon: {
+            svgStyles: {
+              fill: DESIGN_TOKENS["--md-sys-color-on-surface-dark"],
+            },
+          },
         },
       },
     },

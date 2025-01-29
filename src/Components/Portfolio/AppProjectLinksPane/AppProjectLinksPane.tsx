@@ -2,18 +2,16 @@
 import React, { FC } from 'react';
 import styled from "@emotion/styled";
 
-// import App Icons Hook
-// import { useAppIcons } from '../../../Hooks/useAppIcons';
-
+import { IconStyles } from '../../../interfaces';
 import { createSVGIcon } from '../../SVGIcons';
-
 import { withDefaultProps } from '../../hoc';
 import Typography from '../../Typography';
-
 import AppResourceLinkButton from './AppResourceLinkButton'
+
 
 type ExternalLinkTypeNames = "github" | 'source_code_repo' | "docs" | "documentation" | "ci/cd";
 
+// Recognizable by the code: createSVG Function, SVG Styles Mapping
 type ProjectLinkTypeNames = "github" | "docs" | "ci/cd";
 
 // Record of ReleaseTypeNames to icon type names
@@ -35,7 +33,6 @@ interface Link {
     type: ExternalLinkTypeNames;
 }
 
-
 interface AppProjectLinksPaneProps {
     data: {
         links: Link[];
@@ -52,11 +49,8 @@ interface AppProjectLinksPaneProps {
             backgroundColor: string;
             onHoverColor: string;
             onHoverBackgroundColor: string;
-            icons?: {
-                svgStyles?: React.SVGProps<SVGSVGElement>;
-                // Path props, except for d attribute
-                pathStyles?: Omit<React.SVGProps<SVGPathElement>, "d">[];
-            }[],
+            /** Allows overriding <svg style=..> and <path style=..> */
+            icons?: IconStyles | IconStyles[];
         }
         // headerMarginBottom: string;
     };
@@ -113,19 +107,9 @@ const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
                             urlText={link.url}
                         >
                             <IconWrapper>
-                                {createSVGIcon(
-                                    PROJECT_LINKS_MAPPING[link.type],
-                                    theme.item.icons?.[index]
-                                    // {
-                                    //     svgStyles: {
-                                    //         fill: theme.item.color,
-                                    //     },
-                                    //     pathStyles: [
-                                    //         {
-                                    //             fill: theme.item.color,
-                                    //         },
-                                    //     ],
-                                    // }
+                                {createSVGIcon(PROJECT_LINKS_MAPPING[link.type],
+                                    // SVG style overrides (ie fill CSS) necessary for color mode switching
+                                    Array.isArray(theme.item.icons) ? theme.item.icons[index] : theme.item.icons,
                                 )}
                             </IconWrapper>
                             {/* <Icon type={link.type} /> */}

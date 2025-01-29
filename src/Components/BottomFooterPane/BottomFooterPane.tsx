@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
-// import { useTheme } from "@emotion/react";
 
 import { createSVGIcon } from '../SVGIcons';
 

@@ -13,8 +13,8 @@ import { Context as ResponsiveContext } from "react-responsive";
 
 
 // Imports for Business Logic
-import VerticalMainPane, { AppVerticalMainPaneProps } from '../src/Components/VerticalMainPane';
-import BottomFooterPane, { BottomFooterPaneProps } from '../src/Components/BottomFooterPane';
+import VerticalMainPane from '../src/Components/VerticalMainPane';
+import BottomFooterPane from '../src/Components/BottomFooterPane';
 import BigScreenView, { BigScreenViewProps } from "../src/Components/BigScreenView";
 
 import { lightTheme } from '../src/theme';
@@ -383,6 +383,7 @@ beforeEach(() => {
     }))
 })
 LIGHT_THEME.verticalMainPane.portfolio.item.theme.projectDescription.margin
+
 ///// TEST 1 /////
 test("Main/Footer - Overlap: render fragment with Main and Footer and verify they do not overlap", () => {
 
@@ -425,7 +426,7 @@ test("Main/Footer - Overlap: render fragment with Main and Footer and verify the
 });
 
 
-// BigScreenView PROPS VALUES
+// BigScreenView PROPS VALUES for below Test Cases
 const bigScreenViewProps: BigScreenViewProps = {
     // same interface as the props of the Component
     theme: LIGHT_THEME,
@@ -769,7 +770,6 @@ test("Main/Footer - Overlap: render BigScreenView with width 350 and verify Main
     expect(verticalMainPaneBottom).toBeCloseTo(bottomFooterPaneTop, 0);
 
 });
-
 
 ///// TEST 4 /////
 test("Main/Footer - Overlap: render BigScreenView with width 750 and verify Main and Footer do not overlap", () => {

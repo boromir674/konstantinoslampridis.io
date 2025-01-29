@@ -97,6 +97,15 @@ const mergeStylings = (
           item: {
             ...theme.portfolio.item.resourceLinks.item,
             ...commonStyling.portfolio.item.resourceLinks.item,
+            icon: {
+              ...theme.portfolio.item.resourceLinks.item.icon,
+              ...commonStyling.portfolio.item.resourceLinks.item.icon,
+              svgStyles: {
+                // Merge color-dependent (ie fill) styles with common styles (ie width, height)
+                ...theme.portfolio.item.resourceLinks.item.icon.svgStyles,
+                ...commonStyling.portfolio.item.resourceLinks.item.icon.svgStyles,
+              },
+            },
           },
         },
         // Software Releases - Pane
@@ -110,6 +119,14 @@ const mergeStylings = (
             ...theme.portfolio.item.releases.item,
             ...commonStyling.portfolio.item.releases.item,
             fontFamily: commonStyling.portfolio.item.releases.item.font,
+            icon: {
+              ...theme.portfolio.item.releases.item.icon,
+              ...commonStyling.portfolio.item.releases.item.icon,
+              svgStyles: {
+                ...theme.portfolio.item.releases.item.icon.svgStyles,
+                ...commonStyling.portfolio.item.releases.item.icon.svgStyles,
+              },
+            },
           },
         },
       },

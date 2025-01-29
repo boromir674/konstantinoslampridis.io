@@ -14,6 +14,7 @@ import AppResourceLinkButton from './AppResourceLinkButton'
 
 type ExternalLinkTypeNames = "github" | 'source_code_repo' | "docs" | "documentation" | "ci/cd";
 
+// Recognizable by the code: createSVG Function, SVG Styles Mapping
 type ProjectLinkTypeNames = "github" | "docs" | "ci/cd";
 
 // Record of ReleaseTypeNames to icon type names
@@ -35,7 +36,12 @@ interface Link {
     type: ExternalLinkTypeNames;
 }
 
-
+/** Allows overriding <svg style=..> and <path style=..> */
+type Icon = {
+    svgStyles?: React.SVGProps<SVGSVGElement>;
+    // Path props, except for d attribute
+    pathStyles?: Omit<React.SVGProps<SVGPathElement>, "d">[];
+}
 interface AppProjectLinksPaneProps {
     data: {
         links: Link[];
@@ -52,11 +58,7 @@ interface AppProjectLinksPaneProps {
             backgroundColor: string;
             onHoverColor: string;
             onHoverBackgroundColor: string;
-            icons?: {
-                svgStyles?: React.SVGProps<SVGSVGElement>;
-                // Path props, except for d attribute
-                pathStyles?: Omit<React.SVGProps<SVGPathElement>, "d">[];
-            }[],
+            icons?: Icon | Icon[];
         }
         // headerMarginBottom: string;
     };

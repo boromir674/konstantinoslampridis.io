@@ -11,7 +11,7 @@ interface BottomFooterPaneTheme {
   svgStyles: React.SVGProps<SVGSVGElement>
 }
 interface BottomFooterPaneContainerProps {
-  theme: BottomFooterPaneTheme;
+  theme: Omit<BottomFooterPaneTheme, 'svgStyles'>;
   children?: React.ReactNode;
 };
 
@@ -41,27 +41,21 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
 const StyledSpan = styled.span`
   margin-right: 5px;
 `;
-
-
 interface BottomFooterPaneProps {
   id?: string;
   theme: BottomFooterPaneTheme;
   children?: React.ReactNode;
 }
 
+/** Renders a div, with a span child, with a github logo <path>
+ * 
+ * Allows controlling the width, height and fill svg 'style' values.
+*/
 const BottomFooterPane: FC<BottomFooterPaneProps> = (props) => {
+  const { svgStyles, ...divStyles } = props.theme;
   return (
-    <BottomFooterPaneContainer id={props.id} theme={props.theme}>
-      <StyledSpan>
-        {createSVGIcon(
-          'github',
-          // theme.releaseButtonTheme.icons?.[index]
-          {
-            svgStyles: props.theme.svgStyles,
-            // pathStyles: theme.releaseButtonTheme.icons?.[index].pathStyles,
-          }
-        )}
-      </StyledSpan>
+    <BottomFooterPaneContainer id={props.id} theme={divStyles}>
+      <StyledSpan>{createSVGIcon('github', { svgStyles })}</StyledSpan>
     </BottomFooterPaneContainer>
   );
 };
@@ -69,4 +63,3 @@ const BottomFooterPane: FC<BottomFooterPaneProps> = (props) => {
 export default BottomFooterPane;
 
 export type { BottomFooterPaneProps };
-export { BottomFooterPane };

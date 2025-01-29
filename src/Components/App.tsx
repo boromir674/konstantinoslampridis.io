@@ -78,61 +78,13 @@ const App: FC = () => {
     }
   `);
 
-  const [adaptTheme] = useThemeAdapterCallback();
+  const [adaptTheme, adaptThemeV2] = useThemeAdapterCallback();
   const [adaptData] = useDataAdapterCallback();
-
-  // compute maximum number of Releases contained in a single portfolio item
-  const maxNumberOfReleasesPerPortfolioItems = useMemo(() => userDefinedWebsiteData.portfolio.reduce(
-    (acc, { release = [] }) => Math.max(acc, release.length),
-    0
-  ), [userDefinedWebsiteData]);
-  // compute maximum number of links contained in a single portfolio item
-  const maxNumberOfLinksPerPortfolioItems = useMemo(() => userDefinedWebsiteData.portfolio.reduce(
-    (acc, { resource_links = [] }) => Math.max(acc, resource_links.length),
-    0
-  ), [userDefinedWebsiteData]);
-
-  const computeTheme = useCallback((theme: RawColorTheme) => {
-    const appTheme = adaptTheme(theme);
-    // Adapt 'icon' to 'icons' by crating an rray of the same item multiple times
-    const adaptedAppTheme: AppColorTheme = {
-      ...appTheme,
-      verticalMainPane: {
-        ...appTheme.verticalMainPane,
-        portfolio: {
-          ...appTheme.verticalMainPane.portfolio,
-          item: {
-            ...appTheme.verticalMainPane.portfolio.item,
-            theme: {
-              ...appTheme.verticalMainPane.portfolio.item.theme,
-              links: {
-                ...appTheme.verticalMainPane.portfolio.item.theme.links,
-                item: {
-                  ...appTheme.verticalMainPane.portfolio.item.theme.links.item,
-                  icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => appTheme.verticalMainPane.portfolio.item.theme.links.item.icon
-                  ),
-                },
-              },
-              releases: {
-                ...appTheme.verticalMainPane.portfolio.item.theme.releases,
-                releaseButtonTheme: {
-                  ...appTheme.verticalMainPane.portfolio.item.theme.releases.releaseButtonTheme,
-                  icons: Array.from({ length: maxNumberOfReleasesPerPortfolioItems }, () => appTheme.verticalMainPane.portfolio.item.theme.releases.releaseButtonTheme.icon
-                  ),
-                },
-              },
-            },
-          },
-        },
-      },
-    }
-    return adaptedAppTheme;
-  }, [adaptTheme]);
 
   // Memoized Data and Themes
   const appData = useMemo(() => adaptData(userDefinedWebsiteData), [adaptData, userDefinedWebsiteData]);
-  const lightAppTheme = useMemo(() => computeTheme(lightTheme), [computeTheme, lightTheme]);
-  const darkAppTheme = useMemo(() => computeTheme(darkTheme), [computeTheme, darkTheme]);
+  const lightAppTheme = useMemo(() => adaptThemeV2(lightTheme), [adaptThemeV2, lightTheme]);
+  const darkAppTheme = useMemo(() => adaptThemeV2(darkTheme), [adaptThemeV2, darkTheme]);
 
   return (
     // <main>

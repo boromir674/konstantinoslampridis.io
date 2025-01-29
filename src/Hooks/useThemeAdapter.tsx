@@ -20,11 +20,14 @@ type PortfolioItemThemeLinksItem = BigScreenViewProps["theme"]["verticalMainPane
 
 // Type Common Adapted Icon Object for DRY
 interface Icon {
+    // we want to add these to the default values passes to style prop of <svg>
     svgStyles: {
         width: string
         height: string
         fill: string
     }
+    // we do not need to override any pathStyles
+    // pathStyles:
 }
 
 // Typechecking for the Adapter

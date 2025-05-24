@@ -25,11 +25,11 @@ jobs:
       default_trigger: true
       override: '${{ vars.OV_TEST_UNIT }}'
 
-  # lint:
-  #   if: ( needs.pipe.outputs.OVERRIDE_LINT == 'true' || ( needs.pipe.outputs.OVERRIDE_LINT == '' && needs.pipe.result == 'success' ) )
-  #   uses: ./.github/workflows/lint.yml
-  #   with:
-  #     pipe_config: '{"ALLOW_LINT_TO_FAIL": "false"}'
+  lint:
+    uses: ./.github/workflows/lint.yml
+    with:
+      trigger: '{"default_trigger": true, "override": "${{ vars.OV_LINT }}"}'
+      allow_fail: false
 
   ## BUILD PRODUCTION MINIFIED BUNDLE
   gatsby:

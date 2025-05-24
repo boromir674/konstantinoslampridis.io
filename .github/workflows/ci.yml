@@ -22,8 +22,7 @@ jobs:
   test:  ## Unless override, default trigger 'always'
     uses: ./.github/workflows/test-typescript.yml
     with:
-      default_trigger: true
-      override: '${{ vars.OV_TEST_UNIT }}'
+      trigger: '{"default_trigger": true, "override": "${{ vars.OV_TEST_UNIT }}"}'
 
   lint:
     uses: ./.github/workflows/lint.yml

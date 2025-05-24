@@ -3,16 +3,11 @@ on:
   workflow_call:
     inputs:
       # Trigger Behavior Settings #
-      default_trigger:
+      trigger:
         required: false
-        default: true
-        description: "Default trigger for the workflow. If true the 'default behavior' is to run on call. If false, the 'default behavior' is to be skipped."
-        type: boolean
-
-      override:
-        required: false
-        description: "Override the default trigger, 'true' gurantees run, 'false' not run"
-        type: string  # IMPORTANT: must be string, to model 3 states {true, false, none}
+        default: '{"default_trigger": true, "override": ""}'
+        description: "JSON object controlling Trigger behaviour/logic. If 'override' is set to 'true' the workflow will run regardless of the default trigger. If 'override' is set to 'false' the workflow will not run regardless of the default trigger. If 'override' is not set, the default trigger will be used."
+        type: string
 
     outputs:
       COVERAGE_ARTIFACT:
@@ -20,8 +15,7 @@ on:
         value: ${{ jobs.build.outputs.COVERAGE_ARTIFACT }}
 jobs:
   jest:
-    if: inputs.override == 'true' || (inputs.override != 'false' && inputs.default_trigger == true)
-
+    if: (fromJson(inputs.trigger).override == 'true' || (fromJson(inputs.trigger).override != 'false' && fromJson(inputs.trigger).default_trigger == true))
     runs-on: ubuntu-latest
     outputs:
       COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}

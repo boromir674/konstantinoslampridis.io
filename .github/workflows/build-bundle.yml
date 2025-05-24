@@ -21,7 +21,7 @@ on:
       trigger:
         required: false
         default: '{"default_trigger": true, "override": ""}'
-        description: "JSON object controlling Trigger behaviour/logic."
+        description: "JSON object controlling Trigger behaviour/logic. If 'override' is set to 'true' the workflow will run regardless of the default trigger. If 'override' is set to 'false' the workflow will not run regardless of the default trigger. If 'override' is not set, the default trigger will be used."
         type: string
 
     ### OUTPUTS ###

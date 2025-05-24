@@ -216,6 +216,14 @@ Lighthouse Audit can "happen" `locally`, `on CI`, `with docker`, optionally in *
 - Help: `npm exec --package=lighthouse -c 'lighthouse --help'`
 - save trace contents and devtools logs to disk: `--save-assets`
 
+### Emulate online CI locally
+
+```sh
+npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=3'
+
+./scripts/ci-compare-json-arrays.py .lighthouseci/assertion-results.json ".lh-assertion-results-gs.json"
+```
+
 ### From `Local Terminal`
 
 Update your `npm` if need be

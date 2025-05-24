@@ -65,6 +65,7 @@ services:
       - ./src/:/app/src/
       - ./tsconfig.json:/app/tsconfig.json
       - ./gatsby-node.ts:/app/gatsby-node.ts
+      - ./gatsby-config.ts:/app/gatsby-config.ts
 
   ### LINT ###
   # docker-compose run --rm --build lint

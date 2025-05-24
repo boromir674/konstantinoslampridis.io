@@ -25,40 +25,28 @@ jobs:
       default_trigger: true
       override: '${{ vars.OV_TEST_UNIT }}'
 
-  lint:
-    needs: pipe
-    if: always() && ( needs.pipe.outputs.OVERRIDE_LINT == 'true' || ( needs.pipe.outputs.OVERRIDE_LINT == '' && needs.pipe.result == 'success' ) )
-    uses: ./.github/workflows/lint.yml
-    with:
-      pipe_config: '{"ALLOW_LINT_TO_FAIL": "false"}'
+  # lint:
+  #   if: ( needs.pipe.outputs.OVERRIDE_LINT == 'true' || ( needs.pipe.outputs.OVERRIDE_LINT == '' && needs.pipe.result == 'success' ) )
+  #   uses: ./.github/workflows/lint.yml
+  #   with:
+  #     pipe_config: '{"ALLOW_LINT_TO_FAIL": "false"}'
 
-## BUILD PRODUCTION MINIFIED BUNDLE
+  ## BUILD PRODUCTION MINIFIED BUNDLE
   gatsby:
-    needs: pipe
-    if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
-    # TODO rename as below, for current solutoin to have better semantics
-    # if: always() && ( needs.pipe.outputs.FORCE_BUILD == 'true' || ( needs.pipe.outputs.FORCE_BUILD == '' && needs.test.result == 'success' ) )
-
-    # ALT SOLUTION:
-    # if: always() && needs.pipe.outputs.BUILD_ON == 'true' \
-    #  && ( needs.pipe.outputs.FORCE_BUILD == 'true' || needs.test.result == 'success' )
-
-    # TODO: support different logic: allow Pass, and allow Skipped policies
-
     uses: ./.github/workflows/build-bundle.yml
     with:
+      trigger: '{"default_trigger": true, "override": "${{ vars.OV_GATSBY }}"}'
       ci_artifact: web_bundle
 
-# LIGHTHOUSE CI
+  # LIGHTHOUSE CI
   audit:
     needs: gatsby
-    if: always() && ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == 'true' || ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == '' && success() ) )
     uses: ./.github/workflows/lighthouse.yml
     with:
       target_ci_artifact: web_bundle
       # target_url: 'https://konstantinoslampridis.io'
 
-### E2E TEST ###
+  ### E2E TEST ###
   # e2e:
   #   needs: gatsby
   #   if: always() && ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == 'true' || ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == '' && success() ) )
@@ -66,7 +54,7 @@ jobs:
   #   with:
   #     website_artifact: web_bundle
 
-# Test Web Bundle
+  # Test Web Bundle
   test_bundle:
     needs: gatsby
     # allow running regardless of gatsby's 'needs' !

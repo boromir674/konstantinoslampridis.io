@@ -66,7 +66,8 @@ jobs:
           name: ${{ inputs.target_ci_artifact }}
           path: public
 
-      - name: "Audit Site, run Assertions, record results and proceed"
+      # RUN 1 TIME, LIGHTHOUSE and always exit with 0, even if LHCI assertions fail
+      - name: "Audit Site and run Assertions once; then record results and proceed"
         # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
         run: |
           lhci autorun --config "${{ env.REPO_CHECKOUT }}/.lighthouserc.yml"  "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0

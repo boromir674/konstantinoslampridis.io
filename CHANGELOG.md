@@ -4,6 +4,33 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+
+## [1.13.1] - 25/05/2025
+
+### Changes
+
+#### Refactor
+- satisfy eslint rules across the codebase
+
+#### CI
+- better and simpler cicd.yml
+- adopt trigger input in `lint.yml` reusable Workflow
+- fix `test-typescript.yml` Workflow
+- adopt the trigger reusable workflow input with JSON-encoded string type
+- rename workflow file for clarity
+- improve code comments in CI workflows
+- dedicate a new `ci.yml` CI Pipeline realized in a workflow file
+
+#### Chore
+- mount `gatsby-config.ts` in `docker-compose`
+
+#### Docs
+- update `README.md`
+
+#### Test
+- update Gold Standard Lighthouse tests, adding a new entry
+
+
 ## [1.13.1-dev] - 29/01/2025
 
 ### Changes

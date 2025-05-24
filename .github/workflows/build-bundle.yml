@@ -10,12 +10,19 @@ name: 'Build Minified Bundle'
 on:
   workflow_call:
     inputs:
-    # Optional CI Artifact key/placeholder for bundle
+      # Optional CI Artifact key/placeholder for bundle
       ci_artifact:
         required: false
         type: string
         description: 'CI Artifact key/placeholder for bundle'
         default: 'bundle'
+
+      # Trigger Behavior Settings #
+      trigger:
+        required: false
+        default: '{"default_trigger": true, "override": ""}'
+        description: "JSON object controlling Trigger behaviour/logic. If 'override' is set to 'true' the workflow will run regardless of the default trigger. If 'override' is set to 'false' the workflow will not run regardless of the default trigger. If 'override' is not set, the default trigger will be used."
+        type: string
 
     ### OUTPUTS ###
     # Map the workflow outputs to job outputs
@@ -29,6 +36,9 @@ on:
 
 jobs:
   build:
+    # if: inputs.override == 'true' || (inputs.override != 'false' && inputs.default_trigger == true)
+    # equivalent to old solution leveraging json input object
+    if: (fromJson(inputs.trigger).override == 'true' || (fromJson(inputs.trigger).override != 'false' && fromJson(inputs.trigger).default_trigger == true))
     runs-on: ubuntu-latest
     env:
       _IMAGE_NAME: 'spa-prod-bundle'

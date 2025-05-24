@@ -19,37 +19,20 @@ on:
     tags:
       - v*
 
+
 # Note: env context only available as env vars in code, not in 'if' conditions!
+# Many 'Job Triggers' can be overridden using the 'Repository Variables' gh feature:
+#  - https://github.com/boromir674/konstantinoslampridis.io/settings/variables/actions
 
 jobs:
-  # can retire this Job if all 'if' condition read values from 'vars' for determining Top-Level overrides
-  pipe:
-  # CONFIGURE PIPELINE - to allow git-tracked logic for Jobs if/when to run
-    uses: ./.github/workflows/pipe_config.yml
+
+  ### UNIT TEST ###
+  test:  ## Unless override, default trigger 'always'
+    uses: ./.github/workflows/test-typescript.yml
     with:
-      ALLOW_LINT_TO_FAIL: true
+      trigger: '{"default_trigger": true, "override": "${{ vars.OV_TEST_UNIT }}"}'
 
-      ##### OVERRIDE JOB SWITCHES #####
-      # true gurantees Job run, false gurantees Job NOT run
-
-      # OVERRIDE_UNIT_TESTS: false  # shutdown unit-tests
-      # OVERRIDE_LINT: false  # shutdown lint
-      # OVERRIDE_BUILD: false  # prevent build
-      # OVERRIDE_LIGHTHOUSE: false  # prevent lighthouse
-      # OVERRIDE_E2E_TESTS: false  # prevent E2E tests
-      # OVERRIDE_DEPLOY: true  # force deployment
-
-      #############################
-
-### UNIT TEST ###
-  test:
-    needs: pipe
-    if: always() && ( needs.pipe.outputs.OVERRIDE_UNIT_TESTS == 'true' || ( needs.pipe.outputs.OVERRIDE_UNIT_TESTS == '' && needs.pipe.result == 'success' ) )
-    uses: ./.github/workflows/test.yml
-    with:
-      pipe_config: ${{ toJson(needs.pipe.outputs) }}
-
-# HOST COVERAGE Results
+  # HOST COVERAGE Results
   codecov:
     needs: test
     uses: ./.github/workflows/codecov.yml
@@ -63,51 +46,38 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
   lint:
-    needs: pipe
-    if: always() && ( needs.pipe.outputs.OVERRIDE_LINT == 'true' || ( needs.pipe.outputs.OVERRIDE_LINT == '' && needs.pipe.result == 'success' ) )
     uses: ./.github/workflows/lint.yml
     with:
-      pipe_config: '{"ALLOW_LINT_TO_FAIL": "${{ needs.pipe.outputs.ALLOW_LINT_TO_FAIL }}"}'
+      trigger: '{"default_trigger": true, "override": "${{ vars.OV_LINT }}"}'
+      allow_fail: false
 
-## BUILD PRODUCTION MINIFIED BUNDLE
+  ## BUILD PRODUCTION MINIFIED BUNDLE
   gatsby:
-    needs: pipe
-    if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
-    # TODO rename as below, for current solutoin to have better semantics
-    # if: always() && ( needs.pipe.outputs.FORCE_BUILD == 'true' || ( needs.pipe.outputs.FORCE_BUILD == '' && needs.test.result == 'success' ) )
-
-    # ALT SOLUTION:
-    # if: always() && needs.pipe.outputs.BUILD_ON == 'true' \
-    #  && ( needs.pipe.outputs.FORCE_BUILD == 'true' || needs.test.result == 'success' )
-
-    # TODO: support different logic: allow Pass, and allow Skipped policies
-
     uses: ./.github/workflows/build-bundle.yml
     with:
+      trigger: "{'default_trigger': ${{ vars.OV_DEPLOY == 'false' && 'false' || 'true' }}, 'override': '${{ vars.OV_GATSBY }}'}"
       ci_artifact: web_bundle
 
-# LIGHTHOUSE CI
+  # LIGHTHOUSE CI
   audit:
     needs: gatsby
-    if: always() && ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == 'true' || ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == '' && success() ) )
+    if: always() && ( vars.OV_LIGHTHOUSE == 'true' || ( vars.OV_LIGHTHOUSE != 'false' && success() ) )
     uses: ./.github/workflows/lighthouse.yml
     with:
       target_ci_artifact: web_bundle
       # target_url: 'https://konstantinoslampridis.io'
 
-### E2E TEST ###
+  ### E2E TEST ###
   e2e:
     needs: gatsby
-    if: always() && ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == 'true' || ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == '' && success() ) )
+    if: always() && ( vars.OV_E2E_TESTS == 'true' || ( vars.OV_E2E_TESTS != 'false' && success() ) )
     uses: ./.github/workflows/e2e-test.yml
     with:
       website_artifact: web_bundle
 
-# Test Web Bundle
+  # Test Web Bundle
   test_bundle:
     needs: gatsby
-    # allow running regardless of gatsby's 'needs' !
-    if: always() && needs.gatsby.result == 'success'
     uses: ./.github/workflows/test-bundle.yml
     with:
       bundle_ci_artifact: web_bundle
@@ -117,11 +87,10 @@ jobs:
       # Configurable Acceptance Criteria: accept up to 2.5MB
       bundle_size_acceptance: 2.6
 
-  # LOGICAL AGGREGATION OF CI
+  # LOGICAL AGGREGATION OF CI QA Jobs
   check:
     if: always()
     needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']
-    # needs: ['test_bundle']
     uses: boromir674/automated-workflows/.github/workflows/go-single-status.yml@v1.13.1
     with:
       # TODO: allow-skips passes an empty array here
@@ -137,16 +106,10 @@ jobs:
       main_branch: main
       release_branch: release
 
-  # Deploy Web Bundle
+  # DEPLOY to AWS or GITHUB PAGES the 'Web Bundle' (of files)
   deploy:
-    # if DEPLOY_ON override boolean switch is set:
-    # - true  --> Deployment WILL happen
-    # - false --> Deployment will NOT happen
-
-    # if boolean switch NOT SET then implicit default policy condition must be met:
-    # - previous Jobs must succeed and signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
     needs: signal_deploy
-    if: always() && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || ( needs.pipe.outputs.OVERRIDE_DEPLOY == '' && needs.pipe.result == 'success' && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true' ) )
+    if: always() && needs.signal_deploy.outputs.AUTOMATED_DEPLOY == 'true'
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:

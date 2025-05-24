@@ -3,26 +3,24 @@
 #################################
 
 # Automatically, Publish a Production Tag
-# RUNS when a PR  'release' --> 'main/master' Merges AND PR has label 'auto-deploy'
+# RUNS when a code merge happens via a PR  'release' --> 'main' labelled with 'auto-deploy'
 on:
   pull_request:
     types: [closed]
     branches:
       # access with ${{ github.event.pull_request.base.ref }}
       - main
-      - master
 
 jobs:
   tag_prod:
-    runs-on: ubuntu-latest
     # if merged PR Merged AND HEAD branch "was" 'release' AND PR has label 'auto-deploy'
     if: github.event.pull_request.merged == true &&
       github.event.pull_request.head.ref == 'release' &&
       contains(github.event.pull_request.labels.*.name, 'auto-deploy')
     uses: boromir674/automated-workflows/.github/workflows/go-tag-main.yml@v1.13.1
     with:
-      gh_username: "Konstantinos Lampridis"
-      gh_email: "boromir674@hotmail.com"
+      gh_username: ${{ vars.TAG_USER_NAME }}
+      gh_email: ${{ vars.TAG_USER_EMAIL }}
       main_branch: ${{ github.event.pull_request.base.ref }}
     secrets:
       # needs Content write to create Tag!

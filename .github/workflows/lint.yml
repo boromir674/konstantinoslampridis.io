@@ -2,14 +2,20 @@ name: 'Code Lint using ESlint'
 on:
   workflow_call:
     inputs:
-      pipe_config:
-        description: 'Pipe Config'
-        required: true
+      # Trigger Behavior Settings #
+      trigger:
+        required: false
+        default: '{"default_trigger": true, "override": ""}'
+        description: "JSON object controlling Trigger behaviour/logic."
         type: string
-        default: '{"LINT_ON":"true","ALLOW_LINT_TO_FAIL":"false"}'
+      allow_fail:
+        description: 'Pipe Config'
+        type: boolean
+        default: false
+        required: false
 jobs:
   eslint:
-    # if: needs.pipe_config.outputs.LINT_ON == 'true'
+    if: (fromJson(inputs.trigger).override == 'true' || (fromJson(inputs.trigger).override != 'false' && fromJson(inputs.trigger).default_trigger == true))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +33,7 @@ jobs:
 
       - name: Run ESlint against all code
         env:
-          ALLOW_LINT_TO_FAIL: ${{ fromJson(inputs.pipe_config).ALLOW_LINT_TO_FAIL }}
+          ALLOW_LINT_TO_FAIL: ${{ inputs.allow_fail }}
         run: |
           eslint_pass_boolean_flag=1
 

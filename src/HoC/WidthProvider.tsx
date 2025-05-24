@@ -48,7 +48,7 @@ export default function WidthProvideRGL<Props extends {
         };
 
         elementRef = React.createRef<HTMLDivElement>();
-        mounted: boolean = false;
+        mounted = false;
         resizeObserver: ResizeObserver | undefined
 
         // SAVE Node Width to State and observe resize changes

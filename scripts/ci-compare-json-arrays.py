@@ -64,6 +64,7 @@ for i in range(len(_bigger_list)):
 data_runtime = {key(x): x for x in runtime}
 data_gold_standard = {key(x): x for x in gold_standard}
 
+## VERIFY that Runtime Lighthouse Results are at least as good as the Gold Standard
 assert set(data_runtime.keys()) == set(data_gold_standard.keys()), (
     "Keys are different between Runtime and Gold Standard:\n\n"
     f"Runtime: {sorted(data_runtime.keys())}\n"

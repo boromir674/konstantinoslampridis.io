@@ -1,11 +1,7 @@
 name: 'Run Unit Tests'
 on:
   workflow_call:
-    inputs:
-      pipe_config:
-        required: true
-        type: string
-        description: 'Configuration for the Unit Tests'
+
     outputs:
       COVERAGE_ARTIFACT:
         description: "Coverage CI Artifact (id/alias) of uploaded Coverage Results"

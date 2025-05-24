@@ -117,7 +117,7 @@ jobs:
       # Configurable Acceptance Criteria: accept up to 2.5MB
       bundle_size_acceptance: 2.6
 
-  # LOGICAL AGGREGATION OF CI
+  # LOGICAL AGGREGATION OF CI QA Jobs
   check:
     if: always()
     needs: ['test', 'lint', 'test_bundle', 'e2e', 'audit']

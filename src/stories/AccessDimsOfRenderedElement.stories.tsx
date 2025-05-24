@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useRef } from 'react';
 
 // Component Referencing Ref
-interface ComponentReferencingRefProps {};
-const ComponentReferencingRef: FC<ComponentReferencingRefProps> = () => {
+
+const ComponentReferencingRef: FC = () => {
     const ref = useRef<HTMLDivElement>(null);
 
     const handleClick = useCallback(() => {
@@ -46,4 +46,4 @@ export default {
 };
 
 // STORY that simply renders the Component
-export const componentReferencingRefProps: ComponentReferencingRefProps = {};
+export const componentReferencingRefProps = {};

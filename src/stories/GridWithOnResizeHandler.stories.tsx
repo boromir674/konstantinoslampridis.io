@@ -320,7 +320,7 @@ interface DynamicMultiRefBindingToRenderedGridProps {
 // MAIN COMPONENT
 const DynamicMultiRefBindingToRenderedGrid: FC<DynamicMultiRefBindingToRenderedGridProps> = (props) => {
   // TODO allow passing from props
-  const descriptionMargin: number = 16;
+  const descriptionMargin = 16;
 
     // Helper Code for Showing Number of Renders
     const rendersNo = useRef(0)

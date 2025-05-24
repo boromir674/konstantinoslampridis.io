@@ -15,7 +15,7 @@ on:
         value: ${{ jobs.build.outputs.COVERAGE_ARTIFACT }}
 jobs:
   jest:
-    if: (fromJson(inputs.trigger).override == 'true' || (fromJson(inputs.trigger).override != 'false' && fromJson(inputs.trigger).default_trigger == true))
+    if: fromJson(inputs.trigger).override == 'true' || (fromJson(inputs.trigger).override != 'false' && fromJson(inputs.trigger).default_trigger == true)
     runs-on: ubuntu-latest
     outputs:
       COVERAGE_ARTIFACT: ${{ steps.set_coverage_artifact_name.outputs.COVERAGE_ARTIFACT }}

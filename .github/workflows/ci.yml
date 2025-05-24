@@ -1,0 +1,81 @@
+# CI Pipeline
+
+# Designed for Quick Feedback loop on pushed changes (ie topical branches)
+
+on:
+  # Triggers on branch pushes, except for branches main, release, and dev
+  push:
+    branches:
+      - '*'
+      # except main, dev, release, ..
+      - "!main"
+      - "!dev"
+      - "!release"
+      - '!board-n-release-*'
+      - '!board-request-*'
+
+# Note: env context only available as env vars in code, not in 'if' conditions!
+
+jobs:
+
+  ### UNIT TEST ###
+  test:  ## Unless override, default trigger 'always'
+    uses: ./.github/workflows/test-typescript.yml
+    with:
+      default_trigger: true
+      override: '${{ vars.OV_TEST_UNIT }}'
+
+  lint:
+    needs: pipe
+    if: always() && ( needs.pipe.outputs.OVERRIDE_LINT == 'true' || ( needs.pipe.outputs.OVERRIDE_LINT == '' && needs.pipe.result == 'success' ) )
+    uses: ./.github/workflows/lint.yml
+    with:
+      pipe_config: '{"ALLOW_LINT_TO_FAIL": "false"}'
+
+## BUILD PRODUCTION MINIFIED BUNDLE
+  gatsby:
+    needs: pipe
+    if: always() && ( needs.pipe.outputs.OVERRIDE_BUILD == 'true' || ( needs.pipe.outputs.OVERRIDE_BUILD == '' && ( needs.pipe.outputs.OVERRIDE_DEPLOY == 'true' || needs.pipe.result == 'success' ) ) )
+    # TODO rename as below, for current solutoin to have better semantics
+    # if: always() && ( needs.pipe.outputs.FORCE_BUILD == 'true' || ( needs.pipe.outputs.FORCE_BUILD == '' && needs.test.result == 'success' ) )
+
+    # ALT SOLUTION:
+    # if: always() && needs.pipe.outputs.BUILD_ON == 'true' \
+    #  && ( needs.pipe.outputs.FORCE_BUILD == 'true' || needs.test.result == 'success' )
+
+    # TODO: support different logic: allow Pass, and allow Skipped policies
+
+    uses: ./.github/workflows/build-bundle.yml
+    with:
+      ci_artifact: web_bundle
+
+# LIGHTHOUSE CI
+  audit:
+    needs: gatsby
+    if: always() && ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == 'true' || ( needs.pipe.outputs.OVERRIDE_LIGHTHOUSE == '' && success() ) )
+    uses: ./.github/workflows/lighthouse.yml
+    with:
+      target_ci_artifact: web_bundle
+      # target_url: 'https://konstantinoslampridis.io'
+
+### E2E TEST ###
+  # e2e:
+  #   needs: gatsby
+  #   if: always() && ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == 'true' || ( needs.pipe.outputs.OVERRIDE_E2E_TESTS == '' && success() ) )
+  #   uses: ./.github/workflows/e2e-test.yml
+  #   with:
+  #     website_artifact: web_bundle
+
+# Test Web Bundle
+  test_bundle:
+    needs: gatsby
+    # allow running regardless of gatsby's 'needs' !
+    if: always() && needs.gatsby.result == 'success'
+    uses: ./.github/workflows/test-bundle.yml
+    with:
+      bundle_ci_artifact: web_bundle
+      # expectations for assertions
+      expected_number_of_files: 50
+      bundle_size: ${{ needs.gatsby.outputs.BUNDLE_SIZE }}
+      # Configurable Acceptance Criteria: accept up to 2.5MB
+      bundle_size_acceptance: 2.6

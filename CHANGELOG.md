@@ -5,6 +5,20 @@
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.14.0] - 26/05/2025
+
+### Changes
+
+#### Feature
+- add PwC Experience Item
+
+#### Refactor
+- rename component to a better name
+
+#### CI
+- clean workflow code
+
+
 ## [1.13.1] - 25/05/2025
 
 ### Changes

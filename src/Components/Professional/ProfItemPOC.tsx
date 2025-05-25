@@ -50,6 +50,10 @@ const ExperienceItemTitle = styled(ExperienceItemTitleH3) <ExperienceItemTitlePr
   font-family: ${props => props.theme?.fontFamily || "inherit"};
   font-size: ${props => props.theme?.fontSize || "24px"};
   font-weight: bold;
+
+  // Option for underlining the title
+  // text-decoration: underline;
+  // text-underline-offset: 4px;
 `;
 
 interface ProfItemProps {

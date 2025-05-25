@@ -695,7 +695,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         Professional Career
       </h1>
       <div
-        className="css-ea9ttx"
+        className="css-1z0gzvl"
         onClick={[Function]}
       >
         <div
@@ -715,7 +715,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -924,7 +924,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="css-16hehss"
+        className="css-17r9skx"
         onClick={[Function]}
       >
         <div
@@ -944,7 +944,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -1188,7 +1188,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="css-17741q9"
+        className="css-2yeep8"
         onClick={[Function]}
       >
         <div
@@ -1208,7 +1208,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -1431,7 +1431,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-8b1see"
+        className="css-1c18dhl"
         onClick={[Function]}
       >
         <div
@@ -1451,7 +1451,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -1741,7 +1741,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-tmbde5"
+        className="css-1yjf400"
         onClick={[Function]}
       >
         <div
@@ -1761,7 +1761,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -1947,7 +1947,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-b2goo5"
+        className="css-h5pem9"
         onClick={[Function]}
       >
         <div
@@ -1967,7 +1967,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,
@@ -2150,7 +2150,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         </div>
       </div>
       <div
-        className="css-yhb7v1"
+        className="css-of4ajn"
         onClick={[Function]}
       >
         <div
@@ -2170,7 +2170,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           <h3
-            className="css-1wtdklz"
+            className="css-d85rro"
             style={
               {
                 "marginBottom": undefined,

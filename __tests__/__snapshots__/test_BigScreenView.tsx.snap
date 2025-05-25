@@ -500,13 +500,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           Professional Career
         </h1>
         <div
-          class="css-ea9ttx"
+          class="css-1z0gzvl"
         >
           <div
             css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
           >
             <h3
-              class="css-1wtdklz"
+              class="css-d85rro"
             >
               Software Engineer
             </h3>
@@ -574,13 +574,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="css-yhb7v1"
+          class="css-of4ajn"
         >
           <div
             css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
           >
             <h3
-              class="css-1wtdklz"
+              class="css-d85rro"
             >
               Software Engineer
             </h3>

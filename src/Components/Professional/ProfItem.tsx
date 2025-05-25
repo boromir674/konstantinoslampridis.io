@@ -57,7 +57,7 @@ interface AppProfessionalItemProps {
   children?: React.ReactNode;
 }
 
-const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
+const AppProfessionalItemDiv = styled.div<AppProfessionalItemProps>`
   // width: 200px;
   // height: 200px;
   padding: ${(props) => props.theme.padding || "10px"};
@@ -78,6 +78,8 @@ const AppProfessionalItem = styled.div<AppProfessionalItemProps>`
     background-color: ${(props) => props.theme.onHoverBackgroundColor};
     color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
   }
+
+  // margin-bottom: 16px;
 `;
 
 type OnClickCallback = () => void;
@@ -115,7 +117,7 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
       }
     }: renderPropsArgs) => {
       return (
-        <AppProfessionalItem theme={rest} onClick={onClick}>
+        <AppProfessionalItemDiv theme={rest} onClick={onClick}>
           <ProfItemPOC
             title={title}
             duration={duration}
@@ -138,14 +140,14 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
               },
             }}
           />
-        </AppProfessionalItem>
+        </AppProfessionalItemDiv>
       )
     },
     [theme]
   );
 
   return (
-    <ExperienceItem
+    <ExperienceItem  // Adapter Component
       renderProps={(d) =>
         renderProfessionalItem({
           data: d.dataInterface,

@@ -58,7 +58,7 @@ jobs:
       trigger: "{'default_trigger': ${{ vars.OV_DEPLOY == 'false' && 'false' || 'true' }}, 'override': '${{ vars.OV_GATSBY }}'}"
       ci_artifact: web_bundle
 
-  # LIGHTHOUSE CI
+  # LIGHTHOUSE CI with 1 "number of runs"
   audit:
     needs: gatsby
     if: always() && ( vars.OV_LIGHTHOUSE == 'true' || ( vars.OV_LIGHTHOUSE != 'false' && success() ) )
@@ -67,8 +67,8 @@ jobs:
       target_ci_artifact: web_bundle
       # target_url: 'https://konstantinoslampridis.io'
 
-  ### E2E TEST ###
-  e2e:
+  ### E2E TEST with Cypress ###
+  e2e:  # use MATRIX "strategy", for Testing with Chrome, Firefox, and Safari
     needs: gatsby
     if: always() && ( vars.OV_E2E_TESTS == 'true' || ( vars.OV_E2E_TESTS != 'false' && success() ) )
     uses: ./.github/workflows/e2e-test.yml

@@ -60,6 +60,30 @@ education:
 professional:
   experience_items:
 
+    # PwC CZ
+    - title: 'Senior Python Developer - Contractor'
+      company: 'PwC Czech Republic'
+      location: 'Prague, Czechia - Remote'
+      duration: 'Feb 2025 - Present'
+      description: >
+        Working in high leverage position, using AI to solve problems within the US Tax domain.
+      activities:
+        - Browser Use
+        - LLM Evaluation
+        - Retrieval Augmented Generation
+        - Source Attribution
+      technology_tags:
+        - 'Python'
+        - 'LLMs'
+        - 'OpenAI'
+        - 'Docker'
+        - 'Azure Pipelines'
+        - 'Azure DevOps'
+        - MCP
+        - Langchain/Langgraph
+        - 'WSL'
+        - 'FastAPI'
+
     # D-CUBE
     - title: 'AI Ops Engineer - Contractor'
       company: 'D-Cube P.C.'

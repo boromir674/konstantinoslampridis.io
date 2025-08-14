@@ -65,7 +65,7 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
   z-index: 9999; /* Ensure it stays above other content */
   
   // render background, otherwise the below elements would be visible
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: var(--app-surface-interactive-alt-bg, ${(props) => props.theme.backgroundColor});
 
   // Flexbox layout for better control
   display: flex;

@@ -70,13 +70,14 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
   // Flexbox layout for better control
   display: flex;
   align-items: flex-start; /* Allow content to grow vertically */
-  justify-content: space-between;
   padding: 15px 80px;
   min-height: 60px; /* Minimum height but allow growth */
   height: auto; /* Allow flexible height */
   overflow: visible; /* Allow content to be visible if it overflows */
   gap: 20px; /* Add space between toggle section and navigation */
-  
+
+  position: relative;
+
   /* Responsive behavior for small screens */
   @media (max-width: 768px) {
     min-height: 60px;
@@ -84,6 +85,7 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
     gap: 15px; /* Smaller gap for mobile */
     padding: 10px 20px;
     align-items: center; /* Center items on small screens */
+    position: relative;
   }
 `;
 
@@ -92,6 +94,18 @@ const ThemeToggleSection = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  z-index: 1; /* Ensure toggle stays above navigation */
+`;
+
+// Spacer to balance the layout on large screens
+const Spacer = styled.div`
+  @media (min-width: 769px) {
+    width: 180px; /* Approximate width of toggle section for balance */
+  }
+  
+  @media (max-width: 768px) {
+    display: none; /* Hide on mobile where layout stacks */
+  }
 `;
 
 // Color Mode Label for accessibility
@@ -116,13 +130,12 @@ const NavBarSection = styled.div<{ leftOffset: number }>`
   align-items: center;
   justify-content: center;
   position: absolute;
-  // left: 50%;
-  // top: 10%;
-  // left: auto;
-  // top: auto;
+
   transform: translateX(calc(${(props) => props.leftOffset}px));
   flex-wrap: wrap; /* Allow wrapping */
-  gap: 8px; /* Add gap between wrapped items */
+  gap: 10px; /* Add gap between wrapped items */
+
+  width: 100%;
   // max-width: 60vw; /* Limit width to prevent too much spreading */
   position: relative;
 
@@ -137,9 +150,8 @@ const NavBarSection = styled.div<{ leftOffset: number }>`
     justify-content: center;
   }
   
-  /* Responsive: switch to relative positioning on small screens */
+  /* Small screens: Normal flow positioning */
   @media (max-width: 768px) {
-    position: relative;
     left: auto;
     top: auto;
     transform: none;
@@ -174,8 +186,8 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
         </ThemeLabel>
       </ThemeToggleSection>
 
-      {/* Center: Navigation bar with custom offset */}
-      <NavBarSection leftOffset={0}>
+      {/* Center: Navigation bar positioned over main content area */}
+      <NavBarSection leftOffset={navBarLeftOffset}>
         <HorizontalNavBar
           // replace the name key from section objects with the 'label' key to match interface of HorizontalNavBar props
           items={sections.map((section_data) =>

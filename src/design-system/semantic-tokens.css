@@ -1,0 +1,155 @@
+/* Semantic Tokens (layer) of the Design System
+* 
+* These Tokens, prefixed with '--app', map to reference or raw tokens and should be used by Component Tokens (domain-specific Tokens that usually "live" in the same .tsx file as the component).
+* They are domain-agnostic and represent "intend" in the design system.
+
+* We express the Semantic Tokens as CSS Custom Properties because
+* - it is a natural way to define Styling (CSS was designed for that)
+* - they allow devs to compose themes and modules with plain CSS
+* - they can be seamlessly visualized in our Front-end Lab, via an automated Storybook story
+
+Tip: Use together with the useColorMode React hook to consume in your app component.
+  This allows you to toggle between light and dark modes at runtime.
+  The CSS Custom Properties will automatically update based on the current mode.
+*/
+
+
+
+/* COMMON + LIGHT: Contains the common tokens (ie Brand, Typography, etc) but also the Light Color Mode tokens. */
+:root {
+  /* Common Brand Tokens */
+  --app-brand-color-accent: var(--md-ref-palette-primary70, #fb8b81);
+  --app-brand-color-accent-bg: var(--md-ref-palette-primary10, #410003);
+
+
+  /* Brand Typography */
+  --app-brand-font-family: var(--app-font-family-sans);
+  --app-brand-font-family-alt: var(--app-font-family-courier)
+
+  /* LIGHT ONLY Color Mode Tokens */
+
+
+  /* Text */
+  --app-text-primary: var(--md-sys-color-on-surface-light);
+  --app-text-secondary: var(--md-sys-color-on-surface-variant-light);
+
+  /* Accent / Emphasis */
+  --app-accent-from: var(--md-sys-color-on-primary-container-light);
+  --app-accent-to: var(--md-sys-color-tertiary-light);
+  --app-accent-subtle-bg: rgba(0,0,0,.04); /* generic subtle accent wash */
+
+  /* Surfaces */
+  --app-surface-base: var(--md-sys-color-surface-light);
+  --app-surface-raised: var(--md-sys-color-secondary-container-light);
+
+  --app-surface-interactive: var(--md-sys-color-secondary-container-light);
+  --app-surface-interactive-from: var(--md-sys-color-secondary-container-light);
+  --app-surface-interactive-to: var(--md-sys-color-tertiary-container-light);
+  --app-surface-interactive-hover-from: var(--md-sys-color-primary-container-light);
+  --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-light);
+
+  --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-light);
+  --app-surface-interactive-alt-color: var(--md-sys-color-on-secondary-container-light);
+
+  /* Borders / outline */
+  --app-border-subtle: var(--md-sys-color-outline-light);
+
+  /* Focus ring */
+  --app-focus-ring: var(--md-sys-color-primary-light);
+
+  /* Status */
+  --app-danger: var(--md-sys-color-error-light);
+}
+
+
+/* DARK: Contains the Dark Color Mode tokens, via 2 selectors, dark in class list or dataset = 'dark */
+:root.dark,
+[data-theme="dark"] {
+  --app-text-primary: var(--md-sys-color-on-surface-dark);
+  --app-text-secondary: var(--md-sys-color-on-surface-variant-dark);
+
+  --app-accent-from: var(--md-sys-color-primary-dark);
+  --app-accent-to: var(--md-sys-color-on-primary-container-dark);
+  --app-accent-subtle-bg: rgba(255,255,255,.08);
+
+  /* Surfaces */
+  --app-surface-base: var(--md-sys-color-surface-dark);
+  --app-surface-raised: var(--md-sys-color-secondary-container-dark);
+
+  --app-surface-interactive: var(--md-sys-color-secondary-container-dark);
+
+  --app-surface-interactive-from: var(--md-sys-color-secondary-container-dark);
+  --app-surface-interactive-to: var(--md-sys-color-tertiary-container-dark);
+  --app-surface-interactive-hover-from: var(--md-sys-color-primary-container-dark);
+  --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-dark);
+
+  --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-dark);
+  --app-surface-interactive-alt-color: var(--md-sys-color-on-secondary-container-dark);
+
+  /* Borders / outline */
+
+  --app-border-subtle: var(--md-sys-color-outline-dark);
+
+  --app-focus-ring: var(--md-sys-color-primary-dark);
+
+  --app-danger: var(--md-sys-color-error-dark);
+}
+
+
+
+
+/* Or Manually Use (styled-components / emotion):
+   color: var(--app-text-primary);
+   background: linear-gradient(90deg,var(--app-accent-from),var(--app-accent-to));
+   &:focus-visible { outline:2px solid var(--app-focus-ring);
+
+    DARK MODE is a selector list of two separate selectors:
+
+    :root.dark Matches the root element (html) when it has class="dark".
+    [data-theme="dark"] Matches any element (usually html) with attribute data-theme="dark".
+    Comma means “apply rules to either selector”. So the block runs if you toggle dark mode by:
+
+    Adding a class: document.documentElement.classList.add('dark') (uses :root.dark)
+    OR
+    Setting an attribute: document.documentElement.dataset.theme = 'dark' (uses [data-theme="dark"])
+    You only need one mechanism; both are provided for flexibility.
+
+
+    EXAMPLE Client Code to demonstrate applying light or dark css styles in app at runtime
+
+    import { useCallback, useEffect, useState } from 'react';
+
+    type Mode = 'light' | 'dark';
+
+    export function useColorMode(initial?: Mode) {
+    const [mode, setMode] = useState<Mode>(() => {
+        if (initial) return initial;
+        return (localStorage.getItem('color-mode') as Mode) || 'light';
+    });
+
+    useEffect(() => {
+        const root = document.documentElement;
+        if (mode === 'dark') root.classList.add('dark');
+        else root.classList.remove('dark');
+        localStorage.setItem('color-mode', mode);
+    }, [mode]);
+
+    const toggle = useCallback(
+        () => setMode(m => (m === 'dark' ? 'light' : 'dark')),
+        []
+    );
+
+    return { mode, setMode, toggle };
+    }
+
+
+    ALT Code to demonstrate applying light or dark css styles in app at runtime
+
+    const root = document.documentElement;
+    root.dataset.theme = 'dark';   // apply dark
+    delete root.dataset.theme;     // revert to light
+
+    if (mode === 'dark') root.dataset.theme = 'dark';
+    else delete root.dataset.theme;
+
+    */

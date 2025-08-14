@@ -46,6 +46,11 @@ const lightColorMode: Theme = {
     textColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
     urlTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
     externalURLSVGColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-light"],
+    backgroundColorGradient: {
+      // start: DESIGN_TOKENS['--md-sys-color-primary-light'],
+      start: DESIGN_TOKENS['--md-sys-color-on-primary-container-light'],
+      end: DESIGN_TOKENS['--md-sys-color-tertiary-light'],
+    },
   },
   /// EDUCATION LIGHT ///
   education: {

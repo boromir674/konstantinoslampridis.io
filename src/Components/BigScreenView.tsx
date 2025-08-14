@@ -38,15 +38,34 @@ interface BigScreenViewProps {
 
 const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
   box-sizing: border-box;
+  
+  // width: 100vw; /* Force full viewport width */
+  // min-height: 100vh; /* Full viewport height */
+  
+  // when no css reset the below achieve the effect of not having a vertical scroll but all the time the app is inside-enough the viewport to avoid the horizontal scroll bar
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.containerBackgroundColor};
+
+  // background: ${(props) => props.theme.containerBackgroundColor};
+  background-color: ${(props) => props.theme.containerBackgroundColor};
   word-wrap: break-word;
   margin: 0;
   padding: 0;
+  position: relative; /* Establish positioning context */
 
+  /* Main layout: Column with header, main content, footer */
+  display: flex;
+  flex-direction: column;
+`;
+
+/* Container for the main content area (side + main panes) */
+const MainContentArea = styled.div`
   display: flex;
   flex-direction: row;
+
+  flex: 1; /* Take remaining space after header/footer */
+
+  // min-height: 0; /* Allows flex items to shrink, but makes no difference in practice*/
 
   // active if the screen width is less than 800px
   @media (max-width: 800px) {
@@ -74,9 +93,21 @@ const BigScreenView: FC<BigScreenViewProps> = ({
     <BigScreenViewContainer
       theme={{ containerBackgroundColor: containerBackgroundColor }}
     >
+      {/* Header - static at top */}
       <TopHeaderPane theme={topHeaderPane} data={topHeaderPaneData} />
-      <VerticalSidePane theme={verticalSidePane} data={verticalSidePaneData} />
-      <VerticalMainPane id={html?.verticalMainPaneID} theme={verticalMainPane} data={verticalMainPaneData.data} sectionIDs={verticalMainPaneData?.sectionIDs} />
+      
+      {/* Main content area - flex row with side and main panes */}
+      <MainContentArea>
+        <VerticalSidePane theme={verticalSidePane} data={verticalSidePaneData} />
+        <VerticalMainPane 
+          id={html?.verticalMainPaneID} 
+          theme={verticalMainPane} 
+          data={verticalMainPaneData.data} 
+          sectionIDs={verticalMainPaneData?.sectionIDs} 
+        />
+      </MainContentArea>
+      
+      {/* Footer - static at bottom */}
       <BottomFooterPane id={html?.bottomFooterPaneID} theme={bottomFooterPane} />
     </BigScreenViewContainer>
   );

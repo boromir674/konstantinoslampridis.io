@@ -7,6 +7,12 @@ import { UserDefinedTextData } from '../types';
 import { useThemeAdapterCallback } from '../Hooks/useThemeAdapter';
 import { useDataAdapterCallback } from '../Hooks/useDataAdapter';
 
+// Import Semantic Tokens from 'Design System' for branding and theming
+// import '../design-system/reset.css';  // CSS Reset - must be first
+import '../design-system/tokens.css';  // raw tokens needed for Semantic ones
+import '../design-system/semantic-tokens.css';
+import '../design-system/typography.css';
+
 // Leverage CSS modules to do CSS reset
 // import '../global.css'; // Import the global CSS reset
 type RawColorTheme = typeof lightTheme | typeof darkTheme;
@@ -83,8 +89,8 @@ const App: FC = () => {
 
   // Memoized Data and Themes
   const appData = useMemo(() => adaptData(userDefinedWebsiteData), [adaptData, userDefinedWebsiteData]);
-  const lightAppTheme = useMemo(() => adaptTheme(lightTheme), [adaptTheme, lightTheme]);
-  const darkAppTheme = useMemo(() => adaptTheme(darkTheme), [adaptTheme, darkTheme]);
+  const lightAppTheme: AppColorTheme = useMemo(() => adaptTheme(lightTheme), [adaptTheme, lightTheme]);
+  const darkAppTheme: AppColorTheme = useMemo(() => adaptTheme(darkTheme), [adaptTheme, darkTheme]);
 
   return (
     // <main>

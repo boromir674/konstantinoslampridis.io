@@ -2,7 +2,7 @@
 * - Div for the Title, Company, Location, Duration, Description, Activities
 *   CSS:  display: flex;
           flex-direction: column;
-* - Div for and Technology Tags
+* - Div for the Technology Tags
 *   CSS:  display: flex;
           flex-wrap: wrap;
 */
@@ -81,7 +81,9 @@ interface ProfItemProps {
   };
 }
 
-// V2
+/* Component that renders a Professional Item's Contents as a Div.
+* Content includes Job Title, Company name, Description, Tech Tags
+*/
 const ProfItem: React.FC<ProfItemProps> = ({
   theme: {
     title: titleTheme,
@@ -97,68 +99,72 @@ const ProfItem: React.FC<ProfItemProps> = ({
   technology_tags,
 }) => {
   return (
-    <>
-      <div
-        css={css`
+    <div
+      css={css`
           display: flex;
           flex-direction: column;
           gap: 4px;
           margin-bottom: 16px;
         `}
-      >
-        <ExperienceItemTitle theme={titleTheme}>{title}</ExperienceItemTitle>
-        {/* <Typography
+    >
+      {/* Job Title */}
+      <ExperienceItemTitle theme={titleTheme}>{title}</ExperienceItemTitle>
+      {/* <Typography
           variant={'body1'} // <p> element
           style={{
             margin: 0,
             fontFamily: bodyTheme?.fontFamily || "inherit",
             fontSize: bodyTheme?.fontSize || "14px",
           }} */}
-        <p
-          css={css`
+      {/* Job Location (Country/city and/or "remote") */}
+      <p
+        css={css`
             margin: 0;
             font-size: ${bodyTheme?.fontSize || "14px"};
             font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
-        >
-          {location}
-        </p>
-        {/* </Typography> */}
-        <p
-          css={css`
+      >
+        {location}
+      </p>
+      {/* Company Name */}
+      <p
+        css={css`
             margin: 0;
             font-family: ${bodyTheme?.fontFamily || "inherit"};
             font-size: ${bodyTheme?.fontSize || "14px"};
+            font-weight: bold;
           `}
-        >
-          {company}
-        </p>
-        <p
-          css={css`
+      >
+        {company}
+      </p>
+      {/* Duration of contract / occupation */}
+      <p
+        css={css`
             margin: 0;
             font-size: ${bodyTheme?.fontSize || "14px"};
             font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
-        >
-          {duration}
-        </p>
-        <p
-          css={css`
+      >
+        {duration}
+      </p>
+      {/* Job Description: sort text */}
+      <p
+        css={css`
             margin: 8px 0;
             font-size: ${bodyTheme?.fontSize || "14px"};
             font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
-        >
-          {description}
-        </p>
-        {/* Job Activities */}
-        <p style={{
-          marginBottom: 12,
-          fontFamily: bodyTheme?.fontFamily,
-          fontSize: bodyTheme?.fontSize,
-        }}>Activities</p>
-        <ul
-          css={css`
+      >
+        {description}
+      </p>
+      {/* List of Job Activities / Achievements */}
+      <p style={{
+        marginBottom: 12,
+        fontFamily: bodyTheme?.fontFamily,
+        fontSize: bodyTheme?.fontSize,
+      }}>Activities</p>
+      <ul
+        css={css`
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
@@ -166,32 +172,31 @@ const ProfItem: React.FC<ProfItemProps> = ({
             font-size: ${bodyTheme?.fontSize || "14px"};
             font-family: ${bodyTheme?.fontFamily || "inherit"};
           `}
-        >
-          {activities.map((activity, index) => (
-            <li key={index} style={{ padding: "4px 0" }}>
-              <ExpItemActivity
-                theme={{
-                  // containerBackgroundColor: "#fff",
-                  textColor: "inherit",
-                }}
-                data={{ text: activity }}
-              />
-            </li>
-          ))}
-        </ul>
-        {/* Technology Tags */}
-        <TechTagsContainer theme={{
-          fontFamily: tagTheme.fontFamily,
-          fontSize: tagTheme.fontSize,
-        }}>
-          {technology_tags.map((tag, index) => (
-            <AppTag key={index} theme={tagTheme}>
-              {tag}
-            </AppTag>
-          ))}
-        </TechTagsContainer>
-      </div>
-    </>
+      >
+        {activities.map((activity, index) => (
+          <li key={index} style={{ padding: "4px 0" }}>
+            <ExpItemActivity
+              theme={{
+                // containerBackgroundColor: "#fff",
+                textColor: "inherit",
+              }}
+              data={{ text: activity }}
+            />
+          </li>
+        ))}
+      </ul>
+      {/* Technology Tags: Tech stack used */}
+      <TechTagsContainer theme={{
+        fontFamily: tagTheme.fontFamily,
+        fontSize: tagTheme.fontSize,
+      }}>
+        {technology_tags.map((tag, index) => (
+          <AppTag key={index} theme={tagTheme}>
+            {tag}
+          </AppTag>
+        ))}
+      </TechTagsContainer>
+    </div>
   );
 };
 

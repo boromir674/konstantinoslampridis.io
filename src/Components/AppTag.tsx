@@ -24,8 +24,10 @@ interface AppTagProps {
 
 const AppTag = styled.span<AppTagProps>`
   // COLOR THEME
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.textColor};
+  // background-color: ${(props) => props.theme.backgroundColor};
+  background-color: var(--app-surface-interactive-alt-bg, #f8f3e6);
+  // color: ${(props) => props.theme.textColor};
+  color: var(--app-surface-interactive-alt-color);
   border-color: ${(props) => props.theme.outlineColor};
   &:hover {
     background-color: ${(props) => props.theme.onHoverBackgroundColor};
@@ -39,7 +41,8 @@ const AppTag = styled.span<AppTagProps>`
   border-radius: 20px;
   margin: 4px;
   // configure border line width
-  border-style: solid;
+  // border-style: solid;
+  border: 0.5px, solid, ${(props) => props.theme.outlineColor};
   transition: background-color 0.3s ease;
 `;
 export default AppTag;

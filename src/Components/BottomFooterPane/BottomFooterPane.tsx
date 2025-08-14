@@ -19,8 +19,13 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.backgroundColor};
   text-align: center; /* Center the text content */
+
   padding: 10px 0; /* Adds vertical padding for visual space */
-  position: fixed; /* Fixes the footer at the bottom of the viewport */
+
+  // position: fixed; /* Fixes the footer at the bottom of the viewport */
+  /* Sticky positioning - stays at top when scrolling */
+  position: sticky;
+
   bottom: 0;
   width: 100%;
   z-index: 1000; /* Ensures the footer stays on top of other elements */

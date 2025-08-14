@@ -68,6 +68,7 @@ const HorizontalNavBar: FC<HorizontaNavBarProps> = ({ items, theme: { fontFamily
           renderProps={({ active, onClick }) => (
             <AppHorNavItem  // anchor <a>
               key={index}
+              // aria-current={activeLinkIndex === index ? "true" : undefined}
               theme={{ colorSet, padding }}
               active={active}
               onClick={onClick}  // useHandleNavigationClickFunction(htmlID)

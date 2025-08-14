@@ -24,7 +24,7 @@ interface ColorModeAPI {
  * - Supports 'system' initial (uses prefers-color-scheme).
  * - Optional persistence in localStorage.
  */
-export function useColorMode(opts: UseColorModeOptions = {}): ColorModeAPI {
+export default function useColorMode(opts: UseColorModeOptions = {}): ColorModeAPI {
   const {
     initial = 'system',
     storageKey = 'color-mode',

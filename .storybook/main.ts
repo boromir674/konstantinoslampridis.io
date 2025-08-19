@@ -16,7 +16,13 @@ const config: StorybookConfig = {
     {
       directory: '../src/Components',
       files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    }
+    },
+    // Design System - Stories presenting Semantic/Raw Tokens
+    {
+      directory: '../src/design-system',
+      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
+      titlePrefix: 'Design System',
+    },
   ],
   addons: [
     "@storybook/addon-links",

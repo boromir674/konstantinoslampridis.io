@@ -65,7 +65,7 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
   z-index: 9999; /* Ensure it stays above other content */
   
   // render background, otherwise the below elements would be visible
-  background-color: var(--app-surface-interactive-alt-bg, ${(props) => props.theme.backgroundColor});
+  background-color: var(--app-surface-raised, ${(props) => props.theme.backgroundColor});
 
   // Flexbox layout for better control
   display: flex;
@@ -74,9 +74,9 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
   min-height: 60px; /* Minimum height but allow growth */
   height: auto; /* Allow flexible height */
   overflow: visible; /* Allow content to be visible if it overflows */
-  gap: 20px; /* Add space between toggle section and navigation */
-
-  position: relative;
+  // gap: 20px; /* Add space between toggle section and navigation */
+  
+  gap: 10px; /* Add gap between wrapped items */
 
   /* Responsive behavior for small screens */
   @media (max-width: 768px) {

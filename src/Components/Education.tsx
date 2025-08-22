@@ -1,63 +1,44 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+
 import { withDefaultProps } from "./hoc";
 import Typography from "./Typography";
 import AppTag from "./AppTag";
 import EducationItemData from '../EducationItemDataInterface';
 
+
 const EducationSectionContainer = styled.div`
   margin-top: 20px;  // how much space will be left between this and the component above
 `;
 
-// const EducationItem = styled.div`
-//   margin-bottom: 20px;
-// `;
 
-
-interface DegreeTitleProps {
-  theme: {
-    fontFamily: string;
-    fontSize: string;
-  };
-  children?: React.ReactNode;
-}
 const DegreeTitle = styled(withDefaultProps({
   variant: 'h3',
-}, Typography)) <DegreeTitleProps>`
+}, Typography))`
   margin-bottom: 5px;
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize};
+  margin-top: 10px;
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-heading-2xl);
 `;
 
-interface UniversityTitleProps {
-  theme: {
-    fontFamily: string;
-    fontSize: string;
-  };
-}
+
 const UniversityTitle = styled(withDefaultProps({
   variant: 'h4',
-}, Typography)) <UniversityTitleProps>`
+}, Typography))`
   margin-top: 7px;
   margin-bottom: 5px;
   font-style: italic;
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize};
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-body-lg);
 `;
 
-interface LocationProps {
-  theme: {
-    fontFamily: string;
-    fontSize: string;
-  };
-}
+
 const Location = styled(withDefaultProps({
   variant: 'body1',  // <p> element
-}, Typography)) <LocationProps>`
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize || "16px"};
-  // color: #888;
+}, Typography))`
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-body-lg);
   margin-top: 5px;
 `;
 
@@ -72,8 +53,8 @@ const StudiesDuration = styled(withDefaultProps({
 }, Typography)) <StudiesDurationProps>`
   font-style: italic;
   margin-bottom: 10px;
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize};
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-body-lg);
 `;
 
 interface ThesisTitleProps {
@@ -86,8 +67,8 @@ const ThesisTitle = styled(withDefaultProps({
   variant: 'body1',  // <p> element
 }, Typography)) <ThesisTitleProps>`
   margin-bottom: 5px;
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize};
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-body-lg);
 `;
 
 const TopicTagsContainer = styled.div`
@@ -143,8 +124,7 @@ interface StyledAppEducationItemProps {
 const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
   // display: flex;
   padding: ${(props) => props.theme.padding || "0px"};
-  background-color: ${(props) =>
-    props.theme.backgroundColor};
+  background-color: var(--app-container-secondary);
   color: ${(props) => props.theme.textColor};
   border: 1px solid #ccc;
   transition: transform

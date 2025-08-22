@@ -10,8 +10,8 @@ import { useDataAdapterCallback } from '../Hooks/useDataAdapter';
 // Import Semantic Tokens from 'Design System' for branding and theming
 // import '../design-system/reset.css';  // CSS Reset - must be first
 import '../design-system/tokens.css';  // raw tokens needed for Semantic ones
-import '../design-system/semantic-tokens.css';
 import '../design-system/typography.css';
+import '../design-system/semantic-tokens.css';
 
 // Leverage CSS modules to do CSS reset
 // import '../global.css'; // Import the global CSS reset

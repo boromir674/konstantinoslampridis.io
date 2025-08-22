@@ -50,13 +50,21 @@ const LayoutItem = styled.div<LayoutItemProps>`
   border-style: ridge;
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
+
   // design this item so that its height and width gets adjusted based on contents
   height: max-content;
   width: max-content;
   height: 100%;
+
+  background-color: var(--app-container-primary);
+  padding: 0px;
+  // hover does not work here, only in InnerContainer
+
   width: 100%;
   // margin-bottom: 10px;
+
+  // prevent iner children from overflowing
+  overflow: hidden;
 `;
 //// TOP LEVEL DIV COMPONENT ////
 const PortfolioSectionContainer = styled.div<{

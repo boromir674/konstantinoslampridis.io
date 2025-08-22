@@ -37,13 +37,14 @@ const InnerContainer = styled.div`
   flex-direction: column;
   // justify-content: space-between;
 
-
+  // Colors seem to have no effect, due to the markup design of the children and/or parents
+  // background-color: var(--app-container-primary);
+  // background-color: rgba(31, 194, 131, 0.2)
   // padding-bottom: 20px;
   &:hover {
-    transform: scale(1.01);
-    // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    // background-color:
-    // color:
+    // transform: scale(1.01);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    // background-color: var(--app-container-primary);
   }
   // define outline here is also buggy
 `;

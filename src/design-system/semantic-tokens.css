@@ -22,16 +22,32 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
   --app-brand-color-accent-bg: var(--md-ref-palette-primary10, #410003);
 
 
-  /* Brand Typography */
+  /* Typography */
   --app-brand-font-family: var(--app-font-family-sans);
-  --app-brand-font-family-alt: var(--app-font-family-courier)
+  --app-brand-font-family-alt: var(--app-font-family-courier);
+  --app-font-family: var(--app-font-family-sans);
+
 
   /* LIGHT ONLY Color Mode Tokens */
-
 
   /* Text */
   --app-text-primary: var(--md-sys-color-on-surface-light);
   --app-text-secondary: var(--md-sys-color-on-surface-variant-light);
+
+  /* Surface tokens represent visual elevation and content layering intention */
+  /* --app-surface-base        Example Component Token: Main page background */
+  /* --app-surface-raised      Example Component Token: Header, cards, modals - elevated above base */
+  /* --app-surface-overlay     Example Component Token: Dropdowns, tooltips - highest elevation */
+
+
+  /* CONTAINER TOKENS represent content organization and boundary intention */
+
+  /* --app-container-primary: var(--md-sys-color-primary-container-light); Example Component Token: Main content area, like a page or main section */
+  --app-container-primary: var(--md-sys-color-surface-light);
+  
+  --app-container-secondary: var(--md-sys-color-secondary-container-light); /* Example Component Token: Secondary content area, like sidebars or secondary sections */
+  --app-container-tertiary: var(--md-sys-color-tertiary-container-light); /* Example Component Token: Secondary content area, like sidebars */
+
 
   /* Accent / Emphasis */
   --app-accent-from: var(--md-sys-color-on-primary-container-light);
@@ -53,6 +69,7 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 
   /* Borders / outline */
   --app-border-subtle: var(--md-sys-color-outline-light);
+  --app-border: var(--md-sys-color-outline-light);
 
   /* Focus ring */
   --app-focus-ring: var(--md-sys-color-primary-light);
@@ -67,6 +84,14 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 [data-theme="dark"] {
   --app-text-primary: var(--md-sys-color-on-surface-dark);
   --app-text-secondary: var(--md-sys-color-on-surface-variant-dark);
+
+  /* Container tokens represent content organization and boundary intention */
+
+  /* --app-container-primary: var(--md-sys-color-primary-container-dark); Example Component Token: Main content area, like a page or main section */
+  --app-container-primary: var(--md-sys-color-surface-dark);
+  
+  --app-container-secondary: var(--md-sys-color-secondary-container-dark); /* Example Component Token: Secondary content area, like sidebars or secondary sections */
+  --app-container-tertiary: var(--md-sys-color-tertiary-container-dark); /* Example Component Token: Secondary content area, like sidebars */
 
   --app-accent-from: var(--md-sys-color-primary-dark);
   --app-accent-to: var(--md-sys-color-on-primary-container-dark);

@@ -135,12 +135,10 @@ const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
     props.theme.onHoverBackgroundColorChangeDuration};
   cursor: pointer;
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    background-color: ${(props) =>
-    props.theme.onHoverBackgroundColor};
-    color: ${(props) =>
-    props.theme.onHoverTextColor || props.theme.textColor};
+    // background-color: ${(props) => props.theme.onHoverBackgroundColor};
+    // color: ${(props) => props.theme.onHoverTextColor || props.theme.textColor};
   }
 `;
 interface AppEducationItemProps {

@@ -1,3 +1,14 @@
+/* Discovers stories in specified directories with optional title prefixes
+*
+* Folders:
+* - ../src/stories/  --> prefix "PoC/"
+* - ../src/Components/  --> no prefix
+* - ../src/design-system/  --> prefix "Design System/"
+* 
+* Also enables addons.
+*/
+
+
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
 const config: StorybookConfig = {

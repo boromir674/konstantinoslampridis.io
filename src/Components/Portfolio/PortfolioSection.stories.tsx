@@ -1,8 +1,16 @@
+import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
 import { FC } from "react";
-import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
 import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
+import { useThemeComparison } from '../HOC/LightDarkComparison';
 
 import DESIGN_TOKENS from "../../design-system/tokens.json";
+
+import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
+import '../../design-system/typography.css';
+import '../../design-system/semantic-tokens.css';
+// import after css because className css depends Semantic Tokens from our design system
+import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
 
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
@@ -534,4 +542,24 @@ const twoLightGridsSideBySideArgs: PortfolioSectionMultiGridProps = {
 
 export const TwoLightGridsSideBySide = {
   args: twoLightGridsSideBySideArgs
+};
+
+// Theme comparison story following ProfItemPOC pattern
+export const ThemeComparison = {
+  decorators: [useThemeComparison({
+    lightLabel: "☀️ Light Theme",
+    darkLabel: "🌙 Dark Theme", 
+    showLabels: true,
+    gap: "48px"
+  })],
+  render: () => (
+    <PortfolioSection {...argsLight} />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '🌗 **Portfolio Section Theme Comparison**: Displays the PortfolioSection component side-by-side in light and dark themes. This demonstrates how the portfolio grid adapts to different theme contexts while maintaining consistent layout and styling for portfolio items. The HOC automatically handles theme switching for comparison purposes.'
+      }
+    }
+  }
 };

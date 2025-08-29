@@ -71,7 +71,7 @@ const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
     padding: 8px;
   }
   
-  /* SVG inherits from currentColor */
+  // SVG inherits from currentColor, which solves problem of having svg be pained exactly as text and change on state change, same as text (normal -> hover)
   svg { fill: currentColor; }
 
 `;

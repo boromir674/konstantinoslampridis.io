@@ -37,17 +37,15 @@ interface BigScreenViewProps {
 }
 
 const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
+  // background-color: var(teal, --app-color-main-area);
+  //   background-color: var(blue, --app-color-main-area);
+
   box-sizing: border-box;
-  
-  // width: 100vw; /* Force full viewport width */
-  // min-height: 100vh; /* Full viewport height */
-  
+ 
   // when no css reset the below achieve the effect of not having a vertical scroll but all the time the app is inside-enough the viewport to avoid the horizontal scroll bar
   width: 100%;
   height: 100%;
 
-  // background: ${(props) => props.theme.containerBackgroundColor};
-  background-color: ${(props) => props.theme.containerBackgroundColor};
   word-wrap: break-word;
   margin: 0;
   padding: 0;
@@ -60,6 +58,9 @@ const BigScreenViewContainer = styled.div<BigScreenViewContainerProps>`
 
 /* Container for the main content area (side + main panes) */
 const MainContentArea = styled.div`
+  // background-color: var(green, --app-color-main-area);
+  background-color: var(--app-color-main-area);
+
   display: flex;
   flex-direction: row;
 

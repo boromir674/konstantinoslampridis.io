@@ -80,6 +80,12 @@ const App: FC = () => {
           description
           tags
         }
+        skills {
+          name
+          frequency
+          sources
+          category
+        }
       }
     }
   `);

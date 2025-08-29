@@ -16,10 +16,10 @@ interface BottomFooterPaneContainerProps {
 
 
 const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.backgroundColor};
-  text-align: center; /* Center the text content */
+  background-color: var(--app-brand-color-area);
+  color: var(--app-brand-color-area-text);
 
+  text-align: center; /* Center the text content */
   padding: 10px 0; /* Adds vertical padding for visual space */
 
   // position: fixed; /* Fixes the footer at the bottom of the viewport */
@@ -40,6 +40,12 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
 
   // // in case css reset did not take care of box model, set it explicitly
   // box-sizing: border-box;
+
+  // make svg use "live" current color from this element css
+  & svg {
+    fill: currentColor;
+    vertical-align: middle; /* Aligns SVG vertically with text */
+  }
 `;
 
 const StyledSpan = styled.span`

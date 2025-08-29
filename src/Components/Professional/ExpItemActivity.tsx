@@ -10,8 +10,8 @@ interface ExpItemActivityContainerProps {
 };
 
 const ExpItemActivityContainer = styled.div<ExpItemActivityContainerProps>`
-  background: ${(props) => props.theme.backgroundColor || "inherit"};
-  color: ${(props) => props.theme.textColor || "inherit"};
+  background: var(--app-color-main-area, --app-surface-primary, ${(props) => props.theme.backgroundColor || "inherit"});
+  color: var(--app-on-surface-primary, ${(props) => props.theme.textColor});
   box-sizing: border-box;
 `;
 

@@ -20,24 +20,29 @@ const StyledAppTag = styled.span`
   margin: 4px;
   border: 0.5px solid;
   transition: background-color 0.3s ease;
-  font-family: inherit;
-  font-size: inherit;
+  font-family: var(--app-font, inherit);
+  font-size: var(--app-font-size-body-lg, inherit);
+
+  // DESIGN NOTES
+  // Current Intention of this Tag is Surface and not container/"arranging of elements"
+  // When the tag "becomes interactive" (ie on hover it "highlights" tags from Skills section), then Intention should switch to Surface Interactive
+  // thus, we should change to var(--app-surface-interactive-primary)
 
   /* Default/Primary variant */
-  background-color: var(--app-surface-interactive-alt-bg);
-  color: var(--app-surface-interactive-alt-color);
-  border-color: var(--app-surface-interactive-alt-outline);
-  
+  background-color: var(--app-surface-primary);
+  color: var(--app-on-surface-primary);
+  border-color: var(--app-surface-primary-outline);
+
   &:hover {
-    background-color: var(--app-accent);
-    color: var(--app-on-accent);
+    background-color: var(--app-surface-primary-hover);
+    color: var(--app-on-surface-primary-hover);
   }
 
   /* Variant overrides */
   &.tag-secondary {
-    background-color: yellow;
+    background-color: var(--app-surface-secondary);
     color: var(--app-on-surface-secondary);
-    border-color: var(--app-outline-secondary);
+    border-color: var(--app-surface-secondary-outline);
     &:hover {
       background-color: var(--app-surface-secondary-hover);
       color: var(--app-on-surface-secondary-hover);
@@ -52,8 +57,8 @@ const StyledAppTag = styled.span`
 `;
 
 // Simple wrapper that converts variant prop to className
-const AppTag: React.FC<StyledAppTagProps & React.HTMLAttributes<HTMLSpanElement>> = ({ 
-    // destructure only the props we care about
+const AppTag: React.FC<StyledAppTagProps & React.HTMLAttributes<HTMLSpanElement>> = ({
+  // destructure only the props we care about
   variant,
   className,
   children,
@@ -61,7 +66,7 @@ const AppTag: React.FC<StyledAppTagProps & React.HTMLAttributes<HTMLSpanElement>
 }) => {
   const variantClass = variant && variant !== 'primary' ? `tag-${variant}` : '';
   const finalClassName = [variantClass, className].filter(Boolean).join(' ');
-  
+
   return <StyledAppTag className={finalClassName} {...props}>{children}</StyledAppTag>;
 };
 

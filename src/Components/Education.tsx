@@ -124,7 +124,7 @@ interface StyledAppEducationItemProps {
 const StyledAppEduItem = styled.div<StyledAppEducationItemProps>`
   // display: flex;
   padding: ${(props) => props.theme.padding || "0px"};
-  background-color: var(--app-container-secondary);
+  background-color: var(--app-color-main-area, --app-container-secondary);
   color: ${(props) => props.theme.textColor};
   border: 1px solid #ccc;
   transition: transform

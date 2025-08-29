@@ -7,48 +7,36 @@
           flex-wrap: wrap;
 */
 import React from "react";
-import { css, ThemeContext } from "@emotion/react";
+import { css } from "@emotion/react";
 import { withDefaultProps } from "../hoc";
 import Typography from '../Typography'
 import ExpItemActivity from "./ExpItemActivity";
 import styled from "@emotion/styled";
-import AppTag, { AppTagProps } from "../AppTag";
+import AppTag from "../AppTag";
 
-interface TechTagsContainerProps {
-  children?: React.ReactNode;
-  theme?: {
-    backgroundColor?: string;
-    textColor?: string;
-    fontFamily?: string;
-    fontSize?: string;
-  };
-}
 
-const TechTagsContainer = styled.div<TechTagsContainerProps>`
-  background: ${(props) => props.theme.backgroundColor || "inherit"};
-  color: ${(props) => props.theme.textColor || "inherit"};
+const TechTagsContainer = styled.div`
+  background: "inherit";
+  color: "inherit";
   box-sizing: border-box;
   padding-top: 22px;
-  padding-bottom: 22px;
+  // padding-bottom: 22px;
   display: flex;
   flex-wrap: wrap;
-  font-family: ${(props) => props.theme.fontFamily || "inherit"};
-  font-size: ${(props) => props.theme.fontSize || "inherit"};
+  font-family: "inherit";
+  font-size: "inherit";
 `;
 
-interface ExperienceItemTitleProps {
-  theme?: {
-    fontFamily?: string;
-    fontSize?: string;
-  };
-};
+
 const ExperienceItemTitleH3 = withDefaultProps({
   variant: "h3",
 }, Typography);
-const ExperienceItemTitle = styled(ExperienceItemTitleH3) <ExperienceItemTitleProps>`
+const ExperienceItemTitle = styled(ExperienceItemTitleH3)`
+  background-color: var(--app-color-main-area);
+  color: var(--app-on-surface-primary, white);
   margin: 0;
-  font-family: ${props => props.theme?.fontFamily || "inherit"};
-  font-size: ${props => props.theme?.fontSize || "24px"};
+  font-family: var(--app-font, inherit);
+  font-size: var(--app-font-size-heading-lg, 24px);
   font-weight: bold;
 
   // Option for underlining the title
@@ -65,31 +53,12 @@ interface ProfItemProps {
   description: string;
   activities: string[];
   technology_tags: string[];
-  // app theme (ie color set of color modes)
-  theme: {
-    title?: {
-      fontFamily?: string;
-      fontSize?: string;
-    };
-    body?: {
-      fontFamily?: string;
-      fontSize?: string;
-    };
-    tags: {
-      item: AppTagProps["theme"];
-    };
-  };
 }
 
 /* Component that renders a Professional Item's Contents as a Div.
 * Content includes Job Title, Company name, Description, Tech Tags
 */
 const ProfItem: React.FC<ProfItemProps> = ({
-  theme: {
-    title: titleTheme,
-    body: bodyTheme,
-    tags: { item: tagTheme },
-  },
   title,
   duration,
   company,
@@ -100,15 +69,21 @@ const ProfItem: React.FC<ProfItemProps> = ({
 }) => {
   return (
     <div
-      css={css`
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-          margin-bottom: 16px;
-        `}
+      // OPT 1
+      style={{
+        backgroundColor: "var(--app-color-main-area, --app-surface-primary)",
+        color: "var(--app-on-surface-primary)",
+        fontFamily: "var(--app-font, inherit)",
+
+        display: "flex",
+        flexDirection: "column",
+        gap: "4px",
+        // marginBottom: "16px",
+        padding: "14px",
+      }}
     >
       {/* Job Title */}
-      <ExperienceItemTitle theme={titleTheme}>{title}</ExperienceItemTitle>
+      <ExperienceItemTitle>{title}</ExperienceItemTitle>
       {/* <Typography
           variant={'body1'} // <p> element
           style={{
@@ -119,58 +94,73 @@ const ProfItem: React.FC<ProfItemProps> = ({
       {/* Job Location (Country/city and/or "remote") */}
       <p
         css={css`
+            color: var(--app-on-surface-primary);
+            backgroundColor: var(--app-color-main-area, --app-surface-primary);
             margin: 0;
-            font-size: ${bodyTheme?.fontSize || "14px"};
-            font-family: ${bodyTheme?.fontFamily || "inherit"};
+            font-size: var(--app-font-size-body, 14px);
+            font-family: var(--app-font, "inherit");
           `}
       >
         {location}
       </p>
+
       {/* Company Name */}
       <p
         css={css`
+            backgroundColor: var(--app-color-main-area, --app-surface-primary);
             margin: 0;
-            font-family: ${bodyTheme?.fontFamily || "inherit"};
-            font-size: ${bodyTheme?.fontSize || "14px"};
+            font-family: var(--app-font, "inherit");
+            font-size: var(--app-font-size-body, 14px);
             font-weight: bold;
           `}
       >
         {company}
       </p>
+
       {/* Duration of contract / occupation */}
       <p
         css={css`
+            backgroundColor: var(--app-color-main-area, --app-surface-primary);
+            color: var(--app-on-surface-primary);
             margin: 0;
-            font-size: ${bodyTheme?.fontSize || "14px"};
-            font-family: ${bodyTheme?.fontFamily || "inherit"};
+            font-size: var(--app-font-size-body, 14px);
+            font-family: var(--app-font, "inherit");
           `}
       >
         {duration}
       </p>
+
       {/* Job Description: sort text */}
       <p
         css={css`
+            backgroundColor: var(--app-color-main-area, --app-surface-primary);
+            color: var(--app-on-surface-primary);
             margin: 8px 0;
-            font-size: ${bodyTheme?.fontSize || "14px"};
-            font-family: ${bodyTheme?.fontFamily || "inherit"};
+            font-size: var(--app-font-size-body, 14px);
+            font-family: var(--app-font, "inherit");
           `}
       >
         {description}
       </p>
+
       {/* List of Job Activities / Achievements */}
       <p style={{
         marginBottom: 12,
-        fontFamily: bodyTheme?.fontFamily,
-        fontSize: bodyTheme?.fontSize,
-      }}>Activities</p>
+        fontFamily: 'var(--app-font)',
+        fontSize: 'var(--app-font-size-body-lg, 16px)',
+      }}>
+        Activities
+      </p>
       <ul
         css={css`
+            color: var(--app-on-surface-primary);
+            backgroundColor: var(--app-color-main-area, --app-surface-primary);
             padding-left: 40px; /* Restore default padding for lists */
             margin-left: 0; /* Remove any left margin */
             list-style-position: outside; /* Ensure bullets are outside the content */
             margin: 0px 0;
-            font-size: ${bodyTheme?.fontSize || "14px"};
-            font-family: ${bodyTheme?.fontFamily || "inherit"};
+            font-size: var(--app-font-size-body, 14px);
+            fontFamily: 'var(--app-font)',
           `}
       >
         {activities.map((activity, index) => (
@@ -185,17 +175,16 @@ const ProfItem: React.FC<ProfItemProps> = ({
           </li>
         ))}
       </ul>
+
       {/* Technology Tags: Tech stack used */}
-      <TechTagsContainer theme={{
-        fontFamily: tagTheme.fontFamily,
-        fontSize: tagTheme.fontSize,
-      }}>
+      <TechTagsContainer>
         {technology_tags.map((tag, index) => (
-          <AppTag key={index} theme={tagTheme}>
+          <AppTag key={index} variant='primary'>
             {tag}
           </AppTag>
         ))}
       </TechTagsContainer>
+
     </div>
   );
 };

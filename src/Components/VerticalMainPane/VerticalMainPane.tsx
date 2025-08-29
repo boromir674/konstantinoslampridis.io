@@ -10,6 +10,7 @@ import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 import PortfolioSection, { ResponsiveLocalStorageLayoutProps } from "../Portfolio";
 
+
 // Type alias for DRY code
 type ResponsiveLocalStorageLayoutTheme = ResponsiveLocalStorageLayoutProps["theme"];
 // type alias of ResponsiveLocalStorageLayoutProps["theme"], but without the 'item' key
@@ -66,6 +67,8 @@ interface VerticalMainPaneContainerProps {
 }
 
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
+  background-color: var(--app-color-main-area);
+
   display: inline-block;
   box-sizing: border-box
   padding-bottom: 120px; // Adjust this value to match the height of the footer

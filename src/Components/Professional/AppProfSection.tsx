@@ -64,11 +64,10 @@ interface ProfessionalExperienceSectionTitleProps {
   };
 }
 const ProfessionalExperienceSectionTitle = styled.h1<ProfessionalExperienceSectionTitleProps>`
-  color: ${(props) => props.theme.textColor};
-  background-color: ${(props) => props.theme.backgroundColor};
+  color: var(--app-color-surface-text, --app-text-primary, ${(props) => props.theme.textColor});
   padding: ${(props) => props.theme.padding || "0px"};
-  font-family: ${(props) => props.theme.fontFamily || "Roboto, sans-serif"};
-  font-size: ${(props) => props.theme.fontSize || "32px;"};
+  font-family: var(--app-font);
+  font-size: var(--app-font-size-heading-2xl, 32px);
 `;
 
 interface ProfessionalExperienceSectionContainerProps {
@@ -78,7 +77,7 @@ interface ProfessionalExperienceSectionContainerProps {
 }
 
 const ProfessionalExperienceSectionContainer = styled.div<ProfessionalExperienceSectionContainerProps>`
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: var(--app-color-surface-background, --app-surface-primary, ${(props) => props.theme.backgroundColor});
 `;
 
 const ProfessionalSection: React.FC<ProfessionalSectionProps> = ({

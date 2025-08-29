@@ -64,8 +64,10 @@ const TopHeaderPaneContainerDIV = styled.div<{theme: {
   top: 0;
   z-index: 9999; /* Ensure it stays above other content */
   
-  // render background, otherwise the below elements would be visible
-  background-color: var(--app-surface-raised, ${(props) => props.theme.backgroundColor});
+  // required for "always visible" nav bar
+  // otherwise when scrolling it will not have the desired effect of obscuring content underneath it
+  // in other words the elements would be visible, which is sth we don't want as a property of an "always visible" nav bar
+  background-color: var(--app-brand-color-area, --app-surface-raised, ${(props) => props.theme.backgroundColor});
 
   // Flexbox layout for better control
   display: flex;
@@ -112,8 +114,8 @@ const Spacer = styled.div`
 const ThemeLabel = styled(withDefaultProps({
   component: 'span',
 }, Typography)) <{}>`
-  color: var(--app-text-secondary);
-  font-size: 14px;
+  color: var(--app-brand-color-area-text, --app-text-secondary);
+  font-size: var(--app-font-size-heading-sm, 16ps);
   font-weight: 500;
   user-select: none;
 `;

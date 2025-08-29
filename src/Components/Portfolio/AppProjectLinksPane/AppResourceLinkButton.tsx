@@ -25,7 +25,7 @@ interface ResourceLinkButtonTheme {
 }
 const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
   background-color: var(--app-interactive-primary);
-  color: var(--app-on-interactive-primary);
+  color: var(--app-on-interactive-primary, green);
 
   display: flex;
   align-items: center;

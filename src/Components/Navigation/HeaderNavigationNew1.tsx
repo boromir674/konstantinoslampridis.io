@@ -21,7 +21,7 @@ const NavContainer = styled.nav<NavContainerProps>`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background: "inherit";
+  // background: "inherit";
   /* Set the desired spacing between flex items */
   gap: 1px;
 `;

@@ -57,18 +57,26 @@ interface AppProjectLinksPaneProps {
 }
 
 const DivContainer = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background-color: var(--app-color-draggable, --app-container-primary);
+  color: var( --app-color-draggable-text, --app-on-container-primary);
+  
+//   border: 1px solid var(--app-brand-color-accent);
+//   border-radius: 4px;
+  
+  border: 2px solid var(--app-brand-color-accent);
+  border-radius: 12px;
+  
   padding: 6px;
   padding-right: 12px;
   // margin-bottom: 16px;
 `;
 
-const DivContent = styled.div``;
 
 const ResourcesLinksDiv = styled.div`
-display: flex;
-flex-direction: column;
+    background-color: var(--app-color-draggable, --app-container-primary);
+    color: var(--app-on-container-primary);
+    display: flex;
+    flex-direction: column;
 `;
 
 const IconWrapper = styled.span`
@@ -85,9 +93,10 @@ interface ResourceLinksHeaderProps {
 };
 const ResourceLinksHeaderH3 = withDefaultProps({variant: "h3"}, Typography);
 const ResourceLinksHeader = styled(ResourceLinksHeaderH3) <ResourceLinksHeaderProps>`
+    background-color: var(--app-color-draggable, --app-surface-primary);
+    color: var(--app-on-surface-primary);
     font-family: ${props => props.theme.fontFamily || "inherit"};
     font-size: ${props => props.theme.fontSize};
-    color: ${props => props.theme.color};
 `;
 
 const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
@@ -95,7 +104,7 @@ const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
 
     return (
         <DivContainer>
-            <DivContent>
+            {/* <DivContent> */}
                 {/* Resource Links - HEADER TITLE */}
                 <ResourceLinksHeader theme={{...theme.header, color: theme.headerColor}}>Resource Links</ResourceLinksHeader>
                 {/* Resource Links - List of Links */}
@@ -117,7 +126,7 @@ const AppProjectLinksPane: FC<AppProjectLinksPaneProps> = ({ data, theme }) => {
                         </AppResourceLinkButton>
                     ))}
                 </ResourcesLinksDiv>
-            </DivContent>
+            {/* </DivContent> */}
         </DivContainer>
     );
 }

@@ -51,4 +51,8 @@ export interface SemanticTokenLayerProps extends TokenLayerProps {
     name: string;
     tokens: string[];
   }>;
+  semanticTokensByTheme?: {
+    light: Record<string, string>;
+    dark: Record<string, string>;
+  };
 }

@@ -1,6 +1,6 @@
 /** Story showcasing hook for Counting Number of Renders */
 
-import React, { FC, useCallback, useRef, useLayoutEffect } from 'react';
+import React, { FC, useCallback, useRef, useEffect } from 'react';
 
 // HOOK - Automatically Count Renders
 type UseRenderCounterHook = () => [number, () => void]
@@ -11,7 +11,7 @@ const useRenderCounter: UseRenderCounterHook = () => {
     //     rendersNo.current = rendersNo.current + 1
     // }, [rendersNo.current])
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         rendersNo.current = rendersNo.current + 1
     }, []);
     

@@ -14,10 +14,36 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 */
 
 
+/* TOKENS Naming Scheme:
+  --[system]-[element]-[category]-[concept]-[property]-[variant]-[state]
+
+  Where:
+  - system: app (for app-level tokens, could be 'component' for component-specific tokens)
+  - element: optional element (ONLY for COMPONENT Tokens: button, card, input, etc)
+  - category: broad grouping (color, typography, spacing, etc)
+  - concept: specific design concept (background, text, border, etc)
+  - property: specific property if needed (text, bg, border, etc)
+  - variant: optional variant (primary, secondary, etc)
+  - state: optional state (hover, active, disabled, etc)
+
+  SEMANTIC TOKENS Naming Scheme:
+  --app-[category]-[concept]-[property]-[variant]-[state]
+
+  Examples:
+  --app-color-background-primary
+  --app-color-text-secondary-hover
+  --app-border-radius-card
+  --app-font-size-heading-lg
+*/
+
 
 /* COMMON + LIGHT: Contains the common tokens (ie Brand, Typography, etc) but also the Light Color Mode tokens. */
 :root {
   /* Common Brand Tokens */
+  /* system-category-concept */
+  --app-brand-color-area: var(--md-ref-palette-primary70, #fb8b81);
+  --app-brand-color-area-text: var(--md-ref-palette-primary10, #410003);
+
   --app-brand-color-accent: var(--md-ref-palette-primary70, #fb8b81);
   --app-brand-color-accent-bg: var(--md-ref-palette-primary10, #410003);
 
@@ -29,6 +55,22 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 
 
   /* LIGHT ONLY Color Mode Tokens */
+
+  /* App "overarching" Background Area */
+  /* system: app, element: none (otherwise it is not semantic token, but component token) */
+  /* category: color, concept: main-area, property: none (because background is implied (at least until we need text) */
+  /* variant: none, state: none ('light' for color mode is implied and is defined in the System Token anyway)*/
+  --app-color-main-area: var(--md-sys-color-primary-container-light, --md-sys-color-surface-variant-light, --md-sys-color-secondary-container-light);
+
+  /****** Draggable things in the App ******/
+  /* system-category-concept */
+  --app-color-draggable: var(--md-sys-color-surface-variant-light);
+  /* system-category-concept-property */
+  --app-color-draggable-text: var(--md-sys-color-on-surface-variant-light);
+
+
+  --app-color-surface-background: var(--md-sys-color-inverse-on-surface-light);
+  --app-color-surface-text: var(--md-sys-color-inverse-surface-light);  
 
   /* Text */
   --app-text-primary: var(--md-sys-color-on-surface-light);
@@ -54,7 +96,23 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
   --app-accent-to: var(--md-sys-color-tertiary-light);
   --app-accent-subtle-bg: rgba(0,0,0,.04); /* generic subtle accent wash */
 
+  --app-accent: var(--md-sys-color-primary-container-light);
+  --app-on-accent: var(--md-sys-color-on-primary-container-light);
+
   /* Surfaces */
+  --app-surface-primary: var(--md-sys-color-primary-dark);
+  --app-on-surface-primary: var(--md-sys-color-on-primary-dark, --md-sys-color-on-primary-container-light);
+  /* var(--md-sys-color-primary-container-light); */
+  /* --app-surface-primary: var(--md-sys-color-surface-variant-light); */
+  --app-surface-primary-hover: var(--md-sys-color-tertiary-container-light);
+  --app-on-surface-primary-hover: var(--md-sys-color-on-tertiary-container-light);
+
+  --app-surface-secondary: var(--md-sys-color-inverse-primary-light);
+  --app-on-surface-secondary: var(--md-sys-color-on-primary-dark);
+  --app-surface-secondary-hover: var(--md-sys-color-primary-container-light);
+  --app-on-surface-secondary-hover: var(--md-sys-color-on-primary-container-light);
+
+
   --app-surface-base: var(--md-sys-color-surface-light);
   --app-surface-raised: var(--md-sys-color-secondary-container-light);
 
@@ -65,11 +123,25 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
   --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-light);
 
   --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-light);
-  --app-surface-interactive-alt-color: var(--md-sys-color-on-secondary-container-light);
+
+  /* Interaction Intention */
+  --app-interactive-primary: var(--md-sys-color-primary-light);
+  --app-on-interactive-primary: var(--md-sys-color-on-primary-light);
+
+  --app-interactive-hover-primary: var(--md-sys-color-primary-container-light);
+  --app-on-interactive-hover-primary: var(--md-sys-color-on-primary-container-light);
+
+  --app-interactive-secondary: var(--md-sys-color-secondary-light);
+  --app-on-interactive-secondary: var(--md-sys-color-on-secondary-light);
+  --app-interactive-hover-secondary: var(--md-sys-color-secondary-container-light);
+  --app-on-interactive-hover-secondary: var(--md-sys-color-on-secondary-container-light);
 
   /* Borders / outline */
   --app-border-subtle: var(--md-sys-color-outline-light);
   --app-border: var(--md-sys-color-outline-light);
+
+  --app-surface-primary-outline: var(--md-sys-color-outline-light);
+  --app-surface-secondary-outline: var(--md-sys-color-outline-variant-light);
 
   /* Focus ring */
   --app-focus-ring: var(--md-sys-color-primary-light);
@@ -79,9 +151,21 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 }
 
 
-/* DARK: Contains the Dark Color Mode tokens, via 2 selectors, dark in class list or dataset = 'dark */
+/* DARK: Contains the Dark Color Mode tokens, via 2 selectors, dark in class list or dataset = 'dark' */
 :root.dark,
 [data-theme="dark"] {
+
+  /* App "overarching" Background Area (see corresponding "light" token for docs*/
+  --app-color-main-area: var(--md-sys-color-surface-dark, --md-sys-color-surface-variant-dark, --md-sys-color-secondary-container-dark);
+
+  /* system-category-concept */
+  --app-color-draggable: var(--md-sys-color-surface-dark);
+  /* system-category-concept-property */
+  --app-color-draggable-text: var(--md-sys-color-on-surface-dark);
+
+  --app-color-surface-background: var(--md-sys-color-inverse-on-surface-dark);
+  --app-color-surface-text: var(--md-sys-color-inverse-surface-dark);  
+
   --app-text-primary: var(--md-sys-color-on-surface-dark);
   --app-text-secondary: var(--md-sys-color-on-surface-variant-dark);
 
@@ -89,15 +173,31 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
 
   /* --app-container-primary: var(--md-sys-color-primary-container-dark); Example Component Token: Main content area, like a page or main section */
   --app-container-primary: var(--md-sys-color-surface-dark);
-  
+
   --app-container-secondary: var(--md-sys-color-secondary-container-dark); /* Example Component Token: Secondary content area, like sidebars or secondary sections */
   --app-container-tertiary: var(--md-sys-color-tertiary-container-dark); /* Example Component Token: Secondary content area, like sidebars */
+
+  --app-accent: var(--md-sys-color-primary-container-dark);
+  --app-on-accent: var(--md-sys-color-on-primary-container-dark);
 
   --app-accent-from: var(--md-sys-color-primary-dark);
   --app-accent-to: var(--md-sys-color-on-primary-container-dark);
   --app-accent-subtle-bg: rgba(255,255,255,.08);
 
   /* Surfaces */
+  /* --app-surface-primary: var(--md-sys-color-primary-light); */
+  --app-surface-primary: var(--md-sys-color-secondary-container-dark, --md-sys-color-surface-variant-dark);
+  --app-on-surface-primary: var(--md-sys-color-on-surface-variant-dark);
+  /* --app-surface-primary: var(--md-sys-color-primary-container-dark); */
+  --app-interactive-primary: var(--md-sys-color-primary-container-dark);
+  --app-surface-primary-hover: var(--md-sys-color-tertiary-container-dark);
+  --app-on-surface-primary-hover: var(--md-sys-color-on-tertiary-container-dark);
+
+  --app-surface-secondary: var(--md-sys-color-inverse-primary-dark);
+  --app-on-surface-secondary: var(--md-sys-color-on-primary-light);
+  --app-surface-secondary-hover: var(--md-sys-color-primary-container-dark);
+  --app-on-surface-secondary-hover: var(--md-sys-color-on-primary-container-dark);
+
   --app-surface-base: var(--md-sys-color-surface-dark);
   --app-surface-raised: var(--md-sys-color-secondary-container-dark);
 
@@ -109,9 +209,23 @@ Tip: Use together with the useColorMode React hook to consume in your app compon
   --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-dark);
 
   --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-dark);
-  --app-surface-interactive-alt-color: var(--md-sys-color-on-secondary-container-dark);
+
+  /* Interaction Intention */
+  --app-interactive-primary: var(--md-sys-color-primary-dark);
+  --app-on-interactive-primary: var(--md-sys-color-on-primary-dark);
+  --app-interactive-hover-primary: var(--md-sys-color-primary-container-dark);
+  --app-on-interactive-hover-primary: var(--md-sys-color-on-primary-container-dark);
+
+  --app-interactive-secondary: var(--md-sys-color-secondary-dark);
+  --app-on-interactive-secondary: var(--md-sys-color-on-secondary-dark);
+  --app-interactive-hover-secondary: var(--md-sys-color-secondary-container-dark);
+  --app-on-interactive-hover-secondary: var(--md-sys-color-on-secondary-container-dark);
+
 
   /* Borders / outline */
+
+  --app-surface-primary-outline: var(--md-sys-color-outline-dark);
+  --app-surface-secondary-outline: var(--md-sys-color-outline-variant-dark);
 
   --app-border-subtle: var(--md-sys-color-outline-dark);
 

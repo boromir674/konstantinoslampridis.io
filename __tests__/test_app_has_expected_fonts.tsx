@@ -745,7 +745,7 @@ describe("Test Primary and Secondary Fonts are used in the app", () => {
     })
 
     // GIVEN the expected Font Family names
-    const EXPECTED_PRIMARY_FONT = "Roboto,sans-serif";
+    const EXPECTED_PRIMARY_FONT = "var(--app-font)";
 
     const EXPECTED_SECONDARY_FONT = "'Courier New',Courier,monospace";
     // const EXPECTED_ALTERNATIVE_FONT = "Roboto Mono, monospace";

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { ToggleSlider } from "../MyToggleSwitch1";
@@ -99,16 +99,6 @@ const ThemeToggleSection = styled.div`
   z-index: 1; /* Ensure toggle stays above navigation */
 `;
 
-// Spacer to balance the layout on large screens
-const Spacer = styled.div`
-  @media (min-width: 769px) {
-    width: 180px; /* Approximate width of toggle section for balance */
-  }
-  
-  @media (max-width: 768px) {
-    display: none; /* Hide on mobile where layout stacks */
-  }
-`;
 
 // Color Mode Label for accessibility
 const ThemeLabel = styled(withDefaultProps({
@@ -119,12 +109,7 @@ const ThemeLabel = styled(withDefaultProps({
   font-weight: 500;
   user-select: none;
 `;
-// const ThemeLabel = styled.span`
-//   color: var(--app-text-secondary);
-//   font-size: 14px;
-//   font-weight: 500;
-//   user-select: none;
-// `;
+
 
 // Container for navigation with custom offset
 const NavBarSection = styled.div<{ leftOffset: number }>`
@@ -168,6 +153,16 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
   data: { sections, active, onToggle },
   navBarLeftOffset = 0, // Default to no offset
 }) => {
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);  // run only on 1st time Render/DOM update
+
+  // Show no text initially to avoid server/client SSR mismatch
+  const themeText = isMounted ? (active ? 'Dark' : 'Light') : '';
+
   return (
     <TopHeaderPaneContainerDIV theme={{
       backgroundColor: theme.backgroundColor,
@@ -184,7 +179,7 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
           handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
         />
         <ThemeLabel>
-          {active ? 'Dark' : 'Light'}
+          {themeText}
         </ThemeLabel>
       </ThemeToggleSection>
 

@@ -378,36 +378,37 @@ const DesignTokenGridVisualization: React.FC<SizeConfig> = ({
         token.includes('brand')
       )
     },
-    {
-      name: "Text",
-      tokens: Object.keys(parsedTokens.semanticTokens).filter(token =>
-        token.includes('text')
-      )
-    },
+
     {
       name: "Surfaces",
       tokens: Object.keys(parsedTokens.semanticTokens).filter(token =>
         token.includes('surface')
       )
     },
-    {
-      name: "Interaction",
-      tokens: Object.keys(parsedTokens.semanticTokens).filter(token =>
-        token.includes('focus') || token.includes('border') || token.includes('accent')
-      )
-    },
+    // {
+    //   name: "Interaction",
+    //   tokens: Object.keys(parsedTokens.semanticTokens).filter(token =>
+    //     token.includes('focus') || token.includes('border') || token.includes('accent')
+    //   )
+    // },
     // parse other semantic tokens
     {
       name: "Miscellaneous",
       tokens: Object.keys(parsedTokens.semanticTokens).filter(token => 
-        !token.includes('brand') && !token.includes('text') && !token.includes('surface') &&
-        !token.includes('focus') && !token.includes('border') && !token.includes('accent')  // &&
+        !token.includes('brand') && !token.includes('text') && !token.includes('surface')
+        // !token.includes('focus') && !token.includes('border') && !token.includes('accent')  // &&
         // !token.includes('container') && !token.includes('elevation') &&
         // !token.includes('hover') && !token.includes('pressed') && !token.includes('selected') &&
         // !token.includes('error') && !token.includes('warning') &&
         // !token.includes('shadow') && !token.includes('scrim') && !token.includes('divider')
       )
-    }
+    },
+    {
+      name: "Text",
+      tokens: Object.keys(parsedTokens.semanticTokens).filter(token =>
+        token.includes('text')
+      )
+    },
   ].filter(category => category.tokens.length > 0);
 
 
@@ -630,6 +631,7 @@ const DesignTokenGridVisualization: React.FC<SizeConfig> = ({
               universalScale={universalScale}
               semanticTokenSize={semanticTokenSize}
               semanticTokenCategories={semanticTokenCategories}
+              semanticTokensByTheme={parsedTokens.semanticTokensByTheme}
               onTokenHover={handleSemanticTokenHover}
               onTokenCopy={copyTokenToClipboard}
               getTokenValue={getTokenValue}
@@ -648,7 +650,7 @@ export const Default = {
     rawTokenSize: undefined,
     systemTokenSize: undefined,
     semanticTokenSize: undefined,
-    showAllSystemTokens: false,
+    showAllSystemTokens: true,
   },
   argTypes: {
     universalScale: {

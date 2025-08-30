@@ -79,7 +79,7 @@ function normalizeSkillName(skill: string): string | null {
   if (!skill) return null;
   
   // Basic normalization: trim, lowercase, handle common variations
-  let normalized = skill.trim();
+  const normalized = skill.trim();
   
   // Skip very short or generic terms
   if (normalized.length < 2) return null;

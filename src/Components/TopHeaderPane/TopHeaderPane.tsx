@@ -113,7 +113,7 @@ const Spacer = styled.div`
 // Color Mode Label for accessibility
 const ThemeLabel = styled(withDefaultProps({
   component: 'span',
-}, Typography)) <{}>`
+}, Typography))`
   color: var(--app-brand-color-area-text, --app-text-secondary);
   font-size: var(--app-font-size-heading-sm, 16ps);
   font-weight: 500;

@@ -145,9 +145,9 @@ const DesignTokenGridVisualization: React.FC<SizeConfig> = ({
   };
 
   // Parse tokens and build mappings - use the working embedded logic
-  const parsedTokens = parseTokensFromCSS();
-  // const allMappings = useMemo(() => buildTokenMappings(parsedTokens), [parsedTokens]);
-  const allMappings = buildTokenMappings(parsedTokens);
+  const parsedTokens = useMemo(() => parseTokensFromCSS(), []);
+  const allMappings = useMemo(() => buildTokenMappings(parsedTokens), [parsedTokens]);
+
   const tokenMappings = allMappings.mappings;
   const systemToSemanticMappings = allMappings.systemToSemantic;
 
@@ -416,79 +416,6 @@ const DesignTokenGridVisualization: React.FC<SizeConfig> = ({
   const isTokenHighlighted = (tokenName: string) => {
     return highlightedTokens.includes(tokenName);
   };
-
-  const getTokenChain = () => {
-    if (highlightedTokens.length === 0) return null;
-
-    // Categorize tokens by layer
-    const rawTokens = highlightedTokens.filter(token => token.startsWith('--md-ref-palette-'));
-    const systemTokens = highlightedTokens.filter(token => token.startsWith('--md-sys-color-'));
-    const semanticTokens = highlightedTokens.filter(token => token.startsWith('--app-'));
-
-    return { rawTokens, systemTokens, semanticTokens };
-  };
-
-  const renderTokenChainItem = (tokenName: string, layer: string) => {
-    return (
-      <div
-        key={tokenName}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          padding: '0.5rem',
-          background: 'var(--app-surface-base)',
-          borderRadius: '6px',
-          marginBottom: '0.25rem',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
-        }}
-        onClick={() => copyTokenToClipboard(tokenName)}
-        title={`Click to copy: var(${tokenName})`}
-      >
-        <div
-          style={{
-            width: '16px',
-            height: '16px',
-            background: getTokenValue(tokenName),
-            border: '1px solid var(--app-border-subtle)',
-            borderRadius: '3px',
-            flexShrink: 0
-          }}
-        />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{
-            fontSize: '0.75rem',
-            fontFamily: 'var(--app-font-family-courier, monospace)',
-            color: 'var(--app-text-primary)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
-          }}>
-            {tokenName}
-          </div>
-          <div style={{
-            fontSize: '0.65rem',
-            color: 'var(--app-text-secondary)',
-            fontWeight: 600,
-            textTransform: 'uppercase'
-          }}>
-            {layer} • {getTokenValue(tokenName)}
-          </div>
-        </div>
-        <span style={{
-          fontSize: '0.7rem',
-          color: 'var(--app-text-secondary)',
-          opacity: copiedToken === tokenName ? 1 : 0.6
-        }}>
-          {copiedToken === tokenName ? '✓' : '📋'}
-        </span>
-      </div>
-    );
-  };
-
-  const tokenChain = getTokenChain();
-
 
   //// Grid Layout Management
   const rendersNo = useRef(0);

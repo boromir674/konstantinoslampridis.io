@@ -1,20 +1,19 @@
 import React from 'react';
 import type { Meta, StoryObj } from "@storybook/react";
 import { FC } from "react";
-import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
-import { useThemeComparison } from '../HOC/LightDarkComparison';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 import DESIGN_TOKENS from "../../design-system/tokens.json";
 
 import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
 import '../../design-system/typography.css';
 import '../../design-system/semantic-tokens.css';
+
 // import after css because className css depends Semantic Tokens from our design system
 import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
 
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
-import { on } from "events";
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import { AppPortfolioItemProps } from "./AppPortfolioItem";
@@ -44,10 +43,6 @@ export default {
   title: "PortfolioSection",
   tags: ["autodocs"],
 };
-
-const renderPropsOverride: RenderProps = (data, theme) => {
-  return <div></div>
-}
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
   // Other Props, most likely with dedicated fallback values

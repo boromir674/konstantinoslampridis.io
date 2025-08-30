@@ -8,7 +8,7 @@ import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
 import ZIndexContext from '../../ZIndexContext';
 
 
-import { useThemeComparison } from '../HOC/LightDarkComparison';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 // Import legacy Styles
 import { lightTheme, darkTheme } from '../../theme';

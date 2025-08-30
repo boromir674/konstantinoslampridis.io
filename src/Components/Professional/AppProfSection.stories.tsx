@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import AppProfSection, { type ProfessionalSectionProps } from './AppProfSection';
-import { 
-  useThemeComparison,
-  ensureCleanThemeState,
-  enforceLegacyDarkMode
-} from '../HOC/LightDarkComparison';
+import { useThemeComparison, ensureCleanThemeState } from '../../../.storybook/LightDarkComparison';
+
 import { lightTheme, darkTheme } from '../../theme';
 
 

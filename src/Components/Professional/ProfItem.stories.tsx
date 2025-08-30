@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from "@storybook/react";
 
 import ProfItem, { type AppProfItemProps } from './ProfItem';
-import { useThemeComparison } from '../HOC/LightDarkComparison';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 import { lightTheme, darkTheme } from '../../theme';
 

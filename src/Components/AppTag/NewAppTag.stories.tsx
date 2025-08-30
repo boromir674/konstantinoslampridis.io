@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import AppTag, { type AppTagProps } from './AppTag';
-import { useThemeComparison } from '../HOC/LightDarkComparison';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 
 import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones

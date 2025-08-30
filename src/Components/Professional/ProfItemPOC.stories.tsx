@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from "@storybook/react";
 
 import ProfItemPOC, { type ProfItemProps } from "./ProfItemPOC";
-import { useThemeComparison } from '../HOC/LightDarkComparison';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
 import '../../design-system/typography.css';

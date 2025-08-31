@@ -62,21 +62,6 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "heading-order",
-    "level": "error",
-    "url": "http://localhost:33127/index.html",
-    "auditTitle": "Heading elements are not in a sequentially-descending order",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/heading-order"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0.5,
     "values": [
       0.5

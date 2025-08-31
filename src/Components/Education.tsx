@@ -14,7 +14,7 @@ const EducationSectionContainer = styled.div`
 
 
 const DegreeTitle = styled(withDefaultProps({
-  variant: 'h3',
+  variant: 'h2',
 }, Typography))`
   margin-bottom: 5px;
   margin-top: 10px;
@@ -24,7 +24,7 @@ const DegreeTitle = styled(withDefaultProps({
 
 
 const UniversityTitle = styled(withDefaultProps({
-  variant: 'h4',
+  variant: 'h3',
 }, Typography))`
   margin-top: 7px;
   margin-bottom: 5px;

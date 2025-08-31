@@ -63,7 +63,7 @@ interface ProfessionalExperienceSectionTitleProps {
     fontSize?: string;
   };
 }
-const ProfessionalExperienceSectionTitle = styled.h1<ProfessionalExperienceSectionTitleProps>`
+const ProfessionalExperienceSectionTitle = styled.h2<ProfessionalExperienceSectionTitleProps>`
   color: var(--app-color-surface-text, --app-text-primary, ${(props) => props.theme.textColor});
   padding: ${(props) => props.theme.padding || "0px"};
   font-family: var(--app-font);

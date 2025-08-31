@@ -97,7 +97,7 @@ interface PortfolioSectionTitleProps {
   };
 };
 const PortfolioSectionTitle = styled(withDefaultProps({
-  variant: "h1",
+  variant: "h2",
 }, Typography)) <PortfolioSectionTitleProps>`
   font-family: font-family: var(--app-font, inherit);
   font-size: var(--app-font-size-heading-2xl, 32px);

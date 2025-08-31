@@ -5,12 +5,8 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
   <div
     class="css-1lv27ca"
   >
-    <div
-      class="css-1737ciy"
-    >
-      <div
-        class="css-1dbdh0d"
-      >
+    <div>
+      <div>
         <div
           style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
         >
@@ -34,16 +30,16 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           </div>
         </div>
         <span
-          class="css-11717iz"
+          aria-label="Dark"
         >
           Dark
         </span>
       </div>
       <div
-        class="css-y14foe"
+        style="transform: translateX(0px);"
       >
         <nav
-          class="css-11vlmqf"
+          style="--nav-font-family: Roboto, sans-serif; --nav-font-size: 24px;"
         >
           <a
             class="css-681dl8"
@@ -70,7 +66,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
         class="css-kn3uhu"
       >
         <section
-          aria-label="Personal contact information"
           class="css-6q335f"
           id="personal-info"
           style="--accent-color-start: #410003; --accent-color-end: #725b2e;"
@@ -115,7 +110,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-12fn4cu"
             >
               <a
-                aria-label="Open GitHub profile github.com/john-doe in new tab"
                 class="css-16l44dw"
                 href="https://github.com/john-doe"
                 rel="noopener noreferrer"
@@ -149,7 +143,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </svg>
               </a>
               <a
-                aria-label="Open LinkedIn profile linkedin.com/in/john-doe in new tab"
                 class="css-16l44dw"
                 href="https://linkedin.com/in/john-doe"
                 rel="noopener noreferrer"
@@ -183,7 +176,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </svg>
               </a>
               <a
-                aria-label="Open GitLab profile gitlab.com/john-doe in new tab"
                 class="css-16l44dw"
                 href="https://gitlab.com/john-doe"
                 rel="noopener noreferrer"
@@ -230,7 +222,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-as1dsd"
             >
               <a
-                aria-label="Open 1 Page Resume PDF in new tab"
                 class="css-rlwcun"
                 href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
                 rel="noopener noreferrer"
@@ -264,7 +255,6 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </svg>
               </a>
               <a
-                aria-label="Open CV plus Projects PDF in new tab"
                 class="css-rlwcun"
                 href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
                 rel="noopener noreferrer"
@@ -306,32 +296,30 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           <div
             class="css-15torxr"
           >
-            <h3
+            <h2
               class="css-11g0hwi"
             >
               MSc in Artificial Intelligence
-            </h3>
-            <h4
+            </h2>
+            <h3
               class="css-1xx0ev1"
             >
               University of Amsterdam
-            </h4>
-            <span
+            </h3>
+            <div
               css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
             >
-              <a>
-                <p
-                  class="css-171urvq"
-                >
-                  Amsterdam, Netherlands
-                </p>
-                <span
-                  class="css-14bukl4"
-                >
-                  2014 - 2019
-                </span>
-              </a>
-            </span>
+              <p
+                class="css-171urvq"
+              >
+                Amsterdam, Netherlands
+              </p>
+              <span
+                class="css-14bukl4"
+              >
+                2014 - 2019
+              </span>
+            </div>
             <p
               class="css-134jemv"
             >
@@ -366,32 +354,30 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           <div
             class="css-15torxr"
           >
-            <h3
+            <h2
               class="css-11g0hwi"
             >
               BSc in Applied Informatics
-            </h3>
-            <h4
+            </h2>
+            <h3
               class="css-1xx0ev1"
             >
               University of Macedonia
-            </h4>
-            <span
+            </h3>
+            <div
               css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
             >
-              <a>
-                <p
-                  class="css-171urvq"
-                >
-                  Thessaloniki, Greece
-                </p>
-                <span
-                  class="css-14bukl4"
-                >
-                  2008 - 2013
-                </span>
-              </a>
-            </span>
+              <p
+                class="css-171urvq"
+              >
+                Thessaloniki, Greece
+              </p>
+              <span
+                class="css-14bukl4"
+              >
+                2008 - 2013
+              </span>
+            </div>
             <p
               class="css-134jemv"
             >
@@ -474,11 +460,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-104uwcd"
           id="professional-section"
         >
-          <h1
+          <h2
             class="css-1r1ex98"
           >
             Professional Career
-          </h1>
+          </h2>
           <div
             class="css-10m6d7f"
           >
@@ -632,11 +618,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           class="css-62bnf7"
           id="open-source-portfolio-section"
         >
-          <h1
+          <h2
             class="css-7ii6gk"
           >
             Open Source & Portfolio
-          </h1>
+          </h2>
           <div
             style="padding-left: 10px;"
           >
@@ -658,11 +644,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               <div
                 class="css-14yx19c"
               >
-                <h2
+                <h3
                   class="css-1mt6hkg"
                 >
                   Python Package Generator
-                </h2>
+                </h3>
                 <p
                   class="css-wkkei5"
                 >
@@ -897,11 +883,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               <div
                 class="css-14yx19c"
               >
-                <h2
+                <h3
                   class="css-1mt6hkg"
                 >
                   Neural Style Transfer
-                </h2>
+                </h3>
                 <p
                   class="css-wkkei5"
                 >
@@ -1111,11 +1097,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               <div
                 class="css-14yx19c"
               >
-                <h2
+                <h3
                   class="css-1mt6hkg"
                 >
                   Topic Modeling Toolkit
-                </h2>
+                </h3>
                 <p
                   class="css-wkkei5"
                 >
@@ -1298,11 +1284,11 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               <div
                 class="css-14yx19c"
               >
-                <h2
+                <h3
                   class="css-1mt6hkg"
                 >
                   Project with 2 Releases
-                </h2>
+                </h3>
                 <p
                   class="css-wkkei5"
                 >

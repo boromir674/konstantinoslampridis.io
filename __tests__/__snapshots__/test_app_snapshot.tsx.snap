@@ -4,12 +4,8 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
 <div
   className="css-1lv27ca"
 >
-  <div
-    className="css-1737ciy"
-  >
-    <div
-      className="css-1dbdh0d"
-    >
+  <div>
+    <div>
       <div
         onPointerDown={[Function]}
         onPointerLeave={[Function]}
@@ -82,21 +78,25 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         </div>
       </div>
       <span
-        className="css-11717iz"
-        style={
-          {
-            "marginBottom": undefined,
-          }
-        }
+        aria-label="Light"
       >
         Light
       </span>
     </div>
     <div
-      className="css-y14foe"
+      style={
+        {
+          "transform": "translateX(0px)",
+        }
+      }
     >
       <nav
-        className="css-11vlmqf"
+        style={
+          {
+            "--nav-font-family": "Roboto, sans-serif",
+            "--nav-font-size": "24px",
+          }
+        }
       >
         <a
           className="css-681dl8"
@@ -126,7 +126,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
       className="css-kn3uhu"
     >
       <section
-        aria-label="Personal contact information"
         className="css-6q335f"
         id="personal-info"
         style={
@@ -196,7 +195,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             className="css-12fn4cu"
           >
             <a
-              aria-label="Open GitHub profile github.com/boromir674 in new tab"
               className="css-16l44dw"
               href="https://github.com/boromir674"
               rel="noopener noreferrer"
@@ -230,7 +228,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
               </svg>
             </a>
             <a
-              aria-label="Open LinkedIn profile linkedin.com/in/konstantinos-lampridis/ in new tab"
               className="css-16l44dw"
               href="https://linkedin.com/in/konstantinos-lampridis/"
               rel="noopener noreferrer"
@@ -264,7 +261,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
               </svg>
             </a>
             <a
-              aria-label="Open GitLab profile gitlab.com/boromir674 in new tab"
               className="css-16l44dw"
               href="https://gitlab.com/boromir674"
               rel="noopener noreferrer"
@@ -316,7 +312,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             className="css-as1dsd"
           >
             <a
-              aria-label="Open 1 Page Resume PDF in new tab"
               className="css-rlwcun"
               href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
               rel="noopener noreferrer"
@@ -350,7 +345,6 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
               </svg>
             </a>
             <a
-              aria-label="Open CV plus Projects PDF in new tab"
               className="css-rlwcun"
               href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
               rel="noopener noreferrer"
@@ -392,7 +386,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         <div
           className="css-15torxr"
         >
-          <h3
+          <h2
             className="css-11g0hwi"
             style={
               {
@@ -401,8 +395,8 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             }
           >
             MSc in Artificial Intelligence
-          </h3>
-          <h4
+          </h2>
+          <h3
             className="css-1xx0ev1"
             style={
               {
@@ -411,44 +405,42 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             }
           >
             University of Amsterdam
-          </h4>
-          <span
+          </h3>
+          <div
             css={
               {
                 "map": undefined,
-                "name": "ak0z00",
+                "name": "161s72n",
                 "next": undefined,
                 "styles": "
-        display: flex;
-        flex-wrap: wrap;
+        display: block;
+        margin: 0;
       ",
                 "toString": [Function],
               }
             }
           >
-            <a>
-              <p
-                className="css-171urvq"
-                style={
-                  {
-                    "marginBottom": undefined,
-                  }
+            <p
+              className="css-171urvq"
+              style={
+                {
+                  "marginBottom": undefined,
                 }
-              >
-                Amsterdam, Netherlands
-              </p>
-              <span
-                className="css-14bukl4"
-                style={
-                  {
-                    "marginBottom": undefined,
-                  }
+              }
+            >
+              Amsterdam, Netherlands
+            </p>
+            <span
+              className="css-14bukl4"
+              style={
+                {
+                  "marginBottom": undefined,
                 }
-              >
-                2014 - 2019
-              </span>
-            </a>
-          </span>
+              }
+            >
+              2014 - 2019
+            </span>
+          </div>
           <p
             className="css-134jemv"
             style={
@@ -493,7 +485,7 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         <div
           className="css-15torxr"
         >
-          <h3
+          <h2
             className="css-11g0hwi"
             style={
               {
@@ -502,8 +494,8 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             }
           >
             BSc in Applied Informatics
-          </h3>
-          <h4
+          </h2>
+          <h3
             className="css-1xx0ev1"
             style={
               {
@@ -512,44 +504,42 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
             }
           >
             University of Macedonia
-          </h4>
-          <span
+          </h3>
+          <div
             css={
               {
                 "map": undefined,
-                "name": "ak0z00",
+                "name": "161s72n",
                 "next": undefined,
                 "styles": "
-        display: flex;
-        flex-wrap: wrap;
+        display: block;
+        margin: 0;
       ",
                 "toString": [Function],
               }
             }
           >
-            <a>
-              <p
-                className="css-171urvq"
-                style={
-                  {
-                    "marginBottom": undefined,
-                  }
+            <p
+              className="css-171urvq"
+              style={
+                {
+                  "marginBottom": undefined,
                 }
-              >
-                Thessaloniki, Greece
-              </p>
-              <span
-                className="css-14bukl4"
-                style={
-                  {
-                    "marginBottom": undefined,
-                  }
+              }
+            >
+              Thessaloniki, Greece
+            </p>
+            <span
+              className="css-14bukl4"
+              style={
+                {
+                  "marginBottom": undefined,
                 }
-              >
-                2008 - 2013
-              </span>
-            </a>
-          </span>
+              }
+            >
+              2008 - 2013
+            </span>
+          </div>
           <p
             className="css-134jemv"
             style={
@@ -704,11 +694,11 @@ exports[`App: Snapshot Testing renders correctly 1`] = `
         className="css-104uwcd"
         id="professional-section"
       >
-        <h1
+        <h2
           className="css-1r1ex98"
         >
           Professional Career
-        </h1>
+        </h2>
         <div
           className="css-10m6d7f"
           onClick={[Function]}
@@ -2428,7 +2418,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
         className="css-62bnf7"
         id="open-source-portfolio-section"
       >
-        <h1
+        <h2
           className="css-7ii6gk"
           style={
             {
@@ -2437,7 +2427,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
           }
         >
           Open Source & Portfolio
-        </h1>
+        </h2>
         <div
           style={
             {
@@ -2503,7 +2493,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -2512,7 +2502,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Python Package Generator
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -2806,7 +2796,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -2815,7 +2805,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Neural Style Transfer
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -3107,7 +3097,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -3116,7 +3106,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Software Patterns
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -3375,7 +3365,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -3384,7 +3374,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Pytest Object Getter
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -3645,7 +3635,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -3654,7 +3644,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Python Software Release
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -3859,7 +3849,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -3868,7 +3858,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Pytest Subprocess Plugin
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -4129,7 +4119,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -4138,7 +4128,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Topic Modeling Toolkit
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -4370,7 +4360,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -4379,7 +4369,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 So Magic
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -4640,7 +4630,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -4649,7 +4639,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 PyDoer
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={
@@ -4885,7 +4875,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
             <div
               className="css-14yx19c"
             >
-              <h2
+              <h3
                 className="css-1mt6hkg"
                 style={
                   {
@@ -4894,7 +4884,7 @@ Working asynchronously and fully remotely on adding features and automating (bac
                 }
               >
                 Music Album Creator
-              </h2>
+              </h3>
               <p
                 className="css-wkkei5"
                 style={

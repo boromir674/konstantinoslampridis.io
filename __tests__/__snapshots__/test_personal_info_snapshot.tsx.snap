@@ -3,7 +3,6 @@
 exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
 <div>
   <section
-    aria-label="Personal contact information"
     class="css-6q335f"
     id="personal-info"
     style="--accent-color-start: #410003; --accent-color-end: #725b2e;"
@@ -48,7 +47,6 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
         class="css-12fn4cu"
       >
         <a
-          aria-label="Open GitHub profile test-github-url in new tab"
           class="css-16l44dw"
           href="https://test-github-url"
           rel="noopener noreferrer"
@@ -82,7 +80,6 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
           </svg>
         </a>
         <a
-          aria-label="Open LinkedIn profile test-linkedin-url in new tab"
           class="css-16l44dw"
           href="https://test-linkedin-url"
           rel="noopener noreferrer"
@@ -116,7 +113,6 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
           </svg>
         </a>
         <a
-          aria-label="Open GitLab profile test-gitlab-url in new tab"
           class="css-16l44dw"
           href="https://test-gitlab-url"
           rel="noopener noreferrer"
@@ -163,7 +159,6 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
         class="css-as1dsd"
       >
         <a
-          aria-label="Open 1 Page Resume PDF in new tab"
           class="css-rlwcun"
           href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
           rel="noopener noreferrer"
@@ -197,7 +192,6 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
           </svg>
         </a>
         <a
-          aria-label="Open CV plus Projects PDF in new tab"
           class="css-rlwcun"
           href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
           rel="noopener noreferrer"

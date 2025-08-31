@@ -763,7 +763,7 @@ describe("Test Primary and Secondary Fonts are used in the app", () => {
         const professionalSection = document.getElementById('professional-section');
 
         // query for the Section Title Header, which is the first h1 element 
-        const profSectionTitleHeader = professionalSection.querySelector('h1');
+        const profSectionTitleHeader = professionalSection.querySelector('h2');
         // assert that the font-family is the expected Primary Font
         expect(profSectionTitleHeader).toHaveStyleRule('font-family', EXPECTED_PRIMARY_FONT);
 

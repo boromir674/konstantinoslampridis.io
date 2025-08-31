@@ -2,21 +2,6 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:33127/404.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0.5,
     "values": [
       0.5
@@ -133,21 +118,6 @@
     "url": "http://localhost:33127/404/index.html",
     "auditTitle": "Browser errors were logged to the console",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:33127/404/index.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
   },
   {
     "name": "minScore",

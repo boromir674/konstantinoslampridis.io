@@ -38,6 +38,7 @@ WORKDIR /app
 COPY src src
 COPY gatsby-config.ts .
 COPY gatsby-node.ts .
+COPY gatsby-ssr.js .
 COPY tsconfig.json .
 COPY babel.config.js .
 COPY package.json .

@@ -219,6 +219,7 @@ Lighthouse Audit can "happen" `locally`, `on CI`, `with docker`, optionally in *
 ### Emulate online CI locally
 
 ```sh
+make build_static_files
 npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=3'
 
 ./scripts/ci-compare-json-arrays.py .lighthouseci/assertion-results.json ".lh-assertion-results-gs.json"

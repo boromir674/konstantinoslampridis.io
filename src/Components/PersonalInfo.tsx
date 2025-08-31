@@ -266,7 +266,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
   return (
     <Container
       theme={safeTheme}
-      aria-label="Personal contact information"
+      // aria-label="Personal contact information"
       style={{
         // Provide fallback custom props only if semantic vars missing
         ['--accent-color-start' as any]: accentStart,
@@ -292,7 +292,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
             href={`https://${github}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open GitHub profile ${github} in new tab`}
+            // aria-label={`Open GitHub profile ${github} in new tab`}
             theme={safeTheme}
           >
             GitHub
@@ -303,7 +303,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
             href={`https://${linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open LinkedIn profile ${linkedin} in new tab`}
+            // aria-label={`Open LinkedIn profile ${linkedin} in new tab`}
             theme={safeTheme}
           >
             LinkedIn
@@ -314,7 +314,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
             href={`https://${gitlab}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open GitLab profile ${gitlab} in new tab`}
+            // aria-label={`Open GitLab profile ${gitlab} in new tab`}
             theme={safeTheme}
           >
             GitLab
@@ -330,7 +330,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
             href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open 1 Page Resume PDF in new tab"
+            // aria-label="Open 1 Page Resume PDF in new tab"
             theme={{ ...safeTheme, textColor: safeTheme.linkColor }}
           >
             1 Page Resume <AppExternalURLIcon theme={{ lineColor: safeTheme.externalURLSVGColor }} />
@@ -339,7 +339,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({
             href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open CV plus Projects PDF in new tab"
+            // aria-label="Open CV plus Projects PDF in new tab"
             theme={{ ...safeTheme, textColor: safeTheme.linkColor }}
           >
             CV + Projects <AppExternalURLIcon theme={{ lineColor: safeTheme.externalURLSVGColor }} />

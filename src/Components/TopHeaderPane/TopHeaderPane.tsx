@@ -162,6 +162,9 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
 
   // Show no text initially to avoid server/client SSR mismatch
   const themeText = isMounted ? (active ? 'Dark' : 'Light') : '';
+  
+  // Aria label that matches the visual content to avoid label-content-name-mismatch
+  const themeAriaLabel = isMounted ? themeText : 'Theme';
 
   return (
     <TopHeaderPaneContainerDIV theme={{
@@ -178,7 +181,7 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
           handleBackgroundColor={theme.themeSwitch.handleBackgroundColor}
           handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
         />
-        <ThemeLabel>
+        <ThemeLabel aria-label={themeAriaLabel}>
           {themeText}
         </ThemeLabel>
       </ThemeToggleSection>

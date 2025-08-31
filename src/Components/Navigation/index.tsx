@@ -1,4 +1,4 @@
-import HorizontalNavBar from './HeaderNavigationNew1';
+import HorizontalNavBar from './HeaderNavigation';
 import VerticalFlowtingNav from './FloatingNavigationStyled';
 
 

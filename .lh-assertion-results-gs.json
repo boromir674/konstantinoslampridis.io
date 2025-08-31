@@ -83,21 +83,6 @@
     ],
     "operator": ">=",
     "passed": false,
-    "auditId": "target-size",
-    "level": "error",
-    "url": "http://localhost:33127/index.html",
-    "auditTitle": "Touch targets do not have sufficient size or spacing.",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/target-size"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
     "auditId": "errors-in-console",
     "level": "error",
     "url": "http://localhost:33127/404/index.html",

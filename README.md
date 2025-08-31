@@ -31,8 +31,8 @@ We currently use
 
 | Live    | Performance | Accessibility | Best Practices | SEO | PWA |
 | ------- | ----------- | ------------- | -------------- | --- | --- |
-| Desktop | 100         | 93            | 100            | 92  | N/A |
-| Mobile  | 96          | 93            | 100            | 92  | N/A |
+| Desktop | 100         | 100           | 100            | 92  | N/A |
+| Mobile  | 90          | 100           | 100            | 92  | N/A |
 
 # App Architecture
 ```mermaid
@@ -242,7 +242,7 @@ npm exec lighthouse https://konstantinoslampridis.io --no-enable-error-reporting
 
 **Expect:**
 - a shipped chrome browser to start-up
-- an html report of the audit result: konstantinoslampridis.io\<datetime\>.report.htm
+- an html report of the audit result: konstantinoslampridis.io\<datetime\>.report.html
 
 Note: 
 

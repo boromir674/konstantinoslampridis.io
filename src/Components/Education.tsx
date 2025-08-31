@@ -161,13 +161,13 @@ const EducationItem: React.FC<AppEducationItemProps> = ({
     <StyledAppEduItem theme={theme}>
       <DegreeTitle theme={theme.degreeTitle}>{degree_title}</DegreeTitle>
       <UniversityTitle theme={theme.body}>{university_name}</UniversityTitle>
-      <span css={css`
-        display: flex;
-        flex-wrap: wrap;
-      `}><a>
-          <Location theme={theme.body}>{location}</Location><StudiesDuration theme={theme.body}>{duration}</StudiesDuration>
-        </a>
-      </span>
+      <div css={css`
+        display: block;
+        margin: 0;
+      `}>
+        <Location theme={theme.body}>{location}</Location>
+        <StudiesDuration theme={theme.body}>{duration}</StudiesDuration>
+      </div>
       <ThesisTitle theme={theme.body}>Thesis: {thesis_title}</ThesisTitle>
       <TopicTagsContainer>
         {topics.map((topic, index) => (

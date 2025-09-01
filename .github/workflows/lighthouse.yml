@@ -27,6 +27,9 @@ jobs:
       # Install lhci
       - run: yarn global add @lhci/cli@0.14.x
 
+      # Show Version
+      - run: lhci --version
+
       # Checkout code into dedicate 'code' subdirectory
       - uses: actions/checkout@v4
         with:

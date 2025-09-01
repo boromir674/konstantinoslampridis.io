@@ -37,15 +37,17 @@ const InnerContainer = styled.div`
   flex-direction: column;
   // justify-content: space-between;
 
+  background-color: var(--app-contaier-primary, --app-surface-primary);
 
   // padding-bottom: 20px;
   &:hover {
-    transform: scale(1.01);
-    // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    // background-color:
-    // color:
+    transform: scale(1.005);
+
+    // changing the background color on hover, requires "preventing the color to overflow", but without using the overflow in CSS, because it will prevent the pop up to be seen "above" all neighbouring grid items content 
+    // background-color: var(--app-container-primary);
   }
-  // define outline here is also buggy
+
+  // defining outline will reveal that inner content is overflowing outside of its grid item, so we keep "things" transparent (ie no outline)
 `;
 
 /** Renders the DIV and the children representing a Portfolio Item

@@ -22,10 +22,13 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
         with:
-          node-version: '18.16.x'
+          node-version: '22.16.x'
 
       # Install lhci
-      - run: yarn global add @lhci/cli@0.14.x
+      - run: yarn global add @lhci/cli@0.15.x
+
+      # Show Version
+      - run: lhci --version
 
       # Checkout code into dedicate 'code' subdirectory
       - uses: actions/checkout@v4
@@ -70,7 +73,7 @@ jobs:
       - name: "Audit Site and run Assertions once; then record results and proceed"
         # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
         run: |
-          lhci autorun --config "${{ env.REPO_CHECKOUT }}/.lighthouserc.yml"  "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0
+          lhci autorun --config "${{ env.REPO_CHECKOUT }}/.lighthouserc.yml"  "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=3 || pass_all_assertions=0
 
           echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
 
@@ -82,6 +85,7 @@ jobs:
             echo "### Assertions Failed: Errors + Warnings" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
             cat "${RUNTIME_JSON}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
             echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
           else

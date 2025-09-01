@@ -1,3 +1,14 @@
+/* Discovers stories in specified directories with optional title prefixes
+*
+* Folders:
+* - ../src/stories/  --> prefix "PoC/"
+* - ../src/Components/  --> no prefix
+* - ../src/design-system/  --> prefix "Design System/"
+* 
+* Also enables addons.
+*/
+
+
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
 const config: StorybookConfig = {
@@ -16,7 +27,13 @@ const config: StorybookConfig = {
     {
       directory: '../src/Components',
       files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    }
+    },
+    // Design System - Stories presenting Semantic/Raw Tokens
+    {
+      directory: '../src/design-system',
+      files: '**/*.stories.@(js|jsx|mjs|ts|tsx)',
+      titlePrefix: 'Design System',
+    },
   ],
   addons: [
     "@storybook/addon-links",

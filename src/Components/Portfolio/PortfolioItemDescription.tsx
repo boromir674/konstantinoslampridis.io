@@ -9,8 +9,8 @@ import { withDefaultProps } from '../hoc';
 interface PortfolioItemProjectDescriptionProps {
   theme: {
     // Font
-    fontFamily: string;
-    fontSize: string;
+    fontFamily?: string;
+    fontSize?: string;
     //// Layout
     /** Top and Bottom Margin, measured in pixels, for the rendered html tag */
     margin: number;
@@ -21,15 +21,17 @@ const PortfolioItemProjectDescriptionP = withDefaultProps({
 }, withForwardRef(Typography));
 
 const PortfolioItemProjectDescription = styled(PortfolioItemProjectDescriptionP) <PortfolioItemProjectDescriptionProps>`
-  // override margin/padding browser defaults (ie if browser has these default value and no CSS Reset is used)
+  color: var(--app-text-secondary);
+  background-color: var(--app-color-draggable, --app-surface-primary);
+  font-family: var(--app-font, inherit);
+  font-size: var(--app-font-size-body-lg, 16px);
+
+// override margin/padding browser defaults (ie if browser has these default value and no CSS Reset is used)
   margin-top: ${props => props.theme.margin}px;
   margin-bottom: ${props => props.theme.margin}px;
 
   padding: 0;
 
-  font-family: ${props => props.theme.fontFamily};
-  font-size: ${props => props.theme.fontSize};
-  // font-weight: bold;
 `;
 
 export default PortfolioItemProjectDescription;

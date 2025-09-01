@@ -15,16 +15,18 @@ interface PortfolioItemProjectTitleProps {
     children?: React.ReactNode; // Explicitly allow children
 };
 
-const H2 = withDefaultProps({
-    variant: "h2",
+const H3 = withDefaultProps({
+    variant: "h3",
 }, withForwardedRef(Typography));
 
 // COMPONENT - Project Title accepting theme and optional ref
-const ProjectTitle = styled(H2) <PortfolioItemProjectTitleProps>`
+const ProjectTitle = styled(H3) <PortfolioItemProjectTitleProps>`
     margin: 0;
-    font-family: ${props => props.theme?.fontFamily || "inherit"};
-    font-size: ${props => props.theme?.fontSize || "24px"};
+    font-family: var(--app-font, inherit);
+    font-size: var(--app-font-size-heading-lg, 34px);
     font-weight: bold;
+    color: var(--app-on-surface-primary);
+    background-color: var(--app-color-draggable, --app-surface-primary);
   `;
 
 export default ProjectTitle

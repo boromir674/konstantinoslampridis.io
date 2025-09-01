@@ -17,6 +17,7 @@ const args: AppVerticalMainPaneProps = {
       item: {
         ...lightTheme.portfolio.item,
         theme: {
+          minGapBetweenPanes: lightTheme.portfolio.item.theme?.minGapBetweenPanes || "16px",
           releases: {
             headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
             headerColor: lightTheme.portfolio.item.releases.color,
@@ -50,6 +51,7 @@ const args: AppVerticalMainPaneProps = {
                 },
               ],
             },
+            headerFontSize: ""
           },
           // Project Links Pane, ie source code repo docs, etc
           links: {
@@ -82,6 +84,10 @@ const args: AppVerticalMainPaneProps = {
                   },
                 },
               ],
+            },
+            header: {
+              fontFamily: "",
+              fontSize: ""
             }
           },
         },
@@ -318,8 +324,8 @@ export const Dark = {
       portfolio: {
         ...darkTheme.portfolio,
         item: {
-          ...darkTheme.portfolio.item,
           theme: {
+            minGapBetweenPanes: darkTheme.portfolio.item.theme?.minGapBetweenPanes || "16px",
             releases: {
               headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
               headerColor: darkTheme.portfolio.item.releases.color,
@@ -388,6 +394,7 @@ export const Dark = {
               }
             },
           },
+
         },
       }
     },

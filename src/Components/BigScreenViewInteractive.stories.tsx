@@ -306,9 +306,14 @@ const arg1: BigScreenViewInteractiveProps = {
           item: {
             ...lightTheme.portfolio.item,
             theme: {
+              minGapBetweenPanes: "16px",
+              // Sub sections
+              projectTitle: lightTheme.portfolio.item.projectTitle,
+              projectDescription: lightTheme.portfolio.item.projectDescription,
               links: {
                 ...lightTheme.portfolio.item.resourceLinks,
                 item: {
+                  
                   ...lightTheme.portfolio.item.resourceLinks.item,
                   icons: Array.from({ length: maxNumberOfLinksPerPortfolioItems }, () => ({
                     svgStyles: {
@@ -319,6 +324,7 @@ const arg1: BigScreenViewInteractiveProps = {
                   })),
                 },
               },
+
               releases: {
                 ...lightTheme.portfolio.item.releases,
                 headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
@@ -366,6 +372,10 @@ const arg1: BigScreenViewInteractiveProps = {
           item: {
             ...darkTheme.portfolio.item,
             theme: {
+              minGapBetweenPanes: "16px",
+              // Sub sections
+              projectTitle: darkTheme.portfolio.item.projectTitle,
+              projectDescription: darkTheme.portfolio.item.projectDescription,
               links: {
                 ...darkTheme.portfolio.item.resourceLinks,
                 item: {

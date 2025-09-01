@@ -3,9 +3,7 @@ import React, { FC, useCallback } from "react";
 import Typography from '../Typography';
 import styled from "@emotion/styled";
 import { withDefaultProps } from "../hoc";
-import PortfolioItemInterface, {
-  ReleaseItemData,
-} from "../../PortfolioItemInterface";
+import PortfolioItemInterface, { type ReleaseItemData } from "../../PortfolioItemInterface";
 
 // INNER CONTENT COMPONENTS
 import AppReleasePane, { ReleasesPaneProps } from "./AppProjectReleasesPane";
@@ -26,6 +24,7 @@ const BottomPartBlock = styled.div<BottomPartBlockProps>`
 `;
 // COMPONENT rendering a DIV Designed to host the Project Links Pane
 const LeftPane = styled.div`
+  // background-color here is barely visible, since it is covered by the inner component
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,10 +32,12 @@ const LeftPane = styled.div`
 `;
 // COMPONENT rendering a DIV Designed to host the Releases Pane
 const RightPane = styled.div`
+  // background-color here is not visible, since it is covered by the inner component
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center; /* Center content horizontally */
+  // text-align: center; /* Center text content */
 `;
 
 
@@ -60,8 +61,10 @@ interface SoftwareMaturityLevelProps {
 };
 const SoftwareMaturityLevelSpan = withDefaultProps({ component: 'span' }, Typography);
 const SoftwareMaturityLevel = styled(SoftwareMaturityLevelSpan) <SoftwareMaturityLevelProps>`
-  font-family: ${props => props.theme.fontFamily};
-  font-size: ${props => props.theme.fontSize};
+  font-family: font-family: var(--app-font, inherit);
+  font-size: var(--app-font-size-heading-sm, 16px);
+  color: var(--app-text-secondary);
+  padding-bottom: 10px;
 `;
 
 // Dynamic Sub TYPES of Exported Component

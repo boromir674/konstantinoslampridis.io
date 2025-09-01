@@ -1,7 +1,8 @@
 /** Provides SoftwareReleaseButtonComponent for rendering Release Items and ToolTip/Dialogs of a Project */
 import React, { FC, useState, useRef, useContext, useEffect, type ReactNode, type RefObject } from "react";
 import styled from "@emotion/styled";
-import SoftwareReleaseTooltip, { SoftwareReleaseTooltipProps } from "./SoftwareReleaseTooltip";
+
+import SoftwareReleaseTooltip from "./SoftwareReleaseTooltip";
 import ZIndexContext from '../../../ZIndexContext';
 
 interface SoftwareReleaseButtonProps {
@@ -35,13 +36,14 @@ interface SoftwareReleaseButtonTheme {
     }
 }
 const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
+  background-color: var(--app-interactive-secondary);
+  color: var(--app-on-interactive-secondary);
+
   display: flex;
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
   border: none;
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.color};
   border-radius: 4px;
   font-size: 14px;
   font-family: 'Courier New', Courier, monospace;
@@ -68,6 +70,9 @@ const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
     font-size: 12px;
     padding: 8px;
   }
+  
+  // SVG inherits from currentColor, which solves problem of having svg be pained exactly as text and change on state change, same as text (normal -> hover)
+  svg { fill: currentColor; }
 
 `;
 

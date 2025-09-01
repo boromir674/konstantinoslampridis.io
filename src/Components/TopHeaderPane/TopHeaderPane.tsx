@@ -1,9 +1,8 @@
-import React, { FC } from "react";
-import styled from "@emotion/styled";
+import React, { FC, useState, useEffect } from "react";
+import * as styles from './TopHeaderPane.module.css';
 
 import { ToggleSlider } from "../MyToggleSwitch1";
 import { HorizontalNavBar } from "../Navigation";
-
 
 /**
  * Data that the TopHeaderPane (for big screens) can receive
@@ -46,63 +45,73 @@ interface TopHeaderPaneProps {
     };
   };
   data: TopHeaderPaneData;
+  navBarLeftOffset?: number; // Optional left offset for navbar positioning
 }
-
-
-const TopHeaderPaneContainer = styled.div<{theme: {
-  backgroundColor: string;
-  color: string;
-}}>`
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.color};
-
-  position: fixed;
-  top: 0;
-  width: 100%;
-
-  // place the top header pane above everything on the z axis
-  // in other words imagining the page in 3D the top pane shall be the topmost layer
-  // at the highest level
-  z-index: 9999; /* Set a high z-index to keep the header on top */
-
-  padding-left: 80px;
-  padding-top: 10px;
-`;
 
 const TopHeaderPane: FC<TopHeaderPaneProps> = ({
   theme,
   data: { sections, active, onToggle },
+  navBarLeftOffset = 0, // Default to no offset
 }) => {
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);  // run only on 1st time Render/DOM update
+
+  // FOUC Prevention: Empty string until mounted, then show real value
+  // CSS Module handles the placeholder display
+  const themeText = isMounted ? (active ? 'Dark' : 'Light') : '';
+
+  // Aria label that matches the visual content to avoid label-content-name-mismatch
+  const themeAriaLabel = isMounted ? themeText : 'Theme';
+
   return (
-    <TopHeaderPaneContainer theme={{
-      backgroundColor: theme.backgroundColor,
-      color: theme.navigationBar.textColor,
-    }}>
-      <ToggleSlider
-        active={active}
-        onToggle={onToggle}
-        barBackgroundColor={theme.themeSwitch.backgroundColor}
-        barBackgroundColorActive={theme.themeSwitch.backgroundColorActive}
-        handleBackgroundColor={theme.themeSwitch.handleBackgroundColor}
-        handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
-      ></ToggleSlider>
-      <HorizontalNavBar
-        // replace the name key from section objects with the 'label' key to match interface of HorizontalNavBar props
-        items={sections.map((section_data) =>
-          Object.assign(section_data, { label: section_data.name })
-        )}
-        activeItem={sections[0].name}
-        theme={{
-          fontFamily: theme.navigationBar.fontFamily,
-          fontSize: theme.navigationBar.fontSize,
-          colorSet: theme.navigationBar,
-          padding: {
-            vertical: "8px",
-            horizontal: "28px",
-          },
+    <div className={styles.container}>
+      {/* Left side: Theme toggle + label */}
+      <div className={styles.themeToggleSection}>
+        <ToggleSlider
+          active={active}
+          onToggle={onToggle}
+          barBackgroundColor={theme.themeSwitch.backgroundColor}
+          barBackgroundColorActive={theme.themeSwitch.backgroundColorActive}
+          handleBackgroundColor={theme.themeSwitch.handleBackgroundColor}
+          handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
+        />
+        <span
+          className={styles.themeText}
+          aria-label={themeAriaLabel}
+        >
+          {themeText}
+        </span>
+      </div>
+
+      {/* Center: Navigation bar positioned over main content area */}
+      <div
+        className={styles.navBarSection}
+        style={{
+          transform: `translateX(${navBarLeftOffset}px)`,
         }}
-      />
-    </TopHeaderPaneContainer>
+      >
+        <HorizontalNavBar
+          // replace the name key from section objects with the 'label' key to match interface of HorizontalNavBar props
+          items={sections.map((section_data) =>
+            Object.assign(section_data, { label: section_data.name })
+          )}
+          activeItem={sections[0].name}
+          theme={{
+            fontFamily: theme.navigationBar.fontFamily,
+            fontSize: theme.navigationBar.fontSize,
+            colorSet: theme.navigationBar,
+            padding: {
+              vertical: "8px",
+              horizontal: "28px",
+            },
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -1,13 +1,19 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import AppProfSection, { type ProfessionalSectionProps } from './AppProfSection';
+import { useThemeComparison, ensureCleanThemeState } from '../../../.storybook/LightDarkComparison';
 
 import { lightTheme, darkTheme } from '../../theme';
 
+
 // Story summary / metadata
-export default {
+const storyMeta: Meta<typeof AppProfSection> = {
   component: AppProfSection,
   title: "AppProfSection",
   tags: ["autodocs"],
 };
+
+export default storyMeta;
+
 
 interface ComponentStory {
   args: ProfessionalSectionProps;
@@ -45,8 +51,9 @@ const LightMode: ComponentStory = {
 };
 export { LightMode };
 
-// 2: Dark Mode Colors
-const DarkMode: ComponentStory = {
+// 2: Dark Mode Colors (Legacy - Protected from HOC interference)
+const DarkMode: ComponentStory & { decorators?: any[] } = {
+  decorators: [ensureCleanThemeState()],
   args: {
     ...LightMode.args,
     theme: darkTheme.professional,
@@ -54,3 +61,55 @@ const DarkMode: ComponentStory = {
   },
 };      
 export { DarkMode };
+
+
+type Story = StoryObj<typeof storyMeta>;
+
+export const LightAndDarkSideBySide: Story = {
+  decorators: [useThemeComparison({ 
+    lightLabel: "🔧 DECORATOR LIGHT",
+    darkLabel: "🔧 DECORATOR DARK",
+    gap: "32px" 
+  })],
+  render: () => (
+    <AppProfSection {...LightMode.args}/>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Using as Story Decorator
+
+**Clean Pattern**: Apply theme comparison at the story level:
+
+\`\`\`tsx
+export const MyStory: Story = {
+  decorators: [useThemeComparison({ 
+    lightLabel: "🔧 DECORATOR LIGHT",
+    darkLabel: "🔧 DECORATOR DARK" 
+  })],
+  render: () => <YourComponent />
+};
+\`\`\`
+
+**Benefits**: 
+- Cleaner story definitions
+- Consistent theming approach
+- Reusable decorator patterns
+- No wrapper component needed
+        `
+      }
+    }
+  }
+};
+
+export const DarkModeProtected: Story = {
+  decorators: [ensureCleanThemeState()],
+  render: () => (
+    <AppProfSection 
+      {...LightMode.args}
+      theme={darkTheme.professional}
+      id="legacy-dark-protected"
+    />
+  ),
+};

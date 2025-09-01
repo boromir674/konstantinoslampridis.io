@@ -37,6 +37,16 @@ interface Theme {
     urlTextColor: string;
     containerBackgroundColor: string;
     externalURLSVGColor: string;
+    backgroundColorGradient: {
+      start: string;
+      end: string;
+    };
+    colors?: {
+      socialBadgeBorder?: string;
+      focusRing?: string;
+      docBadgeBgFrom?: string;
+      docBadgeBgTo?: string;
+    };
   };
   /// EDUCATION COLORS ///
   education: {
@@ -196,6 +206,16 @@ interface ComputedTheme extends Theme {
         fontFamily: string;
         fontSize: string;
       };
+    };
+    backgroundColorGradient: {
+      start: string;
+      end: string;
+    };
+    colors?: {
+      socialBadgeBorder?: string;
+      focusRing?: string;
+      docBadgeBgFrom?: string;
+      docBadgeBgTo?: string;
     };
   };
   //// ALL PROFESSIONAL Section STYLES

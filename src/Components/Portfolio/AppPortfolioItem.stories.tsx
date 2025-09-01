@@ -1,13 +1,24 @@
+import React, { FC } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
 import AppPortfolioItem, { AppPortfolioItemProps } from "./AppPortfolioItem";
-import { FC } from "react";
-// Import Style Objects
-import { lightTheme, darkTheme } from '../../theme';
-
 
 // Buttons that span modal dialog, such as Release Button and Resource Link Button
 // require access to the ZIndex Context to be able to update their parents' z-index state.
 // here we do not update any parent, but we still need it to instantiate the component
 import ZIndexContext from '../../ZIndexContext';
+
+
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
+
+// Import legacy Styles
+import { lightTheme, darkTheme } from '../../theme';
+
+import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
+import '../../design-system/typography.css';
+import '../../design-system/semantic-tokens.css';
+
+
+
 
 
 // Proxy Component that encapsulates Content initialization
@@ -22,12 +33,16 @@ const AppPortfolioItemZIndex: FC<AppPortfolioItemProps> = (props: AppPortfolioIt
   )
 };
 
+
 // Story Configuration
-export default {
+const meta: Meta<AppPortfolioItemProps> = {
     component: AppPortfolioItemZIndex,
     title: "AppPortfolioItem",
     tags: ["autodocs"],
 };
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 
 const args: AppPortfolioItemProps = {
     data: {
@@ -311,4 +326,28 @@ const darkArgs: AppPortfolioItemProps = {
 
 export const Dark = {
     args: darkArgs
+};
+
+
+// Theme comparison story
+export const ThemeComparison: Story = {
+  decorators: [useThemeComparison({
+    lightLabel: "☀️ Light Theme",
+    darkLabel: "🌙 Dark Theme",
+    showLabels: false,
+    gap: "48px"
+  })],
+  render: () => (
+    <AppPortfolioItemZIndex
+      data={args.data}
+      theme={args.theme}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '🌗 ...'
+      }
+    }
+  }
 };

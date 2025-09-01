@@ -2,59 +2,57 @@
 
 exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
 <div>
-  <div
-    class="css-7xsp98"
+  <section
+    class="css-6q335f"
+    id="personal-info"
+    style="--accent-color-start: #410003; --accent-color-end: #725b2e;"
   >
-    <div
-      class="css-kp9dvk"
+    <header
+      class="css-1aceh0m"
     >
-      <span
-        class="css-bwb5ro"
-      >
-        Name:
-      </span>
-       
-      <span
-        class="css-1pgu2xd"
+      <h1
+        class="css-1b0o9tp"
       >
         test-name
-      </span>
-    </div>
+      </h1>
+      <p
+        class="css-143cy3v"
+      >
+        Personal Information
+      </p>
+    </header>
     <div
-      class="css-kp9dvk"
+      class="css-1ojkdw4"
     >
       <span
-        class="css-bwb5ro"
+        class="css-12b2jet"
       >
-        Email:
+        Email
       </span>
-       
       <span
-        class="css-1pgu2xd"
+        class="css-1offhmh"
       >
         test-email
       </span>
     </div>
     <div
-      class="css-kp9dvk"
+      class="css-16z1gff"
     >
       <span
-        class="css-bwb5ro"
+        class="css-12b2jet"
       >
-        Github:
+        Profiles
       </span>
-       
-      <span
-        class="css-1pgu2xd"
+      <div
+        class="css-12fn4cu"
       >
         <a
-          class="css-1gyz2k7"
+          class="css-16l44dw"
           href="https://test-github-url"
           rel="noopener noreferrer"
           target="_blank"
         >
-          test-github-url
-           
+          GitHub
           <svg
             fill="none"
             height="10px"
@@ -81,76 +79,13 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
             </g>
           </svg>
         </a>
-      </span>
-    </div>
-    <div
-      class="css-kp9dvk"
-    >
-      <span
-        class="css-bwb5ro"
-      >
-        Gitlab:
-      </span>
-       
-      <span
-        class="css-1pgu2xd"
-      >
         <a
-          class="css-1gyz2k7"
-          href="https://test-gitlab-url"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          test-gitlab-url
-           
-          <svg
-            fill="none"
-            height="10px"
-            stroke="#534341"
-            stroke-width="5.108"
-            viewBox="-2.56 -2.56 69.12 69.12"
-            width="10px"
-          >
-            <g
-              id="SVGRepo_iconCarrier"
-            >
-              <path
-                d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-              />
-              <polyline
-                points="40.32 8.6 55.4 8.6 55.4 24.18"
-              />
-              <line
-                x1="19.32"
-                x2="54.61"
-                y1="45.72"
-                y2="8.91"
-              />
-            </g>
-          </svg>
-        </a>
-      </span>
-    </div>
-    <div
-      class="css-kp9dvk"
-    >
-      <span
-        class="css-bwb5ro"
-      >
-        LinkedIn:
-      </span>
-       
-      <span
-        class="css-1pgu2xd"
-      >
-        <a
-          class="css-1gyz2k7"
+          class="css-16l44dw"
           href="https://test-linkedin-url"
           rel="noopener noreferrer"
           target="_blank"
         >
-          test-linkedin-url
-           
+          LinkedIn
           <svg
             fill="none"
             height="10px"
@@ -177,97 +112,120 @@ exports[`Test Personal Section with width = 700 matches the snapshot 1`] = `
             </g>
           </svg>
         </a>
-      </span>
-    </div>
-    <div
-      class="css-kp9dvk"
-    >
-       
-      <span
-        class="css-bwb5ro"
-      >
-        Curricular Docs:
-      </span>
-       
-      <div
-        class="css-5l6624"
-      >
-        <div
-          class="css-1rstcrp"
+        <a
+          class="css-16l44dw"
+          href="https://test-gitlab-url"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <a
-            class="css-1gyz2k7"
-            href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
-            rel="noopener noreferrer"
-            target="_blank"
+          GitLab
+          <svg
+            fill="none"
+            height="10px"
+            stroke="#534341"
+            stroke-width="5.108"
+            viewBox="-2.56 -2.56 69.12 69.12"
+            width="10px"
           >
-            '1 Page Resume' 
-            <svg
-              fill="none"
-              height="10px"
-              stroke="#534341"
-              stroke-width="5.108"
-              viewBox="-2.56 -2.56 69.12 69.12"
-              width="10px"
+            <g
+              id="SVGRepo_iconCarrier"
             >
-              <g
-                id="SVGRepo_iconCarrier"
-              >
-                <path
-                  d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-                />
-                <polyline
-                  points="40.32 8.6 55.4 8.6 55.4 24.18"
-                />
-                <line
-                  x1="19.32"
-                  x2="54.61"
-                  y1="45.72"
-                  y2="8.91"
-                />
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div
-          class="css-1rstcrp"
-        >
-          <a
-            class="css-1gyz2k7"
-            href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            'CV + Projects' 
-            <svg
-              fill="none"
-              height="10px"
-              stroke="#534341"
-              stroke-width="5.108"
-              viewBox="-2.56 -2.56 69.12 69.12"
-              width="10px"
-            >
-              <g
-                id="SVGRepo_iconCarrier"
-              >
-                <path
-                  d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-                />
-                <polyline
-                  points="40.32 8.6 55.4 8.6 55.4 24.18"
-                />
-                <line
-                  x1="19.32"
-                  x2="54.61"
-                  y1="45.72"
-                  y2="8.91"
-                />
-              </g>
-            </svg>
-          </a>
-        </div>
+              <path
+                d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+              />
+              <polyline
+                points="40.32 8.6 55.4 8.6 55.4 24.18"
+              />
+              <line
+                x1="19.32"
+                x2="54.61"
+                y1="45.72"
+                y2="8.91"
+              />
+            </g>
+          </svg>
+        </a>
       </div>
     </div>
-  </div>
+    <div
+      class="css-16z1gff"
+    >
+      <span
+        class="css-12b2jet"
+      >
+        Curricular PDFs
+      </span>
+      <div
+        class="css-as1dsd"
+      >
+        <a
+          class="css-rlwcun"
+          href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          1 Page Resume 
+          <svg
+            fill="none"
+            height="10px"
+            stroke="#534341"
+            stroke-width="5.108"
+            viewBox="-2.56 -2.56 69.12 69.12"
+            width="10px"
+          >
+            <g
+              id="SVGRepo_iconCarrier"
+            >
+              <path
+                d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+              />
+              <polyline
+                points="40.32 8.6 55.4 8.6 55.4 24.18"
+              />
+              <line
+                x1="19.32"
+                x2="54.61"
+                y1="45.72"
+                y2="8.91"
+              />
+            </g>
+          </svg>
+        </a>
+        <a
+          class="css-rlwcun"
+          href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          CV + Projects 
+          <svg
+            fill="none"
+            height="10px"
+            stroke="#534341"
+            stroke-width="5.108"
+            viewBox="-2.56 -2.56 69.12 69.12"
+            width="10px"
+          >
+            <g
+              id="SVGRepo_iconCarrier"
+            >
+              <path
+                d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+              />
+              <polyline
+                points="40.32 8.6 55.4 8.6 55.4 24.18"
+              />
+              <line
+                x1="19.32"
+                x2="54.61"
+                y1="45.72"
+                y2="8.91"
+              />
+            </g>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
 </div>
 `;

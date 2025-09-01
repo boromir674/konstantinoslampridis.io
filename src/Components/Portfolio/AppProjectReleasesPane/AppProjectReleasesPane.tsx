@@ -38,18 +38,44 @@ interface ReleasesPaneProps {
 }
 
 
-const ReleaseType = styled.span`
-  margin-left: auto;
-  visibility: hidden;
-`;
-
-
 const ReleaseList = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 const ReleasesPane = styled.div`
+  background-color: var(--app-color-draggable, var(--app-container-primary));
+  color: var(--app-on-container-primary);
+  
+  /* Modern border design with rounded corners and subtle shadow */
+  border: 2px solid var(--app-brand-color-accent);
+  border-radius: 12px;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--app-surface-outline, rgba(0, 0, 0, 0.08));
+  
+  /* Enhanced focus state for accessibility */
+  &:focus-within {
+    outline: 2px solid var(--app-focus-ring, var(--app-brand-color-accent));
+    outline-offset: 2px;
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 3px var(--app-focus-ring-alpha, rgba(59, 130, 246, 0.2));
+  }
+  
+  /* Hover state for better interactivity */
+  &:hover {
+    border-color: var(--app-brand-color-accent-hover, var(--app-brand-color-accent));
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.12),
+      0 0 0 1px var(--app-surface-outline, rgba(0, 0, 0, 0.08));
+    transform: translateY(-1px);
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Balanced padding with better spacing */
+  padding: 0px 16px 12px 16px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -58,6 +84,35 @@ const ReleasesPane = styled.div`
   box-sizing: border-box; /* Include padding and border in width calculations */
   overflow-wrap: break-word; /* Ensure long text breaks into the next line */
   word-break: break-word; /* Handle long strings without spaces */
+  
+  /* Smooth transitions for all interactive states */
+  transition: 
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+  
+    //   /* Better contrast in dark mode */
+    //   @media (prefers-color-scheme: dark) {
+    //     box-shadow: 
+    //       0 2px 8px rgba(0, 0, 0, 0.3),
+    //       0 0 0 1px var(--app-surface-outline, rgba(255, 255, 255, 0.1));
+        
+    //     &:hover {
+    //       box-shadow: 
+    //         0 4px 16px rgba(0, 0, 0, 0.4),
+    //         0 0 0 1px var(--app-surface-outline, rgba(255, 255, 255, 0.15));
+    //     }
+    //   }
+  
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    transform: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 const ArtifactVersion = styled.span`
   white-space: nowrap; /* Prevent breaking semantic version into multiple lines */
@@ -103,18 +158,18 @@ const deriveURL = (release: ReleaseItemData) => {
 // COMPONENT - Releases Pane Header / Title
 interface ReleasesHeaderProps {
     theme: {
-        fontFamily?: string;
         fontSize: string;
-        color: string;
         marginBottom: string;
     };
 };
 const ReleasesHeaderH3 = withDefaultProps({ variant: "h3" }, Typography);
 const ReleasesHeader = styled(ReleasesHeaderH3) <ReleasesHeaderProps>`
-    font-family: ${props => props.theme.fontFamily || "inherit"};
+    font-family: font-family: var(--app-font, roboto);
+    color: var(--app-text-primary);
     font-size: ${props => props.theme.fontSize};
-    color: ${props => props.theme.color};
     margin-bottom: ${props => props.theme.marginBottom};
+    margin-top: 12px;
+    margin-bottom: 12px;
 `;
 
 const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
@@ -122,9 +177,9 @@ const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
         <ReleasesPane>
             {/* <StyledH3 {...theme}>Releases</StyledH3> */}
             <ReleasesHeader theme={{
-                fontFamily: theme.headerFontFamily,
+                // fontFamily: theme.headerFontFamily,
                 fontSize: theme.headerFontSize,
-                color: theme.headerColor,
+                // color: theme.headerColor,
                 marginBottom: theme.headerMarginBottom
             }}>Releases</ReleasesHeader>
             <ReleaseList>
@@ -142,7 +197,12 @@ const AppReleasePane: FC<ReleasesPaneProps> = ({ data, theme }) => {
                             {createSVGIcon(
                                 RELEASE_TYPE_ICONS[release.type as ReleaseTypeNames],
                                 // SVG style overrides (ie fill, width, height CSS) necessary for color mode switching
+
+                                // simple conditional adaptation of runtime interface (object schema) to supported interface
                                 Array.isArray(theme.releaseButtonTheme.icons) ? theme.releaseButtonTheme.icons[index] : theme.releaseButtonTheme.icons,
+
+                                // conditional adaptation of runtime interface and svgStyles ovveride (prefer to leverage a parent component CSS to control css of inner svg)
+                                // Array.isArray(theme.releaseButtonTheme.icons) ? {...theme.releaseButtonTheme.icons[index], svgStyles: {...theme.releaseButtonTheme.icons[index].svgStyles, fill: 'var(--app-on-interactive-secondary)'}} : {...theme.releaseButtonTheme.icons, svgStyles: {...theme.releaseButtonTheme.icons?.svgStyles, fill: 'var(--app-on-interactive-secondary)'}},
                             )}
                         </IconWrapper>
                         <span>{release.name}</span>

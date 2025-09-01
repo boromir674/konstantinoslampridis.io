@@ -83,27 +83,32 @@ describe("Test Personal Section with width = 700", () => {
 
 
     it(`Verify font-family CSS properties have expected value`, () => {
+
         // WHEN we render the PersonalInfo Component in the Test DOM
         const { getByText } = render(<PersonalInfo {...args}/>);
 
-        // THEN there should be a link with readable text 'test-github-url'
-        const githubLink = getByText('test-github-url');
+        // THEN there should be a link with readable text 'GitHub'
+        const githubLink = getByText('GitHub');
+
         // AND the HTML Element is an anchor <a>
         expect(githubLink.tagName).toBe('A');
         // AND the on Click the redirect is to https URL
         expect(githubLink.getAttribute('href')).toBe('https://test-github-url');
 
-        // AND there should be a link with readable text 'gitlab.com/test'
-        const gitlabLink = getByText('gitlab.com/test');
+
+        // AND there should be a link with readable text 'LinkedIn'
+        const linkedinLink = getByText('LinkedIn');
+
+        // AND the HTML Element is an anchor <a>
+        expect(linkedinLink.tagName).toBe('A');
+
+
+        // AND there should be a link with readable text 'GitLab'
+        const gitlabLink = getByText('GitLab');
 
         // AND the HTML Element is an anchor <a>
         expect(gitlabLink.tagName).toBe('A');
 
-        // AND there should be a link with readable text 'test-linkedin-url'
-        const linkedinLink = getByText('test-linkedin-url');
-
-        // AND the HTML Element is an anchor <a>
-        expect(linkedinLink.tagName).toBe('A');
 
         // THEN all Text in Introduction Section should have the Secondary Font
         // const introSection = document.getElementById('introduction-section');

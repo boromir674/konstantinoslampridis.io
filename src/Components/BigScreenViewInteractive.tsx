@@ -3,7 +3,7 @@ import React, { FC, useState, useCallback } from "react";
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
 
 // Our Hooks
-import useIsSSR from "../Hooks/useIsSSR";
+import useColorMode from "../Hooks/useColorMode";
 // import useWindowSizeTrackingState from "../Hooks/useWindowSizeTrackingState";
 
 interface BooleanMap {
@@ -50,14 +50,18 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
   html,
 }) => {
   // Component State
-  const SSROn = useIsSSR();
   const [theme, setTheme] = useState(colorSet.light);
-//   const [windowSize] = useWindowSizeTrackingState(SSROn);
+  const { mode, setMode, toggle, isSystem, setSystem } = useColorMode({
+    initial: "light",
+    persist: true,
+    respectSystemPreference: false
+  });
+  //   const [windowSize] = useWindowSizeTrackingState(SSROn);
 
   // this state's initial value governs whether the toggle switch will be left or right
   const matchTogglePosition = useCallback(
-    () => (theme === colorSet.light ? "left" : "right"),
-    [theme]
+    () => (mode === 'light' ? "left" : "right"),
+    [mode]
   );
 
   return (
@@ -73,8 +77,9 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
           })),
           // change theme colors from Light/Dark on toggle switch
           onToggle: (active: boolean) => {
-            // if active is true then currently we are on the left (light)
             setTheme(active ? colorSet.dark : colorSet.light);
+            // if active is true then currently we are on the left (light)
+            setMode(active ? 'dark' : 'light');
           },
           // automatically initiale at left if initial state is light, or right if black
           active: booleanMap[positionMap[matchTogglePosition()]],

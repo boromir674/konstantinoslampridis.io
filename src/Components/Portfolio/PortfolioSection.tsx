@@ -47,16 +47,33 @@ interface LayoutItemProps {
 
 ////  GRID ITEM Top Level DIV Component  ////
 const LayoutItem = styled.div<LayoutItemProps>`
-  border-style: ridge;
+  // Highly impactful on UX/UI
+  border-style: solid;
+  border-width: 1px;
+
+  // groove, inset, outset, ridge, solid, dashed, dotted, double, none, hidden
+  // border color
+  border-color: var(--app-interactive-primary);
+
+  // background-color has no effect here
+
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
+
   // design this item so that its height and width gets adjusted based on contents
   height: max-content;
   width: max-content;
   height: 100%;
+
+  background-color: var(--app-container-primary);
+  padding: 0px;
+  // hover does not work here, only in InnerContainer
+
   width: 100%;
   // margin-bottom: 10px;
+
+  // prevent iner children from overflowing
+  // overflow: hidden;
 `;
 //// TOP LEVEL DIV COMPONENT ////
 const PortfolioSectionContainer = styled.div<{
@@ -65,8 +82,9 @@ const PortfolioSectionContainer = styled.div<{
     color: string;
   }
 }>`
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.color};
+  background-color: var(--app-surface-primary);
+  color: var(--app-text-primary);
+  font-family: var(--app-font, inherit);
 `;
 
 // COMPONENT - Portfolio Section Header/Title
@@ -79,12 +97,13 @@ interface PortfolioSectionTitleProps {
   };
 };
 const PortfolioSectionTitle = styled(withDefaultProps({
-  variant: "h1",
+  variant: "h2",
 }, Typography)) <PortfolioSectionTitleProps>`
-  font-family: ${props => props.theme.fontFamily};
-  font-size: ${props => props.theme.fontSize};
-  color: ${props => props.theme.color};
-  background-color: ${props => props.theme.backgroundColor};
+  font-family: font-family: var(--app-font, inherit);
+  font-size: var(--app-font-size-heading-2xl, 32px);
+  color: var(--app-text-primary, ${props => props.theme.color});
+  background-color: var(--app-color-main-area, --app-surface-primary, ${props => props.theme.backgroundColor});
+  padding-bottom: 20px;
 `;
 
 // COMPONENT - Reset Layout Button
@@ -102,6 +121,8 @@ const ResetLayoutButton = styled(withDefaultProps({
 }, Typography)) <ResetLayoutButtonProps>`
   font-family: ${props => props.theme.fontFamily};
   font-size: ${props => props.theme.fontSize};
+  margin-bottom: 10px;
+  marging-left: 10px;
 `;
 // color: ${props => props.theme.color};
 // background-color: ${props => props.theme.backgroundColor};
@@ -177,6 +198,7 @@ type DefaultsType<T> = T extends Partial<ResponsiveLocalStorageLayoutProps> ? T 
 /** Default Design of breakpoints via 'cols' */
 const defaultProps: DefaultsType<AppPortfolioSectionDefaults> = {
   className: "layout",
+  // className: 'react-grid-layout',
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   // TODO make this dynamic based on the content of the PortfolioItem
   rowHeight: 41, // governs the length each Portfolio Card will cover on the y axis, on initial render,
@@ -191,6 +213,7 @@ const defaultProps: DefaultsType<AppPortfolioSectionDefaults> = {
 type Reducer<S, T> = (acc: S, _: T, index: number) => S;
 type ContentItem = { ref: React.RefObject<HTMLElement>, dimsReporter: () => { width: number; height: number } };
 type ContentRegistry = Record<string, ContentItem[]>;
+
 
 // COMPONENT - Reactive Grid Layout (with Local Storage support)
 /**
@@ -263,16 +286,23 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
     <PortfolioSectionContainer // DIV
       id={htmlID}
       theme={{
-        backgroundColor: theme.container.backgroundColor,
-        color: theme.item.color,
+        // backgroundColor: theme.container.backgroundColor,
+        // backgroundColor: 'var(--app-container-primary, ' + theme.container.backgroundColor + ')',
+        // color: theme.item.color,
       }}>
       {/* Portfolio Section TITLE*/}
       <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
+
       {/* Portfolio Section - RESET Layout Button */}
-      <ResetLayoutButton onClick={handleResetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton>
+      <div style={{paddingLeft: '10px'}}><ResetLayoutButton onClick={handleResetLayout} theme={theme.resetLayoutButton}>Reset Layout</ResetLayoutButton></div>
+
       {/* Portfolio Section - GRID LAYOUT */}
       <ResponsiveReactGridLayout
         className={className}
+        // these styles can override the css styles from react-grid-layout.css
+        // style={{
+
+        // }}
         cols={cols}
         rowHeight={rowHeight}
         // Initialize Layouts from Local Storage or else with Empty Object
@@ -353,9 +383,10 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
                   // maxH: 10,
                 }}
                 style={{
-                  outline: theme.item.outline,
+                  // outline: theme.item.outline,
                   // allows increasing top-level grid item height, to allow children pop-ups to be visible
                   zIndex: zIndex,
+                  backgroundColor: 'var(--app-color-draggable, --app-color-main-area, --app-container-primary, ' + theme.item.backgroundColor + ')',
                 }}
               >
                 {/* Initialize the ZIndexContext with state setter */}

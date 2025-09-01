@@ -2,21 +2,6 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:33127/404.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0.5,
     "values": [
       0.5
@@ -27,7 +12,7 @@
     "level": "error",
     "url": "http://localhost:33127/404.html",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
+    "auditDocumentationLink": "https://web.dev/baseline"
   },
   {
     "name": "minScore",
@@ -77,21 +62,6 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "heading-order",
-    "level": "error",
-    "url": "http://localhost:33127/index.html",
-    "auditTitle": "Heading elements are not in a sequentially-descending order",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/heading-order"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0.5,
     "values": [
       0.5
@@ -102,22 +72,7 @@
     "level": "error",
     "url": "http://localhost:33127/index.html",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "target-size",
-    "level": "error",
-    "url": "http://localhost:33127/index.html",
-    "auditTitle": "Touch targets do not have sufficient size or spacing.",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/target-size"
+    "auditDocumentationLink": "https://web.dev/baseline"
   },
   {
     "name": "minScore",
@@ -137,21 +92,6 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "html-has-lang",
-    "level": "error",
-    "url": "http://localhost:33127/404/index.html",
-    "auditTitle": "`<html>` element does not have a `[lang]` attribute",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.9/html-has-lang"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0.5,
     "values": [
       0.5
@@ -162,7 +102,7 @@
     "level": "error",
     "url": "http://localhost:33127/404/index.html",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/articles/publish-modern-javascript"
+    "auditDocumentationLink": "https://web.dev/baseline"
   },
   {
     "name": "minScore",

@@ -1,0 +1,179 @@
+/* TopHeaderPane CSS Module - Build-time CSS to eliminate FOUC */
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  
+  /* Sticky positioning - stays at top when scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  
+  /* Background with CSS variable support */
+  /* solid bg color ensures that "nav bar is always visible on scroll" */
+  background-color: var(--app-brand-color-area, var(--app-surface-raised, #ffffff));
+  
+  /* Flexbox layout for better control */
+  display: flex;
+  align-items: flex-start; /* Allow content to grow vertically */
+  padding: 15px 80px;
+  min-height: 60px; /* Minimum height but allow growth */
+  height: auto; /* Allow flexible height */
+  overflow: visible; /* Allow content to be visible if it overflows */
+  gap: 10px; /* Add space between toggle section and navigation */
+}
+
+/* Responsive behavior for small screens */
+@media (max-width: 768px) {
+  .container {
+    min-height: 60px;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 20px;
+    align-items: center;
+    position: relative;
+  }
+}
+
+/* ===== THEME TOGGLE SECTION ===== */
+.themeToggleSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+}
+
+/* ===== THEME TEXT WITH FOUC PREVENTION ===== */
+.themeText {
+  color: var(--theme-text-color, var(--app-brand-color-area-text, var(--app-text-secondary, #333)));
+  font-size: var(--app-font-size-heading-sm, 16px);
+  font-weight: 500;
+  user-select: none;
+  min-width: 40px; /* Reserve space for 'Light' */
+  display: inline-block;
+  text-align: center;
+  
+  /* ===== FOUC PREVENTION STRATEGY EXPLAINED ===== */
+  
+  /* STEP 1: Reserve layout space immediately when CSS loads
+   * WHY: Prevents layout jumping when content appears later
+   * HOW: min-height reserves vertical space even when element is empty */
+  min-height: 1.2em; /* Prevent height collapse when empty */
+  
+}
+
+/* STEP 2: Show placeholder content when JavaScript hasn't loaded yet
+ * WHY: User sees something instead of blank space during SSR → JS hydration
+ * HOW: CSS ::before pseudo-element creates fake content when element is empty
+ * WHEN: Only shows when element has no real content (themeText = '') */
+.themeText:empty::before {
+  content: ''; /* Show "Light" as default fallback text */
+  opacity: 0.7; /* Make it slightly transparent to show it's loading */
+}
+
+.themeText {
+  /* STEP 3: Smooth transition when real content loads
+   * WHY: Prevents jarring instant change from placeholder to real content
+   * HOW: CSS transition makes opacity changes smooth over 0.2 seconds */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* STEP 4: Hide placeholder when real content appears
+ * WHY: Don't show both placeholder AND real content at same time
+ * HOW: When element is NOT empty (:not(:empty)), hide the ::before placeholder */
+.themeText:not(:empty)::before {
+  display: none; /* Hide placeholder when real content exists */
+}
+
+/* STEP 5: Progressive enhancement - fade in real content
+ * WHY: Make the transition from placeholder to real content smooth
+ * HOW: When element gets content, animate its appearance */
+.themeText:not(:empty) {
+  animation: contentFadeIn 0.2s ease-in-out;
+}
+
+/* STEP 6: Animation definition for smooth content appearance */
+@keyframes contentFadeIn {
+  from { opacity: 0.7; } /* Start slightly transparent (matches placeholder) */
+  to { opacity: 1; }     /* End fully opaque */
+}
+
+/* STEP 7: Fallback for no-JavaScript environments
+ * WHY: If JavaScript fails to load, still show content properly
+ * HOW: Override animations for accessibility and robustness */
+.no-js .themeText {
+  opacity: 1 !important; /* Always show content */
+  animation: none;        /* Disable animations */
+}
+
+/* STEP 8: Prevent interaction with placeholder content
+ * WHY: Users shouldn't be able to select or click placeholder text
+ * HOW: Disable pointer events and text selection when empty */
+.themeText:empty {
+  user-select: none;    /* Can't select placeholder text */
+  pointer-events: none; /* Can't click placeholder text */
+}
+
+/* ===== NAVIGATION BAR SECTION ===== */
+.navBarSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  
+  /* Dynamic transform will be set via inline styles */
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure the navigation items can wrap */
+.navBarSection > * {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Small screens: Normal flow positioning */
+@media (max-width: 768px) {
+  .navBarSection {
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===== DOCUMENTATION COMMENTS ===== */
+
+/* HOW THE FOUC PREVENTION MAGIC WORKS IN PRACTICE:
+ *
+ * TIMELINE:
+ * 1. 📄 HTML loads → <span class="themeText"></span> (empty)
+ * 2. 🎨 CSS loads → Shows "Light" placeholder (::before pseudo-element)
+ * 3. ⚡ JavaScript loads → Sets themeText = "Light" or "Dark"
+ * 4. ✨ Content appears → Hides placeholder, shows real content with fade
+ *
+ * WHY NO FLASH:
+ * - User ALWAYS sees "Light" text (placeholder OR real content)
+ * - When themeText changes from "" to "Light", no visual change
+ * - When themeText changes from "" to "Dark", smooth transition
+ * - Layout space is reserved, so no jumping
+ *
+ * CSS SELECTORS EXPLAINED:
+ * - .themeText:empty        = When element has no content
+ * - .themeText:empty::before = Create fake content when empty
+ * - .themeText:not(:empty)  = When element HAS content
+ * - .no-js .themeText       = When parent has 'no-js' class
+ *
+ * BENEFITS OF CSS MODULE APPROACH:
+ * ✅ Build-time CSS (no runtime generation)
+ * ✅ No FOUC (CSS loads with HTML)
+ * ✅ Better performance (no JavaScript overhead)
+ * ✅ Scoped styles (automatic class name hashing)
+ * ✅ Type safety (with TypeScript)
+ */

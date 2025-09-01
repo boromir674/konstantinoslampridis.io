@@ -58,15 +58,15 @@ interface AppProfessionalItemProps {
 }
 
 const AppProfessionalItemDiv = styled.div<AppProfessionalItemProps>`
-  // width: 200px;
-  // height: 200px;
-  padding: ${(props) => props.theme.padding || "10px"};
-  // padding: ${(props) => props.theme.padding};
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.textColor};
-  border: 1px solid #ccc;
+
+  // padding: ${(props) => props.theme.padding || "10px"};
+
+  background-color: var(--app-container-primary);
+  color: var(--app-text-primary, ${(props) => props.theme.textColor});
+
+  border: 1px solid var(--app-border-subtle);
   transition: transform ${(props) => props.theme.onHoverTransformDuration},
     box-shadow 0.3s,
     background-color
@@ -126,19 +126,6 @@ const AppProfItem: FC<AppProfItemProps> = ({ theme, experienceItemData }) => {
             description={description}
             activities={activities}
             technology_tags={technology_tags}
-            theme={{
-              title: {
-                fontFamily: titleTheme.fontFamily,
-                fontSize: titleTheme.fontSize,
-              },
-              body: {
-                fontFamily: body.fontFamily,
-                fontSize: body.fontSize,
-              },
-              tags: {
-                item: tag,
-              },
-            }}
           />
         </AppProfessionalItemDiv>
       )

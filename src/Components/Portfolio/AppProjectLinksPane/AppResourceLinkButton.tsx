@@ -24,13 +24,14 @@ interface ResourceLinkButtonTheme {
   }
 }
 const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
+  background-color: var(--app-interactive-primary);
+  color: var(--app-on-interactive-primary, green);
+
   display: flex;
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
   border: none;
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.color};
   border-radius: 4px;
   font-size: 14px;
   font-family: "Courier New", Courier, monospace;
@@ -40,8 +41,8 @@ const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Add this line
 
   &:hover {
-    background-color: ${(props) => props.theme.onHoverBackgroundColor};
-    color: ${(props) => props.theme.onHoverColor};
+    background-color: var(--app-interactive-hover-primary);
+    color: var(--app-on-interactive-hover-primary);
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); // Add this line
   }
 
@@ -57,6 +58,9 @@ const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
     font-size: 12px;
     padding: 8px;
   }
+
+  // SVG inherits from currentColor, which solves problem of having svg be pained exactly as text and change on state change, same as text (normal -> hover)
+  svg { fill: currentColor; }
 `;
 // TODO merge into one component (Resource Link + Release Item)
 const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlText, children }) => {

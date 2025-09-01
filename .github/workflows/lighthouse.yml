@@ -73,7 +73,7 @@ jobs:
       - name: "Audit Site and run Assertions once; then record results and proceed"
         # AUTORUN and write .lighthouseci/assertion-results.json in Step Summary
         run: |
-          lhci autorun --config "${{ env.REPO_CHECKOUT }}/.lighthouserc.yml"  "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=1 || pass_all_assertions=0
+          lhci autorun --config "${{ env.REPO_CHECKOUT }}/.lighthouserc.yml"  "--collect.${{ env.AUDIT_TARGET }}" --collect.numberOfRuns=3 || pass_all_assertions=0
 
           echo "## Lighthouse" >> $GITHUB_STEP_SUMMARY
 

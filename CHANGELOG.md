@@ -5,6 +5,61 @@
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.15.0] - 02/09/2025
+
+**SPA Redesign** with **better UX**, and **better color palete.**
+
+**Major Performance & Architecture Modernization:**
+- **Design System Foundation** with comprehensive **Design Tokens**
+- **CSS Modules Migration** for build-time optimizations
+- **Lighthouse CI** improvements and stabilization
+
+### Changes
+
+#### Feature
+- implement comprehensive **Design System** with multi-layered **Design Token** architecture
+- add **`useColorMode`** React Hook for advanced theme management with system preference detection
+- enhance **Personal Info** section with modern styling and accessibility improvements
+- add interactive **Design Token Visualization** in `Storybook` with copy-to-clipboard functionality
+
+#### Performance
+- migrate critical components from **CSS-in-JS** to **CSS Modules** for build-time compilation
+- eliminate **Flash of Unstyled Content (FOUC)** through build-time CSS generation
+- reduce runtime CSS processing overhead by moving styles to build-time
+- implement **CSS Custom Properties** for efficient theming without runtime overhead
+
+#### Refactor
+- convert `TopHeaderPane` from `emotion/styled-components` to **CSS Modules**
+- convert `HeaderNavigation` from runtime styling to **CSS Modules** 
+- refactor `PersonalInfo` component with enhanced semantic structure and accessibility
+- restructure **Theme Management** to leverage CSS Custom Properties and design tokens
+- rename and reorganize navigation components for better clarity
+
+#### Design System
+- establish **3-layer Design Token architecture**: Raw → System → Semantic
+- enhance **CSS Custom Properties** as single source of truth for design values
+- add **Typography System** with consistent font scales and hierarchy
+
+#### CI
+- bump **Lighthouse CI** to use `lhci` `0.15.x` - improve **Lighthouse** 
+- eliminate Lighthouse reported issues on **index.html** page
+  - `html-has-lang`
+  - `heading-order`
+
+#### Test
+- update tests and **snapshots** to reflect new CSS Modules structure and new DOM
+
+#### Storybook
+- add **Design Token Grid** stories for token visualization and documentation
+- implement **Light/Dark Comparison** stories for theme validation
+- enhance existing component stories with new design system integration
+- add interactive token exploration with live CSS variable inspection
+
+#### Dev
+- add **CSS Modules** type definitions for TypeScript support
+- improve development experience with better theme switching capabilities
+
+
 ## [1.14.0] - 26/05/2025
 
 ### Changes

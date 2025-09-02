@@ -36,6 +36,7 @@ interface SoftwareReleaseButtonTheme {
     }
 }
 const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
+  font-family: var(--app-font);
   background-color: var(--app-interactive-secondary);
   color: var(--app-on-interactive-secondary);
 
@@ -46,7 +47,6 @@ const SoftwareReleaseButton = styled.button<SoftwareReleaseButtonTheme>`
   border: none;
   border-radius: 4px;
   font-size: 14px;
-  font-family: 'Courier New', Courier, monospace;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; // Add box-shadow to transition

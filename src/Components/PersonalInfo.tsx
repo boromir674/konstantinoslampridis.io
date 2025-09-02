@@ -83,6 +83,7 @@ const Container = styled.section<ContainerProps>`
 
 // Accent (falls back if theme does not provide)
 const Header = styled.header<{ accentStart: string; accentEnd: string }>`
+  font-family: var(--app-font);
   grid-column: 1 / -1;
   margin: -8px 0 4px;
   display: flex;
@@ -225,14 +226,15 @@ const PDFContainer = styled.div`
 
 // Badge style for inline social links
 const OnlineProfileBadge = styled(MyLink)<{ theme: any }>`
+  font-family: var(--app-font);
+  font-size: .75rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   background: var(--app-surface-interactive);
   padding: 6px 8px;
   border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 600;
   letter-spacing: .4px;
   text-transform: uppercase;
   backdrop-filter: blur(4px);

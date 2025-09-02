@@ -24,6 +24,7 @@ interface ResourceLinkButtonTheme {
   }
 }
 const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
+  font-family: var(--app-font);
   background-color: var(--app-interactive-primary);
   color: var(--app-on-interactive-primary, green);
 
@@ -34,7 +35,6 @@ const ResourceLinkButton = styled.button<ResourceLinkButtonTheme>`
   border: none;
   border-radius: 4px;
   font-size: 14px;
-  font-family: "Courier New", Courier, monospace;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; // Add box-shadow to transition

@@ -91,11 +91,11 @@ interface ResourceLinksHeaderProps {
         color: string;
     };
 };
-const ResourceLinksHeaderH3 = withDefaultProps({variant: "h3"}, Typography);
-const ResourceLinksHeader = styled(ResourceLinksHeaderH3) <ResourceLinksHeaderProps>`
+const ResourceLinksHeaderH4 = withDefaultProps({variant: "h4"}, Typography);
+const ResourceLinksHeader = styled(ResourceLinksHeaderH4) <ResourceLinksHeaderProps>`
     background-color: var(--app-color-draggable, --app-surface-primary);
     color: var(--app-on-surface-primary);
-    font-family: ${props => props.theme.fontFamily || "inherit"};
+    font-family: var(--app-font, ${props => props.theme.fontFamily || "inherit"});
     font-size: ${props => props.theme.fontSize};
 `;
 

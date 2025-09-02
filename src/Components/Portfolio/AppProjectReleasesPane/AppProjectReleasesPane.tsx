@@ -162,8 +162,8 @@ interface ReleasesHeaderProps {
         marginBottom: string;
     };
 };
-const ReleasesHeaderH3 = withDefaultProps({ variant: "h3" }, Typography);
-const ReleasesHeader = styled(ReleasesHeaderH3) <ReleasesHeaderProps>`
+const ReleasesHeaderH4 = withDefaultProps({ variant: "h4" }, Typography);
+const ReleasesHeader = styled(ReleasesHeaderH4) <ReleasesHeaderProps>`
     font-family: font-family: var(--app-font, roboto);
     color: var(--app-text-primary);
     font-size: ${props => props.theme.fontSize};

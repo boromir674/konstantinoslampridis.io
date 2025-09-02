@@ -23,8 +23,8 @@ const TechTagsContainer = styled.div`
   // padding-bottom: 22px;
   display: flex;
   flex-wrap: wrap;
-  font-family: "inherit";
-  font-size: "inherit";
+  font-family: inherit;
+  font-size: inheritinherit;
 `;
 
 

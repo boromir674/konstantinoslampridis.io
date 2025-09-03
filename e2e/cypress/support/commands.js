@@ -41,3 +41,18 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   // continue test(s) ingoring any uncaught exception
   return false;
 });
+
+// chrome reports computed font-family with quotes, firefox without
+Cypress.Commands.add('shouldHaveFontFamily',
+  {
+    prevSubject: true,
+  },
+  (subject, expectedFont) => {
+  cy.wrap(subject).should('satisfy', ($el) => {
+    const actualFont = $el.css('font-family');
+    // Normalize both by removing all quotes
+    const normalizedActual = actualFont.replace(/["']/g, '');
+    const normalizedExpected = expectedFont.replace(/["']/g, '');
+    return normalizedActual === normalizedExpected;
+  });
+});

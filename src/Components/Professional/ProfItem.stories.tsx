@@ -1,11 +1,21 @@
+import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+
 import ProfItem, { type AppProfItemProps } from './ProfItem';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
+
 import { lightTheme, darkTheme } from '../../theme';
 
-export default {
+
+const meta: Meta =  {
     component: ProfItem,
     title: "ProfItem",
     tags: ["autodocs"],
 };
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 
 const LightProps: AppProfItemProps = {
@@ -22,26 +32,25 @@ const LightProps: AppProfItemProps = {
     },
 };
 
-export const Light = {
-    args: {
-        ...LightProps,
-        item: {
-            ...LightProps.experienceItemData,
-            theme: {
-                ...lightTheme.professional.item,
-                title: {
-                    fontFamily: 'times-new-roman',
-                    fontSize: '30px',
-                  },
-            },
-        }
-    },
-}
 
-
-export const Dark = {
-    args: {
-        ...Light.args,
-        theme: darkTheme.professional.item,
-    },
+// Theme comparison story
+export const ThemeComparison: Story = {
+  decorators: [useThemeComparison({
+    lightLabel: "☀️ Light Theme",
+    darkLabel: "🌙 Dark Theme",
+    showLabels: false,
+    gap: "48px"
+  })],
+  render: () => (
+    <ProfItem
+      {...LightProps}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '🌗 **Professional Item Theme Comparison**: Displays the ProfItemPOC component side-by-side in light and dark themes. This demonstrates how the component adapts to different theme contexts while maintaining consistent typography and tag styling. The HOC automatically handles theme switching for comparison purposes.'
+      }
+    }
+  }
 };

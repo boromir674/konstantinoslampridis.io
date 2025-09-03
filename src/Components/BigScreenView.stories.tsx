@@ -39,6 +39,9 @@ const args: BigScreenViewProps = {
         item: {
           ...lightTheme.portfolio.item,
           theme: {
+            minGapBetweenPanes: "16px",
+            projectTitle: lightTheme.portfolio.item.projectTitle,
+            projectDescription: lightTheme.portfolio.item.projectDescription,
             releases: {
               headerFontFamily: lightTheme.portfolio.item.releases.fontFamily,
               headerColor: lightTheme.portfolio.item.releases.color,
@@ -72,6 +75,7 @@ const args: BigScreenViewProps = {
                   },
                 ],
               },
+              headerFontSize: ""
             },
             // Project Links Pane, ie source code repo docs, etc
             links: {
@@ -104,6 +108,10 @@ const args: BigScreenViewProps = {
                     },
                   },
                 ],
+              },
+              header: {
+                fontFamily: "",
+                fontSize: ""
               }
             },
           },
@@ -393,10 +401,6 @@ const darkProps: BigScreenViewProps = {
       backgroundColor: darkTheme.topHeaderPane.backgroundColor,
       themeSwitch: darkTheme.themeSwitch,
     },
-    // topHeaderPane: {
-    //   navigationBar: darkTheme.navigationBar,
-    //   backgroundColor: darkTheme.topHeaderPane.backgroundColor,
-    // },
     verticalSidePane: {
       personalInfo: {
         containerBackgroundColor: darkTheme.personal.containerBackgroundColor,
@@ -415,8 +419,10 @@ const darkProps: BigScreenViewProps = {
       portfolio: {
         ...darkTheme.portfolio,
         item: {
-          ...darkTheme.portfolio.item,
           theme: {
+            projectTitle: darkTheme.portfolio.item.projectTitle,
+            projectDescription: darkTheme.portfolio.item.projectDescription,
+            minGapBetweenPanes: "16px",
             releases: {
               headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
               headerColor: darkTheme.portfolio.item.releases.color,
@@ -450,6 +456,7 @@ const darkProps: BigScreenViewProps = {
                   },
                 ],
               },
+              headerFontSize: ""
             },
             // Project Links Pane, ie source code repo docs, etc
             links: {
@@ -482,11 +489,21 @@ const darkProps: BigScreenViewProps = {
                     },
                   },
                 ],
+              },
+              header: {
+                fontFamily: "",
+                fontSize: ""
               }
             },
           },
+          outline: {
+            color: "",
+            width: ""
+          },
+          backgroundColor: "",
+          color: ""
         },
-      }
+      },
     },
     bottomFooterPane: darkTheme.footerStyles,
   },

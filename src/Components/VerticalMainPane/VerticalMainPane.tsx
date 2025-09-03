@@ -10,6 +10,7 @@ import PortfolioItemData from "../../PortfolioItemInterface";
 import ProfessionalSection, { ProfessionalSectionProps } from "../Professional";
 import PortfolioSection, { ResponsiveLocalStorageLayoutProps } from "../Portfolio";
 
+
 // Type alias for DRY code
 type ResponsiveLocalStorageLayoutTheme = ResponsiveLocalStorageLayoutProps["theme"];
 // type alias of ResponsiveLocalStorageLayoutProps["theme"], but without the 'item' key
@@ -66,22 +67,11 @@ interface VerticalMainPaneContainerProps {
 }
 
 const VerticalMainPaneContainer = styled.div<VerticalMainPaneContainerProps>`
-  // hard-coded fix which prevents a bug:
-  // bug being from a certain level of zoom (and above) the top header pane starts to
-  // cover the top part content of both SidePane and MainPane
-  margin-top: 50px;
-
-  // display: flex;
-  //   flex-direction: column;
-  //   flex-wrap: wrap;
+  background-color: var(--app-color-main-area);
 
   display: inline-block;
-
   box-sizing: border-box
-
-  // border-bottom: 1px solid #000;
   padding-bottom: 120px; // Adjust this value to match the height of the footer
-
 
   // overflow: auto; /* Introduce a scrollbar if necessary */
 

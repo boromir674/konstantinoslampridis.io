@@ -1,12 +1,19 @@
+import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
 import { FC } from "react";
-import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
-import { PortfolioLayoutItemContentProps } from './PortfolioItem/PortfolioItemContainer';
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
 
 import DESIGN_TOKENS from "../../design-system/tokens.json";
 
+import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
+import '../../design-system/typography.css';
+import '../../design-system/semantic-tokens.css';
+
+// import after css because className css depends Semantic Tokens from our design system
+import PortfolioSection, { defaultProps, ResponsiveLocalStorageLayoutProps } from "./PortfolioSection";
+
 // import App Styles Symbols
 import { lightTheme, darkTheme } from '../../theme';
-import { on } from "events";
 
 import PortfolioItemInterface from "../../PortfolioItemInterface";
 import { AppPortfolioItemProps } from "./AppPortfolioItem";
@@ -36,10 +43,6 @@ export default {
   title: "PortfolioSection",
   tags: ["autodocs"],
 };
-
-const renderPropsOverride: RenderProps = (data, theme) => {
-  return <div></div>
-}
 
 const argsLight: ResponsiveLocalStorageLayoutProps = {
   // Other Props, most likely with dedicated fallback values
@@ -445,93 +448,22 @@ export const SingleItemWithTwoReleaseButtons = {
   }
 };
 
-
-// STORY: 2 Dark Grids to compare Contrast of different Theme Color schemes
-// Each Grid has only 1 Item which is sufficient to compare Color schemes contrast
-export const TwoDarkGridsSideBySide = {
-  args: {
-    grids: [
-      { ...argsDark, data: [argsDark.data[0]] },
-      {
-        // EXPERIMENTAL COLOR SCHEME to Consider for next ITERATION
-        ...argsDark,
-        data: [argsDark.data[0]],
-        theme: {
-          ...argsDark.theme,
-          item: {
-            ...argsDark.theme.item,
-
-            // Portfolio Item Background Color
-            // backgroundColor: argsDark.theme.item.backgroundColor,
-            // color: argsDark.theme.item.color,
-
-            theme: {
-              ...argsDark.theme.item.theme,
-              releases: {
-                ...argsDark.theme.item.theme.releases,
-                // headerColor: darkTheme.portfolio.item.releases.color,
-                // headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
-                releaseButtonTheme: {
-                  ...argsDark.theme.item.theme.releases.releaseButtonTheme,
-                  // Darker than Release Button Background
-                  dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
-                  // Same as Release Button Background
-                  codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
-                  // CURRENT DESIGN
-                  // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
-                  // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
-                  onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
-                },
-              },
-            },
-          },
-        },
-      }]
+// Theme comparison story following ProfItemPOC pattern
+export const ThemeComparison = {
+  decorators: [useThemeComparison({
+    lightLabel: "☀️ Light Theme",
+    darkLabel: "🌙 Dark Theme", 
+    showLabels: true,
+    gap: "48px"
+  })],
+  render: () => (
+    <PortfolioSection {...argsLight} />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '🌗 **Portfolio Section Theme Comparison**: Displays the PortfolioSection component side-by-side in light and dark themes. This demonstrates how the portfolio grid adapts to different theme contexts while maintaining consistent layout and styling for portfolio items. The HOC automatically handles theme switching for comparison purposes.'
+      }
+    }
   }
-};
-
-
-// STORY: 2 Light Grids to compare Contrast of different Theme Color schemes
-const twoLightGridsSideBySideArgs: PortfolioSectionMultiGridProps = {
-  ...TwoDarkGridsSideBySide.args,
-  grids: [
-    { ...argsLight, data: [argsLight.data[0]] },
-    {
-      // EXPERIMENTAL COLOR SCHEME to Consider for next ITERATION
-      ...argsLight,
-      data: [argsLight.data[0]],
-      theme: {
-        ...argsLight.theme,
-        item: {
-          ...argsLight.theme.item,
-
-          // backgroundColor: argsDark.theme.item.backgroundColor,
-          // color: argsDark.theme.item.color,
-
-          theme: {
-            ...argsLight.theme.item.theme,
-            releases: {
-              ...argsLight.theme.item.theme.releases,
-              // headerColor: darkTheme.portfolio.item.releases.color,
-              // headerFontFamily: darkTheme.portfolio.item.releases.fontFamily,
-              releaseButtonTheme: {
-                ...argsLight.theme.item.theme.releases.releaseButtonTheme,
-                // Darker than Release Button Background
-                dialogBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-dark'],
-                // Same as Release Button Background
-                codeBackgroundColor: DESIGN_TOKENS['--md-sys-color-surface-variant-dark'],
-                // CURRENT DESIGN
-                // onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-tertiary-dark'],
-                // NEW DESIGN Darker than the Dialog Background, which actually emphasizes the interaction! GOOD!
-                onHoverCodeBackgroundColor: DESIGN_TOKENS['--md-sys-color-inverse-on-surface-dark'],
-              },
-            },
-          },
-        },
-      },
-    }]
-};
-
-export const TwoLightGridsSideBySide = {
-  args: twoLightGridsSideBySideArgs
 };

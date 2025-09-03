@@ -39,8 +39,23 @@ const darkColorMode: Theme = {
     containerBackgroundColor: DESIGN_TOKENS["--md-sys-color-surface-dark"],
     textColor: DESIGN_TOKENS["--md-sys-color-on-surface-dark"],
     urlTextColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
-    externalURLSVGColor:
-      DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+    externalURLSVGColor: DESIGN_TOKENS["--md-sys-color-on-surface-variant-dark"],
+    backgroundColorGradient: {
+      // tried: not effective
+      // start: DESIGN_TOKENS["--md-sys-color-primary-dark"],
+      // end: DESIGN_TOKENS["--md-sys-color-secondary-dark"],
+      // start: DESIGN_TOKENS['--md-sys-color-surface-dark'],
+      //start: DESIGN_TOKENS['--md-sys-color-on-primary-container-dark'],
+      // end: DESIGN_TOKENS['--md-sys-color-tertiary-dark'],
+
+
+      start: DESIGN_TOKENS['--md-sys-color-primary-dark'],
+      end: DESIGN_TOKENS['--md-sys-color-on-primary-container-dark'],
+    },
+    colors: {
+      socialBadgeBorder: DESIGN_TOKENS["--md-sys-color-outline-dark"],
+      focusRing: DESIGN_TOKENS["--md-sys-color-primary-dark"],
+    },
   },
   //////// EDUCATION SECTION DARK ////////
   education: {

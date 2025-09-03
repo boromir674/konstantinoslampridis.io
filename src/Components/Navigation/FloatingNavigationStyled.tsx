@@ -19,8 +19,6 @@ const NavContainer = styled.nav<{ theme?: Theme }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  // background-color: ${(props) => props.theme.backgroundColor};
-  // color: ${(props) => props.theme.foregroundColor};
 `;
 
 interface NavItemProps {

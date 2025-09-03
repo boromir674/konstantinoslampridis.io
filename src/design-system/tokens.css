@@ -161,31 +161,42 @@ Annotated with comments designed to integrate with the 'storybook-design-token' 
   --md-sys-color-on-primary-dark: #5f1412;
   --md-sys-color-primary-container-dark: #7e2b26;
   --md-sys-color-on-primary-container-dark: #ffdad6;
+
   --md-sys-color-secondary-dark: #e7bdb8;
   --md-sys-color-on-secondary-dark: #442927;
   --md-sys-color-secondary-container-dark: #5d3f3c;
   --md-sys-color-on-secondary-container-dark: #ffdad6;
+
   --md-sys-color-tertiary-dark: #e0c38c;
   --md-sys-color-on-tertiary-dark: #3f2d04;
   --md-sys-color-tertiary-container-dark: #584419;
   --md-sys-color-on-tertiary-container-dark: #fedfa6;
+
   --md-sys-color-error-dark: #ffb4ab;
   --md-sys-color-error-container-dark: #93000a;
   --md-sys-color-on-error-dark: #690005;
   --md-sys-color-on-error-container-dark: #ffdad6;
+
   --md-sys-color-background-dark: #201a19;
   --md-sys-color-on-background-dark: #ede0de;
+
   --md-sys-color-surface-dark: #201a19;
   --md-sys-color-on-surface-dark: #ede0de;
   --md-sys-color-surface-variant-dark: #534341;
   --md-sys-color-on-surface-variant-dark: #d8c2bf;
+
   --md-sys-color-outline-dark: #a08c8a;
+
   --md-sys-color-inverse-on-surface-dark: #201a19;
   --md-sys-color-inverse-surface-dark: #ede0de;
   --md-sys-color-inverse-primary-dark: #9c423b;
+
   --md-sys-color-shadow-dark: #000000;
+
   --md-sys-color-surface-tint-dark: #ffb4ac;
+
   --md-sys-color-outline-variant-dark: #534341;
+
   --md-sys-color-scrim-dark: #000000;
   /**
   * @tokens-end

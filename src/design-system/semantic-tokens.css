@@ -1,0 +1,294 @@
+/* Semantic Tokens (layer) of the Design System
+* 
+* These Tokens, prefixed with '--app', map to reference or raw tokens and should be used by Component Tokens (domain-specific Tokens that usually "live" in the same .tsx file as the component).
+* They are domain-agnostic and represent "intend" in the design system.
+
+* We express the Semantic Tokens as CSS Custom Properties because
+* - it is a natural way to define Styling (CSS was designed for that)
+* - they allow devs to compose themes and modules with plain CSS
+* - they can be seamlessly visualized in our Front-end Lab, via an automated Storybook story
+
+Tip: Use together with the useColorMode React hook to consume in your app component.
+  This allows you to toggle between light and dark modes at runtime.
+  The CSS Custom Properties will automatically update based on the current mode.
+*/
+
+
+/* TOKENS Naming Scheme:
+  --[system]-[element]-[category]-[concept]-[property]-[variant]-[state]
+
+  Where:
+  - system: app (for app-level tokens, could be 'component' for component-specific tokens)
+  - element: optional element (ONLY for COMPONENT Tokens: button, card, input, etc)
+  - category: broad grouping (color, typography, spacing, etc)
+  - concept: specific design concept (background, text, border, etc)
+  - property: specific property if needed (text, bg, border, etc)
+  - variant: optional variant (primary, secondary, etc)
+  - state: optional state (hover, active, disabled, etc)
+
+  SEMANTIC TOKENS Naming Scheme:
+  --app-[category]-[concept]-[property]-[variant]-[state]
+
+  Examples:
+  --app-color-background-primary
+  --app-color-text-secondary-hover
+  --app-border-radius-card
+  --app-font-size-heading-lg
+*/
+
+
+/* COMMON + LIGHT: Contains the common tokens (ie Brand, Typography, etc) but also the Light Color Mode tokens. */
+:root {
+  /* Common Brand Tokens */
+  /* system-category-concept */
+  --app-brand-color-area: var(--md-ref-palette-primary70, #fb8b81);
+  --app-brand-color-area-text: var(--md-ref-palette-primary10, #410003);
+
+  --app-brand-color-accent: var(--md-ref-palette-primary70, #fb8b81);
+  --app-brand-color-accent-bg: var(--md-ref-palette-primary10, #410003);
+
+
+  /* Typography */
+  --app-brand-font-family: var(--app-font-family-sans);
+  --app-brand-font-family-alt: var(--app-font-family-courier);
+  --app-font-family: var(--app-font-family-sans);
+
+
+  /* LIGHT ONLY Color Mode Tokens */
+
+  /* App "overarching" Background Area */
+  /* system: app, element: none (otherwise it is not semantic token, but component token) */
+  /* category: color, concept: main-area, property: none (because background is implied (at least until we need text) */
+  /* variant: none, state: none ('light' for color mode is implied and is defined in the System Token anyway)*/
+  --app-color-main-area: var(--md-sys-color-primary-container-light, --md-sys-color-surface-variant-light, --md-sys-color-secondary-container-light);
+
+  /****** Draggable things in the App ******/
+  /* system-category-concept */
+  --app-color-draggable: var(--md-sys-color-surface-variant-light);
+  /* system-category-concept-property */
+  --app-color-draggable-text: var(--md-sys-color-on-surface-variant-light);
+
+
+  --app-color-surface-background: var(--md-sys-color-inverse-on-surface-light);
+  --app-color-surface-text: var(--md-sys-color-inverse-surface-light);  
+
+  /* Text */
+  --app-text-primary: var(--md-sys-color-on-surface-light);
+  --app-text-secondary: var(--md-sys-color-on-surface-variant-light);
+
+  /* Surface tokens represent visual elevation and content layering intention */
+  /* --app-surface-base        Example Component Token: Main page background */
+  /* --app-surface-raised      Example Component Token: Header, cards, modals - elevated above base */
+  /* --app-surface-overlay     Example Component Token: Dropdowns, tooltips - highest elevation */
+
+
+  /* CONTAINER TOKENS represent content organization and boundary intention */
+
+  /* --app-container-primary: var(--md-sys-color-primary-container-light); Example Component Token: Main content area, like a page or main section */
+  --app-container-primary: var(--md-sys-color-surface-light);
+  
+  --app-container-secondary: var(--md-sys-color-secondary-container-light); /* Example Component Token: Secondary content area, like sidebars or secondary sections */
+  --app-container-tertiary: var(--md-sys-color-tertiary-container-light); /* Example Component Token: Secondary content area, like sidebars */
+
+
+  /* Accent / Emphasis */
+  --app-accent-from: var(--md-sys-color-on-primary-container-light);
+  --app-accent-to: var(--md-sys-color-tertiary-light);
+  --app-accent-subtle-bg: rgba(0,0,0,.04); /* generic subtle accent wash */
+
+  --app-accent: var(--md-sys-color-primary-container-light);
+  --app-on-accent: var(--md-sys-color-on-primary-container-light);
+
+  /* Surfaces */
+  --app-surface-primary: var(--md-sys-color-primary-dark);
+  --app-on-surface-primary: var(--md-sys-color-on-primary-dark, --md-sys-color-on-primary-container-light);
+  /* var(--md-sys-color-primary-container-light); */
+  /* --app-surface-primary: var(--md-sys-color-surface-variant-light); */
+  --app-surface-primary-hover: var(--md-sys-color-tertiary-container-light);
+  --app-on-surface-primary-hover: var(--md-sys-color-on-tertiary-container-light);
+
+  --app-surface-secondary: var(--md-sys-color-inverse-primary-light);
+  --app-on-surface-secondary: var(--md-sys-color-on-primary-dark);
+  --app-surface-secondary-hover: var(--md-sys-color-primary-container-light);
+  --app-on-surface-secondary-hover: var(--md-sys-color-on-primary-container-light);
+
+
+  --app-surface-base: var(--md-sys-color-surface-light);
+  --app-surface-raised: var(--md-sys-color-secondary-container-light);
+
+  --app-surface-interactive: var(--md-sys-color-secondary-container-light);
+  --app-surface-interactive-from: var(--md-sys-color-secondary-container-light);
+  --app-surface-interactive-to: var(--md-sys-color-tertiary-container-light);
+  --app-surface-interactive-hover-from: var(--md-sys-color-primary-container-light);
+  --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-light);
+
+  --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-light);
+
+  /* Interaction Intention */
+  --app-interactive-primary: var(--md-sys-color-primary-light);
+  --app-on-interactive-primary: var(--md-sys-color-on-primary-light);
+
+  --app-interactive-hover-primary: var(--md-sys-color-primary-container-light);
+  --app-on-interactive-hover-primary: var(--md-sys-color-on-primary-container-light);
+
+  --app-interactive-secondary: var(--md-sys-color-secondary-light);
+  --app-on-interactive-secondary: var(--md-sys-color-on-secondary-light);
+  --app-interactive-hover-secondary: var(--md-sys-color-secondary-container-light);
+  --app-on-interactive-hover-secondary: var(--md-sys-color-on-secondary-container-light);
+
+  /* Borders / outline */
+  --app-border-subtle: var(--md-sys-color-outline-light);
+  --app-border: var(--md-sys-color-outline-light);
+
+  --app-surface-primary-outline: var(--md-sys-color-outline-light);
+  --app-surface-secondary-outline: var(--md-sys-color-outline-variant-light);
+
+  /* Focus ring */
+  --app-focus-ring: var(--md-sys-color-primary-light);
+
+  /* Status */
+  --app-danger: var(--md-sys-color-error-light);
+}
+
+
+/* DARK: Contains the Dark Color Mode tokens, via 2 selectors, dark in class list or dataset = 'dark' */
+:root.dark,
+[data-theme="dark"] {
+
+  /* App "overarching" Background Area (see corresponding "light" token for docs*/
+  --app-color-main-area: var(--md-sys-color-surface-dark, --md-sys-color-surface-variant-dark, --md-sys-color-secondary-container-dark);
+
+  /* system-category-concept */
+  --app-color-draggable: var(--md-sys-color-surface-dark);
+  /* system-category-concept-property */
+  --app-color-draggable-text: var(--md-sys-color-on-surface-dark);
+
+  --app-color-surface-background: var(--md-sys-color-inverse-on-surface-dark);
+  --app-color-surface-text: var(--md-sys-color-inverse-surface-dark);  
+
+  --app-text-primary: var(--md-sys-color-on-surface-dark);
+  --app-text-secondary: var(--md-sys-color-on-surface-variant-dark);
+
+  /* Container tokens represent content organization and boundary intention */
+
+  /* --app-container-primary: var(--md-sys-color-primary-container-dark); Example Component Token: Main content area, like a page or main section */
+  --app-container-primary: var(--md-sys-color-surface-dark);
+
+  --app-container-secondary: var(--md-sys-color-secondary-container-dark); /* Example Component Token: Secondary content area, like sidebars or secondary sections */
+  --app-container-tertiary: var(--md-sys-color-tertiary-container-dark); /* Example Component Token: Secondary content area, like sidebars */
+
+  --app-accent: var(--md-sys-color-primary-container-dark);
+  --app-on-accent: var(--md-sys-color-on-primary-container-dark);
+
+  --app-accent-from: var(--md-sys-color-primary-dark);
+  --app-accent-to: var(--md-sys-color-on-primary-container-dark);
+  --app-accent-subtle-bg: rgba(255,255,255,.08);
+
+  /* Surfaces */
+  /* --app-surface-primary: var(--md-sys-color-primary-light); */
+  --app-surface-primary: var(--md-sys-color-secondary-container-dark, --md-sys-color-surface-variant-dark);
+  --app-on-surface-primary: var(--md-sys-color-on-surface-variant-dark);
+  /* --app-surface-primary: var(--md-sys-color-primary-container-dark); */
+  --app-interactive-primary: var(--md-sys-color-primary-container-dark);
+  --app-surface-primary-hover: var(--md-sys-color-tertiary-container-dark);
+  --app-on-surface-primary-hover: var(--md-sys-color-on-tertiary-container-dark);
+
+  --app-surface-secondary: var(--md-sys-color-inverse-primary-dark);
+  --app-on-surface-secondary: var(--md-sys-color-on-primary-light);
+  --app-surface-secondary-hover: var(--md-sys-color-primary-container-dark);
+  --app-on-surface-secondary-hover: var(--md-sys-color-on-primary-container-dark);
+
+  --app-surface-base: var(--md-sys-color-surface-dark);
+  --app-surface-raised: var(--md-sys-color-secondary-container-dark);
+
+  --app-surface-interactive: var(--md-sys-color-secondary-container-dark);
+
+  --app-surface-interactive-from: var(--md-sys-color-secondary-container-dark);
+  --app-surface-interactive-to: var(--md-sys-color-tertiary-container-dark);
+  --app-surface-interactive-hover-from: var(--md-sys-color-primary-container-dark);
+  --app-surface-interactive-hover-to: var(--md-sys-color-tertiary-container-dark);
+
+  --app-surface-interactive-alt-bg: var(--md-sys-color-secondary-container-dark);
+
+  /* Interaction Intention */
+  --app-interactive-primary: var(--md-sys-color-primary-dark);
+  --app-on-interactive-primary: var(--md-sys-color-on-primary-dark);
+  --app-interactive-hover-primary: var(--md-sys-color-primary-container-dark);
+  --app-on-interactive-hover-primary: var(--md-sys-color-on-primary-container-dark);
+
+  --app-interactive-secondary: var(--md-sys-color-secondary-dark);
+  --app-on-interactive-secondary: var(--md-sys-color-on-secondary-dark);
+  --app-interactive-hover-secondary: var(--md-sys-color-secondary-container-dark);
+  --app-on-interactive-hover-secondary: var(--md-sys-color-on-secondary-container-dark);
+
+
+  /* Borders / outline */
+
+  --app-surface-primary-outline: var(--md-sys-color-outline-dark);
+  --app-surface-secondary-outline: var(--md-sys-color-outline-variant-dark);
+
+  --app-border-subtle: var(--md-sys-color-outline-dark);
+
+  --app-focus-ring: var(--md-sys-color-primary-dark);
+
+  --app-danger: var(--md-sys-color-error-dark);
+}
+
+
+
+
+/* Or Manually Use (styled-components / emotion):
+   color: var(--app-text-primary);
+   background: linear-gradient(90deg,var(--app-accent-from),var(--app-accent-to));
+   &:focus-visible { outline:2px solid var(--app-focus-ring);
+
+    DARK MODE is a selector list of two separate selectors:
+
+    :root.dark Matches the root element (html) when it has class="dark".
+    [data-theme="dark"] Matches any element (usually html) with attribute data-theme="dark".
+    Comma means “apply rules to either selector”. So the block runs if you toggle dark mode by:
+
+    Adding a class: document.documentElement.classList.add('dark') (uses :root.dark)
+    OR
+    Setting an attribute: document.documentElement.dataset.theme = 'dark' (uses [data-theme="dark"])
+    You only need one mechanism; both are provided for flexibility.
+
+
+    EXAMPLE Client Code to demonstrate applying light or dark css styles in app at runtime
+
+    import { useCallback, useEffect, useState } from 'react';
+
+    type Mode = 'light' | 'dark';
+
+    export function useColorMode(initial?: Mode) {
+    const [mode, setMode] = useState<Mode>(() => {
+        if (initial) return initial;
+        return (localStorage.getItem('color-mode') as Mode) || 'light';
+    });
+
+    useEffect(() => {
+        const root = document.documentElement;
+        if (mode === 'dark') root.classList.add('dark');
+        else root.classList.remove('dark');
+        localStorage.setItem('color-mode', mode);
+    }, [mode]);
+
+    const toggle = useCallback(
+        () => setMode(m => (m === 'dark' ? 'light' : 'dark')),
+        []
+    );
+
+    return { mode, setMode, toggle };
+    }
+
+
+    ALT Code to demonstrate applying light or dark css styles in app at runtime
+
+    const root = document.documentElement;
+    root.dataset.theme = 'dark';   // apply dark
+    delete root.dataset.theme;     // revert to light
+
+    if (mode === 'dark') root.dataset.theme = 'dark';
+    else delete root.dataset.theme;
+
+    */

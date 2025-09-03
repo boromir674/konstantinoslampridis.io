@@ -1,0 +1,105 @@
+/* HeaderNavigationNew1 CSS Module - Build-time CSS to eliminate CLS and runtime CSS generation */
+
+/* 
+ * FOUC Prevention Strategy:
+ * - Uses CSS custom properties for dynamic theming
+ * - Provides sensible defaults that are overridden by theme props
+ * - No runtime CSS generation, all styles compiled at build-time
+ */
+
+.navContainer {
+  /* Theme-driven properties with fallbacks */
+  font-family: var(--nav-font-family, 'Inter', 'Segoe UI', 'Roboto', sans-serif);
+  font-size: var(--nav-font-size, 14px);
+  
+  /* Layout properties */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+  /* Spacing */
+  gap: 1px;
+  
+  /* Do not Inherit background from parent to maintain theme consistency */
+  /* background: inherit; */
+}
+
+/* 
+ * FOUC Prevention: Empty state placeholder
+ * Displays a subtle loading indicator when navigation items aren't ready
+ */
+.navContainer:empty::before {
+  content: "Loading navigation...";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  color: var(--nav-loading-color, rgba(0, 0, 0, 0.4));
+  font-size: var(--nav-loading-font-size, 12px);
+  font-style: italic;
+}
+
+/* 
+ * Hide loading indicator when navigation has content
+ */
+.navContainer:not(:empty)::before {
+  display: none;
+}
+
+/* 
+ * Responsive Design: Adjustments for different screen sizes
+ */
+@media (max-width: 768px) {
+  .navContainer {
+    gap: 0.5px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .navContainer {
+    font-size: var(--nav-font-size-small, 12px);
+    gap: 0;
+  }
+}
+
+/* 
+ * Performance Optimization: GPU acceleration for smooth animations
+ */
+.navContainer {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 
+ * Accessibility: High contrast mode support
+ */
+@media (prefers-contrast: high) {
+  .navContainer {
+    border: 1px solid var(--nav-border-color, currentColor);
+  }
+}
+
+/* 
+ * Theme Support: Dark mode compatibility
+ */
+@media (prefers-color-scheme: dark) {
+  .navContainer:empty::before {
+    color: var(--nav-loading-color-dark, rgba(255, 255, 255, 0.6));
+  }
+}
+
+/* 
+ * CSS Custom Properties Documentation:
+ * --nav-font-family: Font family for navigation text
+ * --nav-font-size: Font size for navigation items  
+ * --nav-font-size-small: Font size for small screens
+ * --nav-loading-color: Color for loading text in light mode
+ * --nav-loading-color-dark: Color for loading text in dark mode
+ * --nav-loading-font-size: Font size for loading indicator
+ * --nav-border-color: Border color for high contrast mode
+ */

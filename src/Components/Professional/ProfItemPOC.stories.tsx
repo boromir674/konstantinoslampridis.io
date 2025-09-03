@@ -1,34 +1,24 @@
-import ProfItemPOC, { type ProfItemProps } from "./ProfItemPOC";
-import { lightTheme, darkTheme } from '../../theme';
+import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import ProfItemPOC, { type ProfItemProps } from "./ProfItemPOC";
+import { useThemeComparison } from '../../../.storybook/LightDarkComparison';
+
+import '../../design-system/tokens.css';  // raw tokens needed for Semantic ones
+import '../../design-system/typography.css';
+import '../../design-system/semantic-tokens.css';
+
+const meta = {
   component: ProfItemPOC,
   title: "ProfItemPOC",
   tags: ["autodocs"],
-};
+} as Meta<ProfItemProps>;
 
-const lightProps: ProfItemProps = {
-  // same interface as the props of the Component
-  // theme
-  theme: {
-    title: {
-      fontFamily: lightTheme.professional.item.title.fontFamily,
-      fontSize: lightTheme.professional.item.title.fontSize,
-    },
-    body: {
-      fontFamily: lightTheme.professional.item.body.fontFamily,
-      fontSize: lightTheme.professional.item.body.fontSize,
-    },
-    tags: {
-      item: lightTheme.professional.item.tag,
-      // item: {
-      //   ...lightTheme.professional.item.tag,
-      //   onHoverBackgroundColor: "#000000",
-      //   onHoverTextColor: "#ffffff",
-      // },
-    },
-  },
-  // data
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// Base data for the professional item
+const baseProfItemData = {
   title: "Software Engineer",
   duration: "Sep 2022 - May 2023",
   company: "Ggvista SAS",
@@ -40,20 +30,25 @@ const lightProps: ProfItemProps = {
   technology_tags: ["React", "TypeScript", "JavaScript"],
   location: "Some Location",
 };
-export const Light = {
-  args: lightProps,
-};
 
-
-const darkProps: ProfItemProps = {
-  // same interface as the props of the Component
-  ...Light.args,
-  theme: {
-    tags: {
-      item: darkTheme.professional.item.tag,
-    },
-  },
+// Theme comparison story
+export const ThemeComparison: Story = {
+  decorators: [useThemeComparison({
+    lightLabel: "☀️ Light Theme",
+    darkLabel: "🌙 Dark Theme",
+    showLabels: false,
+    gap: "48px"
+  })],
+  render: () => (
+    <ProfItemPOC
+      {...baseProfItemData}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: '🌗 **Professional Item Theme Comparison**: Displays the ProfItemPOC component side-by-side in light and dark themes. This demonstrates how the component adapts to different theme contexts while maintaining consistent typography and tag styling. The HOC automatically handles theme switching for comparison purposes.'
+      }
+    }
+  }
 };
-export const Dark = {
-  args: darkProps,
-}

@@ -1,30 +1,11 @@
 import React, { FC } from "react";
-import styled from "@emotion/styled";
+import * as styles from './HeaderNavigation.module.css';
 
 import useScreenScrollHandler from "../../Hooks/useScreenScrollHandler";
 
 import ScrollingNavigationItemGeneric from "./ScrollingNavigationItemGeneric";
 import AppHorNavItem from "./AppHorNavItem";
 
-interface NavContainerProps {
-  theme: {
-    fontFamily: string;
-    fontSize: string;
-  };
-};
-const NavContainer = styled.nav<NavContainerProps>`
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontSize};
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background: "inherit";
-  /* Set the desired spacing between flex items */
-  gap: 1px;
-`;
 
 interface HorizontaNavBarProps {
   items: {
@@ -59,15 +40,19 @@ const HorizontalNavBar: FC<HorizontaNavBarProps> = ({ items, theme: { fontFamily
   const activeLinkIndex = useScreenScrollHandler(items);
 
   return (
-    <NavContainer theme={{
-      fontFamily,
-      fontSize,
-    }}>
+    <nav 
+      className={styles.navContainer}
+      style={{
+        '--nav-font-family': fontFamily,
+        '--nav-font-size': fontSize,
+      } as React.CSSProperties}
+    >
       {items.map((item, index) => (
         <ScrollingNavigationItemGeneric // alows wiring onClick event to scroll
           renderProps={({ active, onClick }) => (
             <AppHorNavItem  // anchor <a>
               key={index}
+              // aria-current={activeLinkIndex === index ? "true" : undefined}
               theme={{ colorSet, padding }}
               active={active}
               onClick={onClick}  // useHandleNavigationClickFunction(htmlID)
@@ -83,7 +68,7 @@ const HorizontalNavBar: FC<HorizontaNavBarProps> = ({ items, theme: { fontFamily
           }}
         ></ScrollingNavigationItemGeneric>
       ))}
-    </NavContainer>
+    </nav>
   );
 };
 

@@ -31,8 +31,8 @@ We currently use
 
 | Live    | Performance | Accessibility | Best Practices | SEO | PWA |
 | ------- | ----------- | ------------- | -------------- | --- | --- |
-| Desktop | 100         | 93            | 100            | 92  | N/A |
-| Mobile  | 96          | 93            | 100            | 92  | N/A |
+| Desktop | 100         | 100           | 100            | 92  | N/A |
+| Mobile  | 90          | 100           | 100            | 92  | N/A |
 
 # App Architecture
 ```mermaid
@@ -219,6 +219,7 @@ Lighthouse Audit can "happen" `locally`, `on CI`, `with docker`, optionally in *
 ### Emulate online CI locally
 
 ```sh
+make build_static_files
 npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=3'
 
 ./scripts/ci-compare-json-arrays.py .lighthouseci/assertion-results.json ".lh-assertion-results-gs.json"
@@ -241,7 +242,7 @@ npm exec lighthouse https://konstantinoslampridis.io --no-enable-error-reporting
 
 **Expect:**
 - a shipped chrome browser to start-up
-- an html report of the audit result: konstantinoslampridis.io\<datetime\>.report.htm
+- an html report of the audit result: konstantinoslampridis.io\<datetime\>.report.html
 
 Note: 
 

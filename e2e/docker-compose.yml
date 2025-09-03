@@ -24,6 +24,8 @@ services:
     environment:
       # pass base url to test pointing at the web application
       - CYPRESS_baseUrl=http://my_app:9000
+      - CYPRESS_BROWSER=${CYPRESS_BROWSER:-chrome}  # Default to chrome if not set
+
     # share the current folder as volume to avoid copying
     working_dir: /e2e
     volumes:
@@ -34,6 +36,8 @@ services:
     # run specs and avoid specs in cypress/integration/examples folder:
     # - cypress/integration/margins_spec.cy.ts
     # - cypress/integration/spec.cy.ts
+
+
 
 ## Run Headless Cypress tests (and then close services):
 # docker-compose up cypress --exit-code-from cypress

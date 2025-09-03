@@ -20,10 +20,30 @@ interface NavItemProps {
   children?: React.ReactNode;
 }
 
+
+// ALT Nav Item Design
+// Border: --app-surface-interactive-alt-bg (using alt as border)
+// Background: --app-accent-subtle-bg (very light accent wash)
+// Text: --app-text-primary
+// Hover: Use --app-surface-interactive-alt-* tokens
+
 const NavItem = styled.a<NavItemProps>`
-  border: 1px solid #ffcc80;
+
+  // font-size: 18px;
+  font-weight: bold;
+
+  background: var(--app-surface-raised, ${(props) =>
+    props.active
+      ? props.theme.colorSet.activatedBackgroundColor
+      : props.theme.colorSet.backgroundColor});
+  color: var(--app-text-secondary, ${(props) =>
+    props.active
+      ? props.theme.colorSet.activatedTextColor
+      : 'var(--app-text-secondary)'});
+
+  // border: 1px solid var(--app-border-subtle);
+  border: ${(props) => props.active ? '2px' : '1px'} solid ${(props) => props.active ? 'var(--app-brand-color-accent)' : 'var(--app-text-secondary)'};
   border-radius: 100px;
-  
   letter-spacing: 3px;
 
   // padding
@@ -39,17 +59,6 @@ const NavItem = styled.a<NavItemProps>`
   align-self: auto;
   order: 0;
   
-  // font-size: 18px;
-  font-weight: bold;
-  // background: "inherit";
-  background: ${(props) =>
-    props.active
-      ? props.theme.colorSet.activatedBackgroundColor
-      : props.theme.colorSet.backgroundColor};
-  color: ${(props) =>
-    props.active
-      ? props.theme.colorSet.activatedTextColor
-      : props.theme.colorSet.textColor};
   // color: "inherit";
   cursor: pointer;
   margin: 0 0px;

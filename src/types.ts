@@ -13,6 +13,13 @@ interface PersonalWebsiteData {
   description: string;
 };
 
+interface ExtractedSkill {
+  name: string;
+  frequency: number;
+  sources: string[]; // 'portfolio' | 'professional'
+  category?: string; // auto-categorized
+}
+
 interface UserDefinedTextData {
   personal: PersonalWebsiteData,
   education: {
@@ -54,7 +61,8 @@ interface UserDefinedTextData {
     }[];
     tags: string[];
   }[];
+  skills?: ExtractedSkill[]; // Optional, auto-extracted if not present
 };
 
 
-export type { UserDefinedTextData };
+export type { UserDefinedTextData, ExtractedSkill };

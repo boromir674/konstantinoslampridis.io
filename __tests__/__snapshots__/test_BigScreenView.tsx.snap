@@ -3,256 +3,231 @@
 exports[`Test App width = 700 matches the snapshot 1`] = `
 <div>
   <div
-    class="css-kzq97d"
+    class="css-1lv27ca"
   >
-    <div
-      class="css-1m5sbi6"
-    >
-      <div
-        style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
-      >
+    <div>
+      <div>
         <div
-          style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
+          style="display: flex; flex-flow: row nowrap; cursor: pointer; width: 48px; user-select: none;"
         >
           <div
-            style="width: 48px; height: 26px; border-radius: 16px; background: rgb(255, 255, 255); transition: all 100ms;"
-          />
-        </div>
-        <div
-          style="margin-left: -100%; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
-        >
-          <div
-            style="transition: all 100ms; padding-top: 4px; padding-left: 25px;"
+            style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
           >
             <div
-              style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 251, 255); transition: all 100ms;"
+              style="width: 48px; height: 26px; border-radius: 16px; background: rgb(255, 255, 255); transition: all 100ms;"
             />
           </div>
-        </div>
-      </div>
-      <nav
-        class="css-qx08l1"
-      >
-        <a
-          class="css-arku82"
-        >
-          Home
-        </a>
-        <a
-          class="css-w0in7m"
-        >
-          Portfolio
-        </a>
-        <a
-          class="css-w0in7m"
-        >
-          Professional
-        </a>
-      </nav>
-    </div>
-    <div
-      class="css-1lxjc1s"
-    >
-      <div
-        class="css-7xsp98"
-      >
-        <div
-          class="css-kp9dvk"
-        >
-          <span
-            class="css-bwb5ro"
-          >
-            Name:
-          </span>
-           
-          <span
-            class="css-1pgu2xd"
-          >
-            John Doe
-          </span>
-        </div>
-        <div
-          class="css-kp9dvk"
-        >
-          <span
-            class="css-bwb5ro"
-          >
-            Email:
-          </span>
-           
-          <span
-            class="css-1pgu2xd"
-          >
-            jd@email.io
-          </span>
-        </div>
-        <div
-          class="css-kp9dvk"
-        >
-          <span
-            class="css-bwb5ro"
-          >
-            Github:
-          </span>
-           
-          <span
-            class="css-1pgu2xd"
-          >
-            <a
-              class="css-1gyz2k7"
-              href="https://github.com/john-doe"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              github.com/john-doe
-               
-              <svg
-                fill="none"
-                height="10px"
-                stroke="#534341"
-                stroke-width="5.108"
-                viewBox="-2.56 -2.56 69.12 69.12"
-                width="10px"
-              >
-                <g
-                  id="SVGRepo_iconCarrier"
-                >
-                  <path
-                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-                  />
-                  <polyline
-                    points="40.32 8.6 55.4 8.6 55.4 24.18"
-                  />
-                  <line
-                    x1="19.32"
-                    x2="54.61"
-                    y1="45.72"
-                    y2="8.91"
-                  />
-                </g>
-              </svg>
-            </a>
-          </span>
-        </div>
-        <div
-          class="css-kp9dvk"
-        >
-          <span
-            class="css-bwb5ro"
-          >
-            Gitlab:
-          </span>
-           
-          <span
-            class="css-1pgu2xd"
-          >
-            <a
-              class="css-1gyz2k7"
-              href="https://gitlab.com/john-doe"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              gitlab.com/john-doe
-               
-              <svg
-                fill="none"
-                height="10px"
-                stroke="#534341"
-                stroke-width="5.108"
-                viewBox="-2.56 -2.56 69.12 69.12"
-                width="10px"
-              >
-                <g
-                  id="SVGRepo_iconCarrier"
-                >
-                  <path
-                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-                  />
-                  <polyline
-                    points="40.32 8.6 55.4 8.6 55.4 24.18"
-                  />
-                  <line
-                    x1="19.32"
-                    x2="54.61"
-                    y1="45.72"
-                    y2="8.91"
-                  />
-                </g>
-              </svg>
-            </a>
-          </span>
-        </div>
-        <div
-          class="css-kp9dvk"
-        >
-          <span
-            class="css-bwb5ro"
-          >
-            LinkedIn:
-          </span>
-           
-          <span
-            class="css-1pgu2xd"
-          >
-            <a
-              class="css-1gyz2k7"
-              href="https://linkedin.com/in/john-doe"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              linkedin.com/in/john-doe
-               
-              <svg
-                fill="none"
-                height="10px"
-                stroke="#534341"
-                stroke-width="5.108"
-                viewBox="-2.56 -2.56 69.12 69.12"
-                width="10px"
-              >
-                <g
-                  id="SVGRepo_iconCarrier"
-                >
-                  <path
-                    d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
-                  />
-                  <polyline
-                    points="40.32 8.6 55.4 8.6 55.4 24.18"
-                  />
-                  <line
-                    x1="19.32"
-                    x2="54.61"
-                    y1="45.72"
-                    y2="8.91"
-                  />
-                </g>
-              </svg>
-            </a>
-          </span>
-        </div>
-        <div
-          class="css-kp9dvk"
-        >
-           
-          <span
-            class="css-bwb5ro"
-          >
-            Curricular Docs:
-          </span>
-           
           <div
-            class="css-5l6624"
+            style="margin-left: -100%; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
           >
             <div
-              class="css-1rstcrp"
+              style="transition: all 100ms; padding-top: 4px; padding-left: 25px;"
+            >
+              <div
+                style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 251, 255); transition: all 100ms;"
+              />
+            </div>
+          </div>
+        </div>
+        <span
+          aria-label="Dark"
+        >
+          Dark
+        </span>
+      </div>
+      <div
+        style="transform: translateX(0px);"
+      >
+        <nav
+          style="--nav-font-family: Roboto, sans-serif; --nav-font-size: 24px;"
+        >
+          <a
+            class="css-681dl8"
+          >
+            Home
+          </a>
+          <a
+            class="css-1svczmw"
+          >
+            Portfolio
+          </a>
+          <a
+            class="css-1svczmw"
+          >
+            Professional
+          </a>
+        </nav>
+      </div>
+    </div>
+    <div
+      class="css-2ingz3"
+    >
+      <div
+        class="css-kn3uhu"
+      >
+        <section
+          class="css-6q335f"
+          id="personal-info"
+          style="--accent-color-start: #410003; --accent-color-end: #725b2e;"
+        >
+          <header
+            class="css-2ezcff"
+          >
+            <h1
+              class="css-1b0o9tp"
+            >
+              John Doe
+            </h1>
+            <p
+              class="css-143cy3v"
+            >
+              Personal Information
+            </p>
+          </header>
+          <div
+            class="css-1ojkdw4"
+          >
+            <span
+              class="css-12b2jet"
+            >
+              Email
+            </span>
+            <span
+              class="css-1offhmh"
+            >
+              jd@email.io
+            </span>
+          </div>
+          <div
+            class="css-16z1gff"
+          >
+            <span
+              class="css-12b2jet"
+            >
+              Profiles
+            </span>
+            <div
+              class="css-12fn4cu"
             >
               <a
-                class="css-1gyz2k7"
+                class="css-1ugqxxv"
+                href="https://github.com/john-doe"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                GitHub
+                <svg
+                  fill="none"
+                  height="10px"
+                  stroke="#534341"
+                  stroke-width="5.108"
+                  viewBox="-2.56 -2.56 69.12 69.12"
+                  width="10px"
+                >
+                  <g
+                    id="SVGRepo_iconCarrier"
+                  >
+                    <path
+                      d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                    />
+                    <polyline
+                      points="40.32 8.6 55.4 8.6 55.4 24.18"
+                    />
+                    <line
+                      x1="19.32"
+                      x2="54.61"
+                      y1="45.72"
+                      y2="8.91"
+                    />
+                  </g>
+                </svg>
+              </a>
+              <a
+                class="css-1ugqxxv"
+                href="https://linkedin.com/in/john-doe"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                LinkedIn
+                <svg
+                  fill="none"
+                  height="10px"
+                  stroke="#534341"
+                  stroke-width="5.108"
+                  viewBox="-2.56 -2.56 69.12 69.12"
+                  width="10px"
+                >
+                  <g
+                    id="SVGRepo_iconCarrier"
+                  >
+                    <path
+                      d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                    />
+                    <polyline
+                      points="40.32 8.6 55.4 8.6 55.4 24.18"
+                    />
+                    <line
+                      x1="19.32"
+                      x2="54.61"
+                      y1="45.72"
+                      y2="8.91"
+                    />
+                  </g>
+                </svg>
+              </a>
+              <a
+                class="css-1ugqxxv"
+                href="https://gitlab.com/john-doe"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                GitLab
+                <svg
+                  fill="none"
+                  height="10px"
+                  stroke="#534341"
+                  stroke-width="5.108"
+                  viewBox="-2.56 -2.56 69.12 69.12"
+                  width="10px"
+                >
+                  <g
+                    id="SVGRepo_iconCarrier"
+                  >
+                    <path
+                      d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32"
+                    />
+                    <polyline
+                      points="40.32 8.6 55.4 8.6 55.4 24.18"
+                    />
+                    <line
+                      x1="19.32"
+                      x2="54.61"
+                      y1="45.72"
+                      y2="8.91"
+                    />
+                  </g>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div
+            class="css-16z1gff"
+          >
+            <span
+              class="css-12b2jet"
+            >
+              Curricular PDFs
+            </span>
+            <div
+              class="css-as1dsd"
+            >
+              <a
+                class="css-rlwcun"
                 href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_resume.pdf"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                '1 Page Resume' 
+                1 Page Resume 
                 <svg
                   fill="none"
                   height="10px"
@@ -279,17 +254,13 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                   </g>
                 </svg>
               </a>
-            </div>
-            <div
-              class="css-1rstcrp"
-            >
               <a
-                class="css-1gyz2k7"
+                class="css-rlwcun"
                 href="https://konstantinos-lampridis-cv-documents.s3.eu-central-1.amazonaws.com/main_cv%2Bprojects.pdf"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                'CV + Projects' 
+                CV + Projects 
                 <svg
                   fill="none"
                   height="10px"
@@ -318,397 +289,393 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               </a>
             </div>
           </div>
-        </div>
-      </div>
-      <div
-        class="css-n1i9i7"
-      >
+        </section>
         <div
-          class="css-eqcqji"
+          class="css-n1i9i7"
         >
-          <h3
-            class="css-1td1kb3"
+          <div
+            class="css-15torxr"
           >
-            MSc in Artificial Intelligence
-          </h3>
-          <h4
-            class="css-oh44f7"
-          >
-            University of Amsterdam
-          </h4>
-          <span
-            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-          >
-            <a>
+            <h2
+              class="css-11g0hwi"
+            >
+              MSc in Artificial Intelligence
+            </h2>
+            <h3
+              class="css-1xx0ev1"
+            >
+              University of Amsterdam
+            </h3>
+            <div
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
               <p
-                class="css-12f1dh1"
+                class="css-171urvq"
               >
                 Amsterdam, Netherlands
               </p>
               <span
-                class="css-9o6sth"
+                class="css-14bukl4"
               >
                 2014 - 2019
               </span>
-            </a>
-          </span>
-          <p
-            class="css-1mvjx7v"
-          >
-            Thesis: 
-            Political Spectrum Aware Topic Model
-          </p>
-          <div
-            class="css-bvngjg"
-          >
-            <span
-              class="css-1szrj99"
+            </div>
+            <p
+              class="css-134jemv"
             >
-              ML
-            </span>
-            <span
-              class="css-1szrj99"
+              Thesis: 
+              Political Spectrum Aware Topic Model
+            </p>
+            <div
+              class="css-bvngjg"
             >
-              CV
-            </span>
-            <span
-              class="css-1szrj99"
-            >
-              RL
-            </span>
-            <span
-              class="css-1szrj99"
-            >
-              NLP
-            </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                ML
+              </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                CV
+              </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                RL
+              </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                NLP
+              </span>
+            </div>
           </div>
-        </div>
-        <div
-          class="css-eqcqji"
-        >
-          <h3
-            class="css-1td1kb3"
+          <div
+            class="css-15torxr"
           >
-            BSc in Applied Informatics
-          </h3>
-          <h4
-            class="css-oh44f7"
-          >
-            University of Macedonia
-          </h4>
-          <span
-            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-          >
-            <a>
+            <h2
+              class="css-11g0hwi"
+            >
+              BSc in Applied Informatics
+            </h2>
+            <h3
+              class="css-1xx0ev1"
+            >
+              University of Macedonia
+            </h3>
+            <div
+              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+            >
               <p
-                class="css-12f1dh1"
+                class="css-171urvq"
               >
                 Thessaloniki, Greece
               </p>
               <span
-                class="css-9o6sth"
+                class="css-14bukl4"
               >
                 2008 - 2013
               </span>
-            </a>
-          </span>
+            </div>
+            <p
+              class="css-134jemv"
+            >
+              Thesis: 
+              Computational Analysis of Simplex Points Algorithm
+            </p>
+            <div
+              class="css-bvngjg"
+            >
+              <span
+                class=" css-sxpw0i"
+              >
+                Operating Systems
+              </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                Linear Programming
+              </span>
+              <span
+                class=" css-sxpw0i"
+              >
+                Discreet Mathematics
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-hl3fix"
+      >
+        <div
+          class="css-8her76"
+          id="introduction-section"
+        >
           <p
-            class="css-1mvjx7v"
+            style="font-size: 1.75rem; line-height: 1.6; margin: 1rem 0px;"
           >
-            Thesis: 
-            Computational Analysis of Simplex Points Algorithm
+            Welcome to the online space of 
+            <strong>
+              John Doe
+            </strong>
+            .
           </p>
-          <div
-            class="css-bvngjg"
+          <p
+            class="css-1ywv6q5"
           >
+            Here you will find information about my
+             
             <span
-              class="css-1szrj99"
+              style="font-weight: bold; color: rgb(65, 0, 3);"
             >
-              Operating Systems
+              Open Source Project Portfolio
             </span>
+            ,
+             
             <span
-              class="css-1szrj99"
+              style="font-weight: bold; color: rgb(65, 0, 3);"
             >
-              Linear Programming
+              Professional Experience
             </span>
+            ,
+             
             <span
-              class="css-1szrj99"
+              style="font-weight: bold; color: rgb(65, 0, 3);"
             >
-              Discreet Mathematics
+              Skills
             </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="css-lpnzm1"
-    >
-      <div
-        class="css-8her76"
-        id="introduction-section"
-      >
-        <p
-          style="font-size: 1.75rem; line-height: 1.6; margin: 1rem 0px;"
-        >
-          Welcome to the online space of 
-          <strong>
-            John Doe
-          </strong>
-          .
-        </p>
-        <p
-          class="css-1ywv6q5"
-        >
-          Here you will find information about my
-           
-          <span
-            style="font-weight: bold; color: rgb(65, 0, 3);"
-          >
-            Open Source Project Portfolio
-          </span>
-          ,
-           
-          <span
-            style="font-weight: bold; color: rgb(65, 0, 3);"
-          >
-            Professional Experience
-          </span>
-          ,
-           
-          <span
-            style="font-weight: bold; color: rgb(65, 0, 3);"
-          >
-            Skills
-          </span>
-          , and
-           
-          <span
-            style="font-weight: bold; color: rgb(65, 0, 3);"
-          >
-            Education
-          </span>
-          .
-        </p>
-      </div>
-      <div
-        class="css-mnc2za"
-        id="professional-section"
-      >
-        <h1
-          class="css-1glvia5"
-        >
-          Professional Career
-        </h1>
-        <div
-          class="css-1z0gzvl"
-        >
-          <div
-            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-          >
-            <h3
-              class="css-d85rro"
+            , and
+             
+            <span
+              style="font-weight: bold; color: rgb(65, 0, 3);"
             >
-              Software Engineer
-            </h3>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              Mountain View, CA
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              GG Navi
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              Sep 2022 - May 2023
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              I worked at GG Navi as a Software Engineer.
-            </p>
-            <p
-              style="margin-bottom: 12px; font-family: Roboto, sans-serif; font-size: 16px;"
-            >
-              Activities
-            </p>
-            <ul
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              <li
-                style="padding: 4px 0px;"
-              >
-                <div
-                  class="css-p4d3hp"
-                >
-                  I worked at GG Navi as a Software Engineer.
-                </div>
-              </li>
-              <li
-                style="padding: 4px 0px;"
-              >
-                <div
-                  class="css-p4d3hp"
-                >
-                  other activity
-                </div>
-              </li>
-            </ul>
-            <div
-              class="css-112f423"
-            >
-              <span
-                class="css-e1ywo8"
-              >
-                python
-              </span>
-              <span
-                class="css-e1ywo8"
-              >
-                docker
-              </span>
-            </div>
-          </div>
+              Education
+            </span>
+            .
+          </p>
         </div>
         <div
-          class="css-of4ajn"
+          class="css-104uwcd"
+          id="professional-section"
         >
-          <div
-            css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+          <h2
+            class="css-1r1ex98"
           >
-            <h3
-              class="css-d85rro"
-            >
-              Software Engineer
-            </h3>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              Mountain View, CA
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              GG Navi
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              Sep 2022 - May 2023
-            </p>
-            <p
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              I worked at GG Navi as a Software Engineer.
-            </p>
-            <p
-              style="margin-bottom: 12px; font-family: Roboto, sans-serif; font-size: 16px;"
-            >
-              Activities
-            </p>
-            <ul
-              css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
-            >
-              <li
-                style="padding: 4px 0px;"
-              >
-                <div
-                  class="css-p4d3hp"
-                >
-                  I worked at GG Navi as a Software Engineer.
-                </div>
-              </li>
-              <li
-                style="padding: 4px 0px;"
-              >
-                <div
-                  class="css-p4d3hp"
-                >
-                  other activity
-                </div>
-              </li>
-            </ul>
-            <div
-              class="css-112f423"
-            >
-              <span
-                class="css-e1ywo8"
-              >
-                python
-              </span>
-              <span
-                class="css-e1ywo8"
-              >
-                docker
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="css-1koo0nk"
-        id="open-source-portfolio-section"
-      >
-        <h1
-          class="css-gj5vb0"
-        >
-          Open Source & Portfolio
-        </h1>
-        <button
-          class="css-1ysyhpi"
-        >
-          Reset Layout
-        </button>
-        <div
-          class="react-grid-layout layout"
-          style="height: 928px;"
-        >
+            Professional Career
+          </h2>
           <div
-            class="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
-            data-grid="[object Object]"
-            style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(10px,10px);"
+            class="css-10m6d7f"
           >
             <div
-              class="css-8epc0j"
+              style="font-family: var(--app-font, inherit); display: flex; flex-direction: column; gap: 4px; padding: 14px;"
             >
-              <h2
-                class="css-ssyvhw"
+              <h3
+                class="css-fdzwyt"
               >
-                Python Package Generator
-              </h2>
+                Software Engineer
+              </h3>
               <p
-                class="css-1bf79uj"
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
               >
-                A CLI tool to generate a Python package with a single command.
+                Mountain View, CA
               </p>
-              <div
-                class="css-1pi72lr"
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
               >
-                  
+                GG Navi
+              </p>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                Sep 2022 - May 2023
+              </p>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                I worked at GG Navi as a Software Engineer.
+              </p>
+              <p
+                style="margin-bottom: 12px; font-family: var(--app-font);"
+              >
+                Activities
+              </p>
+              <ul
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                <li
+                  style="padding: 4px 0px;"
+                >
+                  <div
+                    class="css-53z2mn"
+                  >
+                    I worked at GG Navi as a Software Engineer.
+                  </div>
+                </li>
+                <li
+                  style="padding: 4px 0px;"
+                >
+                  <div
+                    class="css-53z2mn"
+                  >
+                    other activity
+                  </div>
+                </li>
+              </ul>
+              <div
+                class="css-1p2oq9d"
+              >
+                <span
+                  class=" css-sxpw0i"
+                >
+                  python
+                </span>
+                <span
+                  class=" css-sxpw0i"
+                >
+                  docker
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-flniz4"
+          >
+            <div
+              style="font-family: var(--app-font, inherit); display: flex; flex-direction: column; gap: 4px; padding: 14px;"
+            >
+              <h3
+                class="css-fdzwyt"
+              >
+                Software Engineer
+              </h3>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                Mountain View, CA
+              </p>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                GG Navi
+              </p>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                Sep 2022 - May 2023
+              </p>
+              <p
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                I worked at GG Navi as a Software Engineer.
+              </p>
+              <p
+                style="margin-bottom: 12px; font-family: var(--app-font);"
+              >
+                Activities
+              </p>
+              <ul
+                css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
+              >
+                <li
+                  style="padding: 4px 0px;"
+                >
+                  <div
+                    class="css-53z2mn"
+                  >
+                    I worked at GG Navi as a Software Engineer.
+                  </div>
+                </li>
+                <li
+                  style="padding: 4px 0px;"
+                >
+                  <div
+                    class="css-53z2mn"
+                  >
+                    other activity
+                  </div>
+                </li>
+              </ul>
+              <div
+                class="css-1p2oq9d"
+              >
+                <span
+                  class=" css-sxpw0i"
+                >
+                  python
+                </span>
+                <span
+                  class=" css-sxpw0i"
+                >
+                  docker
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-62bnf7"
+          id="open-source-portfolio-section"
+        >
+          <h2
+            class="css-7ii6gk"
+          >
+            Open Source & Portfolio
+          </h2>
+          <div
+            style="padding-left: 10px;"
+          >
+            <button
+              class="css-2ivnr2"
+            >
+              Reset Layout
+            </button>
+          </div>
+          <div
+            class="react-grid-layout layout"
+            style="height: 928px;"
+          >
+            <div
+              class="react-grid-item react-draggable cssTransforms react-resizable css-jejeeb"
+              data-grid="[object Object]"
+              style="z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(10px,10px);"
+            >
+              <div
+                class="css-14yx19c"
+              >
+                <h3
+                  class="css-1mt6hkg"
+                >
+                  Python Package Generator
+                </h3>
+                <p
+                  class="css-wkkei5"
+                >
+                  A CLI tool to generate a Python package with a single command.
+                </p>
                 <div
-                  class="css-18dgpf5"
+                  class="css-1pi72lr"
                 >
                     
                   <div
-                    class="css-tqife0"
+                    class="css-1p4k4am"
                   >
+                      
                     <div
-                      class="css-0"
+                      class="css-x904r0"
                     >
-                      <h3
-                        class="css-1tn7zvf"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
-                        class="css-18ef9vj"
+                        class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -733,7 +700,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -758,7 +725,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -786,172 +753,168 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="css-1y544bo"
-                >
-                    
-                  <span
-                    class="css-cig3pz"
-                  >
-                    Software maturity level: 
-                    Mature
-                  </span>
                   <div
-                    class="css-v1j3u1"
+                    class="css-vwkmwk"
                   >
-                    <h3
-                      class="css-9ssiqh"
+                      
+                    <span
+                      class="css-1tn0i3x"
                     >
-                      Releases
-                    </h3>
+                      Software maturity level: 
+                      Mature
+                    </span>
                     <div
-                      class="css-1iyoj2o"
+                      class="css-15dty92"
                     >
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
+                      <h4
+                        class="css-19xfikg"
+                      >
+                        Releases
+                      </h4>
+                      <div
+                        class="css-1iyoj2o"
+                      >
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 24 24"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
-                              />
-                              <path
-                                d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            cookiecutter-python-package
-                          </span>
-                          <span
-                            class="css-42txja"
-                          >
-                            2.4.0
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 32 32"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 24 24"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                                />
+                                <path
+                                  d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              cookiecutter-python-package
+                            </span>
+                            <span
+                              class="css-42txja"
                             >
-                              <path
-                                d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            generate-python
-                          </span>
-                          <span
-                            class="css-42txja"
+                              2.4.0
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v2.4.0
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              viewBox="-64 0 512 512"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            cookiecutter-python-package
-                          </span>
-                          <span
-                            class="css-42txja"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              generate-python
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v2.4.0
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v2.4.0
-                          </span>
-                        </button>
+                            <span
+                              class="css-2dse8b"
+                            >
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                viewBox="-64 0 512 512"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              cookiecutter-python-package
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v2.4.0
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <span
+                class="react-resizable-handle react-resizable-handle-se"
+              />
             </div>
-            <span
-              class="react-resizable-handle react-resizable-handle-se"
-            />
-          </div>
-          <div
-            class="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
-            data-grid="[object Object]"
-            style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 449px; position: absolute; transform: translate(433px,10px);"
-          >
             <div
-              class="css-8epc0j"
+              class="react-grid-item react-draggable cssTransforms react-resizable css-jejeeb"
+              data-grid="[object Object]"
+              style="z-index: 0; width: 413px; height: 449px; position: absolute; transform: translate(433px,10px);"
             >
-              <h2
-                class="css-ssyvhw"
-              >
-                Neural Style Transfer
-              </h2>
-              <p
-                class="css-1bf79uj"
-              >
-                Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
-              </p>
               <div
-                class="css-1pi72lr"
+                class="css-14yx19c"
               >
-                  
+                <h3
+                  class="css-1mt6hkg"
+                >
+                  Neural Style Transfer
+                </h3>
+                <p
+                  class="css-wkkei5"
+                >
+                  Re-paint any image with the style of another image (ie Van Gogh painting) using a Neural Style Transfer algorithm, accessible through an easy-to-use CLI.
+                </p>
                 <div
-                  class="css-18dgpf5"
+                  class="css-1pi72lr"
                 >
                     
                   <div
-                    class="css-tqife0"
+                    class="css-1p4k4am"
                   >
+                      
                     <div
-                      class="css-0"
+                      class="css-x904r0"
                     >
-                      <h3
-                        class="css-1tn7zvf"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
-                        class="css-18ef9vj"
+                        class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -976,7 +939,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1004,172 +967,168 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="css-1y544bo"
-                >
-                    
-                  <span
-                    class="css-cig3pz"
-                  >
-                    Software maturity level: 
-                    Stable
-                  </span>
                   <div
-                    class="css-v1j3u1"
+                    class="css-vwkmwk"
                   >
-                    <h3
-                      class="css-9ssiqh"
+                      
+                    <span
+                      class="css-1tn0i3x"
                     >
-                      Releases
-                    </h3>
+                      Software maturity level: 
+                      Stable
+                    </span>
                     <div
-                      class="css-1iyoj2o"
+                      class="css-15dty92"
                     >
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
+                      <h4
+                        class="css-19xfikg"
+                      >
+                        Releases
+                      </h4>
+                      <div
+                        class="css-1iyoj2o"
+                      >
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 24 24"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
-                              />
-                              <path
-                                d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            neural-style-transfer
-                          </span>
-                          <span
-                            class="css-42txja"
-                          >
-                            0.6.1
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 32 32"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 24 24"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                                />
+                                <path
+                                  d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              neural-style-transfer
+                            </span>
+                            <span
+                              class="css-42txja"
                             >
-                              <path
-                                d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            nst
-                          </span>
-                          <span
-                            class="css-42txja"
+                              0.6.1
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v0.6.1
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              viewBox="-64 0 512 512"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            neural-style-transfer
-                          </span>
-                          <span
-                            class="css-42txja"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              nst
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v0.6.1
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v0.6.1
-                          </span>
-                        </button>
+                            <span
+                              class="css-2dse8b"
+                            >
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                viewBox="-64 0 512 512"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              neural-style-transfer
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v0.6.1
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <span
+                class="react-resizable-handle react-resizable-handle-se"
+              />
             </div>
-            <span
-              class="react-resizable-handle react-resizable-handle-se"
-            />
-          </div>
-          <div
-            class="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
-            data-grid="[object Object]"
-            style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 500px; position: absolute; transform: translate(10px,418px);"
-          >
             <div
-              class="css-8epc0j"
+              class="react-grid-item react-draggable cssTransforms react-resizable css-jejeeb"
+              data-grid="[object Object]"
+              style="z-index: 0; width: 413px; height: 500px; position: absolute; transform: translate(10px,418px);"
             >
-              <h2
-                class="css-ssyvhw"
-              >
-                Topic Modeling Toolkit
-              </h2>
-              <p
-                class="css-1bf79uj"
-              >
-                A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
-              </p>
               <div
-                class="css-1pi72lr"
+                class="css-14yx19c"
               >
-                  
+                <h3
+                  class="css-1mt6hkg"
+                >
+                  Topic Modeling Toolkit
+                </h3>
+                <p
+                  class="css-wkkei5"
+                >
+                  A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
+                </p>
                 <div
-                  class="css-18dgpf5"
+                  class="css-1pi72lr"
                 >
                     
                   <div
-                    class="css-tqife0"
+                    class="css-1p4k4am"
                   >
+                      
                     <div
-                      class="css-0"
+                      class="css-x904r0"
                     >
-                      <h3
-                        class="css-1tn7zvf"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
-                        class="css-18ef9vj"
+                        class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1195,172 +1154,168 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="css-1y544bo"
-                >
-                    
-                  <span
-                    class="css-cig3pz"
-                  >
-                    Software maturity level: 
-                    Mature
-                  </span>
                   <div
-                    class="css-v1j3u1"
+                    class="css-vwkmwk"
                   >
-                    <h3
-                      class="css-9ssiqh"
+                      
+                    <span
+                      class="css-1tn0i3x"
                     >
-                      Releases
-                    </h3>
+                      Software maturity level: 
+                      Mature
+                    </span>
                     <div
-                      class="css-1iyoj2o"
+                      class="css-15dty92"
                     >
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
+                      <h4
+                        class="css-19xfikg"
+                      >
+                        Releases
+                      </h4>
+                      <div
+                        class="css-1iyoj2o"
+                      >
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 24 24"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
-                              />
-                              <path
-                                d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            topic-modeling-toolkit
-                          </span>
-                          <span
-                            class="css-42txja"
-                          >
-                            0.5.2
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 32 32"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 24 24"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                                />
+                                <path
+                                  d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              topic-modeling-toolkit
+                            </span>
+                            <span
+                              class="css-42txja"
                             >
-                              <path
-                                d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            topic-modeling
-                          </span>
-                          <span
-                            class="css-42txja"
+                              0.5.2
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v0.5.2
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              viewBox="-64 0 512 512"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            topic-modeling-toolkit
-                          </span>
-                          <span
-                            class="css-42txja"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 32 32"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M30.679 13.367c-0.613-0.404-1.366-0.645-2.175-0.645-0.093 0-0.185 0.003-0.276 0.009l0.012-0.001c-0.446 0.001-0.882 0.041-1.306 0.115l0.046-0.007c-0.235-1.357-1.025-2.495-2.122-3.191l-0.019-0.011-0.429-0.248-0.282 0.408c-0.336 0.512-0.599 1.108-0.756 1.745l-0.008 0.039c-0.089 0.324-0.14 0.696-0.14 1.080 0 0.831 0.24 1.605 0.654 2.258l-0.010-0.017c-0.637 0.299-1.381 0.488-2.164 0.524l-0.013 0h-19.729c-0.516 0.001-0.934 0.418-0.936 0.933v0c-0.001 0.056-0.001 0.123-0.001 0.19 0 1.751 0.317 3.428 0.897 4.977l-0.032-0.098c0.558 1.633 1.612 2.975 2.98 3.881l0.028 0.017c1.744 0.903 3.808 1.432 5.995 1.432 0.207 0 0.412-0.005 0.617-0.014l-0.029 0.001c0.018 0 0.039 0 0.060 0 1.272 0 2.515-0.121 3.72-0.352l-0.123 0.020c1.795-0.336 3.395-0.939 4.845-1.773l-0.074 0.039c1.257-0.735 2.331-1.621 3.245-2.652l0.012-0.014c1.325-1.56 2.403-3.381 3.145-5.365l0.041-0.125h0.276c0.055 0.002 0.119 0.004 0.183 0.004 1.226 0 2.34-0.481 3.163-1.265l-0.002 0.002c0.377-0.358 0.676-0.793 0.873-1.281l0.009-0.024 0.122-0.359zM3.79 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 14.849h2.644c0.127 0 0.231-0.103 0.231-0.231 0 0 0 0 0-0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0 0-0 0-0 0-0.128 0-0.232 0.104-0.232 0.232 0 0 0 0 0 0v0 2.355c0.001 0.128 0.104 0.231 0.232 0.231v0zM11.132 14.849h2.646c0.127-0.001 0.23-0.104 0.23-0.231 0 0 0 0 0 0v0-2.355c0-0 0-0.001 0-0.001 0-0.127-0.103-0.23-0.23-0.231h-2.646c-0.127 0.001-0.23 0.104-0.23 0.231v0 2.356c0 0.127 0.103 0.231 0.231 0.231v0zM14.788 14.849h2.643c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM7.434 11.461h2.644c0.128-0.001 0.231-0.104 0.231-0.232 0 0 0 0 0 0v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.644c-0.128 0-0.231 0.103-0.232 0.231v2.355c0.001 0.128 0.104 0.231 0.232 0.232h0zM11.132 11.461h2.646c0.127-0.001 0.23-0.105 0.23-0.232v0-2.355c0 0 0 0 0-0 0-0.127-0.103-0.231-0.231-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0.001 0.128 0.103 0.231 0.231 0.232h0zM14.788 11.461h2.643c0.128-0.001 0.231-0.104 0.232-0.232v-2.355c-0.001-0.128-0.104-0.231-0.232-0.231h-2.643c-0.127 0-0.231 0.103-0.231 0.231 0 0 0 0 0 0v0 2.355c0 0.128 0.103 0.231 0.231 0.232h0zM14.788 8.073h2.643c0 0 0 0 0 0 0.128 0 0.232-0.104 0.232-0.232 0-0 0-0 0-0v0-2.356c-0.001-0.128-0.104-0.231-0.232-0.231 0 0-0 0-0 0h-2.643c-0.127 0-0.231 0.103-0.231 0.231v0 2.356c0 0 0 0 0 0.001 0 0.127 0.103 0.23 0.23 0.23 0 0 0 0 0.001 0h-0zM18.475 14.849h2.644c0 0 0 0 0 0 0.128 0 0.231-0.103 0.232-0.231v-2.355c0-0 0-0 0-0 0-0.128-0.104-0.232-0.232-0.232-0 0-0 0-0 0h-2.644c0 0 0 0-0 0-0.128 0-0.231 0.103-0.231 0.231v2.356c0 0.127 0.103 0.231 0.231 0.231v0z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              topic-modeling
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v0.5.2
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v0.5.2
-                          </span>
-                        </button>
+                            <span
+                              class="css-2dse8b"
+                            >
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                viewBox="-64 0 512 512"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              topic-modeling-toolkit
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v0.5.2
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <span
+                class="react-resizable-handle react-resizable-handle-se"
+              />
             </div>
-            <span
-              class="react-resizable-handle react-resizable-handle-se"
-            />
-          </div>
-          <div
-            class="react-grid-item react-draggable cssTransforms react-resizable css-105ftsp"
-            data-grid="[object Object]"
-            style="outline: 3px solid #857371; z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(433px,469px);"
-          >
             <div
-              class="css-8epc0j"
+              class="react-grid-item react-draggable cssTransforms react-resizable css-jejeeb"
+              data-grid="[object Object]"
+              style="z-index: 0; width: 413px; height: 398px; position: absolute; transform: translate(433px,469px);"
             >
-              <h2
-                class="css-ssyvhw"
-              >
-                Project with 2 Releases
-              </h2>
-              <p
-                class="css-1bf79uj"
-              >
-                A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
-              </p>
               <div
-                class="css-1pi72lr"
+                class="css-14yx19c"
               >
-                  
+                <h3
+                  class="css-1mt6hkg"
+                >
+                  Project with 2 Releases
+                </h3>
+                <p
+                  class="css-wkkei5"
+                >
+                  A Python library for Topic Modeling providing a unified interface facilitating various research operations. It is designed to be easily extensible, allowing developers to implement their own algorithms and plug them in the toolkit.
+                </p>
                 <div
-                  class="css-18dgpf5"
+                  class="css-1pi72lr"
                 >
                     
                   <div
-                    class="css-tqife0"
+                    class="css-1p4k4am"
                   >
+                      
                     <div
-                      class="css-0"
+                      class="css-x904r0"
                     >
-                      <h3
-                        class="css-1tn7zvf"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
-                        class="css-18ef9vj"
+                        class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1385,7 +1340,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-edxqf5"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1413,104 +1368,104 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="css-1y544bo"
-                >
-                    
-                  <span
-                    class="css-cig3pz"
-                  >
-                    Software maturity level: 
-                    Mature
-                  </span>
                   <div
-                    class="css-v1j3u1"
+                    class="css-vwkmwk"
                   >
-                    <h3
-                      class="css-9ssiqh"
+                      
+                    <span
+                      class="css-1tn0i3x"
                     >
-                      Releases
-                    </h3>
+                      Software maturity level: 
+                      Mature
+                    </span>
                     <div
-                      class="css-1iyoj2o"
+                      class="css-15dty92"
                     >
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
+                      <h4
+                        class="css-19xfikg"
+                      >
+                        Releases
+                      </h4>
+                      <div
+                        class="css-1iyoj2o"
+                      >
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              version="1.1"
-                              viewBox="0 0 24 24"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="css-2dse8b"
                             >
-                              <path
-                                d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
-                              />
-                              <path
-                                d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            repo-with-2-releases
-                          </span>
-                          <span
-                            class="css-42txja"
-                          >
-                            0.5.2
-                          </span>
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          class="css-1tvdvhd"
-                        >
-                          <span
-                            class="css-2dse8b"
-                          >
-                            <svg
-                              fill="#2c1513"
-                              height="12px"
-                              viewBox="-64 0 512 512"
-                              width="12px"
-                              xmlns="http://www.w3.org/2000/svg"
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                version="1.1"
+                                viewBox="0 0 24 24"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m11.727 0c-.967.001-1.914.086-2.834.248l.098-.014c-2.423.428-2.862 1.324-2.862 2.976v2.182h5.726v.727h-7.874c-.02 0-.043-.001-.066-.001-1.737 0-3.184 1.239-3.507 2.881l-.004.023c-.256.872-.403 1.874-.403 2.91s.147 2.038.422 2.985l-.019-.076c.407 1.695 1.379 2.902 3.04 2.902h1.969v-2.616c.045-1.953 1.622-3.523 3.574-3.557h.003 5.719c1.584-.013 2.863-1.299 2.863-2.885 0-.009 0-.017 0-.026v.001-5.452c-.104-1.561-1.314-2.81-2.848-2.975l-.014-.001c-.866-.149-1.863-.234-2.879-.234-.036 0-.071 0-.107 0h.005zm-3.096 1.755h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.601 0-1.089-.487-1.091-1.088 0-.002 0-.005 0-.008 0-.596.48-1.08 1.074-1.086h.001z"
+                                />
+                                <path
+                                  d="m18.287 6.119v2.542c-.022 1.977-1.604 3.578-3.572 3.63h-.005-5.719c-1.584.033-2.856 1.322-2.862 2.909v5.453c0 1.551 1.349 2.464 2.862 2.91.855.277 1.839.437 2.86.437s2.005-.16 2.927-.456l-.068.019c1.44-.417 2.862-1.258 2.862-2.91v-2.184h-5.719v-.727h8.582c1.664 0 2.284-1.161 2.863-2.902.28-.87.441-1.871.441-2.91s-.161-2.04-.46-2.979l.019.07c-.411-1.656-1.2-2.902-2.863-2.902zm-3.216 13.807h.017c.603 0 1.091.489 1.091 1.091s-.489 1.091-1.091 1.091c-.603 0-1.091-.489-1.091-1.091 0-.001 0-.003 0-.004 0-.002 0-.005 0-.007 0-.595.48-1.077 1.074-1.08z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              repo-with-2-releases
+                            </span>
+                            <span
+                              class="css-42txja"
                             >
-                              <path
-                                d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
-                              />
-                            </svg>
-                          </span>
-                          <span>
-                            repo-with-2-releases
-                          </span>
-                          <span
-                            class="css-42txja"
+                              0.5.2
+                            </span>
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            class="css-mk0p3m"
                           >
-                            v0.5.2
-                          </span>
-                        </button>
+                            <span
+                              class="css-2dse8b"
+                            >
+                              <svg
+                                fill="#2c1513"
+                                height="12px"
+                                viewBox="-64 0 512 512"
+                                width="12px"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zM128.4 336c-17.9 0-32.4 12.1-32.4 27 0 15 14.6 27 32.5 27s32.4-12.1 32.4-27-14.6-27-32.5-27zM224 136V0h-63.6v32h-32V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zM95.9 32h32v32h-32zm32.3 384c-33.2 0-58-30.4-51.4-62.9L96.4 256v-32h32v-32h-32v-32h32v-32h-32V96h32V64h32v32h-32v32h32v32h-32v32h32v32h-32v32h22.1c5.7 0 10.7 4.1 11.8 9.7l17.3 87.7c6.4 32.4-18.4 62.6-51.4 62.6z"
+                                />
+                              </svg>
+                            </span>
+                            <span>
+                              repo-with-2-releases
+                            </span>
+                            <span
+                              class="css-42txja"
+                            >
+                              v0.5.2
+                            </span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <span
+                class="react-resizable-handle react-resizable-handle-se"
+              />
             </div>
-            <span
-              class="react-resizable-handle react-resizable-handle-se"
-            />
           </div>
         </div>
       </div>
     </div>
     <div
-      class="css-lsw45e"
+      class="css-15jut5p"
     >
       <span
         class="css-2dse8b"

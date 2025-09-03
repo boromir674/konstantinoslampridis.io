@@ -71,7 +71,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
           style="--accent-color-start: #410003; --accent-color-end: #725b2e;"
         >
           <header
-            class="css-1aceh0m"
+            class="css-2ezcff"
           >
             <h1
               class="css-1b0o9tp"
@@ -110,7 +110,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               class="css-12fn4cu"
             >
               <a
-                class="css-16l44dw"
+                class="css-1ugqxxv"
                 href="https://github.com/john-doe"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -143,7 +143,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="css-16l44dw"
+                class="css-1ugqxxv"
                 href="https://linkedin.com/in/john-doe"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -176,7 +176,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="css-16l44dw"
+                class="css-1ugqxxv"
                 href="https://gitlab.com/john-doe"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -524,7 +524,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </li>
               </ul>
               <div
-                class="css-2iyh87"
+                class="css-1p2oq9d"
               >
                 <span
                   class=" css-sxpw0i"
@@ -598,7 +598,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                 </li>
               </ul>
               <div
-                class="css-2iyh87"
+                class="css-1p2oq9d"
               >
                 <span
                   class=" css-sxpw0i"
@@ -665,17 +665,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-x904r0"
                     >
-                      <h3
-                        class="css-mr99ar"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
                         class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -700,7 +700,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -725,7 +725,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -766,17 +766,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-15dty92"
                     >
-                      <h3
+                      <h4
                         class="css-19xfikg"
                       >
                         Releases
-                      </h3>
+                      </h4>
                       <div
                         class="css-1iyoj2o"
                       >
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -809,7 +809,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -839,7 +839,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -904,17 +904,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-x904r0"
                     >
-                      <h3
-                        class="css-mr99ar"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
                         class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -939,7 +939,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -980,17 +980,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-15dty92"
                     >
-                      <h3
+                      <h4
                         class="css-19xfikg"
                       >
                         Releases
-                      </h3>
+                      </h4>
                       <div
                         class="css-1iyoj2o"
                       >
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1023,7 +1023,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1053,7 +1053,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1118,17 +1118,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-x904r0"
                     >
-                      <h3
-                        class="css-mr99ar"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
                         class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1167,17 +1167,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-15dty92"
                     >
-                      <h3
+                      <h4
                         class="css-19xfikg"
                       >
                         Releases
-                      </h3>
+                      </h4>
                       <div
                         class="css-1iyoj2o"
                       >
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1210,7 +1210,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1240,7 +1240,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1305,17 +1305,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-x904r0"
                     >
-                      <h3
-                        class="css-mr99ar"
+                      <h4
+                        class="css-lk330j"
                       >
                         Resource Links
-                      </h3>
+                      </h4>
                       <div
                         class="css-145cla9"
                       >
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1340,7 +1340,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-ulz07d"
+                            class="css-zny2rn"
                           >
                             <span
                               class="css-2dse8b"
@@ -1381,17 +1381,17 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                     <div
                       class="css-15dty92"
                     >
-                      <h3
+                      <h4
                         class="css-19xfikg"
                       >
                         Releases
-                      </h3>
+                      </h4>
                       <div
                         class="css-1iyoj2o"
                       >
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"
@@ -1424,7 +1424,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
                         </div>
                         <div>
                           <button
-                            class="css-6d1ksm"
+                            class="css-mk0p3m"
                           >
                             <span
                               class="css-2dse8b"

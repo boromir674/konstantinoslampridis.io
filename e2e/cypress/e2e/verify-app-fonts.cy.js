@@ -6,11 +6,9 @@ describe("Verify Fonts Primary/Secondary are applied as expected", () => {
 
     
 
-    // GIVEN the expected Font Family names
+    // GIVEN the expected Font Family names (consistent no-quotes format)
     const EXPECTED_PRIMARY_FONT = "Roboto, sans-serif";
-    const EXPECTED_PRIMARY_FONT_FAMILY = 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif';
-
-    const EXPECTED_PROF_ITEM_FONT = 'inherit';
+    const EXPECTED_PRIMARY_FONT_FAMILY = 'Roboto, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif';
 
     const EXPECTED_SECONDARY_FONT = '"Courier New", Courier, monospace';
 
@@ -31,37 +29,6 @@ describe("Verify Fonts Primary/Secondary are applied as expected", () => {
     });
 
     // THEN the text of all Experience Items should have the Primary Font
-
-    // it(`Verify all text in Experience Items has Primary Font: ${EXPECTED_PRIMARY_FONT_FAMILY}`, () => {
-
-    //     const EXP_ITEM_TAGS_CONTAINER_SELECTOR = '[style="background-color:var(--app-color-main-area, --app-surface-primary);color:var(--app-on-surface-primary);font-family:var(--app-font, inherit);display:flex;flex-direction:column;gap:4px;padding:14px"]';
-
-    //     cy.viewport(1280, 1280); // Set viewport to a standard desktop resolution
-
-    //     // for all divs inside the Professional Section, get the inner div
-    //     // for each inner div, iterate over all elements and
-    //     // assert that css font-family of each element inside the div has the expected Primary Font
-
-    //     cy.wrap(div).find('div div').find(EXP_ITEM_TAGS_CONTAINER_SELECTOR).find('.css-18xj7dw').should('have.css', 'font-family', 'inherit');
-
-
-    //     cy.get('#professional-section').each((div) => {
-    //         // cy.wrap(div).find('div div').find('*').each((element) => {
-    //         //     cy.wrap(element).should('have.css', 'font-family', EXPECTED_PRIMARY_FONT_FAMILY);
-    //         // });
-
-                        
-    //         // cy.get('.css-1hnzbsi > [style="background-color:var(--app-color-main-area, --app-surface-primary);color:var(--app-on-surface-primary);font-family:var(--app-font, inherit);display:flex;flex-direction:column;gap:4px;padding:14px"] > .css-18xj7dw')
-
-    //         // cy.get('.css-dj8mo6 > [style="background-color:var(--app-color-main-area, --app-surface-primary);color:var(--app-on-surface-primary);font-family:var(--app-font, inherit);display:flex;flex-direction:column;gap:4px;padding:14px"] > .css-18xj7dw')
-
-    //         // Verify that the TechTagsContainer element has inherit font-family using the pattern from the selectors
-    //         cy.wrap(div).find('div div').find(EXP_ITEM_TAGS_CONTAINER_SELECTOR).find('.css-18xj7dw').should('have.css', 'font-family', 'inherit');
-            
-
-    //     });
-    // });
-
     it(`Verify all text in Experience Items has Primary Font: ${EXPECTED_PRIMARY_FONT_FAMILY}`, () => {
         cy.viewport(1280, 1280); // Set viewport to a standard desktop resolution
 
@@ -86,7 +53,6 @@ describe("Verify Fonts Primary/Secondary are applied as expected", () => {
             });
         });
     });
-
 
     // THEN the text of Education Items should have the Primary Font
     it(`Verify Education Items text has Primary Font: ${EXPECTED_PRIMARY_FONT_FAMILY}`, () => {

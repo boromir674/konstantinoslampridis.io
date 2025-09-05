@@ -39,8 +39,8 @@ interface TopHeaderPaneProps {
     };
     themeSwitch: {
       backgroundColor: string;
-      backgroundColorActive: string;
       handleBackgroundColor: string;
+      backgroundColorActive: string;
       handleBackgroundColorActive: string;
     };
   };
@@ -74,9 +74,12 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
         <ToggleSlider
           active={active}
           onToggle={onToggle}
+          barTransitionType="fade"
+          // Light theme colors
           barBackgroundColor={theme.themeSwitch.backgroundColor}
-          barBackgroundColorActive={theme.themeSwitch.backgroundColorActive}
           handleBackgroundColor={theme.themeSwitch.handleBackgroundColor}
+          // Dark theme colors
+          barBackgroundColorActive={theme.themeSwitch.backgroundColorActive}
           handleBackgroundColorActive={theme.themeSwitch.handleBackgroundColorActive}
         />
         <span

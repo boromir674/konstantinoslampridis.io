@@ -19,13 +19,13 @@ interface Theme {
     activatedTextColor: string;
     activatedBackgroundColor: string;
   };
-  /// THEME SWITCH COLORS ///
-  themeSwitch: {
-    backgroundColor: string;
-    backgroundColorActive: string;
-    handleBackgroundColor: string;
-    handleBackgroundColorActive: string;
-  };
+  // /// THEME SWITCH COLORS ///
+  // themeSwitch: {
+  //   backgroundColor: string;
+  //   backgroundColorActive: string;
+  //   handleBackgroundColor: string;
+  //   handleBackgroundColorActive: string;
+  // };
   /// INTRODUCTIONS COLORS ///
   introduction: {
     containerBackgroundColor: string;
@@ -190,6 +190,13 @@ interface SVGStyles extends ThemeSVGStyles {
 // EXPORTED: INTERFACE of Merged "Color + Common" Styles
 // WHEN changes happen in CommonTheme or Theme, this interface should be checked if it needs to be updated
 interface ComputedTheme extends Theme {
+  //// THEME SWITCH ////
+  themeSwitch: {
+      backgroundColor: string;
+      handleBackgroundColor: string;
+      backgroundColorActive: string;
+      handleBackgroundColorActive: string;
+  },
   navigationBar: ComputedNavigationBarTheme;
   //// ALL PERSONAL INFORMATION STYLES
   personal: {

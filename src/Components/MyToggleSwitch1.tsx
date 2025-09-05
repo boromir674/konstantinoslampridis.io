@@ -44,6 +44,11 @@ interface ToggleSliderProps {
   barTransitionType?: "fade" | "slide";
 }
 
+/* ToggleSlider Component
+ *
+ * A toggle switch component that can be toggled by clicking or dragging.
+ * If 'active' prop is true, then the toggle starts in the "on" position (right).
+*/
 function ToggleSlider({
   // governs the length of the "slider", inside which the toggle moves from left to right, or vice versa
   barWidth = 48,
@@ -82,6 +87,13 @@ function ToggleSlider({
   );
   const [dragging, setDragging] = useState(false);
 
+  // ✅ SYNC INTERNAL STATE WITH PROP CHANGES
+  React.useEffect(() => {
+    setActive(initialActive);
+    setProgressState((initialActive && !flip) || (!initialActive && flip) ? 1 : 0);
+    setCurrentBarColor(initialActive ? barBackgroundColorActive : barBackgroundColor);
+  }, [initialActive, flip, barBackgroundColorActive, barBackgroundColor]);
+
   function interpolateColors(start: string, end: string, pos: number) {
     const colorMap = interpolate([start, end]);
     return colorMap(pos);
@@ -97,13 +109,16 @@ function ToggleSlider({
     setProgressState(p);
 
     if (barTransitionType === "fade") {
-      setCurrentBarColor(
-        interpolateColors(
-          barBackgroundColor,
-          barBackgroundColorActive,
-          paddingProgress
-        )
+      const leftSideColor = barBackgroundColor;      // Inactive color
+      const rightSideColor = barBackgroundColorActive; // Active color
+      
+      const interpolatedColor = interpolateColors(
+        leftSideColor,
+        rightSideColor,
+        paddingProgress
       );
+      
+      setCurrentBarColor(interpolatedColor);
     }
   }
 

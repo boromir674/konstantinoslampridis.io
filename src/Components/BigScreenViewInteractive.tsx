@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from "react";
+import React, { FC, useState, useCallback, useEffect } from "react";
 
 import BigScreenView, { BigScreenViewProps } from "./BigScreenView";
 
@@ -50,19 +50,26 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
   html,
 }) => {
   // Component State
-  const [theme, setTheme] = useState(colorSet.light);
+  const [isMounted, setIsMounted] = useState(false);
   const { mode, setMode, toggle, isSystem, setSystem } = useColorMode({
     initial: "light",
     persist: true,
     respectSystemPreference: false
   });
-  //   const [windowSize] = useWindowSizeTrackingState(SSROn);
+  
+  // Apply isMounted protection to theme as well!
+  const [theme, setTheme] = useState(colorSet.light);
+  
+  useEffect(() => {
+    setIsMounted(true);
+    // Also update theme when mounted to match the actual mode
+    setTheme(mode === 'dark' ? colorSet.dark : colorSet.light);
+  }, [mode, colorSet]);
 
-  // this state's initial value governs whether the toggle switch will be left or right
-  const matchTogglePosition = useCallback(
-    () => (mode === 'light' ? "left" : "right"),
-    [mode]
-  );
+  const getTogglePosition = () => (mode === 'light' ? "left" : "right");
+
+  // Use a safe default position until mounted
+  const togglePosition = isMounted ? getTogglePosition() : "left";
 
   return (
     <BigScreenView
@@ -82,7 +89,7 @@ const BigScreenViewInteractive: FC<BigScreenViewInteractiveProps> = ({
             setMode(active ? 'dark' : 'light');
           },
           // automatically initiale at left if initial state is light, or right if black
-          active: booleanMap[positionMap[matchTogglePosition()]],
+          active: booleanMap[positionMap[togglePosition]],
         },
         verticalMainPane: {
           data: data.verticalMainPane,

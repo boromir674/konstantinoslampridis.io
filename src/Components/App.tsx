@@ -15,7 +15,6 @@ import '../design-system/semantic-tokens.css';
 
 // Leverage CSS modules to do CSS reset
 // import '../global.css'; // Import the global CSS reset
-type RawColorTheme = typeof lightTheme | typeof darkTheme;
 type AppColorTheme = BigScreenViewInteractiveProps["colorSet"]["light"] | BigScreenViewInteractiveProps["colorSet"]["dark"];
 
 

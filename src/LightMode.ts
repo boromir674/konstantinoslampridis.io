@@ -28,13 +28,6 @@ const lightColorMode: Theme = {
     activatedBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-light"],
     activatedTextColor: DESIGN_TOKENS["--md-sys-color-on-secondary-light"],
   },
-  //// THEME SWITCH ////
-  themeSwitch: {
-    backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
-    backgroundColorActive: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
-    handleBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
-    handleBackgroundColorActive: DESIGN_TOKENS['--md-sys-color-surface-light'],
-  },
   //// INTRODUCTION ////
   introduction: {
     containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-light'],

@@ -21,13 +21,7 @@ const darkColorMode: Theme = {
     activatedBackgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-dark"],
     activatedTextColor: DESIGN_TOKENS["--md-sys-color-on-secondary-dark"],
   },
-  //// THEME SWITCH ////
-  themeSwitch: {
-    backgroundColor: DESIGN_TOKENS["--md-sys-color-secondary-dark"],
-    handleBackgroundColor: DESIGN_TOKENS["--md-sys-color-on-secondary-dark"],
-    backgroundColorActive: DESIGN_TOKENS["--md-sys-color-on-secondary-dark"],
-    handleBackgroundColorActive: DESIGN_TOKENS["--md-sys-color-surface-dark"],
-  },
+
   ///// INTRODUCTION /////
   introduction: {
     // containerBackgroundColor: DESIGN_TOKENS['--md-sys-color-primary-container-dark'],

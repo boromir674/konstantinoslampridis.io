@@ -75,6 +75,8 @@ describe("Portfolio UI Tests", () => {
                                     clientY: firstItemCenterY,
                                     force: true
                                 })
+                                // 🔧 FIX: Wait for Firefox to properly register onDragStart
+                                .wait(50) 
                                 // DRAG TO SECOND ITEM: Move to second item's position + extra distance
                                 .trigger("mousemove", { 
                                     clientX: targetX + 100, // Add 100px more to the right

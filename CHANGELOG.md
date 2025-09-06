@@ -5,6 +5,36 @@
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.15.1] - 06/09/2025
+
+**Theme Toggle SSR/Hydration fixes** & E2E Testing Enhancements.
+
+**Major User Experience & Testing Improvements:**
+- **Theme Toggle** loaded from LS does not glitch anymore
+- **Comprehensive E2E Test Suite** for drag-and-drop interactions and UI validation
+
+### Changes
+
+#### Feature
+- implement **smooth color interpolation** for theme toggle slider with fade transitions
+- add **SSR/Hydration protection** for theme toggle to prevent visual inconsistencies on page load
+- enhance theme toggle with **proper prop synchronization** and state management
+
+#### Fix
+- resolve **theme toggle color interpolation** issues that caused incorrect white color transitions
+- fix **SSR hydration mismatch** where toggle position would revert on page refresh
+- eliminate **visual inconsistencies** when applying theme from localStorage on mount
+
+#### E2E
+- implement **realistic drag simulation** with proper mousedown → mousemove → mouseup sequences
+- add **resize handle targeting** using correct `.react-resizable-handle-se` selectors
+- create **portfolio item swap detection** with position tolerance for grid snapping
+- establish **font family verification** across multiple UI components
+
+#### Build
+- update **caniuse-lite** dependency to eliminate build warnings during static site generation
+
+
 ## [1.15.0] - 02/09/2025
 
 **SPA Redesign** with **better UX**, and **better color palete.**

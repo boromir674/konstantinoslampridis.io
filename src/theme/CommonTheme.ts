@@ -7,6 +7,14 @@ import DESIGN_TOKENS from "../design-system/tokens.json";
 
 
 const commonStyling = {
+    //// THEME SWITCH ////
+    themeSwitch: {
+        backgroundColor: DESIGN_TOKENS['--md-sys-color-secondary-light'],
+        handleBackgroundColor: DESIGN_TOKENS['--md-sys-color-on-secondary-light'],
+        // Must put the Dark colors here ! to avoid mid-grag changing of inactive/active color pair
+        backgroundColorActive: DESIGN_TOKENS["--md-sys-color-on-secondary-dark"],
+        handleBackgroundColorActive: DESIGN_TOKENS["--md-sys-color-secondary-dark"],
+    },
     // NAVIGATION BAR (in header)
     navigationBar: {
         fontFamily: DESIGN_TOKENS["--md-sys-typescale-headline-small-font-family-name"],

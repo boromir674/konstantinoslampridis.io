@@ -14,7 +14,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
             style="padding-top: 0px; box-sizing: border-box; width: 100%; flex: 0 0 auto;"
           >
             <div
-              style="width: 48px; height: 26px; border-radius: 16px; background: rgb(255, 255, 255); transition: all 100ms;"
+              style="width: 48px; height: 26px; border-radius: 16px; background: rgb(68, 41, 39); transition: all 100ms;"
             />
           </div>
           <div
@@ -24,7 +24,7 @@ exports[`Test App width = 700 matches the snapshot 1`] = `
               style="transition: all 100ms; padding-top: 4px; padding-left: 25px;"
             >
               <div
-                style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(255, 251, 255); transition: all 100ms;"
+                style="width: 18px; height: 18px; size: 18px; border-radius: 16px; background-color: rgb(231, 189, 184); transition: all 100ms;"
               />
             </div>
           </div>

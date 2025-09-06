@@ -79,7 +79,7 @@ const useMemoizedResizeSuggestionAlgorithm: () => [ResizeItemWithContextAlgorith
         }
 
         const suggestedItemUnitChanges = resizeSuggestionAlgo(item, context);
-        console.log('suggestedItemUnitChanges:', suggestedItemUnitChanges);
+
         // const suggestedItemUnitChanges = useMemo(() => resizeSuggestionAlgo(item, context), [
         //     // Dependencies
         //     resizeSuggestionAlgo,

@@ -60,6 +60,22 @@ const MyLink = styled(Link)`
 // declared using forwardRef. This opts it into receiving the ref from above as the second ref argument which is declared after props.
 const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltipProps>(({ theme, data: { command, urlText }, visible, onCopyCommand, copied }, ref) => {
     if (!visible) return null;
+
+    // Handle touch events for the command copy area (backup for mobile)
+    const handleCommandTouch = (event: React.TouchEvent<HTMLDivElement>) => {
+        // Prevent default and manually trigger copy
+        event.preventDefault();
+        onCopyCommand();
+    };
+
+    // Handle touch events for the URL link (backup for mobile)
+    const handleLinkTouch = (event: React.TouchEvent<HTMLAnchorElement>) => {
+        // Prevent default to avoid any conflicts
+        event.preventDefault();
+        // Manually open the URL in a new tab/window
+        window.open(urlText, '_blank', 'noopener,noreferrer');
+    };
+
     return (
         // CONTAINER
         <div
@@ -83,6 +99,7 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                     onHoverCodeBackgroundColor: theme.onHoverCodeBackgroundColor,
                 }}
                 onClick={onCopyCommand}
+                onTouchStart={handleCommandTouch}
             >
                 <pre style={{ margin: 0 }}>
                     <code style={{ color: theme.codeColor }}>
@@ -135,6 +152,7 @@ const SoftwareReleaseTooltip = forwardRef<HTMLDivElement, SoftwareReleaseTooltip
                     href={urlText}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onTouchEnd={handleLinkTouch}
                     theme={{
                         textColor: theme.color,
                     }}

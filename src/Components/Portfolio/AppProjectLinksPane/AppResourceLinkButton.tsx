@@ -80,23 +80,53 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
       }
     };
 
+    // Handle touch outside (for mobile devices)
+    const handleTouchOutside = (event: TouchEvent) => {
+      if (
+        buttonRef.current && !buttonRef.current.contains(event.target as Node) &&
+        tooltipRef.current && !tooltipRef.current.contains(event.target as Node)
+      ) {
+        setTooltipVisible(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleTouchOutside);
+    
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleTouchOutside);
     };
   }, []);
 
   // Handle Click on the button
   const handleClickOnButton = () => {
     setTooltipVisible(!tooltipVisible);
-    // if visible set zIndex to 10 else 0
+    setZIndex(tooltipVisible ? 0 : 100);
+  };
+
+  // Add touch event handlers as backup for mobile
+  const handleTouchStart = (event: React.TouchEvent<HTMLButtonElement>) => {
+
+  };
+
+  // Handle touch end - this manually triggers the action if onClick doesn't work
+  const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
+
+    // Prevent the default behavior to avoid double-triggering
+    event.preventDefault();
+
+    // Manually call our click handler logic
+    setTooltipVisible(!tooltipVisible);
     setZIndex(tooltipVisible ? 0 : 100);
   };
 
   return (
-    <div onClick={handleClickOnButton}>
+    <div>
       <ResourceLinkButton
-        // ref={buttonRef as RefObject<HTMLButtonElement>}
+        onClick={handleClickOnButton}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         ref={buttonRef}
         theme={{
           color: theme.color,

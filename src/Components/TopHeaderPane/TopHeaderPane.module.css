@@ -36,6 +36,14 @@
   }
 }
 
+/* Additional rule: Disable sticky on very short screens (landscape phones) */
+@media (max-height: 500px) {
+  .container {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
 /* ===== THEME TOGGLE SECTION ===== */
 .themeToggleSection {
   display: flex;

@@ -231,6 +231,15 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   rowHeight,
 }) => {
 
+
+  // makes the grid Items draggable if screen "has space" (does not listen to live screen resizes to reduce rerenders)
+  const booleanRef = useRef(false);
+  React.useEffect(() => {
+    // Responsive drag/resize: Disable on small screens (mobile/tablet)
+    booleanRef.current = (typeof window !== 'undefined' ? window.innerWidth : 801) >= 800;
+  }, []);
+  const isDragResizeEnabled = booleanRef.current;
+
   // Code for implementing Saving and Loading Layouts from Local Storage
   const [layouts, setLayouts, saveToLS] = useLayoutsState();
 
@@ -285,11 +294,8 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
   return (
     <PortfolioSectionContainer // DIV
       id={htmlID}
-      theme={{
-        // backgroundColor: theme.container.backgroundColor,
-        // backgroundColor: 'var(--app-container-primary, ' + theme.container.backgroundColor + ')',
-        // color: theme.item.color,
-      }}>
+      theme={{}}>
+
       {/* Portfolio Section TITLE*/}
       <PortfolioSectionTitle theme={theme.sectionHeader}>Open Source & Portfolio</PortfolioSectionTitle>
 
@@ -307,6 +313,10 @@ const ResponsiveLocalStorageLayout: FC<ResponsiveLocalStorageLayoutProps> = ({
         rowHeight={rowHeight}
         // Initialize Layouts from Local Storage or else with Empty Object
         layouts={layouts}
+
+        // Responsive drag/resize: Disabled on small screens for better touch scrolling
+        isDraggable={isDragResizeEnabled}
+        // isResizable={isDragResizeEnabled}
 
         // we store the Layouts (breakpoints -> layouts) in the component's state, and local storage when user changes the layout (when an item is droped (after a drag-n-drop), when the user resizes an item after they release of the click button), or when the "Reset Layout" button is clicked
         onLayoutChange={handleOnLayoutChange}

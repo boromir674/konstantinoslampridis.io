@@ -35,6 +35,14 @@ const MyLink = styled(Link)`
 const ResourceLinkTooltip = forwardRef<HTMLDivElement, ResourceLinkTooltipProps>(({ theme, urlText, visible }, ref) => {
   if (!visible) return null;
 
+  // Handle touch events for the link (backup for mobile)
+  const handleLinkTouch = (event: React.TouchEvent<HTMLAnchorElement>) => {
+    // Prevent default to avoid any conflicts
+    event.preventDefault();
+    // Manually open the URL in a new tab/window
+    window.open(urlText, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div
       ref={ref}
@@ -53,6 +61,7 @@ const ResourceLinkTooltip = forwardRef<HTMLDivElement, ResourceLinkTooltipProps>
         href={urlText}
         target="_blank"
         rel="noopener noreferrer"
+        onTouchEnd={handleLinkTouch}
         theme={{
           textColor: theme.color,
         }}

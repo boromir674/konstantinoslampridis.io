@@ -98,27 +98,42 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
                 setTooltipVisible(false);
                 setZIndex(0);
             }
-            // else if (buttonRef.current && buttonRef.current.contains(event.target as Node)) {
-            //     console.log("Clicked on Button: Hiding Tooltip");
-            //     setTooltipVisible(false);
-            //     setZIndex(0);
-            // }
         };
-        // Add Listener on Component Mount, only if the Tooltip is visible
+
+        // Handle touch outside (for mobile devices)
+        const handleTouchOutsideOfButtonAndTooltip = (event: TouchEvent) => {
+            if (buttonRef.current && !buttonRef.current.contains(event.target as Node) && tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+                setTooltipVisible(false);
+                setZIndex(0);
+            }
+        };
+
+        // Add Listeners on Component Mount, only if the Tooltip is visible
         document.addEventListener("mousedown", handleClickOutsideOfButtonAndTooltip);
+        document.addEventListener("touchstart", handleTouchOutsideOfButtonAndTooltip);
+        
         return () => {
-            // Remove Listener on Component Unmount
+            // Remove Listeners on Component Unmount
             document.removeEventListener("mousedown", handleClickOutsideOfButtonAndTooltip);
+            document.removeEventListener("touchstart", handleTouchOutsideOfButtonAndTooltip);
         };
     }, [tooltipVisible]);
 
     ///// Handle Click on the button /////
     const handleClickOnButton = () => {
-        // if (!tooltipVisible) {
         setTooltipVisible(!tooltipVisible);
-        // if visible set zIndex to 10 else 0
         setZIndex(tooltipVisible ? 0 : 10);
-        // }
+    };
+
+    // Handle touch end - this should trigger the action if onClick doesn't work
+    const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
+
+        // Prevent the default behavior and manually trigger our action
+        event.preventDefault();
+
+        // Manually call our click handler logic
+        setTooltipVisible(!tooltipVisible);
+        setZIndex(tooltipVisible ? 0 : 10);
     };
 
     // Stop event propagation inside the tooltip
@@ -138,6 +153,8 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
         <div>
             <SoftwareReleaseButton
                 onClick={handleClickOnButton} // onClick prop supported since element is <button> 
+                // onTouchStart={(event: React.TouchEvent<HTMLButtonElement>) => {}}  // Add touch event handlers as backup
+                onTouchEnd={handleTouchEnd}
                 ref={buttonRef as RefObject<HTMLButtonElement>}
                 theme={{
                     color: theme.color,

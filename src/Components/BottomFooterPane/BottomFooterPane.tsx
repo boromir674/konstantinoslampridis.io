@@ -20,22 +20,47 @@ const BottomFooterPaneContainer = styled.div<BottomFooterPaneContainerProps>`
   color: var(--app-brand-color-area-text);
 
   text-align: center; /* Center the text content */
-  padding: 10px 0; /* Adds vertical padding for visual space */
+  padding: 10px 0; /* Default padding for large screens */
 
   // position: fixed; /* Fixes the footer at the bottom of the viewport */
-  /* Sticky positioning - stays at top when scrolling */
+  /* Sticky positioning - stays at bottom when scrolling, but only when there's enough height */
   position: sticky;
 
   bottom: 0;
   width: 100%;
   z-index: 1000; /* Ensures the footer stays on top of other elements */
 
+  /* Height-based responsive design - smaller footer for smaller screens */
+  
+  /* Very tall screens (>800px): Generous padding */
+  @media (min-height: 800px) {
+    padding: 15px 0;
+  }
+
+  /* Medium height screens (600px-800px): Standard padding */
+  @media (min-height: 600px) and (max-height: 799px) {
+    padding: 12px 0;
+  }
+
+  /* Short screens (500px-599px): Compact padding, still sticky */
+  @media (min-height: 500px) and (max-height: 599px) {
+    padding: 8px 0;
+  }
+
+  /* Very short screens (<500px): Minimal padding, no sticky */
+  @media (max-height: 499px) {
+    position: relative !important;
+    bottom: auto !important;
+    padding: 6px 0;
+  }
+
+  /* Width-based adjustments (keep existing behavior) */
   @media (max-width: 768px) {
-    padding: 15px 0; /* Adjust padding for tablet screens */
+    /* Additional adjustments for tablet widths if needed */
   }
 
   @media (max-width: 480px) {
-    padding: 20px 0; /* Adjust padding for smartphone screens */
+    /* Additional adjustments for phone widths if needed */
   }
 
   // // in case css reset did not take care of box model, set it explicitly

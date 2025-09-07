@@ -220,7 +220,7 @@ Lighthouse Audit can "happen" `locally`, `on CI`, `with docker`, optionally in *
 
 ```sh
 make build_static_files
-npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=3'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=3'
 
 ./scripts/ci-compare-json-arrays.py .lighthouseci/assertion-results.json ".lh-assertion-results-gs.json"
 ```
@@ -260,17 +260,17 @@ does not produce report in JSON! See `lhci` below.
 
 Help:
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci --help'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci --help'
 ```
 
 Run 3 Audits to account for results variance:
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --url https://konstantinoslampridis.io'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci collect --url https://konstantinoslampridis.io'
 ```
 
 Run 1 Audit:
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --url https://konstantinoslampridis.io -n 1'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci collect --url https://konstantinoslampridis.io -n 1'
 ```
 
 **Expect:** 1 `lhr-*.html` and 1 `lhr-*.json` file inside `./.lighthouseci/` folder
@@ -279,7 +279,7 @@ Serve static site from `public-auto` folder and
 audit each *.html found in static site:
 
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci collect --staticDistDir ./public-auto -n 1'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci collect --staticDistDir ./public-auto -n 1'
 ```
 
 **Expect:** 3 `lhr-*.html` and 3 `lhr-*.json` file inside `./.lighthouseci/` folder
@@ -295,14 +295,14 @@ Run #1...done.
 
 **Run Healthcheck, Audit, and Assertions** on live url, with *1 iteration*
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.url='https://konstantinoslampridis.io' --collect.numberOfRuns=1'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci autorun --collect.url='https://konstantinoslampridis.io' --collect.numberOfRuns=1'
 ```
 **Expect:** 1 `lhr-*.html`, 1 `lhr-*.json` file and 1 `Assertions file`  inside `./.lighthouseci/` folder
 
 **Run Healthcheck, Audit, and Assertions** on local website bundle files, with *1 iteration*
 
 ```sh
-npm exec --package=@lhci/cli@0.14.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=1'
+npm exec --package=@lhci/cli@0.15.x -c 'lhci autorun --collect.staticDistDir='public-auto' --collect.numberOfRuns=1'
 ```
 
 **Expect:** 1 `lhr-*.html`, 1 `lhr-*.json` file and 1 `Assertions file`  inside `./.lighthouseci/` folder

@@ -69,7 +69,8 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
 
   return (
     <div className={styles.container}>
-      {/* Left side: Theme toggle + label */}
+
+      {/* THEME TOGGLE/SLIDER: Left side: Theme toggle + label */}
       <div className={styles.themeToggleSection}>
         <ToggleSlider
           active={active}
@@ -90,7 +91,7 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
         </span>
       </div>
 
-      {/* Center: Navigation bar positioned over main content area */}
+      {/* NAVIGATION BAR: Center: Navigation bar positioned over main content area */}
       <div
         className={styles.navBarSection}
         style={{
@@ -114,6 +115,7 @@ const TopHeaderPane: FC<TopHeaderPaneProps> = ({
           }}
         />
       </div>
+
     </div>
   );
 };

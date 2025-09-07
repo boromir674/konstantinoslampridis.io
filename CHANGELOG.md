@@ -5,6 +5,33 @@
 This project adheres to [Semantic Versioning](https://semver.org/).
 
 
+## [1.15.2] - 07/09/2025
+
+Fixing **touch** issues, for smartphones.  
+Now all interactive **Grid Item buttons** should also work on touch screens.
+
+**UX improvements** on smaller screens
+
+### Changes
+
+#### Fix
+
+- on mount decide if grid items are dragable based on screen height
+- make Footer disappear if screen height too small
+- on small height disable sticky Top Header
+- touch behavior for links and \<pre\> inside the Links/Releases popups
+- touch behave like click for Links and Release buttons
+
+#### E2E
+
+- add more touch tests for popups
+- verify Portfolio Popup "work": links/releases pane, copy popup
+
+#### Test
+
+- update snapshots to account for new touch handlers
+
+
 ## [1.15.1] - 06/09/2025
 
 **Theme Toggle SSR/Hydration fixes** & E2E Testing Enhancements.

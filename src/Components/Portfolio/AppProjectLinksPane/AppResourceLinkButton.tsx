@@ -105,11 +105,6 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
     setZIndex(tooltipVisible ? 0 : 100);
   };
 
-  // Add touch event handlers as backup for mobile
-  const handleTouchStart = (event: React.TouchEvent<HTMLButtonElement>) => {
-
-  };
-
   // Handle touch end - this manually triggers the action if onClick doesn't work
   const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
 
@@ -125,7 +120,7 @@ const ResourceLinkButtonComponent: FC<ResourceLinkButtonProps> = ({ theme, urlTe
     <div>
       <ResourceLinkButton
         onClick={handleClickOnButton}
-        onTouchStart={handleTouchStart}
+        // onTouchStart={(event: React.TouchEvent<HTMLButtonElement>) => {}}  // Add touch event handlers as backup for mobile
         onTouchEnd={handleTouchEnd}
         ref={buttonRef}
         theme={{

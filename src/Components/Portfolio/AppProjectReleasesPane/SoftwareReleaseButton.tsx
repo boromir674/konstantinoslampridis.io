@@ -125,11 +125,6 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
         setZIndex(tooltipVisible ? 0 : 10);
     };
 
-    // Add touch event handlers as backup
-    const handleTouchStart = (event: React.TouchEvent<HTMLButtonElement>) => {
-
-    };
-
     // Handle touch end - this should trigger the action if onClick doesn't work
     const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
 
@@ -158,7 +153,7 @@ const SoftwareReleaseButtonComponent: FC<SoftwareReleaseButtonProps> = ({ theme,
         <div>
             <SoftwareReleaseButton
                 onClick={handleClickOnButton} // onClick prop supported since element is <button> 
-                onTouchStart={handleTouchStart}
+                // onTouchStart={(event: React.TouchEvent<HTMLButtonElement>) => {}}  // Add touch event handlers as backup
                 onTouchEnd={handleTouchEnd}
                 ref={buttonRef as RefObject<HTMLButtonElement>}
                 theme={{
